@@ -1,0 +1,463 @@
+//分支语句和循环语句
+//分支语句if、switch
+//循环语句while、for、do while
+
+
+
+
+
+////if分支语句
+
+////单分支if
+//#include<stdio.h>
+//int main()
+//{
+//    int age;
+//    scanf("%d", &age);
+//    if (age < 18)
+//        printf("未成年\n");
+//    //若输入内容小于18，判断为真，正常输出；若输入内容大于等于18，不输出
+//    return 0;
+//}
+
+
+////双分支if
+//#include<stdio.h>
+//int main()
+//{
+//    int input = 0;
+//    printf("你会好好学习吗？(选择1为是，选择0为否)：");
+//    scanf("%d", &input);
+//    if (input == 1)
+//        printf("你真棒\n");
+//    else
+//        printf("要努力学习哦！");
+//    return 0;
+//}
+
+
+////多分支if
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    int age;
+//    scanf("%d", &age);
+//    if (age < 18)
+//        printf("未成年\n");
+//    else if (age >= 18 && age < 28)
+//        printf("青年\n");
+//    else if (age >= 28 && age < 60)
+//        printf("壮年\n");
+//    else
+//        printf("老年\n");
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    int age;
+//    scanf("%d", &age);
+//    if (age < 18)
+//        printf("未成年\n");
+//    else
+//    {
+//        if (age >= 18 && age < 28)
+//        printf("青年\n");
+//        else if (age >= 28 && age < 60)
+//        printf("壮年\n");
+//        else
+//        printf("老年\n");
+//    }
+//    return 0;
+//}
+
+
+//悬空else
+//else与离其最近的并且未匹配的if进行匹配
+
+
+////判断一个数是否为奇数
+//#include<stdio.h>
+//int main()
+//{
+//    int input;
+//    int jieguo;
+//    printf("输入一个数字！\n");
+//    scanf("%d", &input);
+//    jieguo = input % 2;
+//    if (jieguo == 0)
+//        printf("该数字不是一个奇数\n");
+//    else
+//    {
+//        if (input == 0)
+//            printf("该数字不是一个奇数\n");
+//        else
+//            printf("该数字是一个奇数\n");
+//    }
+//    return 0;
+//}
+
+////输出1—100之间的奇数
+//1
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 1;
+//    int jieguo = a % 2;
+//    while (a <= 100)
+//    {
+//        if (a % 2 == 1)
+//            printf("%d\n", a);
+//        a++;
+//    }
+//}
+//2
+//#include<stdio.h>
+//int main()
+//{
+//    int i = 1;
+//    while (i <= 100)
+//    {
+//        printf("%d ", i);
+//        i += 2;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+////switch语句——switch(整型表达式)——case后必须是整型常量表达式
+////一种分支语句，常常用于多分支
+//#include<stdio.h>
+//int main()
+//{
+//    int day;
+//    scanf("%d", &day);
+//    switch (day)
+//    {
+//    case 1:
+//        printf("星期一\n");
+//        break;
+//    case 2:
+//        printf("星期二\n");
+//        break;
+//    case 3:
+//        printf("星期三\n");
+//        break;
+//    case 4:
+//        printf("星期四\n");
+//        break;
+//    case 5:
+//        printf("星期五\n");
+//        break;
+//    case 6:
+//        printf("星期六\n");
+//        break;
+//    case 7:
+//        printf("星期天\n");
+//        break;
+//    default:
+//        printf("输入错误\n");
+//    }
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int n = 1;
+//    int m = 2;
+//    switch (n)
+//    {
+//    case 1:
+//        m++;
+//    case 2:
+//        n++;
+//    case 3:
+//        switch (n)
+//        {
+//        case 1:
+//            n++;
+//        case 2:
+//            m++;
+//            n++;
+//            break;
+//        }
+//    case 4:
+//        m++;
+//        break;
+//    default:
+//        break;
+//    }
+//    printf("m=%d,n=%d\n", m, n);
+//    //m=5,n=3
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////while循环语句
+
+//#include<stdio.h>
+//int main()
+//{
+//    int line = 0;
+//
+//    printf("美好的一天开始了！\n");
+//
+//    while (line < 20000)//括号中为判断语句,若成立则执行while循环
+//    {
+//        printf("敲一行代码:%d\n",line);
+//        line++;
+//    }
+//    if(line>=20000)
+//        printf("成为大牛\n");
+//    return 0;
+//}
+
+
+////输入ctrl+z可退出
+////EOF—end of file  文件结束标志 代表值-1
+//#include<stdio.h>
+//int main()
+//{
+//    int ch;
+//    while((ch = getchar()) !=EOF)
+//        putchar(ch);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    char ch;
+//    char key;
+//    char password[20] = { 0 };
+//    printf("请输入密码\n");
+//    scanf("%s", &password);//输入数据，并放在password数组中
+//    //输入缓冲区剩余"\n"
+//    printf("请确认(Y/N):");
+//    //在输入password数据时，输入数字后回车，getchar读取到回车，直接输出"确认失败"
+//    while ((ch = getchar()) != '\n')//读取走输入缓存区中剩余的数据，直到读取到’\n’结束循环
+//    {
+//        ;//空语句
+//    }
+//    key = getchar();
+//    if (key == 'Y')
+//    {
+//        printf("确认成功\n");
+//    }
+//    else
+//    {
+//        printf("确认失败\n");
+//    }
+//    return 0;
+//}
+
+
+////只输出数字字符
+//#include<stdio.h>
+//int main()
+//{
+//    int ch;
+//    while ((ch = getchar()) != EOF)
+//    {
+//        if (ch < '0' || ch>'9')
+//            continue;
+//        putchar(ch);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//for循环
+//for(表达式1;表达式2;表达式3)
+//表达式1为初始化部分，用于初始化循环变量
+//表达式2为条件判断部分，用于判断何时终止,为真则继续进行for循环
+//表达式3为调整部分，用于循环条件的调整
+
+
+////打印1-10的数字
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 1;
+//    for (a = 1; a <= 10; a++)
+//    {
+//        printf("%d\n", a);
+//    }
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    char arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//    int a ;
+//    for ( a = 0;a < 10; a++)
+//    {
+//        printf("%d\n", arr[a]);
+//    }
+//    return 0;
+//}
+
+
+
+//for循环的变种
+
+//变种1：for的初始化、判断、和调整都可以被省略
+//for循环的判断部分如果被省略，那判断条件就是恒为真
+//不可随意省略
+//#include<stdio.h>
+//int main()
+//{
+//    for (;;)
+//    {
+//        printf("包佳毅最帅\n");//无限输出
+//    }
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 0;
+//    int b = 0;
+//    for (; a < 10; a++)
+//    {
+//        for (b=0; b < 10; b++)//每执行一次外部for循环，重置b=0
+//        {
+//            printf("包佳毅最帅\n");//输出100次
+//        }
+//    }
+//    return 0;
+//}
+
+
+////变种2:用两个变量控制
+//#include<stdio.h>
+//int main()
+//{
+//    int x, y;
+//    for (x = 0, y = 0; x < 2 && y < 5; ++x, y++)//x大于2后为假，结果输出两次
+//    {
+//        printf("包佳毅最帅\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//do while循环
+//do
+//  循环语句;//至少执行循环语句一次
+//while(表达式);
+
+////打印1-10
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 1;
+//    do
+//    {
+//        printf("%d\n", a);
+//        a++;
+//    }
+//    while (a <=10);
+//    return 0;
+//}
+
+
+
+
+
+
+
+////goto语句-不建议使用
+////终止程序在某些深度嵌套的结构的处理过程，例如一次跳出两层或多层循环
+
+//#include<stdio.h>
+//int main()
+//{
+//    printf("hello bjy\n");
+//    goto again;
+//    printf("你好\n");//这句话不执行
+//again:
+//    printf("hehe\n");
+//    return 0;
+//}
+
+
+////关机程序
+////shutdown -s-t 60设置时间关机
+////shutdown -a 取消关机
+////system()-执行系统命令
+//#include<stdio.h>
+//#include<windows.h>
+//#include<string.h>
+//int main()
+//{
+//    char input[20] = {'\0'};
+//    system("shutdown -s -t 60");
+//again:
+//    printf("请输入我是猪\n请输入:");
+//    scanf("%s", &input);
+//    if (strcmp(input, "我是猪") == 0)
+//    {
+//        system("shutdown -a");
+//    }
+//    else
+//    {
+//        goto again;
+//    }
+//    return 0;
+//}
