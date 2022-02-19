@@ -1,0 +1,576 @@
+
+
+                                                           //函数
+//函数时一个大型程序的某部分代码，由一个或多个语句块组成，它负责完成某项特定任务，而相较于其他代码，具备相对独立性
+
+
+                                                        //函数的参数
+
+//实际参数(实参)
+//真实传给函数的参数，可以是：常量、变量、表达式、函数等
+//无论实参是何种类型的量必须有确定的值,以便把这些值传送给形参
+
+//形式参数(形参)
+//形式参数是指函数名后括号中的变量，因为形式参数只有再函数被调用的过程中才实例化(分配内存单元)
+//形式参数当函数调用完之后就自动销毁，因此形式参数只在函数中有效
+
+
+
+                                            //C语言中的函数分类：库函数和自定义函数
+
+
+//C语言常用库函数:
+
+//IO函数(input output)
+
+//字符串操作函数 
+
+//字符操作函数
+
+//内存操作函数
+
+//时间/日期函数
+
+//数学函数
+
+//其他库函数
+
+
+
+
+
+
+
+
+//自定义函数
+
+//#include<stdio.h>
+//int Add(int x, int y)//加法函数：f(x,y)=x+y
+////括号中为函数的参数，花括号中为函数体
+//{
+//    int z = x + y;
+//    return z;
+//}
+//
+//int main()
+//{
+//    int num1 = 0;
+//    int num2 = 0;
+//    int sum = 0;
+//    int a = 100;
+//    int b = 200;
+//    printf("输入两个操作数：\n");
+//    scanf("%d%d", &num1, &num2);
+//    sum = Add(num1, num2);//()—函数调用操作符
+//    //sum = num1 + num2;
+//    printf("sum=%d\n", sum);
+//    sum = Add(a, b);
+//    printf("sum=%d\n", sum);
+//    return 0;
+//}
+
+
+
+////自定义函数找两个数较大值
+//#include<stdio.h>
+//#include<string.h>
+//int Max(int x,int y)
+//{
+//    if (x > y)
+//        return x;
+//    else
+//        return y;
+// }
+//int get_MAX(int x, int y)
+//{
+//    return (x > y ? x : y);
+//}
+//int main()
+//{
+//    int a = 20;
+//    int b = 10;
+//    int max1,max2;
+//
+//    max1= Max(a, b);
+//    max2 = get_MAX(a, b);
+//    printf("max1=%d\nmax2=%d\n", max1,max2);
+//    return 0;
+//}
+
+
+
+
+////test函数
+////输出结果为5个a=2
+//#include<stdio.h>
+//#include<string.h>
+//void test()
+//{
+//    int a = 1;//创建局部变量a 每次创建a的值都为1
+//    a++;
+//    printf("a=%d\n", a);
+//}
+//
+//int main()
+//{
+//    int i = 0;
+//    while (i < 5)
+//    {
+//        test();//执行test函数
+//        i++;
+//    }
+//    return 0;
+//}
+
+
+
+
+                                                             //函数的调用
+//传值调用：当实参传给形参时，形参其实是实参的一份临时拷贝，对形参的修改不影响实参
+
+//传址调用
+/*传址调用是把函数外部创建变量的内存地址传递给函数参数的一种调用函数的方法
+这种传参方式可以让函数和函数外边的变量建立起真正的联系，也就是函数内部也可以直接操作函数外部的变量*/
+
+
+
+////创建一个函数交换两个整型变量的内容
+//#include<stdio.h>
+//void exchange(int* px, int* py)
+//{
+//    //地址交换
+//    int temp;//中间变量
+//    temp = *px;
+//    *px = *py;
+//    *py = temp;
+//}
+//int main()
+//{
+//    int a = 10;
+//    int b = 20;
+//    printf("a=%d,b=%d\n", a, b);
+//    exchange(&a, &b);//调用exchange函数，传输a和b的地址
+//    printf("a=%d,b=%d\n", a, b);
+//
+//    return 0;
+//}
+
+
+
+
+////写一个函数可以判断是不是素数
+//#include<stdio.h>
+//#include<math.h>
+//int su(int x)//是素数返回1，不是素数返回0
+//{
+//    int i;
+//    for (i = 2; i <= sqrt(x); i++)
+//    {
+//        if (x % i == 0)
+//        {
+//            return 0;//返回0，并退出su函数
+//        }
+//    }
+//        return 1;
+//}
+//int main()
+//{
+//    int k;
+//    for (k = 100; k <= 200; k++)
+//    {
+//        if (su(k) == 1)
+//        {
+//            printf("素数有%d\n", k);
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+
+////写一个函数判断一年是否为闰年
+//#include<stdio.h>
+//int is_leap_year(int x)//返回1为闰年，返回0不是闰年
+//{
+//    if ((x % 4 == 0 && x % 100 != 0)||(x%400==0))
+//    {
+//        return 1;
+//    }
+//    else
+//    {
+//        return 0;
+//    }
+//}
+//int main()
+//{
+//    int i;
+//    for (i = 1000; i <= 2000; i++)
+//    {
+//        if (is_leap_year(i) == 1)
+//        {
+//            printf("闰年有%d\n", i);
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+////写一个函数实现一个整型有序数组的二分查找
+//int binery_search(int arr[10],int k,int sz) //如果找到了返回这个数的下标，找不到返回-1
+//{
+//    int left = 0;   
+//    int right = sz - 1;
+//    while (left<=right)
+//    {
+//        int mid = (left + right) / 2;//中间元素的下标
+//        if (arr[mid] == k)
+//        {
+//            return mid;
+//        }
+//        else if (k > arr[mid])
+//        {
+//            left = mid+1;
+//        }
+//        else if (k < arr[mid])
+//        {
+//            right = mid-1;
+//        }
+//    }
+//    return -1;
+//}
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//    int k = 7;
+//    int sz = sizeof(arr) / sizeof(arr[0]);
+//    int ret = binery_search(arr, k,sz);//传递过去的是数组arr首元素的地址
+//    if (ret == -1)
+//    {
+//        printf("找不到指定数字\n");
+//    }
+//    else
+//    {
+//        printf("找到了，下标为%d\n", ret);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+////写一个函数，每调用一次这个函数，就会将num的值增加1
+//#include<stdio.h>
+//int ADD(int* a)//调用一次函数就使num+1
+//{
+//    (*a)++;//自增运算符优先级较高，需使用括号
+//    return *a;
+//}
+//int main()
+//{
+//    int num = 0;
+//    num = ADD(&num);
+//    printf("num=%d\n", num);
+//    num = ADD(&num);
+//    printf("num=%d\n", num);
+//    num = ADD(&num);
+//    printf("num=%d\n", num);
+//    return 0;
+//}
+
+
+
+
+
+                                                //函数的嵌套使用和链式访问
+//嵌套调用
+
+//#include<stdio.h>
+//void new_line()
+//{
+//    printf("包佳毅最帅\n");
+//}
+//void three_line()
+//{
+//    int i;
+//    for (i = 0; i < 3; i++)
+//    {
+//        new_line();
+//    }
+//}
+//int main()
+//{
+//    three_line();
+//    return 0;
+//}
+
+
+
+//链式访问
+//把一个函数的返回值作为另一个函数的参数
+
+//#include<stdio.h>
+//int main()
+//{
+//    printf("%d\n", strlen("abc"));//把strlen函数的返回值作为printf函数的参数
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    printf("%d", printf("%d", printf("%d", 43)));//printf函数成功后，将返回所写字符的总数。 输出4321
+//    return 0;
+//}
+
+
+
+
+
+
+
+                                                     //函数的声明和定义
+//函数的声明
+/*
+1.告诉编译器有一个函数叫什么，参数是什么，返回类型是什么。但是具体存在与否，无关紧要
+2.函数的声明一般都出现在函数的使用之前，要满足先声明后定义
+3.函数的声明一般要放在头文件中
+*/
+
+//函数的定义
+//是指函数的具体实现，交待函数的功能实现
+
+
+
+//另创建一个头文件放入函数的声明
+/*
+#ifndef __ADD_H__
+#define __ADD_H__
+……
+#endif
+*/
+//另创建一个.c文件放入函数的定义
+//在主文件中引用头文件可直接使用函数 如：#include "add.h"
+//
+
+//#include<stdio.h>
+//int ADD(int, int);//函数的声明  若函数放在main主函数之前则不需要额外声明
+//int main()
+//{
+//    int a = 10;
+//    int b = 20;
+//    int sum;
+//    sum = ADD(a, b);//函数的调用
+//    printf("%d\n", sum);
+//    return 0;
+//}
+//int ADD(int x, int y)//函数的定义
+//{
+//    return (x + y);
+//}
+
+
+
+
+
+
+                                                   //函数和递归
+//递归的两个必要条件
+/*
+1.存在限制条件，当满足这个条件时，递归不再继续
+2.每次递归调用后越来越接近限制条件
+*/
+
+
+////递归常见错误：栈溢出——stack overflow
+//#include<stdio.h>
+//int main()
+//{
+//    printf("hehe\n");
+//    main();
+//    return 0;
+//}
+
+
+
+////接收一个无符号整型数，按照顺序打印它的每一位
+//#include<stdio.h>
+//void print(int a)
+//{
+//    if (a > 9)//两位及两位以上的数字
+//    {
+//        print(a / 10);
+//    }
+//    printf("%d ", a % 10);
+//}
+//int main()
+//{
+//    unsigned int num;
+//    scanf("%d", &num);
+//    print(num);
+//    return 0;
+//}
+
+
+
+
+////编写函数不允许使用strlen函数，求字符串长度
+////1.
+//#include<stdio.h>
+//int my_strlen (char* str)
+//{
+//    int count=0;
+//    while (*str!='\0')
+//    {
+//        count++;
+//        str++;//地址+1
+//    }
+//    return count;
+//}
+//int main()
+//{
+//    char arr[] = "bjy";
+//    int len = my_strlen(arr);//传过去首元素的地址
+//    printf("len=%d\n", len);
+//    return 0;
+//}
+////2.
+//#include<stdio.h>//不创建临时变量
+//int my_strlen(char* str)
+//{
+//    if (*str != '\0')
+//    {
+//        return 1+my_strlen(str+1);
+//    }
+//    else
+//    {
+//        return 0;
+//    }
+//}
+//int main()
+//{
+//    char arr[] = "bjy";
+//    int len = my_strlen(arr);//传过去首元素的地址
+//    printf("len=%d\n", len);
+//    return 0;
+//}
+
+
+
+
+
+
+                                                        //递归与迭代
+                                                        
+////求n的阶乘(不考虑溢出)
+//#include<stdio.h>
+//int FAC1(int n)//循环的方式
+//{
+//    int i;
+//    int ret=1;
+//    for (i = 1; i <= n; i++)
+//    {
+//        ret *= i;
+//    }
+//    return ret;
+//}
+//int FAC2(int n)//递归的方式
+//{
+//    if (n <= 1)
+//    {
+//        return 1;
+//    }
+//    else
+//    {
+//        return  n* FAC2(n - 1);
+//    }
+//}
+//int main()
+//{
+//    int n;
+//    scanf("%d", &n);
+//    int ret=FAC1(n);
+//    printf("阶乘为：%d\n", ret);
+//    int key = FAC2(n);
+//    printf("阶乘为：%d\n", key);
+//    return 0;
+//}
+
+
+
+
+
+
+//求第n个斐波那契数(不考虑溢出)
+//斐波那契数列  1 1 2 3 5 8 13 21 34 55 前两个数之和等于下一个数
+/*
+斐波那契公式
+当n<=1时，1
+当n>2时，fib(n-1)+fib(n-2)
+*/
+
+////递归效率低
+//#include<stdio.h>
+//int count = 0;
+//int Fib(int n)
+//{
+//    if (n == 3)//测试第三个斐波那契数的计算次数
+//    {
+//        count++;
+//    }
+//    if (n <= 2)
+//    {
+//        return 1;
+//    }
+//    else
+//    {
+//        return Fib(n - 1) + Fib(n - 2);
+//    }
+//}
+//int main()
+//{
+//    int i;
+//    int ret;
+//    int key;
+//    scanf("%d", &i);
+//    ret = Fib(i);
+//    printf("斐波那契数为%d\n", ret);
+//    printf("计算次数为%d\n", count);
+//    return 0;
+//}
+
+////迭代
+//#include<stdio.h>
+//int Fib(int n)
+//{
+//    int a = 1;
+//    int b = 1;
+//    int c = 1;//保证在不进入循环的情况下输出正确答案
+//    while (n > 2)
+//    {
+//        c = a + b;
+//        a = b;
+//        b = c;
+//        n--;
+//    }
+//    return c;
+//}
+//int main()
+//{
+//    int i;
+//    int ret;
+//    int key;
+//    scanf("%d", &i);
+//    ret = Fib(i);
+//    printf("斐波那契数为%d\n", ret);
+//    return 0;
+//}
