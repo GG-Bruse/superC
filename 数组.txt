@@ -1,0 +1,339 @@
+
+
+
+                                                       //数组
+////定义：一组相同类型元素的集合
+////数组的大小必须用常量来制定(不可为变量)
+////int是数组中元素的类型，并非数组的类型为int
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[10] = {1,2,3,4,5,6,7,8,9,10};//定义一个存放十个整数的数组
+//    //[]—下标引用操作符
+//    printf("%d\n", arr[4]);//5  与索引道理相同
+//    int i = 0;
+//    while (i < 10)
+//    {
+//        printf("%d\n", arr[i]); 
+//        i++;
+//    }
+//    return 0;
+//}
+
+
+
+
+////数组名是数组首元素的地址(两种例外)
+////1.sizeof[数组名]——数组名表示整个数组，计算的是整个整个数组的大小(单位是字节)
+////2.&数组名，数组名代表整个数组，取出的是整个数组的地址
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[] = { 1,2,3,4,5 };
+//    printf("%p\n", arr);     //00F5F8EC
+//    printf("%p\n", arr+1);   //00F5F8F0
+//
+//    printf("%p\n", &arr[0]); //00F5F8EC
+//    printf("%p\n", &arr[0]+1);//00F5F8F0
+//
+//    printf("%p\n", &arr);    //00F5F8EC 整个数组的地址，只是从这个地址开始
+//    printf("%p\n", &arr+1);  //00F5F900 
+//
+//    printf("%d\n", *arr);    //1 
+//    return 0;
+//}
+
+    
+
+
+////数组的初始化是指在创建数组的同时给数组一些合理初始化值
+//#include<stdio.h>
+//int main()
+//{
+//    //不完全初始化，剩下的元素默认初始化为0
+//    int arr[10] = { 1,2,3 };
+//    char arr1[5] = { 'a','b' };
+//    char arr2[5] = { 'a',98 };//认为98为ASCII码值转化为b
+//    
+//    char arr3[3] = "ab";//剩下的元素为\0,并不是默认的0
+//
+//    char arr4[] = "abcdef";//不指定大小时，必须初始化，元素为7
+//    char arr5[4] ={'a','b','c'};//不指定大小时，元素为3
+//    
+//    printf("%d\n", sizeof(arr4));//7
+//    printf("%d\n", strlen(arr4));//6
+//    printf("%s\n", arr5);
+//    return 0;
+//}
+
+//strlen 只能针对字符串求长度-库函数-需引用头文件 检测到\0结束  默认返回无符号整型
+//sizeof 计算变量、数组、类型的大小-单位是字节-操作符
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    char arr1[] = "abc";
+//    char arr2[] = { 'a','b','c' };
+//    printf("%d\n", sizeof(arr1));//4
+//    printf("%d\n", sizeof(arr2));//3
+//    printf("%d\n", strlen(arr1));//3
+//    printf("%d\n", strlen(arr2));//没检测到\0，长度无法预测为随机值
+//    return 0;
+//}
+
+
+
+
+
+
+//一维数组
+
+////访问输出abcdef
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char arr[] = "abcdef";
+//    int i = 0;
+//    int len = strlen(arr);
+//    for (i = 0; i <len; i++)
+//    {
+//        printf("%c\n", arr[i]);
+//    }
+//    return 0;
+//}
+
+
+////一维数组在内存中的储存
+////连续存放
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//    int sz = sizeof(arr) / sizeof(arr[0]);
+//    int i;
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("&arr[%d]=% p\n",i, &arr[i]);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+//二维数组
+
+//二维数组的创建和初始化
+
+//#include<stdio.h>
+//int main()
+//{
+//    //三行四列
+//    int arr1[3][4] = { { 1,2 } ,{3,4},{1,2} };
+//    int arr2[3][4] = { 1,2,3,4,1,2,3,4,1 };
+//    int arr3[][4] = { { 1,2,3,4 } ,{1,2,3,4},{1,2,3,4} };//后面的方括号中必须有整型
+//    return 0;
+//}
+
+
+
+////二维数组的使用
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[3][4] = { {1,2,3},{4,5} };
+//    int i, j;
+//    for (i = 0; i < 3; i++)
+//    {
+//        for (j = 0; j < 4; j++)
+//        {
+//            printf("%d", arr[i][j]);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+
+
+////二维数组在内存中的储存
+////连续存储
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[3][4] = { {1,2,3},{4,5} };
+//    int i, j;
+//    for (i = 0; i < 3; i++)
+//    {
+//        for (j = 0; j < 4; j++)
+//        {
+//            printf("&arr[%d][%d]=%p\n",i,j,&arr[i][j]);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+
+////字符串的输入和输出
+////当用scanf函数输入字符串时，字符串中不能含有空格，否则将以空格作为串的结束符
+//#include<stdio.h>
+//int main()
+//{
+//    char str[15];
+//    printf("input string:\n");
+//    scanf("%s", str);//不需要取地址符
+//    printf("%s", str);
+//    //执行此句命令时，按数组名找到首元素地址，然后逐个输出数组中的各个字符，直到遇到\0为止
+//    return 0;
+//}
+
+
+
+
+
+
+//数组的构造与应用
+
+//冒泡排序
+/* 从第一个数开始依次对相邻两数进行比较，如次序对则不做任何操作；如次序不对则使这两个数交换位置。第一遍的(N-1)次比较后，最大的数已放在最后，
+第二遍只需考虑(N-1)个数，依次类推直到第(N-1)遍比较后就完成了排序 */
+
+//#include<stdio.h>
+//#define N 10
+//int main()
+//{
+//    int arr[N], i, j, temp;
+//    printf("please input %d numbers\n", N);
+//    //输入
+//    for (i = 0; i < N; i++)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    //排序
+//    for (i = 0; i < N-1; i++)//0-9
+//    {
+//        for (j = 0; j < N-1-i; j++)//0-9//0-8//……
+//        {
+//            if (arr[j] > arr[j+1])
+//            {
+//                temp = arr[j];
+//                arr[j] = arr[j+1];
+//                arr[j+1] = temp;
+//            }
+//        }
+//    }
+//    //输出
+//    printf("the carry after sort:\n");
+//    for (i = 0; i < N; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
+
+
+
+//选择排序
+//首先找出值最小的数，然后把这个数与第一个数交换，这样值最小的数就放到了第一个位置；
+//然后，再从剩下的数中找值最小的，把它和第二个数互换，使得第二小的数放在第二个位置上。
+//依次类推，直到所有值从小到大排列为止
+
+//#include<stdio.h>
+//#define N 10
+//int main()
+//{
+//    int arr[N], i, j, k, temp;
+//    //输入
+//    printf("please input %d numbers\n", N);
+//    for (i = 0; i < N; i++)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    //排序
+//    for (i = 0; i < N - 1; i++)//0-8
+//    {
+//        k = i;//0-8
+//        for (j = i + 1; j < N; j++)//1-9
+//        {
+//            if (arr[j] < arr[k])
+//            {
+//                k = j;
+//            }
+//        }
+//        if (k != i)
+//        {
+//            temp = arr[k];
+//            arr[k] = arr[i];
+//            arr[i] = temp;
+//        }
+//    }
+//    //输出
+//    printf("the carray after sort:\n");
+//    for (i = 0; i < N; i++)
+//    {
+//        printf("%5d", arr[i]);
+//    }
+//    printf("\n");
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//数组作为函数参数
+
+////冒泡排序
+//#include<stdio.h>
+//void bubble_sort(int arr[],int sz)//将数组内的数据排成升序
+//{
+//    int i;
+//    for (i = 0; i < sz - 1; i++)
+//    {
+//        //每一趟冒泡排序
+//        int j;
+//        int flag = 1;//假设这一趟要排序的数据已经有序
+//        for (j = 0; j < sz - 1 - i; j++)
+//        {
+//            if (arr[j] > arr[j + 1])
+//            {
+//                int temp;
+//                temp = arr[j];
+//                arr[j] = arr[j + 1];
+//                arr[j + 1] = temp;
+//                flag = 0;//本趟排序的数据不完全有序
+//            }
+//        }
+//        if (flag == 1)
+//        {
+//            break;
+//        }
+//    }
+//}
+//int main()
+//{
+//    int i;
+//    int arr[] = { 9,8,7,6,5,4,3,2,1 };
+//    int sz = sizeof(arr) / sizeof(arr[0]);
+//    bubble_sort(arr, sz);
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
+
+
+
