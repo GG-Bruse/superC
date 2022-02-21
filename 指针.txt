@@ -1,0 +1,1068 @@
+
+
+
+
+                                                        //指针(初级)
+
+/*指针是编程语言中的一个对象，利用地址，它的值直接指向存在电脑存储器中另一个地方的值。由于通过地址额能找到所需变量单元，可以说，地址指向该
+变量单元。因此，将地址形象化的称为"指针"。意思是通过它能找到以它为地址的内存单元。
+*/
+
+
+//内存是电脑上重要的储存器，计算机所有的程序都是在内存中运行的
+//所以为了能够有效的使用内存，就把内存划分为一个个小小的内存单元，每个内存单元的大小都是1个字节
+//为了能够有效的访问到内存的每个单元，就给内存单元进行了编号，这些编号被称为该内存单元的地址
+
+//如何产生地址：
+//32(64)位—32(64)根地址线/数据线—可产生2的32(64)次方种编号
+//一个内存单元放入一个字节
+
+//void*类型的指针可以接收任意类型的地址，但不能进行解引用操作和加减运算
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 10;//4个字节
+//    int*p=&a;//取出a的地址并创建变量p,将a的地址存放在p中 p是一个变量—指针变量
+//    //有一种变量是用来存放地址的—指针变量
+//    printf("%p\n", &a);
+//    printf("%p\n", p);
+//    *p=20;//*—解引用操作符/间接访问操作符
+//    //将20这个值放入变量a中
+//    printf("%d\n", a);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char ch = 'b';
+//    char*bjy = &ch;
+//    *bjy = 'j';
+//    printf("%c",*bjy);
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    double d = 3.14;
+//    double* bjy = &d;
+//    *bjy = 666.66;
+//    printf("%lf\n", d);
+//    printf("%lf\n", *bjy);
+//    return 0;
+//}
+
+
+////指针变量的大小
+////指针大小在32位平台是4个字节，在64位平台是8个字节
+//#include<stdio.h>
+//int main()
+//{
+//    printf("%d\n", sizeof(char*));//8
+//    printf("%d\n", sizeof(short*));//8
+//    printf("%d\n", sizeof(int*));//8
+//    printf("%d\n", sizeof(double*));//8
+//    return 0;
+//}
+
+
+
+ 
+
+                                                          //指针类型
+                                                          
+//指针类型决定指针进行解引用操作时，能够访问空间的大小
+//int*  *p能够访问四个字节
+//char* *p能够访问一个字节
+//short* *p能够访问两个字节
+//double* *p能够访问八个字节
+
+
+//指针+-整数
+//指针类型决定了:指针走一步走多长(指针的步长)
+//int*p p+1——>4
+//char*p p+1——>1
+//double*p p+1——>8
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 0x11223344;
+//    int* pa = &a;
+//    char* pc = &a;
+//    printf("%p\n", pa);
+//    printf("%p\n", pa + 1);//向后加4
+//
+//    printf("%p\n", pc);
+//    printf("%p\n", pc + 1);//向后加1
+//    return 0;
+//}
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int i = 0;
+//    int arr[10] = { 0 };
+//    int* p = arr;//数组名-首元素地址
+//    for (i = 0; i < 10; i++)
+//    {
+//        *(p + i) = 1;//向后走四个字节
+//    }
+//    for (i = 0; i < 10; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+                                                          //野指针
+//野指针就是指针指向的位置是不可知的(随机的、不正确的、没有明确限制的)
+
+
+
+//成因1：指针未初始化
+
+//错误案列
+//#include<stdio.h>
+//int main()
+//{
+//    int a;//局部变量不初始化，默认随机值
+//    int* p=a;//局部的指针变量，就被初始化随机值
+//    *p = 20;
+//    return 0;
+//}
+
+
+
+//成因2：指针越界访问
+
+////错误案列
+//int main()
+//{
+//    int arr[10];
+//    int* p = arr;
+//    int i = 0;
+//    for (i = 0; i < 11; i++)
+//    {
+//        //当指针指向的范围超出数组arr的范围时，p就是野指针
+//        *(p + i) = i;
+//    }
+//    return 0;
+//}
+
+
+
+//成因3：指针指向的空间释放
+
+//错误案列
+//int* test()
+//{
+//    int a = 10;//临时变量——出函数时销毁
+//    return &a;
+//}
+//int main()
+//{
+//    int* p = test();//接收时指针指向的空间已经释放
+//    *p = 20;
+//    return  0;
+//}
+
+
+
+//如何规避野指针
+/*
+1.指针初始化(NULL——用于初始化指针，给指针赋值)
+
+2.小心指针越界
+
+3.指针指向的空间释放就放置NULL（指向NULL的指针不能使用）
+
+4.指针使用前检查有效性
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       //指针运算
+                                                       
+//指针+-整数
+
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//    int i= 0;
+//    int sz = sizeof(arr) / sizeof(arr[0]);//10
+//    int* p = &arr[9];
+//    for (i = 0; i< sz; i++)
+//    {
+//        printf("%d ", *p);
+//        p -= 1;
+//    }
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#define N_VALUES 5
+//int main()
+//{
+//    float values[N_VALUES];
+//    float* vp;
+//    for (vp = &values[0]; vp < &values[N_VALUES];)
+//    {
+//        *vp++=0;//先赋值再加一
+//    }
+//    for (vp = &values[0]; vp < &values[N_VALUES];vp++)
+//    {
+//        printf("%d ", *vp);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+//指针-指针
+//得中间元素的个数
+
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//    printf("%d\n", &arr[9] - &arr[0]);//9
+//    printf("%d\n", &arr[0] - &arr[9]);//-9
+//    return 0;
+//}
+
+//编写函数计算字符长度
+//#include<stdio.h>
+//int my_strlen(char* str)
+//{
+//    int count = 0;
+//    while (1)
+//    {
+//        if (*str != '\0')
+//        {
+//            str++;
+//            count++;
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
+//    return count;
+//}
+//int it_strlen(char* str)
+//{
+//    char* start = str;
+//    char* end = str;
+//    while (*end != '\0')
+//    {
+//        end++;
+//    }
+//    return end - start;//返回之间的元素个数
+//}
+//int main()
+//{
+//    int len, lens;
+//    char arr[] = "bjy";
+//    len=my_strlen(arr);
+//    lens = it_strlen(arr);
+//    printf("%d\n", len);
+//    printf("%d\n", lens);
+//    return 0;
+//}
+
+
+
+
+
+
+
+//指针关系运算
+
+//允许指向数组元素的指针与指向数组最后一个元素后面的那个内存位置的指针进行比较，
+//但是不允许与指向第一个元素之前的那个内存位置的指针进行比较
+//(也需避免与后面那个内存位置的指针进行比较，虽然符合标准但不一定可行，在部分编译器不可行)
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    //指针和数组
+//数组名是数组首元素地址
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[10] = { 0 };
+//    int* p = arr;
+//    int i = 0;
+//    for (i = 0; i < 10; i++)
+//    {
+//        printf("%p=======%p\n", p + i, &arr[i]);
+//    }
+//    return 0;
+//}
+
+
+
+
+//指针数组——存放指针的数组
+//#include<stdio.h>
+//int main()
+//{
+//    int i = 0;
+//    int a = 0, b = 1, c = 2;
+//    int* arr[3] = { &a,&b,&c };
+//    for (i = 0; i < 3; i++)
+//    {
+//        printf("%d\n", *arr[i]);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+                                                          //二级指针
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 10;
+//    int* pa = &a;
+//    int** ppa = &pa;//二级指针
+//    int*** pppa = &ppa;//三级指针
+//    printf("%d\n", a);
+//    printf("%d\n", *pa);
+//    printf("%d\n", **ppa);
+//    printf("%d\n", ***pppa);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+                                                     //指针(高阶)
+
+
+                                                     //字符指针
+//#include<stdio.h>
+//int main()
+//{
+//    char arr[] = "abcdef";
+//    char* pc = arr;
+//    printf("%s\n", arr);
+//    printf("%s\n", pc);
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    char *p = "abcdef";
+//    //"abcdef"是一个常量字符串，不可进行解引用修改
+//    //最好写成：const char *p="abcdef";
+//    //系统将字符串存放在内存中，指针p指向该字符串(将a的地址赋给p)
+//    printf("%c\n", *p);//a
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    char arr1[] = "abcdef";//变量
+//    char arr2[] = "abcdef";
+//    const char* p1 = "abcdef";//常量
+//    const char* p2 = "abcdef";
+//
+//    if (arr1 == arr2)
+//    {
+//        printf("hehe\n");
+//    }
+//    else
+//    {
+//        printf("haha\n");//输出
+//    }
+//
+//    if (p1 == p2)
+//    {
+//        printf("hehe\n");//输出
+//    }
+//    else
+//    {
+//        printf("haha\n");
+//    }
+//    //不可修改的常量在内存中只存储一份，p1和p2都指向"abcdef"
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+                                                   //指针数组(存放指针的数组)
+//[存储类型]数据类型*指针数组名[数组长度]
+
+//int main()
+//{
+//    int arr[10] = { 0 };//整型数组
+//    char ch[5] = { 0 };//字符数组
+//    int* parr[4];//存放整型指针的数组
+//    char* pch[5];//存放字符指针的数组
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 10;
+//    int b = 20;
+//    int c = 30;
+//    int d = 40;
+//    int* parr[4] = { &a,&b,&c,&d };
+//    int i = 0;
+//    for (i = 0; i < 4; i++)
+//    {
+//        printf("%d\n", *(parr[i]));
+//    }
+//    return 0;
+//}
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int arr1[] = { 1,2,3,4,5 };
+//    int arr2[] = { 2,3,4,5,6 };
+//    int arr3[] = { 3,4,5,6,7 };
+//    int *parr[] = { arr1,arr2,arr3 };
+//
+//    int i = 0;
+//    for (i = 0; i < 3; i++)
+//    {
+//        int j = 0;
+//        for (j = 0; j < 5; j++)
+//        {
+//            printf("%d ", *(parr[i] + j));
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+                                                       //数组指针(指向数组的指针)
+                                                      
+//[存储类型]数据类型(*指针变量名)[数组长度/二维数组的列数]
+//*(行指针)=列指针
+//*(列指针)=某行某列的值
+
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[10] = { 0,1,2,3,4,5,6,7,8,9 };
+//    //arr-首元素的地址
+//    //&arr[0]-首元素的地址
+//    //&arr-数组的地址
+//    int(*p)[10] = &arr;//数组指针
+//    return 0;
+//}
+
+
+
+//见手机截图
+//int main()
+//{
+//    char* arr[5];
+//    char* (*pa)[5] = &arr;//指向指针数组的数组指针
+//
+//    int arr2[10] = { 0 };
+//    int(*pa2)[10] = &arr2;
+//    return 0;
+//}
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//    int(*pa)[10] = &arr;
+//    int i;
+//    for (i = 0; i < 10; i++)
+//    {
+//        printf("%d ", (*pa)[i]);//*pa=arr
+//    }
+//    return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+////参数是数组的形式
+//void Print1(int arr[3][5], int x, int y)
+//{
+//    int i, j;
+//    for (i = 0; i < 3; i++)
+//    {
+//        for (j = 0; j < 5; j++)
+//        {
+//            printf("%d ", arr[i][j]);
+//        }
+//        printf("\n");
+//    }
+//   
+//}
+////参数是指针的形式
+//void Print2(int(*p)[5], int x, int y)
+//{
+//    int i;
+//    for (i = 0; i < x; i++)
+//    {
+//        int j = 0;
+//        for (j = 0; j < y; j++)
+//        {
+//            printf("%d ", *(*(p + i) + j));
+//            //printf("%d ", (*(p + i))[j]);
+//        }
+//        printf("\n");
+//    }
+//}
+//int main()
+//{
+//    int arr[3][5] = { {1,2,3,4,5},{2,3,4,5,6},{3,4,5,6,7} };
+//    Print1(arr, 3, 5);
+//    printf("\n");
+//    Print2(arr, 3, 5);
+//    return 0;
+//}
+
+
+
+
+/*
+
+int arr[5];//arr是一个有5个元素的整型数组
+
+int* parr1[10];//parr1是一个数组，数组有10个元素，每个元素的类型是int*，parr1是指针数组
+
+int(*parr2)[10];//parr2是一个指针，该指针指向了一个数组，数组有10 个元素，每个元素的类型是int，parr2是数组指针
+
+int(*parr3[10])[5];//parr3是一个数组，该数组有10个元素。
+                   //每个元素是一个数组指针，该数组指针指向的数组有5个元素，每个元素是int
+
+*/
+
+
+
+
+
+
+
+
+
+                                                //数组参数.指针参数
+
+//一维数组的传参
+
+//void test(int arr[])
+//{}
+//void test(int arr[10])
+//{}
+//void test(int* arr)
+//{}
+//
+//void test2(int *arr[20])
+//{}
+//void test2(int **arr)
+//{}
+//int main()
+//{
+//    int arr[10] = { 0 };
+//    int* arr2[20] = { 0 };
+//    test(arr);
+//    test2(arr2);
+//    return 0;
+//}
+
+
+
+//二维数组的传参
+
+//void test(int arr[3][5])
+//{}
+//void test1(int arr[][5])//可以省略行，不能省略列
+//{}
+//void test2(int(*arr)[5])//数组指针接收
+//{}
+//int main()
+//{
+//    int arr[3][5] = { 0 };
+//    test(arr);//二维数组传参
+//    test1(arr);
+//    test2(arr);
+//    //不可用二级指针接收
+//    return 0;
+//}
+
+
+
+
+
+//一级指针传参
+
+//#include<stdio.h>
+//void Print(int* p, int sz)
+//{
+//    int i;
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("%d ", *(p + i));
+//    }
+//}
+//int main()  
+//{
+//    int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//    int* p = arr;
+//    int sz = sizeof(arr) / sizeof(arr[0]);
+//    Print(p, sz);
+//    return 0;
+//}
+
+
+
+
+//二级指针传参
+
+//#include<stdio.h>
+//void test(int** p)
+//{
+//    printf("%d\n", **p);
+//}
+//int main()
+//{
+//    int n = 20;
+//    int* p = &n;
+//    int** pp = &p;
+//    int* arr[10] = {p};//指针数组
+//    test(pp);//二级地址
+//    test(&p);//一级指针的地址
+//    test(arr);//指针数组的数组名（首地址）
+//    return 0;
+//}
+
+
+
+
+
+
+
+                                                        //函数指针
+                                                     
+//函数返回值(*指针变量名)(形参表)——指向函数的指针
+
+//通过函数的指针调用函数的形式
+//1. (*指针变量名)(实参表)
+//2. 指针变量名(实参表)
+//3.(**指针变量名)(实参表)——(*可有可无，也可以是多个)
+
+
+//#include<stdio.h>
+//int Add(int x, int y)
+//{
+//    int z;
+//    z = x + y;
+//    return z;
+//}
+//int main()
+// 
+//{
+//    int a = 10;
+//    int b = 20;
+//    //printf("%d\n", Add(a, b));
+//
+//    //函数也具有地址
+//    //&函数名和函数名都是函数的地址
+//    /*printf("%p\n", &Add);
+//    printf("%p\n", Add);*/
+//
+//    int(*pa)(int ,int) = Add;//函数指针-存放函数地址的一个指针
+//    printf("%d\n", (*pa)(a, b));
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//void Print(char *str)
+//{
+//    printf("%s\n", str);
+//}
+//int main()
+//{
+//    void(*pa)(char*) = Print;//函数指针
+//    (*pa)("hello world!");
+//    return 0;
+//}
+
+
+
+//(*(void(*)())0)()
+/*
+把0强制类型转换成：void(*)()函数指针类型-0就是一个函数的地址
+再调用0地址处的该函数
+*/
+
+
+
+//void(* signal (int , void(*)(int))  ) (int) );
+/*
+是一个函数声明
+signal函数的参数有两个，第一个是int,第二个是函数指针。该函数指针指向的函数的参数是int，返回类型是void
+signal函数的返回类型也是一个函数指针，该函数指针指向的函数的参数是int，返回类型是void。
+*/
+
+//可以写成：
+//typedf void(*pfun_t)(int) ——将类型void(*)(int)重命名为pfun_t
+//pfun_t signal(int,pfun_t);
+
+
+
+
+
+
+
+
+
+                                                            //函数指针数组
+
+//函数返回值(*指针变量名[数组长度])(形参表)
+
+//#include<stdio.h>
+//int Add(int x, int y)
+//{
+//    return x + y;
+//}
+//int Sub(int x, int y)
+//{
+//    return x - y;
+//}
+//int Mul(int x, int y)
+//{
+//    return x * y;
+//}
+//int Div(int x, int y)
+//{
+//    return x / y;
+//}
+//int main()
+//{
+//    int (*pa)(int, int) = Add;//函数指针，指向Add函数(存放Add函数的地址)
+//
+//    //需要一个数组存放4个函数的地址——即需要一个函数指针数组
+//    int(*parr[4])(int, int) = { Add,Sub,Mul,Div };//每个元素是函数指针
+//    int i = 0;
+//    for (i = 0; i < 4; i++)
+//    {
+//        printf("%d\n", parr[i](2, 3));//调用
+//    }
+//    return 0;
+//}
+
+
+//写一个函数指针pf,指向my_strcpy
+//写一个函数指针数组，能够存放4个my_strcpy函数的地址
+//#include<stdio.h>
+//char* my_strcpy(char* dest, const char* src)
+//{}
+//int main()
+//{
+//    char* (*pf)(char*, const char*)=my_strcpy;
+//    char* (*pfarr[4])(char*, const char*) = { my_strcpy };
+//
+//    return 0;
+//}
+
+
+
+
+//函数指针数组的使用：转移表
+
+//计算器
+//#include<stdio.h>
+//void menu()
+//{
+//    printf("****************************\n");
+//    printf("******  1.add    2.sub  ****\n");
+//    printf("******  3.mul    4.div  ****\n");
+//    printf("******     0. exit      ****\n");
+//    printf("****************************\n");
+//}
+//int Add(int x, int y)
+//{
+//    return x + y;
+//}
+//int Sub(int x, int y)
+//{
+//    return x - y;
+//}
+//int Mul(int x, int y)
+//{
+//    return x * y;
+//}
+//int Div(int x, int y)
+//{
+//    return x / y;
+//}
+//int main()
+//{
+//    int input;
+//    int x, y;
+//    int ret;
+//    //pfarr是一个函数指针数组-转移表
+//    int(*pfarr[])(int, int) = { 0,Add,Sub,Mul,Div };
+//    do
+//    {
+//        menu();
+//        printf("请选择:\n");
+//        scanf("%d", &input);
+//        if (input >= 1 && input <= 4)
+//        {
+//            printf("请输入两个操作数\n");
+//            scanf("%d%d", &x, &y);
+//            ret = (*pfarr[input])(x, y);
+//            printf("%d\n", ret);
+//        }
+//        else if (input == 0)
+//        {
+//            printf("退出\n");
+//            break;
+//        }
+//        else
+//        {
+//            printf("输入错误，请重新输入\n");
+//        }
+//    } while (input);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       //指向函数指针数组的指针
+                                                      
+//函数返回值(*(*指针变量名)[数组长度])(形参表)
+
+//int Add(int x, int y)
+//{
+//    return x + y;
+//}
+//int main()
+//{
+//    int arr[10] = { 0 };
+//    int(*p)[10] = &arr;//用数组指针存放数组地址
+//
+//    int (*pf)(int, int);//函数指针
+//    int(*pfarr[4])(int, int);//函数指针数组
+//    int(*(*ppf)[4])(int, int) = &pf;//指向函数指针数组的指针
+//    //ppf是一个数组指针，指针指向的数组由4个元素组成
+//    //指向的数组的每个元素的类型是一个函数指针int(*)(int,int)
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+                                                            //回调函数
+
+//回调函数就是一个通过函数指针回调的函数，如果把函数的指针(地址)作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，就称这是回调函数
+//回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用，用于对该事件或条件的响应
+
+
+////计算器
+//#include<stdio.h>
+//void menu()
+//{
+//    printf("****************************\n");
+//    printf("******  1.add    2.sub  ****\n");
+//    printf("******  3.mul    4.div  ****\n");
+//    printf("******     0. exit      ****\n");
+//    printf("****************************\n");
+//}
+//int Add(int x, int y)
+//{
+//    return x + y;
+//}
+//int Sub(int x, int y)
+//{
+//    return x - y;
+//}
+//int Mul(int x, int y)
+//{
+//    return x * y;
+//}
+//int Div(int x, int y)
+//{
+//    return x / y;
+//}
+//void Calc(int(*pf)(int, int))
+//{
+//    int x, y;
+//    printf("请输入两个操作数:\n");
+//    scanf("%d%d", &x, &y);
+//    printf("%d\n", (*pf)(x, y));
+//}
+//int main()
+//{
+//    int input;
+//    do
+//    {
+//        menu();
+//        printf("请选择：\n");
+//        scanf("%d", &input);
+//
+//        switch (input)
+//        {
+//        case 1:
+//            Calc(Add);
+//            break;
+//        case 2:
+//            Calc(Sub);
+//            break;
+//        case 3:
+//            Calc(Mul);
+//            break;
+//        case 4:
+//            Calc(Div);
+//            break;
+//        case 0:
+//            printf("退出\n");
+//            break;
+//        default:
+//            printf("选择错误，请重新选择\n");
+//        }
+//    } while (input);
+//    return 0;
+//}
+
+
+
+//不限制类型冒泡排序
+//#include<stdio.h>
+//int Compare_int(const void* e1, const void* e2)//比较函数
+//{
+//    return *(int*)e1 - *(int*)e2;
+//} 
+//void Swap(char* buf1,char* buf2,int width)//交换函数
+//{
+//    int i = 0;
+//    for (i = 0; i < width; i++)
+//    {
+//        char temp = *buf1;
+//        *buf1 = *buf2;
+//        *buf2 = temp;
+//        buf1++;
+//        buf2++;
+//    }
+//}
+//void bubble_sort(void* base,int sz,int width,int (*compare)(const void* e1,const void* e2))//排序函数
+//{
+//    int i = 0;
+//    int j = 0;
+//    for (i = 0; i < sz - 1; i++)
+//    {
+//        for (j = 0; j < sz - 1 - i; j++)
+//        {
+//            if (compare( (char*)base+j*width , (char*)base+(j+1)*width )  > 0)
+//            {
+//                Swap((char*)base + j * width, (char*)base + (j + 1) * width, width);//调用一次交换一个元素
+//            }
+//        }
+//    }
+//}
+//void test()
+//{
+//    int arr[10] = { 9,8,7,6,5,4,3,2,1,0 };
+//    int sz = sizeof(arr) / sizeof(arr[0]);
+//    bubble_sort(arr,sz,sizeof(arr[0]),Compare_int);
+//    int i = 0;
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
