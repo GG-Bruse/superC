@@ -1,0 +1,654 @@
+
+                                                    //字符串、字符、内存函数
+//求字符串的长度
+//strlen
+
+//长度不受限制的字符串函数
+//strcpy
+//strcat
+//strcmp
+
+//长度受限制的字符串函数
+//strncpy
+//strncat
+//strncmp
+
+//字符串查找
+//strstr
+//strtok
+
+//错误信息报告
+//strerror
+
+//字符的操作
+
+//内存操作函数
+//memcpy
+//memmove
+//memset
+//memcmp
+
+
+
+                                                     //字符串
+                                                     
+//strlen
+//size_t strlen (const char* str)
+//字符串以'\0'作为结束标志，strlen函数返回的是在字符串中'\0’前出现的字符个数(不包含'\0')
+//参数指向的字符串必须以'\0'结尾
+//函数的返回值为size_t，是无符号的
+
+
+
+
+
+
+//strcpy
+//char* strcpy (char* destination ,char* source)
+//源字符串必须以'\0'结束
+//会将源字符串中的'\0'拷贝到目标空间
+//目标空间必须足够大，以确保能存放源字符串
+//目标空间必须可变
+
+//#include<stdio.h>
+//int main()
+//{
+//    char str1[] = "abcdefg";
+//    char str2[] = "bjy";
+//    strcpy(str1, str2);//bjy'\0'efg'\0'
+//    printf("%s", str1);
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//char* my_strcpy(char* dest,const char* src)
+//{
+//    char* ret = dest;
+//
+//   /* while (*src != '\0')
+//    {
+//        *dest = *src;
+//        dest++;
+//        src++;
+//    }
+//    *dest = *src;*/
+//    while(*dest++=*src++);
+//
+//    return ret;
+//}
+//int main()
+//{
+//    char str1[] = "abcdefg";
+//    char str2[] = "bjy";
+//    my_strcpy(str1, str2);
+//    printf("%s\n", str1);
+//    return 0;
+//}
+
+
+
+
+
+
+
+//strcat追加
+//char* strcat(char* destination ,char* source)
+//源字符串必须以'\0'结束
+//目标空间必须足够大，能容纳下源字符串的内容
+//目标空间必须可修改
+
+//#include<stdio.h>
+//int main()
+//{
+//    char arr1[20] = "hello ";
+//    char arr2[] = "world!";
+//    strcat(arr1, arr2);
+//    printf("%s\n", arr1);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<assert.h>
+//char* my_strcat(char* dest, const char* src)
+//{
+//    char* ret = dest;
+//    assert(dest && src);
+//    /*传入一个表达式，它会计算这个表达式的结果：如果表达式的结果为“假”，assert()会打印出断言失败的信息
+//    并调用 abort() 函数终止程序的执行；如果表达式的结果为“真”，assert() 就什么也不做，程序继续往后执行*/
+//    while (*dest)
+//    {
+//        dest++;
+//    }
+//    while (*src)
+//    {
+//        *dest = *src;
+//        dest++;
+//        src++;
+//    }
+//    *dest = *src;
+//    //while(*dest++=*src++);
+//    return ret;
+//}
+//int main()
+//{
+//    char arr1[20] = "hello ";
+//    char arr2[] = "world!";
+//    my_strcat(arr1, arr2);
+//    printf("%s\n", arr1);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//strcmp
+//int strcmp(const char* str1,const char* str2)
+/*
+标准规定：
+第一个字符串大于第二个字符串，则返回大于0的数字
+第一个字符串等于第二个字符串，则返回0
+第一个字符串小于第二个字符串，则返回小于0的数字
+*/
+
+//#include<string.h>
+//#include<stdio.h>
+//int main()
+//{
+//    char* p1 = "abcdef";
+//    char* p2 = "sqwer";
+//    int ret = strcmp(p1, p2);//对位元素ASCII码进行比较
+//    if (ret > 0)
+//    {
+//        printf("p1>p2");
+//    }
+//    else if (ret == 0)
+//    {
+//        printf("p1==p2");
+//    }
+//    else
+//    {
+//        printf("p1<p2");
+//    }
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<assert.h>
+//int my_strcmp(const char* str1, const char* str2)
+//{
+//    assert(str1 && str2);
+//    while (*str1 == *str2)
+//    {
+//        if (*str1 == '\0')//两个字符相同的情况下，有一个为'\0',那么另一个也为'\0'
+//        {
+//            return 0;
+//        }
+//        str1++;
+//        str2++;
+//    }
+//
+//    if (*str1 > *str2)
+//        return 1;
+//    else if (*str1 < *str2)
+//        return -1;
+//    //return (*str1-*str2);
+//}
+//int main()
+//{
+//    char* p1 = "abc";
+//    char* p2 = "abcd";
+//    int ret = my_strcmp(p1, p2);
+//    printf("ret=%d\n", ret);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//strncpy
+//char* strncpy(char* destination,const char* source,size_t num)
+//从源字符串拷贝num个字符到目标空间
+//若源字符串的长度小于num，则拷贝完源字符串之后，在目标的后面追加0(即'\0')，直到num个
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char str1[10] = "abcdef";
+//    char str2[] = "bjy";
+//    strncpy(str1, str2, 6);
+//    printf("%s\n",str1);
+//    return 0;
+//}
+
+
+
+
+
+
+
+//strncat(追加完后自动加上'\0')
+//char* strncat(char* destination,const char* source,size_t num) 
+//若源字符串的长度小于num，只将源字符串追加并加上'\0'
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char arr1[20] = "hello ";
+//    char arr2[] = "world!";
+//    strncat(arr1, arr2, 6);
+//    printf("%s\n", arr1);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//strncmp
+//int strcmp(const char* str1,const char*str2,size_t num)
+//size_t num 限制要比较前num个字符
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    const char* p1 = "abcdef";
+//    const char* p2 = "abcqwer";
+//    int ret = strncmp(p1, p2, 3);
+//    printf("%d\n", ret);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//strstr(查找字符串)
+//char* strstr(const char* str1,const char* str2)
+//str1被查找的字符串，str2要查找的字符串
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char* p1 = "abcdefghi";
+//    char* p2 = "def";
+//    char* ret = strstr(p1, p2);//不存在则返回NULL,存在则返回d的地址
+//    if (ret == NULL)
+//    {
+//        printf("该子字符串不存在\n");
+//    }
+//    else
+//    {
+//        printf("%s", ret);
+//    }
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//#include<assert.h>
+//char* my_strstr(const char* p1,const char* p2)
+//{
+//    assert(p1 && p2);
+//    char* s1 = NULL;
+//    char* s2 = NULL;
+//    if (*p2 == '\0')//空字符串情况
+//    {
+//        return NULL;
+//    }
+//    while (*p1)
+//    {
+//        s1 = (char*)p1;
+//        s2 = (char*)p2;
+//        while ( *s1 && *s2 && (*s1 == *s2))
+//        {
+//            s1++;
+//            s2++;
+//        }
+//        if (*s2 == '\0')
+//        {
+//            return (char*)p1;
+//        }
+//        p1++;
+//    }
+//    return NULL;
+//}
+//int main()
+//{
+//    char* p1 = "abbbcdef";
+//    char* p2 = "bbc";
+//    char* ret = my_strstr(p1, p2);
+//    if (ret == NULL)
+//    {
+//        printf("该子字符串不存在\n");
+//    }
+//    else
+//    {
+//        printf("%s", ret);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//strtok
+//char* strtok(char* str,const char* sep)
+//sep参数是个字符串，定义了用作分隔符的字符集合(顺序不影响，包含即可)
+//第一个参数指定一个字符串，它包含了0个或者多个有sep字符串中的一个或多个分隔符分割的标记
+/*strtok函数找到str中的下一个标记，并将其用'\0'结尾，返回一个指向这个标记的指针
+注意:strtok函数会改变被操作的字符串，所以在使用strtok函数切分的字符串一般都是临时拷贝的内容并且可修改的*/
+//strtok函数的第一个参数不为NULL，函数将找到str中第一个标记，strtok函数将保存它在字符串中的位置
+//strtok函数的第一个参数为NULL,函数将在同一个字符串中被保存的位置开始，查找下一个标记
+//若字符串中不存在更多标记，则返回NULL指针
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char arr[] = "2268574547@qq.com";
+//    char* p = "@.";
+//    char buf[1024] = { 0 };
+//    strcpy(buf, arr);
+//    char* ret = strtok(buf, p);
+//    printf("%s\n", ret);
+//    ret = strtok(NULL, p);
+//    printf("%s\n", ret);
+//    ret = strtok(NULL, p);
+//    printf("%s\n", ret);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    /*char arr[] = "2268574547@qq.com";
+//    char* p = "@.";*/
+//    char arr[] = "123.456.789";
+//    char* p = ".";
+//    char buf[1024] = { 0 };
+//    strcpy(buf, arr);
+//    char* ret = NULL;
+//    for (ret = strtok(buf, p); ret != NULL; ret = strtok(NULL, p))
+//    {
+//        printf("%s\n", ret);
+//    }
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+//strerror
+//char* strerror(int errnum)
+//返回错误码所对应的错误信息
+//必须包含的头文件:errno.h
+//int errnum——错误码 
+
+//#include<errno.h>
+//#include<stdio.h>
+//int main()
+//{
+//    //errno为一个全局的错误码的变量
+//    //当C语言的库函数在执行过程中，发生了错误，就会把对应的错误码赋值到errno中
+//    char* str = strerror(errno);
+//    printf("%s\n", str);//输出错误信息
+//    return 0;
+//}
+
+//#include<errno.h>
+//#include<stdio.h>
+//int main()
+//{
+//    FILE* pf = fopen("test.txt", "r");
+//    if (pf == NULL)
+//    {
+//        printf("%s\n", strerror(errno));
+//    }
+//    else
+//    {
+//        printf("open file success\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+                                                        //字符<ctype.h>
+
+//字符分类函数
+
+/*
+函数          若该函数的参数符合下列条件就返回真
+iscntrl       任何控制字符
+isspace       空白字符:空格''、换页'\f'、换行'\n'、回车'\r'、制表符'\t'、垂直制表符'\v'
+isdigit       十进制数字0—9
+isxdigit      十六进制数字，0—9，a—z,A—Z
+islower       小写字母a—z
+isupper       大写字母A—Z
+isalpha       大写字母或小写字母
+isalnum       0—9、A—Z、a—z
+ispunct       标点符号、任何不属于数字或字母的图形字符(可打印)
+isgraph       任何图形字符
+isprint       任何可打印的字符、包括图形字符和空白字符
+*/
+
+
+
+
+
+
+//字符转换
+//int tolower(int c) 大转小
+//int toupper(int c) 小转大
+
+//#include<stdio.h>
+//#include<ctype.h>
+//int main()
+//{
+//    char ch = toupper('q');
+//    putchar(ch);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<ctype.h>
+//int main()
+//{
+//    char arr[] = "I AM A STUDENT.";
+//    int i = 1;
+//    while (arr[i])
+//    {
+//        if (isupper(arr[i]))
+//        {
+//            arr[i] = tolower(arr[i]);
+//        }
+//        i++;
+//    }
+//    printf("%s\n", arr);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+                                                       //内存函数<string.h>
+                                                          
+//memcpy(内存拷贝)
+//void * memcpy( void * destination, const void * source, size_t num)
+//函数memcpy从source的位置开始向后复制num个字节的数据到destination的内存位置
+//该函数在遇到'\0'时并不会停止
+//若source和destination有任何的重叠，复制的结果都是为未定义的
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    int i;
+//    int arr1[] = { 1,2,3,4,5 };
+//    int arr2[5] = { 0 };
+//    memcpy(arr2, arr1, sizeof(arr1));
+//    for (i = 0; i < 5; i++)
+//    {
+//        printf("%d\n", arr2[i]);
+//    }
+//    return 0;
+//}
+
+//#include<stdio.h>
+//#include<assert.h>
+//struct s
+//{
+//    char name[20];
+//    int age;
+//};
+//void* my_memcpy(void* dest, const void* src, size_t num)
+//{
+//    void* ret = dest;
+//    assert(dest && src);
+//    while (num--)
+//    {
+//        *(char*)dest = *(char*)src;  
+//        ++(char*)dest;
+//        ++(char*)src;
+//    }
+//    return ret;
+//}
+//int main()
+//{
+//    struct s arr1[] = { {"张三",30},{"李四",40} };
+//    struct s arr2[3] = { 0 };
+//    my_memcpy(arr2, arr1, sizeof(arr1));
+//    printf("%s", arr2[1].name);
+//    return 0;
+//}
+
+
+
+
+
+
+
+//memmove(处理内存重叠的情况)
+//void* memmove(void* destination, const void* source, size_t num)
+//和memcpy函数的差别就是memmove函数处理的源内存块和目标内存块是可以重叠的
+
+//#include<stdio.h>
+//#include<assert.h>
+//void* my_memmove(void* dest, const void* src, size_t num)
+//{
+//    assert(dest && src);
+//    void* ret = dest;
+//    if (dest < src)
+//    {
+//        //前->后
+//        while (num--)
+//        {
+//            *(char*)dest = *(char*)src;
+//            ++(char*)dest;
+//            ++(char*)src;
+//        }
+//    }
+//    else
+//    {
+//        //后->前
+//        while (num--)
+//        {
+//            *((char*)dest + num) = *((char*)src + num);
+//        }
+//    }
+//    return ret;
+//}
+//int main()
+//{
+//    int arr[] = { 0,1,2,3,4,5,6,7,8,9 };
+//    int i;
+//    my_memmove(arr + 2, arr, 20);
+//    for (i = 0; i < 10; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+//memcmp
+//int memcmp ( const void * ptr1, const void * ptr2, size_t num)
+//比较从ptr1和ptr2指针开始的num个字节
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    int arr1[] = { 1,2,3,4,5 };
+//    int arr2[] = { 1,2,5,4,3 };
+//    int ret = memcmp(arr1, arr2, 12);
+//    printf("%d\n", ret);
+//    return 0;
+//}
+
+
+
+
+//memset(内存设置)
+//void * memset(void * dest, int c, size_t num)
+//int c 设置的字符
+//size_t num 修改的字节数(每次修改一个字节)
+
+//#include<string.h>
+//#include<stdio.h>
+//int main()
+//{
+//    int i;
+//    char arr[10] = "";
+//    memset(arr, '#', 10);
+//    for (i = 0; i < 10; i++)
+//    {
+//        printf("%c", arr[i]);
+//    }
+//    return 0;
+//}
+
+
