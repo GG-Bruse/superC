@@ -1,0 +1,534 @@
+
+
+                                                            //结构体初级
+
+//结构体是一些值的集合，这些值被称为成员变量，结构体的每个成员可以是不同类型的变量
+
+
+////程序员人为创造出来的一种类型
+//#include<stdio.h>
+//#include <string.h>
+////创建一个结构体类型
+//struct Book
+//{
+//    char name [20];//C语言程序设计
+//    short price;//66元
+//};
+//int main()
+//{
+//    //利用结构体类型—创建一个该类型的结构体变量
+//    struct Book b1 = {"C语言程序设计",66};
+//    printf("书名：%s\n", b1.name);
+//    printf("价格：%d\n",b1.price);
+//    b1.price = 100;
+//    printf("修改后的价格：%d\n", b1.price);
+//    strcpy(b1.name,"C++");//strcpy—string copy—字符串拷贝
+//    printf("修改后的书名：%s\n", b1.name);
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//struct Book
+//{
+//    char name [20];//C语言程序设计
+//    short price;//66元
+//};
+//int main()
+//{
+//    struct Book b1 = { "C语言程序设计",66};
+//    struct Book* bjy = &b1;
+//
+//    //利用bjy指针打印出书的书名和价格
+//    //.    结构体变量 成员
+//    //->  结构体指针 成员
+//    printf("书名：%s\n", (*bjy).name);
+//    printf("书名：%s\n", bjy->name );
+//    printf("价格：%d\n", (*bjy).price);
+//    printf("价格：%d\n",bjy->price);
+//}
+
+
+
+//struct student//结构体类型
+//{
+//    //成员变量  
+//    char name[20];
+//    short age;
+//    char phone[12];
+//    char sex[5];
+//}s1,s2,s3;//定义全局变量
+//int main()
+//{
+//    //创建结构体变量
+//    struct student s;//局部变量
+//    return 0;
+//}
+
+
+
+//typedef struct student
+//{
+//    //成员变量  
+//    char name[20];
+//    short age;
+//    char phone[12];
+//    char sex[5];
+//}stu;//类型重命名
+//int main()
+//{
+//    stu s1 = {"包佳毅",20,"13617400626","男"};
+//    return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//struct s
+//{
+//    int a;
+//    char c;
+//    char arr[20];
+//    double d;
+//};
+//struct T
+//{
+//    char ch[20];
+//    struct s s;//结构体里面包含结构体
+//    char* pc;
+//};
+//int main()
+//{
+//    char str[20] = "bjy";
+//    struct T t = { "hehe",{100,'w',"hello world",3.14},str };
+//    printf("%s\n", t.ch);
+//    printf("%s\n", t.s.arr);
+//    printf("%lf\n", t.s.d);
+//    printf("%p\n", t.pc);
+//    return 0;
+//}
+
+
+
+  
+
+
+
+
+
+
+
+
+
+//结构体传参(最好传输地址)
+
+//首选print2的原因：
+/*
+函数传参时，参数需要压栈。如果传递一个结构体变量，结构体过大，参数压栈的系统开销比较大，会导致性能下降
+*/
+
+//#include<stdio.h>
+//typedef struct student
+//{
+//    char name[20];
+//    short age;
+//    char phone[12];
+//    char sex[5];
+//}stu;
+//void print1(stu temp)
+//{
+//    printf("name:%s\n", temp.name);
+//    printf("age:%d\n", temp.age);
+//    printf("phone:%s\n", temp.phone);
+//    printf("sex:%s\n", temp.sex);
+//}
+//void print2(stu* temp)
+//{
+//    printf("name:%s\n", temp->name);
+//    printf("age:%d\n", temp->age);
+//    printf("phone:%s\n", temp->phone);
+//    printf("sex:%s\n", temp->sex);
+//}
+//int main()
+//{
+//    stu s = { "包佳毅",18,"13617400626","男" };
+//    print1(s);//传输结构体，占用空间更大
+//    printf("\n");
+//    print2(&s);//传输地址，更好
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+                                                      //结构体详解
+//结构体的声明
+/*
+struct (tag)
+{
+    member-list//成员列表
+}variable-list;//变量列表
+*/
+//缺少tag则为匿名结构类型，只能在声明时创建其变量
+
+
+
+
+
+
+//结构体的自引用
+//结构体中不能包含自己，可以包含别的结构体
+//链表 既能存储数据，又能找到下一个数据
+
+//struct Node
+//{
+//    int data;//存储的数据(数据域)
+//    struct Node* next;//存放下一个节点的地址(指针域)
+//};
+//int main()
+//{
+//    return 0;
+//}
+
+//不建议使用匿名结构体
+//typedef struct Node
+//{
+//    int data;
+//    struct Node* next;
+//}N;//重命名
+//int main()
+//{
+//    N n;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//结构体内存对齐(空间换取时间)
+/*
+结构体对齐规则：
+1.第一个成员在与结构体变量偏移量为0的地址处
+2.其他成员要对齐到某个数字(对齐数)的整型倍的地址处
+    对齐数:编译器默认的一个对齐数与该成员大小的较小值(vs默认为8)
+3.结构体总大小为最大对齐数(每一个成员变量都有一个对齐数)的整数倍
+4.若嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的总大小就是所有最大对齐数(含嵌套结构体的对齐数)的整数倍
+*/
+
+//设计结构体时，让占用空间少的成员尽量集中在一起，以减少内存的浪费
+
+//#include<stdio.h>
+//struct S1
+//{
+//    char c1;
+//    int a;
+//    char c2;
+//};
+//struct S2
+//{
+//    char c1;
+//    char c2;
+//    int a;
+//};
+//struct S3
+//{
+//    double d;
+//    char c;
+//    int i;
+//};
+//struct S4
+//{
+//    char c1;
+//    struct S3 s3;
+//    double d;
+//};
+//int main()
+//{
+//    struct S1 s1 = { 0 };
+//    printf("%d\n", sizeof(s1));//12
+//    struct S2 s2 = { 0 };
+//    printf("%d\n", sizeof(s2));//8
+//    struct S3 s3 = { 0 };
+//    printf("%d\n", sizeof(s3));//16
+//    struct S4 s4 = { 0 };
+//    printf("%d\n", sizeof(s4));//32
+//    return 0;
+//}
+
+//修改默认对齐数
+//#pragma pack(8)//设置默认对齐数为8
+//#pragma pack()//取消设置的默认对齐数
+
+
+//offsetof(返回结构体成员偏移量)
+//size_t offsetof(structName, member Name)  <stddef.h>
+//#include<stddef.h>
+//#include<stdio.h>
+//struct S
+//{
+//    char c;
+//    int i;
+//    double d;
+//};
+//int main()
+//{
+//    printf("%d\n", offsetof(struct S, c));//0
+//    printf("%d\n", offsetof(struct S, i));//4
+//    printf("%d\n", offsetof(struct S, d));//8
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//结构体实现位段(节省空间)
+/*
+位段的声明与结构体类似,有两个不同:
+1.位段的成员必须是char、int、unsigned int或signed int
+2.位段的成员名后边有一个冒号和一个数字
+*/
+/*
+位段的内存分配:
+1.位段的空间上是按照需要以4个字节(int)或者1个字节(char)的方式来开辟的
+2.位段涉及很多不确定因素，位段是不跨平台的，注重可移植的程序应该避免使用位段
+*/
+
+//#include<stdio.h>
+//struct S
+//{
+//    int a : 2;//只需要2个bit(int不可大于32,char不可大于8)
+//    int b : 5;
+//    int c: 10;
+//    int d: 30;
+//};
+////共需要47bit 8*8>47>4*8
+//int main()
+//{
+//    struct S s;
+//    printf("%d\n", sizeof(s));//8字节 
+//
+//    return 0;
+//}
+
+//#include<stdio.h>
+//struct S
+//{
+//    char a : 3;
+//    char b : 4;
+//    char c : 5;
+//    char d : 4;
+//};
+//int main()
+//{
+//    struct S s = { 0 };
+//    s.a = 10;
+//    s.b = 20;
+//    s.c = 3;
+//    s.d = 4;
+//    printf("%d\n", sizeof(s));//3
+//    return 0;
+//}
+
+/*
+位段的跨平台问题:
+1.int位段被当成有符号数吧还是无符号数是不确定的
+2.位段的最大位的数目不能确定。(16位机器最大16，32位机器最大32)
+3.位段中成员在内存中从左向右分配，还是从右向左分配的标准尚未定义
+4.当一个结构体包含两个位段，第二个位段成员比较大，无法容纳于第一个位段剩余的位时，是舍弃剩余的位还是利用，这是不确定的。(vs中舍弃)
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          
+                                                            //枚举
+//枚举类型的定义
+
+//enum Day//Day为枚举类型名
+//{
+//    //可能取值(枚举常量)
+//    mon,
+//    tues,
+//    wes,
+//    thur,
+//    fri,
+//    sat,
+//    sun
+//};
+
+//#include<stdio.h>
+//enum Sex
+//{
+//    male,//0(默认从零开始，依次递增)
+//    female=12,
+//    secret//默认为上一个枚举常量加一(13)
+//};
+//int main()
+//{
+//    enum Sex s = male;
+//    printf("%d", secret);//13
+//    return 0;
+//}
+
+
+
+
+
+
+
+//枚举的优点:
+/*
+1.增加代码的可读性和可维护性
+2.和#define定义的标识符相比，枚举类型有类型检查
+3.防止了命名污染(封装)
+4.便于调试
+5。使用方便，一次可以定义多个常量
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    //联合体(共用体)
+//联合也是一种特殊的自定义类型，这种类型定义的变量也包含一系列的成员。特征是这些成员公用同一块空间
+
+//联合体大小的计算
+/*
+1.联合变量的大小至少为最大成员的大小
+2.当最大成员大小不是最大对齐数的整数倍时，就要对齐到最大对齐数的整数倍
+*/
+
+//#include<stdio.h>
+//union Un
+//{
+//    char c;
+//    int i;
+//};
+//int main()
+//{
+//    union Un u;
+//    printf("%d\n", sizeof(u));//4
+//    return 0;
+//}
+
+//#include<stdio.h>
+//union Un
+//{
+//    int a;//4
+//    char arr[5];//大小为5，对齐数为1
+//};
+//int main()
+//{
+//    union Un u;
+//    printf("%d\n", sizeof(u));//8
+//    return 0;
+//}
+
+
+
+
+
+
+//大端小端的判断
+
+//1.
+//#include<stdio.h>
+//int check_sys()
+//{
+//    int a = 1;
+//    return *(char*)&a;//返回1表示小端。返回0表示大端
+//}
+//int main()
+//{
+//    int ret = check_sys();
+//    if (ret)
+//    {
+//        printf("小端\n");
+//    }
+//    else
+//    {
+//        printf("大端\n");
+//    }
+//    return 0;
+//}
+
+//2.(利用联合体的结构特征)
+//#include<stdio.h>
+//int check_sys()
+//{
+//    union
+//    {
+//        char c;
+//        int i;
+//    }u;
+//    u.i = 1;
+//    return u.c;
+//}
+//int main()
+//{
+//    int ret = check_sys();
+//    if (ret)
+//    {
+//        printf("小端\n");
+//    }
+//    else
+//    {
+//        printf("大端\n");
+//    }
+//    return 0;
+//}
+
+
+
