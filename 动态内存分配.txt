@@ -1,0 +1,300 @@
+
+
+                                                    //动态内存分配<stdlib.h>
+//局部变量和函数的形式参数向栈区申请空间
+//全局变量和static静态变量向静态区申请空间
+//动态内存分配向堆区申请空间
+
+
+
+
+
+//malloc 
+//void* malloc(size_t size)
+/*
+这个函数向内存申请一块连续可用的空间
+1.若开辟成功，则返回一个指向该空间的指针
+2.若开辟失败，则返回一个NULL指针。因此malloc的返回值一定要检查
+3.返回值类型为void*,所以malloc函数并不知道开辟空间的类型，具体在使用时由使用者决定
+4.若参数size为0，malloc的行为标准为为定义的，取决于编译器
+*/
+
+
+
+
+//free(用于释放动态开辟的内存)
+//void free(void* ptr)
+/*
+1.若参数ptr指向的空间不是动态开辟的，那free函数的行为是未定义的
+2.若参数ptr是NULL指针，则free函数什么都不做
+*/
+
+
+
+
+
+//#include<stdlib.h>
+//#include<string.h>
+//#include<errno.h>
+//#include<stdio.h>
+//int main()
+//{
+//    int* p = (int*)malloc(10 * sizeof(int));
+//    if (p == NULL)
+//    {
+//        printf("%s\n", strerror(errno));
+//    }
+//    else
+//    {
+//        int i = 0;
+//        for (i = 0; i < 10; i++)
+//        {
+//            *(p + i) = i;
+//        }
+//        for (i = 0; i < 10; i++)
+//        {
+//            printf("%d ", *(p + i));
+//        }
+//    }
+//    free(p);
+//    p = NULL;//断开指针与动态开辟空间的联系，避免指针的危险操作
+//             //防止对同一块动态内存空间的重复释放
+//    return 0;
+//}
+
+
+
+
+
+
+//calloc
+//void* calloc(size_t num,size_t size)
+/*
+1.函数的功能是为num个大小为size的元素开辟空间，并且把空间的每个字节初始化为0
+2.与malloc函数的区别只在于calloc会返回地址之前把申请的空间的每个字节初始化为0
+*/
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//#include<errno.h>
+//int main()
+//{
+//    int* p = (int*)calloc(10, sizeof(int));
+//    if (p == NULL)
+//    {
+//        printf("%s\n", strerror(errno));
+//    }
+//    else
+//    {
+//        int i = 0;
+//        for (i = 0; i < 10; i++)
+//        {
+//            printf("%d ", *(p + i));
+//        }
+//    }
+//    free(p);
+//    p = NULL;
+//    return 0;
+//}
+
+
+
+
+
+
+
+//realloc(调整动态开辟内存空间的大小)
+//void* realloc(void* ptr ,size_t size)
+/*
+ptr为要调整的内存地址
+size为调整后的新大小
+返回值为调整后的内存起始位置
+这个函数在调整原内存空间大小的基础上，还会将原来内存中的数据移动到新的空间
+*/
+/*
+realloc使用的注意事项:
+1.若p指向的空间之后有足够的内存空间可以追加，则直接追加，然后返回p
+2.若p指向的空间之后没有足够的内存空间，则realloc函数会重新找一个新的内存区域，
+  开辟一块满足需求的空间，并且把原来内存中的数据拷贝过来，释放旧的内存空间，
+  最后返回新开辟的内存空间的地址
+*/
+
+//#include<string.h>
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<errno.h>
+//int main()
+//{
+//    int i;
+//    int* p = (int*)malloc(20);
+//    if (p == NULL)
+//    {
+//        printf("%s\n", strerror(errno));
+//    }
+//    else
+//    {
+//        for (i = 0; i < 5; i++)
+//        {
+//            *(p + i) = i;
+//        }
+//    }
+//    int* pnew = (int*)realloc(p, 40);//用一个新的指针接收realloc函数的返回值
+//    if (pnew != NULL)
+//    {
+//        p = pnew;//减少指针变量的个数
+//        for (i = 5; i < 10; i++)
+//        {
+//            *(p + i) = i;
+//        }
+//        for (i = 0; i < 10; i++)
+//        {
+//            printf("%d ", *(p + i));
+//        }
+//    }
+//    free(p);
+//    p = NULL;
+//    return 0;
+//}
+
+//#include<stdlib.h>
+//int main()
+//{
+//    int* p = (int*)realloc(NULL, 40);
+//    //开辟40字节大小的空间,功能等价于malloc函数
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//常见的动态内存错误:
+/*
+1.对NULL指针的解引用操作 (要进行返回值的判断)
+2.对动态开辟空间的越界访问
+3.对非动态开辟内存使用free释放
+4.使用free释放一块动态开辟内存的一部分 (若指针位置发生变化，归位后再进行释放)
+5.对同一块动态内存多次释放
+6.动态开辟内存忘记释放(内存泄漏)
+*/
+
+
+
+
+
+
+
+
+//柔性数组
+//C99中，结构体中的最后一个元素允许是未知大小的数组，这就叫做柔性数组成员
+
+/*
+柔性数组的特点:
+1.结构体中的柔性数组成员前面必须至少有一个其他成员
+2.sizeof返回的这种结构体的大小不包括柔性数组的内存
+3.包含柔性数组成员的结构体用malloc()函数进行内存的动态分配，并且分配的内存应大于结构体的大小，以适应柔性数组的预期大小
+*/
+
+/*
+柔性数组的优势:
+1.方便内存释放
+2.利于访问速度，减少内存碎片
+*/
+
+//#include<stdio.h>
+//struct S
+//{
+//    int n;
+//    int arr[];//或写成int arr[0]
+//    //柔性数组成员-数组大小可以调整
+//};
+//int main()
+//{
+//    struct S s;
+//    printf("%d\n", sizeof(s));//4
+//    return 0;
+//}
+
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//struct S
+//{
+//    int n;
+//    int arr[0];
+//};
+//int main()
+//{
+//    struct S* ps = (struct S*)malloc(sizeof(struct S) + 5 * sizeof(int));//给arr分配20个字节的空间
+//    if (ps != NULL)
+//    {
+//        ps->n = 100;
+//        int i = 0;
+//        for (i = 0; i < 5; i++)
+//        {
+//            ps->arr[i] = i;
+//        }
+//        struct S* ptr = realloc(ps, sizeof(struct S) + 10 * sizeof(int));//重新分配
+//        if (ptr != NULL)
+//        {
+//            ps = ptr;
+//            for (i = 5; i < 10; i++)
+//            {
+//                ps->arr[i] = i;
+//            }
+//            for (i = 0; i < 10; i++)
+//            {
+//                printf("%d ", ps->arr[i]);
+//            }
+//        }
+//    }
+//    free(ps);
+//    ps = NULL;
+//    return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//struct S
+//{
+//    int a;
+//    int* arr;
+//};
+//int main()
+//{
+//    int i;
+//    struct S* p = (struct S*)malloc(sizeof(struct S));
+//    if (p == NULL)
+//    {
+//        return 0;
+//    }
+//    p->a = 100;
+//    p->arr = (int*)malloc(sizeof(int) * 10);
+//    if (p->arr == NULL)
+//    {
+//        return 0;
+//    }
+//    for (i = 0; i < 10; i++)
+//    {
+//        p->arr[i] = i;
+//    }
+//    for (i = 0; i < 10; i++)
+//    {
+//        printf("%d ", p->arr[i]);
+//    }
+//    free(p->arr);
+//    p->arr = NULL;
+//    free(p);
+//    p = NULL;
+//    return 0;
+//}
