@@ -1,0 +1,522 @@
+
+
+
+////打印1000-2000年之间的闰年
+////闰年—能被4整除但不能被100整除
+////能被400整除是闰年
+//#include<stdio.h>
+//int main()
+//{
+//    int year;
+//    int count = 0;
+//    for (year = 1000; year <= 2000; year++)
+//    {
+//        if ((year % 4 == 0 && year % 100 != 0)||(year%400==0))
+//        {
+//            printf("%d是闰年\n", year);
+//            count++;
+//        }
+//    }
+//    printf("共有%d个闰年\n", count);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+////打印100-200之间的素数
+
+////素数—试除法—只有1和自身能够整除自己
+//#include<stdio.h>
+//int main()
+//{
+//    int i;
+//    int count = 0;
+//    for (i = 100; i <= 200; i++)
+//    {
+//        int j = 0;
+//        for (j = 2; j < i; j++)
+//        {
+//            if (i % j == 0)
+//            {
+//                break;
+//            }
+//        }
+//        if (j == i)
+//        {
+//            count++;
+//            printf("素数是%d\n", i);
+//        }
+//    }
+//    printf("素数有%d个\n",count);
+//}
+
+
+////算法优化版
+////i=a*b   16=2*8=4*4
+////a和b中至少有一个数字<=i的开平方
+//#include<stdio.h>
+//#include<math.h>//调用sqrt函数所需要引用的头文件
+//int main()
+//{
+//    int i;
+//    int j;
+//    int count=0;
+//    for (i = 101; i <= 200; i+=2)//每次加二跳过所有偶数
+//    {
+//        for (j = 2; j <=sqrt(i); j++)//sqrt—开平方的数学库函数
+//        {
+//            if (i % j == 0)
+//            {
+//                break;
+//            }
+//        }
+//        if (j > sqrt(i))
+//        {
+//            count++;
+//            printf("素数是%d\n", i);
+//        }
+//    }
+//    printf("素数有%d个\n", count);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+////编写一个代码计算1-100的整数之间有多少个数字9
+//#include<stdio.h>
+//int main()
+//{
+//    int i;
+//    int count=0;
+//    for (i = 1; i <= 100; i++)
+//    {
+//        if ( i / 10 == 9)
+//        {
+//            count++;
+//        }
+//        if (i % 10 == 9)
+//        {
+//            count++;
+//        }
+//    }
+//    printf("共有%d个九\n", count);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//分数求和
+////计算1/1-1/2+1/3-……+1/99-1/100
+
+//#include<stdio.h>
+//int main()
+//{
+//    double a;
+//    double b;
+//    double sum1=0;
+//    double sum2=0;
+//    double sum;
+//    for (a = 1; a <= 99; a = a + 2)
+//    {
+//        sum1 = sum1 + (1/a);
+//    }
+//    for (b = 2; b <= 100; b += 2)
+//    {
+//        sum2 = sum2 + (1/b);
+//    }
+//    sum = sum1 - sum2;
+//    printf("%f\n", sum);
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    float i;
+//    float sum=0;
+//    float sign = 1;
+//    for (i = 1; i <= 100; i++)
+//    {
+//        sum = sum + sign*(1 / i);
+//        sign = -sign;//变换符号
+//    }
+//    printf("%f", sum);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+////求十个整数中的最大值
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[] = { -1,-2,-3,-4,-5,-6,-7,-8,-9,-10 };
+//    int max = arr[0];
+//    int i;
+//    int x = sizeof(arr) / sizeof(arr[0]);//计算元素个数
+//    for (i = 1; i < x; i++)
+//    {
+//        if (max < arr[i])
+//        {
+//            max = arr[i];
+//        }
+//    }
+//    printf("最大值为%d\n", max);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+////输出9*9的乘法口诀表
+//#include<stdio.h>
+//int main()
+//{
+//    int i, j;
+//    for (i = 1; i <= 9; i++)
+//    {
+//        for (j = 1; j <= i; j++)
+//        {
+//            printf("%d*%d=%-2d ", i, j, i * j);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+////输入四门成绩，输出总分、平均分、最高分、最低分
+//#include<stdio.h>
+//int main()
+//{
+//    float arr[4], sum=0, p, max, min;
+//    int i;
+//    for (i = 0; i < 4; i++)
+//    {
+//        scanf("%f", &arr[i]);
+//        sum += arr[i];
+//    }
+//    p = sum / (sizeof(arr) / sizeof(arr[0]));
+//    printf("平均数为%.2f,总数为%.2f\n", p, sum);
+//    max = min = arr[0];
+//    for (i = 1; i < 4; i++)
+//    {
+//        if (arr[i] > max)
+//        {
+//            max = arr[i];
+//        }
+//        if (arr[i] < min)
+//        {
+//            min = arr[i];
+//        }
+//    }
+//    printf("最大数为%.2f,最小数为%.2f\n", max, min);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+////打印一个菱形
+//#include<stdio.h>
+//int main()
+//{
+//    int i, j, z;
+//    for (i = 1; i<=6; i++)
+//    {
+//        for (j = 6; j >= i; j--)
+//        {
+//            printf(" ");
+//        }
+//        for (z = 1; z < 2*i; z++)
+//        {
+//            printf("*");
+//        }
+//        printf("\n");
+//    }
+//    for (i = 1; i <= 7; i++)
+//    {
+//        for (j = 1; j <i; j++)
+//        {
+//            printf(" ");
+//        }
+//        for (z = 16; z >=2*(i+1); z--)
+//        {
+//            printf("*");
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//猜数字游戏
+//电脑生成一个随机数字1-100
+
+//rand函数——调用stdlib.h头文件
+//生成数字在0-32767之间
+//但每次生成数字相同，需使用srand函数设置随机数的生成器
+
+//srand——需调用stdlib.h头文件
+//void srand(unsigned int seed);
+//若要生成随机数括号中应输入一个随时变化的数(使用时间戳)
+
+//需调用time.h头文件
+//time()括号中所需参数类型为指针
+//NULL空指针
+//函数返回长整型，需强制转化为无符号整型
+//时间戳-用于设置随机数的生成起始点
+//当前计算机的时间减去计算机的起始时间(1970.1.1.0:0:0)=(xxx)秒
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<time.h>
+//void menu()//菜单
+//{
+//    printf("********************************************\n");
+//    printf("********    1. play     0.exit     *********\n");
+//    printf("********************************************\n");
+//}
+//void game()
+//{
+//    int ret;
+//    int guess;//接收猜的数字
+//    printf("开始猜数字游戏\n");
+//
+//    ret =rand()%100+1;//rand-生成随机数
+//    //%100后生成0-99的数字
+//    
+//    while (1)
+//    {
+//        printf("请猜数字：\n");
+//        scanf("%d", &guess);
+//        if (guess > ret)
+//        {
+//            printf("猜大了！\n");
+//        }
+//        else if (guess < ret) 
+//        {
+//            printf("猜小了\n");
+//        }
+//        else//guess==ret
+//        {
+//            printf("恭喜你猜对了\n");
+//            break;
+//        }
+//    }
+//}
+//int main()
+//{
+//    int input;
+//    srand((unsigned int)time(NULL));//设计随机数的生成起点 只需设置一次
+//    do
+//    {
+//        menu();
+//        printf("请选择:\n");
+//        scanf("%d", &input);
+//        switch (input)
+//        {
+//        case 0:
+//            printf("退出游戏！\n");
+//            break;
+//        case 1:
+//            game();//猜数字游戏
+//            break;
+//        default:
+//            printf("输入错误！\n");
+//        }
+//    } while(input);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+////输入一行字符，统计其中有多少个单词
+//#include<stdio.h>
+//int main()
+//{
+//    char str[100],c;
+//    int i, word = 1;
+//    gets(str);
+//    for (i = 0; (c = str[i]) != '\0'; i++)
+//    {
+//        if (c == ' ')
+//        {
+//            word++;
+//        }
+//    }
+//    printf("共有%d个单词\n", word);
+//    return 0;
+//}
+
+
+
+
+
+
+
+////不能创建临时变量(第三个变量)，实现两个数的交换
+
+//加减法—可计算的数的范围较小(可能会溢出)
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 10;
+//    int b = 20;
+//    printf("before: a=%d b=%d\n", a, b);
+//    a = a + b;
+//    b = a - b;
+//    a = a - b;
+//    printf("after: a=%d b=%d\n", a, b);
+//    return 0;
+//}
+
+//异或法
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 10;
+//    int b = 20;
+//    a = a ^ b;//进行异或产生密码
+//    b = a ^ b;//密码与其中一个数异或产生另一个数
+//    a = a ^ b;
+//    printf("a=%d,b=%d\n", a, b);
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+//编写代码：求一个整数存储在内存中的二进制的个数
+
+////只能计算正数
+//#include<stdio.h>
+//int main()
+//{
+//    int num;
+//    int count = 0;
+//    scanf("%d", &num);
+//    //统计num的补码中1的个数
+//    while (num != 0)
+//    {
+//        if (num % 2 == 1)
+//        {
+//            count++;
+//            num =num/ 2;
+//        }
+//    }
+//    printf("%d\n", count);
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    int num = 0;
+//    int count=0;
+//    int i = 0;
+//    scanf("%d", &num);
+//    //若num&1==1,那么num的补码的最后一位一定是1
+//    //000000000000000001
+//    for (i=0;i<32;i++)
+//    {
+//        if (((num >> i) & 1) == 1)
+//        {
+//            count++;
+//        }
+//    }
+//    printf("%d\n", count);
+//    return 0;
+//}
+
+
+
+
+////发生整型提升
+//#include<stdio.h>
+//int main()
+//{
+//    char a = -1;//-1
+//    signed char b = -1;//-1
+//    unsigned char c = -1;//255
+//    printf("a=%d,b=%d,c=%d\n", a, b, c);
+//    return 0;
+//}
+
+
+
