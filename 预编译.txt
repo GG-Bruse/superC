@@ -1,0 +1,293 @@
+
+
+                                                            //程序环境
+
+/*
+在ANSI C的任何一种实现中，存在两个不同的环境:
+1.翻译环境，在这个环境中源代码被转换成可执行的机器指令(进行编译和链接)
+2.执行环境，它用于实际执行代码
+*/
+
+/*
+编译分为预编译、编译、汇编:
+预编译:
+1.#include头文件的包含
+2.注释删除(使用空格对注释进行替换)
+3.#define的替换处理
+编译:
+(把C语言代码编译成汇编代码)
+1.语法分析
+2.词法分析
+3.语义分析
+4.符号汇总
+汇编:
+(将汇编代码转换成二进制代码)
+形成符号表
+*/
+
+/*
+链接分为两个部分:
+1.合并段表
+2.符号表的合并和重定位
+*/
+
+
+/*
+程序执行过程:
+1.程序必须载入内存中。在有操作系统的环境中，一般这个由操作系统完成。在独立的环境中，程序的载入必须由手工安排，
+也可能是通过可执行程序代码置入只读内存来完成
+2.程序的执行便可以开始，接着便调用main函数
+3.开始执行程序代码，这个时候程序将使用一个运行时堆栈来存储函数的局部变量和返回地址。
+程序同时也可以使用静态内存，存储于静态内存的变量在程序的整个执行过程中一直保留它们的值。
+4.终止程序。正常终止main函数，也可能是意外终止。
+*/
+
+
+
+
+
+
+
+
+
+                                                           //预编译详解
+
+//预定义符号
+/*
+__FILE__    //进行编译的源文件的路径
+__LINE__    //文件当前的行号
+__DATE__    //文件被编译的日期
+__TIME__    //文件被编译的时间
+__FUNCTION__//其所在函数的名字
+__STDC__    //若编译器遵循ANSI C,其值为1，否则未定义(vs不支持)
+*/
+
+//#include<stdio.h>
+//int main()
+//{
+//    printf("%s\n", __FILE__);//D:\vs\学习文件\源.c
+//    printf("%d\n", __LINE__);//5975
+//    printf("%s\n%s\n", __DATE__, __TIME__);
+//    //Jan 18 2022
+//    //15:22 : 10
+//    printf("%s\n", __FUNCTION__);//main
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#define预处理指令
+
+//1.#define定义标识符
+/*
+如:
+#define MAX 100
+#define STR "hehe"
+#define reg register
+#define do_forever for(;;)//若定义的代码过长，可以换行写，但除最后一行以外，每行的最后都加上反斜杠(\续行符)
+*/
+
+
+//2.#define定义宏
+/*
+#define机制包括了一个规定，允许把参数替换到文本中，这种实现通常被称为宏
+例如:
+#define SQUARE(x) x*x
+注意:
+1.宏是直接替换的，而不是传参的，所以用于对数值表达式进行求值的宏定义都应加上括号。
+避免在使用宏时由于参数中的操作符或邻近操作符产生不可预料的相互作用
+2.宏参数和#define定义中可以出现其他#define定义的变量，但宏不可以实现递归
+*/
+
+
+
+
+
+//#
+//把一个宏参数变成其对应的字符串
+//#include<stdio.h>
+//#define PRINT(X) printf("the value of "#X" is %d\n",X)
+//int main()
+//{
+//    int a = 10;
+//    int b = 20;
+//    PRINT(a); //the value of a is 10
+//    PRINT(b);//the value of b is 20
+//    return 0;
+//}
+
+
+//##
+//把位于它两边的符号合成一个符号。它允许宏定义从分离的文本片段创建标识符
+//#include<stdio.h>
+//#define CAT(X,Y) X##Y
+//int main()
+//{
+//    int bjyhandsome = 2022;
+//    printf("%d\n", CAT(bjy, handsome));//2022
+//    return 0;
+//}
+
+
+
+
+
+//宏与函数的对比:
+/*
+1.函数存在调用函数和从函数返回的额外开销。宏比函数在程序的规模和速度方面更胜一筹
+2.函数的参数必须声明为特定的类型，所以函数只能在类型合适的表达式上使用。
+  而宏与类型无关，更加灵活也不够严谨。
+3.使用宏时，将宏定义的代码替换到程序中，可能大幅度增加程序的长度。
+4.宏无法调试
+5.宏可能会带来运算符优先级的问题，容易导致程序出错
+6.函数可递归，宏不可递归。
+*/
+
+
+
+
+
+//#undef
+//这条指令用于移除一个宏定义
+
+
+
+
+
+
+
+
+
+//条件编译(可以嵌套)
+//对调试性的代码可以进行选择性的编译
+
+//判断是否被定义
+//1.
+//#include<stdio.h>
+//int main()
+//{
+//#if !defined(DEBUG)//或写成#ifndef DEBUG
+////没有定义就执行语句
+//    printf("hehe");
+//#endif
+//    return 0;
+//}
+//2.
+//#include<stdio.h>
+////#define DEBUG //若定义则语句执行，否则不执行
+//int main()
+//{
+//    int arr[10] = { 0 };
+//    int i;
+//    for (i = 0; i < 10; i++)
+//    {
+//        arr[i] = i;
+//#ifdef DEBUG
+//        printf("%d ", arr[i]);
+//#endif
+//    }
+//    return 0;
+//}
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int arr[10] = { 0 };
+//    int i;
+//    for (i = 0; i < 10; i++)
+//    {
+//        arr[i] = i;
+//#if 1
+//        printf("%d ", arr[i]);
+//#endif
+//    }
+//    return 0;
+//}
+
+
+//多个分支的条件编译
+/*
+#if 常量表达式
+    ……
+#elif 常量表达式
+    ……
+#else
+    ……
+#endif
+*/
+
+
+
+
+
+
+
+//文件包含
+
+//本地文件包含""
+/*
+查找策略:
+先在源文件所在目录下查找，若该头文件未找到，编译器就像查找库函数头文件一样在标准位置查找头文件，若再找不到就提示编译错误
+*/
+
+//库文件包含<>
+/*
+直接去标准路径下查找
+*/
+
+//防止头文件的重复引入(在头文件中使用)
+//1.
+//#ifndef __TEST_H__
+//#define __TEST_H__
+////…………
+//#endif
+//2.
+//#pragma once
+////…………
+
+
+
+
+//偏移量
+//#include<stdio.h>
+//#include<stddef.h>
+//struct S
+//{
+//    char c1;
+//    int a;
+//    char c2;
+//};
+//int main()
+//{
+//    //offsetof为一个宏
+//    printf("%d\n", offsetof(struct S, c1));//0
+//    printf("%d\n", offsetof(struct S, a));//4
+//    printf("%d\n", offsetof(struct S, c2));//8
+//    return 0;
+//}
+
+//模拟实现
+//#include<stdio.h>
+//#define OFFSETOF(struct_name,member_name) (int)&(((struct_name*)0)->member_name)
+////相对于0的地址即为偏移量
+//struct S
+//{
+//    char c1;
+//    int a;
+//    char c2;
+//};
+//int main()
+//{
+//    //offsetof为一个宏
+//    printf("%d\n", OFFSETOF(struct S, c1));//0
+//    printf("%d\n", OFFSETOF(struct S, a));//4
+//    printf("%d\n", OFFSETOF(struct S, c2));//8
+//    return 0;
+//}
