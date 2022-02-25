@@ -1,0 +1,479 @@
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    char a = -128;
+//    char b = 128;//127+1
+//    printf("%u\n", a);
+//    printf("%u\n", b);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char str1[100];
+//    char str2[100];
+//    char str3[100];
+//    int ret1;
+//    int ret2;
+//    int ret3;
+//    gets(str1);
+//    gets(str2);
+//    gets(str3);
+//    ret1 = strcmp(str1, str2);
+//    ret2 = strcmp(str2, str3);
+//    ret3 = strcmp(str1, str3);
+//    if (ret1>0)//str1>str2
+//    {
+//        if (ret2 > 0)//str2>str3
+//        {
+//            puts(str3);
+//            puts(str2);
+//            puts(str1);
+//        }
+//        else//str2<=str3
+//        {
+//            if (ret3 > 0)//str1>str3
+//            {
+//                puts(str2);
+//                puts(str3);
+//                puts(str1);
+//            }
+//            else//str1<=str3
+//            {
+//                puts(str2);
+//                puts(str1);
+//                puts(str3);
+//            }
+//        }
+//    }
+//    else//str1<=str2
+//    {
+//        if (ret2 > 0)//str2>str3
+//        {
+//            if (ret3 > 0)//str1>str3
+//            {
+//                puts(str3);
+//                puts(str1);
+//                puts(str2);
+//            }
+//            else//str1<=str3
+//            {
+//                puts(str1);
+//                puts(str3);
+//                puts(str2);
+//            }
+//        }
+//        else//str2<=str3
+//        {
+//            puts(str1);
+//            puts(str2);
+//            puts(str3);
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+////在大部分情况下，数组名即首元素的地址
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char str[3][100];
+//    int ret1;
+//    int ret2;
+//    int ret3;
+//    gets(&str[0][0]);
+//    gets(&str[1][0]);
+//    gets(&str[2][0]);
+//    ret1 = strcmp(&str[0][0], &str[1][0]);
+//    ret2 = strcmp(&str[1][0], &str[2][0]);
+//    ret3 = strcmp(&str[0][0], &str[2][0]);
+//    if (ret1 > 0)
+//    {
+//        if (ret2 > 0)
+//        {
+//            puts(&str[2][0]);
+//            puts(&str[1][0]);
+//            puts(&str[0][0]);
+//        }
+//        else
+//        {
+//            if (ret3 > 0)
+//            {
+//                puts(&str[1][0]);
+//                puts(&str[2][0]);
+//                puts(&str[0][0]);
+//            }
+//            else
+//            {
+//                puts(&str[1][0]);
+//                puts(&str[0][0]);
+//                puts(&str[2][0]);
+//            }
+//        }
+//    }
+//    else
+//    {
+//        if (ret2 > 0)
+//        {
+//            if (ret3 > 0)
+//            {
+//                puts(&str[2][0]);
+//                puts(&str[0][0]);
+//                puts(&str[1][0]);
+//            }
+//            else
+//            {
+//                puts(&str[0][0]);
+//                puts(&str[2][0]);
+//                puts(&str[1][0]);
+//            }
+//        }
+//        else
+//        {
+//            puts(&str[0][0]);
+//            puts(&str[1][0]);
+//            puts(&str[2][0]);
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+//#include<stdio.h>
+//int f(int n)
+//{
+//    if (n == 1) return 1;
+//    else return f(n - 1) + n;
+//}
+//int main()
+//{
+//    int i, sum = 0;
+//    for (i = 1; i <= 3; i++) sum += f(i);
+//    printf("%d\n",sum);
+//    return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//int w = 3;
+//int fun(int k)
+//{
+//    if (k == 0) return w;
+//    return (fun(k - 1) * k);
+//}
+//int main()
+//{
+//    int w = 10;
+//    printf("%d\n", fun(5) * w);
+//    return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//void func1(int i);
+//void func2(int i);
+//char st[] = "hello,friend!";
+//void func1(int i)
+//{
+//    printf("%c", st[i]);
+//    if (i < 3) { i += 2; func2(i); }
+//}
+//void func2(int i)
+//{
+//    printf("%c", st[i]);
+//    if (i < 3) { i += 2; func1(i); }
+//}
+//int main()
+//{
+//    int i = 0;
+//    func1(i);
+//    printf("\n");
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include<stdio.h>
+//int fun(int n)
+//{
+//    if (n == 1) return 1;
+//    else return n + fun(n - 1);
+//}
+//int main()
+//{
+//    int x;
+//    scanf("%d", &x);
+//    x = fun(x);
+//    printf("%d\n", x);
+//    return 0;
+//}
+
+
+
+
+
+
+//#include<stdio.h>
+//int fun(int n)
+//{
+//    int s;
+//    if (n == 1 || n == 2) s = 2;
+//    else s = n + fun(n - 1);
+//    return (s);
+//}
+//int main()
+//{
+//    int x;
+//    x = fun(4);
+//    printf("%d\n", x);
+//    return 0;
+//}
+
+
+
+
+
+
+//#include<stdio.h>
+//int power(int x, int n)
+//{
+//    int p;
+//    if (n > 0) p = power(x, n - 1) * x;
+//    else p = 1;
+//    return p;
+//}
+//int main()
+//{
+//    int x = 2, n = 4;
+//    printf("%d\n", power(x, n));
+//    return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//int fib(int n)
+//{
+//    switch (n)
+//    {
+//    case 0:return 0;
+//    case 1:
+//    case 2:return 1;
+//    }
+//    return (fib(n - 1) + fib(n - 2));
+//}
+//int main()
+//{
+//    int k;
+//    k = fib(6);
+//    printf("%d\n", k);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//void reverse(int a[], int n)
+//{
+//    int i, t;
+//    for (i = 0; i < n / 2; i++)
+//    {
+//        t = a[i]; a[i] = a[n - 1 - i]; a[n - 1 - i] = t;
+//    }
+//}
+//int main()
+//{
+//    int b[10] = { 1,2,3,4,5,6,7,8,9,10 };
+//    int i, s = 0;
+//    reverse(b, 8);
+//    for (i = 6; i < 10; i++)
+//    {
+//        s += b[i];
+//    }
+//    printf("%d\n", s);
+//    return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int f1();
+//int i = 5;
+//int main()
+//{
+//    int i = 3;
+//    {int i = 10; i++; }
+//    i = f1();
+//    i += 1;
+//    printf("%d\n", i);
+//}
+//int f1()
+//{
+//    i = i + 1;
+//    return (i);
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int a, b;
+//void fun()
+//{
+//    a = 100;
+//    b = 200;
+//}
+//int main()
+//{
+//    int a = 5, b = 7;
+//    fun();
+//    printf("%d %d\n", a, b);
+//    return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int x = 3;
+//void incre()
+//{
+//    static int x = 1;
+//    x *= x + 1;
+//    printf("%d", x);
+//}
+//int main()
+//{
+//    int i;
+//    for (i = 1; i < x; i++)
+//    {
+//        incre();
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//int a = 3;
+//int main()
+//{
+//    int s = 0;
+//    {int a = 5; s += a + 1; }
+//    s += a + 1;
+//    printf("%d\n", s);
+//    return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int fun3(int x)
+//{
+//    static int a = 3;
+//    a += x;
+//    return (a);
+//}
+//int main()
+//{
+//    int k = 2, m = 1, n;
+//    n = fun3(k);
+//    n = fun3(m);
+//    printf("%d\n", n);
+//    return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int m = 13;
+//int fun2(int x, int y)
+//{
+//    int m = 3;
+//    return (x * y - m);
+//}
+//int main()
+//{
+//    int a = 7, b = 5;
+//    printf("%d\n", fun2(a, b) / m);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//#define N 2
+//#define M N+1
+//#define NUM 2*M+1
+//int main()
+//{
+//    int i;
+//    for (i = 1; i <= NUM; i++)
+//    {
+//        printf("%d\n", i);
+//    }
+//    return 0;
+//}
