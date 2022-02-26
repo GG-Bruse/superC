@@ -1,0 +1,500 @@
+
+                                                         //库函数
+
+
+
+
+
+
+                                                    //C 标准库 - <stdio.h>
+                                      
+////字符输入函数getchar 功能：从键盘上输入一个字符
+////字符输出函数putchar 功能：输出单个字符
+//#include<stdio.h>
+//int main()
+//{
+//    char ch1;
+//    ch1 = getchar();//输入多个字符时，只能识别到第一个字符
+//    putchar(ch1);//只能输出单个字符
+//    //不能进行汉字操作
+//    return 0;
+//}
+
+
+////从键盘连续输入三个字符，将它们反序输出
+//#include<stdio.h>
+//int main()
+//{
+//    char ch1, ch2, ch3;
+//
+//    ch1=getchar();//abc
+//    ch2 = getchar();
+//    ch3 = getchar();
+//
+//    putchar(ch3);//cba
+//    putchar(ch2);
+//    putchar(ch1);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//格式化输出函数printf
+
+//返回值：成功后，将返回所写字符的总数。
+
+//英文字母l:在d、o、x、u前，指定输出精度为long型
+//          在e、f、g前，指定输出精度为double型
+
+//m指定输出数据域宽。当数据长度<m，左补空格；否则按实际输出
+
+//#include<stdio.h>
+//int main()
+//{
+//    printf("%10s\n", "apple");
+//    printf("%3s\n", "apple");
+//    printf("%10f\n", 12.34567);
+//    printf("%15f\n", 12.34567);
+//    //     apple
+//    //apple
+//    // 12.345670
+//    //      12.345670
+//    return 0;
+//}
+
+
+
+//.n对实数，指定小数点后位数(四舍五入)
+//    对字符串，指定输出位数
+
+//#include<stdio.h>
+//int main()
+//{
+//    printf("%10.3f\n", 1000.7654321);
+//    printf("%10.3f\n", 1111000.7654321);
+//    printf("%8.2s\n", "name");
+//    //  1000.765
+//    //1111000.765
+//    //      na
+//    return 0;
+//}
+
+
+
+//-输出数据在域内左对齐(缺省右对齐)
+//+输出有符号数的正负号(+或-)
+
+//#include<stdio.h>
+//int main()
+//{
+//    printf("%13f\n", 100.76543);
+//    printf("%-13f\n", 100.76543);
+//    printf("%+13f\n", 100.76543);
+//    printf("%+13f\n", -100.76543);
+//    //   100.765430
+//    //100.76543
+//    //  +100.765430
+//    //  -100.765430
+//    return 0;
+//}
+
+//#在八进制和十六进制数前显示前导O,OX
+
+//0输出数值时指定左边不使用的空位置自动补0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////格式化输入函数scanf(无精度控制)
+//#include<stdio.h>
+//int main()
+//{
+//    int a, b, c;
+//    scanf("%d%*d%d", &a, &b); //"*"表示该输入项读后不赋予相应的变量，即跳过该输入项
+//    printf("%d%d\n", a, b);
+//
+//    scanf("%5d", &c);//123456
+//    printf("%d\n", c);//12345
+//    //用十进制数指定输入的宽度(即字符数)
+//    return 0;
+//}
+
+//#include<stdio.h>
+//int main()
+//{
+//    int a;
+//    scanf("%d", &a);//12A//1 2//2   3
+//    printf("%d\n", a);//12//1//2
+//    //在输入多个字符时，若格式控制串中没有非格式字符作为数据之间的间隔，则可以使用空格、TAB、回车或非法数据作间隔
+//    //此时C语言认为该数据结束
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+////字符串输出函数
+////puts(字符串数组名/字符串常量)
+////输出后自动换行
+//#include<stdio.h>
+//int main()
+//{
+//    char str[] = "BASIC";
+//    puts(str);
+//    puts("PASCAL");
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+////字符串输入函数
+////gets(字符数组名)
+////只以回车作为输入结束的标志
+//#include<stdio.h>
+//int main()
+//{
+//    char str[15];
+//    printf("输出字符串：\n");
+//    gets(str);
+//    puts(str);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    //C 标准库 - <stdlib.h>
+
+                                                    
+//qsort-库函数-实现排序
+//算法思想：快速排序
+
+//void qsort (void* base , size_t num , size_t width , int(*compare)(const *e1,const *e2) )
+
+//base——目标数组的起始位置
+
+//num——数组的元素个数
+
+//width——元素的大小(字节数)
+
+//compare——比较函数(自己编写)
+//当1<2时,return<0
+//当1==2时,return 0
+//当1>2时,return >0
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//struct Stu
+//{
+//    char name[20];
+//    int age;
+//};
+//
+//int Compare_int(const void* e1, const void* e2)
+//{
+//    return *(int*)e1 - *(int*)e2;
+//}
+//int Compare_float(const void* e1, const void* e2)
+//{
+//    return (int)(*(float*)e1 - *(float*)e2);
+//    //或者写成条件语句
+//}
+//int Compare_struct_name(const void* e1, const void* e2)
+//{
+//    return ((struct Stu*)e1)->age - ((struct Stu*)e2)->age;
+//}
+//int Compare_struct_age(const void* e1, const void* e2)
+//{
+//    //比较字符串
+//    //不能直接使用><=,应该使用strcmp函数
+//    return (strcmp(((struct Stu*)e1)->name, ((struct Stu*)e2)->name));
+//}
+//
+//
+//void test1()
+//{
+//    int arr[10] = { 9,8,7,6,5,4,3,2,1 };
+//    int sz = sizeof(arr) / sizeof(arr[0]);
+//    qsort(arr, sz, sizeof(arr[0]), Compare_int);
+//    int i = 0;
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//}
+//void test2()
+//{
+//    float f[] = { 9.0,8,0,7.0,6.0,5.0,4.0 };
+//    int sz = sizeof(f) / sizeof(f[0]);
+//    qsort(f, sz, sizeof(f[0]), Compare_int);
+//    int i = 0;
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("%.1f ", f[i]);
+//    }
+//}
+//void test3()
+//{
+//    struct Stu s[3] = { {"王五",40} ,{"李四",30},{"张三",20} };//年龄排序
+//    int sz = sizeof(s) / sizeof(s[0]);
+//    qsort(s, sz, sizeof(s[0]), Compare_struct_name);
+//    int i = 0;
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("%d ", s[i].age);
+//    }
+//}
+//void test4()
+//{
+//    struct Stu s[3] = { {"张三",20} ,{"王五",40} ,{"李四",30} };//名字排序
+//    int sz = sizeof(s) / sizeof(s[0]);
+//    qsort(s, sz, sizeof(s[0]), Compare_struct_age);
+//    int i;
+//    for (i = 0; i < sz; i++)
+//    {
+//        printf("%s ", s[i].name);
+//    }
+//}
+//
+//
+//int main()
+//{
+//    test1();
+//    printf("\n");
+//    test2();
+//    printf("\n");
+//    test3();
+//    printf("\n");
+//    test4();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    //C 标准库 - <string.h>
+                                                    
+//strcpy库函数
+//string copy——字符串拷贝
+//char*strcpy(char*destination,const char*source);//由源拷贝到目的地
+//strcpy(字符数组名，字符数组名/字符串常量)
+//将按源指向的 C 字符串复制到按目的地指向的阵列中，包括终止的空字符（并在该点停止）。
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char arr1[] = "bjy";
+//    char arr2[20] = "#########";
+//    strcpy(arr2, arr1);
+//    printf("%s\n", arr2);//bjy
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//memset——memory内存——set设置
+//void * memset ( void * ptr, int value, size_t num );
+//ptr——指向要填充的内存块的指点
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char arr[] = "hello world";
+//    memset(arr, '*', 6);//传输时传的是*的ACSII码值
+//    printf("%s\n", arr);//******world
+//    return 0;
+//}
+
+
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+////字符串连接函数
+////stract(字符串数组名，字符串数组名/字符串常量)
+////把2中的字符串连接到1中字符串的后面，并删去字符串1后面的\0(1的应足够长，否则不能全部装如被连接的字符串)
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char str1[30] = "我的名字是：";
+//    char str2[10];
+//    printf("输入你的名字：\n");
+//    gets(str2);
+//    strcat(str1, str2);
+//    puts(str1);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//字符串比较函数
+//strcmp(字符串1，字符串2)
+//1、2都可是字符数组名或字符串常量
+
+//1==2 return 0
+//1>2  return >0
+//1<2  return <0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//测字符串长度函数strlen(字符串)
+//格式中的字符串可以是字符数组名，也可以是字符串常量
+//测字符串的实际长度(不包含字符串结束标志'\0')
+
+
+
+
+
+
+
+
+
+
+
+//查找子字符串函数strstr(字符串1，字符串2)
+//字符串1，2都可以是字符数组名或字符串常量
+//在在字符串1中从左边开始查找字符串2，如果找到则返回从找到位置开始一直到末尾的所有字符，若没找到，则返回NULL
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//    char c1[] = "zbcdxyzabc";
+//    char c2[] = "xyz";
+//    printf("%s\n", strstr(c1, c2));//xyzabc
+//    printf("%s\n", strstr(c1, "bc"));//bcdxyzabc
+//    printf("%s\n", strstr("abcdef", "bc"));//bcdef
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+//字符变小写函数strlwr(字符数组名/字符串常量)
+
+//字符变大写函数strupr(字符数组名/字符串常量)
+
+
+
+
+
+                                                    //C 标准库 - <time.h>
+
+
