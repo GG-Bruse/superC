@@ -1,0 +1,255 @@
+
+
+//斐波那契递归
+//时间复杂度为O(2^N)
+//#include<stdio.h>
+//long long Fibonacci(size_t N)
+//{
+//	return N < 2 ? N : Fibonacci(N - 1) + Fibonacci(N - 2);
+//}
+//int main()
+//{
+//	printf("%lld\n",Fibonacci(30));
+//	return 0;
+//}
+
+
+//优化
+//以空间换取时间
+//时间复杂度为O(N)
+
+//#include<stdio.h>
+//#include<malloc.h>
+//long long Fibonacci(int N)
+//{
+//	long long* fibArray = malloc(sizeof(long long) * (N + 1));
+//	if (fibArray != NULL)
+//	{
+//		fibArray[0] = 0;
+//		fibArray[1] = 1;
+//		for (int i = 2; i <= N; ++i)
+//		{
+//			fibArray[i] = fibArray[i - 1] + fibArray[i - 2];
+//		}
+//		return fibArray[N];
+//	}
+//	else
+//	{
+//		return -1;
+//	}
+//	free(fibArray);
+//	fibArray = NULL;
+//}
+//int main()
+//{
+//	printf("%lld\n",Fibonacci(30));
+//	return 0;
+//}
+
+
+//迭代计算斐波那契数
+//#include<stdio.h>
+//int Fibonacci(int n)
+//{
+//    if (n == 0)
+//        return 0;
+//    if (n == 1 || n == 2)
+//        return 1;
+//    int a = 1, b = 1, c = 0;
+//    for (int i = 3; i <= n; i++)
+//    {
+//        c = a + b;
+//        a = b;
+//        b = c;
+//    }
+//    return c;
+//}
+//int main()
+//{
+//	printf("%d\n", Fibonacci(10));
+//	return 0;
+//}
+
+
+
+
+
+
+
+//动态数组
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//struct dynamicArray
+//{
+//	void** m_pAddr;//维护真实开辟在堆区的指针
+//	int m_capacity;//容量
+//	int m_size;//当前大小
+//};
+////初始化动态数组
+//struct dynamicArray* init_DynamicArray(int capacity)
+//{
+//	if (capacity <= 0)
+//	{
+//		return NULL;
+//	}
+//	//给数组在堆区开辟空间
+//	struct dynamicArray* array = (struct dynamicArray*)malloc(sizeof(struct dynamicArray));
+//	if (array == NULL)
+//	{
+//		return NULL;
+//	}
+//	//给数组初始化
+//	array->m_pAddr = (void**)malloc(sizeof(void*) * capacity);
+//	array->m_capacity = capacity;
+//	array->m_size = 0;
+//	return array;
+//}
+////实现插入数组功能
+//void insert_DynamicArray(struct dynamicArray* array,int pos,void* data)
+//{
+//	if (array == NULL || data == NULL)
+//	{
+//		return;
+//	}
+//	//若位置无效则进行尾插
+//	if (pos<0 || pos>array->m_size)
+//	{
+//		pos = array->m_size;
+//	}
+//	if (array->m_size == array->m_capacity)
+//	{
+//		//动态扩展
+//		void** newSpace = malloc(sizeof(void*) * array->m_capacity * 2);//每次扩展为原先的两倍
+//		if (newSpace == NULL)
+//		{
+//			return;
+//		}
+//		memcpy(newSpace, array->m_pAddr, sizeof(void*)*array->m_size);
+//		free(array->m_pAddr);
+//		array->m_pAddr = newSpace;
+//		array->m_capacity *= 2;
+//	}
+//	//插入元素
+//	for (int i = array->m_size -1; i >=pos ; i--)//数据移动
+//	{
+//		array->m_pAddr[i + 1] = array->m_pAddr[i];
+//	}
+//	array->m_pAddr[pos] = data;
+//	array->m_size++;
+//}
+////实现遍历数组功能
+//void for_each_DynamicArray(struct dynamicArray* array,void(*myPrint)(void*))//函数指针——由于不知道数据类型，需由用户自行提供回调函数
+//{
+//	if (array == NULL||myPrint == NULL)
+//	{
+//		return;
+//	}
+//	for (int i = 0; i < array->m_size; i++)
+//	{
+//		myPrint(array->m_pAddr[i]);
+//	}
+//}
+////按位置删除数组元素
+//void removebyPos_DynamicArray(struct dynamicArray* array, int pos)
+//{
+//	if (array == NULL || pos<0 || pos>array->m_size-1)
+//	{
+//		return;
+//	}
+//	for (int i = pos; i < array->m_size - 1; i++)//通过前移覆盖进行删除
+//	{
+//		array->m_pAddr[i] = array->m_pAddr[i + 1];
+//	}
+//	array->m_size--;
+//}
+//
+////按值删除数组元素
+//void removebyValue_DynamicArray(struct dynamicArray* array, void* value,int (*myCompare)(void*,void*))
+//{
+//	if (array == NULL || value == NULL)
+//	{
+//		return;
+//	}
+//	for (int i = 0; i < array->m_size; i++)
+//	{
+//		if (myCompare(array->m_pAddr[i], value))
+//		{
+//			removebyPos_DynamicArray(array, i);
+//			break;
+//		}
+//	}
+//}
+////销毁数组
+//void destroy_DynamicArray(struct dynamicArray* array)
+//{
+//	if (array == NULL)
+//	{
+//		return;
+//	}
+//	if (array->m_pAddr != NULL)
+//	{
+//		free(array->m_pAddr);
+//		array->m_pAddr = NULL;
+//	}
+//	free(array);
+//	array = NULL;
+//}
+////测试
+//struct Person
+//{
+//	char name[64];
+//	int age;
+//};
+//void myPrintPerson(void* data)
+//{
+//	struct Person* p = data;
+//	printf("姓名:%s\n", p->name);
+//	printf("年龄:%d\n", p->age);
+//}
+//int compare(void* p1, void* p2)
+//{
+//	struct Person* P1 = p1;
+//	struct Person* P2 = p2;
+//	return (P1->age == P2->age) && strcmp(P1->name, P2->name) == 0;
+//}
+//int main()
+//{
+//	struct dynamicArray* array = init_DynamicArray(5);
+//	printf("容量:%d\n大小:%d\n\n", array->m_capacity, array->m_size);
+//
+//	struct Person p1 = { "aaa",1 };
+//	struct Person p2 = { "bbb",2 };
+//	struct Person p3 = { "ccc",3 };
+//	struct Person p4 = { "ddd",4 };
+//	struct Person p5 = { "eee",5 };
+//	struct Person p6 = { "fff",6 };
+//	struct Person p7 = { "ggg",7 };
+//
+//	insert_DynamicArray(array, 0, &p1);
+//	insert_DynamicArray(array, 0, &p2);
+//	insert_DynamicArray(array, 1, &p3);
+//	insert_DynamicArray(array, 0, &p4);
+//	insert_DynamicArray(array, -1, &p5);
+//	insert_DynamicArray(array, 0, &p6);
+//	insert_DynamicArray(array, 2, &p7);
+//
+//
+//	removebyPos_DynamicArray(array, 0);
+//	removebyValue_DynamicArray(array, &p3,compare);
+//	for_each_DynamicArray(array, myPrintPerson);
+//
+//	printf("\n容量:%d\n大小:%d\n", array->m_capacity, array->m_size);
+//	destroy_DynamicArray(array);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
