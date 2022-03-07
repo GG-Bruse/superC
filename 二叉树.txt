@@ -1,0 +1,358 @@
+
+//二叉树的递归遍历
+//#include<stdio.h>
+//struct BinaryNode
+//{
+//	char ch;//数据域
+//	//指针域
+//	struct BinaryNode* lChild;//左孩子
+//	struct BinaryNode* rChild;//右孩子
+//};
+//void recursion(struct BinaryNode* root)
+//{
+//	if (root == NULL)//保证代码有效性的同时也是递归的结束条件
+//	{
+//		return;
+//	}
+//	//先序遍历
+//	/*printf("%c ", root->ch);
+//	recursion(root->lChild);
+//	recursion(root->rChild);*/
+//
+//	//中序遍历
+//	/*recursion(root->lChild);
+//	printf("%c ", root->ch);
+//	recursion(root->rChild);*/
+//
+//	//后序遍历
+//	recursion(root->lChild);
+//	recursion(root->rChild);
+//	printf("%c ", root->ch);
+//}
+//int main()
+//{
+//	struct BinaryNode nodeA = { 'A',NULL ,NULL };
+//	struct BinaryNode nodeB = { 'B',NULL ,NULL };
+//	struct BinaryNode nodeC = { 'C',NULL ,NULL };
+//	struct BinaryNode nodeD = { 'D',NULL ,NULL };
+//	struct BinaryNode nodeE = { 'E',NULL ,NULL };
+//	struct BinaryNode nodeF = { 'F',NULL ,NULL };
+//	struct BinaryNode nodeG = { 'G',NULL ,NULL };
+//	struct BinaryNode nodeH = { 'H',NULL ,NULL };
+//
+//	//建立关系
+//	nodeA.lChild = &nodeB;
+//	nodeA.rChild = &nodeF;
+//
+//	nodeB.rChild = &nodeC;
+//
+//	nodeC.lChild = &nodeD;
+//	nodeC.rChild = &nodeE;
+//
+//	nodeF.rChild = &nodeG;
+//
+//	nodeG.lChild = &nodeH;
+//
+//	//递归遍历
+//	recursion(&nodeA);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////求二叉树叶子的数量和树的高度
+//#include<stdio.h>
+//struct BinaryNode
+//{
+//	char ch;//数据域
+//	//指针域
+//	struct BinaryNode* lChild;//左孩子
+//	struct BinaryNode* rChild;//右孩子
+//};
+//void calculateLeafNum(struct BinaryNode* root,int* num)
+//{
+//	if (root == NULL)
+//	{
+//		return;
+//	}
+//	if (root->lChild == NULL && root->rChild == NULL)
+//	{
+//		(*num)++;
+//	}
+//	calculateLeafNum(root->lChild, num);
+//	calculateLeafNum(root->rChild, num);
+//}
+//int getTreeHeight(struct BinaryNode* root)
+//{
+//	if (root == NULL)
+//	{
+//		return 0;
+//	}
+//	//获取左子树高度
+//	int LHeight = getTreeHeight(root->lChild);
+//	//获取右字数高度
+//	int RHeight = getTreeHeight(root->rChild);
+//	//取较大值
+//	return LHeight > RHeight ? LHeight + 1 : RHeight + 1;
+//}
+//int main()
+//{
+//	struct BinaryNode nodeA = { 'A',NULL ,NULL };
+//	struct BinaryNode nodeB = { 'B',NULL ,NULL };
+//	struct BinaryNode nodeC = { 'C',NULL ,NULL };
+//	struct BinaryNode nodeD = { 'D',NULL ,NULL };
+//	struct BinaryNode nodeE = { 'E',NULL ,NULL };
+//	struct BinaryNode nodeF = { 'F',NULL ,NULL };
+//	struct BinaryNode nodeG = { 'G',NULL ,NULL };
+//	struct BinaryNode nodeH = { 'H',NULL ,NULL };
+//
+//	nodeA.lChild = &nodeB;
+//	nodeA.rChild = &nodeF;
+//	nodeB.rChild = &nodeC;
+//	nodeC.lChild = &nodeD;
+//	nodeC.rChild = &nodeE;
+//	nodeF.rChild = &nodeG;
+//	nodeG.lChild = &nodeH;
+//
+//	int num = 0;
+//	calculateLeafNum(&nodeA,&num);
+//	printf("该二叉树的叶子数量为:%d\n", num);//3
+//
+//	int height = getTreeHeight(&nodeA);
+//	printf("该二叉树的高度为:%d\n", height);//4
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//拷贝、释放二叉树
+//#include<stdio.h>
+//#include<stdlib.h>
+//struct BinaryNode
+//{
+//	char ch;
+//	struct BinaryNode* lChild;
+//	struct BinaryNode* rChild;
+//};
+//struct BinaryNode* copyTree(struct BinaryNode* root)//先左再右后根
+//{
+//	if (root == NULL)
+//	{
+//		return NULL;
+//	}
+//	struct BinaryNode* lChild = copyTree(root->lChild);
+//	struct BinaryNode* rChild = copyTree(root->rChild);
+//	struct BinaryNode* newNode = malloc(sizeof(struct BinaryNode));
+//	if (newNode == NULL)
+//	{
+//		return NULL;
+//	}
+//	newNode->ch = root->ch;
+//	newNode->lChild = lChild;
+//	newNode->rChild = rChild;
+//	return newNode;
+//}
+//void freeTree(struct BinaryNode* root)
+//{
+//	if (root == NULL)
+//	{
+//		return;
+//	}
+//	freeTree(root->lChild);
+//	freeTree(root->rChild);
+//	free(root);
+//	root = NULL;
+//}
+//void recursion(struct BinaryNode* root)
+//{
+//	if (root == NULL)//保证代码有效性的同时也是递归的结束条件
+//	{
+//		return;
+//	}
+//	printf("%c ", root->ch);
+//	recursion(root->lChild);
+//	recursion(root->rChild);
+//}
+//int main() 
+//{
+//	struct BinaryNode nodeA = { 'A',NULL ,NULL };
+//	struct BinaryNode nodeB = { 'B',NULL ,NULL };
+//	struct BinaryNode nodeC = { 'C',NULL ,NULL };
+//	struct BinaryNode nodeD = { 'D',NULL ,NULL };
+//	struct BinaryNode nodeE = { 'E',NULL ,NULL };
+//	struct BinaryNode nodeF = { 'F',NULL ,NULL };
+//	struct BinaryNode nodeG = { 'G',NULL ,NULL };
+//	struct BinaryNode nodeH = { 'H',NULL ,NULL };
+//	
+//	nodeA.lChild = &nodeB;
+//	nodeA.rChild = &nodeF;
+//	nodeB.rChild = &nodeC;
+//	nodeC.lChild = &nodeD;
+//	nodeC.rChild = &nodeE;
+//	nodeF.rChild = &nodeG;
+//	nodeG.lChild = &nodeH;
+//
+//	struct BinaryNode* newTree = copyTree(&nodeA);
+//	recursion(newTree);
+//	freeTree(newTree);
+//	return 0;
+//}
+
+
+
+
+
+
+
+//二叉树的非递归遍历(利用栈)
+//#include<stdlib.h>
+//#include<stdio.h>
+//#include<string.h>
+//#define MAX 1024
+//struct Sstack
+//{
+//	void* data[MAX];
+//	int m_size;
+//};
+//typedef void* Stack;
+//Stack init_SeqStack()
+//{
+//	struct Sstack* myStack = malloc(sizeof(struct Sstack));
+//	if (myStack == NULL)
+//	{
+//		return NULL;
+//	}
+//	myStack->m_size = 0;
+//	memset(myStack->data, 0, sizeof(void*) * MAX);
+//	return myStack;
+//}
+//void push_SeqStack(Stack stack,void* data)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || data == NULL || myStack->m_size == MAX)
+//	{
+//		return;
+//	}
+//	myStack->data[myStack->m_size] = data;
+//	myStack->m_size++;
+//}
+//void pop_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || myStack->m_size == 0)
+//	{
+//		return;
+//	}
+//	myStack->data[myStack->m_size - 1] = NULL;
+//	myStack->m_size--;
+//}
+//void* top_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || myStack->m_size == 0)
+//	{
+//		return NULL;
+//	}
+//	return myStack->data[myStack->m_size-1];
+//}
+//int size_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL)
+//	{
+//		return -1;
+//	}
+//	return myStack->m_size;
+//}
+//void destroy_SeqStack(Stack stack)
+//{
+//	if (stack == NULL)
+//	{
+//		return;
+//	}
+//	free(stack);
+//	stack = NULL;
+//}
+//
+//
+//
+//struct BinaryNode
+//{
+//	char ch;
+//	struct BinaryNode* lChild;
+//	struct BinaryNode* rChild;
+//	int flag;
+//};
+//void nonRecursion(struct BinaryNode* root)
+//{
+//	Stack myStack = init_SeqStack();
+//	push_SeqStack(myStack,root);
+//	while (size_SeqStack(myStack) > 0)
+//	{
+//		struct BinaryNode* pTop = top_SeqStack(myStack);
+//		pop_SeqStack(myStack);
+//		if (pTop->flag == 1)
+//		{
+//			printf("%c", pTop->ch);
+//			continue;
+//		}
+//		pTop->flag = 1;
+//		if (pTop->rChild != NULL)
+//		{
+//			push_SeqStack(myStack, pTop->rChild);
+//		}
+//		if (pTop->lChild != NULL)
+//		{
+//			push_SeqStack(myStack, pTop->lChild);
+//		}
+//		push_SeqStack(myStack, pTop);
+//	}
+//	destroy_SeqStack(myStack);
+//}
+//int main() 
+//{
+//	struct BinaryNode nodeA = { 'A',NULL ,NULL ,0};
+//	struct BinaryNode nodeB = { 'B',NULL ,NULL ,0};
+//	struct BinaryNode nodeC = { 'C',NULL ,NULL ,0};
+//	struct BinaryNode nodeD = { 'D',NULL ,NULL ,0};
+//	struct BinaryNode nodeE = { 'E',NULL ,NULL ,0};
+//	struct BinaryNode nodeF = { 'F',NULL ,NULL ,0};
+//	struct BinaryNode nodeG = { 'G',NULL ,NULL ,0};
+//	struct BinaryNode nodeH = { 'H',NULL ,NULL ,0};
+//	
+//	nodeA.lChild = &nodeB;
+//	nodeA.rChild = &nodeF;
+//	nodeB.rChild = &nodeC;
+//	nodeC.lChild = &nodeD;
+//	nodeC.rChild = &nodeE;
+//	nodeF.rChild = &nodeG;
+//	nodeG.lChild = &nodeH;
+//
+//	nonRecursion(&nodeA);
+//	return 0;
+//}
