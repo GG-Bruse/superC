@@ -1,0 +1,406 @@
+
+
+//栈的顺序存储
+//#include<stdlib.h>
+//#include<stdio.h>
+//#include<string.h>
+//#define MAX 1024
+//struct Sstack
+//{
+//	void* data[MAX];//指针数组——栈数组
+//	int m_size;//栈的大小
+//};
+//typedef void* Stack;
+////初始化栈
+//Stack init_SeqStack()
+//{
+//	struct Sstack* myStack = malloc(sizeof(struct Sstack));
+//	if (myStack == NULL)
+//	{
+//		return NULL;
+//	}
+//	myStack->m_size = 0;
+//	memset(myStack->data, 0, sizeof(void*) * MAX);//内存设置—初始化数组
+//	return myStack;
+//}
+////压栈(本质即尾插)
+//void push_SeqStack(Stack stack,void* data)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || data == NULL || myStack->m_size == MAX)
+//	{
+//		return;
+//	}
+//	myStack->data[myStack->m_size] = data;
+//	myStack->m_size++;
+//}
+////出栈(本质即尾删)
+//void pop_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || myStack->m_size == 0)
+//	{
+//		return;
+//	}
+//	myStack->data[myStack->m_size - 1] = NULL;
+//	myStack->m_size--;
+//}
+////返回栈顶
+//void* top_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || myStack->m_size == 0)
+//	{
+//		return NULL;
+//	}
+//	return myStack->data[myStack->m_size-1];
+//}
+////返回栈的大小
+//int size_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL)
+//	{
+//		return -1;
+//	}
+//	return myStack->m_size;
+//}
+////判断栈是否为空
+//int isEmpty_SeqStack(Stack stack)//空为真
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL||myStack->m_size==0)
+//	{
+//		return 1;
+//	}
+//	return 0;
+//}
+////销毁栈
+//void destroy_SeqStack(Stack stack)
+//{
+//	if (stack == NULL)
+//	{
+//		return;
+//	}
+//	free(stack);
+//	stack = NULL;
+//}
+//
+//
+//
+//
+////测试
+//struct Person
+//{
+//	char name[64];
+//	int age;
+//};
+//int main()
+//{
+//	Stack stack = init_SeqStack();
+//	struct Person p1 = { "aaa",1 };
+//	struct Person p2 = { "bbb",2 };
+//	struct Person p3 = { "ccc",3 };
+//	struct Person p4 = { "ddd",4 };
+//	struct Person p5 = { "eee",5 };
+//	struct Person p6 = { "fff",6 };
+//	struct Person p7 = { "ggg",7 };
+//
+//	push_SeqStack(stack,&p1);
+//	push_SeqStack(stack,&p2);
+//	push_SeqStack(stack,&p3);
+//	push_SeqStack(stack,&p4);
+//	push_SeqStack(stack,&p5);
+//	push_SeqStack(stack,&p6);
+//	push_SeqStack(stack,&p7);
+//
+//	while (isEmpty_SeqStack(stack) == 0)
+//	{
+//		struct Person* p = top_SeqStack(stack);
+//		printf("姓名:%s\n", p->name);
+//		printf("年龄:%d\n", p->age);
+//		pop_SeqStack(stack);
+//	}
+//	printf("栈的元素个数为:%d\n", size_SeqStack(stack));
+//	destroy_SeqStack(stack);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//栈的链式存储
+//链表头做栈顶,利于频繁的插入删除(不需通过遍历找到尾结点)
+
+//#include<stdlib.h>
+//#include<stdio.h>
+//struct stackNode//结点结构体
+//{
+//	struct stackNode* next;
+//};
+//struct Lstack//栈的结构体
+//{
+//	struct stackNode pHeader;
+//	int m_size;
+//};
+//typedef void* LinkStack;
+////初始化
+//LinkStack init_LinkStack()
+//{
+//	struct Lstack* myStack = malloc(sizeof(struct Lstack));
+//	if (myStack == NULL)
+//	{
+//		return NULL;
+//	}
+//	myStack->pHeader.next = NULL;
+//	myStack->m_size = 0;
+//	return myStack;
+//}
+////入栈(本质即头插)
+//void push_LinkStack(LinkStack stack, void* data)
+//{
+//	struct Lstack* myStack = stack;
+//	if (stack == NULL || data == NULL)
+//	{
+//		return;
+//	}
+//	struct stackNode* myNode = data;
+//	myNode->next = myStack->pHeader.next;
+//	myStack->pHeader.next = myNode;
+//	myStack->m_size++;
+//}
+////出栈
+//void pop_LinkStack(LinkStack stack)
+//{
+//	struct Lstack* myStack = stack;
+//	if (stack == NULL||myStack->m_size==0)
+//	{
+//		return;
+//	}
+//	struct stackNode* pFirst = myStack->pHeader.next;//记录第一个包含数据的结点(即要删除的结点)
+//	myStack->pHeader.next = pFirst->next;
+//	myStack->m_size--;
+//}
+////返回栈顶元素
+//void* top_LinkStack(LinkStack stack)
+//{
+//	struct Lstack* myStack = stack;
+//	if (stack == NULL || myStack->m_size == 0)
+//	{
+//		return NULL;
+//	}
+//	return myStack->pHeader.next;
+//}
+////返回栈的元素个数
+//int size_LinkStack(LinkStack stack)
+//{
+//	struct Lstack* myStack = stack;
+//	if (stack == NULL)
+//	{
+//		return -1;
+//	}
+//	return myStack->m_size;
+//}
+////判断是否为空
+//int isEmpty_LinkStack(LinkStack stack)//空为真
+//{
+//	struct Lstack* myStack = stack;
+//	if (stack == NULL||myStack->m_size==0)
+//	{
+//		return -1;//非0为真
+//	}
+//	return 0;
+//}
+////销毁
+//void destroy_LinkStack(LinkStack stack)
+//{
+//	if (stack == NULL)
+//	{
+//		return;
+//	}
+//	free(stack);
+//	stack = NULL;
+//}
+//
+//
+//
+//struct Person
+//{
+//	void* node;//用户预留前四个字节交予链表使用
+//	char name[64];
+//	int age;
+//};
+//int main()
+//{
+//	LinkStack stack = init_LinkStack();
+//	struct Person p1 = { NULL,"aaa",1 };
+//	struct Person p2 = { NULL,"bbb",2 };
+//	struct Person p3 = { NULL,"ccc",3 };
+//	struct Person p4 = { NULL,"ddd",4 };
+//	struct Person p5 = { NULL,"eee",5 };
+//	struct Person p6 = { NULL,"fff",6 };
+//	struct Person p7 = { NULL,"ggg",7 };
+//
+//	push_LinkStack(stack,&p1);
+//	push_LinkStack(stack,&p2);
+//	push_LinkStack(stack,&p3);
+//	push_LinkStack(stack,&p4);
+//	push_LinkStack(stack,&p5);
+//	push_LinkStack(stack,&p6);
+//	push_LinkStack(stack,&p7);
+//
+//	while (isEmpty_LinkStack(stack) == 0)
+//	{
+//		struct Person* p = top_LinkStack(stack);
+//		printf("姓名:%s\n", p->name);
+//		printf("年龄:%d\n", p->age);
+//		pop_LinkStack(stack);
+//	}
+//	printf("栈的元素个数为:%d\n", size_LinkStack(stack));
+//	destroy_LinkStack(stack);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+//栈的应用——括号匹配
+//#include<stdlib.h>
+//#include<stdio.h>
+//#include<string.h>
+//#define MAX 1024
+//struct Sstack
+//{
+//	void* data[MAX];
+//	int m_size;
+//};
+//typedef void* Stack;
+//Stack init_SeqStack()
+//{
+//	struct Sstack* myStack = malloc(sizeof(struct Sstack));
+//	if (myStack == NULL)
+//	{
+//		return NULL;
+//	}
+//	myStack->m_size = 0;
+//	memset(myStack->data, 0, sizeof(void*) * MAX);
+//	return myStack;
+//}
+//void push_SeqStack(Stack stack,void* data)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || data == NULL || myStack->m_size == MAX)
+//	{
+//		return;
+//	}
+//	myStack->data[myStack->m_size] = data;
+//	myStack->m_size++;
+//}
+//void pop_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || myStack->m_size == 0)
+//	{
+//		return;
+//	}
+//	myStack->data[myStack->m_size - 1] = NULL;
+//	myStack->m_size--;
+//}
+//int size_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL)
+//	{
+//		return -1;
+//	}
+//	return myStack->m_size;
+//}
+//void* top_SeqStack(Stack stack)
+//{
+//	struct Sstack* myStack = stack;
+//	if (stack == NULL || myStack->m_size == 0)
+//	{
+//		return NULL;
+//	}
+//	return myStack->data[myStack->m_size-1];
+//}
+//void destroy_SeqStack(Stack stack)
+//{
+//	if (stack == NULL)
+//	{
+//		return;
+//	}
+//	free(stack);
+//	stack = NULL;
+//}
+//
+//
+//
+//int isLeft(char ch)
+//{
+//	return ch == '(';
+//}
+//int isRight(char ch)
+//{
+//	return ch == ')';
+//}
+//void printError(char* str,char* errMsg,char* pos)
+//{
+//	printf("错误信息:%s\n", errMsg);
+//	printf("%s\n", str);
+//	//计算打印空格的数量
+//	int num = pos - str;
+//	for (int i = 0; i < num; i++)
+//	{
+//		printf(" ");
+//	}
+//	printf("~");
+//	printf("\n");
+//}
+//int main()
+//{
+//	char* str = "5+5*(6)+9/3*1-(1+3(0";
+//	char* p = str;
+//	Stack stack = init_SeqStack();
+//	while (*p != '\0')
+//	{
+//		if (isLeft(*p))
+//		{
+//			push_SeqStack(stack, p);
+//		}
+//		if (isRight(*p))
+//		{
+//			if (size_SeqStack(stack) > 0)
+//			{
+//				pop_SeqStack(stack);
+//			}
+//			else
+//			{
+//				printError(str,"右括号没有匹配到对应的左括号",p);
+//				break;
+//			}
+//		}
+//		p++;
+//	}
+//	while (size_SeqStack(stack) > 0)
+//	{
+//		printError(str, "左括号没有匹配到右括号", top_SeqStack(stack));
+//		pop_SeqStack(stack);
+//	}
+//	destroy_SeqStack(stack);
+//	return 0;
+//}
+
