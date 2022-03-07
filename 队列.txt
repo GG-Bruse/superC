@@ -1,0 +1,161 @@
+
+//队列的链式存储
+//#include<stdlib.h>
+//#include<stdio.h>
+//struct QueueNode
+//{
+//	struct QueueNode* next;
+//};
+//struct LQueue
+//{
+//	struct QueueNode pHeader;
+//	int m_size;
+//	struct QueueNode* pTail;//用于记录尾结点，添加新元素或查看队尾元素时不必通过遍历找到尾结点
+//};
+//typedef void* LinkQueue;
+////初始化
+//LinkQueue init_LinkQueue()
+//{
+//	struct LQueue* myQueue = malloc(sizeof(struct LQueue));
+//	if (myQueue == NULL)
+//	{
+//		return NULL;
+//	}
+//	myQueue->m_size = 0;
+//	myQueue->pHeader.next = NULL;
+//	myQueue->pTail = &myQueue->pHeader;
+//	return myQueue;
+//}
+////入队
+//void push_LinkQueue(LinkQueue queue,void* data)
+//{
+//	if (queue == NULL||data==NULL)
+//	{
+//		return;
+//	}
+//	struct LQueue* myQueue = queue;
+//	struct QueueNode* myNode = data;
+//	myQueue->pTail->next = myNode;
+//	myNode->next = NULL;
+//	myQueue->pTail = myNode;
+//	myQueue->m_size++;
+//}
+////出队
+//void pop_LinkQueue(LinkQueue queue)
+//{
+//	struct LQueue* myQueue = queue;
+//	if (queue == NULL||myQueue->m_size==0)
+//	{
+//		return;
+//	}
+//	if (myQueue->m_size == 1)//只有一个元素的情况
+//	{
+//		myQueue->pHeader.next = NULL;
+//		myQueue->pTail = &myQueue->pHeader;
+//	}
+//	else//有一个以上的元素
+//	{
+//		struct QueueNode* pDel = myQueue->pHeader.next;//记录
+//		myQueue->pHeader.next = pDel->next;
+//	}
+//	myQueue->m_size--;
+//}
+////返回队列大小
+//int size_LinkQueue(LinkQueue queue)
+//{
+//	struct LQueue* myQueue = queue;
+//	if (queue == NULL)
+//	{
+//		return -1;
+//	}
+//	return myQueue->m_size;
+//}
+////判断是否为空
+//int isEmpty_LinkQueue(LinkQueue queue)//空为真
+//{
+//	struct LQueue* myQueue = queue;
+//	if (queue == NULL)
+//	{
+//		return -1;
+//	}
+//	if (myQueue->m_size == 0)
+//	{
+//		return 1;
+//	}
+//	return 0;
+//}
+////返回队头
+//void* front_LinkQueue(LinkQueue queue)
+//{
+//	struct LQueue* myQueue = queue;
+//	if (queue == NULL)
+//	{
+//		return NULL;
+//	}
+//	return myQueue->pHeader.next;
+//}
+////返回队尾
+//void* back_LinkQueue(LinkQueue queue)
+//{
+//	struct LQueue* myQueue = queue;
+//	if (queue == NULL)
+//	{
+//		return NULL;
+//	}
+//	return myQueue->pTail;
+//}
+////销毁
+//void destory_LinkQueue(LinkQueue queue)
+//{
+//	if (queue == NULL)
+//	{
+//		return;
+//	}
+//	free(queue);
+//	queue = NULL;
+//}
+//
+//
+////测试
+//struct Person
+//{
+//	void* node;
+//	char name[64];
+//	int age;
+//};
+//int main()
+//{
+//	LinkQueue myQueue = init_LinkQueue();
+//	struct Person p1 = { NULL,"aaa",1 };
+//	struct Person p2 = { NULL,"bbb",2 };
+//	struct Person p3 = { NULL,"ccc",3 };
+//	struct Person p4 = { NULL,"ddd",4 };
+//	struct Person p5 = { NULL,"eee",5 };
+//	struct Person p6 = { NULL,"fff",6 };
+//	struct Person p7 = { NULL,"ggg",7 };
+//
+//	push_LinkQueue(myQueue, &p1);
+//	push_LinkQueue(myQueue, &p2);
+//	push_LinkQueue(myQueue, &p3);
+//	push_LinkQueue(myQueue, &p4);
+//	push_LinkQueue(myQueue, &p5);
+//	push_LinkQueue(myQueue, &p6);
+//	push_LinkQueue(myQueue, &p7);
+//
+//	printf("队列大小为:%d\n", size_LinkQueue(myQueue));
+//	while (!isEmpty_LinkQueue(myQueue))
+//	{
+//		struct Person* pFront = front_LinkQueue(myQueue);
+//		printf("姓名为:%s\n", pFront->name);
+//		printf("年龄为:%d\n", pFront->age);
+//		printf("\n");
+//		struct Person* pBack = back_LinkQueue(myQueue);
+//		printf("姓名为:%s\n", pBack->name);
+//		printf("年龄为:%d\n", pBack->age);
+//		printf("\n");
+//		pop_LinkQueue(myQueue);
+//	}
+//	printf("队列大小为:%d\n", size_LinkQueue(myQueue));
+//	destory_LinkQueue(myQueue);
+//	return 0;
+//}
