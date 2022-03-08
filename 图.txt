@@ -1,0 +1,371 @@
+//图的顺序存储——邻接矩阵
+//#include<iostream>
+//#include<cstring>
+//#define MaxVertex 50
+//using  namespace std;
+//typedef char VertexInfo[9];//重命名了char类型数组
+//struct Graph//图的结构体
+//{
+//	//顶点数组
+//	VertexInfo vertex[MaxVertex];
+//	//边的数组(二维矩阵)
+//	int edge[MaxVertex][MaxVertex];
+//	//顶点的个数
+//	int vertexNum;
+//	//边的条数
+//	int edgNum;
+//};
+////求用户输入的顶点在顶点数组中的位置
+//int LocalVertex(Graph& g, VertexInfo v)
+//{
+//	for (int i = 0; i < g.vertexNum; i++)
+//	{
+//		if (strcmp(v, g.vertex[i]) == 0)
+//		{
+//			return i;//找到
+//		}
+//	}
+//	return -1;
+//}
+////构建一个图
+//void GreateGraph(Graph& g)
+//{
+//	cout << "请分别输入图的顶点数和边数" << endl;
+//	cin >> g.vertexNum >> g.edgNum;
+//	cout << "请输入" << g.vertexNum << "个顶点的值" << endl;
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		cin >> g.vertex[i];
+//	}
+//	//初始化所有边
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		for (int j = 0; j < g.vertexNum; ++j)
+//		{
+//			g.edge[i][j] = 0;
+//		}
+//	}
+//	cout << "请输入" << g.edgNum << "条边" << endl;
+//	VertexInfo v1, v2;
+//	for (int i = 0; i < g.edgNum; i++)
+//	{
+//		cin >> v1 >> v2;
+//		int m = LocalVertex(g, v1);
+//		int n = LocalVertex(g, v2);
+//		//边对应的二维数组赋值
+//		g.edge[m][n] = 1;
+//		g.edge[n][m] = 1;//删去这行即为有向图
+//	}
+//}
+////打印图
+//void PrintGraph(Graph& g)
+//{
+//	cout << "\t";
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		cout << g.vertex[i] << "\t";
+//	}
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		cout << endl;
+//		cout << g.vertex[i] << "\t";
+//		for (int j = 0; j < g.vertexNum; ++j)
+//		{
+//			cout << g.edge[i][j] << "\t";
+//		}
+//	}
+//	cout << endl;
+//}
+//int main()
+//{
+//	Graph graph;
+//	GreateGraph(graph);
+//	PrintGraph(graph);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//图的链式存储——邻接表
+//#include<iostream>
+//using namespace std;
+//#define MaxVertex 100
+////邻接点的结构体
+//struct edgeNode
+//{
+//	int position;
+//	//指向后继顶点的指针
+//	struct edgeNode* next;
+//};
+////顶点数组的结构体
+//struct Vertex
+//{
+//	//顶点的名字
+//	char name[9];
+//	//指向邻接点结构体的指针
+//	struct edgeNode* first;
+//};
+////邻接表图的结构体
+//struct GraphList
+//{
+//	//顶点数组
+//	Vertex head[MaxVertex];
+//	//顶点的个数
+//	int VertexNum;
+//	//边的条数
+//	int edgeNum;
+//};
+//int LoaclVertex(GraphList& g,char* name)
+//{
+//	for (int i = 0; i < g.VertexNum; ++i)
+//	{
+//		if (strcmp(name, g.head[i].name) == 0)
+//		{
+//			return i;
+//		}
+//	}
+//	return -1;
+//}
+////创建一个图
+//void GreateGraph(GraphList& g)
+//{
+//	cout << "请输入图的顶点数和边数" << endl;
+//	cin >> g.VertexNum >> g.edgeNum;
+//	cout << "请输入" << g.VertexNum << "个顶点的值" << endl;
+//	for (int i = 0; i < g.VertexNum; ++i)
+//	{
+//		cin >> g.head[i].name;
+//		g.head[i].first = NULL;//目前没有邻接点
+//	}
+//	cout << "请输入" << g.edgeNum << "条边" << endl;
+//	char v1[9], v2[9];
+//	for (int i = 0; i < g.edgeNum; i++)
+//	{
+//		cin >> v1 >> v2;
+//		int m = LoaclVertex(g, v1);
+//		int n = LoaclVertex(g, v2);
+//		//添加邻接点
+//		edgeNode* pNew = new edgeNode;
+//		pNew->position = n;
+//		pNew->next = g.head[m].first;
+//		g.head[m].first = pNew;
+//
+//		//添加则为无向图，删去则为有向图
+//		edgeNode* pNew1 = new edgeNode;
+//		pNew->position = m;
+//		pNew1->next = g.head[n].first;
+//		g.head[n].first = pNew1;
+//	}
+//}
+//void PrintGraphList(GraphList& g)
+//{
+//	for (int i = 0; i < g.VertexNum; ++i)
+//	{
+//		edgeNode* pNode = g.head[i].first;
+//		cout << g.head[i].name << ":";
+//		while (pNode != NULL)
+//		{
+//			int index = pNode->position;
+//			cout << g.head[index].name << ".";
+//			pNode = pNode->next;
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+//}
+//int main()
+//{
+//	GraphList graph;
+//	GreateGraph(graph);
+//	PrintGraphList(graph);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+//最短路径
+//#include<iostream>
+//#include<cstring>
+//#include<stack>
+//#define MaxVertex 50
+//using  namespace std;
+//typedef char VertexInfo[9];//重命名了char类型数组
+//struct Graph//图的结构体
+//{
+//	//顶点数组
+//	VertexInfo vertex[MaxVertex];
+//	//边的数组(二维矩阵)
+//	int edge[MaxVertex][MaxVertex];
+//	//顶点的个数
+//	int vertexNum;
+//	//边的条数
+//	int edgNum;
+//};
+////求用户输入的顶点在顶点数组中的位置
+//int LocalVertex(Graph& g, VertexInfo v)
+//{
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		if (strcmp(v, g.vertex[i]) == 0)
+//		{
+//			return i;//找到
+//		}
+//	}
+//	return -1;
+//}
+//void GreateGraph(Graph& g)
+//{
+//	cout << "请分别输入图的顶点数和边数" << endl;
+//	cin >> g.vertexNum >> g.edgNum;
+//	cout << "请输入" << g.vertexNum << "个顶点的值" << endl;
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		cin >> g.vertex[i];
+//	}
+//	//初始化所有边
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		for (int j = 0; j < g.vertexNum; ++j)
+//		{
+//			g.edge[i][j] = INT_MAX;
+//		}
+//	}
+//	cout << "请输入" << g.edgNum << "条边 弧尾 弧头 权值" << endl;
+//	int w;
+//	VertexInfo v1, v2;
+//	for (int i = 0; i < g.edgNum; ++i)
+//	{
+//		cin >> v1 >> v2 >> w;
+//		int m = LocalVertex(g, v1);
+//		int n = LocalVertex(g, v2);
+//		//边对应的二维数组赋值
+//		g.edge[m][n] = w;
+//		g.edge[n][m] = w;//删去这行即为有向图
+//	}
+//}
+//void PrintGraph(Graph& g)
+//{
+//	cout << "\t";
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		cout << g.vertex[i] << "\t";
+//	}
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		cout << endl;
+//		cout << g.vertex[i] << "\t";
+//		for (int j = 0; j < g.vertexNum; ++j)
+//		{
+//			cout << g.edge[i][j] << "\t";
+//		}
+//	}
+//	cout << endl;
+//}
+//void dijistraPath(Graph& g,int* path,int* dist,int v0)
+//{
+//	int min = 0;
+//	int pos = v0;//访问的起始地点
+//	bool* visited = new bool[g.vertexNum];//用于标记顶点是否已经被访问
+//	//初始化
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		visited[i] = false;
+//		if (i != v0)//排除顶点到出发点的判断
+//		{
+//			path[i] = v0;//初始化所有点的最近邻接点都是v0点
+//			dist[i] = g.edge[v0][i];
+//			cout << g.vertex[v0] << "到" << g.vertex[i] << "距离:dist[" << i << "] = " << dist[i] << endl;
+//		}
+//		else
+//		{
+//			//i==v0没有意义,不存在路径
+//			path[i] = -1;
+//			dist[i] = INT_MAX;
+//		}
+//	}
+//	visited[v0] = true;//把v0标记为已访问
+//
+//	for (int i = 0; i < g.vertexNum; ++i)
+//	{
+//		min = INT_MAX;
+//		for (int j = 0; j < g.vertexNum; ++j)
+//		{
+//			if (!visited[j] && min > dist[j])//没有被访问，并且找到了拥有更小权值的边
+//			{
+//				//保存最小值
+//				min = dist[j];
+//				//保存位置
+//				pos = j;
+//				cout << "顶点更新:pos = " << pos << "顶点为:" << g.vertex[pos] << endl;
+//			}
+//		}
+//		visited[pos] = true;//pos位置顶点标志为已访问
+//
+//		//dist v0到各个点的距离
+//		for (int j = 0; j < g.vertexNum; ++j)
+//		{
+//			//g.edge[pos][j] < INT_MAX 判断pos->j这条边是存在的
+//			if (!visited[j] && dist[pos] + g.edge[pos][j] < dist[j] && g.edge[pos][j] < INT_MAX)
+//			{
+//				dist[j] = dist[pos] + g.edge[pos][j];
+//				path[j] = pos;
+//				cout << "更新最短距离:dist[" << j << "] = " << dist[j] << endl;
+//			}
+//		}
+//	}
+//}
+//void showPath(Graph& g,int* path,int v0,int v)//v0起始点 v到达点
+//{
+//	stack<int>st;
+//	int temp = v;
+//	while (temp != v0)
+//	{
+//		st.push(temp);
+//		temp = path[temp];
+//	}
+//	st.push(v0);
+//	//打印路径
+//	while (!st.empty())
+//	{
+//		cout << g.vertex[st.top()] << " ";
+//		st.pop();
+//	}
+//}
+//int main()
+//{
+//	Graph g;
+//	GreateGraph(g);
+//
+//	int path[50];//path数组——到当前点的最近的邻接点
+//
+//	int dist[50];//dist数组——从出发点到各个点的最短距离
+//
+//	int v0 = 0;//出发点
+//
+//	dijistraPath(g, path, dist ,v0);
+//
+//	for (int i = 1; i < g.vertexNum; ++i)
+//	{
+//		cout << "路径:";
+//		showPath(g, path, v0, i);
+//		cout << "路径长度:" << dist[i] << endl;
+//	}
+//	return 0;
+//}
