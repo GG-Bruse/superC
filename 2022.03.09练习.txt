@@ -1,0 +1,46 @@
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	char name[20] = { 0 };
+//	int ID;
+//	cout << "请输入姓名" << endl;
+//	cin >> name;
+//	cout << "请输入你的学号" << endl;
+//	cin >> ID;
+//	cout << name << ":" << ID << endl;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Student
+//{
+//public:
+//	//Student(string name, int age, float score) :m_name(name), m_age(age), m_score(score) {}
+//	Student(string name, int age, float score)
+//	{
+//		this->m_name = name;
+//		this->m_age = age;
+//		this->m_score = score;
+//	}
+//	void Print()
+//	{
+//		cout << m_name << "的年龄为" << m_age << " 成绩为:" << m_score << endl;
+//	}
+//private:
+//	string m_name;
+//	int m_age;
+//	float m_score;
+//
+//};
+//int main()
+//{
+//	Student bjy("包佳毅", 18, 100);
+//	bjy.Print();
+//	return 0;
+//}
+
+
