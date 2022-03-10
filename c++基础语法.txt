@@ -1,0 +1,634 @@
+
+
+                                                          //auto C++11
+/*
+在C中，auto修饰局部变量，局部变量也称auto变量(自动变量)
+
+在c++11中，auto根据用户初始化内容自动推导类型
+*/
+
+/*
+注意:
+1.定义变量时必须初始化,auto通过初始化的值进行类型推导
+2.部分编译器不支持函数形参为auto变量(vs不支持，Qt支持)
+3.auto变量不可作为自定义类型的成员变量,即使初始化也不行
+4.不可创建auto类型的数组
+5.模板实例化类型不可是auto类型
+*/
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//double test()
+//{
+//    return 1.1;
+//}
+//struct Person
+//{
+//    int age;
+//};
+//class Student
+//{
+//public:
+//    Student(const char* name ,int age)
+//    {
+//        this->m_name = (char*)name;
+//        this->m_age = age;
+//    }
+//    char* m_name;
+//    int m_age;
+//};
+//void func(vector<int>& temp)
+//{
+//    for (auto i = temp.begin(); i != temp.end(); ++i);//变量i的类型为vector<int>::iterator迭代器
+//}
+//int main()
+//{
+//    auto a = 1;//变量a的类型为int
+//
+//    auto b = test();//变量b的类型为double
+//
+//    Person p1 = {0};
+//    auto p2 = p1;//p2的类型为Person
+//
+//    Student s("bjy",18);
+//    auto sb = s;//对象sb类型为Student
+//
+//    vector<int>v;
+//    func(v);
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            //decltype
+//获取变量的类型
+
+/*
+ auto并不适用于所有的自动类型推导场景,在某些特殊情况下auto用起来非常不方便,甚至压根无法使用,所以 decltype 关键字也被引入到 C++11 中。
+ auto和decltype关键字都可以自动推导出变量的类型,但它们的用法是有区别的:auto varname = value; 
+ decltype(exp)varname = value; 其中，varname 表示变量名，value 表示赋给变量的值，exp 表示一个表达式.
+*/
+
+//#include<iostream>
+//#include<typeinfo>
+//using namespace std;
+//int main()
+//{
+//    int i;
+//    decltype(i)j = 0;//利用i的类型定义一个变量j
+//    cout << typeid(j).name() << endl;
+//
+//    float a = 2;
+//    double b = 1;
+//    decltype(a + b)c = 1.2;//c为double类型
+//    cout << c << endl;
+//
+//    enum {A,B,C}flag;//匿名的枚举变量
+//    decltype(flag)flag2;//通过类型推导，可以定义与匿名变量相同类型的变量
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            //追踪返回类型
+//返回类型后置:在函数名和参数列表后面指定返回类型
+
+//#include<iostream>
+//using namespace std;
+//int func1(int a, double b)
+//{
+//    return a + b;
+//}
+//auto func2(int a, double b)->int//指定特定的返回类型
+//{
+//    return a + b;
+//}
+//auto func3(int a, double b)->decltype(a+b)//根据返回的数据自动识别返回类型
+//{
+//    return a + b;
+//}
+//
+//template<class T1, class T2>
+//auto mul(T1& t1, T2& t2)->decltype(t1*t2)
+//{
+//    return t1 * t2;
+//}
+//
+//int main()
+//{
+//    auto a = func3(10, 11.1);
+//    cout << a << endl;
+//
+//    auto i = 10;
+//    auto j = 11.2;
+//    auto ret = mul(i, j);
+//    cout << ret << endl;
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                             //普通变量的列表初始化
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    int a{ 1 };
+//    cout << a << endl;
+//
+//    int arr[]{ 1,2,3,4,5,6 };
+//    for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i)
+//    {
+//        cout << arr[i] << " ";
+//    }
+//
+//    return 0;
+//}
+
+//可通过使用列表初始化防止类型收窄造成精度丢失(部分编译器不可)
+//错误案列:
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    int c = 1024;
+//    char d = {c};//编译不过   从“int”转换到“char”需要收缩转换
+//    cout << "d = " << d << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          //基于范围的for循环
+//范围必须是可确定的
+/*
+例如:
+形参若接收一个数组，实际上接收其地址，该形参实际为一个指针变量，无法通过该指针变量确定元素个数(即范围)
+void func(int arr[])
+{
+    for (int tmp : arr)//此基于范围的“for”语句需要适合的 "begin" 函数，但未找到
+
+    {
+        cout << tmp << endl;
+    }
+}
+*/
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    int arr[]{ 1,2,3,4,5,6,7,8,9,10 };
+//
+//    //传统写法
+//    for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i)
+//    {
+//        cout << arr[i] << " ";
+//    }
+//    cout << endl;
+//
+//
+//    //基于范围的写法
+//    for (int temp : arr)
+//    {
+//        cout << temp << " ";
+//    }
+//    cout << endl;
+//    //类似于:
+//    for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i)
+//    {
+//        int temp = arr[i];
+//        cout << temp << " ";
+//    }
+//    cout << endl;
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                               //静态断言
+/*
+static_assert(常量表达式，提示字符串)
+若第一个参数常量表达式的值为真(true或者非零值)，那么static_assert不做任何事情，就像它不存在一样，
+否则会产生一条编译错误，错误位置就是该static_assert语句所在行，错误提示就是第二个参数提示字符串。
+
+
+说明:
+使用static_assert，我们可以在编译期间发现更多的错误，用编译器来强制保证一些契约，并帮助我们改善编译信息的可读性，尤其是用于模板的时候。
+static_assert可以用在全局作用域中，命名空间中，类作用域中，函数作用域中，几乎可以不受限制的使用。
+
+编译器在遇到一个static_assert语句时，通常立刻将其第一个参数作为常量表达式进行演算，
+但如果该常量表达式依赖于某些模板参数，则延迟到模板实例化时再进行演算，这就让检查模板参数成为了可能。
+
+性能方面，由于是static_assert编译期间断言，不生成目标代码，因此static_assert不会造成任何运行期性能损失。
+*/
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    static_assert(sizeof(void*) != 4, "不支持32位系统");//无法运行,本机默认为x86为32位,sizeof(void*) = 4
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            //nullptr
+/*
+解决了C++中NULL的二义性的问题，#define NULL ((void*)0),#define NULL 0.
+nullptr是nullptr_t 类型的右值常量,专用于初始化空类型指针.nullptr_t是C++11新增加的数据类型可称为“指针空值类型”
+*/
+
+//#include <iostream>
+//using namespace std;
+//
+//void isnull(void* c) 
+//{
+//    cout << "void* c" << endl;
+//}
+//void isnull(int n) 
+//{
+//    cout << "int n" << endl;
+//}
+//int main() 
+//{
+//    isnull(NULL);//int n
+//    isnull(nullptr);//void* c
+//
+//    //nullptr只能给指针赋值，不能给一个整型变量赋值
+//    int* p1 = NULL;
+//    int* p2 = nullptr;
+//    if (p1 == p2)
+//    {
+//        cout << "equal" << endl;//执行
+//    }
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            //强类型枚举
+/*
+例:
+enum class Status01{Ok,Error};
+enum struct Status02{Ok,Error};
+enum class Status03:char {Ok,Error};
+*/
+/*
+特点:
+(1)强作用域,强类型枚举成员的名称不会被输出到其父作用域,所以不同枚举类型定义同名枚举成员编译不会报重定义错误.
+进而使用枚举类型的枚举成员时,必须指明作用域,比如Enum::VAL1,而单独的VAL1则不再具有意义:
+(2)转换限制，强类型枚举成员的值不可以与整型发生隐式相互转换。
+(3)可以指定成员变量的类型
+(4)由于使用枚举成员必须选择作用域，强类型枚举无法匿名
+*/
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    enum class Status01: long long {Ok,Error};
+//    cout << sizeof(Status01::Ok) << endl;
+//
+//    enum struct Status02 : long long { Ok, Error };
+//    cout << sizeof(Status02::Ok) << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        //常量表达式constexpr
+/*
+允许一些计算只在编译时进行一次,而不是每次程序运行时,编译器可以进行尺度更大的优化；
+*/
+
+
+
+//constexpr修饰普通变量
+/*
+使用 constexpr 修改普通变量时，变量必须经过初始化且初始值必须是一个常量表达式
+*/
+
+//#include <iostream>
+//using namespace std;
+//int main()
+//{
+//    constexpr int num = 1 + 2 + 3;
+//    int url[num] = { 1,2,3,4,5,6 };
+//    cout << url[1] << endl;
+//    return 0;
+//}
+
+
+
+
+//constexpr修饰函数
+/*
+限制:
+1.常量表达式函数必须有返回值(不可以是void函数)
+2.常量表达式函数体中只能有一条语句,且该语句必须是return语句。
+但不产生实际代码的语句可以在常量表达式函数中使用,如static_assert,using,typedef等
+3.return语句中,不能使用非常量表达式的变量、函数,且return的表达式也要是常量表达式
+4.常量表达式函数在使用前，必须有定义.  (普通函数在被调用前只要有函数声明就够了，不一定有定义)
+*/
+
+//#include<iostream>
+//using namespace std;
+//int getNum01()
+//{
+//    return 1;
+//}
+//const int getNum02()
+//{
+//    return 2;
+//}
+//constexpr int getNum03()
+//{
+//    return 3;
+//}
+//int main()
+//{
+//    //枚举成员初始化必须是整型常量
+//    
+//    //error
+//    /*enum {a1 = getNum01(),a2};
+//    enum { b1 = getNum02(), b2 };*/
+//
+//    //ok
+//    enum {c1 = getNum03(),c2 };
+//
+//    return 0;
+//}
+
+
+
+
+//constexpr修饰类的构造函数
+/*
+1.constexpr修饰类的构造函数时,要求该构造函数的函数体必须为空,且采用初始化列表的方式为各个成员赋值时,必须使用常量表达式
+2.C++11 标准中,不支持用constexpr修饰带有virtual的成员方法
+*/
+
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//    //构造函数体必须为空，可以使用初始化列表的方式进行初始化
+//    constexpr Date(int year, int month, int day) :m_year(year), m_month(month), m_day(day) {}
+//
+//    constexpr int getYear()const
+//    {
+//        return m_year;
+//    }
+//    constexpr int getMonth()const
+//    {
+//        return m_month;
+//    }
+//    constexpr int getDay()const
+//    {
+//        return m_day;
+//    }
+//private:
+//    int m_year;
+//    int m_month;
+//    int m_day;
+//};
+//int main()
+//{
+//    constexpr Date obj{ 2022, 3, 8 };//必须使用常量初始化
+//    cout << obj.getYear() << endl;
+//    return 0;
+//}
+
+
+
+
+//constexpr修饰模板函数
+/*
+constexpr可以修饰模板函数,但由于模板中类型的不确定性,因此模板函数实例化后的函数是否符合常量表达式函数的要求也是不确定的.
+若constexpr修饰的模板函数实例化结果不满足常量表达式函数的要求,则constexpr会被自动忽略,即该函数就等同于一个普通函数.
+*/
+
+//#include <iostream>
+//using namespace std;
+//struct myType {
+//    const char* name;
+//    int age;
+//};
+//template<typename T>
+//constexpr T dispaly(T t) {
+//    return t;
+//}
+//
+//int main()
+//{
+//    struct myType stu { "zhangsan", 10 };
+//    //普通函数
+//    struct myType ret = dispaly(stu);
+//    cout << ret.name << " " << ret.age << endl;
+//    //常量表达式函数
+//    constexpr int ret1 = dispaly(10);
+//    cout << ret1 << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                           //自定义字面参量说明
+
+/*
+C++11中引入了用户自定义字面量，也叫自定义后缀操作符，即通过实现一个后缀操作符，将申明了该后缀标识的字面量转化为需要的类型。
+字面量的返回值并没有被严格限定，可以提供相容类型的返回值
+
+以下参数列表才合法:
+char const*
+unsigned long long
+long double
+char const* , size_t
+wchar_t const *, size_t
+char16_t const *, size_t
+char32_t const *, size_t
+最后四个对于字符串相当有用，因为第二个参数会自动推断为字符串的长度
+*/
+
+//#include<iostream>
+//using namespace std;
+//unsigned long long operator"" _s(unsigned long long x)
+//{
+//    return x * 1000;
+//}
+//
+//size_t operator"" _byte(char const* str, size_t len)//自动推断长度
+//{
+//    return len;
+//}
+//
+//int main()
+//{
+//    unsigned long long time = 123_s;
+//    cout << time << "_ms" << endl;//123000_ms
+//
+//    cout << "bjy"_byte << endl;//3
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                         //原生字符串字面值
+/*
+原生字符串字面值(raw string literal)使用户书写的字符串“所见即所得”.
+原生字符串的声明相当简单,只需在字符串前加入前缀,即字母R,并在引号中使用括号左右标识,就可以声明该字符串字面量为原生字符串了.
+*/
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//    cout << R"(hello\nworld)" << endl;//使得转义字符失效并被认为为普通字符
+//
+//    string str = R"(\n\t)";
+//    cout << str << endl;
+//    return 0;
+//}
+
