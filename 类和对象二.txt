@@ -1,0 +1,727 @@
+//静态成员
+
+/*
+在类定义中，它的成员(包括成员变量和成员函数)可以用关键子static声明为静态的，称为静态成员
+不管这个类创建了多少个对象，静态成员只有一个拷贝，这个拷贝被所有属于这个类的对象共享
+*/
+
+
+
+//静态成员变量
+/*
+1.静态成员变量必须在类中声明，在类外定义
+2.静态成员变量不属于某个对象，在为对象分配空间中不包括静态成员所占空间
+3.静态成员变量可以通过类名或对象名来引用
+4.所有对象都共享一份数据
+5.静态成员变量也受访问权限限制
+*/
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//    //静态成员变量:编译阶段就分配了内存
+//    //类内声明
+//    static int m_a;
+//};
+//int A::m_a = 10;//类外初始化
+//int main()
+//{
+//    //1.通过对象进行访问
+//    A a1;
+//    cout << "m_a = " << a1.m_a << endl;
+//    A a2;
+//    a2.m_a = 20;
+//    cout << "m_a = " << a1.m_a << endl;
+//    //2.通过类名进行访问
+//    cout << "m_a = " << A::m_a << endl;
+//    return 0;
+//}
+
+
+
+//静态成员函数
+/*
+1.所有对象都共享同一个函数
+2.静态成员函数可以通过类名或对象名来调用
+3.静态成员函数可以访问静态成员变量，但不能访问普通成员变量
+4.静态成员函数也受访问权限限制
+*/
+//#include<iostream>
+//using namespace std;
+//class A
+//{
+//public:
+//    static void fun()
+//    {
+//        cout << "静态成员函数调用" << endl;
+//    }
+//};
+//int main()
+//{
+//    //通过对象调用
+//    A a1;
+//    a1.fun();
+//    //通过类名
+//    A::fun();
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//单例模式
+
+/*
+单例模式是一种常见的软件设计模式。在它的核心结构中值包含一个被称为单例的特殊类。通过单例模式可以保证系统中一个类只有一个实例
+而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。
+*/
+/*
+实现方法:
+1.将构造函数私有化，实现不可创建多个对象
+2.类内声明一个静态指针，类外进行初始化，该指针为唯一实例。并将其设置为私有权限，防止通过将指针置入NULL导致无法访问
+3.在私有权限下提供空实现的拷贝构造函数，防止通过编译器提供的拷贝构造函数实现创建对象
+4.公共权限下提供接口，实现访问该对象的功能
+5.单例模式下通过new在堆区开辟的空间一般不进行释放(可能多人使用),在程序结束时由系统收回堆区内存
+*/
+
+//#include<iostream>
+//using namespace std;
+//class ChairMan//主席类
+//{
+//private:
+//    //构造函数私有化，不可以创建多个对象
+//    ChairMan()
+//    {}
+//    //防止通过编译器提供的拷贝构造函数实现创建对象
+//    ChairMan(const ChairMan&)
+//    {}
+//    static ChairMan* singleman;//类内声明
+//public:
+//    //公共只读接口
+//    static ChairMan* get()
+//    {
+//        return singleman;
+//    }
+//};
+//ChairMan* ChairMan::singleman = new ChairMan;//类外初始化对象
+//int main()
+//{
+//    ChairMan* c1 = ChairMan::get();
+//    ChairMan* c2 = ChairMan::get();
+//    if (c1 == c2)
+//    {
+//        cout << "c1 = c2" << endl;
+//    }
+//    else
+//    {
+//        cout << "c1 != c2" << endl;
+//    }
+//    return 0;
+//}
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Printer
+//{
+//private:
+//    Printer()
+//    {
+//        count = 0;
+//    }
+//    Printer(const Printer&)
+//    {}
+//    static Printer* p;
+//    int count;//记录打印次数
+//public:
+//    static Printer* get()
+//    {
+//        return p;
+//    }
+//    //打印函数
+//    void printtext(string str)
+//    {
+//        cout << str << endl;
+//        count++;
+//    }
+//    //查看打印次数
+//    void look()
+//    {
+//        cout << "共打印" << count << "次" << endl;
+//    }
+//};
+//Printer* Printer::p = new Printer;
+//int main()
+//{
+//    Printer* p = Printer::get();
+//    p->printtext("bjy is the best handsome boy");
+//    p->printtext("bjy is the best handsome boy");
+//    p->look();
+//    p->printtext("bjy is the best handsome boy");
+//    p->look();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//this指针
+//this指针的本质:类名* const this(不允许被修改)
+/*
+this指针指向被调用的成员函数所属的对象
+this指针隐式的加在每个成员函数中
+不要使用空指针访问(隐式)用到this指针的成员函数
+*/
+/*
+用途:
+1.解决名称冲突
+2.实现链式编程
+*/
+//#include<iostream>
+//using namespace std;
+//class Person
+//{
+//public:
+//    Person(int age)
+//    {
+//        this->age = age;
+//    }
+//    Person& Addage(Person& p)
+//    {
+//        this->age += p.age;
+//        return *this;//指向被调用的成员函数所属的对象的指针，解引用为本体对象
+//    }
+//    int age;
+//};
+//int main()
+//{
+//    Person p1(18);
+//    Person p2(10);
+//    cout << "p1的年龄为:" << p1.age << endl;
+//    p1.Addage(p2);
+//    cout << "p1的年龄为:" << p1.age << endl;
+//    p1.Addage(p2).Addage(p2);//链式编程思想
+//    cout << "p1的年龄为:" << p1.age << endl;
+//    return 0;
+//}
+
+
+
+
+
+//常对象与常函数
+//#include<iostream>
+//using namespace std;
+//class Person
+//{
+//public:
+//    Person(int age ,int high)
+//    {
+//        m_age = age;
+//        m_high = high;
+//    }
+//
+//    void showage() const//const修饰为常函数(中的this指针)，使得不可修改this指向的值
+//    {
+//        //m_age = 100;
+//        m_high = 180;
+//        cout << "年龄为:" << this->m_age << endl;
+//        cout << "身高为:" << this->m_high << endl;
+//    }
+//
+//    mutable int m_high;//加上mutable关键字，使得常函数可以修改该成员变量的值，当其作为常对象的属性时也可以被修改
+//    int m_age;
+//};
+//int main()
+//{
+//    Person p1(18, 10);
+//    p1.showage();
+//    const Person p2(1, 1);//常对象——其属性不可被修改
+//    //常对象最好只调用常函数，普通函数可能修改其属性导致报错
+//    p2.showage();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//友元
+/*
+类的主要特点之一是数据隐藏，即类的私有成员无法在类的外部(作用域之外)访问。
+友元是一种特权，C++允许其访问私有成员。
+*/
+
+//1.全局函数做友元函数
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Building
+//{
+//    friend void goodfirend(Building* p);//利用firend关键字，声明友元函数
+//public:
+//    Building()
+//    {
+//        this->sittingroom = "客厅";
+//        this->bedroom = "卧室";
+//    }
+//public:
+//    string sittingroom;//客厅
+//private:
+//    string bedroom;//卧室
+//
+//};
+////全局函数
+//void goodfirend(Building* p)
+//{
+//    cout << "正在访问" << p->sittingroom << endl;
+//    cout << "正在访问" << p->bedroom << endl;
+//}
+//int main()
+//{
+//    Building Person;
+//    goodfirend(&Person);
+//    return 0;
+//}
+
+
+//2.类做为友元类
+//#include<iostream>
+//#include<string>
+//using namespace std;
+////类:我的房子
+//class Building
+//{
+//    friend class Goodfriend;
+//public:
+//    Building()
+//    {
+//        this->sittingroom = "客厅";
+//        this->bedroom = "卧室";
+//    }
+//    string sittingroom;
+//private:
+//    string bedroom;
+//};
+////类:好朋友
+//class Goodfriend
+//{
+//public:
+//    Goodfriend()
+//    {
+//        this->p = new Building;
+//    }
+//    void visit()
+//    {
+//        cout << "好朋友正在访问" << p->sittingroom << endl;
+//        cout << "好朋友正在访问" << p->bedroom << endl;
+//    }
+//    Building* p;
+//};
+//int main()
+//{
+//    Goodfriend a;
+//    a.visit();
+//    return 0;
+//}
+
+
+//3.另一个类中的成员函数作为本类友元函数
+//将函数类外编写，避免编译器无法识别
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Building;
+////类:好朋友
+//class Goodfriend
+//{
+//public:
+//    Goodfriend();
+//    void visit();
+//
+//    Building* p;
+//};
+////类:我的房子
+//class Building
+//{
+//    friend void Goodfriend::visit();
+//public:
+//    Building()
+//    {
+//        this->bedroom = "卧室";
+//    }
+//private:
+//    string bedroom;
+//};
+//Goodfriend::Goodfriend()
+//{
+//    this->p = new Building;
+//}
+//void Goodfriend::visit()
+//{
+//    cout << "好朋友正在访问" << p->bedroom << endl;
+//}
+//int main()
+//{
+//    Goodfriend a;
+//    a.visit();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//数组类封装
+//#include<iostream>
+//using namespace std;
+//class my_arr
+//{
+//public:
+//    my_arr()
+//    {
+//        cout << "默认构造函数调用" << endl;
+//        this->m_num = 100;
+//        this->m_size = 0;
+//        this->parr = new int[m_num];
+//    }
+//    my_arr(int num)
+//    {
+//        cout << "有参构造函数调用" << endl;
+//        this->m_num = num;
+//        this->m_size = 0;
+//       this->parr = new int[m_num];
+//    }
+//    my_arr(const my_arr& arr)
+//    {
+//        cout << "拷贝构造函数调用" << endl;
+//        this->m_num = arr.m_num;
+//        this->m_size = arr.m_size;
+//        this->parr = new int[m_num];
+//        if (m_num>=m_size)
+//        {
+//            for (int i = 0; i < m_size; i++)
+//            {
+//                this->parr[i] = arr.parr[i];
+//            }
+//        }
+//    }
+//    //尾插法
+//    void pushBack(int val)
+//    {
+//        this->parr[this->m_size] = val;
+//        m_size++;
+//    }
+//    //根据位置设置数据
+//    void setdata(int pos,int val)
+//    {
+//        this->parr[pos] = val;
+//    }
+//    //根据位置获取数据
+//    int getdata(int pos)
+//    {
+//        return this->parr[pos];
+//    }
+//    //获取数组容量
+//    int getnum()
+//    {
+//        return m_num;
+//    }
+//    //获取数组大小
+//    int getsize()
+//    {
+//        return m_size;
+//    }
+//    //析构函数
+//    ~my_arr()
+//    {
+//        cout << "析构函数调用" << endl;
+//        if (this->parr != NULL)
+//        {
+//            delete[] parr;
+//            this->parr = NULL;
+//        }
+//    }
+//private:
+//    int m_num;//数组的最大下标
+//    int m_size;//数组当前的大小
+//    int* parr;//指向开辟在堆区的空间
+//};
+//int main()
+//{
+//    int i;
+//    my_arr arr;
+//    for (i = 0; i < 10; i++)
+//    {
+//        arr.pushBack(i);
+//    }
+//    for (i = 0; i < arr.getsize(); i++)
+//    {
+//        cout << arr.getdata(i) << endl;
+//    }
+//
+//    my_arr arr2(arr);
+//    for (i = 0; i < arr2.getsize(); i++)
+//    {
+//        cout << arr2.getdata(i) << endl;
+//    }
+//
+//    return 0;
+//}
+
+
+
+
+//字符串类封装
+//#include<iostream>
+//#include<cstring>
+//using namespace std;
+//class Mystring
+//{
+//    friend ostream& operator<<(ostream& cout, Mystring& p);
+//    friend istream& operator>>(istream& cin, Mystring& p);
+//public:
+//    Mystring(const char* str)
+//    {
+//        this->pstring = new char[strlen(str)+1];
+//        strcpy(this->pstring, str);
+//        this->m_size = strlen(str);
+//    }
+//    Mystring(const Mystring& p)
+//    {
+//        this->pstring = new char[strlen(p.pstring)+1];
+//        strcpy(this->pstring, p.pstring);
+//        this->m_size = p.m_size;
+//    }
+//    //重载=(1)
+//    Mystring& operator=(const char* p)
+//    {
+//        if (this->pstring != NULL)
+//        {
+//            delete[] this->pstring;
+//        }
+//        this->pstring = new char[strlen(p) + 1];
+//        strcpy(this->pstring, p);
+//        this->m_size = strlen(p);
+//        return *this;
+//    }
+//    //重载=(2)
+//    Mystring& operator=(const Mystring& p)
+//    {
+//        if (this->pstring != NULL)
+//        {
+//            delete[] this->pstring;
+//        }
+//        this->pstring = new char[strlen(p.pstring) + 1];
+//        strcpy(this->pstring, p.pstring);
+//        this->m_size = strlen(p.pstring);
+//        return *this;
+//    }
+//    //重载[]
+//    char& operator[](int index)
+//    {
+//        return this->pstring[index];
+//    }
+//    //重载+实现字符串拼接(1)
+//    Mystring operator+(const char* str)
+//    {
+//        int newsize = this->m_size + strlen(str) + 1;
+//        char* temp = new char[newsize];
+//        memset(temp, 0, newsize);//清空
+//        strcat(temp, this->pstring);
+//        strcat(temp, str);
+//        Mystring newstring(temp);
+//        delete[]temp;
+//        return newstring;
+//    }
+//    //+(2)
+//    Mystring operator+(Mystring& p)
+//    {
+//        int newsize = this->m_size + strlen(p.pstring) + 1;
+//        char* temp = new char[newsize];
+//        memset(temp, 0, newsize);//清空
+//        strcat(temp, this->pstring);
+//        strcat(temp, p.pstring);
+//        Mystring newstring(temp);
+//        delete[]temp;
+//        return newstring;
+//    }
+//    //重载==进行字符串的比较(1)
+//    bool operator==(const Mystring& p)
+//    {
+//        int ret = strcmp(this->pstring, p.pstring);
+//        if (ret == 0)
+//        {
+//            return true;
+//        }
+//        return false;
+//    }
+//    //==(2)
+//    bool operator==(const char* str)
+//    {
+//        int ret = strcmp(this->pstring, str);
+//        if (ret == 0)
+//        {
+//            return true;
+//        }
+//        return false;
+//    }
+//    ~Mystring()
+//    {
+//        if (this->pstring != NULL)
+//        {
+//            delete[] this->pstring;
+//            this->pstring = NULL;
+//        }
+//    }
+//private:
+//    char* pstring;//维护在堆区开辟的字符数组
+//    int m_size;//字符串的长度(不统计'\0')
+//};
+////重载<<用于输出
+//ostream& operator<<(ostream& cout, Mystring& p)
+//{
+//    cout << p.pstring << endl;
+//    return cout;
+//}
+////重载>>用于输入
+//istream& operator>>(istream& cin, Mystring& p)
+//{
+//    char buff[1024];//开辟临时数组用作缓冲区
+//    if (p.pstring != NULL)
+//    {
+//        delete[] p.pstring;
+//        p.pstring = NULL;
+//    }
+//    cin >> buff;
+//    p.pstring = new char[strlen(buff) + 1];
+//    strcpy(p.pstring, buff);
+//    p.m_size = strlen(buff);
+//    return cin ;
+//}
+
+
+
+
+
+
+
+//委托构造
+/*
+委托构造函数可以使用当前类的其他构造函数来帮助当前构造函数初始化.
+1.委托构造一定要通过初始化列表的方式
+2.当被委托的构造函数的函数体中如果有代码，那么会先执行完函数体的代码，才会回到发出委托请求的构造函数
+3.不要形成委托环。 
+ 在构造函数较多时,我们可能拥有多个委托构造函数,而一些目标构造函数很可能也是委托构造函数,
+ 就很可能在委托构造函数中形成循环链状的委托构造关系
+ 4.若在委托构造函数中使用try，可以捕获目标构造函数中抛出的异常
+*/
+
+//#include<iostream>
+//using namespace std;
+//class Test
+//{
+//public:
+//    Test():Test(18,'b')
+//    {
+//        cout << "调用无参构造函数" << endl;
+//    }
+//    Test(int x):m_x(x){}
+//    Test(char y):m_y(y){}
+//    Test(int x, char y) :m_x(x), m_y(y) { cout << "调用有参构造函数" << endl; }
+//
+//    int m_x = 0;
+//    char m_y = 0;
+//};
+//int main()
+//{
+//    Test t;
+//    cout << t.m_x << endl;
+//    cout << t.m_y << endl;
+//    return 0;
+//}
+/*
+输出:
+调用有参构造函数
+调用无参构造函数
+18
+b
+*/
+
+
+
+//委托环(错误)
+//#include<iostream>
+//using namespace std;
+//class Foo
+//{
+//public:
+//    Foo(int i) : Foo('c') { type = i; }
+//    Foo(char c) : Foo(1) { name = c; }
+//private:
+//    int type;
+//    char name;
+//};
+
+
+
+
+//#include <iostream> 
+//using namespace std;
+//class Foo
+//{
+//public:
+//    Foo(int i)try:Foo(i, 'c'){}
+//    catch (...)
+//    {
+//        cout << "捕获int类型异常" << endl;
+//    }
+//private:
+//    Foo(int i, char c)
+//    {
+//        this->type = i;
+//        this->name = c;
+//        cout << "抛出异常" << endl;
+//        throw 0;
+//    }
+//    int type;
+//    char name;
+//};
+//int main()
+//{
+//    Foo f(1);
+//    return 0;
+//}
