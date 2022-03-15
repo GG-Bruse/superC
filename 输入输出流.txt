@@ -1,0 +1,259 @@
+
+
+                                                           //C++输入输出流
+
+//程序的输入指的是从输入文件将数据传送给程序，程序的输出指的是从程序将数据传送给输出文件
+/*
+C++输入输出包含三个方面的内容:
+1.对系统指定的标准设备的输入和输出。即从键盘输入数据，输出到显示屏屏幕。
+这种输入输出称为标准的输入输出，简称标准I/O
+
+2.以外存磁盘文件为对象进行输入和输出，即从磁盘文件输入数据，数据输出到磁盘文件。
+以外存文件为对象输入输出称为文件的输入输出，简称文件I/O
+
+3.对内存中指定的空间进行输入和输出，通常指定一个字符数组作为存储空间(实际上可以利用该空间存储任何信息)。
+这种输入和输出被称为字符串输入输出，简称串I/O
+*/
+
+
+
+
+
+
+
+
+
+
+//标准输入流
+/*
+(1)cin.get()//一次只能读取一个字符
+(2)cin.get(一个参数)//读一个字符
+(3cin.get(两个参数)//可以读字符串
+(4)cin.getline()//读取字符串
+(5)cin.ignore()//忽略
+(6)cin.peek()//偷窥
+(7)cin.putback()//放回
+*/
+
+//#include<iostream>
+//using namespace std;
+//void test1()//(1)(2)
+//{
+//    char c = cin.get();
+//    cout << "c = " << c << endl;
+//    cin.get(c);
+//    cout << "c = " << c << endl;
+//}
+//void test2()//(3)
+//{
+//    //利用cin.get()获取字符串时，换行符会遗留在缓冲区中
+//    char buf[1024] = { 0 };
+//    cin.get(buf, 1024);
+//    cout << buf << endl;
+//}
+//void test3()//(4)
+//{
+//    //使用cin.getline()获取字符串时，换行符不会遗留在缓冲区，也不会被取走，而是直接扔掉
+//    char buf[1024] = { 0 };
+//    cin.getline(buf,1024);
+//    cout << buf << endl;
+//}
+//void test4()
+//{
+//    cin.ignore(2);//忽略缓冲区数据，默认忽略一个字符。参数为X,便忽略缓冲区中X个字符
+//    char c = cin.get();//asc
+//    cout << "c = " << c << endl;//c
+//}
+//void test5()
+//{
+//    char c = cin.peek();//查看缓冲区的一个字符，可以使用，但不从缓冲区取走
+//    cout << "c = " << c << endl;
+//    c = cin.get();
+//    cout << "c = " << c << endl;
+//}
+//void test6()
+//{
+//    //将数据放回缓冲区原来的位置
+//    char c = cin.get();
+//    cin.putback(c);
+//    char buf[1024] = { 0 };
+//    cin.getline(buf, 1024);
+//    cout << buf << endl;
+//}
+//int main()
+//{
+//    //test1();
+//    //test2();
+//    //test3();
+//    //test4();
+//    //test5();
+//    test6();
+//    return 0;
+//}
+
+
+
+//案例1(判断用户输入的是字符串还是数字)
+//#include<iostream>
+//using namespace std;
+//void test()
+//{
+//    cout << "请输入一个字符串或者数字" << endl;
+//    char c = cin.peek();
+//    if (c >= '0' && c <= '9')
+//    {
+//        int num;
+//        cin >> num;//取走缓冲区数据
+//        cout << "输入的是数字" << endl;
+//    }
+//    else
+//    {
+//        char buf[1024];
+//        cin >> buf;
+//        cout << "输入的是字符串" << endl;
+//    }
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+//案例2(用户输入一个0—10之间的数字，如果输入错误则重新输入)
+/*
+cout<<cin.fail();
+如果标志位为0则缓冲区正常，若标志位为1则缓冲区异常
+*/
+
+//#include<iostream>
+//using namespace std;
+//void test()
+//{
+//    cout << "请输入0—10之间的数字" << endl;
+//    int num;
+//    while (true)
+//    {
+//        cin >> num;
+//        if (num >= 0 && num <= 10 && cin.fail() == 0)
+//        {
+//            cout << "输入正确,输入值为:" << num << endl;
+//            break;
+//        }
+//        cin.clear();//重置标志位
+//        cin.ignore(1024,'\n');//清除输入缓冲区的当前行
+//        cout << "输入错误请重新输入" << endl;
+//    }
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//标准输出流
+/*
+(1)cout.flush()//刷新缓冲区 Linux下有效
+(2)cout.put()//向缓冲区写字符
+(3)cout.write(char* buf,int size)//从buffer中写num个字节到当前输出流中
+*/
+
+//#include<iostream>
+//using namespace std;
+//void test1()//(2)
+//{
+//    cout.put('h').put('e');//提供链式编程
+//    //使用较少
+//}
+//void test2()//(3)
+//{
+//    char buf[] = "hello world";
+//    cout.write(buf, strlen(buf));
+//}
+//int main()
+//{
+//    //test1();
+//    test2();
+//    return 0;
+//}
+
+
+//格式化输出
+/*
+(1)使用控制符的方法:#include<iomanip>
+(2)使用流对象的有关成员函数
+*/
+/*
+ios::left           输出数据在本域宽范围内向左对齐
+ios::right          输出数据在本域宽范围内向右对齐
+ios::internal       数值的符号位在域宽内左对齐，数值右对齐，中间由填充字符填充
+ios::dec            设置整数的基数为10
+ios::oct            设置整数的基数为8
+ios::hex            设置整数的基数为16
+ios::showbase       强制输出整数的基数(八进制以0开头、十六进制以0x开头)
+ios::showpoint      强制输出浮点数的小数点和尾数0
+ios::uppercase      在以科学计数法格式E和以十六进制输出字母时以大写表示
+ios::showpos        对正数显示"+"号
+ios::fixed          浮点数以定点格式(小数形式)输出
+ios::unitbuf        每次输出后刷新所有的流
+ios::stdio          每次输出之后清除stdout,stderr
+*/
+
+//流成员函数案例
+//#include<iostream>
+//using namespace std;
+//void test()
+//{
+//    int num = 99;
+//    cout.width(20);//指定宽度
+//    cout.fill('*');//将空字符填充
+//    cout.setf(ios::left);//左对齐
+//    cout.unsetf(ios::dec);//卸载十进制
+//    cout.setf(ios::hex);//设置为十六进制
+//    cout.setf(ios::showbase);//显示基数
+//    cout << num << endl;
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+//使用控制符案例
+//#include<iostream>
+//#include<iomanip>
+//using namespace std;
+//void test()
+//{
+//    int num = 99;
+//    cout << setw(20)//设置宽度
+//        <<setfill('*')//设置填充
+//        <<setiosflags(ios::showbase)//显示基数(十进制无基数)
+//        <<setiosflags(ios::left)//设置左对齐
+//        <<hex//设置为十六进制
+//        <<num
+//        << endl;
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
