@@ -1,0 +1,197 @@
+//#include<iostream>
+
+//using namespace std;
+
+//int sum(int, int);
+
+//int main()
+
+//{
+
+//
+
+//int a, b ,c;
+
+//cout << "Enter two numbers";
+
+//cin >> a >> b;
+
+//c = sum(a, b);
+
+//cout << "sun is:" << c;
+
+//return 0;
+
+//}
+
+//int sum(int a, int b)
+
+//{
+
+//return a + b;
+
+//}
+
+
+
+
+
+
+//#include<iostream>
+
+//using namespace std;
+
+//int i = 15;
+
+//int main()
+
+//{
+
+//int i = 100;
+
+//::i = i + 1;
+
+//cout << ::i << endl;//101
+
+//return 0;
+
+//}
+
+
+
+
+
+
+
+
+//#include<iostream>
+
+//using namespace std;
+
+//void Swap(int& a, int& b)
+
+//{
+
+//int temp = a;
+
+//a = b;
+
+//b = temp;
+
+//}
+
+//int main()
+
+//{
+
+//int a = 5, b = 10;
+
+//Swap(a , b);
+
+//cout << a << " " << b << endl;
+
+//return 0;
+
+//}
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+
+//using namespace std;
+
+//int& function(int& i)
+
+//{
+
+//i += 10;
+
+//return i;
+
+//}
+
+//int main()
+
+//{
+
+//int k = 0;
+
+//int& m = function(k);
+
+//cout << k << endl;
+
+//m = 20;
+
+//cout << k << endl;
+
+//return 0;
+
+
+
+#include<iostream>
+
+using namespace std;
+
+int Fibonacci(int i)
+
+{
+
+if (i == 1 || i == 2) return 1;
+
+return Fibonacci(i - 1) + Fibonacci(i - 2);
+
+}
+
+int main()
+
+{
+
+int* space = new int[20];
+
+if (space == NULL)
+
+{
+
+return 0;
+
+}
+
+for (int i = 0; i < 20; ++i)
+
+{
+
+*(space+i) = Fibonacci(i + 1);
+
+}
+
+for (int i = 0; i < 20; ++i)
+
+{
+
+cout << *(space+i) << endl;
+
+}
+
+if (space != NULL)
+
+{
+
+delete[] space;
+
+space = nullptr;
+
+}
+
+return 0;
+
+}
+
+
