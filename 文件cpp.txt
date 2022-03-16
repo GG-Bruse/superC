@@ -1,0 +1,77 @@
+
+                                                       //文件读写<fstream>
+
+/*
+ios::in             以输入的方式打开文件
+ios::out            以输出方式打开文件(这是默认方式)。如果已有此名字的文件，则将其原有内容全部删除
+ios::app            以输出的方式打开文件,写入的数据追加在文件末尾
+ios::ate            打开一个已有文件，文件指针指向文件末尾
+ios::trunc          打开一个文件，若文件已存在，则删除其中全部数据。若文件不存在则建立新文件。
+                    若已指定了ios::out方式，并且未指定ios::app、ios::ate、ios::in,则同时默认此方式
+ios::binary         以二进制方式打开文件，若不指定此方式则默认为ACSCII方式。(搭配其他方式使用)
+ios::nocreate       打开一个已有的文件。若文件不存在则打开失败。:nocreate的意思是不建立新文件
+ios::noreplace      若文件不存在则建立新文件，若文件已经存在则操作失败。replace的意思是不更新原有文件
+ios::in | ios::out  以输入和输出的方式打开文件，文件可读可写
+*/
+
+
+//#include<iostream>
+//#include<string>
+//#include<fstream>//文件输入输出流
+//using namespace std;
+//void test1()//写数据
+//{
+//    ofstream ofs;
+//    ofs.open("test.txt", ios::out | ios::trunc);//设置路径和打开方式
+//    if (!ofs.is_open())//判断文件是否打开成功，返回bool值
+//    {
+//        cout << "文件打开失败" << endl;
+//        return;
+//    }
+//    ofs << "姓名:GG_Bond" << endl;
+//    ofs << "年龄:18" << endl;
+//    ofs << "性别:男" << endl;
+//    ofs.close();
+//}
+//void test2()
+//{
+//    ifstream ifs("test.txt", ios::in);
+//    if (!ifs.is_open())
+//    {
+//        cout << "文件打开失败" << endl;
+//        return;
+//    }
+//    //1.
+//    /*char buf[1024] = {0};
+//    while (ifs >> buf)//循环读取
+//    {
+//        cout << buf << endl;
+//    }*/
+//
+//    //2.
+//    /*char buf[1024] = { 0 };
+//    while (ifs.getline(buf,sizeof(buf)))
+//    {
+//        cout << buf << endl;
+//    }*/
+//
+//    //3.
+//    /*string buf;
+//    while (getline(ifs,buf))
+//    {
+//        cout << buf << endl;
+//    }*/
+//
+//    //4.(不推荐)
+//    /*char c;
+//    while ((c = ifs.get()) != EOF)
+//    {
+//        cout << c;
+//    }*/
+//    ifs.close();
+//}
+//int main()
+//{
+//    test2();
+//    return 0;
+//}
