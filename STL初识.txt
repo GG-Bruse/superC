@@ -1,0 +1,207 @@
+
+                                                             //STL
+/*
+STL(标准模板库)
+从广义上分为:容器(container)、算法(aigorithm)、迭代器(iterator)
+
+1.容器:
+根据数据在容器中的排列特性分为序列式容器和关联式容器:
+(1)序列式容器强调值得排序，序列式容器中得每个元素均有固定位置，除非用删除或插入的操作改变这个位置
+(2)关联式容器是非线性的树结构，更准确来说是二叉树结构。
+各元素之间没有严格物理上的顺序关系，也就是说元素在容器中并没有保存元素置入时的逻辑顺序。
+关联式容器特点:在值中选择一个值作为关键字key，这个关键字对值起索引的作用，方便查找。
+
+2.算法:
+算法分为:
+(1)质变算法:是指运算过程中会更改区间内的元素的内容，例如:拷贝、替换、删除等
+(2)非质变算法:是指运算过程中不会更改区间内的元素内容，例如查找、计数、遍历、寻极值等
+
+3.迭代器:
+迭代器的种类:
+输入迭代器               提供对数据的只读访问                  只读，支持++、==、!=
+
+输出迭代器               提供对数据的只写访问                  只写，支持++
+
+前向迭代器               提供读写操作，并且能向前推进迭代器    读写，支持++、==、!=
+
+双向迭代器               提供读写操作，并能向前和向后操作      读写，支持++、--
+
+随机访问迭代器           提供读写操作，并能以跳跃的方式访问    读写，支持++、--、[n]、
+                         容器的任意数据，是功能最强的迭代器    <、<=、>、>=
+*/
+
+
+
+/*
+STL提供了六大组件:
+容器、算法、迭代器、仿函数、适配器(配接器)、空间配置器
+(1)容器:
+各种数据结构，用来存放数据。从实现角度来看，STL容器是一种class templats(类模板)
+
+(2)算法:
+各种常用的算法。从实现角度来看，STL算法是一种function template(函数模板)
+
+(3)迭代器:
+扮演了容器与算法之间的胶合剂，共有五种类型。
+从实现角度来看，迭代器是一种将operator*,operator->,operator++,operator--等指针相关操作予以重载的class template。
+所有STL容器都附带自己专属的迭代器，只有容器的设计者才知道如何遍历自己的元素。原生指针也是一种迭代器。
+
+(4)仿函数:
+行为类似函数，可作为算法的某种策略。
+从实现角度来看，仿函数是一种重载了operator()的class或class template
+
+(5)适配器(配接器)
+一种用来修饰容器或仿函数或迭代器接口的东西
+
+(6)空间配置器:
+负责空间的配置与管理。从实现角度来看，配置器是一个实现了动态空间配置、空间管理、空间释放的class template
+
+STL六大组件的交互关系:
+容器通过空间配置器取得数据存储空间，算法通过迭代器存储容器中的内容，仿函数可以协助算法完成不同策略的变化，适配器可以修饰仿函数。
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            //初识
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>//标准算法头文件
+//using namespace std;
+//void myPrint(int val)
+//{
+//    cout << val << endl;
+//}
+//void test1()
+//{
+//    int arr[5] = { 1,2,3,4,5 };
+//    int* p = arr;//原生指针也是迭代器
+//    for (int i = 0; i < 5; i++)
+//    {
+//        cout << *(p++) << endl;
+//    }
+//}
+//void test2()
+//{
+//    vector<int>a;//创建一个vector容器，容器中存放的元素类型是int类型
+//    a.push_back(10);//插入元素
+//    a.push_back(20);
+//    a.push_back(30);
+//    vector<int>::iterator it = a.begin();//a.begin起始迭代器 指向容器中的第一个数据
+//    vector<int>::iterator itend = a.end();//a.end结束迭代器 指向容器的是容器中最后一个元素的下一个位置
+//    //第一种遍历
+//    /*while (it != itend)
+//    {
+//        cout << *it << endl;
+//        it++;
+//    }*/
+//    //第二种遍历
+//    /*for (; it != itend; it++)
+//    {
+//        cout << *it << endl;
+//    }*/
+//    //第三种遍历
+//    for_each(a.begin(), a.end(), myPrint);//提供回调函数
+//}
+//int main()
+//{
+//    //test1();
+//    test2();
+//    return 0;
+//}
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Person
+//{
+//public:
+//    Person(string name,int age)
+//    {
+//        this->m_name = name;
+//        this->m_age = age;
+//    }
+//    string m_name;
+//    int m_age;
+//};
+//int main()
+//{
+//    vector<Person> p;
+//    Person p1("Tom", 99);
+//    Person p2("Jerry", 1);
+//    Person p3("GG_Bond", 18);
+//    p.push_back(p1);
+//    p.push_back(p2);
+//    p.push_back(p3);
+//
+//    vector<Person*> a;
+//    a.push_back(&p1);
+//    a.push_back(&p2);
+//    a.push_back(&p3);
+//    //自定义类型
+//    for (vector<Person>::iterator it = p.begin(); it != p.end(); it++)
+//    {
+//        cout << (*it).m_name << endl;
+//        cout << it->m_age << endl;
+//    }
+//    //自定义类型指针
+//    for (vector<Person*>::iterator it = a.begin(); it != a.end(); it++)
+//    {
+//        cout << (**it).m_name << endl;
+//        cout << (*it)->m_age << endl;
+//    }
+//    return 0;
+//}
+
+
+
+//容器嵌套
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//void test()
+//{
+//    vector<vector<int>>v;
+//    vector<int>v1;
+//    vector<int>v2;
+//    vector<int>v3;
+//    //在小容器中放入数据
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v1.push_back(i + 1);
+//        v2.push_back(i + 10);
+//        v3.push_back(i + 100);
+//    }
+//    //将小容器放入大容器
+//    v.push_back(v1);
+//    v.push_back(v2);
+//    v.push_back(v3);
+//    //遍历大容器
+//    for (vector<vector<int>>::iterator it = v.begin(); it != v.end(); it++)
+//    {
+//        //大容器解引用为小容器
+//        for (vector<int>::iterator its = (*it).begin(); its != (*it).end(); its++)
+//        {
+//            cout << *its << " ";
+//        }
+//        cout << endl;
+//    }
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
