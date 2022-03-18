@@ -1,0 +1,440 @@
+
+                                                            //set、multiset容器
+
+//set容器
+/*
+set的所有元素会根据元素的键值自动排序(默认从小到大)。
+set的元素既是键值又是实值。set不允许两个元素有相同的键值。
+不可以通过迭代器修改set元素的值，set的iterator是一种const_iterator。
+*/
+
+//multiset容器
+/*
+multiset的用法与set基本一致，唯一差别在于multiset允许键值重复。
+*/
+
+
+
+
+
+//常用API
+
+//set构造函数
+/*
+set<T>st;//set默认构造函数
+multiset<T>mst;//multiset默认构造函数
+set(const set& st);//拷贝构造函数
+*/
+
+
+
+//set赋值操作
+/*
+set& operator=(const set& st);//重载等号运算符
+swap(st);//交换两个集合容器
+*/
+
+
+
+//set大小操作
+/*
+size();//返回容器中的元素个数
+empty();//判断容器是否为空
+*/
+
+
+
+//set插入和删除操作
+/*
+insert(elem);//在容器中插入元素elem
+clear();//清除容器中所有元素
+erase(pos);//删除pos迭代器所指的元素，返回下一个元素的迭代器
+erase(begin,end);//删除区间[begin,end)的所有元素，返回下一个元素的迭代器
+erase(elem);//删除容器中值为elem的元素
+*/
+
+
+
+//set查找操作
+/*
+find(key);//查找key是否存在。若存在，返回该键的元素的迭代器。若不存在，返回end();
+count(key);//查找key的元素个数
+lower_bound(keyelem);//返回第一个key>=keyelem元素的迭代器,若不存在，返回end();
+upper_bound(keyelem);//返回第一个key>keyelem元素的迭代器,若不存在，返回end();
+equal_range(keyelem);//返回容器中key与keyelem相等的上下限的两个迭代器(即返回lower_bound和upper_bound),若不存在，返回set.end();
+*/
+
+
+
+
+
+//案例1:
+//#include<iostream>
+//#include<set>
+//using namespace std;
+//void test1(set<int>& s)
+//{
+//    set<int>::iterator pos = s.find(30);
+//    if (pos != s.end())
+//    {
+//        cout << "找到了元素:" << *pos << endl;
+//    }
+//    else
+//    {
+//        cout << "未找到该元素" << endl;
+//    }
+//}
+//void test2(set<int>& s)
+//{
+//    //对于set而言，count的结果要么为0要么为1(不允许两个元素有相同的键值)
+//    cout << "key为40的个数为:" << s.count(40) << endl;
+//}
+//void test3(set<int>& s)
+//{
+//    set<int>::iterator it = s.lower_bound(30);
+//    if (it != s.end())
+//    {
+//        cout << *it << endl;//30(已经进行排序)
+//    }
+//
+//    set<int>::iterator its = s.upper_bound(30);
+//    if (its != s.end())
+//    {
+//        cout << *its << endl;//40
+//    }
+//
+//    pair<set<int>::iterator,set<int>::iterator>ret = s.equal_range(30);//返回对组
+//    if (ret.first != s.end())
+//    {
+//        cout << "lower_bound的值为:" << *ret.first << endl;
+//    }
+//    if (ret.second != s.end())
+//    {
+//        cout << "upper_bound的值为:" << *ret.second << endl;
+//    }
+//}
+//int main()
+//{
+//    set<int>s;
+//    s.insert(10);
+//    s.insert(40);
+//    s.insert(20);
+//    s.insert(50);
+//    s.insert(30);
+//    //test1(s);
+//    //test2(s);
+//    test3(s);
+//    return 0;
+//}
+
+
+
+
+
+//案例2:pair对组的创建
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//    //1.
+//    pair<string,int>p1("Tom", 18);
+//    cout << "姓名:" << p1.first << endl;
+//    cout << "年龄:" << p1.second << endl;
+//    //2.
+//    pair<string, int>p2 = make_pair("Jerry", 1);
+//    cout << "姓名:" << p2.first << endl;
+//    cout << "年龄:" << p2.second << endl;
+//    return 0;
+//}
+
+
+
+
+
+//案例3:set排序从大到小
+//#include<iostream>
+//#include<set>
+//using namespace std;
+//class mycompareint//仿函数
+//{
+//public:
+//    bool operator()(int a,int b)const//const一定要加
+//    {
+//        return a > b;
+//    }
+//};
+//void test()
+//{
+//    set<int, mycompareint>s;
+//    s.insert(10);
+//    s.insert(50);
+//    s.insert(30);
+//    s.insert(40);
+//    s.insert(20);
+//    for (set<int, mycompareint>::iterator it = s.begin(); it != s.end(); it++)
+//    {
+//        cout << *it << " ";
+//    }
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+
+
+//案例4:对于自定义数据类型
+//#include<iostream>
+//#include<set>
+//#include<string>
+//using namespace std;
+//class Person
+//{
+//public:
+//    Person(string name,int age)
+//    {
+//        this->m_name = name;
+//        this->m_age = age;
+//    }
+//    string m_name;
+//    int m_age;
+//};
+//class mycompareperson
+//{
+//public:
+//    bool operator()(const Person& p1, const Person& p2)const
+//    {
+//        //按照年龄从小到大
+//        return p1.m_age < p2.m_age;
+//    }
+//};
+//int main()
+//{
+//    set<Person,mycompareperson>s;
+//    Person p1("aaa", 1);
+//    Person p2("bbb", 2);
+//    Person p3("ccc", 3);
+//    Person p4("ddd", 4);
+//    Person p5("eee", 5);
+//    s.insert(p1);
+//    s.insert(p2);
+//    s.insert(p3);
+//    s.insert(p4);
+//    s.insert(p5);
+//    for (set<Person, mycompareperson>::iterator it = s.begin(); it != s.end(); it++)
+//    {
+//        cout << "姓名:" << (*it).m_name << endl;
+//        cout << "年龄:" << it->m_age << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                   //map、multimap容器(底层红黑树)
+/*
+map的所有元素根据元素的键值自动排序。
+map的所有元素都是pair,同时拥有键值和实值。其pair的第一元素被视为键值。第二元素被视为实值。map不允许两个元素有相同的键值。
+不可通过迭代器修改map的键值，但可以修改实值。
+multimap和map的操作类似，但multimap键值可以重复。
+*/
+
+
+
+
+
+//常用API
+
+//map构造函数
+/*
+map<T,T>m;//map默认构造函数
+map(const map& m);//拷贝构造函数
+*/
+
+
+
+//map赋值操作
+/*
+msp& operator=(const map& m);//重载等号运算符
+swap(m);//交换两个集合容器
+*/
+
+
+
+//map大小操作
+/*
+size();//返回容器中元素的个数
+empty();//判断容器是否为空
+*/
+
+
+
+//map插入操作
+/*
+1.
+map.insert(……)；//往容器中插入元素。返回pair<iterator,bool>
+
+2.m.insert(pair<string,int>("Tom",18));//通过pair的方式插入
+
+3.m.insert(make_pair("Jerry",1));通过pair的方式插入
+
+4.m.insert(map<string,int>::value_type(GG_Bond",18));//通过value_type的方式插入
+
+5.m[1]="haha";//通过数组的方式插入
+*/
+
+
+
+//map删除操作
+/*
+clear();//删除所有元素
+erase(pos);//删除pos迭代器所指的元素，返回下一个元素的迭代器
+erase(begin,end);//删除[begin,end)区间的所有元素，返回下一个元素的迭代器
+erase(keyelem);//删除容器中key为keyelem的对组
+*/
+
+
+
+//map查找操作
+/*
+find(key);//查找key是否存在，若存在，返回该键的元素的迭代器。若不存在，返回end();
+count();//返回容器中key为keyelem的对组的个数。对于map来说，要么为0，要么为1
+lower_bound(keyelem);//返回第一个key>=keyelem元素的迭代器,若不存在，返回end();
+upper_bound(keyelem);//返回第一个key>keyelem元素的迭代器,若不存在，返回end();
+equal_range(keyelem);//返回key与keyelem相等的上下限的两个迭代器,若不存在，返回end();
+*/
+
+
+
+
+
+//案例1:从大到小排序
+//#include<iostream>
+//#include<map>
+//using namespace std;
+//class mycompare
+//{
+//public:
+//    bool operator()(int a, int b)const
+//    {
+//        return a > b;
+//    }
+//};
+//void test()
+//{
+//    map<int, int, mycompare>m;
+//    m.insert(pair<int, int>(1, 10));
+//    m.insert(make_pair(2, 20));
+//    m.insert(map<int, int>::value_type(3, 30));
+//    m[4] = 40;
+//    for (map<int, int, mycompare>::iterator it = m.begin(); it != m.end(); it++)
+//    {
+//        cout << it->first << endl;
+//        cout << it->second << endl;
+//    }
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+
+
+//案例2:员工分组
+//#include<iostream>
+//#include<vector>
+//#include<string>
+//#include<map>
+//#include<ctime>
+//enum
+//{
+//    CAIWU,
+//    RENSHI,
+//    YANFA
+//};
+//using namespace std;
+//class Worker
+//{
+//public:
+//    string m_name;
+//    int m_money = 0;
+//};
+//void createworker(vector<Worker>& v)
+//{
+//    string nameseed = "ABCDE";
+//    for (int i = 0; i < 5; i++)
+//    {
+//        Worker w;
+//        w.m_name = "员工";
+//        w.m_name += nameseed[i];
+//        w.m_money = rand() % 10000 + 10000;
+//        v.push_back(w);
+//    }
+//
+//}
+//void setgroup(vector<Worker>& v,multimap<int ,Worker>& m)
+//{
+//    for (vector<Worker>::iterator it = v.begin(); it != v.end(); it++)
+//    {
+//        //随机产生部门编号
+//        int ID = rand() % 3;
+//        m.insert(make_pair(ID, *it));
+//    }
+//}
+//void Print(multimap<int, Worker>& m, int bumen)
+//{
+//    multimap<int, Worker>::iterator pos = m.find(bumen);//找到该部门第一个元素的迭代器
+//    int num = m.count(bumen);//部门人数
+//    for (int i = 0; pos != m.end() && i < num; pos++, i++)
+//    {
+//        cout << "姓名为:" << pos->second.m_name << endl;
+//        cout << "薪资为:" << pos->second.m_money << endl;
+//    }
+//}
+//void showworker(multimap<int, Worker>& m)
+//{
+//    cout << "财务部门员工信息如下:" << endl;
+//    Print(m, CAIWU);
+//    cout << "人事部门员工信息如下:" << endl;
+//    Print(m, RENSHI);
+//    cout << "研发部门员工信息如下:" << endl;
+//    Print(m, YANFA);
+//}
+//int main()
+//{
+//    //随机数种子
+//    srand((unsigned int)time(NULL));
+//    vector<Worker>v;
+//    //创建五名员工
+//    createworker(v);
+//    //员工分组
+//    multimap<int, Worker>m;
+//    setgroup(v, m);
+//    //分部门显示员工
+//    showworker(m);
+//    return 0;
+//}
