@@ -1,0 +1,429 @@
+
+                                                          //函数对象
+/*
+重载函数调用操作符的类，其对象常被称为函数对象，即他们是行为类似函数的对象，也被称为仿函数。
+其实就是重载()操作符，使得类对象可以像函数一样调用。
+*/
+
+/*
+函数对象优点:
+1.函数对象通常不定义构造函数和析构函数，所以在构造和析构时不会发生任何问题。
+2.函数对象超出普通函数的概念，函数对象可以有自己的状态。
+3.函数对象可以进行内联编译，性能好，用函数指针几乎不可能实现。
+4.模板函数对象使得函数对象具有通用性。
+*/
+
+//案例1
+//#include<iostream>
+//using namespace std;
+//class MyPrint
+//{
+//public:
+//    void operator()(int num)
+//    {
+//        cout << num << endl;
+//        m_count++;
+//    }
+//    int m_count = 0;
+//};
+//int main()
+//{
+//    MyPrint print;
+//    print(100);
+//    print(100);
+//    print(100);
+//    print(100);
+//    //函数对象可以拥有自己的状态，因为其本质为一个类对象
+//    cout << "调用次数为:" << print.m_count << endl;
+//    return 0;
+//}
+
+
+
+
+//案例2:函数对象作为函数参数
+//#include<iostream>
+//using namespace std;
+//class MyPrint
+//{
+//public:
+//    void operator()(int num)
+//    {
+//        cout << num << endl;
+//    }
+//};
+//void doprint(MyPrint print,int num)
+//{
+//    print(num);
+//}
+//void test()
+//{
+//    doprint(MyPrint(), 1000);
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                //谓词
+/*
+谓词是指普通函数或者返回值是bool类型的函数对象(仿函数)。
+若operator()接收一个参数被称作一元谓词，两个参数则为二元谓词。谓词可作为判断式。
+*/
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+////一元谓词
+//class upperthan20
+//{
+//public:
+//    bool operator()(int a)
+//    {
+//        return a>20;
+//    }
+//};
+//void test1()
+//{
+//    vector<int>v;
+//    v.push_back(10);
+//    v.push_back(20);
+//    v.push_back(30);
+//    v.push_back(40);
+//    v.push_back(50);
+//    vector<int>::iterator it = find_if(v.begin(), v.end(), upperthan20());//通过算法方式按照条件查找
+//    cout << *it << endl;
+//}
+////二元谓词
+//class mycompare
+//{
+//public:
+//    bool operator()(int v1,int v2)
+//    {
+//        return v1 > v2;
+//    }
+//};
+//void myprintint(int val)
+//{
+//    cout << val << " ";
+//}
+//void test2()
+//{
+//    vector<int>v;
+//    v.push_back(10);
+//    v.push_back(50);
+//    v.push_back(20);
+//    v.push_back(40);
+//    v.push_back(30);
+//    sort(v.begin(), v.end(), mycompare());//提供仿函数，实现从大到小的排序
+//    for_each(v.begin(), v.end(), myprintint);//遍历，提供回调函数
+//    cout << endl;
+//    //lambda表达式(匿名对象)  []代表lambda表达式标志
+//    for_each(v.begin(), v.end(), [](int val) {cout << val << " "; });
+//}
+//int main()
+//{
+//    //test1();
+//    test2();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                           //内建函数对象
+/*
+使用内建函数对象所需的头文件#include<functional>
+STL内建了一些函数对象
+分为:算术类函数对象、关系运算类函数对象、逻辑运算类函数对象
+*/
+
+
+
+//算数类函数对象
+//除了negate其他都为二元运算
+/*
+tempslate<class T>plus<T>//加法仿函数
+template<class T>minus<T>//减法仿函数
+template<class T>multiplies<T>//乘法仿函数
+template<class T>divdies<T>//除法仿函数
+template<class T>modulus<T>//联模仿函数
+template<class T>negate<T>//取反仿函数
+*/
+
+
+
+//关系运算类函数对象:都为二元运算
+/*
+tempslate<class T>bool equal_to<T>//等于
+template<class T>bool not_equal_to<T>//不等于
+template<class T>bool greater<T>//大于
+template<class T>bool greater_equal<T>//大于等于
+template<class T>bool less<T>//小于
+template<class T>bool less_equal<T>//小于等于
+*/
+
+
+
+//逻辑运算类函数对象:not为一元运算,其他为二元运算
+/*
+template<class T>bool logical_or<T>//逻辑或
+template<class T>bool logical_and<T>//逻辑与
+template<class T>bool logical_not<T>//逻辑非
+*/
+
+
+
+
+
+//案例
+//#include<iostream>
+//#include<functional>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//void test1()
+//{
+//    negate<int>n;
+//    cout << n(10) << endl;
+//}
+//void test2()
+//{
+//    vector<int>v;
+//    v.push_back(40);
+//    v.push_back(20);
+//    v.push_back(50);
+//    v.push_back(10);
+//    v.push_back(30);
+//    sort(v.begin(), v.end(), greater<int>());
+//    for_each(v.begin(), v.end(), [](int val) {cout << val << " "; });
+//}
+//int main()
+//{
+//    //test1();
+//    test2();
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                             //适配器
+
+//函数对象适配器
+/*
+1.利用bind2nd绑定
+2.继承public binary_function<数据类型,数据类型,仿函数返回值>
+3.加const
+*/
+
+//#include<algorithm>
+//#include<iostream>
+//#include<vector>
+//#include<functional>
+//using namespace std;
+//class Myprint:public binary_function<int,int,void>
+//{
+//public:
+//    void operator()(int val,int start)const
+//    {
+//        cout << val+start << " ";
+//    }
+//};
+//void test()
+//{
+//    int num;
+//    cout << "请输入起始值:";
+//    cin >> num;
+//    vector<int>v;
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v.push_back(i);
+//    }
+//    for_each(v.begin(), v.end(), bind2nd(Myprint(),num));//bind2nd绑定,内建函数对象
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+
+
+//取反适配器
+/*
+1.利用not1/not 2进行取反
+2.继承public unary_function<数据类型,仿函数返回值>
+3.加const
+*/
+//#include<algorithm>
+//#include<iostream>
+//#include<vector>
+//#include<functional>
+//using namespace std;
+//class greaterthanfive: public unary_function<int,bool>
+//{
+//public:
+//    bool operator()(int val)const
+//    {
+//        return val > 5;
+//    }
+//};
+//void test()
+//{
+//    vector<int>v;
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v.push_back(i);
+//    }
+//    vector<int>::iterator it = find_if(v.begin(), v.end(), not1(greaterthanfive()));//一元取反
+//    if (it != v.end())
+//    {
+//        cout << *it << endl;
+//    }
+//
+//    sort(v.begin(), v.end(), not2(less<int>()));//二元取反
+//    for_each(v.begin(), v.end(), [](int val) {cout << val << " "; });
+//
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+
+
+//函数适配器
+//#include<algorithm>
+//#include<iostream>
+//#include<vector>
+//#include<functional>
+//using namespace std;
+//void myprint(int val ,int start)
+//{
+//    cout << val+start << " ";
+//}
+//void test()
+//{
+//    vector<int>v;
+//    for (int i = 0; i < 10; i++)
+//    {
+//         v.push_back(i);
+//    }
+//    //利用ptr_fun将函数指针适配成函数对象
+//    for_each(v.begin(), v.end(), bind2nd(ptr_fun(myprint),1000));
+//}
+//int main()
+//{
+//    test();
+//    return 0;
+//}
+
+
+
+
+
+//成员函数适配器
+/*
+如果容器存放的是对象指针，使用mem_fun
+若容器存放的是对象实体，使用mem_fun_ref
+*/
+//#include<algorithm>
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<functional>
+//using namespace std;
+//class Person
+//{
+//public:
+//    Person(string name, int age)
+//    {
+//        this->m_name = name;
+//        this->m_age = age;
+//    }
+//    void showPerson()
+//    {
+//        cout << "姓名为:" << this->m_name << endl;
+//        cout << "年龄为:" << this->m_age << endl;
+//    }
+//    void addage()
+//    {
+//        this->m_age += 100;
+//    }
+//    string m_name;
+//    int m_age;
+//};
+//int main()
+//{
+//    vector<Person>v;
+//    Person p1("Tom", 18);
+//    Person p2("Jerry", 1);
+//    Person p3("aaa", 3);
+//    Person p4("GG_Bond", 18);
+//    v.push_back(p1);
+//    v.push_back(p2);
+//    v.push_back(p3);
+//    v.push_back(p4);
+//    //利用mem_fun_ref进行适配
+//    for_each(v.begin(), v.end(), mem_fun_ref(&Person::showPerson));
+//    for_each(v.begin(), v.end(), mem_fun_ref(&Person::addage));
+//    cout << endl;
+//    for_each(v.begin(), v.end(), mem_fun_ref(&Person::showPerson));
+//    return 0;
+//}
