@@ -1,0 +1,266 @@
+                     //常用拷贝和替换算法
+
+//copy将容器内指定范围的元素拷贝到另一容器中
+/*
+copy(iterator begin,iterator end,iterator dest);
+dest目标容器起始迭代器
+*/
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//#include<iterator>
+//using namespace std;
+//int main()
+//{
+//    vector<int>v;
+//    vector<int>dest;
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v.push_back(i + 1);
+//    }
+//    dest.resize(v.size());
+//    copy(v.begin(), v.end(), dest.begin());
+//    copy(dest.begin(), dest.end(), ostream_iterator<int>(cout, " "));//copy进行打印操作
+//    return 0;
+//}
+
+
+
+
+
+//replace将容器指定范围内的旧元素修改为新元素
+/*
+replace(iterator begin, iterator end, oldvalue, newvalue)
+*/
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//    vector<int>v;
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v.push_back(i + 1);
+//    }
+//    replace(v.begin(), v.end(), 3, 3000);
+//    copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
+//    return 0;
+//}
+
+
+
+
+
+
+//replace_if将容器指定范围内满足条件的元素替换为新元素
+/*
+replace_if(iterator begin,iterator end,_callback,newvalue);
+_callback回调函数或谓词(返回bool类型的函数对象)
+*/
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Myreplace
+//{
+//public:
+//    bool operator()(int val)
+//    {
+//        return val > 3;//大于3的数都进行替换
+//    }
+//};
+//int main()
+//{
+//    vector<int>v;
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v.push_back(i + 1);
+//    }
+//    replace_if(v.begin(), v.end(), Myreplace(), 3000);
+//    copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
+//    return 0;
+//}
+
+
+
+
+
+//swap互换两个容器的元素
+/*
+swap(container c1,container c2);
+*/
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//    vector<int>v1;
+//    vector<int>v2(10, 100);//10个100
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v1.push_back(i + 1);
+//    }
+//    swap(v1, v2);
+//    copy(v1.begin(), v1.end(), ostream_iterator<int>(cout, " "));
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                      //常用的算数生成算法
+
+//accumulate计算容器元素累计总和
+/*
+accumulate(iterator begin.iterator end,value);
+value累加初始值
+return 累加完成后的值
+*/
+//#include<iostream>
+//#include<vector>
+//#include<numeric>
+//using namespace std;
+//int main()
+//{
+//    vector<int>v;
+//    for (int i = 0; i <= 100; i++)
+//    {
+//        v.push_back(i);
+//    }
+//    cout << accumulate(v.begin(), v.end(), 0) << endl;
+//    return 0;
+//}
+
+
+
+
+
+//fill向容器中添加元素
+/*
+fill(iterator begin,iterator end,elem);
+elem添加的元素
+*/
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//#include<numeric>
+//using namespace std;
+//int main()
+//{
+//    vector<int>v;
+//    v.resize(10);
+//    fill(v.begin(), v.end(), 100);
+//    for_each(v.begin(), v.end(), [](int val) {cout << val << " "; });
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                         //常用的集合算法
+
+//set_intersection 求两个set集合的交集(两个集合必须为有序序列)
+/*
+set_intersection(iterator beg1,iterator end1,iterator beg2,iterator end2,iterator dest);
+dest目标容器开始迭代器
+return 目标容器的最后一个元素的迭代器地址
+*/
+
+
+
+
+
+//set_union 求两个set集合的并集(两个集合必须为有序序列)
+/*
+set_union(iterator beg1,iterator end1,iterator beg2,iterator end2,iterator dest);
+dest目标容器开始迭代器
+return 目标容器的最后一个元素的迭代器地址
+*/
+
+
+
+
+
+//set_difference 求两个set集合的差集(两个集合必须为有序序列)
+/*
+set_difference(iterator beg1,iterator end1,iterator beg2,iterator end2,iterator dest);
+dest目标容器开始迭代器
+return 目标容器的最后一个元素的迭代器地址
+*/
+
+
+
+
+
+//案例
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//    vector<int>v1;
+//    vector<int>v2;
+//    vector<int>v3;
+//    for (int i = 0; i < 10; i++)
+//    {
+//        v1.push_back(i);
+//        v2.push_back(i + 5);
+//    }
+//
+//    //交集
+//    v3.resize(min(v1.size(), v2.size()));
+//    vector<int>::iterator itend = set_intersection(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin());
+//    for_each(v3.begin(), itend, [](int val) {cout << val << " "; });//v3扩容内存时可能过大，遍历时使用itend,避免超出交集元素范围
+//    cout << endl;
+//
+//    //并集
+//    v3.resize(v1.size() + v2.size());
+//    itend = set_union(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin());
+//    for_each(v3.begin(), itend, [](int val) {cout << val << " "; });
+//    cout << endl;
+//
+//    //差集
+//    //1.v1与v2的差集
+//    v3.resize(max(v1.size(), v2.size()));
+//    itend = set_difference(v1.begin(), v1.end(), v2.begin(), v2.end(), v3.begin());
+//    for_each(v3.begin(), itend, [](int val) {cout << val << " "; });
+//    cout << endl;
+//    //2.v2与v1的差集
+//    v3.resize(max(v1.size(), v2.size()));
+//    itend = set_difference(v2.begin(), v2.end(), v1.begin(), v1.end(), v3.begin());
+//    for_each(v3.begin(), itend, [](int val) {cout << val << " "; });
+//    cout << endl;
+//
+//    return 0;
+//}
