@@ -1,0 +1,81 @@
+
+/*
+给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。
+
+回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+
+例如，121 是回文，而 123 不是。
+*/
+
+//初始版本
+//#include<iostream>
+//#include<string>
+//#include<math.h>
+//using namespace std;
+//class Solution {
+//public:
+//    bool isPalindrome(int x) {
+//        int i = 0;
+//        long temp = x;
+//        int num = 0;
+//        for (; temp > 0; i++)
+//        {
+//            temp /= 10;
+//        }
+//        temp = x;
+//        if (temp >= 0)
+//        {
+//            while (temp > 0)
+//            {
+//                long n = temp % 10;
+//                temp /= 10;
+//                num += n * (long)pow(10, i-1);
+//                i--;
+//            }
+//            if (num == x)
+//            {
+//                return true;
+//            }
+//            else
+//            {
+//                return false;
+//            }
+//        }
+//        else
+//        {
+//            return false;
+//        }
+//    }
+//};
+//int main()
+//{
+//    int x = 9;
+//    Solution s;
+//    bool ret = s.isPalindrome(x);
+//    if (ret)
+//    {
+//        cout << "是" << endl;
+//    }
+//    else
+//    {
+//        cout << "不是" << endl;
+//    }
+//    return 0;
+//}
+
+
+//优化版本
+//class Solution {
+//public:
+//    bool isPalindrome(int x) {
+//        if (x < 0)
+//            return false;
+//        long cur = 0;
+//        long num = x;
+//        while (num != 0) {
+//            cur = cur * 10 + num % 10;
+//            num /= 10;
+//        }
+//        return cur == x;
+//    }
+//};
