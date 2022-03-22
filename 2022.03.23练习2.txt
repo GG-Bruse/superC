@@ -1,0 +1,130 @@
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int a, b, d;
+//	cout << "Enter two numbers:";
+//	cin >> a >> b;
+//	int min = a < b ? a : b;
+//	for (d = 2; d < min; ++d)
+//	{
+//		if (((a % d) == 0) && ((b % d) == 0))
+//		{
+//			break;
+//		}
+//	}
+//	if (d == min)
+//	{
+//		cout << "No common denominator";
+//		return 0;
+//	}
+//	cout << "The lowest common denominator is " << d << endl;
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int sum(int, int);
+//int main()
+//{
+//	int a, b;
+//	cout << "Enter two numbers:";
+//	cin >> a >> b;
+//	cout<<sum(a, b)<<endl;
+//	return 0;
+//}
+//int sum (int a, int b)
+//{
+//	return a + b;
+//}
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int* p = new int[20];
+//	p[0] = p[1] = 1;
+//	for (int i = 2; i < 20; ++i)
+//	{
+//		p[i] = p[i - 1] + p[i - 2];
+//	}
+//	for (int i = 0; i < 20; ++i)
+//	{
+//		cout << *(p + i) << endl;
+//	}
+//	delete[] p;
+//	p = nullptr;
+//	return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<cmath>
+//using namespace std;
+//double sroot(double db)
+//{
+//	return sqrt(db);
+//}
+//int sroot(int a)
+//{
+//	return sqrt(a);
+//}
+//long sroot(long a)
+//{
+//	return sqrt(a);
+//}
+//int main()
+//{
+//	auto ret1 = sroot(3.14);
+//	cout << ret1 << endl;
+//	auto ret2 = sroot(2);
+//	cout << ret2 << endl;
+//	auto ret3 = sroot((long)10);
+//	cout << ret3 << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//#include<cmath>
+//using namespace std;
+//template <class T> struct Checker;
+////限制只能使用int,long,double类型
+//template <> struct Checker<int> { typedef int Type; };
+//template <> struct Checker<long> { typedef long Type; };
+//template <> struct Checker<double> { typedef double Type; };
+//
+//template <class T>
+//typename Checker<T>::Type sroot(T t)
+//{
+//    return sqrt(t);
+//}
+//int main()
+//{
+//	auto ret1 = sroot(3.14);
+//	cout << ret1 << endl;
+//	auto ret2 = sroot(2);
+//	cout << ret2 << endl;
+//	auto ret3 = sroot((long)10);
+//	cout << ret3 << endl;
+//	return 0;
+//}
