@@ -1,0 +1,92 @@
+/*
+给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+
+不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+
+元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+返回的nums新的长度
+*/
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int removeElement(vector<int>& nums, int val)
+//    {
+//        int size = nums.size();
+//        for (int i = 0; i < size; ++i)
+//        {
+//            if (nums[i] == val)
+//            {
+//                for (int j = i; j < size - 1; ++j)
+//                {
+//                    nums[j] = nums[j + 1];
+//                }
+//                --size;
+//                --i;
+//            }
+//        }
+//        return size;
+//    }
+//};
+//int main()
+//{
+//    vector<int>nums;
+//    nums.push_back(0);
+//    nums.push_back(1);
+//    nums.push_back(2);
+//    nums.push_back(2);
+//    nums.push_back(3);
+//    nums.push_back(0);
+//    nums.push_back(4);
+//    nums.push_back(2);
+//    int val = 2;
+//    Solution s;
+//    int len = s.removeElement(nums, val);
+//    for (int i = 0; i < len; i++) {
+//        cout << nums[i];
+//    }
+//    return 0;
+//}
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int removeElement(vector<int>& nums, int val)
+//    {
+//        int size = nums.size();
+//        int left = 0;
+//        for (int right = 0; right < size; right++)
+//        {
+//            if (nums[right] != val)
+//            {
+//                nums[left] = nums[right];
+//                left++;
+//            }
+//        }
+//        return left;
+//    }
+//};
+//int main()
+//{
+//    vector<int>nums;
+//    nums.push_back(3);
+//    nums.push_back(2);
+//    nums.push_back(2);
+//    nums.push_back(3);
+//    int val = 3;
+//    Solution s;
+//    int len = s.removeElement(nums, val);
+//    for (int i = 0; i < len; i++) {
+//        cout << nums[i];
+//    }
+//    return 0;
+//}
