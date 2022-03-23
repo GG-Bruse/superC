@@ -1,0 +1,128 @@
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int* p = new int[20];
+//	if (p == NULL)
+//	{
+//		return 0;
+//	}
+//	p[0] = p[1] = 1;
+//	for (int i = 2; i < 20; ++i)
+//	{
+//		p[i] = p[i - 1] + p[i - 2];
+//	}
+//	for (int i = 0; i < 20; ++i)
+//	{
+//		cout << p[i] << endl;
+//	}
+//	delete[] p;
+//	p = nullptr;
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<memory>
+//using namespace std;
+//int main()
+//{
+//	unique_ptr<int[]>p(new int[20]);
+//	if (p == NULL)
+//	{
+//		return 0;
+//	}
+//	p[0] = p[1] = 1;
+//	for (int i = 2; i < 20; ++i)
+//	{
+//		p[i] = p[i - 1] + p[i - 2];
+//	}
+//	for (int i = 0; i < 20; ++i)
+//	{
+//		cout << p[i] << endl;
+//	}
+//	p = nullptr;
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//#include<cmath>
+//using namespace std;
+//auto sroot(int val)->decltype(sqrt(val))
+//{
+//	return sqrt(val);
+//}
+//auto sroot(long val)->decltype(sqrt(val))
+//{
+//	return sqrt(val);
+//}
+//auto sroot(double val)->decltype(sqrt(val))
+//{
+//	return sqrt(val);
+//}
+//int main()
+//{
+//	double db = 3.14;
+//	long l = 100000000;
+//	int i = 4;
+//	cout << sroot(db) << endl;
+//	cout << sroot(l) << endl;
+//	cout << sroot(i) << endl;
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int x, y;
+//	cin >> x >> y;
+//	int& max = x > y ? x : y;
+//	int& min = x < y ? x : y;
+//	cout << min << " " << max << endl;
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//class B
+//{
+//public:
+//	B() = default;
+//	B(int i, int j)
+//	{
+//		this->x = i;
+//		this->y = j;
+//	}
+//	void printb()
+//	{
+//		cout << x << " " << endl;
+//	}
+//private:
+//	int x, y;
+//};
+//class A
+//{
+//public:
+//	A() = default;
+//	A(int,int);
+//	void printa()
+//	{
+//		b.printb();
+//	}
+//private:
+//	B b;
+//};
+//A::A(int i, int j):b(i,j)
+//{}
