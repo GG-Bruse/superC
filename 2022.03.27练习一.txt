@@ -1,0 +1,84 @@
+/*
+给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+说明：
+你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
+*/
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int singleNumber(vector<int>& nums)
+//    {
+//        sort(nums.begin(), nums.end());
+//        int size = nums.size();
+//        for (int i = 0; i < size-1; ++i)
+//        {
+//            if (nums[i] != nums[i + 1])
+//            {
+//                return nums[i];
+//            }
+//            ++i;
+//        }
+//        return nums[size-1];
+//    }
+//};
+//int main()
+//{
+//    vector<int>v;
+//    v.push_back(4);
+//    v.push_back(1);
+//    v.push_back(2);
+//    v.push_back(1);
+//    v.push_back(2);
+//    Solution s;
+//    cout<<s.singleNumber(v);
+//	return 0;
+//}
+
+
+/*
+异或运算有以下三个性质。
+
+任何数和0做异或运算，结果仍然是原来的数，即 a⊕0=a。
+任何数和其自身做异或运算，结果是 0，即 a⊕a=0。
+异或运算满足交换律和结合律，即 a⊕b⊕a=b⊕a⊕a=b⊕(a⊕a)=b⊕0=b。
+
+假设数组中有 2m+12m+1 个数，其中有 mm 个数各出现两次，一个数出现一次。令 a1、a2 … am为出现两次的m个数，a m+1为出现一次的数。
+
+(a1^a1)^(a2^a2)^……^(am^am)^am+1
+即0^0^……^0^am+1 = am+1
+
+因此，数组中的全部元素的异或运算结果即为数组中只出现一次的数字。
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int singleNumber(vector<int>& nums)
+//    {
+//        int ret = 0;
+//        for (int i = 0;i<nums.size();++i) 
+//        {
+//            int temp = nums[i];
+//            ret ^= temp;
+//        }
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v;
+//    v.push_back(4);
+//    v.push_back(1);
+//    v.push_back(2);
+//    v.push_back(1);
+//    v.push_back(2);
+//    Solution s;
+//    cout<<s.singleNumber(v);
+//	return 0;
+//}
