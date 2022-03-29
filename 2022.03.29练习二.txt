@@ -1,0 +1,90 @@
+/*
+给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
+*/
+
+
+//循环遍历
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int missingNumber(vector<int>& nums)
+//    {
+//        sort(nums.begin(), nums.end());
+//        int count = 0;
+//        for (vector<int>::iterator it = nums.begin(); it != nums.end(); ++it,++count)
+//        {
+//            if (*it != count)
+//            {
+//                return count;
+//            }
+//        }
+//        return count;
+//    }
+//};
+//int main()
+//{
+//    vector<int>nums;
+//    nums.push_back(3);
+//    nums.push_back(0);
+//    nums.push_back(1);
+//    Solution s;
+//    cout<<s.missingNumber(nums);
+//    return 0;
+//}
+
+//稍优化版
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int missingNumber(vector<int>& nums)
+//    {
+//        sort(nums.begin(), nums.end());
+//        int n = nums.size();
+//        for (int i = 0; i < n; i++)
+//        {
+//            if (nums[i] != i)
+//            {
+//                return i;
+//            }
+//        }
+//        return n;
+//    }
+//};
+
+
+
+
+//位运算
+/*
+按位异或运算⊕满足交换律和结合律,且对任意整数x都满足x⊕x=0和x⊕0=x。
+由于上述2n+1个整数中,丢失的数字出现了一次,其余的数字都出现了两次,因此对上述2n+1个整数进行按位异或运算,结果即为丢失的数字。
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int missingNumber(vector<int>& nums)
+//    {
+//        int res = 0;
+//        int n = nums.size();
+//        for (int i = 0; i < n; i++)
+//        {
+//            res ^= nums[i];
+//        }
+//        for (int i = 0; i <= n; i++)
+//        {
+//            res ^= i;
+//        }
+//        return res;
+//    }
+//};
