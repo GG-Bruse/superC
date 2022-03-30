@@ -1,0 +1,120 @@
+/*
+给定两个字符串s和t,它们只包含小写字母。
+字符串t由字符串s随机重排,然后在随机位置添加一个字母。
+请找出在t中被添加的字母。
+*/
+
+
+
+/*
+求和:
+将字符串s中每个字符的 ASCII 码的值求和，得到 A_s
+对字符串t同样的方法得到 A_t
+两者的差值 A_t - A_s即代表了被添加的字符。
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    char findTheDifference(string s, string t)
+//    {
+//        int ret = 0;
+//        for (string::iterator it = t.begin(); it != t.end(); ++it)
+//        {
+//            ret += *it;
+//        }
+//        for (string::iterator it = s.begin(); it != s.end(); ++it)
+//        {
+//            ret -= *it;
+//        }
+//        return (char)ret;
+//    }
+//};
+//int main()
+//{
+//    string s = "abcd";
+//    string t = "abcde";
+//    Solution a;
+//    cout<<a.findTheDifference(s, t);
+//	return 0;
+//}
+
+
+
+/*
+位运算:
+按位异或运算⊕满足交换律和结合律
+*/
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    char findTheDifference(string s, string t)
+//    {
+//        int ret = 0;
+//        for (string::iterator it = s.begin(); it != s.end(); ++it)
+//        {
+//            ret ^= *it;
+//        }
+//        for (string::iterator it = t.begin(); it != t.end(); ++it)
+//        {
+//            ret ^= *it;
+//        }
+//        return (char)ret;
+//    }
+//};
+//int main()
+//{
+//    string s = "abcd";
+//    string t = "abcde";
+//    Solution a;
+//    cout<<a.findTheDifference(s, t);
+//	return 0;
+//}
+
+
+
+
+
+/*
+计数法:
+使用额外空间，遍历字符串s，所遇元素加1。遍历字符串t，所遇元素减1.
+若为负数，则该字符为添加的字符
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    char findTheDifference(string s, string t)
+//    {
+//        vector<int>v(26,0);//26个字母
+//        for (string::iterator it = s.begin(); it != s.end(); ++it)
+//        {
+//            ++v[*it - 'a'];
+//        }
+//        for (string::iterator it = t.begin(); it != t.end(); ++it)
+//        {
+//            --v[*it - 'a'];
+//            if (v[*it - 'a'] < 0)
+//            {
+//                return *it;
+//            }
+//        }
+//        return  ' ';
+//    }
+//};
+//int main()
+//{
+//    string s = "abcd";
+//    string t = "abcde";
+//    Solution a;
+//    cout << a.findTheDifference(s, t);
+//    return 0;
+//}
