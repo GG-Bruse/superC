@@ -1,0 +1,134 @@
+/*
+给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 。
+*/
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<int> intersection(vector<int>& nums1, vector<int>& nums2)
+//    {
+//        vector<int>v;
+//        /*sort(nums1.begin(), nums1.end());
+//        sort(nums2.begin(), nums2.end());*/
+//        for (vector<int>::iterator it = nums1.begin(); it != nums1.end(); ++it)
+//        {
+//            for (vector<int>::iterator its = nums2.begin(); its != nums2.end(); ++its)
+//            {
+//                if (*it == *its)
+//                {
+//                    if (!v.size() || *it != v.back())//防止加入重复元素
+//                    {
+//                        v.push_back(*it);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        //删除重复元素
+//        /*sort(v.begin(), v.end());
+//        for (int i = 1; i < v.size(); ++i)
+//        {
+//            if (v[i] == v[i - 1])
+//            {
+//                vector<int>::iterator it = v.begin() + i - 1;
+//                v.erase(it);
+//                --i;
+//            }
+//        }*/
+//        return v;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v1, v2;
+//    v1.push_back(4);
+//    v1.push_back(9);
+//    v1.push_back(5);
+//
+//    v2.push_back(9);
+//    v2.push_back(4);
+//    v2.push_back(9);
+//    v2.push_back(8);
+//    v2.push_back(4);
+//    Solution s;
+//    vector<int>v3 = s.intersection(v1, v2);
+//    for (vector<int>::iterator it = v3.begin(); it != v3.end(); ++it)
+//    {
+//        cout << *it << " ";
+//    }
+//	return 0;
+//}
+
+
+
+//双指针
+/*
+首先对两个数组进行排序，然后使用两个指针遍历两个数组。可以预见的是加入答案的数组的元素一定是递增的，
+为了保证加入元素的唯一性，我们需要额外记录变量 pre 表示上一次加入答案数组的元素。
+
+初始时，两个指针分别指向两个数组的头部。每次比较两个指针指向的两个数组中的数字，如果两个数字不相等，则将指向较小数字的指针右移一位，
+如果两个数字相等，且该数字不等于 pre ,同时将两个指针都右移一位。
+当至少有一个指针超出数组范围时，遍历结束。
+*/
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> intersection(vector<int>& nums1, vector<int>& nums2)
+//    {
+//        sort(nums1.begin(), nums1.end());
+//        sort(nums2.begin(), nums2.end());
+//        int length1 = nums1.size(), length2 = nums2.size();
+//        int index1 = 0, index2 = 0;
+//        vector<int> intersection;
+//        while (index1 < length1 && index2 < length2)
+//        {
+//            int num1 = nums1[index1], num2 = nums2[index2];
+//            if (num1 == num2)
+//            {
+//                // 保证加入元素的唯一性
+//                if (!intersection.size() || num1 != intersection.back())
+//                {
+//                    intersection.push_back(num1);
+//                }
+//                index1++;
+//                index2++;
+//            }
+//            else if (num1 < num2)
+//            {
+//                index1++;
+//            }
+//            else
+//            {
+//                index2++;
+//            }
+//        }
+//        return intersection;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v1, v2;
+//    v1.push_back(4);
+//    v1.push_back(9);
+//    v1.push_back(5);
+//
+//    v2.push_back(9);
+//    v2.push_back(4);
+//    v2.push_back(9);
+//    v2.push_back(8);
+//    v2.push_back(4);
+//    Solution s;
+//    vector<int>v3 = s.intersection(v1, v2);
+//    for (vector<int>::iterator it = v3.begin(); it != v3.end(); ++it)
+//    {
+//        cout << *it << " ";
+//    }
+//    return 0;
+//}
