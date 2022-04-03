@@ -1,0 +1,132 @@
+/*
+给定一个整数，写一个函数来判断它是否是 3 的幂次方。如果是，返回 true ；否则，返回 false 。
+
+整数 n 是 3 的幂次方需满足：存在整数 x 使得 n == 3x
+*/
+
+//#include<iostream>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isPowerOfThree(int n)
+//    {
+//        if (n < 0)
+//        {
+//            return false;
+//        }
+//        if (1162261467 % n == 0)
+//        {
+//            return true;
+//        }
+//        return false;
+//    }
+//};
+///*
+//class Solution
+//{
+//public:
+//    bool isPowerOfThree(int n)
+//    {
+//        return n > 0 && 1162261467 % n == 0;
+//    }
+//};
+//*/
+//int main()
+//{
+//    Solution s;
+//    cout<<s.isPowerOfThree(-3);
+//	return 0;
+//}
+
+
+//试除法
+/*
+我们不断地将n除以33,直到n=1.如果此过程中n无法被3整除,就说明n不是3的幂。
+本题中的n可以为负数或0,可以直接提前判断该情况并返回False,也可以进行试除，因为负数或0也无法通过多次除以3得到1。
+*/
+//#include<iostream>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isPowerOfThree(int n)
+//    {
+//        while (n && n % 3 == 0)
+//        {
+//            n /= 3;
+//        }
+//        return n == 1;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout<<s.isPowerOfThree(-3);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+/*
+对于一个正整数，如果它和除了它自身以外的所有正因子之和相等，我们称它为完美数。
+
+给定一个整数 n， 如果是完美数，返回true；否则返回false。
+*/
+//#include<iostream>
+//#include<cmath>
+//using namespace std;
+////超过时间限制
+////class Solution
+////{
+////public:
+////    bool checkPerfectNumber(int num)
+////    {
+////        int ret = 0;
+////        for (int i = 1; i < num; ++i)
+////        {
+////            if (num % i == 0)
+////            {
+////                ret += i;
+////            }
+////        }
+////        return ret == num;
+////    }
+////};
+//class Solution {
+//public:
+//    bool checkPerfectNumber(int num)
+//    {
+//        if (num == 1)
+//        {
+//            return false;
+//        }
+//        int sum = 1;
+//        for (int d = 2; d * d <= num; ++d)
+//        {
+//            if (num % d == 0)
+//            {
+//                sum += d;
+//                if (d * d < num)
+//                {
+//                    sum += num / d;
+//                }
+//            }
+//        }
+//        return sum == num;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout<<s.checkPerfectNumber(28);
+//	return 0;
+//}
