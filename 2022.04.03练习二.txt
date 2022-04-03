@@ -1,0 +1,120 @@
+/*
+给定一个整数，写一个函数来判断它是否是 4 的幂次方。如果是，返回 true ；否则，返回 false 。
+
+整数 n 是 4 的幂次方需满足：存在整数 x 使得 n == 4x
+*/
+
+/*
+如果 n 是 4 的幂，那么它可以表示成 4^x的形式，我们可以发现它除以 3 的余数一定为 1，即：
+
+如果 n 是 2 的幂却不是 4 的幂，那么它可以表示成 4^x×2 的形式，此时它除以 3 的余数一定为 2。
+
+因此我们可以通过 n 除以 3 的余数是否为 1 来判断 n 是否是 4 的幂。
+*/
+//#include<iostream>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isPowerOfFour(int n)
+//    {
+//        return n > 0 && (n & (n - 1)) == 0 && n % 3 == 1;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout<<s.isPowerOfFour(16);
+//	return 0;
+//}
+
+
+
+
+/*
+如果 n 是 4 的幂，那么 n 的二进制表示中有且仅有一个 1，并且这个 1 出现在从低位开始的第偶数个二进制位上（这是因为这个 1 后面必须有偶数个 0）。
+这里我们规定最低位为第 0 位，例如 n=16 时，n 的二进制表示为(10000)_2​
+
+唯一的 1 出现在第 4 个二进制位上，因此 n 是 4 的幂。
+
+由于题目保证了 n 是一个 32 位的有符号整数，因此我们可以构造一个整数mask，它的所有偶数二进制位都是0，所有奇数二进制位都是1。
+这样一来，我们将 n 和 mask 进行按位与运算，如果结果为 0，说明 n 二进制表示中的 1 出现在偶数的位置，否则说明其出现在奇数的位置。
+
+根据上面的思路,mask 的二进制表示为：
+mask=(10101010101010101010101010101010)2
+
+我们也可以将其表示成 1616 进制的形式，使其更加美观：
+mask=(AAAAAAAA)16
+*/
+//#include<iostream>
+//#include<math.h>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isPowerOfFour(int n)
+//    {
+//        return n > 0 && (n & (n - 1)) == 0 && (n & 0xaaaaaaaa) == 0;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout << s.isPowerOfFour(8);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//二分查找
+/*
+给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+*/
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int search(vector<int>& nums, int target)
+//    {
+//        int left = 0, right = nums.size() - 1;
+//        while (left <= right)
+//        {
+//            int mid = (left + right) / 2;
+//            if (nums[mid] == target)
+//            {
+//                return mid;
+//            }
+//            else if (nums[mid] < target)
+//            {
+//                left = mid + 1;
+//            }
+//            else if(nums[mid] > target)
+//            {
+//                right = mid - 1;
+//            }
+//        }
+//        return -1;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int>v;
+//    v.push_back(-1);
+//    v.push_back(0);
+//    v.push_back(3);
+//    v.push_back(5);
+//    v.push_back(9);
+//    v.push_back(12);
+//    cout<<s.search(v, 9);
+//	return 0;
+//}
