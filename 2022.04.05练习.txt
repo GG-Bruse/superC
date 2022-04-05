@@ -1,0 +1,171 @@
+/*
+斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。
+给定 n ，请计算 F(n) 。
+*/
+
+//使用数组或递归也可解决问题，但堆区内存有限，使用动态开辟空间存在局限性，递归效率太低
+
+//动态规划
+//#include<iostream>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int fib(int n)
+//    {
+//        if (n < 2)
+//        {
+//            return n;
+//        }
+//        int left = 0, right = 1;
+//        for (int i = 2; i <= n; ++i)
+//        {
+//            int temp = right;
+//            right = left + right;
+//            left = temp;
+//        }
+//        return right;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout << s.fib(3) << endl;
+//	return 0;
+//}
+
+//数组(不具有普适性，但由于leetcode无法进行动态内存开辟，只能使用该笨方法)
+//#include<iostream>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int fib(int n)
+//    {
+//        int a[31] = { 0,1 };
+//        for (int i = 2; i < 31; i++)
+//        {
+//            a[i] = a[i - 1] + a[i - 2];
+//        }
+//        return a[n];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。
+*/
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int thirdMax(vector<int>& nums)
+//    {
+//        if (nums.size() < 2)
+//        {
+//            return nums[0];
+//        }
+//        sort(nums.begin(), nums.end());
+//        int temp = *(nums.rbegin()), count = 0;
+//        for (vector<int>::reverse_iterator it = nums.rbegin()+1; it != nums.rend(); ++it)
+//        {
+//            if (temp != *it)
+//            {
+//                ++count;
+//            }
+//            if (count == 2)
+//            {
+//                return *it;
+//            }
+//            temp = *it;
+//        }
+//        return nums[nums.size() - 1];
+//    }
+//};
+//int main()
+//{
+//    vector<int>v;
+//    v.push_back(1);
+//    v.push_back(2);
+//    v.push_back(2);
+//    v.push_back(5);
+//    v.push_back(3);
+//    v.push_back(5);
+//    /*v.push_back(3);
+//    v.push_back(2);
+//    v.push_back(1);*/
+//    Solution s;
+//    cout<<s.thirdMax(v);
+//    return 0;
+//}
+
+//优化版
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int thirdMax(vector<int>& nums)
+//    {
+//        sort(nums.begin(), nums.end(), greater<>());
+//        for (int i = 1, diff = 1; i < nums.size(); ++i)
+//        {
+//            if (nums[i] != nums[i - 1] && ++diff == 3)
+//            { 
+//                // 此时 nums[i] 就是第三大的数
+//                return nums[i];
+//            }
+//        }
+//        return nums[0];
+//    }
+//};
+
+
+
+//有序遍历
+/*
+遍历数组，同时用一个有序集合来维护数组中前三大的数。具体做法是每遍历一个数，就将其插入有序集合，
+若有序集合的大小超过 3，就删除集合中的最小元素。这样可以保证有序集合的大小至多为 3，且遍历结束后，
+若有序集合的大小为 3，其最小值就是数组中第三大的数；若有序集合的大小不足 3，那么就返回有序集合中的最大值。
+*/
+
+//#include<iostream>
+//#include<set>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int thirdMax(vector<int>& nums)
+//    {
+//        set<int> s;
+//        for (int num : nums)
+//        {
+//            if (s.find(num) == s.end())
+//            {
+//                s.insert(num);
+//            }
+//            if (s.size() > 3)
+//            {
+//                s.erase(s.begin());
+//            }
+//        }
+//        return s.size() == 3 ? *s.begin() : *s.rbegin();
+//    }
+//};
