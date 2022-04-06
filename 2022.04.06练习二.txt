@@ -1,0 +1,70 @@
+/*
+统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
+
+请注意，你可以假定字符串里不包括任何不可打印的字符。
+*/
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int countSegments(string s)
+//    {
+//        if (s == "")
+//        {
+//            return 0;
+//        }
+//        int count = 0;
+//        for (string::iterator it = s.begin()+1; it != s.end(); ++it)
+//        {
+//            if (*(it-1) != ' ' && *it == ' ')
+//            {
+//                ++count;
+//            }
+//        }
+//        if (*(s.end() - 1) != ' ')
+//        {
+//            return count + 1;
+//        }
+//        return count;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    string str = "";
+//    cout<<s.countSegments(str);
+//	return 0;
+//}
+
+
+
+//优化版
+/*
+计算字符串中单词的数量，就等同于计数单词的第一个下标的个数。因此，我们只需要遍历整个字符串，统计每个单词的第一个下标的数目即可。
+
+满足单词的第一个下标有以下两个条件：
+
+该下标对应的字符不为空格；
+
+该下标为初始下标或者该下标的前下标对应的字符为空格；
+*/
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    int countSegments(string s)
+//    {
+//        int segmentCount = 0;
+//        for (int i = 0; i < s.size(); i++)
+//        {
+//            if ((i == 0 || s[i - 1] == ' ') && s[i] != ' ')
+//            {
+//                segmentCount++;
+//            }
+//        }
+//        return segmentCount;
+//    }
+//};
