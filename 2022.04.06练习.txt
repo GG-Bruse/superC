@@ -1,0 +1,92 @@
+//#include<iostream>
+//using namespace std;
+//class counter
+//{
+//public:
+//	counter(int value);
+//	void increment();
+//	void decrement();
+//	int getValue();
+//	void print();
+//	~counter();
+//private:
+//	int m_value;
+//};
+//counter:: counter(int value)
+//{
+//	this->m_value = value;
+//}
+//counter::~counter()
+//{
+//	cout << "hello world" << endl;
+//}
+/oid counter::increment()
+//{
+//	++this->m_value;
+//}
+/oid counter::decrement()
+//{
+//	--this->m_value;
+//}
+//int counter::getValue()
+//{
+//	return this->m_value;
+//}
+/oid counter::print()
+//{
+//	cout << "当前计数为" << this->m_value << endl;
+//}
+//int main()
+//{
+//	int count;
+//	cout << "please inpue a number" << endl;
+//	cin >> count;
+//	counter c(count);
+//	c.increment();
+//	c.print();
+//	return 0;
+//}
+
+
+
+
+/*#include<iostream>
+using namespace std;
+class Point
+{
+public:
+	void setpoint(int x,int y)
+	{
+		this->m_x = x;
+		this->m_y = y;
+	}
+	int GetX()
+	{
+		return this->m_x;
+	}
+	int GetY()
+	{
+		return this->m_y;
+	}
+private:
+	int m_x, m_y;
+};
+int main()
+{
+	Point op1, op2, op3, *op4;
+	int i, j;
+	op1.setpoint(1,2);
+	op2.setpoint(3, 4);
+	i = op1.GetX();
+	j = op1.GetY();
+	cout << "op1 i = " << i << "   op1 j = " << j << endl;
+	i = op2.GetX();
+	j = op2.GetY();
+	cout << "op2 i = " << i << "   op2 j = " << j << endl;
+	op3.setpoint(30, 15);
+	op4 = &op3;
+	i = op4->GetX();
+	j = op4->GetY();
+	cout << "op4 i = " << i << "   op4 j = " << j << endl;
+	return 0;
+}*/
