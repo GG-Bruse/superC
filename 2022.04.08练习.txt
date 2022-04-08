@@ -1,0 +1,120 @@
+/*
+给定一个非负整数数组 A，返回一个数组，在该数组中， A 的所有偶数元素之后跟着所有奇数元素。
+
+你可以返回满足此条件的任何数组作为答案。
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<int> sortArrayByParity(vector<int>& nums)
+//    {
+//        vector<int>v;
+//        for (vector<int>::iterator it = nums.begin(); it != nums.end(); ++it)
+//        {
+//            if ((*it) % 2 == 0)
+//            {
+//                v.push_back(*it);
+//            }
+//        }
+//        for (vector<int>::iterator it = nums.begin(); it != nums.end(); ++it)
+//        {
+//            if ((*it) % 2 != 0)
+//            {
+//                v.push_back(*it);
+//            }
+//        }
+//        return v;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v = {3,1,2,4};
+//    Solution s;
+//    v = s.sortArrayByParity(v);
+//    for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+//    {
+//        cout << *it << " ";
+//    }
+//	return 0;
+//}
+
+
+
+
+
+
+
+/*
+给你一个整数数组 nums ，该数组具有以下属性：
+
+nums.length == 2 * n.
+nums 包含 n + 1 个 不同的 元素
+nums 中恰有一个元素重复 n 次
+找出并返回重复了 n 次的那个元素。
+*/
+
+//存在空间限制
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int repeatedNTimes(vector<int>& nums)
+//    {
+//        int arr[1024] = { 0 };
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            ++arr[nums[i]];
+//        }
+//        int max = arr[0];
+//        int count = 0;
+//        for (int i = 1; i < 1024; ++i)
+//        {
+//            if (arr[i] > max)
+//            {
+//                max = arr[i];
+//                count = i;
+//            }
+//        }
+//        return count;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v = {7,8,7,0};
+//    Solution s;
+//    cout<<s.repeatedNTimes(v);
+//	return 0;
+//}
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int repeatedNTimes(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        if (size == 2) {
+//            return nums[0];
+//        }
+//        sort(nums.begin(), nums.end());
+//        if (nums[size / 2] == nums[size / 2 + 1])
+//        {
+//            return nums[size / 2]; // 在右半边
+//        }
+//        else
+//        {
+//            return nums[size / 2 - 1]; // 在左半边
+//        }
+//    }
+//};
+
