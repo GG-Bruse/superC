@@ -1,0 +1,166 @@
+/*
+给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。
+
+矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<vector<int>> transpose(vector<vector<int>>& matrix)
+//    {
+//        int m = matrix.size(), n = matrix[0].size();
+//        vector<vector<int>> transposed(n, vector<int>(m));
+//        for (int i = 0; i < m; i++)
+//        {
+//            for (int j = 0; j < n; j++)
+//            {
+//                transposed[j][i] = matrix[i][j];
+//            }
+//        }
+//        return transposed;
+//    }
+//};
+//int main()
+//{
+//    vector<vector<int>>matrix = { {1, 2, 3},{4, 5, 6 }, { 7, 8, 9 } };
+//    Solution s;
+//    matrix = s.transpose(matrix);
+//    for (vector<vector<int>>::iterator it = matrix.begin(); it != matrix.end(); ++it)
+//    {
+//        for (vector<int>::iterator its = (*it).begin(); its != (*it).end(); ++its)
+//        {
+//            cout << *its << " ";
+//        }
+//        cout << endl;
+//    }
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+/*
+给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+
+说明：本题中，我们将空字符串定义为有效的回文串。
+*/
+
+//初始版
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isPalindrome(string s)
+//    {
+//        if (s == "")
+//        {
+//            return true;
+//        }
+//        for (string::iterator it = s.begin(); it != s.end(); ++it)
+//        {
+//            if ((*it >= 97 && *it <= 122) || (*it >= 65 && *it <= 90) || (*it >= 48 && *it <= 57))
+//            {
+//                *it = tolower(*it);
+//                continue;
+//            }
+//            s.erase(it);
+//            s.resize(s.size()-1,' ');
+//            if (it != s.begin())
+//            {
+//                --it;
+//            }
+//        }
+//        string::iterator left = s.begin();
+//        string::iterator right = s.end() - 1;
+//        while (left <= right)
+//        {
+//            if (*left == ' ' || *left == '.')
+//            {
+//                ++left;
+//            }
+//            if (*right == ' ' || *left == '.')
+//            {
+//                --right;
+//            }
+//            if (*left == *right)
+//            {
+//                ++left;
+//                --right;
+//                continue;
+//            }
+//            return false;
+//        }
+//        return true;
+//    }
+//};
+//int main()
+//{
+//    string str = "......a.....";
+//    Solution s;
+//    cout<<s.isPalindrome(str);
+//	return 0;
+//}
+
+//优化版
+//class Solution
+//{
+//public:
+//    bool isPalindrome(string s)
+//    {
+//        string sgood;
+//        for (char ch : s)
+//        {
+//            if (isalnum(ch))
+//            {
+//                sgood += tolower(ch);
+//            }
+//        }
+//        int n = sgood.size();
+//        int left = 0, right = n - 1;
+//        while (left < right)
+//        {
+//            if (sgood[left] != sgood[right])
+//            {
+//                return false;
+//            }
+//            ++left;
+//            --right;
+//        }
+//        return true;
+//    }
+//};
+
+
+/*
+最简单的方法是对字符串 s 进行一次遍历，并将其中的字母和数字字符进行保留，放在另一个字符串sgood 中。
+这样我们只需要判断 sgood 是否是一个普通的回文串即可。
+
+判断的方法有两种。第一种是使用语言中的字符串翻转 API 得到 sgood 的逆序字符串}sgood_rev，
+只要这两个字符串相同，那么sgood 就是回文串。
+*/
+//class Solution
+//{
+//public:
+//    bool isPalindrome(string s)
+//    {
+//        string sgood;
+//        for (char ch : s) {
+//            if (isalnum(ch))
+//            {
+//                sgood += tolower(ch);
+//            }
+//        }
+//        string sgood_rev(sgood.rbegin(), sgood.rend());
+//        return sgood == sgood_rev;
+//    }
+//};
