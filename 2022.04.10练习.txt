@@ -1,0 +1,143 @@
+/*
+如果数组是单调递增或单调递减的，那么它是 单调 的。
+
+如果对于所有 i <= j，nums[i] <= nums[j]，那么数组 nums 是单调递增的。 如果对于所有 i <= j，nums[i]> = nums[j]，那么数组 nums 是单调递减的。
+
+当给定的数组 nums 是单调数组时返回 true，否则返回 false。
+*/
+
+//#include<algorithm>
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isMonotonic(vector<int>& nums)
+//    {
+//        vector<int>Greater;
+//        Greater.resize(nums.size());
+//        vector<int>Less;
+//        Less.resize(nums.size());
+//        int ret1 = true , ret2 = true;
+//        copy(nums.begin(), nums.end(), Greater.begin());
+//        copy(nums.begin(), nums.end(), Less.begin());
+//        sort(Greater.begin(), Greater.end(), greater<int>());
+//        sort(Less.begin(), Less.end(), less<int>());
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            if (nums[i] != Greater[i])
+//            {
+//                ret1 = false;
+//            }
+//            if (nums[i] != Less[i])
+//            {
+//                ret2 = false;
+//            }
+//        }
+//        return ret1 || ret2;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v{ 1,2,2,3 };
+//    Solution s;
+//    cout<<s.isMonotonic(v);
+//	return 0;
+//}
+
+
+//优化版
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isMonotonic(vector<int>& nums)
+//    {
+//        bool inc = true, dec = true;
+//        int n = nums.size();
+//        for (int i = 0; i < n - 1; ++i)
+//        {
+//            if (nums[i] > nums[i + 1])
+//            {
+//                inc = false;
+//            }
+//            if (nums[i] < nums[i + 1])
+//            {
+//                dec = false;
+//            }
+//        }
+//        return inc || dec;
+//    }
+//};
+
+
+
+/*
+//判断 [first, last) 区域内的数据是否符合 std::less<T> 排序规则，即是否为升序序列
+bool is_sorted (ForwardIterator first, ForwardIterator last);
+//判断 [first, last) 区域内的数据是否符合 comp 排序规则
+bool is_sorted (ForwardIterator first, ForwardIterator last, Compare comp);
+*/
+//#include<iostream>
+//#include<algorithm>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isMonotonic(vector<int>& nums)
+//    {
+//        return is_sorted(nums.begin(), nums.end()) || is_sorted(nums.rbegin(), nums.rend());
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。返回这个结果。
+*/
+
+//#include<iostream>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int addDigits(int num)
+//    {
+//        if (num < 10)
+//            return num;
+//        while (num >= 10)
+//        {
+//            int sum = 0;
+//            while (num > 0)
+//            {
+//                sum += num % 10;
+//                num /= 10;
+//            }
+//            num = sum;
+//        }
+//        return num;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout<<s.addDigits(38);
+//	return 0;
+//}
