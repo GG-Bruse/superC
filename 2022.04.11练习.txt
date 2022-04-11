@@ -1,0 +1,211 @@
+//#include <iostream>
+//#include<string>
+//#include<memory>
+//using namespace std;
+//class Student
+//{
+//public:
+//    Student(string, int, double);
+//    void account(double);
+//    static double sum();
+//    static double average();
+//private:
+//    static double total_score;
+//    static int count;
+//    string m_name;
+//    int m_age;
+//    double m_score;
+//};
+//double Student::total_score = 0.0;
+//int Student::count = 0;
+//Student::Student(string name, int age, double score) : m_name(name), m_age(age), m_score(score)
+//{
+//    ++count;
+//    total_score += score;
+//}
+//void Student::account(double score)
+//{
+//    total_score = total_score - this->m_score + score;
+//    this->m_score = score;
+//}
+//double Student::sum()
+//{
+//    return total_score;
+//}
+//double Student::average()
+//{
+//    return total_score / count;
+//}
+//int main()
+//{
+//    unique_ptr<Student>s1(new Student("a", 17, 59.9));
+//    unique_ptr<Student>s2(new Student("b", 18, 100.0));
+//    unique_ptr<Student>s3(new Student("c", 19, 60));
+//    cout << "总分为" << s1->sum() << endl;
+//    s1->account(79);
+//    cout << "总分为:" << s1->sum() << endl;
+//    cout << "平均分为:" << s2->average() << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	for (int i = 0; i < 100; ++i)
+//	{
+//		cout << "hello world" << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	for (int i = 0; i < 100; i++)
+//	{
+//		cout << "hello world" << endl;
+//	}
+//	return 0;
+//}
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//00552540  push        ebp
+//00552541  mov         ebp,esp
+//00552543  sub         esp,0CCh
+//00552549  push        ebx
+//0055254A  push        esi
+//0055254B  push        edi
+//0055254C  lea         edi,[ebp-0Ch]
+//0055254F  mov         ecx,3
+//00552554  mov         eax,0CCCCCCCCh
+//00552559  rep stos    dword ptr es:[edi]
+//0055255B  mov         ecx,offset _57B8321F_源@cpp (055F029h)
+//00552560  call        @__CheckForDebuggerJustMyCode@4 (055137Fh)
+//	for (int i = 0; i < 100; ++i)
+//00552565  mov         dword ptr [ebp-8],0
+//0055256C  jmp         __$EncStackInitStart+2Bh (0552577h)
+//0055256E  mov         eax,dword ptr [ebp-8]
+//00552571  add         eax,1
+//00552574  mov         dword ptr [ebp-8],eax
+//00552577  cmp         dword ptr [ebp-8],64h
+//0055257B  jge         __$EncStackInitStart+5Ch (05525A8h)
+//	{
+//		cout << "hello world" << endl;
+//0055257D  mov         esi,esp
+//0055257F  push        offset std::endl<char,std::char_traits<char> > (055103Ch)
+//00552584  push        offset string "hello world" (0559B30h)
+//00552589  mov         eax,dword ptr [__imp_std::cout (055D0D4h)]
+//0055258E  push        eax
+//0055258F  call        std::operator<<<std::char_traits<char> > (05511A9h)
+//00552594  add         esp,8
+//00552597  mov         ecx,eax
+//00552599  call        dword ptr [__imp_std::basic_ostream<char,std::char_traits<char> >::operator<< (055D0A0h)]
+//0055259F  cmp         esi,esp
+//005525A1  call        __RTC_CheckEsp (055128Fh)
+//	}
+//005525A6  jmp         __$EncStackInitStart+22h (055256Eh)
+//	return 0;
+//005525A8  xor         eax,eax
+//}
+
+
+
+
+
+//
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//008B2540  push        ebp
+//008B2541  mov         ebp,esp
+//008B2543  sub         esp,0CCh
+//008B2549  push        ebx
+//008B254A  push        esi
+//008B254B  push        edi
+//008B254C  lea         edi,[ebp-0Ch]
+//008B254F  mov         ecx,3
+//008B2554  mov         eax,0CCCCCCCCh
+//008B2559  rep stos    dword ptr es:[edi]
+//008B255B  mov         ecx,offset _57B8321F_源@cpp (08BF029h)
+//008B2560  call        @__CheckForDebuggerJustMyCode@4 (08B137Fh)
+//	for (int i = 0; i < 100; i++)
+//008B2565  mov         dword ptr [ebp-8],0
+//008B256C  jmp         __$EncStackInitStart+2Bh (08B2577h)
+//008B256E  mov         eax,dword ptr [ebp-8]
+//008B2571  add         eax,1
+//008B2574  mov         dword ptr [ebp-8],eax
+//008B2577  cmp         dword ptr [ebp-8],64h
+//008B257B  jge         __$EncStackInitStart+5Ch (08B25A8h)
+//	{
+//		cout << "hello world" << endl;
+//008B257D  mov         esi,esp
+//008B257F  push        offset std::endl<char,std::char_traits<char> > (08B103Ch)
+//008B2584  push        offset string "hello world" (08B9B30h)
+//008B2589  mov         eax,dword ptr [__imp_std::cout (08BD0D4h)]
+//008B258E  push        eax
+//008B258F  call        std::operator<<<std::char_traits<char> > (08B11A9h)
+//008B2594  add         esp,8
+//008B2597  mov         ecx,eax
+//008B2599  call        dword ptr [__imp_std::basic_ostream<char,std::char_traits<char> >::operator<< (08BD0A0h)]
+//008B259F  cmp         esi,esp
+//008B25A1  call        __RTC_CheckEsp (08B128Fh)
+//	}
+//008B25A6  jmp         __$EncStackInitStart+22h (08B256Eh)
+//	return 0;
+//008B25A8  xor         eax,eax
+//}
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//class MyInt
+//{
+//	friend ostream& operator<<(ostream& cout, MyInt& a);//友元
+//public:
+//	MyInt();
+//	MyInt& operator++();//前置++
+//	MyInt& operator++(int);//使用占位参数区别前后置++，使之可以发生函数重载
+//private:
+//	int m_num;
+//};
+//MyInt::MyInt()
+//{
+//	this->m_num = 0;
+//}
+//MyInt& MyInt::operator++()
+//{
+//	this->m_num++;
+//	return *this;
+//}
+//MyInt& MyInt::operator++(int)
+//{
+//	static MyInt temp = *this;
+//	this->m_num++;
+//	return temp;
+//}
+//ostream& operator<<(ostream& cout, MyInt& a)
+//{
+//	cout << a.m_num;
+//	return cout;
+//}
