@@ -1,0 +1,182 @@
+1.简介
+程序运行时存在静态空间、栈和堆区，用堆来存储动态分配空间的对象即那些在程序运行时分配空间的对象，若该对象不再使用，我们必须显式的销毁它们，避免内存泄漏。
+
+智能指针是一个可以像指针一样工作的对象,有unique_ptr(独占指针),shared_ptr与weak_ptr等智能指针,定义在<memory>头文件中，可以对动态资源进行管理。
+保证以构造的对象最终会销毁，即它的析构函数最终会被调用。
+
+注意：
+
+1.为了避免内存泄漏,通过智能指针管理的对象应该没有其他的引用指向它们.
+
+2.智能指针不支持指针的算术运算
+
+2.unique_ptr指针（独占指针）
+我们大多数场景下用到的都是unique_ptr。
+
+其在默认情况下和普通指针的大小是相同，内存上没有任何的额外消耗，性能最优。
+
+注意：
+
+1.不能使用其他unique_ptr对象的值来初始化一个unique_ptr。也不能将一个unique_ptr对象赋值给另外一个。这样的操作将导致两个独占指针共享相同对象的所有权。
+
+2.unique_ptr代表的是专属所有权，如果想要把一个unique_ptr的内存交给另外一个unique_ptr对象管理。
+只能使用std::move转移当前对象的所有权。转移之后，当前对象不再持有此内存，新的对象将获得专属所有权。
+
+3.若unique_ptr指向的是一个对象数组的话,要确保调用delete[]来处理被解除分配的数组,则应该在对象类型后面包含一对空的方括号[]。
+
+#include<iostream>
+#include<memory>
+using namespace std;
+int main() 
+{
+    unique_ptr<int> up1(new int(11));
+    cout << "up = " << *up1 << endl;
+ 
+    //将up1的独占权转移给up2，up1不能再操作堆区空间
+    unique_ptr<int> up2 = std::move(up1);
+    cout << "up2 = " << *up2 << endl;
+ 
+    //up2.reset();//若为无参作用是显示释放堆区内容
+    up2.reset(new int(22));//若为有参，先释放原来堆区内容,重新给up2绑定一个新的堆区内容
+    cout << "up2 = " << *up2 << endl;
+ 
+    //释放控制权，但不释放堆区内存
+    int* p = up2.release();
+    cout <<"p = "<< *p << endl;
+    delete p;
+    p = nullptr;
+    return 0;
+}
+#include<iostream>
+#include<memory>
+using namespace std;
+int main()
+{
+    //指向数组的独占指针
+    unique_ptr<int[] > up(new int[5]);
+    for (int k = 0; k < 5; k++)
+    {
+        up[k] = k+1;
+    }
+    for (int k = 0; k < 5; k++)
+    {
+        cout << up[k] << " ";
+    }
+    cout << endl;
+    return 0;
+}
+3.shared_ptr指针（共享所有权）
+多个shared_ptr智能指针可以共同使用同一块堆内存。由于该类型智能指针在实现上采用的是引用计数机制，
+即便有一个shared_ptr指针放弃了堆内存的"使用权"(引用计数减1)也不会影响其他指向同一堆内存的shared_ptr指针(只有引用计数为0时,堆内存才会被自动释放）
+
+#include<iostream>
+#include<memory>
+using namespace std;
+int main()
+{
+    shared_ptr<int> sp1(new int(11));
+    shared_ptr<int>sp2(sp1);//拷贝构造
+ 
+    cout << "num = " << sp2.use_count() << endl;//打印计数器 2
+ 
+    sp1.reset();
+    cout << "num = " << sp2.use_count() << endl;//1
+    cout << *sp2 << endl;//11
+ 
+    sp1.reset();
+    cout << "num = " << sp1.use_count() << endl;//0
+    return 0;
+}
+shared_ptr的内存占用是裸指针的两倍。因为除了要管理一个裸指针外，还要维护一个引用计数。 因此相比于unique_ptr, shared_ptr的内存占用更高。
+
+4.weak_ptr（辅助作用）
+该类型指针通常不单独使用(没有实际用处),只能和shared_ptr搭配使用。我们可以将weak_ptr视为shared_ptr指针的一种辅助工具。
+借助weak_ptr类型指针,我们可以获取shared_ptr指针的一些状态信息,比如有多少指向相同的shared_ptr指针,shared_ptr指针指向的堆内存是否已经被释放等。
+
+当weak_ptr类型指针的指向和某一shared_ptr指针相同时,weak_ptr并不会使所指堆内存的引用计数加1
+当weak_ptr指针被释放时,之前所指堆内存的引用计数也不会因此而减1.也就是说,weak_ptr并不会影响所指堆内存空间的引用计数。
+
+weak_ptr<T>模板类中没有重载*和->运算符 , weak_ptr 类型指针只能访问所指的堆内存，而无法修改它
+
+#include<iostream>
+#include<memory>
+using namespace std;
+int main()
+{
+    shared_ptr<int>sp1(new int(11));
+    shared_ptr<int>sp2(sp1);
+    weak_ptr<int>wp = sp1;
+    cout << wp.use_count() << endl;
+ 
+    shared_ptr<int>sp3 = wp.lock();
+    //lock() 若当前weak_ptr已经过期,则该函数会返回一个空的shared_ptr指针.反之,该函数返回一个和当前weak_ptr指向相同的shared_ptr。
+    cout << wp.use_count() << endl;
+ 
+    if (sp3 == nullptr)
+    {
+        cout << "堆区空间已经释放" << endl;
+    }
+    else
+    {
+        //cout << *wp << endl;//err
+        cout << *sp3 << endl;//间接访问
+    }
+    return 0;
+}
+5.自实现初级版智能指针
+#include<iostream>
+using namespace std;
+class Person
+{
+public:
+    Person(int age)
+    {
+        cout << "有参构造函数调用" << endl;
+        m_age = age;
+    }
+    void showage()
+    {
+        cout << "年龄为:" << this->m_age << endl;
+    }
+    ~Person()
+    {}
+    int m_age;
+};
+//利用智能指针管理new出来的内存的释放
+class Smartpoint
+{
+public:
+    Smartpoint(Person* p)
+    {
+        this->m_person = p;
+    }
+    //重载->运算符
+    Person* operator->()
+    {
+        return this->m_person;
+    }
+    //重载*运算符
+    Person& operator*()
+    {
+        return *m_person;
+    }
+    ~Smartpoint()
+    {
+        if (this->m_person != NULL)
+        {
+            //cout << "析构函数调用" << endl;
+            delete this->m_person;
+        }
+    }
+private:
+    Person* m_person;
+};
+int main()
+{
+    Smartpoint sp(new Person(18));
+    sp->showage();
+    (*sp).showage();
+    return 0;
+}
+6.总结
+在实际项目开发中建议使用智能指针，而非裸指针，这在后面的文章中会进行具体的讲解。
