@@ -1,0 +1,219 @@
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	void change(int&, int&);
+//	int a, b;
+//	cin >> a >> b;
+//	if (a > b)change(a, b);
+//	cout << a << " " << b << endl;
+//	return 0;
+//}
+//void change(int& a, int& b)
+//{
+//	int temp = a;
+//	a = b;
+//	b = temp;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<cmath>
+//using namespace std;
+//inline float f(float x)
+//{
+//	return 2*x*x*x - 4*x*x + 3*x - 6;
+//}
+//int main()
+//{
+//	float left, right, middle, ym, yl, yr;
+//	cout << "please two numbers:" << endl;
+//	cin >> left >> right;
+//	yl = f(left);
+//	yr = f(right);
+//	do
+//	{
+//		middle = (right + left) / 2;
+//		ym = f(middle);
+//		if (yr * ym > 0)
+//		{
+//			right = middle;
+//			yr = ym;
+//		}
+//		else
+//		{
+//			left = middle;
+//			yl = ym;
+//		}
+//	} while (fabs(ym) >= left);
+//	cout << "Root is :" << middle;
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//class counter
+//{
+//public:
+//	counter(int);
+//	void increment();
+//	void decrement();
+//	int GetValue();
+//	int print();
+//private:
+//	int value;
+//};
+//counter::counter(int number)
+//{
+//	this->value = number;
+//}
+//void counter::increment()
+//{
+//	++this->value;
+//}
+//void counter::decrement()
+//{
+//	--this->value;
+//}
+//int counter::GetValue()
+//{
+//	return this->value;
+//}
+//int counter::print()
+//{
+//	cout << "value is " << value << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	void PrintDate();
+//	void SetDay(int);
+//	void SetMonth(int);
+//	void SetYear(int);
+//private:
+//	int m_day, m_month, m_year;
+//};
+//void Date::PrintDate()
+//{
+//	cout << "Date is " << this->m_year << "." << this->m_month << "." << this->m_day << endl;
+//}
+//void Date::SetDay(int day)
+//{
+//	this->m_day = day;
+//}
+//void Date::SetMonth(int month)
+//{
+//	this->m_month = month;
+//}
+//void Date::SetYear(int year)
+//{
+//	this->m_year = year;
+//}
+//int main()
+//{
+//	Date testday;
+//	testday.SetDay(13);
+//	testday.SetMonth(4);
+//	testday.SetYear(2022);
+//	testday.PrintDate();
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//class Book
+//{
+//public:
+//	Book(int a ,int b)
+//	{
+//		qu = a;
+//		price = b;
+//	}
+//	void show_money()
+//	{
+//		cout << qu* price << endl;
+//	}
+//private:
+//	int qu, price;
+//};
+//int main()
+//{
+//	Book ob[5] = { Book(1,10),Book(2,20),Book(3,30),Book(4,40),Book(5,50) };
+//	for (int i = 0; i < 5; ++i)
+//	{
+//		ob[i].show_money();
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Student
+//{
+//public:
+//	Student(int n, string name, double d)
+//	{
+//		this->ID = n;
+//		this->m_name = name;
+//		this->deg = d;
+//		sum += d;
+//		++num;
+//	}
+//	static double avg()
+//	{
+//		return sum / num;
+//	}
+//	static int total()
+//	{
+//		return num;
+//	}
+//	void disp()
+//	{
+//		cout << ID << " " << this->m_name << " " << this->deg << endl;
+//	}
+//private:
+//	int ID;
+//	string m_name;
+//	double deg;
+//	static double sum;
+//	static int num;
+//};
+//double Student::sum = 0;
+//int Student::num = 0;
+//int main()
+//{
+//	Student s1(1001, "zhou", 97), s2(1002, "zhan", 65), s3(1003, "chen", 100);
+//	cout << "学号 姓名 成绩" << endl;
+//	s1.disp();
+//	s2.disp();
+//	s3.disp();
+//	cout << "学生人数 = " << Student::avg() << endl;
+//	cout << "平均成绩 = " << Student::avg() << endl;
+//	return 0;
+//}
