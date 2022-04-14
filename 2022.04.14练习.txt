@@ -1,0 +1,157 @@
+斐波那契的边界条件是 F(0)=0 和 F(1)=1。当 n>1 时，每一项的和都等于前两项的和，因此有如下递推关系：F(n)=F(n-1)+F(n-2)
+
+一、递归思想
+递归的思想是把一个大型复杂问题层层转化为一个与原问题规模更小的问题，问题被拆解成子问题后，递归调用继续进行，直到子问题无需进一步递归就可以解决的地步为止。
+
+#include<stdio.h>
+int fib(int n)
+{
+    return n > 2 ? n : fib(n - 1) + fib(n - 2);
+}
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    printf("%d\n", fib(n));
+    return 0;
+}
+其时间复杂度为O(2^N),由于其时间复杂度太高，在实际应用中用武之地并没有想象的那么多，要是真写个这种程序，老板应该是不容下你了。
+
+二、空间换时间
+动态开辟空间将计算出的数据记录下来，避免重复计算，使用空间换时间。
+
+时间复杂度O(n),空间复杂度O(n)。
+
+#include<stdio.h>
+#include<stdlib.h>
+long long fib(int n)
+{
+    long long* p = (long long*)malloc(sizeof(long long) * (n+1));
+    p[0] = 0;
+    p[1] = 1;
+    for (int i = 2; i <= n; ++i)
+    {
+        p[i] = p[i - 1] + p[i - 2];
+    }
+    long long temp = p[n];
+    free(p);
+    p = NULL;
+    return temp;
+}
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    printf("%lld\n", fib(n));
+    return 0;
+}
+这里使用动态开辟空间而不用数组，因为数组的大小有限制。
+
+其缺点依然十分明显，其空间复杂度较高，开辟堆区内存，若管理不当，甚至可能造成内存泄漏。(避免因未释放堆区而造成内存泄漏的小技巧：
+(7条消息) C++11智能指针的解析_GG_Bond18的博客-CSDN博客
+https://blog.csdn.net/GG_Bruse/article/details/124136480
+)
+
+三、动态规划
+本方法是在方法二的基础上节省空间。利用滚动数组思想，将空间复杂度由O(n)优化为O(1)。时间复杂度依然为O(n)。
+
+#include<stdio.h>
+long long fib(int n)
+{
+    if (n < 2)
+    {
+        return n;
+    }
+    long long left = 0, right = 1, ret = 1;
+    for (int i = 2; i < n; ++i)
+    {
+        left = right;
+        right = ret;
+        ret = left + right;
+    }
+    return ret;
+}
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    printf("%lld\n", fib(n));
+    return 0;
+}
+基本掌握这个方法就可以了。
+
+四、通项公式
+
+
+#include<stdio.h>
+#include<math.h>
+int fib(int n)
+{
+    double sqrt5 = sqrt(5);
+    double fibN = pow((1 + sqrt5) / 2, n) - pow((1 - sqrt5) / 2, n);
+    return round(fibN / sqrt5);
+}
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    printf("%d\n", fib(n));
+    return 0;
+}
+代码中使用的 pow 函数的时空复杂度与 CPU 支持的指令集相关，该文章不深入分析。
+
+五、矩阵快速幂
+
+
+#include<stdio.h>
+struct Matrix
+{
+    int mat[2][2];
+};
+struct Matrix matrixMultiply(struct Matrix* a, struct Matrix* b)
+{
+    struct Matrix c;
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            c.mat[i][j] = (*a).mat[i][0] * (*b).mat[0][j] + (*a).mat[i][1] * (*b).mat[1][j];
+        }
+    }
+    return c;
+}
+struct Matrix matrixPow(struct Matrix a, int n)
+{
+    struct Matrix ret;
+    ret.mat[0][0] = ret.mat[1][1] = 1;
+    ret.mat[0][1] = ret.mat[1][0] = 0;
+    while (n > 0) {
+        if (n & 1) {
+            ret = matrixMultiply(&ret, &a);
+        }
+        n >>= 1;
+        a = matrixMultiply(&a, &a);
+    }
+    return ret;
+}
+int fib(int n)
+{
+    if (n < 2)
+    {
+        return n;
+    }
+    struct Matrix q;
+    q.mat[0][0] = q.mat[0][1] = q.mat[1][0] = 1;
+    q.mat[1][1] = 0;
+    struct Matrix res = matrixPow(q, n - 1);
+    return res.mat[0][0];
+}
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    printf("%d", fib(n));
+    return 0;
+}
+时间复杂度为O(logn),空间复杂度为O(1)。
+
+六、总结
+方法一和方法二尽量不要使用。
