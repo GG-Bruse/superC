@@ -1,0 +1,233 @@
+局部变量和函数的形参向栈区申请空间
+
+全局变量和static静态变量向静态区申请空间
+
+动态内存分配向堆区申请空间(位于<stdlib.h>或<cstdlib>头文件)
+
+一、malloc
+void* malloc (size_t size);
+
+分配内存块
+
+分配一个连续可用的字节内存块，返回指向该内存块开头的指针。
+
+新分配的内存块的内容未初始化，内存块中的数据为不确定值。
+
+如果为参数为零，则返回值取决于特定的库实现（它可能是空指针，也可能不是空指针）。
+
+参数
+
+内存块的大小，以字节为单位。
+
+是无符号整数类型，size_t。
+
+返回值
+
+成功时，为指向函数分配的内存块的指针。
+此指针的类型始终为void*，可以将其转换为所需的数据指针类型。(C++由于其类型检查更为严格，则必须进行强制类型转换)
+如果函数未能分配请求的内存块，则返回空指针NULL。
+
+#include<stdlib.h>
+#include<string.h>
+#include<errno.h>
+#include<stdio.h>
+int main()
+{
+    int* p = (int*)malloc(10 * sizeof(int));
+    if (p == NULL)
+    {
+        printf("%s\n", strerror(errno));
+    }
+    else
+    {
+        for (int i = 0; i < 10; ++i)
+        {
+            *(p + i) = i;
+        }
+        for (int i = 0; i < 10; ++i)
+        {
+            printf("%d ", *(p + i));
+        }
+    }
+    free(p);
+    p = NULL;
+    /*
+    1.断开指针与动态开辟的空间的联系，避免指针的危险操作
+    2.防止对同一块动态空间内存空间的重复释放
+    */
+    return 0;
+}
+输出0 1 2 3 4 5 6 7 8 9
+
+二、free（用于释放动态开辟的空间）
+void free(void* ptr);
+
+解除分配内存块
+
+1.若参数ptr指向的空间不是动态开辟的，那么free函数的行为是未定义的。
+
+2.若参数ptr是NULL指针，则free函数什么也不做。
+
+3.free只释放堆区空间，但ptr仍指向那块空间。所以使用完free后要将ptr置为NULL,切断ptr与该内存块的联系。
+
+参数
+
+指向要释放的那块空间的指针（必须指向初始位置）
+
+返回值
+
+无
+
+错误案例
+
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int* p = (int*)malloc(sizeof(int) * 10);
+    if (p == NULL)
+    {
+        return 1;
+    }
+    for (int i = 0; i < 10; ++i)
+    {
+        *(p + i) = i;
+    }
+    for (int i = 0; i < 10; ++i)
+    {
+        printf("%d ", *(p++));//这里指针移动
+    }
+    free(p);//导致free释放的不是初始位置的指针，程序崩溃
+    p = NULL;
+    return 0;
+}
+三、calloc
+void* calloc(size_t num,size_t num);
+
+分配和零初始化内存块
+
+1.函数的功能是为num个大小为size的元素开辟空间。
+
+2.与malloc的区别只在于calloc会在返回地址前将申请的空间的每个字母初始化为0。
+
+#include <stdio.h>      /* printf, scanf, NULL */
+#include <stdlib.h>     /* calloc, exit, free */
+ 
+int main ()
+{
+  int i,n;
+  int * pData;
+  printf ("Amount of numbers to be entered: ");
+  scanf ("%d",&i);
+  pData = (int*) calloc (i,sizeof(int));
+  if (pData==NULL) exit (1);
+  for (n=0;n<i;n++)
+  {
+    printf ("Enter number #%d: ",n+1);
+    scanf ("%d",&pData[n]);
+  }
+  printf ("You have entered: ");
+  for (n=0;n<i;n++) printf ("%d ",pData[n]);
+  free (pData);
+  return 0;
+}
+四、realloc
+void* realloc(void* ptr,size_t size);
+
+重新分配内存块
+
+1.ptr为要调整的内存空间，size为调整后的新大小
+
+2.返回值为调整后的内存块的起始位置
+
+注意事项
+
+1.若ptr指向的空间之后有足够的空间可以追加，则直接追加，然后返回ptr。
+
+2.若ptr指向的空间之后没有足够的内存空间，则realloc函数会重新找一块内存空间，开辟一块满足需求的内存空间，并且把原来内存中的数据拷贝过来，释放旧的内存空间，最后返回新开辟的内存空间的地址。
+
+#include <stdio.h>      /* printf, scanf, puts */
+#include <stdlib.h>     /* realloc, free, exit, NULL */
+ 
+int main ()
+{
+  int input,n;
+  int count = 0;
+  int* numbers = NULL;
+  int* more_numbers = NULL;
+  do {
+     printf ("Enter an integer value (0 to end): ");
+     scanf ("%d", &input);
+     count++;
+ 
+     more_numbers = (int*) realloc (numbers, count * sizeof(int));
+ 
+     if (more_numbers!=NULL) {
+       numbers=more_numbers;
+       numbers[count-1]=input;
+     }
+     else {
+       free (numbers);
+       puts ("Error (re)allocating memory");
+       exit (1);
+     }
+  } while (input!=0);
+  printf ("Numbers entered: ");
+  for (n=0;n<count;n++) printf ("%d ",numbers[n]);
+  free (numbers);
+  return 0;
+}
+五、常见的动态内存分配错误
+1.对NULL指针的解引用操作（要进行返回值的判断）
+
+2.对动态开辟空间的越界访问
+
+3.对非动态开辟内存的空间的使用free进行释放
+
+4.使用free释放一块动态开辟内存的一部分
+
+（若指针位置发生变化，归位后再进行释放）
+
+5.对同一块动态内存的多次释放
+
+6.动态开辟内存忘记释放（内存泄漏）
+
+六、柔性数组
+C99中，结构体中的最后一个元素是未知大小的数组，被称为柔性数组成员。
+
+特点
+
+1.结构体中柔性数组成员前必须至少有一个其他成员。
+
+2.sizeof返回的这种结构体的大小不包括柔性数组的内存大小。
+
+3.包含柔性数组成员的结构体用malloc函数进行内存动态内存的动态分配，并且分配的内存应大于结构体的大小，以适应柔性数组的预期大小。
+
+优势
+
+1.方便内存释放。
+
+2.利于访问速度，减少内存碎片。
+
+#include<stdio.h>
+#include<stdlib.h>
+struct S
+{
+    int n;
+    int arr[];
+};
+int main()
+{
+    struct S* ps = (struct S*)malloc(sizeof(struct S) + 5 * sizeof(int));
+    //给arr分配内存20个字节的空间
+    if (ps == NULL)
+    {
+        return 1;
+    }
+ 
+    //……………………操作
+ 
+    free(ps);
+    ps = NULL;
+    return 0;
+}
