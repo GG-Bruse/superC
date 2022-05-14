@@ -1,0 +1,321 @@
+int arr3_length =  n1 + n2;
+    int *arr3 = (int *)malloc(sizeof(int)*arr3_length);//注解①
+	 
+	int i=0 , j=0,t=0;
+	//比较两个顺序表中的值，并将小的值放入LC中，当其中一个表比较完成后
+	while(i<n1&&j<n2)
+		{
+			if(arr1[i]<=arr2[j])
+				arr3[t++] = arr1[i++];
+			else
+				arr3[t++] = arr2[j++];	
+		}
+
+
+	//直接将另一个未比较完成的表中的剩余值全部放到LC中
+
+	if(i==n1)
+		{
+			while(t<arr3_length)
+				arr3[t++] = arr2[j++];	
+		}
+	else
+		{
+			while(t<arr3_length)
+			arr3[t++] = arr1[i++];
+		}
+	return arr3;
+
+
+
+
+
+
+
+int mid ;
+    int left = 0 ,right = n;//注解① 
+  
+	mid = (left+right)/2;
+	
+    if(right!=1)//注解② 
+    {
+		//从mid将数组分成两部分 
+        int *Arr_1 = &arr[left],*Arr_2 = &arr[mid];
+
+		//左侧 
+        Arr_1 = merge_sort(Arr_1,mid);
+        //右侧 
+        Arr_2 = merge_sort(Arr_2,right-mid);
+        
+        //合并 
+        arr = merge_array(Arr_1,mid,Arr_2,right-mid);
+
+    }
+    return arr;
+
+
+
+
+
+
+
+int temp = arr[l];//临时空间，存放"枢轴"
+	while(l<r)//终止条件 
+	{        
+		while((l<r)&&arr[r]>=temp)//"大"数在高位不动
+			r--;//注解①
+		arr[l] = arr[r];//"小"数在高位移动
+
+		while((l<r)&&arr[l]<=temp)
+			l++;
+		arr[r] = arr[l];
+
+    }
+    arr[l] = temp;
+    return l;
+
+
+
+
+nt pos = partition_array(arr,l,r);
+
+    if(l<r)
+    {
+        if(l<pos-1)
+			arr = quick_sort(arr,l,pos-1);
+        if(pos+1<r)
+            arr = quick_sort(arr,pos+1,r);
+    }
+    return arr;
+
+
+
+
+int temp;
+    if(j<param1)
+	{
+		int max=j;//根结点
+		int s1=2*j+1;//左子节点
+		int s2=2*j+2;//右子结点
+		//找出最大结点
+		if(arr[s1]>arr[max]&&s1<param1)
+			max=s1;
+		if(arr[s2]>arr[max]&&s2<param1)
+			max=s2;
+		//交换最大子节点到根结点并做递归
+		if(max!=j)
+		{
+			
+            temp     = arr[max];
+            arr[max] = arr[j];
+            arr[j]   = temp; 
+			
+            adjustHeap(arr,param1,max);		
+		}
+	}
+
+
+
+
+
+
+int temp;
+    if(j<param1)
+	{
+		int max=j;//根结点
+		int s1=2*j+1;//左子节点
+		int s2=2*j+2;//右子结点
+		//找出最大结点
+		if(arr[s1]>arr[max]&&s1<param1)
+			max=s1;
+		if(arr[s2]>arr[max]&&s2<param1)
+			max=s2;
+		//交换最大子节点到根结点并做递归
+		if(max!=j)
+		{
+			
+            temp     = arr[max];
+            arr[max] = arr[j];
+            arr[j]   = temp; 
+			
+            adjustHeap(arr,param1,max);		
+		}
+	}
+
+
+
+
+int MAX =arr[0],MIN=arr[0], t =0 ;;
+ 
+  	int i ;
+  	//寻找数组中最大最小值 
+    for(i=0;i<n;i++)
+        {
+            if(arr[i]>=MAX)
+                    MAX = arr[i];       
+             if(arr[i]<=MIN)
+                    MIN = arr[i];
+        }
+
+	//生成统计数组,并清空数据 
+    int Arr_2[MAX] ;
+    int  j=0;
+    while(j<=MAX)
+    {
+    		Arr_2[j] =0;
+    		j++; 
+	}
+    for( i=0;i<n;i++)
+       	 Arr_2[arr[i]]++;//统计 
+       	 
+    for( i = MIN;i<=MAX;i++)
+        {
+           int temp = Arr_2[i];//保存arr数组中每个数出现的次数
+           while(Arr_2[i]!=0) 
+            {
+                arr[t] = i;//还原数组 
+                t++;
+                Arr_2[i]--;
+            }
+        	if(temp!=0)
+           	printf("%d %d\n",i,temp);
+          
+        }
+    
+    print_array(arr,n);//输出 
+
+
+
+
+
+
+
+
+
+
+int i,j,MAX = arr[0],MIN = arr[0],Num = 10;
+	//Num --桶的个数  -- 没多一个桶，可容纳的待排序的数字就可以大10
+	
+	int bucketEle[10] ;//桶中情况 
+	
+	//寻找数组中最大最小值 
+    for(i=0;i<n;i++)
+        if(arr[i]>=MAX)
+                MAX = arr[i];       
+        else if(arr[i]<=MIN)  
+        		MIN = arr[i];
+	
+	int len =15;//单个桶的长度 
+	int bucketArry [Num][len];
+	
+	//清空桶
+	for(i=0;i<Num;i++)
+		{
+			bucketEle[i]  = 0; 
+			for(j=0;j<len;j++)
+				bucketArry[i][j]=0;
+		}
+	
+	//数据入桶
+	for(i=0;i<n;i++) 
+	{
+		int  subScript_1 = arr[i]/10;//寻找该入哪个桶	
+		bucketArry[subScript_1][bucketEle[subScript_1]] = arr[i];
+		bucketEle[subScript_1]++;//统计桶中元素的个数
+			
+	}
+	
+	
+	//冒泡排序【对每一个单独的桶进行排序】
+	int temp,f;
+	for(temp=0;temp<Num;temp++)//二维数组的第几行 
+		{
+			int length = bucketEle[temp];
+			for(i=0;i<length-1;i++)
+				{
+					for(j=0;j<length-i-1;j++)
+						{
+							if(bucketArry[temp][j]>bucketArry[temp][j+1])
+							{
+								f = bucketArry[temp][j];
+								bucketArry[temp][j] = bucketArry[temp][j+1];
+								bucketArry[temp][j+1] = f;
+							}
+						}
+				}
+		}
+			
+	int t=0,k=0;
+	//数据整合
+	for(i=0;i<Num;i++)
+	{
+		if(bucketEle[i]!=0)//当前桶不空
+		{
+			while(k<bucketEle[i]) 
+			{
+				arr[t] = bucketArry[i][k];
+				
+				t++;//总元素
+				k++; 
+			}
+		} 
+		k=0;
+	}
+		 
+	
+   return arr;
+
+
+
+
+
+
+
+int MAX =arr[0],MIN=arr[0], t =0 ;
+ 
+  	int i ;
+  	//寻找数组中最大最小值 
+    for(i=0;i<n;i++)
+        {
+            if(arr[i]>=MAX)
+                    MAX = arr[i];       
+             if(arr[i]<=MIN)
+                    MIN = arr[i];
+        }
+        
+
+	//生成统计数组,并清空数据 
+    int Arr_2[MAX] ;
+    int  j=0;
+    while(j<=MAX)
+    {
+    		Arr_2[j] =0;
+    		j++; 
+	}
+  
+  
+    for( i=0;i<n;i++)
+       	 Arr_2[arr[i]]++;//统计 
+       	 
+    for( i = MIN;i<=MAX;i++)
+        {
+        //   int temp = Arr_2[i];//保存arr数组中每个数出现的次数
+           while(Arr_2[i]!=0) 
+            {
+                arr[t] = i;//还原数组 
+                t++;
+                Arr_2[i]--;
+            }
+        	//if(temp!=0)
+           //	printf("%d %d\n",i,temp);
+          
+        }
+    
+    return arr;//输出 
+
+
+
+
+
+
+
