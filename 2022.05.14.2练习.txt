@@ -1,0 +1,173 @@
+int cock=0,hen=0,chicken=0;
+	 
+    for(cock=0;cock<20;cock++)
+        {
+            for(hen=0;hen<33;hen++)
+            {
+                for(chicken=0;chicken<100;)
+                {
+                    if(cock+hen+chicken==100)
+                    {
+                    	if(5*cock+3*hen+chicken/3==100)
+                    	{
+                    		  printf("公鸡有%d只,母鸡有%d只,小鸡有%d只\n",cock,hen,chicken);
+						}
+                      
+                    }
+                    chicken+= 3; 
+                }
+            }
+        }
+
+
+
+
+
+
+
+int A,B,C,D;
+long E,F;
+for(A=3;A<=9;A++)
+{
+    for(D=1;D<=9;D++)
+    {
+        E=D*100000+D*10000+D*1000+D*100+D*10+D;
+        if(E%A==0)
+        {
+            F=E/A;
+            if((F/10000==A)&&((F%100)/10==A))
+            {
+                if((F/1000)%10==F%10)
+                {
+                    printf("%d*%d=%d",F,A,E);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+int x1,x2,x3,i;
+    scanf("%d %d %d",&x1,&x2,&x3);
+    i=1;
+    while(1){
+        if((i%x1==0)&&(i%x2==0)&&(i%x3==0))
+        break;
+        i++;
+    }
+    printf("%d,%d,和%d的最小公倍数是%d",x1,x2,x3,i);
+
+
+
+
+
+
+
+
+
+for(int n=5;n<=9999;n++){
+if(((n-1)%5==0)&&((n-5)%6==0)&&((n-5)%7==0)&&((n-10)%11==0)&&((n-11)%13==0))
+printf("士兵最少有%d个",n);
+}
+
+
+
+
+
+int c1,c2,c3,c4,c5;
+    for(int a=0;a<=1;a++)
+        for(int b=0;b<=1;b++)
+            for(int c=0;c<=1;c++)
+                for(int d=0;d<=1;d++)
+                    for(int e=0;e<=1;e++)
+                        {
+                            c1=((b+c+d+e)==1)==a;
+                            c2=((a+c+d+e)==4)==b;
+                            c3=((b+d+e)==1)==c;
+                            c4=((a+b+c+e)==0)==d;
+                            c5=(c==e)==e;
+                            if(c1&&c2&&c3&&c4&&c5)
+                                {
+                                    if(a==1)
+                                        printf("甲戴帽子\n");
+                                    else
+                                        printf("甲戴红帽子\n");
+                                    
+                                    if(b==1)
+                                        printf("乙戴白帽子\n");
+                                    else
+                                        printf("乙戴红帽子\n");
+
+                                    if(c==1)
+                                        printf("丙戴白帽子\n");
+                                    else
+                                        printf("丙戴红帽子\n");
+
+                                    if(d==1)
+                                        printf("丁戴白帽子\n");
+                                    else
+                                        printf("丁戴红帽子\n");
+
+                                    if(e==1)
+                                        printf("戊戴白帽子\n");
+                                    else
+                                        printf("戊戴红帽子\n");
+                                }
+                        }
+
+
+
+
+int i ,j ,temp;
+	for(i =1;i<n;i++)
+  	{
+      if(arr[i]<arr[i-1])
+      {
+        temp = arr[i];
+        for(j=i-1;temp<arr[j]&&j!=-1;j--)//注意此处的  !=-1           
+             arr[j+1] = arr[j];
+             
+             
+        arr[j+1] =temp;
+      }
+      if(i<4)
+        print_array(arr, n);
+  	}
+     print_array(arr, n);  
+
+
+
+
+
+
+int i = 0,t=0;
+	int key = 0;
+	int end = 0;
+	int Gap[4] = {5,2,1,-1};//最后的-1为终止条件
+    //如果需要跟给增量，直接在这里给
+	int gap = Gap[t];//给增量
+	while (gap > 0)
+	{
+		for (i = gap; i < n; i++)
+		{
+			key = arr[i];
+			end = i - gap;
+			while (end >= 0 && key<arr[end])
+			{
+				arr[end + gap] = arr[end];
+				end=end-gap;
+			}
+			arr[end + gap] = key;
+		}
+		
+		print_array(arr, n);
+		t++;
+		gap=Gap[t];
+	
+	}
+	print_array(arr, n);
+
