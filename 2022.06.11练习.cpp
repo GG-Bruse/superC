@@ -237,7 +237,7 @@ int main()
         Fun fun1;
         const Fun fun2;
         cout << fun1.value() << Fun::i << fun2.value();
-        return 0*/;
+        return 0;
 }
 
 
