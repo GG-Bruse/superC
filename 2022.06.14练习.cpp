@@ -258,3 +258,19 @@ int main()
 }
 
 
+
+
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+int main()
+{
+        cout << setprecision(3) << fixed << setfill('*') << setw(8);
+        cout << 12.345 << setw(8) << 34.567;
+        return 0;
+}
+
+
+
+
