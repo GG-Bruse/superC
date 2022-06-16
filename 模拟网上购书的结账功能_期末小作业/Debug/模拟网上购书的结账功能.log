@@ -1,0 +1,35 @@
+﻿  Buyer.cpp
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(7,8): error C2061: 语法错误: 标识符“string”
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(7,7): error C2535: “Buyer::Buyer(void)”: 已经定义或声明成员函数
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(6): message : 参见“Buyer::Buyer”的声明
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(8,9): error C3646: “GetName”: 未知重写说明符
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(8,16): error C2059: 语法错误:“(”
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(8,18): error C2238: 意外的标记位于“;”之前
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(10,9): error C3646: “GetAddress”: 未知重写说明符
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(10,19): error C2059: 语法错误:“(”
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(10,21): error C2238: 意外的标记位于“;”之前
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(15,9): error C3646: “m_name”: 未知重写说明符
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(15,15): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(17,9): error C3646: “m_address”: 未知重写说明符
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(17,18): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(3,8): error C7550: “Buyer::{ctor}”: 此上下文中的限定名称对构造函数命名，而不是对类型命名
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(3,14): error C2065: “string”: 未声明的标识符
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(3,21): error C2146: 语法错误: 缺少“)”(在标识符“name”的前面)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(4,1): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(4,1): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(11,15): error C2039: "GetName": 不是 "Buyer" 的成员
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(3): message : 参见“Buyer”的声明
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(11,22): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(11,22): error C2146: 语法错误: 缺少“;”(在标识符“GetName”的前面)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(12,1): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(12,1): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(21,15): error C2039: "GetAddress": 不是 "Buyer" 的成员
+D:\vs\C++\模拟网上购书的结账功能\Buyer.h(3): message : 参见“Buyer”的声明
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(21,25): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(21,1): error C2086: “int string”: 重定义
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(11): message : 参见“string”的声明
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(21,25): error C2146: 语法错误: 缺少“;”(在标识符“GetAddress”的前面)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(22,1): error C2143: 语法错误: 缺少“;”(在“{”的前面)
+D:\vs\C++\模拟网上购书的结账功能\Buyer.cpp(22,1): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
+  main.cpp
+  正在生成代码...

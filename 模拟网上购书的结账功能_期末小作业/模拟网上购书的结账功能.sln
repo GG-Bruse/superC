@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "模拟网上购书的结账功能", "模拟网上购书的结账功能.vcxproj", "{F88E2C49-2160-4C21-8B2B-E40A3FED2111}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Debug|x64.ActiveCfg = Debug|x64
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Debug|x64.Build.0 = Debug|x64
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Debug|x86.ActiveCfg = Debug|Win32
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Debug|x86.Build.0 = Debug|Win32
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Release|x64.ActiveCfg = Release|x64
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Release|x64.Build.0 = Release|x64
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Release|x86.ActiveCfg = Release|Win32
+		{F88E2C49-2160-4C21-8B2B-E40A3FED2111}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB7AA7D0-C36A-4A72-9A56-43B148FC046A}
+	EndGlobalSection
+EndGlobal
