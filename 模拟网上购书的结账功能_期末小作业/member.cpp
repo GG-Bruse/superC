@@ -7,6 +7,7 @@ member::member(string name, int ID, string address, double cost, int level) :Buy
 
 void member::print_img()
 {
+	cout << endl;
 	cout << "购书人姓名:       " << this->m_name << endl;
 	cout << "购书人编号:       " << this->m_ID << endl;
 	cout << "购书人为会员,级别:" << this->Membership_level << endl;

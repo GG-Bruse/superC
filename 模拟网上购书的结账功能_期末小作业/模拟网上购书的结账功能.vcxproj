@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Book.cpp" />
     <ClCompile Include="Buyer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="member.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="vip.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Book.h" />
     <ClInclude Include="Buyer.h" />
     <ClInclude Include="member.h" />
     <ClInclude Include="Ordinary_users.h" />

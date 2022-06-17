@@ -30,6 +30,9 @@
     <ClCompile Include="vip.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buyer.h">
@@ -42,6 +45,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="vip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Book.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
