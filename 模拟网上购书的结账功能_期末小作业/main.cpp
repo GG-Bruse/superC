@@ -32,7 +32,6 @@ int main()
 	string name = "";
 	int ID = 0 ,input = 0;
 
-	cout << "输入1进行网上购书,输入0退出程序" << endl;
 	do
 	{
 		cout << "欢迎进行网上购书" << endl;
