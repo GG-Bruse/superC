@@ -7,6 +7,7 @@
 例如，121 是回文，而 123 不是。
 */
 
+
 //初始版本
 //#include<iostream>
 //#include<string>
