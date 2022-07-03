@@ -189,3 +189,36 @@ int main()
 }
 
 
+
+
+
+
+#include<iostream>
+using namespace std;
+class student
+{
+public:
+        student(int a)
+        {
+                this->i = a;
+        }
+private:
+        int i;
+};
+class S:public student
+{
+public:
+        S(int a, int b) :student(a)
+        {
+                this->j = b;
+        }
+private:
+        int j;
+};
+int main()
+{
+        return 0;
+}
+
+
+
