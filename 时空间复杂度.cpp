@@ -5,6 +5,8 @@
 
 
 
+
+
 /*
 时间复杂度的概念:
 一个算法所花费的时间与其中语句的执行次数呈正比。算法中的基本操作的执行次数为算法的时间复杂度。
@@ -174,61 +176,68 @@ long long Factorial(size_t N)
 
 
 
+/*
+空间复杂度的概念:
+空间复杂度是对一个算法在运行过程中临时占用存储空间大小的度量。(变量的个数) 
+*/ 
 
 
+/*
+计算空间复杂度: 
+同样使用大O的渐进表示法(估算)
+*/ 
 
 
+/*
+例1:
+BubbleSort:
+void bubble_sort(int arr[], int len)
+{
+	for (int i = 0; i < len - 1; i++)
+    {
+		for (int j = 0; j < len - 1 - i; j++)
+        {
+			if (arr[j] > arr[j + 1])
+			{
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+}
+其空间复杂度为O(1),变量个数为常数个 
+*/ 
 
 
+/*
+例2: 
+long long* Fibonacci(size_t n)
+{
+	if(n == 0)
+		return NULL;
+	long long* fibArray = (long long*)malloc((n+1)*sizeof(long long));
+	fibArray[0] = 0;
+	fibArray[1] = 1;
+	for(int i = 2;i <= n; ++i)
+	{
+		fibArray[i] = fibArray[i-1]+fibArray[i-2];
+	}
+	return fibArray;
+}
+其空间复杂度为O(n) 
+*/ 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+例3:
+long long Factorial(size_t N)
+{
+	return N < 2?N:Factorial(N-1);
+}
+递归调用了N层,每次调用建立了一个栈帧，每个栈帧使用了常数个空间 
+其空间复杂度为O(N) 
+*/
 
 
 
