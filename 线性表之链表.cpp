@@ -19,10 +19,28 @@ void SListPushFront(SLNode* pheader, SLDataType data)//Í·²å
 {
 
 }
-void SListPushBack(SLNode* pheader, SLDataType data)//Î²²å 
+void SListPushBack(SLNode** ppheader, SLDataType d)//Î²²å 
 {
 	SLNode* newNode = (SLNode*)malloc(sizeof(SLNode));
+	if (newNode == NULL)
+		return;
 
+	newNode->data = d;
+	newNode->next = NULL;
+
+	SLNode* tail = *ppheader;
+	if (*ppheader == NULL)
+	{
+		*ppheader = newNode;
+	}
+	else
+	{
+		while (tail->next != NULL)
+		{
+			tail = tail->next;
+		}
+		tail->next = newNode;
+	}
 }
 void SListPrint(SLNode* pheader)
 {
@@ -35,10 +53,11 @@ void SListPrint(SLNode* pheader)
 int main()
 {
 	SLNode* pheader = NULL;
-	SListPushBack(pheader, 1);
-	SListPushBack(pheader, 2);
-	SListPushBack(pheader, 3);
-	SListPushBack(pheader, 4);
+	SListPushBack(&pheader, 1);
+	SListPushBack(&pheader, 2);
+	SListPushBack(&pheader, 3);
+	SListPushBack(&pheader, 4);
+	SListPrint(pheader);
 	return 0;
 }
 
