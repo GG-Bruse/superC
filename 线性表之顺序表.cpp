@@ -90,7 +90,7 @@ void SeqListPopFront(SL* ps)//头删
 	} 
 	--ps->size;
 }
-void for_each(SL* ps)//查 
+void for_each(SL* ps)//遍历
 {
 	for(int i = 0;i< ps->size; ++i)
 	{
@@ -123,9 +123,11 @@ int main()
 
 
 //动态顺序表C语言实现
+/*
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+
 typedef int SQDataType;
 typedef struct SeqList
 {
@@ -138,7 +140,7 @@ void SeqListCheckCapacity(SL* ps)//扩容
 {
 	if(ps->size >= ps->capacity)
 	{
-		SQDataType* temp = (SQDataType*)realloc(ps->arr,sizeof(SQDataType)*ps->capacity*1.5);
+		SQDataType* temp = (SQDataType*)realloc(ps->arr,sizeof(SQDataType)*ps->capacity*2);
 		if(temp == NULL)
 		{
 			printf("realloc fail\n");
@@ -147,10 +149,11 @@ void SeqListCheckCapacity(SL* ps)//扩容
 		else
 		{
 			ps->arr = temp;
-			ps->capacity *= 1.5;
+			ps->capacity *= 2;
 		}
 	}
 }
+
 void SeqListInit(SL* ps)//初始化 
 {
 	ps->arr = (SQDataType*)malloc(sizeof(SQDataType)*10); 
@@ -161,6 +164,14 @@ void SeqListInit(SL* ps)//初始化
 	}
 	ps->size = 0;
 	ps->capacity = 10;
+}
+
+void SeqListDestory(SL* ps)//销毁空间
+{
+	free(ps->arr);
+	ps->arr = NULL;
+	ps->capacity = 0;
+	ps->size = 0;
 }
 
 void SeqListPushFront(SL* ps,SQDataType data)//头插 
@@ -233,7 +244,28 @@ void SeqListErase(SL* ps,int pos)//按位置删除
 	--ps->size;
 }
 
-void for_each(SL* ps)//查 
+void SeqListModity(SL* ps,int pos ,SQDataType data)//改
+{
+	if (pos >= ps->size)
+	{
+		return;
+	}
+	ps->arr[pos] = data;
+}
+
+int SeqListFind(SL* ps, SQDataType data)//查
+{
+	for (int i = 0; i < ps->size; ++i)
+	{
+		if (ps->arr[i] == data)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+void for_each(SL* ps)//遍历
 {
 	for(int i = 0;i< ps->size; ++i)
 	{
@@ -258,64 +290,17 @@ int main()
 	SeqListInsert(&s,0,-1);
 	SeqListErase(&s,2);
 	for_each(&s);
+	SeqListModity(&s, 0, 1);
+	for_each(&s);
+	SeqListDestory(&s);
 	return 0;
 } 
+*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//动态顺序表的缺陷
+/*
+1.若空间不足，需要增容。增容会付出一定性能消耗，其次可能存在一定的空间浪费。
+2.在头部或中部左右的插入删除效率较低。
+*/
 
