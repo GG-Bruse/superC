@@ -122,7 +122,7 @@ int main()
 
 
 
-//动态顺序表C语言实现
+//动态顺序表C语言实现(1)
 /*
 #include<stdio.h>
 #include<stdlib.h>
@@ -174,48 +174,6 @@ void SeqListDestory(SL* ps)//销毁空间
 	ps->size = 0;
 }
 
-void SeqListPushFront(SL* ps,SQDataType data)//头插 
-{
-	SeqListCheckCapacity(ps);
-	for(int i = ps->size;i > 0; --i)
-	{
-		ps->arr[i] = ps->arr[i-1];
-	} 
-	ps->arr[0] = data;
-	++ps->size;
-}
-
-void SeqListPushBack(SL* ps,SQDataType data)//尾插 
-{
-	SeqListCheckCapacity(ps);
-	ps->arr[ps->size] = data;
-	++ps->size;
-}
-
-void SeqListPopFront(SL* ps)//头删 
-{
-	if(ps->size <= 0)
-	{
-		return;
-	} 
-	for(int i = 0;i < ps->size-1; ++i)
-	{
-		ps->arr[i] = ps->arr[i+1];
-	}
-	ps->arr[ps->size-1] = 0;
-	--ps->size;
-}
-
-void SeqListPopBack(SL* ps)//尾删 
-{
-	if(ps->size <= 0)
-	{
-		return;
-	} 
-	//ps->arr[ps->size] = 0;
-	--ps->size;
-}
-
 void SeqListInsert(SL* ps,int pos,SQDataType data)//按位置插入 
 {
 	if(pos > ps->size)
@@ -242,6 +200,26 @@ void SeqListErase(SL* ps,int pos)//按位置删除
 		ps->arr[i] = ps->arr[i+1];
 	}
 	--ps->size;
+}
+
+void SeqListPushFront(SL* ps,SQDataType data)//头插 
+{
+	SeqListInsert(ps,0,data);
+}
+
+void SeqListPushBack(SL* ps,SQDataType data)//尾插 
+{
+	SeqListInsert(ps,ps->size,data);
+}
+
+void SeqListPopFront(SL* ps)//头删 
+{
+	SeqListErase(ps,0);
+}
+
+void SeqListPopBack(SL* ps)//尾删 
+{
+	SeqListErase(ps,ps->size-1);
 }
 
 void SeqListModity(SL* ps,int pos ,SQDataType data)//改
@@ -296,6 +274,151 @@ int main()
 	return 0;
 } 
 */
+
+
+
+
+
+
+
+
+
+//动态顺序表(动态数组)C语言实现(2)
+/*
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct dynamicArray
+{
+	void** m_pAddr;//维护真实开辟在堆区的空间 
+	int m_capacity;//容量
+	int m_size;//当前大小	 
+};
+
+struct dynamicArray* init_DynamicArray(int capacity)
+{
+	if(capacity <= 0)
+		return NULL;
+	
+	struct dynamicArray* array = (struct dynamicArray*)malloc(sizeof(struct dynamicArray));
+	if(array == NULL)
+		return NULL;
+	
+	array->m_pAddr = (void**)malloc(sizeof(void*)*capacity);
+	array->m_capacity = capacity;
+	array->m_size = 0;
+	return array;
+}
+
+void insert_DynamicArray(struct dynamicArray* array,int pos,void* data)
+{
+	if(array == NULL || data == NULL)
+		return;
+	if(pos < 0 || pos > array->m_size)
+		pos = array->m_size;//位置无效则进行尾插
+	
+	if(array->m_size >= array->m_capacity)
+	{
+		void** newSpace = (void**)realloc(array->m_pAddr,sizeof(void*)*array->m_capacity*2);
+		if(newSpace == NULL)
+			return;
+		free(array->m_pAddr);
+		array->m_pAddr = newSpace;
+		array->m_capacity *= 2;
+	}
+	
+	for(int i = array->m_size; i > pos;--i)
+	{
+		array->m_pAddr[i] = array->m_pAddr[i-1];
+	}
+	array->m_pAddr[pos] = data;
+	++array->m_size;
+}
+
+void removebyPos_DynamicArray(struct dynamicArray* array,int pos)
+{
+	if(array == NULL || pos<0 || pos>array->m_size-1)
+		return;
+	for(int i = pos;i<array->m_size-1;++i)
+	{
+		array->m_pAddr[i] = array->m_pAddr[i+1]; 
+	}
+	--array->m_size;
+}
+
+void removebyValue_DynamicArray(struct dynamicArray* array,void* value,int(myCompare)(void*,void*))//==无法完成各种数据类型的比较，由用户提供回调函数 
+{
+	if(array == NULL || value == NULL || myCompare == NULL)
+		return;
+	for(int i = 0;i<array->m_size;++i)
+	{
+		if(myCompare(array->m_pAddr[i],value))
+		{
+			removebyPos_DynamicArray(array,i);
+			break;
+		}
+	} 
+}
+
+void for_each(struct dynamicArray* array,void(*myPrint)(void*))//参数三为函数指针，由于不知道数据类型，需要用户自行提供回调函数 
+{
+	if(array == NULL || myPrint == NULL)
+		return;
+	for(int i = 0;i<array->m_size;++i)
+	{
+		myPrint(array->m_pAddr[i]);
+	}
+	printf("\n");
+}
+
+void destory_DynamicArray(struct dynamicArray* array)
+{
+	if(array == NULL)
+		return;
+	if(array->m_pAddr != NULL)
+	{
+		free(array->m_pAddr);
+		array->m_pAddr = NULL;
+	}
+	free(array);
+	array = NULL;
+}
+
+
+void myPrint(void* data)
+{
+	printf("%d ",*(int*)data);
+}
+int myCompare(void* a,void* b)
+{
+	return (*(int*)a == *(int*)b);
+}
+int main()
+{
+	int p1 = 1;
+	int p2 = 2;
+	int p3 = 3;
+	int p4 = 4;
+	int p5 = 5;
+	int p6 = 6;
+	int compare = 1;
+	struct dynamicArray* array = init_DynamicArray(10);
+	insert_DynamicArray(array,0,&p1);
+	insert_DynamicArray(array,0,&p2);
+	insert_DynamicArray(array,0,&p3);
+	insert_DynamicArray(array,0,&p4);
+	insert_DynamicArray(array,0,&p5);
+	insert_DynamicArray(array,0,&p6);
+	for_each(array,myPrint);
+	removebyPos_DynamicArray(array,0);
+	removebyValue_DynamicArray(array,&compare,myCompare);
+	for_each(array,myPrint);
+	destory_DynamicArray(array);
+	return 0;
+}
+*/
+
+
 
 
 //动态顺序表的缺陷
