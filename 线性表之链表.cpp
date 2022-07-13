@@ -5,15 +5,8 @@
 */
 
 
-/*
-单链表:
-第一个结点的指针域内存入第二个结点的首地址，第二个结点存放第三个结点的首地址。
-依次串联，最后一个结点的指针域赋为NULL。 
-*/
-
 
 //单链表的C语言实现
-
 #include<stdio.h>
 #include<stdlib.h>
 typedef int SLDataType;
@@ -23,41 +16,120 @@ typedef struct SListNode
 	struct SListNode* next;
 }SLNode;
 
-SLNode* ButNode()
+SLNode* BuyListNode(SLDataType d)//创建一个结点 
 {
-	
+	SLNode* newNode = (SLNode*)malloc(sizeof(SLNode));
+	if (newNode == NULL)
+		return NULL;
+	newNode->data = d;
+	newNode->next = NULL;
+	return newNode;
 }
 
-void SListPushFront(SLNode* pheader, SLDataType d)//头插 
+SLNode* SListFind(SLNode* pheader,SLDataType d)
 {
-	SLNode* newNode = (SLNode*)malloc(sizeof(SLNode));
-	newNode->data= d;
-	newNode->next = NULL;
-	
-	SLNode* cur = pheader
-	
-	
+	SLNode* cur = pheader;
+	for(;cur != NULL;cur = cur->next)
+	{
+		if(cur->data == d)
+		{
+			return cur;
+		}
+	}
+	return NULL;
+} 
+
+void SListPushFront(SLNode** ppheader, SLDataType d)//头插 
+{
+	SLNode* newNode = BuyListNode(d);
+	newNode->next = *ppheader;
+	*ppheader = newNode;
 }
+
 void SListPushBack(SLNode** ppheader, SLDataType d)//尾插 
 {
-	SLNode* newNode = (SLNode*)malloc(sizeof(SLNode));
-	newNode->data= d;
-	newNode->next = NULL;
-	
-	if(*ppheader == NULL)
+	SLNode* newNode = BuyListNode(d);
+
+	if (*ppheader == NULL)
 	{
 		*ppheader = newNode;
 	}
 	else
 	{
 		SLNode* tail = *ppheader;
-		while(tail->next != NULL)
+		while (tail->next != NULL)
 		{
 			tail = tail->next;
 		}
 		tail->next = newNode;
 	}
 }
+
+void SlistPopFront(SLNode** ppheader)//头删 
+{
+	if(*ppheader == NULL)
+		return;
+	SLNode* temp = *ppheader;
+	*ppheader = (*ppheader)->next;
+	free(temp);
+	temp = NULL;
+}
+
+void SListPopBack(SLNode** ppheader)//尾删 
+{
+	if(*ppheader == NULL)
+	{
+		return;
+	}
+	else if((*ppheader)->next == NULL)
+	{
+		free(*ppheader);
+		*ppheader = NULL;
+		return;
+	} 
+		
+	SLNode* prev = NULL;
+	SLNode* tail = *ppheader;
+	for(;tail->next != NULL;tail = tail->next)
+	{
+		prev = tail;
+	}
+	free(tail);
+	prev->next = NULL;
+} 
+
+void SListInsert(SLNode** ppheader,SLNode* pos,SLDataType d)//在pos的前面插入 
+{
+	if(pos == *ppheader)
+	{
+		SListPushFront(ppheader,d);
+	}
+	else
+	{
+		SLNode* newNode = BuyListNode(d);
+		SLNode* prev = *ppheader;
+		for(;prev->next != pos;prev = prev->next);
+		prev->next = newNode;
+		newNode->next = pos;
+	}
+} 
+
+void SListErase(SLNode** ppheader,SLNode* pos)//删除pos位置的值 
+{
+	if(pos == *ppheader)
+	{
+		SlistPopFront(ppheader);
+	}
+	else
+	{
+		SLNode* prev = *ppheader;
+		for(;prev->next != pos;prev = prev->next);
+		prev->next = pos->next;
+		free(pos);
+		pos = NULL;
+	}
+} 
+
 void SListPrint(SLNode* pheader)
 {
 	for (SLNode* cur = pheader; cur != NULL; cur = cur->next)
@@ -66,6 +138,7 @@ void SListPrint(SLNode* pheader)
 	}
 	printf("\n");
 }
+
 int main()
 {
 	SLNode* pheader = NULL;
@@ -73,7 +146,22 @@ int main()
 	SListPushBack(&pheader, 2);
 	SListPushBack(&pheader, 3);
 	SListPushBack(&pheader, 4);
-	SListPrint(pheader); 
+	SListPushFront(&pheader,0);
+
+	SListPrint(pheader);
+	
+	//在3前面插入30
+	SLNode* pos = SListFind(pheader,3);
+	if(pos)
+		SListInsert(&pheader,pos,30); 
+	
+	
+	pos = SListFind(pheader,0);
+	if(pos)
+		SListErase(&pheader,pos);
+	
+	SListPrint(pheader);
+	
 	return 0;
 }
 
