@@ -164,7 +164,16 @@ long long Factorial(size_t N)
 */
 
 
-
+/*
+例七:
+斐波那契递归:
+long long Fibonacci(size_t N)
+{
+	return N<2?N:Fibonacci(N-1):Fibonacci(N-2);
+} 
+N-1分支和N-2分支每层可再分出两个分支。时间复杂度为O(2^N)
+实际上由于N-1和N-2的变化速率不同，N-1分支的调用次数多于N-2分支。 
+*/
 
 
 
