@@ -3,10 +3,26 @@
 链表是一种物理存储结构上非连续、非顺序的存储结构。
 数据元素的逻辑顺序是通过链表中的指针链接依次实现的。
 */
+/*
+实际中的链表结构非常多样，共8种:
+1.单向 双向 
+2.带头 不带头(头结点:第一个结点不存储有效数据) 
+3.循环 非循环 
+
+常用的两种的链表结构:
+1.无头单向非循环链表:
+结构简单，一般不会单独用来存储数据。实践应用中一般作为其他数据结构的子结构，如哈希桶、图的邻接表等。
+2.带头双向循环链表:
+结构最复杂，一般用于单独存储数据。实际中使用的链表都为该种链表。 
+*/ 
 
 
 
-//单链表的C语言实现
+
+
+
+//无头单向非循环链表的C语言实现
+/*
 #include<stdio.h>
 #include<stdlib.h>
 typedef int SLDataType;
@@ -164,4 +180,183 @@ int main()
 	
 	return 0;
 }
+*/
+
+
+
+
+
+/*
+单链表的缺陷:
+1. 与数组相比，在链表中存储元素需要更多的内存。 因为在链表中，每个节点都包含一个指针，并且它本身需要额外的内存。
+2.在链表中很难遍历元素或节点。 我们不能像按索引在数组中那样随机访问任何元素。 
+例如，如果我们要访问位置n处的节点，则必须遍历它之前的所有节点。
+3.单链表无法反向遍历 
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+//带头双向循环链表C语言实现
+#include<stdio.h>
+#include<stdlib.h>
+#include<assert.h>
+typedef int LDataType;
+typedef struct ListNode
+{
+	struct ListNode* prev;//前驱 
+	struct ListNode* next;//后继 
+	LDataType data; 
+}ListNode;
+
+ListNode* BuyListNode(LDataType d)//创建一个结点 
+{
+	ListNode* newNode = (ListNode*)malloc(sizeof(ListNode));
+	if (newNode == NULL)
+		return NULL;
+	newNode->data = d;
+	newNode->prev = NULL;
+	newNode->next = NULL;
+	return newNode;
+}
+
+
+
+ListNode* ListInit()
+{
+	ListNode* pheader = BuyListNode(0);
+	pheader->prev = pheader;
+	pheader->next = pheader;
+	return pheader;
+} 
+
+void ListDestory(ListNode* pheader)
+{
+	
+}
+
+
+
+
+void ListPushFront(ListNode* pheader,LDataType d)
+{
+	assert(pheader);
+	ListNode* newNode = BuyListNode(d);
+	newNode->next = pheader->next;
+	(pheader->next)->prev = newNode;
+	pheader->next = newNode;
+	newNode->prev = pheader;
+}
+
+void ListPushBack(ListNode* pheader,LDataType d)
+{
+	assert(pheader);
+	ListNode* newNode = BuyListNode(d);
+	(pheader->prev)->next = newNode;
+	newNode->prev = pheader->prev;
+	newNode->next = pheader;
+	pheader->prev = newNode;
+}
+
+void ListPopFront(ListNode* pheader)
+{
+	assert(pheader);
+	assert(pheader->next != pheader);
+	
+	ListNode* first = pheader->next;
+	(first->next)->prev = pheader; 
+	pheader->next = first->next;
+	free(first);
+	first = NULL;
+}
+
+void ListPopBack(ListNode* pheader)
+{
+	assert(pheader);
+	assert(pheader->next != pheader);
+	
+	ListNode* tail = pheader->prev;
+	(tail->prev)->next =pheader;
+	pheader->prev = tail->prev;
+	free(tail);
+	tail = NULL; 
+}
+
+
+ListNode* ListFind(ListNode* pheader,LDataType d)
+{
+	
+} 
+
+void ListInsert(ListNode* pheader,ListNode* pos,LDataType d)//在pos位置插入 
+{
+	
+}
+
+void ListErase(ListNode* pheader,ListNode* pos)//删除pos位置的值 
+{
+	
+}
+
+void for_each(ListNode* pheader)
+{
+	assert(pheader);
+	for(ListNode* cur = pheader->next;cur != pheader;cur = cur->next)
+	{
+		printf("%d ",cur->data);
+	}
+	printf("\n");
+}
+
+int main()
+{
+	ListNode* pheader = ListInit();
+
+	ListPushBack(pheader,3);
+	ListPushBack(pheader,2);
+	ListPushBack(pheader,1);
+	ListPushBack(pheader,0);
+	ListPushFront(pheader,4);
+	ListPushFront(pheader,5);
+
+	for_each(pheader);
+	
+	ListPopFront(pheader);
+	ListPopBack(pheader);
+	
+	for_each(pheader);
+	ListDestory(pheader);
+	return 0;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
