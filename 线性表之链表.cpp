@@ -21,6 +21,9 @@
 
 
 
+
+
+
 //无头单向非循环链表的C语言实现
 /*
 #include<stdio.h>
@@ -206,7 +209,14 @@ int main()
 
 
 
+
+
+
+
+
+
 //带头双向循环链表C语言实现
+/*
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
@@ -217,7 +227,6 @@ typedef struct ListNode
 	struct ListNode* next;//后继 
 	LDataType data; 
 }ListNode;
-
 ListNode* BuyListNode(LDataType d)//创建一个结点 
 {
 	ListNode* newNode = (ListNode*)malloc(sizeof(ListNode));
@@ -228,6 +237,17 @@ ListNode* BuyListNode(LDataType d)//创建一个结点
 	newNode->next = NULL;
 	return newNode;
 }
+void for_each(ListNode* pheader)
+{
+	assert(pheader);
+	for(ListNode* cur = pheader->next;cur != pheader;cur = cur->next)
+	{
+		printf("%d ",cur->data);
+	}
+	printf("\n");
+}
+
+
 
 
 
@@ -238,84 +258,110 @@ ListNode* ListInit()
 	pheader->next = pheader;
 	return pheader;
 } 
-
 void ListDestory(ListNode* pheader)
 {
-	
+	assert(pheader);
+	for(ListNode* cur = pheader->next;cur != pheader;)
+	{
+		ListNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+	free(pheader);
+	pheader = NULL;
 }
+
+
+
+
+
+ListNode* ListFind(ListNode* pheader,LDataType d)
+{
+	assert(pheader);
+	for(ListNode* cur = pheader->next;cur != pheader;cur = cur->next)
+	{
+		if(cur->data == d)
+		{
+			return cur;
+		}
+	}
+	return NULL;
+} 
+void ListInsert(ListNode* pos,LDataType d)//在pos位置之前插入 
+{
+	assert(pos);
+	ListNode* newNode = BuyListNode(d);
+	newNode->next = pos;
+	newNode->prev = pos->prev;
+	(pos->prev)->next = newNode;
+	pos->prev = newNode;
+}
+void ListErase(ListNode* pos)//删除pos位置的值 
+{
+	assert(pos);
+	(pos->prev)->next = pos->next;
+	(pos->next)->prev = pos->prev;
+	free(pos);
+	pos = NULL;
+}
+
 
 
 
 
 void ListPushFront(ListNode* pheader,LDataType d)
 {
-	assert(pheader);
-	ListNode* newNode = BuyListNode(d);
-	newNode->next = pheader->next;
-	(pheader->next)->prev = newNode;
-	pheader->next = newNode;
-	newNode->prev = pheader;
-}
+	//assert(pheader);
+	//ListNode* newNode = BuyListNode(d);
+	//newNode->next = pheader->next;
+	//(pheader->next)->prev = newNode;
+	//pheader->next = newNode;
+	//newNode->prev = pheader;
 
+	assert(pheader);
+	ListInsert(pheader->next,d);
+}
 void ListPushBack(ListNode* pheader,LDataType d)
 {
-	assert(pheader);
-	ListNode* newNode = BuyListNode(d);
-	(pheader->prev)->next = newNode;
-	newNode->prev = pheader->prev;
-	newNode->next = pheader;
-	pheader->prev = newNode;
+	//assert(pheader);
+	//ListNode* newNode = BuyListNode(d);
+	//(pheader->prev)->next = newNode;
+	//newNode->prev = pheader->prev;
+	//newNode->next = pheader;
+	//pheader->prev = newNode;
+	
+	ListInsert(pheader,d);
 }
-
 void ListPopFront(ListNode* pheader)
 {
-	assert(pheader);
-	assert(pheader->next != pheader);
+	//assert(pheader);
+	//assert(pheader->next != pheader);
+	//ListNode* first = pheader->next;
+	//(first->next)->prev = pheader; 
+	//pheader->next = first->next;
+	//free(first);
+	//first = NULL;
 	
-	ListNode* first = pheader->next;
-	(first->next)->prev = pheader; 
-	pheader->next = first->next;
-	free(first);
-	first = NULL;
+	assert(pheader);
+	ListErase(pheader->next);
 }
-
 void ListPopBack(ListNode* pheader)
 {
+	//assert(pheader);
+	//assert(pheader->next != pheader);
+	//ListNode* tail = pheader->prev;
+	//(tail->prev)->next =pheader;
+	//pheader->prev = tail->prev;
+	//free(tail);
+	//tail = NULL;
+	
 	assert(pheader);
-	assert(pheader->next != pheader);
-	
-	ListNode* tail = pheader->prev;
-	(tail->prev)->next =pheader;
-	pheader->prev = tail->prev;
-	free(tail);
-	tail = NULL; 
+	ListErase(pheader->prev); 
 }
 
 
-ListNode* ListFind(ListNode* pheader,LDataType d)
-{
-	
-} 
 
-void ListInsert(ListNode* pheader,ListNode* pos,LDataType d)//在pos位置插入 
-{
-	
-}
 
-void ListErase(ListNode* pheader,ListNode* pos)//删除pos位置的值 
-{
-	
-}
-
-void for_each(ListNode* pheader)
-{
-	assert(pheader);
-	for(ListNode* cur = pheader->next;cur != pheader;cur = cur->next)
-	{
-		printf("%d ",cur->data);
-	}
-	printf("\n");
-}
 
 int main()
 {
@@ -327,31 +373,35 @@ int main()
 	ListPushBack(pheader,0);
 	ListPushFront(pheader,4);
 	ListPushFront(pheader,5);
-
 	for_each(pheader);
 	
 	ListPopFront(pheader);
 	ListPopBack(pheader);
-	
 	for_each(pheader);
+	
+	ListNode* pos = ListFind(pheader,2);
+	if(pos)
+	{
+		ListInsert(pos,200); 
+	}
+	for_each(pheader);
+	
+	pos = ListFind(pheader,200);
+	if(pos)
+	{
+		ListErase(pos);
+	}
+	for_each(pheader);
+	
 	ListDestory(pheader);
 	return 0;
 } 
+*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+带头双向循环链表:
+最优的链表结构，在任意位置的插入删除(不包括插入删除结点的查找)都为O(1) 
+*/
 
 
 
