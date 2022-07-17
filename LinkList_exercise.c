@@ -60,8 +60,6 @@ struct ListNode* reverseList(struct ListNode* head){
 
 
 
-
-
 //链表的中间结点
 /**
  * Definition for singly-linked list.
@@ -189,6 +187,79 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2){
     free(head);
     return first;
 }
+
+
+
+
+
+
+
+//环形链表
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+//快慢指针
+bool hasCycle(struct ListNode *head) {
+    struct ListNode *slow = head,*fast = head;
+    while(fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast)
+            return true;
+    }
+    return false;
+}
+
+
+
+
+
+
+
+//环形链表2
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+/*
+L+ N*C + X = 2(L+X)
+N*C = L+X
+N*C - X = L
+(N-1)*C + C-X = L
+结论：
+一个指针从meet点开始走，一个指针从链表开始走，他们会在入口点相遇
+*/
+
+struct ListNode *detectCycle(struct ListNode *head) {
+    struct ListNode* slow = head,*fast = head;
+    while(fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast)
+        {
+            struct ListNode* meet = slow;
+            while(head != meet)
+            {
+                head = head->next;
+                meet = meet->next;
+            }
+            return meet;
+        }
+    }
+    return NULL;
+}
+
+
 
 
 
