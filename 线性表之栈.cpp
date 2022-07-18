@@ -14,7 +14,7 @@
 数组尾当作栈顶，数组头作栈底。栈顶需频繁插入删除，使用数组尾可避免数据挪动。
 缺陷:栈空间不足时的扩容及其扩容后空间的浪费
 2.链表:
-(单链表)链表头作栈顶，链表尾作栈底。栈顶需频繁插入删除，使用链表头可避免频繁遍历寻找尾节点。
+(单链表)链表头作栈顶，链表尾作栈底。栈顶需频繁插入删除，使用链表头作栈顶可避免频繁遍历寻找尾节点。
 (双向循环链表)链表头、链表尾作栈顶都可 
 */
 
@@ -114,3 +114,257 @@ int main()
 */
 
 
+
+
+
+
+
+
+#define MAX  1024
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+class Stack
+{
+public:
+	Stack();
+	void top_back(void* data);//压栈
+	void pop_back();//出栈
+	void* top();//返回栈顶
+	int size();
+	bool isEmpty();
+	~Stack();
+private:
+	void* data[MAX];//指针数组——栈数组
+	int m_size;
+};
+Stack::Stack()
+{
+	this->m_size = 0;
+	memset(this->data, 0, sizeof(void*) * MAX);
+}
+
+void Stack::top_back(void* data)
+{
+	if (data == nullptr)return;
+	this->data[this->m_size] = data;
+	++this->m_size;
+}
+
+void Stack::pop_back()
+{
+	this->data[this->m_size - 1] = nullptr;
+	--this->m_size;
+}
+
+void* Stack::top()
+{
+	if (this->m_size == 0)return nullptr;
+	return this->data[this->m_size - 1];
+}
+
+int Stack::size()
+{
+	return this->m_size;
+}
+
+bool Stack::isEmpty()
+{
+	if (this->m_size == 0)return true;
+	return false;
+}
+
+Stack::~Stack()
+{
+	this->m_size = 0;
+	memset(this->data, 0, sizeof(void*) * MAX);
+}
+bool isLeft(char ch)
+{
+	return ch == '(';
+}
+bool isRight(char ch)
+{
+	return ch == ')';
+}
+void printError(char* str, string errMsg, char* pos)
+{
+	cout << "错误信息:" << errMsg << endl;
+	cout << str << endl;
+	int num = pos - str;
+	for (int i = 0; i < num; ++i)
+	{
+		cout << " ";
+	}
+	cout << "~" << endl;
+}
+int main()
+{
+	char* str = (char*)"5 + 5 * (6) + 9 / 3 * 1 - ( 1 + 310";
+	char* p = str;
+	Stack sk;
+	while (*p != '\0')
+	{
+		if (isLeft(*p))
+		{
+			sk.top_back(p);
+		}
+		if (isRight(*p))
+		{
+			if (sk.size() > 0)
+			{
+				sk.pop_back();
+			}
+			else
+			{
+				printError(str, "右括号没有匹配到对应的左括号", p);
+			}
+		}
+		++p;
+	}
+	while (sk.size() > 0)
+	{
+		printError(str, "左括号没有匹配到右括号", (char*)sk.top());
+		sk.pop_back();
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<iostream>
+using namespace std;
+class StackNode
+{
+	friend class StackLink;
+private:
+	StackNode* next;
+};
+
+class StackLink
+{
+public:
+	StackLink();
+	void top_back(void* data);
+	void pop_back();
+	void* top();
+	int size();
+	bool isEmpty();
+	~StackLink();
+private:
+	StackNode pHeader;
+	int m_size;
+};
+StackLink::StackLink()
+{
+	this->pHeader.next = nullptr;
+	this->m_size = 0;
+}
+
+void StackLink::top_back(void* data)
+{
+	if (data == nullptr)return;
+	StackNode* myNode = (StackNode*)data;
+	myNode->next = this->pHeader.next;
+	this->pHeader.next = myNode;
+	++this->m_size;
+}
+
+void StackLink::pop_back()
+{
+	StackNode* pDel = this->pHeader.next;
+	this->pHeader.next = pDel->next;
+	--this->m_size;
+}
+
+void* StackLink::top()
+{
+	if (this->m_size == 0)return nullptr;
+	return this->pHeader.next;
+}
+
+int StackLink::size()
+{
+	return this->m_size;
+}
+
+bool StackLink::isEmpty()
+{
+	if (this->m_size == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+StackLink::~StackLink()
+{
+	this->pHeader.next = nullptr;
+	this->m_size = 0;
+}
+bool isLeft(char ch)
+{
+	return ch == '(';
+}
+bool isRight(char ch)
+{
+	return ch == ')';
+}
+void printError(char* str, string errMsg, char* pos)
+{
+	cout << "错误信息:" << errMsg << endl;
+	cout << str << endl;
+	int num = pos - str;
+	for (int i = 0; i < num; ++i)
+	{
+		cout << " ";
+	}
+	cout << "~" << endl;
+}
+int main()
+{
+	char* str = (char*)"5 + 5 * (6) + 9 / 3 * 1 - ( 1 + 310";
+	char* p = str;
+	Stack sk;
+	while (*p != '\0')
+	{
+		if (isLeft(*p))
+		{
+			sk.top_back(p);
+		}
+		if (isRight(*p))
+		{
+			if (sk.size() > 0)
+			{
+				sk.pop_back();
+			}
+			else
+			{
+				printError(str, "右括号没有匹配到对应的左括号", p);
+			}
+		}
+		++p;
+	}
+	while (sk.size() > 0)
+	{
+		printError(str, "左括号没有匹配到右括号", (char*)sk.top());
+		sk.pop_back();
+	}
+	return 0;
+}
