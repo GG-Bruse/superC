@@ -20,6 +20,7 @@
 
 
 //C语言利用无头单向不循环链表实现队列(1)
+/*
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
@@ -79,7 +80,7 @@ void QueuePop(Queue* pq)//队头出
 {
 	assert(pq);
 	assert(pq->head);//队列不为空
-	if(pq->head == NULL)//只有一个结点的情况 
+	if(pq->head->next == NULL)//只有一个结点的情况 
 	{
 		free(pq->head);
 		pq->head = pq->tail = NULL;
@@ -139,6 +140,7 @@ int main()
 	QueueDestory(&q);
 	return 0;
 } 
+*/
 
 
 
@@ -151,11 +153,108 @@ int main()
 
 
 
+#include<iostream>
+#include<string>
+using namespace std;
+class QueueNode
+{
+	friend class QueueLink;
+private:
+	QueueNode* next;
+};
 
+class QueueLink
+{
+public:
+	QueueLink();
+	void push_QueueLink(void* data);
+	void pop_QueueLink();
+	int size();
+	void* head();
+	void* tail();
+	bool isEmpty();
+	~QueueLink();
+private:
+	QueueNode pHeader;
+	QueueNode* pTail;//用于记录尾结点，不必通过遍历找到尾结点
+	int m_size;
+};
+QueueLink::QueueLink()
+{
+	this->m_size = 0;
+	this->pHeader.next = nullptr;
+	this->pTail = &this->pHeader;
+}
 
+void QueueLink::push_QueueLink(void* data)
+{
+	if (data == nullptr)return;
+	QueueNode* myNode = (QueueNode*)data;
+	this->pTail->next = myNode;
+	myNode->next = nullptr;
+	this->pTail = myNode;
+	++this->m_size;
+}
 
+void QueueLink::pop_QueueLink()
+{
+	if (this->m_size == 0)return;
+	if (this->m_size == 1)
+	{
+		this->pHeader.next = nullptr;
+		this->pTail = &this->pHeader;
+	}
+	else
+	{
+		QueueNode* pDel = this->pHeader.next;
+		this->pHeader.next = pDel->next;
+	}
+	--this->m_size;
+}
 
+int QueueLink::size()
+{
+	return this->m_size;
+}
 
+void* QueueLink::head()
+{
+	return this->pHeader.next;
+}
 
+void* QueueLink::tail()
+{
+	return this->pTail;
+}
 
+bool QueueLink::isEmpty()
+{
+	if (this->m_size == 0)return true;
+	return false;
+}
 
+QueueLink::~QueueLink()
+{
+	this->m_size = 0;
+	this->pHeader.next = nullptr;
+	this->pTail = &this->pHeader;
+}
+bool isLeft(char ch)
+{
+	return ch == '(';
+}
+bool isRight(char ch)
+{
+	return ch == ')';
+}
+void printError(char* str, string errMsg, char* pos)
+{
+	cout << "错误信息:" << errMsg << endl;
+	cout << str << endl;
+	int num = pos - str;
+	for (int i = 0; i < num; ++i)
+	{
+		cout << " ";
+	}
+	cout << "~" << endl;
+}
