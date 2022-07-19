@@ -152,7 +152,8 @@ int main()
 
 
 
-
+//C++利用带头单向不循环链表实现队列
+/*
 #include<iostream>
 #include<string>
 using namespace std;
@@ -239,22 +240,46 @@ QueueLink::~QueueLink()
 	this->pHeader.next = nullptr;
 	this->pTail = &this->pHeader;
 }
-bool isLeft(char ch)
+
+struct data
 {
-	return ch == '(';
-}
-bool isRight(char ch)
+	void* Link;
+	int m_data;
+};
+int main()
 {
-	return ch == ')';
-}
-void printError(char* str, string errMsg, char* pos)
-{
-	cout << "错误信息:" << errMsg << endl;
-	cout << str << endl;
-	int num = pos - str;
-	for (int i = 0; i < num; ++i)
+	QueueLink q;
+	data p0;
+	p0.Link = nullptr;
+	p0.m_data = 0;
+	data p1;
+	p1.Link = nullptr;
+	p1.m_data = 1;
+	data p2;
+	p2.Link = nullptr;
+	p2.m_data = 2;
+	data p3;
+	p3.Link = nullptr;
+	p3.m_data = 3;
+	data p4;
+	p4.Link = nullptr;
+	p4.m_data = 4;
+	data p5;
+	p5.Link = nullptr;
+	p5.m_data = 5;
+	
+	q.push_QueueLink(&p1);
+	q.push_QueueLink(&p2);
+	q.push_QueueLink(&p3);
+	q.push_QueueLink(&p4);
+	q.push_QueueLink(&p5);
+	
+	cout<<"队列中元素个数为:"<<q.size()<<endl;
+	while(!q.isEmpty())
 	{
-		cout << " ";
-	}
-	cout << "~" << endl;
+		cout<<((data*)q.head())->m_data<<" ";
+		q.pop_QueueLink();
+	}	
+	return 0;
 }
+*/
