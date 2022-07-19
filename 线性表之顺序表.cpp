@@ -421,17 +421,12 @@ int main()
 
 
 
-//动态顺序表的缺陷
+
+
+
+
+//动态顺序表(动态数组)C++实现
 /*
-1.若空间不足，需要增容。增容会付出一定性能消耗，其次可能存在一定的空间浪费。
-2.在头部或中部左右的插入删除效率较低，需要挪动数据。
-*/
-
-
-
-
-
-
 #include<cstring>
 #include<iostream>
 using namespace std;
@@ -498,6 +493,7 @@ void dynamicArray::for_each(void(*MyPrint)(void*))
 	{
 		MyPrint(this->m_pAdder[i]);
 	}
+	cout<<endl;
 }
 
 void dynamicArray::remove(int pos)
@@ -531,3 +527,48 @@ dynamicArray:: ~dynamicArray()
 		this->m_pAdder = nullptr;
 	}
 }
+
+void myPrint(void* data)
+{
+	printf("%d ",*(int*)data);
+}
+bool MyCompare(void* a,void* b)
+{
+	return (*(int*)a == *(int*)b);
+}
+int main()
+{
+	int p1 = 1;
+	int p2 = 2;
+	int p3 = 3;
+	int p4 = 4;
+	int p5 = 5;
+	int p6 = 6;
+	int compare = 1;
+	dynamicArray d(10);
+	d.insert(0,&p1);
+	d.insert(0,&p2);
+	d.insert(0,&p3);
+	d.insert(0,&p4);
+	d.insert(0,&p5);
+	d.insert(0,&p6);
+	d.for_each(myPrint);
+	d.remove(2);
+	d.remove(&compare,MyCompare);
+	d.for_each(myPrint);
+	return 0;
+}
+*/
+
+
+
+
+
+//动态顺序表的缺陷
+/*
+1.若空间不足，需要增容。增容会付出一定性能消耗，其次可能存在一定的空间浪费。
+2.在头部或中部左右的插入删除效率较低，需要挪动数据。
+*/
+
+
+
