@@ -119,9 +119,9 @@ int main()
 
 
 
-
+//C++利用数组实现栈 
+/*
 #define MAX  1024
-
 #include<iostream>
 #include<cstring>
 using namespace std;
@@ -231,6 +231,7 @@ int main()
 	}
 	return 0;
 }
+*/
 
 
 
@@ -246,15 +247,17 @@ int main()
 
 
 
-
-
+//C++利用单链表实现栈
+/*
 #include<iostream>
+#include<cstdlib>
 using namespace std;
 class StackNode
 {
 	friend class StackLink;
 private:
 	StackNode* next;
+	void* data;
 };
 
 class StackLink
@@ -280,7 +283,10 @@ StackLink::StackLink()
 void StackLink::top_back(void* data)
 {
 	if (data == nullptr)return;
-	StackNode* myNode = (StackNode*)data;
+	StackNode* myNode = (StackNode*)malloc(sizeof(StackNode));
+	if(myNode == nullptr)return;
+	myNode->data = data;
+	
 	myNode->next = this->pHeader.next;
 	this->pHeader.next = myNode;
 	++this->m_size;
@@ -290,13 +296,15 @@ void StackLink::pop_back()
 {
 	StackNode* pDel = this->pHeader.next;
 	this->pHeader.next = pDel->next;
+	free(pDel);
+	pDel = nullptr;
 	--this->m_size;
 }
 
 void* StackLink::top()
 {
 	if (this->m_size == 0)return nullptr;
-	return this->pHeader.next;
+	return this->pHeader.next->data;
 }
 
 int StackLink::size()
@@ -315,6 +323,12 @@ bool StackLink::isEmpty()
 
 StackLink::~StackLink()
 {
+	for(StackNode* cur = pHeader.next;cur != nullptr;)
+	{
+		StackNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
 	this->pHeader.next = nullptr;
 	this->m_size = 0;
 }
@@ -339,9 +353,9 @@ void printError(char* str, string errMsg, char* pos)
 }
 int main()
 {
-	char* str = (char*)"5 + 5 * (6) + 9 / 3 * 1 - ( 1 + 310";
+	char* str = (char*)"5 + 5 * (6) + 9 / 3 * 1 - ) 1 + 310";
 	char* p = str;
-	Stack sk;
+	StackLink sk;
 	while (*p != '\0')
 	{
 		if (isLeft(*p))
@@ -368,3 +382,4 @@ int main()
 	}
 	return 0;
 }
+*/
