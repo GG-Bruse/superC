@@ -105,13 +105,104 @@ n(n>=0)╦Ж╫А╣Ц╣дспоч╪╞╨оё╛сир╩╦Ж╦Ы╫А╣Црт╪╟а╫©ц╩╔╡╩оЮ╫╩ё╛╥ж╠ПЁфн╙вСвсйВ╨мсрвсйВ╣д╤
 а╢й╫╫А╧╧сж╥жн╙╤Ч╡Фа╢╨мхЩ╡Фа╢(╨Л╨зйВ)
 */
 
+/*
+╤Ч╡ФйВ╣д╠ИюЗ╥╫й╫:
+охпР(╦Ы)╠ИюЗ:╦Ы вСвсйВ срвсйВ NLR
+жппР(╦Ы)╠ИюЗ:вСвсйВ ╦Ы срвсйВ LNR
+╨СпР(╦Ы)╠ИюЗ:вСвсйВ срвсйВ ╦Ы LRN
+╡ЦпР╠ИюЗ:
+иХ╤Ч╡ФйВ╣д╦Ы╫А╣ЦкЫтз╡ЦйЩн╙1ё╛╡ЦпР╠ИюЗ╬мйг╢скЫтз╤Ч╡ФйВ╣д╦Ы╫А╣ЦЁЖ╥╒ё╛
+йвох╥цнй╣зр╩╡Ц╣дйВ╦Ы╫А╣Цё╛х╩╨С╢свС╣╫ср╥цнй╣з╤Ч╡Цио╣д╫А╣Цё╛рт╢кюЮмфё╛╢сио╣╫обё╛╢свС╣╫срё╛жП╡Ц╥цнййВ╣д╫А╣Ц║ё
+*/
 
 
 
 
+#include<stdio.h>
+#include<stdlib.h>
+typedef char BTDataType;
+struct BinaryTreeNode
+{
+	struct BinaryTreeNode* left;
+	struct BinaryTreeNode* right;
+	BTDataType data;
+};
+void PrevOrder(struct BinaryTreeNode* root)//г╟пР
+{
+	if (root == NULL)
+	{
+		printf("NULL ");
+		return;
+	}
+	printf("%c ", root->data);
+	PrevOrder(root->left);
+	PrevOrder(root->right);
+}
+void InOrder(struct BinaryTreeNode* root)//жппР
+{
+	if (root == NULL)
+	{
+		printf("NULL ");
+		return;
+	}
+	InOrder(root->left);
+	printf("%c ", root->data);
+	InOrder(root->right);
+}
+void PostOrder(struct BinaryTreeNode* root)//╨СпР
+{
+	if (root == NULL)
+	{
+		printf("NULL ");
+		return;
+	}
+	PostOrder(root->left);
+	PostOrder(root->right);
+	printf("%c ", root->data);
+}
+int main()
+{
+	//в╪╠╦╫А╣Ц
+	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	A->data = 'A';
+	A->left = NULL;
+	A->right = NULL;
+	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	B->data = 'B';
+	B->left = NULL;
+	B->right = NULL;
+	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	C->data = 'C';
+	C->left = NULL;
+	C->right = NULL;
+	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	D->data = 'D';
+	D->left = NULL;
+	D->right = NULL;
+	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	E->data = 'E';
+	E->left = NULL;
+	E->right = NULL;
 
+	//╧╧╫╗йВ╫А╧╧
+	A->left = B;
+	A->right = C;
+	B->left = D;
+	B->right = E;
 
-
+	//г╟жп╨СпР╠ИюЗ
+	PrevOrder(A);
+	printf("\n");
+	InOrder(A); 
+	printf("\n");
+	PostOrder(A);
+	return 0;
+}
+/*
+A B D NULL NULL E NULL NULL C NULL NULL
+NULL D NULL B NULL E NULL A NULL C NULL
+NULL NULL D NULL NULL E B NULL NULL C A
+*/
 
 
 
