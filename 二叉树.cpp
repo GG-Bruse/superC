@@ -82,7 +82,8 @@ n(n>=0)╦Ж╫А╣Ц╣дспоч╪╞╨оё╛сир╩╦Ж╦Ы╫А╣Црт╪╟а╫©ц╩╔╡╩оЮ╫╩ё╛╥ж╠ПЁфн╙вСвсйВ╨мсрвсйВ╣д╤
 3.тз╤Ч╡ФйВ╣д╣зi╡Циожа╤Юсп2^(i-1)╦Ж╫А╣Ц(i>0)
 4.иН╤хн╙k╣д╤Ч╡ФйВжа╤Юсп2^k - 1╦Ж╫А╣Ц(k>0)
 5.╤тсзхн╨нр╩©ц╤Ч╡ФйВё╛хТ╤хн╙2╣д╫А╣ЦйВспm╦Жё╛тРр╤всйЩn╠ьн╙m+1(╪╢n = m+1)
-6.╬ъспn╦Ж╫А╣Ц╣дбЗ╤Ч╡ФйВ╣диН╤хн╙logN
+6.╬ъспN╦Ж╫А╣Ц╣дбЗ╤Ч╡ФйВ╣диН╤хн╙logN
+6.╤тсзмЙх╚╤Ч╡ФйВё╛хТ╢сиожаобё╛╢свСжаср╠Ю╨её╛тР╠Ю╨ен╙i╣д╫А╣Цё╛фДвС╨╒вс╠Ю╨е╠ьн╙2iё╛фДср╨╒вс╠Ю╨ен╙2i+1,фДк╚гв╣д╠Ю╨ен╙i/2(i = 1н╙╦Ынчк╚гвЁЩмБ)
 
 льйБ╤Ч╡ФйВ:
 1.бЗ╤Ч╡ФйВ:
@@ -102,22 +103,23 @@ n(n>=0)╦Ж╫А╣Ц╣дспоч╪╞╨оё╛сир╩╦Ж╦Ы╫А╣Црт╪╟а╫©ц╩╔╡╩оЮ╫╩ё╛╥ж╠ПЁфн╙вСвсйВ╨мсрвсйВ╣д╤
 2.а╢й╫╢Ф╢╒:
 ╤Ч╡ФйВ╣да╢й╫╢Ф╢╒╫А╧╧йгж╦сца╢╠Мю╢╠Мй╬р╩©ц╤Ч╡ФйВё╛╪╢сца╢ю╢ж╦й╬т╙кьж╝╪Д╣дбъ╪╜╧ьо╣║ё
 м╗Ёё╣д╥╫╥╗:а╢╠М╣дц©╦Ж╫А╣ЦсихЩ╦ЖсРвИЁиё╛йЩ╬щсР╨мвСсрж╦уКсР║ё
-а╢й╫╫А╧╧сж╥жн╙╤Ч╡Фа╢╨мхЩ╡Фа╢(╨Л╨зйВ)
+а╢й╫╫А╧╧сж╥жн╙╤Ч╡Фа╢(left╨мright)╨мхЩ╡Фа╢(left║╒right╨мparent)
 */
 
 /*
 ╤Ч╡ФйВ╣д╠ИюЗ╥╫й╫:
+1.иН╤хсеох╠ИюЗ:
 охпР(╦Ы)╠ИюЗ:╦Ы вСвсйВ срвсйВ NLR
 жппР(╦Ы)╠ИюЗ:вСвсйВ ╦Ы срвсйВ LNR
 ╨СпР(╦Ы)╠ИюЗ:вСвсйВ срвсйВ ╦Ы LRN
-╡ЦпР╠ИюЗ:
+2.╡ЦпР╠ИюЗ(╧Ц╤хсеох╠ИюЗ):
 иХ╤Ч╡ФйВ╣д╦Ы╫А╣ЦкЫтз╡ЦйЩн╙1ё╛╡ЦпР╠ИюЗ╬мйг╢скЫтз╤Ч╡ФйВ╣д╦Ы╫А╣ЦЁЖ╥╒ё╛
 йвох╥цнй╣зр╩╡Ц╣дйВ╦Ы╫А╣Цё╛х╩╨С╢свС╣╫ср╥цнй╣з╤Ч╡Цио╣д╫А╣Цё╛рт╢кюЮмфё╛╢сио╣╫обё╛╢свС╣╫срё╛жП╡Ц╥цнййВ╣д╫А╣Ц║ё
 */
 
 
 
-
+/*
 #include<stdio.h>
 #include<stdlib.h>
 typedef char BTDataType;
@@ -144,7 +146,7 @@ void InOrder(struct BinaryTreeNode* root)//жппР
 	{
 		printf("NULL ");
 		return;
-	}
+	}  
 	InOrder(root->left);
 	printf("%c ", root->data);
 	InOrder(root->right);
@@ -196,35 +198,257 @@ int main()
 	InOrder(A); 
 	printf("\n");
 	PostOrder(A);
+	printf("\n");
+
 	return 0;
 }
+*/
+//A B D NULL NULL E NULL NULL C NULL NULL
+//NULL D NULL B NULL E NULL A NULL C NULL
+//NULL NULL D NULL NULL E B NULL NULL C A
+
+
+
+
+
+
+
+
+
 /*
-A B D NULL NULL E NULL NULL C NULL NULL
-NULL D NULL B NULL E NULL A NULL C NULL
-NULL NULL D NULL NULL E B NULL NULL C A
+#include<stdio.h>
+#include<stdlib.h>
+typedef char BTDataType;
+struct BinaryTreeNode
+{
+	struct BinaryTreeNode* left;
+	struct BinaryTreeNode* right;
+	BTDataType data;
+};
+void GetBinaryTreeNodeSize_1(struct BinaryTreeNode* root, int* count)//╩Ях║╫А╣ЦйЩ
+{
+	if (root == NULL)return;
+	++(*count);
+	GetBinaryTreeNodeSize_1(root->left, count);
+	GetBinaryTreeNodeSize_1(root->right, count);
+}
+int GetBinaryTreeNodeSize_2(struct BinaryTreeNode* root)//╩Ях║╫А╣ЦйЩ
+{
+	return root == NULL ? 0 : GetBinaryTreeNodeSize_2(root->left) + GetBinaryTreeNodeSize_2(root->right) + 1;
+}
+int GetLeaf(struct BinaryTreeNode* root)//╩Ях║р╤всйЩ
+{
+	if (root == NULL)return 0;
+	return ((root->left == NULL) && (root->right == NULL)) ? 1 : GetLeaf(root->left) + GetLeaf(root->right);
+}
+int main()
+{
+	//в╪╠╦╫А╣Ц
+	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	A->data = 'A';
+	A->left = NULL;
+	A->right = NULL;
+	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	B->data = 'B';
+	B->left = NULL;
+	B->right = NULL;
+	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	C->data = 'C';
+	C->left = NULL;
+	C->right = NULL;
+	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	D->data = 'D';
+	D->left = NULL;
+	D->right = NULL;
+	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	E->data = 'E';
+	E->left = NULL;
+	E->right = NULL;
+
+	//╧╧╫╗йВ╫А╧╧
+	A->left = B;
+	A->right = C;
+	B->left = D;
+	B->right = E;
+
+	int count = 0;
+	GetBinaryTreeNodeSize_1(A, &count);
+	printf("╧╡сп%d╦Ж╫А╣Ц\n", count);//5
+	printf("╧╡сп%d╦Ж╫А╣Ц\n", GetBinaryTreeNodeSize_2(A));//5
+
+	printf("р╤всйЩн╙:%d\n", GetLeaf(A));//3
+	return 0;
+}
 */
 
 
 
 
+//╡ЦпР╠ИюЗ(╥г╣щ╧И)║╙║╙╤сапй╣ож
+#include<stdio.h>
+#include<stdlib.h>
+#include<assert.h>
+#include<stdbool.h>
+typedef char BTDataType;
+struct BinaryTreeNode
+{
+	struct BinaryTreeNode* left;
+	struct BinaryTreeNode* right;
+	BTDataType data;
+};
+/************************************************************/
+typedef struct BinaryTreeNode* QDataType;
+typedef struct QueueNode
+{
+	QDataType data;
+	struct QueueNode* next;
+}QNode;
+typedef struct Queue
+{
+	QNode* head;
+	QNode* tail;
+}Queue;
 
+void QueueInit(Queue* pq)
+{
+	assert(pq);
+	pq->head = pq->tail = NULL;
+}
+void QueueDestory(Queue* pq)
+{
+	assert(pq);
+	QNode* cur = pq->head;
+	while (cur != NULL)
+	{
+		QNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+	pq->head = pq->tail = NULL;
+}
+void QueuePush(Queue* pq, QDataType d)//╤сн╡хК 
+{
+	assert(pq);
+	QNode* newNode = (QNode*)malloc(sizeof(QNode));
+	if (newNode == NULL)
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+	newNode->next = NULL;
+	newNode->data = d;
 
+	if (pq->tail == NULL)
+	{
+		pq->head = pq->tail = newNode;
+	}
+	else
+	{
+		pq->tail->next = newNode;
+		pq->tail = newNode;
+	}
+}
+void QueuePop(Queue* pq)//╤см╥ЁЖ 
+{
+	assert(pq);
+	assert(pq->head);//╤сап╡╩н╙©у
+	if (pq->head->next == NULL)//ж╩спр╩╦Ж╫А╣Ц╣дгИ©Ж 
+	{
+		free(pq->head);
+		pq->head = pq->tail = NULL;
+	}
+	else
+	{
+		QNode* next = pq->head->next;
+		free(pq->head);
+		pq->head = next;
+	}
+}
+QDataType QueueFront(Queue* pq)
+{
+	assert(pq);
+	assert(pq->head);
+	return pq->head->data;
+}
+QDataType QueueBack(Queue* pq)
+{
+	assert(pq);
+	assert(pq->tail);
+	return pq->tail->data;
+}
+int QueueSize(Queue* pq)
+{
+	assert(pq);
+	int size = 0;
+	QNode* cur = pq->head;
+	while (cur != NULL)
+	{
+		++size;
+		cur = cur->next;
+	}
+	return size;
+}
+bool QueueIsEmpty(Queue* pq)
+{
+	assert(pq);
+	return pq->head == NULL;
+}
+/***************************************************/
+//1║╒йвох╫╚╤Ч╡ФйВ╣д╦Ы╫з╣Цpush╣╫╤сапжпё╛еп╤о╤сап╡╩н╙NULLё╛╬мйДЁЖ╤см╥╣дт╙кьё╛
+//2║╒╠ИюЗ╧Щ╣д╫з╣ЦЁЖ╤сап
+//3║╒еп╤о╫з╣ЦхГ╧Шсп╨╒всё╛╬м╫╚╨╒всpush╣╫╤сапжп
+//4║╒я╜╩╥ртио╡ывВё╛ж╠╣╫Tree == NULL║ё
+void LevelOrder(struct BinaryTreeNode* root)//╡ЦпР╠ИюЗ
+{
+	Queue q;
+	QueueInit(&q);
+	if (root != NULL)
+		QueuePush(&q, root);
+	while (!QueueIsEmpty(&q))
+	{
+		struct BinaryTreeNode* front = QueueFront(&q);
+		QueuePop(&q);
+		printf("%c ", front->data);
+		if (front->left != NULL)
+			QueuePush(&q, front->left);
+		if (front->right != NULL)
+			QueuePush(&q, front->right);
+	}
+	QueueDestory(&q);
+}
+int main()
+{
+	//в╪╠╦╫А╣Ц
+	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	A->data = 'A';
+	A->left = NULL;
+	A->right = NULL;
+	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	B->data = 'B';
+	B->left = NULL;
+	B->right = NULL;
+	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	C->data = 'C';
+	C->left = NULL;
+	C->right = NULL;
+	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	D->data = 'D';
+	D->left = NULL;
+	D->right = NULL;
+	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	E->data = 'E';
+	E->left = NULL;
+	E->right = NULL;
 
+	//╧╧╫╗йВ╫А╧╧
+	A->left = B;
+	A->right = C;
+	B->left = D;
+	B->right = E;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	LevelOrder(A);
+	return 0;
+}
 
 
 
