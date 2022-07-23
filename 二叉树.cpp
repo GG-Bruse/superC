@@ -162,6 +162,14 @@ void PostOrder(struct BinaryTreeNode* root)//后序
 	PostOrder(root->right);
 	printf("%c ", root->data);
 }
+void DestoryTree(struct BinaryTreeNode* root)//后序销毁
+{
+	if (root == NULL)
+		return;
+	DestoryTree(root->left);
+	DestoryTree(root->right);
+	free(root);
+}
 int main()
 {
 	//准备结点
@@ -200,6 +208,7 @@ int main()
 	PostOrder(A);
 	printf("\n");
 
+	DestoryTree(A);
 	return 0;
 }
 */
@@ -285,6 +294,7 @@ int main()
 
 
 //层序遍历(非递归)——队列实现
+/*
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
@@ -296,7 +306,7 @@ struct BinaryTreeNode
 	struct BinaryTreeNode* right;
 	BTDataType data;
 };
-/************************************************************/
+///*************************************************************
 typedef struct BinaryTreeNode* QDataType;
 typedef struct QueueNode
 {
@@ -393,7 +403,7 @@ bool QueueIsEmpty(Queue* pq)
 	assert(pq);
 	return pq->head == NULL;
 }
-/***************************************************/
+//********************************************************
 //1、首先将二叉树的根节点push到队列中，判断队列不为NULL，就输出队头的元素，
 //2、遍历过的节点出队列
 //3、判断节点如果有孩子，就将孩子push到队列中
@@ -449,17 +459,7 @@ int main()
 	LevelOrder(A);
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 
 
