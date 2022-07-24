@@ -87,8 +87,6 @@ int main()
 
 
 
-
-
 /*
 希尔排序(缩小增量排序):
 ————直接插入排序的优化
@@ -146,8 +144,132 @@ int main()
 
 
 
+//选择排序基本思想:
+//每一次从待排序的数据元素中选出最大(最小)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完
+
+//直接选择排序(优化版)
+/*
+同时查找最大值和最小值
+时间复杂度为:O(N^2)
+*/
+/*
+#include<stdio.h>
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void SelectSort(int* arr,int n)
+{
+	
+	for (int begin = 0,end = n - 1; begin < end; ++begin, --end)
+	{
+		int mini = begin, maxi = begin;
+		for (int i = begin; i <= end; ++i)
+		{
+			if (arr[i] < arr[mini])
+			{
+				mini = i;
+			}
+			if (arr[i] > arr[maxi])
+			{
+				maxi = i;
+			}
+		}
+		Swap(&arr[begin], &arr[mini]);
+		if (begin == maxi)maxi = mini;//特殊情况
+		Swap(&arr[end], &arr[maxi]);
+	}
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	SelectSort(arr, (int)(sizeof(arr) / sizeof(int)));
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
 
 
 
 
+/*
+堆排序:
+堆的逻辑结构是一棵完全二叉树，堆的物理结构是一个数组(层序)
+leftchild = parent * 2 +1;
+rightchild = parent * 2 + 2; 
+parent = (child - 1)/2
 
+堆的两个特性:
+1.结构性:
+		用数组表示的二叉树
+2.有序性:
+		任一结点的关键字是其子树所有结点的最大值\最小值
+		最大堆(大顶堆、大根堆):最大值
+		最小堆(小顶堆、小根堆):最小值
+*/
+/*
+1.建堆:(排升序建大堆，排降序建小堆)		建堆的时间复杂度为:O(n)
+向下调整算法:若建大堆，从根结点开始选出左右孩子中较大的一个，与父亲比较，若比父亲大则交换。然后继续往下调整直到叶子结点终止。(前提:左右子树都是大堆)
+			 若建小堆，从根结点开始选出左右孩子中较小的一个，与父亲比较，若比父亲小则交换。然后继续往下调整直到叶子结点终止。(前提:左右子树都是小堆)
+从最后一个非叶子的子树开始使用向下调整算法，保证其左右子树都是小堆,完成建大堆。
+2.将最大(小)数交换到最后，并不再参与排序。前n-1个数向下调整，再跟倒数第二个位置交换……
+*/
+/*
+#include<stdio.h>
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void AdJustDown(int* arr,int n,int root)
+{
+	int parent = root;
+	int child = parent * 2 + 1;//默认左孩子
+	while (child < n)
+	{
+		if (child+1 < n && arr[child + 1] > arr[child])
+		{
+			++child;
+		}
+		if (arr[child] > arr[parent])
+		{
+			Swap(&arr[child], &arr[parent]);
+			parent = child;
+			child = parent * 2 + 1;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void HeapSort(int* arr,int n)
+{
+	for (int i = (n - 1 - 1) / 2; i >= 0; --i)
+	{
+		AdJustDown(arr, n, i);
+	}
+	for(int end = n - 1;end > 0; --end)
+	{
+		Swap(&arr[0], &arr[end]);
+		AdJustDown(arr, end, 0);
+	}
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	HeapSort(arr, 10);
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
+//时间复杂度:O(NlogN)
