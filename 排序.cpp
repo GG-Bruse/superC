@@ -41,6 +41,8 @@
 
 
 
+
+
 /*
 直接插入排序:
 把待排序的记录按其关键码值的大小逐个插入到已经排好序的有序序列中，直到所有的记录插入完为止，得到一个新的有序序列
@@ -144,8 +146,53 @@ int main()
 
 
 
+
+
+
+
 //选择排序基本思想:
 //每一次从待排序的数据元素中选出最大(最小)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完
+
+//选择排序
+/*
+#include<stdio.h>
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void SelectSort(int* arr, int n)
+{
+	for (int i = 0;i < n - 1;++i)
+	{
+		int min = i;
+		for (int j = i+1; j < n; ++j)
+		{
+			if (arr[j] < arr[min])
+			{
+				min = j;
+			}
+		}
+		if (min != i)
+		{
+			Swap(&arr[i], &arr[min]);
+		}
+	}
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	SelectSort(arr, (int)(sizeof(arr) / sizeof(int)));
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
+
+
 
 //直接选择排序(优化版)
 /*
@@ -193,6 +240,8 @@ int main()
 	return 0;
 }
 */
+
+
 
 
 
@@ -273,3 +322,78 @@ int main()
 }
 */
 //时间复杂度:O(NlogN)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//交换排序基本思想:
+//将键值较大(小)的记录向序列的尾部移动，键值较小(大)的记录向序列的前部移动
+
+
+//冒泡排序
+/*
+#include<stdio.h>
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void BubbleSort(int arr[],int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		int exchange = 0;
+		for (int j = 0; j < n-i-1; ++j)
+		{
+			if (arr[j] > arr[j+1])
+			{
+				Swap(&arr[j], &arr[j + 1]);
+				exchange = 1;
+			}
+		}
+		if (exchange == 0)//若没发生交换，则停止循环
+		{
+			break;
+		}
+	}
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	BubbleSort(arr, (int)(sizeof(arr) / sizeof(int)));
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
+//时间复杂度为:O(n)
+
+
+
+
+
+
+
+/*
+快速排序是一种二叉树结构的交换排序方法。
+其基本思想为:
+任取待排序元素序列中的某元素作为基准值，按照该排序码将待排序集合分割成两子序列。
+左子序列中所有元素均小于基准值，右子序列中所有元素均大于基准值，然后左右子序列重复该过程，直到所有元素都排列在相应位置为止。
+*/
+
+
+
+
