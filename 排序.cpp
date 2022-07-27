@@ -336,6 +336,7 @@ int main()
 
 
 
+
 //交换排序基本思想:
 //将键值较大(小)的记录向序列的尾部移动，键值较小(大)的记录向序列的前部移动
 
@@ -388,12 +389,229 @@ int main()
 
 
 /*
-快速排序是一种二叉树结构的交换排序方法。
+快速排序是一种二叉树结构的交换排序方法。(时间复杂度为O(NlogN))
 其基本思想为:
-任取待排序元素序列中的某元素作为基准值，按照该排序码将待排序集合分割成两子序列。
+任取待排序元素序列中的某元素作为基准值key(key一般选择第一个或者最后一个)，按照该排序码将待排序集合分割成两子序列。
 左子序列中所有元素均小于基准值，右子序列中所有元素均大于基准值，然后左右子序列重复该过程，直到所有元素都排列在相应位置为止。
+*/
+/*
+快速排序在有序的情况下最坏，此时其时间复杂度为O(N^2)
+解决方案:三数取中
 */
 
 
+
+//挖坑法
+/*
+#include<stdio.h>
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void InsertSort(int* arr, int n)
+{
+	for (int i = 0; i < n - 1; ++i)
+	{
+		int end = i;
+		int temp = arr[end + 1];
+		while (end >= 0)
+		{
+			if (arr[end] > temp)
+			{
+				arr[end + 1] = arr[end];
+				--end;
+			}
+			else
+			{
+				break;//找到位置
+			}
+		}
+		arr[end + 1] = temp;
+	}
+}
+int GetMid(int* arr,int left,int right)//三数取中
+{
+	int mid = (left + right) >> 1;
+	if (arr[left] < arr[mid])
+	{
+		if (arr[mid] < arr[right])
+		{
+			return mid;
+		}
+		else if (arr[left] > arr[right])
+		{
+			return left;
+		}
+		else
+		{
+			return right;
+		}
+	}
+	else//arr[left] > arr[mid]
+	{
+		if (arr[mid] > arr[right])
+		{
+			return mid;
+		}
+		else if (arr[left] > arr[right])
+		{
+			return right;
+		}
+		else
+		{
+			return left;
+		}
+	}
+}
+void QuickSort(int* arr, int left,int right)
+{
+	if (left >= right)return;
+
+	int index = GetMid(arr, left, right);
+	Swap(&arr[left], &arr[index]);//保持逻辑不变
+
+	int begin = left, end = right;
+	int pivot = begin;
+	int key = arr[begin];
+	while (begin < end)
+	{
+		//右边找小，放在左边
+		while (begin < end && arr[end] >= key)
+		{
+			--end;
+		}
+		arr[pivot] = arr[end];
+		pivot = end;
+		//左边找大，放在右边
+		while (begin < end && arr[begin] <= key)
+		{
+			++begin;
+		}
+		arr[pivot] = arr[begin];
+		pivot = begin;
+	}
+	pivot = begin;
+	arr[pivot] = key;
+
+	//小区间优化(二叉树结构，越靠近叶子，结点数分化越多(函数调用开销较大);尾部直接使用插入排序)
+	//不适合使用堆排序(同为二叉树结构)、希尔排序(适合大体量数据)
+	if (pivot - 1 - left > 10)
+	{
+		QuickSort(arr, left, pivot - 1);
+	}
+	else
+	{
+		InsertSort(arr + left, pivot - 1 - left + 1);
+	}
+	if (right - pivot - 1 > 10)//该值根据数据量自行调控
+	{
+		QuickSort(arr, pivot + 1, right);
+	}
+	else
+	{
+		InsertSort(arr + pivot + 1, right - pivot - 1 + 1);
+	}
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	QuickSort(arr, 0 ,(int)(sizeof(arr) / sizeof(int))-1);
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
+
+
+
+//左右指针法
+/*
+#include<stdio.h>
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void QuickSort(int* arr, int left, int right)
+{
+	if (left >= right)return;
+
+	int begin = left, end = right;
+	int key = begin;
+	while (begin < end)
+	{
+		while (begin < end && arr[end] >= arr[key])//找小
+		{
+			--end;
+		}
+		while (begin < end && arr[begin] <= arr[key])//找大
+		{
+			++begin;
+		}
+		Swap(&arr[begin], &arr[end]);
+	}
+	Swap(&arr[begin], &arr[key]);
+
+	QuickSort(arr, left, begin - 1);
+	QuickSort(arr, begin + 1, right);
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	QuickSort(arr, 0, (int)(sizeof(arr) / sizeof(int)) - 1);
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
+
+
+
+//前后指针法
+/*
+#include<stdio.h>
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+void QuickSort(int* arr, int left, int right)
+{
+	if (left >= right)return;
+
+	int key = left;
+	int cur = left, prev = left + 1;
+	while (prev <= right)
+	{
+		if (arr[prev] < arr[key] && ++cur != prev)//避免无意义交换
+		{
+			Swap(&arr[prev], &arr[cur]);
+		}
+		++prev;
+	}
+	Swap(&arr[key], &arr[cur]);
+
+	QuickSort(arr, left, cur - 1);
+	QuickSort(arr, cur + 1, right);
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	QuickSort(arr, 0, (int)(sizeof(arr) / sizeof(int)) - 1);
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
 
 
