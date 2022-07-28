@@ -150,6 +150,11 @@ int main()
 
 
 
+
+
+
+
+
 //选择排序基本思想:
 //每一次从待排序的数据元素中选出最大(最小)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完
 
@@ -337,6 +342,16 @@ int main()
 
 
 
+
+
+
+
+
+
+
+
+
+
 //交换排序基本思想:
 //将键值较大(小)的记录向序列的尾部移动，键值较小(大)的记录向序列的前部移动
 
@@ -398,7 +413,6 @@ int main()
 快速排序在有序的情况下最坏，此时其时间复杂度为O(N^2)
 解决方案:三数取中
 */
-
 
 
 //挖坑法
@@ -613,5 +627,299 @@ int main()
 	return 0;
 }
 */
+
+
+
+//非递归(递归的缺陷:栈帧深度过大，stackoverflow)
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<stdlib.h>
+//#include<assert.h>
+////利用栈实现非递归
+///************************************************************************************/
+//typedef int SKDataType;
+//typedef struct stack
+//{
+//	SKDataType* data;
+//	int top;
+//	int capacity;
+//}Stack;
+//void StackInit(Stack* ps)
+//{
+//	assert(ps);
+//	ps->data = (SKDataType*)malloc(sizeof(SKDataType)*4);
+//	if(ps->data == NULL)
+//	{
+//		printf("malloc fail\n");
+//		exit(-1);
+//	}
+//
+//	ps->capacity = 4;
+//	ps->top = 0;//top指向栈顶元素的上一个位置
+//}
+//void StackDestory(Stack* ps)
+//{
+//	assert(ps);
+//	free(ps->data);
+//	ps->data = NULL;
+//	ps->capacity = ps->top = 0;
+//}
+//void StackPush(Stack* ps,SKDataType d)
+//{
+//	assert(ps);
+//	if(ps->top == ps->capacity)
+//	{
+//		SKDataType* newSpace = (SKDataType*)realloc(ps->data,ps->capacity * 2 * sizeof(SKDataType));
+//		if(newSpace == NULL)
+//		{
+//			printf("realloc fail\n");
+//			exit(-1);
+//		}
+//		ps->data = newSpace;
+//		ps->capacity *= 2;
+//	}
+//	ps->data[ps->top] = d;
+//	++ps->top;
+//}
+//void StackPop(Stack* ps)
+//{
+//	assert(ps);
+//	assert(ps->top > 0);//栈不可为空
+//	--ps->top;
+//}
+//SKDataType StackTop(Stack* ps)
+//{
+//	assert(ps);
+//	assert(ps->top > 0);
+//	return ps->data[ps->top - 1];
+//}
+//int StackSize(Stack* ps)
+//{
+//	assert(ps);
+//	return ps->top;
+//}
+//bool StackIsEmpty(Stack* ps)
+//{
+//	assert(ps);
+//	return ps->top == 0;
+//}
+///***********************************************************************************/
+//void QuickSort(int* arr, int size)
+//{
+//	Stack sk;
+//	StackInit(&sk);
+//	StackPush(&sk, size);
+//	StackPush(&sk, 0);
+//	while (!StackIsEmpty(&sk))
+//	{
+//		int left = StackTop(&sk);
+//		StackPop(&sk);
+//		int right = StackTop(&sk);
+//		StackPop(&sk);
+//
+//		//挖坑单趟排序
+//		int begin = left, end = right;
+//		int pivot = begin;
+//		int key = arr[begin];
+//		while (begin < end)
+//		{
+//			//右边找小，放在左边
+//			while (begin < end && arr[end] >= key)
+//			{
+//				--end;
+//			}
+//			arr[pivot] = arr[end];
+//			pivot = end;
+//			//左边找大，放在右边
+//			while (begin < end && arr[begin] <= key)
+//			{
+//				++begin;
+//			}
+//			arr[pivot] = arr[begin];
+//			pivot = begin;
+//		}
+//		pivot = begin;
+//		arr[pivot] = key;
+//
+//		if (right > pivot + 1)
+//		{
+//			StackPush(&sk, right);
+//			StackPush(&sk, pivot + 1);
+//		}
+//		if (left < pivot - 1)
+//		{
+//			StackPush(&sk, pivot - 1);
+//			StackPush(&sk, left);
+//		}
+//	}
+//	StackDestory(&sk);
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+//	QuickSort(arr, (int)(sizeof(arr) / sizeof(int)) - 1);
+//	for (int i = 0; i < 10; ++i)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+归并排序:
+是建立在归并操作上的一种有效的排序算法，采用分治法。
+将已有序的子序列合并，得到完全有序的序列。即先使每个子序列有序，再使每个子序列间有序。
+若将两个有序表合并成一个有序表，称为二路归并
+*/
+/*
+#include<stdio.h>
+#include<stdlib.h>
+void _MergeSort(int* arr, int left, int right,int* temp)
+{
+	if (left >= right)return;
+	int mid = (left + right) >> 1;
+	_MergeSort(arr, left, mid, temp);
+	_MergeSort(arr, mid + 1, right, temp);
+
+	int begin1 = left, end1 = mid;
+	int begin2 = mid + 1, end2 = right;
+	int index = left;
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (arr[begin1] < arr[begin2])
+		{
+			temp[index++] = arr[begin1++];
+		}
+		else
+		{
+			temp[index++] = arr[begin2++];
+		}
+	}
+	while (begin1 <= end1)
+	{
+		temp[index++] = arr[begin1++];
+	}
+	while (begin2 <= end2)
+	{
+		temp[index++] = arr[begin2++];
+	}
+
+	for (int i = left; i <= right; ++i)
+	{
+		arr[i] = temp[i];
+	}
+}
+void MergeSort(int* arr, int size)
+{
+	int* temp = (int*)malloc(sizeof(int) * size);
+	_MergeSort(arr, 0, size - 1, temp);
+	free(temp);
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	MergeSort(arr,(int)(sizeof(arr) / sizeof(int)));
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
+
+
+//非递归
+/*
+#include<stdio.h>
+#include<stdlib.h>
+void MergeSort(int* arr, int size)
+{
+	int* temp = (int*)malloc(sizeof(int) * size);
+	int gap = 1;//每组数据个数
+	while (gap < size)
+	{
+		for (int i = 0; i < size ; i += 2 * gap)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+			int index = i;
+
+			//归并过程中右半区间可能不存在
+			if (begin2 >= size) break;
+			//归并过程中右区间计算过大
+			if (end2 >= size) end2 = size - 1;
+
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (arr[begin1] < arr[begin2])
+				{
+					temp[index++] = arr[begin1++];
+				}
+				else
+				{
+					temp[index++] = arr[begin2++];
+				}
+			}
+			while (begin1 <= end1)
+			{
+				temp[index++] = arr[begin1++];
+			}
+			while (begin2 <= end2)
+			{
+				temp[index++] = arr[begin2++];
+			}
+		}
+		for (int j = 0; j < size; ++j)
+		{
+			arr[j] = temp[j];
+		}
+		gap *= 2;
+	}
+	free(temp);
+}
+int main()
+{
+	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+	MergeSort(arr, (int)(sizeof(arr) / sizeof(int)));
+	for (int i = 0; i < 10; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+	return 0;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
