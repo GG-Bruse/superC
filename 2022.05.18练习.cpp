@@ -52,3 +52,63 @@ public:
 };
 
 
+
+#include<stdio.h>
+#include<time.h>
+#include<stdlib.h>
+void Get_Max1(int* arr, int* maxi)
+{
+	int begin = 0, end = 999999;
+	int maxb = arr[begin], maxe = arr[end];
+	for (int i = 0; i < 1000000 / 2; ++i)
+	{
+		if (maxb < arr[i])
+		{
+			maxb = arr[i];
+			begin = i;
+		}
+		if (maxe < arr[999999 - i])
+		{
+			maxe = arr[999999 - i];
+			end = 999999 - i;
+		}
+	}
+	*maxi = maxb < maxe ? end : begin;
+}
+void Get_Max2(int* arr, int* maxi)
+{
+	int max = arr[0], max_i = 0;
+	for (int i = 0; i < 1000000; ++i)
+	{
+		if (max < arr[i])
+		{
+			max = arr[i];
+			max_i = i;
+		}
+	}
+	*maxi = max_i;
+}
+int main()
+{
+	int* arr = (int*)malloc(sizeof(int) * 1000000);
+	if (arr != NULL)
+	{
+		for (int i = 0; i < 1000000; ++i)
+		{
+			arr[i] = i + 1;
+		}
+		int maxi = 0;
+		clock_t begin1 = clock();
+		Get_Max1(arr, &maxi);
+		clock_t end1 = clock();
+		printf("%d\n", arr[maxi]);
+		printf("func1:%d\n", end1 - begin1);
+
+		clock_t begin2 = clock();
+		Get_Max2(arr, &maxi);
+		clock_t end2 = clock();
+		printf("%d\n", arr[maxi]);
+		printf("func2:%d\n", end2 - begin2);
+	}
+	return 0;
+}
