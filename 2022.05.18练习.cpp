@@ -52,25 +52,25 @@ public:
 };
 
 
-
+//1亿
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
 void Get_Max1(int* arr, int* maxi)
 {
-	int begin = 0, end = 999999;
+	int begin = 0, end = 99999999;
 	int maxb = arr[begin], maxe = arr[end];
-	for (int i = 0; i < 1000000 / 2; ++i)
+	for (int i = 0; i < 100000000 / 2; ++i)
 	{
 		if (maxb < arr[i])
 		{
 			maxb = arr[i];
 			begin = i;
 		}
-		if (maxe < arr[999999 - i])
+		if (maxe < arr[99999999 - i])
 		{
-			maxe = arr[999999 - i];
-			end = 999999 - i;
+			maxe = arr[99999999 - i];
+			end = 99999999 - i;
 		}
 	}
 	*maxi = maxb < maxe ? end : begin;
@@ -78,7 +78,7 @@ void Get_Max1(int* arr, int* maxi)
 void Get_Max2(int* arr, int* maxi)
 {
 	int max = arr[0], max_i = 0;
-	for (int i = 0; i < 1000000; ++i)
+	for (int i = 0; i < 100000000; ++i)
 	{
 		if (max < arr[i])
 		{
@@ -90,10 +90,10 @@ void Get_Max2(int* arr, int* maxi)
 }
 int main()
 {
-	int* arr = (int*)malloc(sizeof(int) * 1000000);
+	int* arr = (int*)malloc(sizeof(int) * 100000000);
 	if (arr != NULL)
 	{
-		for (int i = 0; i < 1000000; ++i)
+		for (int i = 0; i < 100000000; ++i)
 		{
 			arr[i] = i + 1;
 		}
