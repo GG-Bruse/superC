@@ -131,3 +131,111 @@ int main()
     printf("YES\n");
     return 0;
 }
+
+
+
+
+
+#include<stdio.h>
+int main()
+{
+    int year = 0, month = 0;
+    while (scanf("%d%d", &year, &month) != EOF)
+    {
+
+        if (month == 2)
+        {
+            if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
+            {
+                printf("29\n");
+                continue;
+            }
+            else
+            {
+                printf("28\n");
+                continue;
+            }
+        }
+        switch (month)
+        {
+        case 1:
+        case 2:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+            printf("31\n");
+            break;
+        default:
+            printf("30\n");
+            break;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+#include<stdio.h>
+int main()
+{
+    char temp = 0;
+    while (scanf("%c", &temp) != EOF)
+    {
+        if ((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z'))
+        {
+            printf("%c is an alphabet.\n", temp);
+        }
+        else
+        {
+            printf("%c is not an alphabet.\n", temp);
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+#include<stdio.h>
+int main()
+{
+    double val = 0.0;
+    int month = 0, day = 0, coupon = 0;
+    scanf("%lf%d%d%d", &val, &month, &day, &coupon);
+    double discount = 0.0;
+
+    if (month == 11)discount = 0.7;
+    else discount = 0.8;
+
+    double total = 0.0;
+    if (coupon)
+    {
+        total = val * discount - 50;
+    }
+    else
+    {
+        total = val * discount;
+    }
+    if (total < 0)
+    {
+        total = 0.0;
+    }
+    printf("%0.2lf", total);
+    return 0;
+}
+
+
+
+
+
