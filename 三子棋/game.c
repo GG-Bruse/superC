@@ -1,164 +1,111 @@
-#define _CRT_SECURE_NO_WARNINGS
+#include "game.h"
 
-#include<stdio.h>
-#include"game.h"
-
-//函数的定义实现
-
-void InitBoard(char board[][COL], int row, int col)
+void init(char chessBoard[MAX_ROW][MAX_COL])
 {
-	int i=0;
-	int j=0;
-	for (i = 0; i < row; i++)
+	for (int row = 0; row < MAX_ROW; row++)
 	{
-		for (j = 0; i < col; j++)
+		for (int col = 0; col < MAX_COL; col++)
 		{
-			board[i][j] = ' ';
+			chessBoard[row][col] = ' ';
 		}
 	}
 }
 
-void DisplayBoard(char board[ROW][COL], int row, int col)
+void print_chessBoard(char chessBoard[MAX_ROW][MAX_COL])
 {
-	int i = 0;
-	int j = 0;
-	for (i = 0; i < row; i++)
-	{
-		//1.打印一行的数据
-		for (j = 0; j < col; j++)
-		{
-			printf(" %c ", board[i][j]);
-			if (j < col - 1)
-			{
-				printf("|");
-			}
-		}
-		printf("\n");
-		//2.打印分割行
-		if (i < row - 1)
-		{
-			for (j = 0; j < col; j++)
-			{
-				printf("---");
-				if (j < col - 1)
-				{
-					printf("|");
-				}
-			}
-			printf("\n");
-		}
+	printf("+---+---+---+\n");
+	for (int row = 0; row < MAX_ROW; row++) {
+		printf("| %c | %c | %c |\n", chessBoard[row][0],
+			chessBoard[row][1], chessBoard[row][2]);
+		printf("+---+---+---+\n");
 	}
 }
 
-
-void Playermove(char board[ROW][COL], int row, int col)
+void playerMove(char chessBoard[MAX_ROW][MAX_COL])
 {
-	int x = 0;
-	int y = 0;
-	printf("玩家下棋\n");
 	while (1)
 	{
-		printf("请输入要下的坐标：\n");
-		scanf("%d,%d", &x, &y);
-		//判断坐标的合法性
-		if (x >= 1 && x <= 3 && y >= 1 && y <= 3)
+		int row = 0;
+		int col = 0;
+		printf("请输入坐标（row col）：");
+		scanf("%d %d", &row, &col);
+		row -= 1, col -= 1;
+		if (row < 0 || row >= MAX_ROW || col < 0 || col >= MAX_COL)
 		{
-			if (board[x - 1][y - 1] == ' ')
-			{
-				board[x - 1][y - 1] = '*';
-				break;
-			}
-			else
-			{
-				printf("该坐标被占用，请重新输入\n");
-			}
+			printf("您的坐标不在合法范围内 [0, 2],请重新输入：\n");
+			continue;
 		}
-		else
+		if (chessBoard[row][col] != ' ')
 		{
-			printf("坐标非法，请重新输入\n");
+			printf("您的坐标位置已经有子了!\n");
+			continue;
 		}
+		chessBoard[row][col] = 'x';
+		break;
 	}
 }
 
-
-void Computermove(char board[ROW][COL], int row, int col)
+void computerMove(char chessBoard[MAX_ROW][MAX_COL])
 {
-	int x, y;
-	printf("电脑下棋：\n");
 	while (1)
 	{
-		x = rand() % row;
-		y = rand() % col;
-		if (board[x][y] == ' ')
+		int row = rand() % MAX_ROW;
+		int col = rand() % MAX_COL;
+		if (chessBoard[row][col] != ' ')
 		{
-			board[x][y] = '#';
-			break;
+			continue;
 		}
+		chessBoard[row][col] = 'o';
+		break;
 	}
 }
 
-int Isfull(char board[ROW][COL], int row, int col)//返回1表示棋盘已满，返回0表示棋盘未满
+int isFull(char chessBoard[MAX_ROW][MAX_COL])
 {
-	int i;
-	int j;
-	for (i = 0; i < row; i++)
+	for (int row = 0; row < MAX_ROW; row++)
 	{
-		for (j = 0; j < col; j++)
+		for (int col = 0; col < MAX_COL; col++)
 		{
-			if (board[i][j]==' ')
+			if (chessBoard[row][col] == ' ')
 			{
-				return 0;//没满
+				return 0;
 			}
+
 		}
 	}
-	return 1;//满了
+	return 1;
 }
 
-
-
-
-
-char Iswin(char board[ROW][COL], int row, int col)
+char isWin(char chessBoard[MAX_ROW][MAX_COL])
 {
-	int i = 0;
-	//横三行
-	for (i = 0; i < row; i++)
+	for (int row = 0; row < MAX_ROW; row++)
 	{
-		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][1] != ' ')
+		if (chessBoard[row][0] != ' ' && chessBoard[row][0] == chessBoard[row][1] && chessBoard[row][0] == chessBoard[row][2])
 		{
-			return board[i][1];
+			return chessBoard[row][0];
 		}
 	}
-	//竖三列
-	for (i = 0; i < col; i++)
+	for (int col = 0; col < MAX_COL; col++)
 	{
-		if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[i][1] != ' ')
+		if (chessBoard[0][col] != ' ' && chessBoard[0][col] == chessBoard[1][col] && chessBoard[0][col] == chessBoard[2][col])
 		{
-			return board[1][i];
+			return chessBoard[0][col];
 		}
 	}
-	//两个对角线
-	if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != ' ')
+	if (chessBoard[0][0] != ' ' && chessBoard[0][0] == chessBoard[1][1] && chessBoard[0][0] == chessBoard[2][2])
 	{
-		return board[1][1];
+		return chessBoard[0][0];
 	}
-	if (board[2][0] == board[1][1] && board[1][1] == board[0][2] && board[1][1] != ' ')
+	if (chessBoard[2][0] != ' ' && chessBoard[2][0] == chessBoard[1][1] && chessBoard[2][0] == chessBoard[0][2])
 	{
-		return board[1][1];
+		return chessBoard[2][0];
 	}
-	//判断是否平局
-	if (Isfull(board,ROW,COL) == 1)
+	if (isFull(chessBoard))
 	{
-		return 'Q';
+		return 'q';
 	}
-	return 'C';
+	return ' ';
 }
-
-
-
-
-
-
 
 
 

@@ -1,111 +1,81 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-//测试三子棋游戏
-
-#include<stdio.h>
 #include"game.h"
 
-void menu()
-{
-	printf("***************************\n");
-	printf("***   1.play    0.exit  ***\n");
-	printf("***************************\n");
-}
 
-//整个游戏算法的实现
+
+
 void game()
 {
-	char ret=0;
-	//创建3*3数组，存放玩家和电脑的对弈信息
-	char board[ROW][COL] = { {' ',' ',' ','\0'},{' ',' ',' ','\0'},{' ',' ',' ','\0'}};
-	//初始棋盘
-	//InitBoard(board,ROW,COL);//全部为空
-	//打印棋盘
-	DisplayBoard(board, ROW, COL);
-	//下棋
+	char chessBoard[MAX_ROW][MAX_COL] = { 0 };
+	init(chessBoard);
+	char winner = ' ';
 	while (1)
 	{
-		//玩家下棋
-		Playermove(board,ROW,COL);
-		DisplayBoard(board, ROW, COL);
-		//判断玩家是否赢
-		ret=Iswin(board,ROW,COL);
-		if (ret != 'C')
+		system("cls");
+		print_chessBoard(chessBoard);
+		playerMove(chessBoard);
+		winner = isWin(chessBoard);
+		if (winner != ' ')
 		{
 			break;
 		}
-		//电脑下棋
-		Computermove(board,ROW,COL);
-		DisplayBoard(board, ROW, COL);
-		//判断电脑是否赢
-		ret=Iswin(board, ROW, COL);
-		if (ret != 'C')
+		computerMove(chessBoard);
+		winner = isWin(chessBoard);
+		if (winner != ' ')
 		{
 			break;
 		}
 	}
-	if (ret == '*')
+	print_chessBoard(chessBoard);
+	if (winner == 'x')
 	{
-		printf("玩家获胜\n");
+		printf("恭喜您, 您赢了!\n");
 	}
-	else if (ret == '#')
+	else if (winner == 'o')
 	{
-		printf("电脑获胜\n");
+		printf("哈哈，您连人工智障都下不过!\n");
 	}
-	else//ret == 'Q'
+	else
 	{
-		printf("平局\n");
+		printf("您只能和人工智障打平手!!\n");
 	}
 }
 
-void test()
+int menu()
 {
-	int input=0;
-	srand((unsigned int)time(NULL));
-	do
-	{
-		menu();
-		printf("请选择：");
-		scanf("%d", &input);
-		switch (input)
-		{
-		case 1:
-			game();
-			break;
-		case 0:
-			printf("退出游戏\n");
-			break;
-		default:
-			printf("选择错误，请重新选择\n");
-			break;
-		}
-	} while (input);
+	printf("--------------------------\n");
+	printf("--------1.开始游戏--------\n");
+	printf("--------0.退出游戏--------\n");
+	printf("--------------------------\n");
+	int choice = 0;
+	printf("请输入你的选择：");
+	scanf("%d", &choice);
+	return choice;
 }
-
-
-
 int main()
 {
-	test();
+	srand((unsigned int)time(0));
+	while (1)
+	{
+		int choice = menu();
+		if (choice == 1)
+		{
+			game();
+		}
+		else if (choice == 0)
+		{
+			printf("退出游戏,GOODBYE!!!!!\n");
+			break;
+		}
+		else
+		{
+			printf("输入错误！请重新输入！\n");
+			continue;
+		}
+	}
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
