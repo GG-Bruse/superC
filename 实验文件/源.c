@@ -4512,3 +4512,231 @@ arr是一个整形一维数组。*/
 //    *returnSize = num - 1;
 //    return arr;
 //}
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	/*unsigned char a = 200;
+//	unsigned char b = 100;
+//	unsigned char c = 0;
+//	c = a + b;
+//	printf("%d  %d", a + b, c);*/
+//
+//	unsigned int a = 0x1234; unsigned char b = *(unsigned char*)&a;
+//
+//	printf("%d", b);
+//	return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a[1000] = { 0 };
+//	int i = 0;
+//	for (i = 0; i < 1000; i++)
+//	{
+//		a[i] = -1 - i;
+//	}
+//	printf("%d", strlen(a));
+//	return 0;
+//}
+
+
+
+
+/*
+5位运动员参加了10米台跳水比赛，有人让他们预测比赛结果：
+
+
+
+A选手说：B第二，我第三；
+
+B选手说：我第二，E第四；
+
+C选手说：我第一，D第二；
+
+D选手说：C最后，我第三；
+
+E选手说：我第四，A第一；
+
+比赛结束后，每位选手都说对了一半，请编程确定比赛的名次。
+*/
+//#include<stdio.h>
+//int main()
+//{
+//    int a = 0, b = 0, c = 0, d = 0, e = 0;
+//    for (a = 1; a <= 5; a++)
+//    {
+//        for (b = 1; b <= 5; b++)
+//        {
+//            for (c = 1; c <= 5; c++)
+//            {
+//                for (d = 1; d <= 5; d++)
+//                {
+//                    for (e = 1; e <= 5; e++)
+//                    {
+//                        if ((2 == b && 3 != a) || (2 != b && 3 == a) == 1)
+//                        {
+//                            if ((2 == b && 4 != e) || (2 != b && 4 == e) == 1)
+//                            {
+//                                if ((1 == c && 2 != d) || (1 != c && 2 == d) == 1)
+//                                {
+//                                    if ((5 == c && 3 != d) || (5 != c && 3 == d) == 1)
+//                                    {
+//                                        if ((4 == e && 1 != a) || (4 != e && 1 == a) == 1)
+//                                        {
+//                                            if (((a != b) && (a != c) && (a != d) && (a != e))
+//                                                && ((b != c) && (b != d) && (b != e))
+//                                                && ((c != d) && (c != e))
+//                                                && ((d != e)))
+//                                            {
+//                                                printf("a = %d , b = %d , c = %d , d = %d , e = %d\n", a, b, c, d, e);
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int killer = 0;
+//	for (killer = 'A'; killer < 'D'; killer++)
+//	{
+//		if ((killer != 'A') + (killer == 'C') + (killer == 'D') + (killer != 'D') == 3)
+//		{
+//			printf("killer is  %c\n", killer);
+//		}
+//	}
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//#define MAX 30
+//int main()
+//{
+//    int arr[MAX][MAX] = {0};
+//    int n = 0;
+//    scanf("%d", &n);
+//    arr[0][0] = 1;
+//    for (int i = 0; i < n; ++i)
+//    {
+//        int j = 0;
+//        arr[i][0] = arr[i][j] = arr[0][0];
+//        for (; j <= i; ++j)
+//        {
+//            arr[i + 1][j + 1] = arr[i][j] + arr[i][j + 1];
+//        }
+//    }
+//    for (int i = 0; i < n; ++i)
+//    {
+//        for (int j = 0; j <= i; ++j)
+//        {
+//            printf("%-5d", arr[i][j]);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+//#include <stdio.h>
+//int check_sys_1()
+//{
+//	int i = 1;
+//	char* p = (char*)&i;
+//	return *p;
+//}
+////简化后:
+//int check_sys()
+//{
+//	int i = 1;
+//	return (*(char*)&i);
+//}
+//int main()
+//{
+//	int ret = check_sys();
+//	if (ret == 1)
+//	{
+//		printf("小端\n");
+//	}
+//	else
+//	{
+//		printf("大端\n");
+//	}
+//	return 0;
+//}
+
+
+
+//#include <stdio.h>
+//int check_sys()
+//{
+//	union
+//	{
+//		int i;
+//		char c;
+//	}un;
+//	un.i = 1;
+//	return un.c;
+//}
+//int main()
+//{
+//	int ret = check_sys();
+//	if (ret == 1)
+//	{
+//		printf("小端\n");
+//	}
+//	else
+//	{
+//		printf("大端\n");
+//	}
+//	return 0;
+//}
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = 5;  //  5的补码为:00000000 00000000 00000000 00000101   截断后保留一个字节为:00000101
+//	char b = 126;//126的补码为:00000000 00000000 00000000 01111110   截断后保留一个字节为:01111110
+//
+//	char c = a + b;//此时a + b进行计算，发生整型提升
+//				//00000000 00000000 00000000 00000101
+//				//00000000 00000000 00000000 01111110
+//		 //相加得:00000000 00000000 00000000 10000011
+//		 //存入char类型变量，发生截断,保留一个字节为:10000011
+//
+//	printf("%d\n", c);//以十进制方式打印signed char(有符号)类型数据，发生整型提升
+//					  //补码:11111111 11111111 11111111 10000011
+//					  //反码:11111111 11111111 11111111 10000010
+//					  //原码:10000000 00000000 00000000 01111101
+//					  //即输出-125
+//	return 0;
+//}
