@@ -4740,3 +4740,139 @@ E选手说：我第四，A第一；
 //					  //即输出-125
 //	return 0;
 //}
+
+
+
+
+
+
+/*
+有一个数字矩阵，矩阵的每行从左到右是递增的，矩阵从上到下是递增的，请编写程序在这样的矩阵中查找某个数字是否存在。
+
+要求：时间复杂度小于O(N);
+*/
+//#include<stdio.h>
+//#define NUM 5
+//int check_num(int* parr[NUM],int check)
+//{
+//	for (int i = 0; i < NUM ; ++i)
+//	{
+//		if ((i == NUM - 1)||(*parr[i + 1] > check))
+//		{
+//			for (int j = 0; j < NUM; ++j)
+//			{
+//				if (*(parr[i] + j) == check)
+//				{
+//					return 1;
+//				}
+//			}
+//			return 0;
+//		}
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	int check = 0;
+//	scanf("%d", &check);
+//	int arr1[NUM] = { 1,2,3,4,5 };
+//	int arr2[NUM] = { 6,7,8,9,10 };
+//	int arr3[NUM] = { 11,12,13,14,15 };
+//	int arr4[NUM] = { 16,17,18,19,20 };
+//	int arr5[NUM] = { 21,22,23,24,25 };
+//	int* parr[NUM] = {arr1,arr2,arr3,arr4,arr5};
+//
+//	if (check_num(parr, check))
+//		printf("找到这个数了\n");
+//	else
+//		printf("没找到这个数\n");
+//	return 0;
+//}
+
+
+
+
+
+
+/*
+实现一个函数，可以左旋字符串中的k个字符。
+例如：
+ABCD左旋一个字符得到BCDA
+
+ABCD左旋两个字符得到CDAB
+*/
+//#include<stdio.h>
+//#include<string.h>
+//void Left_handed(char* str,int k,int size)
+//{
+//	for (int j = 0; j < k; ++j)
+//	{
+//		int i = 0;
+//		char temp = *str;
+//		for (i = 0; i < size; ++i)
+//		{
+//			str[i] = str[i + 1];
+//		}
+//		str[i - 1] = temp;
+//	}
+//}
+//int main()
+//{
+//	char str[100] = { 0 };
+//	scanf("%s", str);
+//	int k = 0;
+//	scanf("%d", &k);
+//	Left_handed(str, k, strlen(str));
+//	printf("%s", str);
+//	return 0;
+//}
+
+
+
+
+
+
+
+/*
+写一个函数，判断一个字符串是否为另外一个字符串旋转之后的字符串。
+例如：给定s1 =AABCD和s2 = BCDAA，返回1
+
+给定s1=abcd和s2=ACBD，返回0.
+*/
+//#include<stdio.h>
+//#include<string.h>
+//void Left_Once(char* str,int size)
+//{
+//		int i = 0;
+//		char temp = *str;
+//		for (i = 0; i < size; ++i)
+//		{
+//			str[i] = str[i + 1];
+//		}
+//		str[i - 1] = temp;
+//}
+//int judge(char* str1,int str2 ,int size)
+//{
+//	for (int i = 0; i < size; ++i)
+//	{
+//		Left_Once(str1, size);
+//		if (strcmp(str1, str2) == 0)
+//		{
+//			return 1;
+//		}
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	char str1[100] = { 0 };
+//	scanf("%s", str1);
+//	char str2[100] = { 0 };
+//	scanf("%s", str2);
+//	
+//	if (judge(str1, str2, strlen(str1)))
+//		printf("str2可由str1旋转得到\n");
+//	else
+//		printf("str2不可由str1旋转得到\n");
+//	return 0;
+//}

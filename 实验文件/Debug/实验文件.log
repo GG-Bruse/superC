@@ -1,2 +1,6 @@
 ﻿  源.c
+D:\vs\C\实验文件\源.c(4856,24): warning C4047: “函数”:“const char *”与“int”的间接级别不同
+D:\vs\C\实验文件\源.c(4856,20): warning C4024: “strcmp”: 形参和实参 2 的类型不同
+D:\vs\C\实验文件\源.c(4870,22): warning C4047: “函数”:“int”与“char [100]”的间接级别不同
+D:\vs\C\实验文件\源.c(4870,18): warning C4024: “judge”: 形参和实参 2 的类型不同
   实验文件.vcxproj -> D:\vs\C\实验文件\Debug\实验文件.exe
