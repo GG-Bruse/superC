@@ -4876,3 +4876,93 @@ ABCD左旋两个字符得到CDAB
 //		printf("str2不可由str1旋转得到\n");
 //	return 0;
 //}
+
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//    int n = 0;
+//    while (scanf("%d", &n) != EOF)
+//    {
+//        for (int i = 0; i < n; ++i)
+//        {
+//            printf("* ");
+//        }
+//        printf("\n");
+//        for (int i = 0; i < n - 2; ++i)
+//        {
+//            printf("* ");
+//            for (int j = 0; j < n - 2; ++j)
+//            {
+//                printf("  ");
+//            }
+//            printf("*\n");
+//        }
+//        for (int i = 0; i < n; ++i)
+//        {
+//            printf("* ");
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//void Insert(int* arr, int size, int key)
+//{
+//    int i = 0;
+//    int temp = 0;
+//    for (i = 0; i < size - 1; ++i)
+//    {
+//        if (key < arr[i])
+//        {
+//            break;
+//        }
+//    }
+//    temp = i;
+//    for (i = size - 1; i > temp; --i)
+//    {
+//        arr[i] = arr[i - 1];
+//    }
+//    arr[temp] = key;
+//}
+//void Print(int* arr, int size)
+//{
+//    for (int i = 0; i < size; ++i)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//}
+//int main()
+//{
+//    int N = 0;
+//    scanf("%d", &N);
+//    int* arr = (int*)malloc(sizeof(int) * (N + 1));
+//    for (int i = 0; i < N; ++i)
+//    {
+//        scanf("%d", &arr[i]);
+//    }
+//    int num = 0;
+//    scanf("%d", &num);
+//
+//    Insert(arr, N + 1, num);
+//    Print(arr, N + 1);
+//
+//    free(arr);
+//    return 0;
+//}
