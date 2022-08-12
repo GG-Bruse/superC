@@ -4966,3 +4966,24 @@ ABCD左旋两个字符得到CDAB
 //    free(arr);
 //    return 0;
 //}
+
+
+
+
+//#include <stdio.h>
+//int main()
+//{
+//    int n;
+//    while (scanf("%d", &n) != EOF)
+//    {
+//        int start = n * n - n + 1;
+//        printf("%d", start);
+//        int i;
+//        for (i = 1; i < n; i++)
+//        {
+//            printf("+%d", start + 2 * i);
+//        }
+//        printf("\n");
+//    }
+//    return 0;
+//}
