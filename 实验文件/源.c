@@ -4987,3 +4987,146 @@ ABCD左旋两个字符得到CDAB
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int aa[2][5] = { 10,9,8,7,6,5,4,3,2,1 };
+//	int* ptr1 = (int*)(&aa + 1);
+//	int* ptr2 = (int*)(*(aa + 1));
+//	printf("%d,%d", *(ptr1 - 1), *(ptr2 - 1));//1 6
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a[5] = { 5, 4, 3, 2, 1 };
+//	int* ptr = (int*)(&a + 1);
+//	printf("%d,%d", *(a + 1), *(ptr - 1));
+//	return 0;
+//}
+
+
+
+
+
+
+
+//#include<stdio.h>
+//#include<stdlib.h>
+//
+//int compare1(const void* e1, const void* e2)
+//{
+//	return *(int*)e1 - *(int*)e2;
+//}
+//void print1(int* arr,int size)
+//{
+//	for (int i = 0; i < size; ++i)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//}
+//void test1()
+//{
+//	int arr[10] = { 10,9,8,7,6,5,4,3,2,1 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	qsort(arr, size, sizeof(arr[0]), compare1);
+//	print1(arr, size);
+//}
+///*************************************************************************/
+//int compare2(const void* e1, const void* e2)
+//{
+//	return *(char*)e1 - *(char*)e2;
+//}
+//void print2(char* str, int size)
+//{
+//	for (int i = 0; i < size; ++i)
+//	{
+//		printf("%c ", str[i]);
+//	}
+//	printf("\n");
+//}
+//void test2()
+//{
+//	char str[10] = { 'j','i','h','g','f','e','d','c','b','a' };
+//	int size = sizeof(str) / sizeof(str[0]);
+//	qsort(str, size, sizeof(str[0]), compare2);
+//	print2(str, size);
+//}
+///************************************************************************/
+//int main()
+//{
+//	test1();
+//	test2();
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include<stdio.h>
+//void Swap(char* buf1, char* buf2, int width)
+//{
+//	for (int i = 0; i < width; ++i)
+//	{
+//		char temp = *buf1;
+//		*buf1 = *buf2;
+//		*buf2 = temp;
+//		++buf1;
+//		++buf2;
+//	}
+//}
+//void bubble_sort(void* base,int size,int width,int(*compare)(const void* e1,const void* e2))
+//{
+//	for (int i = 0; i < size - 1; ++i)
+//	{
+//		for (int j = 0; j < size - 1 - i; ++j)
+//		{
+//			if (compare((char*)base + j * width, (char*)base + (j + 1) * width) > 0)
+//			{
+//				Swap((char*)base + j * width, (char*)base + (j + 1) * width, width);
+//			}
+//		}
+//	}
+//}
+//
+//int compare(const void* e1, const void* e2)
+//{
+//	return *(int*)e1 - *(int*)e2;
+//}
+//void print(int* arr,int size)
+//{
+//	for (int i = 0; i < size; ++i)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	printf("\n");
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,6,5,4,3,2,1 };
+//	int size = sizeof(arr) / sizeof(arr[0]);
+//	bubble_sort(arr,size,sizeof(arr[0]),compare);
+//	print(arr,size);
+//	return 0;
+//}
