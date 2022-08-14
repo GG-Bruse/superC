@@ -5130,3 +5130,73 @@ ABCD左旋两个字符得到CDAB
 //	print(arr,size);
 //	return 0;
 //}
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	char a = 101;
+//	int sum = 200;
+//	a += 27; sum += a;//-128 72
+//	printf("%d\n", sum);
+//	return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int value = 1024;//0x0000 0400 小端 ——  0004 0000
+//	char condition = *((char*)(&value));//00
+//	if (condition) 
+//		value += 1;
+//	condition = *((char*)(&value));
+//	if (condition) 
+//		value += 1; 
+//	condition = *((char*)(&value));
+//	printf("%d %d", value, condition);//1024 0
+//	return 0;
+//}
+
+
+
+
+
+
+//32位机器
+//#include<stdio.h>
+//void func(char para[100])
+//{
+//	void* p = malloc(100);
+//	printf("%d, %d\n", sizeof(para), sizeof(p));//4 4
+//}
+//int main()
+//{
+//	char arr[100] = { 0 };
+//	func(arr);
+//	return 0;
+//}
+
+
+
+
+
+
+
+//#include <stdio.h>
+//void func(char* p)
+//{ 
+//	p = p + 1; 
+//}
+//int main()
+//{
+//	char s[] = { '1', '2', '3', '4' };
+//	func(s);//不改变p
+//	printf("%c", *s);//1
+//	return 0;
+//}
