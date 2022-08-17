@@ -270,9 +270,16 @@ namespace关键字的出现就是针对这种问题的
 
 
 
-//引用的使用场景
 
-//1.作参数
+
+//引用的使用场景:
+/*
+1.作参数
+	a.输出参数 b.大对象传参时,可提高效率
+2.做返回值
+*/
+
+
 //#include<iostream>
 //using namespace std;
 //void Swap(int& left, int& right)
@@ -291,7 +298,10 @@ namespace关键字的出现就是针对这种问题的
 //}
 
 
-//2.做返回值
+//err代码
+/*
+若出了函数作用域，返回对象被销毁。那么不可使用引用返回，应使用传值返回。
+*/
 //#include<iostream>
 //using namespace std;
 //int& Add(int a, int b)
@@ -303,7 +313,23 @@ namespace关键字的出现就是针对这种问题的
 //int main()
 //{
 //	int& ret = Add(1, 2);
-//	Add(2, 3);
+//	cout << "Add(1, 2) is :" << ret << endl;//3
+//	cout << "Add(1, 2) is :" << ret << endl;//随机值,此时原本变量c所在空间被系统清理
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//int& Add(int a, int b)
+//{
+//	static int c = a + b;
+//	cout << c << endl;
+//	return c;
+//}
+//int main()
+//{
+//	int& ret = Add(1, 2);//3
+//	Add(2, 3);//3
 //	cout << "Add(1, 2) is :" << ret << endl;//3
 //	return 0;
 //}
@@ -312,19 +338,41 @@ namespace关键字的出现就是针对这种问题的
 
 
 
+//传值、传引用效率比较
+/*
+以值作为参数或者返回值类型，在传参和返回期间，函数不会直接传递实参或者将变量本身直接返回，而是传递实参或者返回变量的一份临时的拷贝，
+因此用值作为参数或者返回值类型，效率是非常低下的，尤其是当参数或者返回值类型非常大时，效率就更低
+*/
 
-
-
-
-
-
-
-
-
-
-
-
-
+//#include <iostream>
+//#include <time.h>
+//using namespace std;
+//struct A { int a[10000]; };
+//void TestFunc1(A data) {}
+//void TestFunc2(A& data) {}
+//void TestRefAndValue()
+//{
+//	A a = { {0} };
+//	// 以值作为函数参数
+//	size_t begin1 = clock();
+//	for (size_t i = 0; i < 10000; ++i)
+//		TestFunc1(a);
+//	size_t end1 = clock();
+//
+//	// 以引用作为函数参数
+//	size_t begin2 = clock();
+//	for (size_t i = 0; i < 10000; ++i)
+//		TestFunc2(a);
+//	size_t end2 = clock();
+//
+//	cout << "TestFunc1(A)-time:" << end1 - begin1 << endl;//13
+//	cout << "TestFunc2(A&)-time:" << end2 - begin2 << endl;//1
+//}
+//int main()
+//{
+//	TestRefAndValue();
+//	return 0;
+//}
 
 
 

@@ -1,3 +1,2 @@
 ﻿  基础语法.cpp
-D:\vs\C++\C++文件\基础语法.cpp(300): warning C4172: 返回局部变量或临时变量的地址: c
   C++文件.vcxproj -> D:\vs\C++\C++文件\Debug\C++文件.exe
