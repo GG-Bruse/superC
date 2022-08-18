@@ -211,13 +211,43 @@ namespace关键字的出现就是针对这种问题的
 
 
 
-//C++支持函数重载的原理--名字修饰
+//C++支持函数重载的原理--函数名字修饰规则
+/*
+每个.o文件都有其符号表
+gcc的函数修饰后名字不变。而g++的函数修饰后变成 [_Z+函数长度+函数名+类型首字母]
+windows下vs编译器对函数名字修饰规则不同
+*/
 
 
 
 
 
 
+//extern "C"
+/*
+由于C和C++编译器对函数名字修饰规则的不同，在有些场景下可能就会出问题，比如:
+
+1. C++中调用C语言实现的静态库或者动态库，反之亦然
+2. 多人协同开发时，有些人使用C语言，有些人使用用C++
+
+在这种混合模式下开发，由于C和C++编译器对函数名字修饰规则不同，可能就会导致链接失败，在该种场景
+下，就需要使用extern "C"。在函数前加extern "C"，意思是告诉编译器，将该函数按照C语言规则来编译
+
+1.C++程序调用C库: 
+在C++程序引用头文件时extern "C"
+
+2.C程序调用C++库(不可完全兼容):
+在C++库的头文件中extern "C"
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+…………
+…………
+#ifdef __cplusplus
+}
+#endif
+*/
 
 
 
@@ -262,11 +292,51 @@ namespace关键字的出现就是针对这种问题的
 //{
 //	int a = 10;
 //	// int& ra; // 该条语句编译时会出错
-//	int& ra = a;
-//	int& rra = a;
-//	std::cout << &a << " " << &ra << " " << &rra << std::endl;
+//	int& xa = a;
+//	int& xxa = a;
+//	std::cout << &a << " " << &xa << " " << &xxa << std::endl;
 //	return 0;
 //}
+
+
+
+
+
+
+//常引用
+
+//#include<iostream>
+//int main()
+//{
+//	int a = 1;
+//	int& b = a;//权限平移 ok
+//
+//	const int c = 2;
+//	const int& d = c;//不可写成int& d = c; 会造成权限放大 err
+//
+//	int e = 3;
+//	const int& f = e;//权限缩小 ok
+//
+//	return 0;
+//}
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int data = 1;
+//	double d = data;
+//	//double& xd = data;    err
+//	const double& xd = data;
+//	/*
+//	隐式类型转换/强制类型转换都会产生临时变量
+//	临时变量具有常性
+//	若data赋给xd,则权限放大，因此错误
+//	*/
+//	cout << xd << endl;
+//	return 0;
+//}
+
 
 
 
@@ -278,7 +348,6 @@ namespace关键字的出现就是针对这种问题的
 	a.输出参数 b.大对象传参时,可提高效率
 2.做返回值
 */
-
 
 //#include<iostream>
 //using namespace std;
@@ -297,10 +366,10 @@ namespace关键字的出现就是针对这种问题的
 //	return 0;
 //}
 
-
 //err代码
 /*
-若出了函数作用域，返回对象被销毁。那么不可使用引用返回，应使用传值返回。
+若函数返回时，出了函数作用域，如果返回对象还在(还没还给系统)，则可以使用引用返回，
+如果已经还给系统了，则必须使用传值返回
 */
 //#include<iostream>
 //using namespace std;
@@ -318,21 +387,6 @@ namespace关键字的出现就是针对这种问题的
 //	return 0;
 //}
 
-//#include<iostream>
-//using namespace std;
-//int& Add(int a, int b)
-//{
-//	static int c = a + b;
-//	cout << c << endl;
-//	return c;
-//}
-//int main()
-//{
-//	int& ret = Add(1, 2);//3
-//	Add(2, 3);//3
-//	cout << "Add(1, 2) is :" << ret << endl;//3
-//	return 0;
-//}
 
 
 
@@ -344,6 +398,7 @@ namespace关键字的出现就是针对这种问题的
 因此用值作为参数或者返回值类型，效率是非常低下的，尤其是当参数或者返回值类型非常大时，效率就更低
 */
 
+//值和引用的作为参数类型的性能比较
 //#include <iostream>
 //#include <time.h>
 //using namespace std;
@@ -375,21 +430,102 @@ namespace关键字的出现就是针对这种问题的
 //}
 
 
+//值和引用的作为返回值类型的性能比较
+//#include<iostream>
+//#include <time.h>
+//using namespace std;
+//struct A
+//{ 
+//	int a[10000]; 
+//}a;
+//A TestFunc1()
+//{
+//	return a; 
+//}
+//A& TestFunc2()
+//{ 
+//	return a;
+//}
+//void TestReturnByRefOrValue()
+//{
+//	size_t begin1 = clock();
+//	for (size_t i = 0; i < 100000; ++i)
+//		TestFunc1();
+//	size_t end1 = clock();
+//
+//	size_t begin2 = clock();
+//	for (size_t i = 0; i < 100000; ++i)
+//		TestFunc2();
+//	size_t end2 = clock();
+//
+//	cout << "TestFunc1 time:" << end1 - begin1 << endl;//157
+//	cout << "TestFunc2 time:" << end2 - begin2 << endl;//2
+//}
+//int main()
+//{
+//	TestReturnByRefOrValue();
+//	return 0;
+//}
 
 
 
 
 
 
+//引用和指针的区别
+/*
+在语法概念上引用就是一个别名，没有独立空间，和其引用实体共用同一块空间
+在底层实现上实际是有空间的，因为引用是按照指针方式来实现的。
+*/
 
+/*
+引用和指针的不同点:
+1. 引用概念上定义一个变量的别名，指针存储一个变量地址。
 
+2. 引用在定义时必须初始化，指针没有要求
 
+3. 引用在初始化时引用一个实体后，就不能再引用其他实体，而指针可以在任何时候指向任何一个同类型实体
 
+4. 没有NULL引用，但有NULL指针
 
+5. 在sizeof中含义不同：引用结果为引用类型的大小，但指针始终是地址空间所占字节个数(32位平台下占4个字节)
 
+6. 引用自加即引用的实体增加1，指针自加即指针向后偏移一个类型的大小
 
+7. 有多级指针，但是没有多级引用
 
+8. 访问实体方式不同，指针需要显式解引用，引用编译器自己处理
 
+9. 引用比指针使用起来相对更安全
+*/
 
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	int a = 10;
+//
+//	int* pa = &a;
+//	*pa = 20;
+//
+//	int& xa = a;
+//	xa = 10;
+//
+//	return 0;
+//}
+/*
+反汇编
+	int* pa = &a;
+00B82036  lea         eax,[a]
+00B82039  mov         dword ptr [pa],eax
+	*pa = 20;
+00B8203C  mov         eax,dword ptr [pa]
+00B8203F  mov         dword ptr [eax],14h
 
-
+	int& xa = a;
+00B82045  lea         eax,[a]
+00B82048  mov         dword ptr [xa],eax
+	xa = 10;
+00B8204B  mov         eax,dword ptr [xa]
+00B8204E  mov         dword ptr [eax],0Ah
+*/
