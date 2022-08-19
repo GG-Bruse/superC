@@ -1,2 +1,10 @@
 ﻿  源.c
+D:\vs\C\实验文件\源.c(5293,28): warning C4047: “函数”:“const char *”与“char (*)[7]”的间接级别不同
+D:\vs\C\实验文件\源.c(5293,24): warning C4024: “strlen”: 形参和实参 1 的类型不同
+D:\vs\C\实验文件\源.c(5294,32): warning C4047: “函数”:“const char *”与“char (*)[7]”的间接级别不同
+D:\vs\C\实验文件\源.c(5294,29): warning C4024: “strlen”: 形参和实参 1 的类型不同
+D:\vs\C\实验文件\源.c(5296,28): warning C4047: “函数”:“const char *”与“char”的间接级别不同
+D:\vs\C\实验文件\源.c(5296,24): warning C4024: “strlen”: 形参和实参 1 的类型不同
+D:\vs\C\实验文件\源.c(5297,30): warning C4047: “函数”:“const char *”与“char”的间接级别不同
+D:\vs\C\实验文件\源.c(5297,27): warning C4024: “strlen”: 形参和实参 1 的类型不同
   实验文件.vcxproj -> D:\vs\C\实验文件\Debug\实验文件.exe

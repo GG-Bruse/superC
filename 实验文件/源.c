@@ -5222,3 +5222,85 @@ ABCD左旋两个字符得到CDAB
 //	printf("\n");
 //	return 0;
 //}
+
+
+
+
+
+//#include<stdio.h>
+//int main()
+//{
+//	int a[] = { 1,2,3,4 };
+//	printf("%d\n", sizeof(a));//16 int [4]
+//	printf("%d\n", sizeof(a + 0));//4 为数组第一个元素的地址(即指针类型)
+//	printf("%d\n", sizeof(*a));//4 int
+//	printf("%d\n", sizeof(a + 1));//4 int*
+//	printf("%d\n", sizeof(a[1]));//4 int
+//	printf("%d\n", sizeof(&a));//4 整个数组的地址(数组指针)
+//	printf("%d\n", sizeof(*&a));//16
+//	printf("%d\n", sizeof(&a + 1));//4 数组指针
+//	printf("%d\n", sizeof(&a[0]));//4 int*
+//	printf("%d\n", sizeof(&a[0] + 1));//4 int*
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[] = { 'a','b','c','d','e','f' };
+//	printf("%d\n", sizeof(arr));//6
+//	printf("%d\n", sizeof(arr + 0));//4 char*
+//	printf("%d\n", sizeof(*arr));//1 char
+//	printf("%d\n", sizeof(arr[1]));//1 char
+//	printf("%d\n", sizeof(&arr));//4 数组指针
+//	printf("%d\n", sizeof(&arr + 1));//4 数组指针
+//	printf("%d\n", sizeof(&arr[0] + 1));//4 char*
+//
+//	printf("%d\n", strlen(arr));//随机值
+//	printf("%d\n", strlen(arr + 0));//随机值
+//	printf("%d\n", strlen(&arr));//随机值
+//	printf("%d\n", strlen(&arr + 1));//随机值
+//	printf("%d\n", strlen(&arr[0] + 1));//随机值
+//	printf("%d\n", strlen(*arr));//err代码,非法访问	*arr为数组的首元素'a'(即97)
+//	printf("%d\n", strlen(arr[1]));//err代码,非法访问
+//	return 0;
+//}
+
+
+
+
+
+//#include<stdio.h>
+//#include<string.h>
+//int main()
+//{
+//	char arr[] = "abcdef";
+//	printf("%d\n", sizeof(arr));//7 char [7]
+//	printf("%d\n", sizeof(arr + 0));//4 char*
+//	printf("%d\n", sizeof(*arr));//1 char
+//	printf("%d\n", sizeof(arr[1]));//1 char
+//	printf("%d\n", sizeof(&arr));//4 数组指针
+//	printf("%d\n", sizeof(&arr + 1));//4 数组指针
+//	printf("%d\n", sizeof(&arr[0] + 1));//4 char*
+//
+//	printf("%d\n", strlen(arr));//6
+//	printf("%d\n", strlen(arr + 0));//6
+//	printf("%d\n", strlen(&arr));//6
+//	printf("%d\n", strlen(&arr + 1));//随机值
+//	printf("%d\n", strlen(&arr[0] + 1));//5
+//	printf("%d\n", strlen(*arr));//err
+//	printf("%d\n", strlen(arr[1]));//err
+//	return 0;
+//}
+
+
+
+
+
+
