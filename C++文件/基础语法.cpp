@@ -275,6 +275,10 @@ extern "C"
 
 
 
+
+
+
+
 //引用
 /*
 引用不是新定义一个变量，而是给已存在变量取了一个别名，编译器不会为引用变量开辟内存空间，它和它引用的变量共用同一块内存空间
@@ -529,3 +533,310 @@ extern "C"
 00B8204B  mov         eax,dword ptr [xa]
 00B8204E  mov         dword ptr [eax],0Ah
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//内联函数
+/*
+概念:
+以inline修饰的函数叫做内联函数，编译时C++编译器会在调用内联函数的地方展开，没有函数调用建立栈帧的开销，内联函数提升程序运行的效率
+
+特性:
+1.inline是一种以空间换时间的做法，如果编译器将函数当成内联函数处理，在编译阶段，会用函数体替换函数调用。
+缺陷:可能会使目标文件变大，优势：少了调用开销，提高程序运行效率。
+
+2.inline对于编译器而言只是一个建议，不同编译器关于inline实现机制可能不同。
+一般建议:将函数规模较小(即函数不是很长，具体没有准确的说法，取决于编译器内部实现)、不是递归、频繁调用的函数采用inline修饰，
+		 否则编译器会忽略inline特性
+
+3.inline不建议声明和定义分离，分离会导致链接错误。因为inline被展开，就没有函数地址了(不放入符号表)，链接就会找不到。
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//auto关键字(C++11)
+/*
+在早期C/C++中auto的含义是:使用auto修饰的变量，是具有自动存储器的局部变量。
+
+C++11中:
+auto不再是一个存储类型指示符，而是作为一个类型指示符来指示编译器，auto声明的变量必须由编译器在编译时期推导而得
+*/
+
+/*
+注意:
+1.使用auto定义变量时必须对其进行初始化，在编译阶段编译器需要根据初始化表达式来推导auto的实际类型。
+因此auto并非是一种"类型"的声明，而是一个类型声明时的"占位符"，编译器在编译期会将auto替换为变量实际的类型
+
+2.用auto声明指针类型时，用auto和auto*没有任何区别(加*没用)，但用auto声明引用类型时则必须加&
+
+3.当在同一行声明多个变量时，这些变量必须是相同的类型，否则编译器将会报错.
+因为编译器实际只对第一个类型进行推导，然后用推导出来的类型定义其他变量。
+
+4.为了避免与C++98中的auto发生混淆，C++11只保留了auto作为类型指示符的用法
+*/
+
+/*
+auto不能推导的场景:
+1.auto不能作为函数的参数(形参)
+
+2.auto不能直接用来声明数组
+*/
+
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//double AutoTest()
+//{
+//	return 10;
+//}
+//int main()
+//{
+//	int a = 10;
+//	auto b = a;
+//	auto c = 'a';
+//	auto d = AutoTest();
+//	cout << typeid(b).name() << endl;
+//	cout << typeid(c).name() << endl;
+//	cout << typeid(d).name() << endl;
+//	return 0;
+//}
+
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//int main()
+//{
+//	int x = 10;
+//	auto a = &x;
+//	auto* b = &x;//加*没用
+//	auto& c = x;
+//	cout << typeid(a).name() << endl;//int*
+//	cout << typeid(b).name() << endl;//int*
+//	cout << typeid(c).name() << endl;//int
+//	*a = 20;
+//	*b = 30;
+//	c = 40;
+//	cout << x << endl;//40
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//基于范围的for循环(C++11)
+/*
+C++11中引入了基于范围的for循环。for循环后的括号由冒号" : "分为两部分
+第一部分是范围内用于迭代的变量，第二部分则表示被迭代的范围
+
+范围for的使用条件:
+1.for循环迭代的范围必须是确定的
+对于数组而言，就是数组中第一个元素和最后一个元素的范围;
+对于类而言，应该提供begin和end的方法，begin和end就是for循环迭代的范围。
+
+2.迭代的对象要可以实现++和==的操作(可以自行进行运算符重载)
+*/
+
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i)
+//	{
+//		cout << arr[i] << " ";
+//	}
+//	cout << endl;
+//	for (auto i : arr)
+//	{
+//		cout << i << " ";
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//指针空值nullptr(C++11)
+/*
+NULL实际是一个宏，在传统的C头文件(stddef.h)中:
+#ifndef NULL
+#ifdef __cplusplus
+#define NULL 0
+#else
+#define NULL ((void *)0)
+#endif
+#endif
+NULL可能被定义为字面常量0，或者被定义为无类型指针(void*)的常量
+*/
+
+/*
+NULL的问题:
+本意是想通过f(NULL)调用指针版本的f(int*)函数，但是由于NULL被定义成0，因此与程序的初衷相悖(存在二义性)
+#include<iostream>
+using std::cout;
+using std::endl;
+void f(int)
+{
+	cout << "f(int)" << endl;
+}
+void f(int*)
+{
+	cout << "f(int*)" << endl;
+}
+int main()
+{
+	f(0);//f(int)
+	f(NULL);//f(int)
+	f((int*)NULL);//f(int*)
+	return 0;
+}
+*/
+
+/*
+nullptr注意:
+1. 在使用nullptr表示指针空值时，不需要包含头文件，因为nullptr是C++11作为新关键字引入的。
+2. 在C++11中，sizeof(nullptr) 与 sizeof((void*)0)所占的字节数相同。
+3. 为了提高代码的健壮性，在表示指针空值时建议最好使用nullptr
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
