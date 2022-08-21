@@ -18,5 +18,8 @@
     <ClCompile Include="基础语法.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="类和对象.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
