@@ -1,3 +1,7 @@
-﻿  基础语法.cpp
-  类和对象.cpp
-D:\vs\C++\C++文件\类和对象.cpp(384,3): error C2065: “b”: 未声明的标识符
+﻿  类和对象.cpp
+  正在生成代码
+  5 of 14 functions (35.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  C++文件.vcxproj -> D:\vs\C++\C++文件\Release\C++文件.exe
