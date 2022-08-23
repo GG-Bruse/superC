@@ -556,6 +556,35 @@ c.函数返回值类型为类对象
 5. . *  ::  sizeof  ? :  注意以上5个运算符不能重载
 */
 
+//赋值运算符重载
+/*
+1. 赋值运算符重载格式:
+	a.参数类型：const T&，传递引用可以提高传参效率，const避免误修改
+
+	b.返回值类型 : T&，返回引用可以提高返回的效率，有返回值目的是为了支持连续赋值
+
+	c.检测是否为自己给自己赋值
+
+	d.返回*this : 要复合连续赋值的含义
+
+2.赋值运算符只能重载成类的成员函数不能重载成全局函数
+原因:
+赋值运算符如果不显式实现，编译器会生成一个默认的(以值的方式逐字节拷贝)。
+此时用户再在类外自己实现一个全局的赋值运算符重载，就和编译器在类中生成的默认赋值运算符重载冲突了，故赋值运算符重载只能是类的成员函数
+
+3.若类中未涉及到资源管理，赋值运算符是否实现都可以；一旦涉及到资源管理则必须要实现
+*/
+
+//前置++和后置++重载
+/*
+前置++和后置++都是一元运算符，为了让前置++与后置++形成能正确重载
+C++规定 : 后置++重载时多增加一个int类型的参数，但调用函数时该参数不用传递，编译器自动传递
+
+注意:
+前置++直接返回+1之后的结果
+后置++是先使用后+1，因此需要返回+1之前的旧值，故需在实现时需要先将this保存一份
+
+*/
 
 
 
@@ -564,31 +593,130 @@ c.函数返回值类型为类对象
 
 
 
+//日期类
+#include <iostream>
+using std::cout;
+using std::endl;
+class Date
+{
+public:
+	Date(int year, int month, int day);
 
+	Date& operator=(const Date& temp);
 
+	bool operator==(const Date& temp);
 
+	bool operator!=(const Date& temp);
 
+	bool operator>(const Date& temp);
 
+	bool operator>=(const Date& temp);
 
+	bool operator<(const Date& temp);
 
+	bool operator<=(const Date& temp);
 
+	Date& operator++();
 
+	Date& operator++(int);
 
+	void Print()const;
+private:
+	int _year;
+	int _month;
+	int _day;
+};
 
+Date::Date(int year = 2003, int month = 10, int day = 23)
+{
+	_year = year;
+	_month = month;
+	_day = day;
+}
 
+Date& Date::operator=(const Date& temp)//该情况下实际上没必要显示提供
+{
+	if (this != &temp)//若遇到自身给自身赋值的情况
+	{
+		this->_year = temp._year;
+		this->_month = temp._month;
+		this->_day = temp._day;
+	}
+	return *this;//实现=运算符的链式赋值
+}
 
+bool Date::operator==(const Date& temp)
+{
+	return _year == temp._year && _month == temp._month && _day == temp._day;
+}
+bool Date::operator!=(const Date& temp)
+{
+	return !(*this == temp);
+}
+bool Date::operator>(const Date& temp)
+{
+	if (_year > temp._year)
+		return true;
+	else if (_year == temp._year && _month > temp._month)
+		return true;
+	else if (_year == temp._year && _month == temp._month && _day > temp._day)
+		return true;
+	else
+		return false;
+}
+bool Date::operator>=(const Date& temp)
+{
+	return (*this > temp) || (*this == temp);
+}
+bool Date::operator<(const Date& temp)
+{
+	return !(*this >= temp);
+}
+bool Date::operator<=(const Date& temp)
+{
+	return !(*this > temp);
+}
 
+Date& Date::operator++()//前置++
+{
 
+}
 
+Date& Date::operator++(int)//后置++
+{
 
+}
 
+void Date::Print()const
+{
+	cout << _year << "_" << _month << "_" << _day << endl;
+}
 
+int main()
+{
+	Date day1(2022, 8, 23);//调用构造函数
 
+	Date day2(day1);//调用编译器默认提供的拷贝构造函数
 
+	Date day3;//调用全缺省构造函数
+	Date day4;
 
+	day4 = day3 = day1;//调用赋值运算符重载函数
 
+	day1.Print();
+	day2.Print();
+	day3.Print();
+	day4.Print();
 
+	cout << (day1 == day2) << endl;//1
+	cout << (day1 != day2) << endl;//0
+	cout << (day1 > day2) << endl;//0
+	cout << (day1 < day2) << endl;//0
+	cout << (day1 >= day2) << endl;//1
+	cout << (day1 <= day2) << endl;//1
 
+	return 0;
+}
 
 
 
