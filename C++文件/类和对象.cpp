@@ -506,6 +506,43 @@ c.º¯Êı·µ»ØÖµÀàĞÍÎªÀà¶ÔÏó
 
 
 
+//const³ÉÔ±
+/*
+½«constĞŞÊÎµÄ"³ÉÔ±º¯Êı"³ÆÖ®Îªconst³ÉÔ±º¯Êı£¬constĞŞÊÎÀà³ÉÔ±º¯Êı£¬Êµ¼ÊĞŞÊÎ¸Ã³ÉÔ±º¯ÊıÒşº¬µÄthisÖ¸Õë£¬±íÃ÷ÔÚ¸Ã³ÉÔ±º¯ÊıÖĞ²»ÄÜ¶ÔÀàµÄÈÎºÎ³ÉÔ±½øĞĞĞŞ¸Ä
+*/
+
+//È¡µØÖ·¼°constÈ¡µØÖ·²Ù×÷·ûÖØÔØ
+/*
+ÕâÁ½¸öÔËËã·ûÒ»°ã²»ĞèÒªÖØÔØ£¬Ê¹ÓÃ±àÒëÆ÷Éú³ÉµÄÄ¬ÈÏÈ¡µØÖ·µÄÖØÔØ¼´¿É£¬Ö»ÓĞÌØÊâÇé¿ö²ÅĞèÒªÖØÔØ£¬±ÈÈçÏëÈÃ±ğÈË»ñÈ¡µ½Ö¸¶¨µÄÄÚÈİ
+*/
+//#include<iostream>
+//class Date
+//{
+//public:
+//	Date* operator&()
+//	{
+//		return this;
+//	}
+//	const Date* operator&()const
+//	{
+//		return this;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -582,178 +619,362 @@ C++¹æ¶¨ : ºóÖÃ++ÖØÔØÊ±¶àÔö¼ÓÒ»¸öintÀàĞÍµÄ²ÎÊı£¬µ«µ÷ÓÃº¯ÊıÊ±¸Ã²ÎÊı²»ÓÃ´«µİ£¬±àÒëÆ
 
 ×¢Òâ:
 Ç°ÖÃ++Ö±½Ó·µ»Ø+1Ö®ºóµÄ½á¹û
-ºóÖÃ++ÊÇÏÈÊ¹ÓÃºó+1£¬Òò´ËĞèÒª·µ»Ø+1Ö®Ç°µÄ¾ÉÖµ£¬¹ÊĞèÔÚÊµÏÖÊ±ĞèÒªÏÈ½«this±£´æÒ»·İ
+ºóÖÃ++ÊÇÏÈÊ¹ÓÃºó+1£¬Òò´ËĞèÒª·µ»Ø+1Ö®Ç°µÄ¾ÉÖµ£¬¹ÊĞèÔÚÊµÏÖÊ±ĞèÒªÏÈ½«this±£´æ£¬ÇÒÎªÁÙÊ±¶ÔÏó£¬Òò´ËÖ»ÄÜÒÔÖµµÄ·½Ê½·µ»Ø£¬²»ÄÜ·µ»ØÒıÓÃ
 
 */
 
 
 
-
-
-
-
-
 //ÈÕÆÚÀà
-#include <iostream>
-using std::cout;
-using std::endl;
+//#include <iostream>
+//#include <cassert>
+//using std::cout;
+//using std::cin;
+//using std::endl;
+//using std::ostream;
+//using std::istream;
+//class Date
+//{
+//	friend inline ostream& operator<<(ostream& out, const Date& d);
+//	friend inline istream& operator>>(istream& in, Date& d);
+//public:
+//	Date(int year, int month, int day);
+//
+//	int GetMonthDay(int year, int month)//¸Ãº¯Êı·ÅÔÚÀàÖĞ³ÉÎªÄÚÁªº¯Êı
+//	{
+//		static int days[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };//¸ÃÊı×éÉè¼ÆÎª¾²Ì¬±ÜÃâ¶à´Î´´½¨
+//		int day = days[month];
+//		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
+//		{
+//			day += 1;
+//		}
+//		return day;
+//	}
+//	bool CheckDate()
+//	{
+//		return (_year >= 1 && _month > 0 && _month < 13 && _day > 0 && _day <= GetMonthDay(_year, _month));
+//	}
+//
+//	Date& operator=(const Date& temp);
+//
+//	bool operator==(const Date& temp);
+//	bool operator!=(const Date& temp);
+//	bool operator>(const Date& temp);
+//	bool operator>=(const Date& temp);
+//	bool operator<(const Date& temp);
+//	bool operator<=(const Date& temp);
+//
+//	Date operator+(int day);
+//	Date& operator+=(int day);
+//	Date operator-(int day);
+//	Date& operator-=(int day);
+//
+//	Date& operator++();
+//	Date operator++(int);
+//	Date& operator--();
+//	Date operator--(int);
+//
+//	int operator-(const Date& temp);
+//
+//	void Print()const;
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+//Date::Date(int year = 2003, int month = 10, int day = 23)
+//{
+//	_year = year;
+//	_month = month;
+//	_day = day;
+//	if (!CheckDate())
+//	{
+//		cout << "·Ç·¨ÈÕÆÚ:";
+//		Print();
+//	}
+//}
+//
+//Date& Date::operator=(const Date& temp)//¸ÃÇé¿öÏÂÊµ¼ÊÉÏÃ»±ØÒªÏÔÊ¾Ìá¹©
+//{
+//	if (this != &temp)//ÈôÓöµ½×ÔÉí¸ø×ÔÉí¸³ÖµµÄÇé¿ö
+//	{
+//		this->_year = temp._year;
+//		this->_month = temp._month;
+//		this->_day = temp._day;
+//	}
+//	return *this;//ÊµÏÖ=ÔËËã·ûµÄÁ´Ê½¸³Öµ
+//}
+//
+//bool Date::operator==(const Date& temp)
+//{
+//	return _year == temp._year && _month == temp._month && _day == temp._day;
+//}
+//bool Date::operator!=(const Date& temp)
+//{
+//	return !(*this == temp);
+//}
+//bool Date::operator>(const Date& temp)
+//{
+//	if (_year > temp._year)
+//		return true;
+//	else if (_year == temp._year && _month > temp._month)
+//		return true;
+//	else if (_year == temp._year && _month == temp._month && _day > temp._day)
+//		return true;
+//	else
+//		return false;
+//}
+//bool Date::operator>=(const Date& temp)
+//{
+//	return (*this > temp) || (*this == temp);
+//}
+//bool Date::operator<(const Date& temp)
+//{
+//	return !(*this >= temp);
+//}
+//bool Date::operator<=(const Date& temp)
+//{
+//	return !(*this > temp);
+//}
+//
+//Date Date::operator+(int day)
+//{
+//	Date temp(*this);
+//	temp += day;
+//	return temp;
+//}
+//Date& Date::operator+=(int day)
+//{
+//	if (day < 0)
+//	{
+//		return *this -= -day;
+//	}
+//	_day += day;
+//	while (_day > GetMonthDay(_year, _month))
+//	{
+//		_day -= GetMonthDay(_year, _month);
+//		++_month;
+//		if (_month == 13)
+//		{
+//			_month = 1;
+//			++_year;
+//		}
+//	}
+//	return *this;
+//}
+//Date Date::operator-(int day)
+//{
+//	Date temp(*this);
+//	temp -= day;
+//	return temp;
+//}
+//Date& Date::operator-=(int day)
+//{
+//	if (day < 0)
+//	{
+//		return *this+=-day;
+//	}
+//	_day -= day;
+//	while (_day <= 0)
+//	{
+//		--_month;
+//		if (_month == 0)
+//		{
+//			--_year;
+//			_month = 12;
+//		}
+//		_day += GetMonthDay(_year, _month);
+//	}
+//	return *this;
+//}
+//
+//
+//Date& Date::operator++()//Ç°ÖÃ++
+//{
+//	*this += 1;
+//	return *this;
+//}
+//Date Date::operator++(int)//ºóÖÃ++
+//{
+//	Date temp(*this);
+//	*this += 1;
+//	return temp;//·µ»Ø¾Ö²¿±äÁ¿£¬³ö¸Ã×÷ÓÃÓòºóÏú»Ù£¬²»¿ÉÊ¹ÓÃÒıÓÃ·µ»Ø
+//}
+//Date& Date::operator--()//Ç°ÖÃ--
+//{
+//	return *this -= 1;
+//}
+//Date Date::operator--(int)//ºóÖÃ--
+//{
+//	Date temp(*this);
+//	*this -= 1;
+//	return temp;//·µ»Ø¾Ö²¿±äÁ¿£¬³ö¸Ã×÷ÓÃÓòºóÏú»Ù£¬²»¿ÉÊ¹ÓÃÒıÓÃ·µ»Ø
+//}
+//
+//int Date::operator-(const Date& temp)
+//{
+//	int flag = 1;
+//	Date max = *this;
+//	Date min = temp;
+//	if (max < min)
+//	{
+//		max = temp;
+//		min = *this;
+//		flag = -1;
+//	}
+//	int count = 0;
+//	while (max != min)//!=µÄÂß¼­½Ï>¸ü¼òµ¥
+//	{
+//		++min;
+//		++count;
+//	}
+//	return count*flag;
+//}
+//
+//void Date::Print()const
+//{
+//	cout << _year << "_" << _month << "_" << _day << endl;
+//}
+//
+////ĞèÖØÔØÎªÈ«¾Öº¯Êı,×¢ÒâĞÎ²Î±íË³Ğò
+//inline ostream& operator<<(ostream& out,const Date& d)
+//{
+//	out << d._year << "_" << d._month << "_" << d._day;
+//	return out;
+//}
+//inline istream& operator>>(istream& in,Date& d)
+//{
+//	in >> d._year >> d._month >> d._day;
+//	assert(d.CheckDate());
+//	return in;
+//}
+//int main()
+//{
+//	Date day1(2022, 8, 23);//µ÷ÓÃ¹¹Ôìº¯Êı
+//
+//	Date day2(day1);//µ÷ÓÃ±àÒëÆ÷Ä¬ÈÏÌá¹©µÄ¿½±´¹¹Ôìº¯Êı
+//
+//	Date day3;//µ÷ÓÃÈ«È±Ê¡¹¹Ôìº¯Êı
+//	Date day4;
+//
+//	day4 = day3 = day1;//µ÷ÓÃ¸³ÖµÔËËã·ûÖØÔØº¯Êı
+//
+//	cout << day1 << endl;
+//	cout << day2 << endl;
+//	cout << day3 << endl;
+//	cout << day4 << endl;
+//
+//	cout << (day1 == day2) << endl;//1
+//	cout << (day1 != day2) << endl;//0
+//	cout << (day1 > day2) << endl;//0
+//	cout << (day1 < day2) << endl;//0
+//	cout << (day1 >= day2) << endl;//1
+//	cout << (day1 <= day2) << endl;//1
+//
+//	cout << (day1++) << endl;//2022_8_23
+//	cout << (++day1) << endl;;//2022_8_25
+//	cout << (day1--) << endl;//2022_8_25
+//	cout << (--day1) << endl;//2022_8_23
+//
+//	day1 += 5;
+//	cout << day1 << endl;//2022_8_28
+//	day1 = day1 + 4;
+//	cout << day1 << endl;//2022_9_1
+//
+//
+//	day1 = day1 - 4;
+//	cout << day1 << endl;//2022_8_28
+//	day1 -= 5;
+//	cout << day1 << endl;//2022_8_23
+//
+//	day1 += 100;
+//	int num = day1 - day4;
+//	cout << num << endl;//100
+//	
+//	Date day5(1000, 13, 55);//·Ç·¨ÈÕÆÚ:1000_13_55
+//
+//	cin >> day5;
+//	cout << day5;
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<iostream>
+#include <cassert>
+using namespace std;
 class Date
 {
+	friend inline ostream& operator<<(ostream& out, const Date& d);
+	friend inline istream& operator>>(istream& in, Date& d);
 public:
 	Date(int year, int month, int day);
 
-	Date& operator=(const Date& temp);
+	int GetMonthDay(int year, int month)
+	{
+		static int days[13] = { 0,31,28,31,30,31,30,31,31,30,31,30,31 };
+		int day = days[month];
+		if (month == 2 && ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)))
+		{
+			day += 1;
+		}
+		return day;
+	}
+	bool CheckDate()
+	{
+		return (_year >= 1 && _month > 0 && _month < 13 && _day > 0 && _day <= GetMonthDay(_year, _month));
+	}
 
-	bool operator==(const Date& temp);
-
-	bool operator!=(const Date& temp);
-
-	bool operator>(const Date& temp);
-
-	bool operator>=(const Date& temp);
-
-	bool operator<(const Date& temp);
-
-	bool operator<=(const Date& temp);
-
-	Date& operator++();
-
-	Date& operator++(int);
-
-	void Print()const;
 private:
 	int _year;
 	int _month;
 	int _day;
 };
-
 Date::Date(int year = 2003, int month = 10, int day = 23)
 {
 	_year = year;
 	_month = month;
 	_day = day;
-}
-
-Date& Date::operator=(const Date& temp)//¸ÃÇé¿öÏÂÊµ¼ÊÉÏÃ»±ØÒªÏÔÊ¾Ìá¹©
-{
-	if (this != &temp)//ÈôÓöµ½×ÔÉí¸ø×ÔÉí¸³ÖµµÄÇé¿ö
+	if (!CheckDate())
 	{
-		this->_year = temp._year;
-		this->_month = temp._month;
-		this->_day = temp._day;
+		cout << "·Ç·¨ÈÕÆÚ:";
+		cout << *this << endl;
 	}
-	return *this;//ÊµÏÖ=ÔËËã·ûµÄÁ´Ê½¸³Öµ
 }
-
-bool Date::operator==(const Date& temp)
+inline ostream& operator<<(ostream& out, const Date& d)
 {
-	return _year == temp._year && _month == temp._month && _day == temp._day;
+	out << d._year << "_" << d._month << "_" << d._day;
+	return out;
 }
-bool Date::operator!=(const Date& temp)
+inline istream& operator>>(istream& in, Date& d)
 {
-	return !(*this == temp);
+	in >> d._year >> d._month >> d._day;
+	assert(d.CheckDate());
+	return in;
 }
-bool Date::operator>(const Date& temp)
-{
-	if (_year > temp._year)
-		return true;
-	else if (_year == temp._year && _month > temp._month)
-		return true;
-	else if (_year == temp._year && _month == temp._month && _day > temp._day)
-		return true;
-	else
-		return false;
-}
-bool Date::operator>=(const Date& temp)
-{
-	return (*this > temp) || (*this == temp);
-}
-bool Date::operator<(const Date& temp)
-{
-	return !(*this >= temp);
-}
-bool Date::operator<=(const Date& temp)
-{
-	return !(*this > temp);
-}
-
-Date& Date::operator++()//Ç°ÖÃ++
-{
-
-}
-
-Date& Date::operator++(int)//ºóÖÃ++
-{
-
-}
-
-void Date::Print()const
-{
-	cout << _year << "_" << _month << "_" << _day << endl;
-}
-
 int main()
 {
-	Date day1(2022, 8, 23);//µ÷ÓÃ¹¹Ôìº¯Êı
-
-	Date day2(day1);//µ÷ÓÃ±àÒëÆ÷Ä¬ÈÏÌá¹©µÄ¿½±´¹¹Ôìº¯Êı
-
-	Date day3;//µ÷ÓÃÈ«È±Ê¡¹¹Ôìº¯Êı
-	Date day4;
-
-	day4 = day3 = day1;//µ÷ÓÃ¸³ÖµÔËËã·ûÖØÔØº¯Êı
-
-	day1.Print();
-	day2.Print();
-	day3.Print();
-	day4.Print();
-
-	cout << (day1 == day2) << endl;//1
-	cout << (day1 != day2) << endl;//0
-	cout << (day1 > day2) << endl;//0
-	cout << (day1 < day2) << endl;//0
-	cout << (day1 >= day2) << endl;//1
-	cout << (day1 <= day2) << endl;//1
-
+	Date day5(1000, 13, 55);
+	cin >> day5;
+	assert(day5.CheckDate());
+	cout << day5;
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

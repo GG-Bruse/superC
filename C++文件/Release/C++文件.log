@@ -1,7 +1,6 @@
 ﻿  类和对象.cpp
   正在生成代码
-  2 of 20 functions (10.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 16 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
   C++文件.vcxproj -> D:\vs\C++\C++文件\Release\C++文件.exe
