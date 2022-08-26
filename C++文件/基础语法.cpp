@@ -308,10 +308,12 @@ extern "C"
 
 
 //常引用
-
 //#include<iostream>
 //int main()
 //{
+//	int data1 = 1;//用常量赋值变量，拷贝产生临时变量
+//	//int& data2 = 1;//err
+//
 //	int a = 1;
 //	int& b = a;//权限平移 ok
 //
