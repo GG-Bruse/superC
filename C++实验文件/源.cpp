@@ -8275,3 +8275,37 @@ s只包含小写字母
 //}
 
 
+
+
+
+
+
+
+
+/*
+求1+2+3+...+n，要求不能使用乘除法、位运算、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）
+*/
+
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//int i = 1;
+//int ret = 0;
+//class Sum
+//{
+//public:
+//    Sum()
+//    {
+//        ret += i;
+//        ++i;
+//    }
+//};
+//class Solution
+//{
+//public:
+//    int Sum_Solution(int n)
+//    {
+//        //Sum arr[n];//变长数组
+//        return ret;
+//    }
+//};
