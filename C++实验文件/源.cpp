@@ -8309,3 +8309,82 @@ s只包含小写字母
 //        return ret;
 //    }
 //};
+
+//#include<iostream>
+//using namespace std;
+//class Sum
+//{
+//public:
+//    Sum()
+//    {
+//        _sum += _i;
+//        ++_i;
+//    }
+//    static int GetSum()
+//    {
+//        return _sum;
+//    }
+//private:
+//    static int _sum;
+//    static int _i;
+//};
+//int Sum::_sum = 0;
+//int Sum::_i = 1;
+//class Solution
+//{
+//public:
+//    int Sum_Solution(int n)
+//    {
+//        //Sum arr[n];
+//        return Sum::GetSum();
+//    }
+//};
+
+//#include<iostream>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    class Sum
+//    {
+//    public:
+//        Sum()
+//        {
+//            _sum += _i;
+//            ++_i;
+//        }
+//        static int GetSum()
+//        {
+//            return _sum;
+//        }
+//    };
+//
+//    int Sum_Solution(int n)
+//    {
+//        //Sum arr[n];
+//        return Sum::GetSum();
+//    }
+//private:
+//    static int _sum;
+//    static int _i;
+//};
+//int Solution::_sum = 0;
+//int Solution::_i = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
