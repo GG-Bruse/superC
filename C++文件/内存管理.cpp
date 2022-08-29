@@ -111,6 +111,13 @@
 //	delete[] p6;
 //
 //	cout << endl;
+//	//C++11支持初始化自定义类型的数组
+//	Test* p7 = new Test[5]{ 1,2,3,4,5 };//调用构造函数
+//	delete[] p7;
+//	cout << endl;
+//	Test* p8 = new Test[5]{ Test(1),Test(2), Test(3), Test(4), Test(5) };//调用拷贝构造函数
+//	delete[] p8;
+//
 //	return 0;
 //}
 
@@ -136,6 +143,332 @@
 
 
 
+
+
+
+
+
+
+
+
+
+//operator new与operator delete函数
+/*
+new、delete底层分别调用operator new与operator delete函数，operator new与operator delete函数并不是对new、delete的操作符重载
+
+new和delete是用户进行动态内存申请和释放的操作符，operator new 和operator delete是系统提供的全局函数，
+new在底层调用operator new全局函数来申请空间 + 构造函数，delete在底层通过operator delete全局函数来释放空间 + 析构函数
+
+operator new实际也是通过malloc来申请空间，如果malloc申请空间成功就直接返回，否则执行用户提供的空间不足应对措施，
+如果用户提供该措施就继续申请，否则就抛异常。operator delete最终是通过free来释放空间的
+*/
+
+
+
+
+
+
+//重载operator new与operator delete
+/*
+一般情况下不需要对 operator new 和 operator delete进行重载，除非在申请和释放空间时候有某些特殊的需求。
+比如：在使用new和delete申请和释放空间时，打印一些日志信息，可以简单帮助用户来检测是否存在内存泄漏。
+*/
+
+// 重载operator delete，在申请空间时：打印在哪个文件、哪个函数、第多少行，申请了多少个字节
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//void* operator new(size_t size, const char* fileName, const char* funcName, size_t lineNo)
+//{
+//	void* p = ::operator new(size);
+//	cout << fileName << "-" << funcName << "-" << lineNo << "-" << p << "-"<< size << endl;
+//	return p;
+//}
+////重载operator delete
+//void operator delete(void* p)
+//{
+//	cout <<"delete->" << p << endl;
+//	free(p);
+//}
+//#ifdef _DEBUG//只有在Debug方式下，才调用用户重载的 operator new
+//#define new new(__FILE__, __FUNCTION__, __LINE__)
+//#endif
+//int main()
+//{
+//	int* p = new int;
+//	delete p;
+//	return 0;
+//}
+
+//重载类的专属operator new与operator delete
+//#include<iostream>
+//using namespace std;
+//class Test
+//{
+//public:
+//	void* operator new(size_t size)
+//	{
+//		cout << "void* operator new(size_t size)->STL内存池" << endl;
+//		void* obj = _alloc.allocate(1);
+//		return obj;
+//	}
+//	void operator delete(void* ptr)
+//	{
+//		cout << "void operator delete(void* ptr)->STL内存池" << endl;
+//		_alloc.deallocate((Test*)ptr,1);
+//	}
+//private:
+//	static allocator<Test> _alloc;//STL内存池
+//	int _data;
+//};
+//allocator<Test> Test::_alloc;
+//int main()
+//{
+//	//提高效率:申请时不走Test,不去malloc,走定制的内存池
+//	Test* t1 = new Test;
+//	Test* t2 = new Test;
+//	Test* t3 = new Test;
+//	Test* t4 = new Test;
+//	delete t1;
+//	delete t2;
+//	delete t3;
+//	delete t4;
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//new和delete的实现原理
+/*
+1.内置类型
+若申请的是内置类型的空间，new和malloc，delete和free基本类似，
+不同的地方是:
+new/delete申请和释放的是单个元素的空间，new[]和delete[]申请的是连续空间，而且new在申请空间失败时会抛异常，malloc则会返回NULL。
+
+2.自定义类型
+new的原理
+1.调用operator new函数申请空间
+2.在申请的空间上执行构造函数，完成对象的构造
+
+delete的原理
+1. 在空间上执行析构函数，完成对象中资源的清理工作
+2. 调用operator delete函数释放对象的空间
+
+new T[N]的原理
+1. 调用operator new[]函数，在operator new[]中实际调用operator new函数完成N个对象空间的申请
+2. 在申请的空间上执行N次构造函数
+
+delete[]的原理
+1. 在释放的对象空间上执行N次析构函数，完成N个对象中资源的清理
+2. 调用operator delete[]释放空间，实际在operator delete[]中调用operator delete来释放空间
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//定位new表达式(placement-new)
+/*
+定位new表达式是在已分配的原始内存空间中调用构造函数初始化一个对象。
+使用格式：
+new (place_address) type或者new (place_address) type(initializer-list)
+place_address必须是一个指针，initializer-list是类型的初始化列表
+使用场景:
+定位new表达式在实际中一般是配合内存池使用。因为内存池分配出的内存没有初始化，
+所以如果是自定义类型的对象，需要使用new的定义表达式进行显示调构造函数进行初始化
+*/
+//#include<iostream>
+//using namespace std;
+//class Test
+//{
+//public:
+//	Test(int a = 0): _data(a)
+//	{
+//		cout << "Test():" << this << endl;
+//	}
+//	~Test()
+//	{
+//		cout << "~Test():" << this << endl;
+//	}
+//private:
+//	int _data;
+//};
+//// 定位new/replacement new
+//int main()
+//{
+//	//p1现在指向的是与Test对象相同大小的一段空间，但构造函数没有执行
+//	Test* p1 = (Test*)malloc(sizeof(Test));
+//	new(p1)Test; // 注意:如果A类的构造函数有参数时，此处需要传参
+//	p1->~Test();
+//	free(p1);
+//
+//	Test* p2 = (Test*)operator new(sizeof(Test));
+//	new(p2)Test(10);
+//	p2->~Test();
+//	operator delete(p2);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//malloc、free和new、delete的区别
+/*
+malloc/free和new/delete的共同点是:
+都是从堆上申请空间，并且需要用户手动释放。
+
+不同的地方是:
+1. malloc和free是函数，new和delete是操作符
+2. malloc申请的空间不会初始化，new可以初始化
+3. malloc申请空间时，需要手动计算空间大小并传递，new只需在其后跟上空间的类型即可，如果是多个对象，[]中指定对象个数即可
+4. malloc的返回值为void*, 在使用时必须强转，new不需要，因为new后跟的是空间的类型
+5. malloc申请空间失败时，返回的是NULL，因此使用时必须判空，new不需要，但是new需要捕获异常
+6. 申请自定义类型对象时，malloc/free只会开辟空间，不会调用构造函数与析构函数，
+而new在申请空间后会调用构造函数完成对象的初始化，delete在释放空间前会调用析构函数完成空间中资源的清理
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//内存泄漏概述
+/*
+什么是内存泄漏:
+内存泄漏指因为疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并不是指内存在物理上的消失，
+而是应用程序分配某段内存后，因为设计错误，失去了对该段内存的控制，因而造成了内存的浪费。
+内存泄漏的危害:
+长期运行的程序出现内存泄漏，影响很大，如操作系统、后台服务等等，出现内存泄漏会导致响应越来越慢，最终卡死
+*/
+
+//内存泄漏分类
+/*
+C/C++程序中一般我们关心两种方面的内存泄漏:
+
+堆内存泄漏(Heap leak):
+堆内存指的是程序执行中依据须要分配通过malloc/calloc/realloc/ new等从堆中分配的一块内存，
+用完后必须通过调用相应的 free或者delete 删掉。
+假设程序的设计错误导致这部分内存没有被释放，那么以后这部分空间将无法再被使用，就会产生Heap Leak。
+
+系统资源泄漏:
+指程序使用系统分配的资源，比如套接字、文件描述符、管道等没有使用对应的函数释放，导致系统资源的浪费，严重可导致系统效能减少，系统执行不稳定。
+*/
 
 
 
