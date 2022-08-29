@@ -4,7 +4,10 @@
 
 //CÓïÑÔ½á¹¹ÌåstructÖÐÖ»ÄÜ¶¨Òå±äÁ¿¡£ÔÚC++ÖÐ£¬½á¹¹ÌåÄÚ²»½ö¿ÉÒÔ¶¨Òå±äÁ¿£¬Ò²¿ÉÒÔ¶¨Òåº¯Êý¡£
 //ÔÚC++ÖÐ¸üÏ²»¶ÓÃclassÀ´´úÌæstruct
-
+/*
+ÀàÊÇ¶ÔÄ³Ò»ÀàÊµÌå(¶ÔÏó)À´½øÐÐÃèÊöµÄ£¬ÃèÊö¸Ã¶ÔÏó¾ßÓÐÄÇÐ©ÊôÐÔ£¬
+ÄÇÐ©·½·¨£¬ÃèÊöÍê³Éºó¾ÍÐÎ³ÉÁËÒ»ÖÖÐÂµÄ×Ô¶¨ÒåÀàÐÍ£¬²ÅÓÃ¸Ã×Ô¶¨ÒåÀàÐÍ¾Í¿ÉÒÔÊµÀý»¯¾ßÌåµÄ¶ÔÏó
+*/
 
 
 
@@ -556,11 +559,23 @@ explicitÐÞÊÎ¹¹Ôìº¯Êý£¬½ûÖ¹ÀàÐÍ×ª»»
 //private:
 //	int _data;
 //};
+//void func1(Test temp){}
+//Test func2()
+//{
+//	Test temp(2022);
+//	return temp;
+//}
 //int main()
 //{
 //	Test(2022);//ÄäÃû¶ÔÏóÖ±½Óµ÷ÓÃ¹¹Ôìº¯Êý£¬ÉúÃüÖÜÆÚÖ»ÔÚÕâÒ»ÐÐ
 //	/*err*/Test d2 = 2022;//ÒþÊ½ÀàÐÍ×ª»»:¹¹Ôì(ÁÙÊ±±äÁ¿) + ¿½±´¹¹Ôì + ÓÅ»¯ -> Ö±½Óµ÷ÓÃ¹¹Ôì
 //	const Test& d4 = 2022;
+//
+//	func1(Test(2022));//¹¹Ôì+¿½±´¹¹Ôì+ÓÅ»¯ -> Ö±½Ó¹¹Ôì
+//
+//	Test t1 = func2();//Ò»´Î¹¹Ôì+Á½´Î¿½±´¹¹Ôì+ÓÅ»¯(²»ÔÚÍ¬Ò»±í´ïÊ½µÄ»°ÎÞ·¨ÓÅ»¯) -> Ò»´Î¹¹Ôì+Ò»´Î¿½±´¹¹Ôì
+// 
+//  //½áÂÛ:Á¬ÐøµÄÒ»¸ö±í´ïÊ½²½ÖèÖÐ£¬Á¬Ðø¹¹Ôì¶¼»áÓÅ»¯(ºÏ¶þÎªÒ»)
 //	return 0;
 //}
 
@@ -1310,24 +1325,6 @@ C++¹æ¶¨ : ºóÖÃ++ÖØÔØÊ±¶àÔö¼ÓÒ»¸öintÀàÐÍµÄ²ÎÊý£¬µ«µ÷ÓÃº¯ÊýÊ±¸Ã²ÎÊý²»ÓÃ´«µÝ£¬±àÒëÆ
 //	cout << day5;
 //	return 0;
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

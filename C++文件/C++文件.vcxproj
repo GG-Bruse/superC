@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="内存管理.cpp" />
     <ClCompile Include="基础语法.cpp" />
     <ClCompile Include="类和对象.cpp" />
   </ItemGroup>
