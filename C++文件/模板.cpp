@@ -159,21 +159,120 @@ typename是用来定义模板参数关键字，也可以使用class(切记:不能使用struct代替class)
 3.模板函数不允许自动类型转换，但普通函数可以进行自动类型转换
 */
 
-int Add(int left, int right)//专门处理int的加法函数
+//int Add(int left, int right)//专门处理int的加法函数
+//{
+//	return left + right;
+//}
+//template<class T>//通用加法函数
+//T Add(T left, T right)
+//{
+//	return left + right;
+//}
+//template<class T1, class T2>//通用加法函数
+//T1 Add(T1 left, T2 right)
+//{
+//	return left + right;
+//}
+//int main()
+//{
+//	Add(1, 2);//与非函数模板类型完全匹配，不需要函数模板实例化
+//
+//	//模板函数可以生成更加匹配的版本，编译器根据实参生成更加匹配的Add函数
+//	Add(1.0, 2.0);//调用第二个
+//	Add(1.0, 2);//调用第三个
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//类模板
+
+//类模板的定义格式:
+/*
+template<class T1, class T2, ..., class Tn>
+class 类模板名
 {
-	return left + right;
-}
-template<class T1, class T2>//通用加法函数
-T1 Add(T1 left, T2 right)
-{
-	return left + right;
-}
-int main()
-{
-	Add(1, 2); // 与非函数模板类型完全匹配，不需要函数模板实例化
-	Add(1.0, 2); // 模板函数可以生成更加匹配的版本，编译器根据实参生成更加匹配的Add函数
-	return 0;
-}
+// 类内成员定义
+};
+*/
+//#include<iostream>
+//using namespace std;
+//template<class T>
+//class Stack
+//{
+//public:
+//	Stack(size_t capacity = 6):_capacity(capacity),_top(0),_data(new T[capacity]){}
+//	~Stack();
+//private:
+//	size_t _capacity;
+//	size_t _top;
+//	T* _data;
+//};
+//template<class T>//类模板中函数放在类外进行定义时，需要加模板参数列表
+//Stack<T>::~Stack()
+//{
+//	delete[] _data;
+//	_top = 0;
+//	_capacity = 0;
+//}
+//int main()
+//{
+//	//Stack是类名，Stack<int>、Stack<char>等才是类型
+//	Stack<int>sk1;
+//	Stack<char>sk2;
+//	Stack<int>sk3(100);
+//	return 0;
+//}
+
+//类模板的实例化:
+/*
+类模板实例化与函数模板实例化不同，类模板实例化需要在类模板名字后跟<>，然后将实例化的类型放在<>中即可，
+类模板名字不是真正的类，而实例化的结果才是真正的类
+*/
+
+
+
+
+//模板不支持分离编译，一般放在同一文件中，取名.hpp
+
+
+
+
+
+
+
+
+
+
+
 
 
 
