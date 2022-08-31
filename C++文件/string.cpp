@@ -143,8 +143,8 @@ length		返回字符串有效字符长度
 capacity	返回空间总大小
 empty		检测字符串是否为空串，是返回true，否则返回false
 clear		清空有效字符
-reserve		为字符串预留空间
-resize		将有效字符的个数该成n个，多出的空间用字符c填充
+reserve		为字符串预留空间(开空间)
+resize		将有效字符的个数改成n个，多出的空间用字符c填充(开空间+初始化)
 
 注意:
 1. size()与length()方法底层实现原理完全相同，引入size()的原因是为了与其他容器的接口保持一致，一般情况下基本都是用size()。
@@ -166,8 +166,10 @@ resize在改变元素个数时，如果是将元素个数增多，可能会改变底层容量的大小，如果是将
 /*
 operator[]			返回pos位置的字符，const string类对象调用
 at					返回pos位置的字符，越界抛异常
-begin + end			begin获取第一个字符的迭代器 + end获取最后一个字符下一个位置的迭代器
-rbegin + rend		rbegin获取第一个字符的迭代器 +rend获取最后一个字符下一个位置的迭代器
+begin + end			begin获取第一个字符的迭代器 + end获取最后一个字符下一个位置的迭代器 iterator
+rbegin + rend		rbegin获取最后一个字符的迭代器 +rend获取第一个字符前一个位置的迭代器 reverse_iterator
+cbegin + cend		const_iterator
+crbegin + crend		const_reverse_iterator
 范围for				C++11支持更简洁的范围for的新遍历方式
 */
 
@@ -182,6 +184,7 @@ c_str			返回C格式字符串
 find + npos		从字符串pos位置开始往后找字符c，返回该字符在字符串中的位置
 rfind			从字符串pos位置开始往前找字符c，返回该字符在字符串中的位置
 substr			在str中从pos位置开始，截取n个字符，然后将其返回
+erase			从字符串中删除字符
 
 注意:
 1. 在string尾部追加字符时，s.push_back(c) / s.append(1, c) / s += 'c'三种的实现方式差不多，
@@ -189,6 +192,18 @@ substr			在str中从pos位置开始，截取n个字符，然后将其返回
 
 2. 对string操作时，若能够大概预估到放多少字符，可以先通过reserve把空间预留好
 */
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string filename("strig.cpp");
+//	filename += '\0';
+//	filename += "STL.cpp";
+//	cout << filename << endl;//strig.cppSTL.cpp		以对象的size为准
+//	cout << filename.c_str() << endl;//strig.cpp	遇到'\0'终止
+//	return 0;
+//}
 
 
 
@@ -199,19 +214,18 @@ operator>>				输入运算符重载
 operator<<				输出运算符重载
 getline					获取一行字符串
 relational operators	大小比较
+
+转换:
+stoi			Convert string to integer (function template )
+stol			Convert string to long int (function template )
+stoul			Convert string to unsigned integer (function template )
+stoll			Convert string to long long (function template )
+stoull			Convert string to unsigned long long (function template )
+stof			Convert string to float (function template )
+stod			Convert string to double (function template )
+stold			Convert string to long double (function template )
+to_string		Convert numerical value to string (function )
 */
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
