@@ -8382,9 +8382,66 @@ s只包含小写字母
 
 
 
+/*
+给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和并同样以字符串形式返回。
 
+你不能使用任何內建的用于处理大整数的库（比如 BigInteger）， 也不能直接将输入的字符串转换为整数形式
+*/
 
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    string addStrings(string num1, string num2)
+//    {
+//        int end1 = num1.size() - 1, end2 = num2.size() - 1;
+//        int next = 0;
+//        string strRet;
+//        while (end1 >= 0 || end2 >= 0)
+//        {
+//            int value1 = end1 >= 0 ? num1[end1] - '0' : 0;
+//            int value2 = end2 >= 0 ? num2[end2] - '0' : 0;
+//            int ret = value1 + value2 + next;
+//            next = ret > 9 ? 1 : 0;
+//            strRet.insert(strRet.begin(), (ret % 10) + '0');
+//            --end1;
+//            --end2;
+//        }
+//        if (next)
+//            strRet.insert(strRet.begin(), '1');
+//        return strRet;
+//    }
+//};
 
-
-
+//优化版
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    string addStrings(string num1, string num2)
+//    {
+//        int end1 = num1.size() - 1, end2 = num2.size() - 1;
+//        int next = 0;
+//        string strRet;
+//        while (end1 >= 0 || end2 >= 0)
+//        {
+//            int value1 = end1 >= 0 ? num1[end1] - '0' : 0;
+//            int value2 = end2 >= 0 ? num2[end2] - '0' : 0;
+//            int ret = value1 + value2 + next;
+//            next = ret > 9 ? 1 : 0;
+//            strRet += ((ret) % 10 + '0');
+//            --end1;
+//            --end2;
+//        }
+//        if (next)
+//            strRet += '1';
+//        reverse(strRet.begin(), strRet.end());
+//        return strRet;
+//    }
+//};
 
