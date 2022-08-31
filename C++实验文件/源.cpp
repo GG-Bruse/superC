@@ -8445,3 +8445,30 @@ s只包含小写字母
 //    }
 //};
 
+
+
+
+
+
+/*
+计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。（注：字符串末尾不以空格为结尾）
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    //cin>> str;//流提取符遇到空格或换行停止
+//    getline(cin, str);
+//    size_t pos = str.rfind(' ');
+//    if (pos != string::npos)
+//    {
+//        cout << str.size() - pos - 1 << endl;
+//    }
+//    else
+//    {
+//        cout << str.size() << endl;
+//    }
+//    return 0;
+//}
