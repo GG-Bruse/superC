@@ -255,6 +255,259 @@ to_string		Convert numerical value to string (function )
 
 
 
+//模拟实现string
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include<cassert>
+using std::cout;
+using std::endl;
+using std::swap;
+namespace bjy
+{
+	class string
+	{
+	public:
+		typedef char* iterator;
+		typedef const char* const_iterator;
+		iterator begin()
+		{
+			return _str;
+		}
+		iterator end()
+		{
+			return _str + _size;
+		}
+		const_iterator begin()const
+		{
+			return _str;
+		}
+		const_iterator end()const
+		{
+			return _str + _size;
+		}
+
+		string() :_str(new char[1]), _size(0), _capacity(0)
+		{
+			_str[0] = '\0';
+		}
+		//string(const char* str/* = "" */) :_str(new char[strlen(str) + 1]), _size(strlen(str)), _capacity(_size)//初始化顺序依赖声明顺序
+		//{
+		//	strcpy(_str, str);//内容拷贝
+		//}
+		string(const char* str)
+		{
+			_size = strlen(str);
+			_capacity = _size;
+			_str = new char[_size + 1];
+			strcpy(_str, str);//内容拷贝
+		}
+		
+		//传统写法
+		//string(const string& str)//深拷贝
+		//{
+		//	_size = str._size;
+		//	_capacity = str._capacity;
+		//	_str = new char[_capacity + 1];
+		//	strcpy(_str, str._str);
+		//}
+		//现代写法
+		string(const string& str):_str(nullptr),_size(0),_capacity(0)//使用初始化列表初始化，避免交换脏数据
+		{
+			string strTemp(str._str);//调用构造函数
+			swap(strTemp);
+		}
+
+		//string& operator=(const string& str)//传统写法
+		//{
+		//	if (this != &str)
+		//	{
+		//		char* pTemp = new char[strlen(str._str) + 1];
+		//		strcpy(pTemp, str._str);
+		//		delete[] _str;
+		//		_str = pTemp;
+		//		_size = str._size;
+		//		_capacity = str._capacity;
+		//	}
+		//	return *this;
+		//}
+		//string& operator=(const string& str)//现代写法1
+		//{
+		//	if (this != &str)
+		//	{
+		//		string strTemp(str._str);
+		//		swap(strTemp);
+		//	}
+		//	return *this;
+		//}
+		string& operator=(string str)//现代写法2:通过传值传参，使得str代替strTemp
+		{
+			swap(str);
+			return *this;
+		}
+
+		const char* c_str()const
+		{
+			return _str;
+		}
+		size_t size()const
+		{
+			return _size;
+		}
+		char& operator[](size_t pos)
+		{
+			assert(pos < _size);
+			return _str[pos];
+		}
+		const char& operator[](size_t pos)const
+		{
+			assert(pos < _size);
+			return _str[pos];
+		}
+		void reserve(size_t num)
+		{
+			if (num > _capacity)
+			{
+				char* temp = new char[num + 1];
+				strcpy(temp, _str);
+				delete[] _str;
+				_str = temp;
+				_capacity = num;
+			}
+		}
+		void push_back(char ch)
+		{
+			if (_size >= _capacity)
+				reserve(_capacity == 0 ? 3 : _capacity * 2);
+			
+			_str[_size] = ch;
+			++_size;
+			_str[_size] = '\0';
+		}
+		void append(const char* str)
+		{
+			size_t lenth = strlen(str);
+			if (_size + lenth > _capacity)
+				reserve(_capacity == 0 ? 3 : _capacity + lenth);
+			strcpy(_str + _size, str);
+			_size += lenth;
+		}
+		string& operator+=(char ch)
+		{
+			push_back(ch);
+			return *this;
+		}
+		string& operator+=(const char* str)
+		{
+			append(str);
+			return *this;
+		}
+		string& operator+=(const string& str)
+		{
+			append(str.c_str());
+			return *this;
+		}
+
+		~string()
+		{
+			delete[] _str;
+			_str = nullptr;
+			_capacity = _size = 0;
+		}
+	private:
+		void swap(string& strTemp)
+		{
+			::swap(_str, strTemp._str);
+			::swap(_size, strTemp._size);
+			::swap(_capacity, strTemp._capacity);
+		}
+	private:
+		char* _str;
+		size_t _size;
+		size_t _capacity;
+	};
+}
+using namespace bjy;
+int main()
+{
+	string str1("hahaha");
+	cout << str1.c_str() << endl;
+	string str2;
+	cout << str2.c_str() << endl;
+
+	for (size_t i = 0; i < str1.size(); ++i)
+	{
+		str1[i] = 'b';
+	}
+	for (size_t i = 0; i < str1.size(); ++i)
+	{
+		cout << str1[i] << " ";
+	}
+	cout << endl;
+
+	for (string::iterator it = str1.begin(); it != str1.end(); ++it)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+
+	for (auto ch : str1)
+	{
+		cout << ch << " ";
+	}
+	cout << endl;
+
+	string str3("1111111111111");
+	string str4(str3);
+	str3[0] = 'b';
+	cout << str3.c_str() << endl;
+	cout << str4.c_str() << endl;
+
+	str3 = str4;
+	str4[0] = 'j';
+	cout << str3.c_str() << endl;
+	cout << str4.c_str() << endl;
+
+	str3.push_back('y');
+	cout << str3.c_str() << endl;
+
+	str3 += 'y';
+	cout << str3.c_str() << endl;
+
+	str3.append("yyy");
+	cout << str3.c_str() << endl;
+
+	str3 += "yyy";
+	cout << str3.c_str() << endl;
+
+	str3 += str4;
+	cout << str3.c_str() << endl;
+
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
