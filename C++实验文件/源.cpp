@@ -8472,3 +8472,87 @@ s只包含小写字母
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+/*
+给定一个字符串 s ，找到 它的第一个不重复的字符，并返回它的索引 。如果不存在，则返回 -1
+*/
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int firstUniqChar(string s)
+//    {
+//        size_t countArray[26] = { 0 };
+//        for (auto ch : s)
+//            ++countArray[ch - 'a'];
+//        for (size_t i = 0; i < s.size(); ++i)
+//        {
+//            if (countArray[s[i] - 'a'] == 1)
+//                return i;
+//        }
+//        return -1;
+//    }
+//};
+
+
+
+
+
+/*
+如果在将所有大写字符转换为小写字符、并移除所有非字母数字字符之后，短语正着读和反着读都一样。则可以认为该短语是一个回文串。
+
+字母和数字都属于字母数字字符。
+
+给你一个字符串 s，如果它是回文串，返回 true ；否则，返回 false
+*/
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool CheckNumLetter(char ch)
+//    {
+//        return ((ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9'));
+//    }
+//    bool isPalindrome(string s)
+//    {
+//        for (size_t i = 0; i < s.size(); ++i)
+//        {
+//            if (s[i] >= 'A' && s[i] <= 'Z')
+//                s[i] += 32;
+//            if (!CheckNumLetter(s[i]))
+//            {
+//                s.erase(s.begin() + i);
+//                --i;
+//            }
+//        }
+//        int begin = 0, end = s.size() - 1;
+//        while (begin <= end)
+//        {
+//            if (s[begin] != s[end])
+//            {
+//                return false;
+//            }
+//            ++begin;
+//            --end;
+//        }
+//        return true;
+//    }
+//};
+//int main()
+//{
+//    string str("0P");
+//    Solution s;
+//    bool ret = s.isPalindrome(str);
+//    cout << ret << endl;
+//    return 0;
+//}
