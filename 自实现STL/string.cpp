@@ -28,7 +28,7 @@ const_iterator bjy::string::end()const
 
 
 
-//string(const char* str) :_str(new char[strlen(str) + 1]), _size(strlen(str)), _capacity(_size)//³õÊ¼»¯Ë³ĞòÒÀÀµÉùÃ÷Ë³Ğò
+//string(const char* str = "") :_str(new char[strlen(str) + 1]), _size(strlen(str)), _capacity(_size)//³õÊ¼»¯Ë³ĞòÒÀÀµÉùÃ÷Ë³Ğò
 //{
 //	strcpy(_str, str);//ÄÚÈİ¿½±´
 //}
@@ -219,6 +219,15 @@ size_t bjy::string::find(char ch, size_t pos)const
 	}
 	return npos;
 }
+size_t bjy::string::find(const char* sub, size_t pos)
+{
+	assert(sub);
+	assert(pos < _size);
+	const char* ptr = strstr(_str + pos, sub);
+	if (ptr == nullptr)
+		return npos;
+	return ptr - _str;
+}
 void bjy::string::resize(size_t n, char ch)
 {
 	if (n > _size)
@@ -236,15 +245,6 @@ void bjy::string::resize(size_t n, char ch)
 		_str[n] = '\0';
 		_size = n;
 	}
-}
-size_t bjy::string::find(const char* sub, size_t pos)
-{
-	assert(sub);
-	assert(pos < _size);
-	const char* ptr = strstr(_str + pos, sub);
-	if (ptr == nullptr)
-		return npos;
-	return ptr - _str;
 }
 string bjy::string::substr(size_t pos, size_t len)const
 {

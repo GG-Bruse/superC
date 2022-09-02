@@ -31,15 +31,15 @@ namespace bjy
 		}
 		string(const char* str);
 
-		////传统写法
-		////string(const string& str)//深拷贝
-		////{
-		////	_size = str._size;
-		////	_capacity = str._capacity;
-		////	_str = new char[_capacity + 1];
-		////	strcpy(_str, str._str);
-		////}
-		////现代写法
+		//传统写法
+		//string(const string& str)//深拷贝
+		//{
+		//	_size = str._size;
+		//	_capacity = str._capacity;
+		//	_str = new char[_capacity + 1];
+		//	strcpy(_str, str._str);
+		//}
+		//现代写法
 		string(const string& str) :_str(nullptr), _size(0), _capacity(0)//使用初始化列表初始化，避免交换脏数据
 		{
 			string strTemp(str._str);//调用构造函数
