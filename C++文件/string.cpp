@@ -255,7 +255,62 @@ to_string		Convert numerical value to string (function )
 
 
 
+
+
+
+
+
+//vs和g++下string结构的说明
+/*
+注意:下述结构是在32位平台下进行验证，32位平台下指针占4个字节。
+
+1.vs下string的结构:
+string总共占28个字节，内部结构稍微复杂一点，先是有一个联合体，联合体用来定义string中字符串的存储空间:
+(1)当字符串长度小于16时，使用内部固定的字符数组来存放
+(2)当字符串长度大于等于16时，从堆上开辟空间
+原因:
+大多数情况下字符串的长度都小于16，那string对象创建好之后，内部已经有了16个字符数组的固定空间，不需要通过堆创建，效率高
+
+2.g++下string的结构:
+g++下，string是通过写时拷贝实现的，string对象总共占4个字节，内部只包含了一个指针，该指针将来指向一块堆空间，内部包含了如下字段:
+(1)空间总大小
+(2)字符串有效长度
+(3)引用计数
+(4)指向堆空间的指针，用来存储字符串
+*/
+/*
+写时拷贝:(谁写谁拷贝)
+延迟拷贝,是在浅拷贝的基础之上增加了引用计数的方式来实现的。
+引用计数:
+用来记录资源使用者的个数。在构造时，将资源的计数给成1，每增加一个对象使用该资源，就给计数增加1，
+当某个对象被销毁时，先给该计数减1，然后再检查是否需要释放资源，
+如果计数为1，说明该对象时资源的最后一个使用者，将该资源释放；否则就不能释放，因为还有其他对象在使用该资源。
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //模拟实现string
+/*
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<algorithm>
@@ -272,8 +327,8 @@ namespace bjy
 	class string
 	{
 	public:
-		friend ostream& operator<<(ostream& out, const string& str);
-		friend istream& operator>>(istream& in, string& str);
+		//const static size_t npos = -1;//特例:const static可以直接当成定义初始化
+		static size_t npos;
 		typedef char* iterator;
 		typedef const char* const_iterator;
 		iterator begin()
@@ -293,11 +348,13 @@ namespace bjy
 			return _str + _size;
 		}
 
+
+
 		string() :_str(new char[1]), _size(0), _capacity(0)
 		{
 			_str[0] = '\0';
 		}
-		//string(const char* str/* = "" */) :_str(new char[strlen(str) + 1]), _size(strlen(str)), _capacity(_size)//初始化顺序依赖声明顺序
+		//string(const char* str) :_str(new char[strlen(str) + 1]), _size(strlen(str)), _capacity(_size)//初始化顺序依赖声明顺序
 		//{
 		//	strcpy(_str, str);//内容拷贝
 		//}
@@ -309,6 +366,8 @@ namespace bjy
 			strcpy(_str, str);//内容拷贝
 		}
 		
+
+
 		//传统写法
 		//string(const string& str)//深拷贝
 		//{
@@ -323,6 +382,8 @@ namespace bjy
 			string strTemp(str._str);//调用构造函数
 			swap(strTemp);
 		}
+
+
 
 		//string& operator=(const string& str)//传统写法
 		//{
@@ -352,15 +413,8 @@ namespace bjy
 			return *this;
 		}
 
-		const char* c_str()const
-		{
-			return _str;
-		}
-		size_t size()const
-		{
-			return _size;
-		}
 
+		
 		char& operator[](size_t pos)
 		{
 			assert(pos < _size);
@@ -371,18 +425,28 @@ namespace bjy
 			assert(pos < _size);
 			return _str[pos];
 		}
-
-		void reserve(size_t num)
+		bool operator>(const string& str)const
 		{
-			if (num > _capacity)
-			{
-				char* temp = new char[num + 1];
-				strcpy(temp, _str);
-				delete[] _str;
-				_str = temp;
-				_capacity = num;
-			}
+			return strcmp(_str, str._str) > 0;
 		}
+		bool operator==(const string& str)const
+		{
+			return strcmp(_str, str._str) == 0;
+		}
+		bool operator>=(const string& str)const
+		{
+			return (*this > str || *this == str);
+		}
+		bool operator<=(const string& str)const
+		{
+			return !(*this > str);
+		}
+		bool operator<(const string& str)const
+		{
+			return !(*this >= str);
+		}
+
+		
 
 		string& insert(size_t pos, char ch)
 		{
@@ -402,7 +466,7 @@ namespace bjy
 			assert(pos <= _size);
 			size_t lenth = strlen(str);
 			if (_size + lenth >= _capacity)
-				reserve(_capacity == 0 ? 3 : _capacity + lenth);
+				reserve(_capacity + lenth);
 			for (size_t end = _size + lenth; end >= pos + lenth; --end)
 			{
 				_str[end] = _str[end - lenth];
@@ -446,6 +510,28 @@ namespace bjy
 			append(str._str);
 			return *this;
 		}
+
+
+
+		void reserve(size_t num)
+		{
+			if (num > _capacity)
+			{
+				char* temp = new char[num + 1];
+				strcpy(temp, _str);
+				delete[] _str;
+				_str = temp;
+				_capacity = num;
+			}
+		}
+		const char* c_str()const
+		{
+			return _str;
+		}
+		size_t size()const
+		{
+			return _size;
+		}
 		void erase(size_t pos ,size_t lenth = npos)
 		{
 			assert(pos < _size);
@@ -460,27 +546,65 @@ namespace bjy
 				_size -= lenth;
 			}
 		}
-		size_t find(char ch, size_t pos = 0)
+		void clear()
 		{
-
+			_str[0] = '\0';
+			_size = 0;
+		}
+		void resize(size_t n, char ch = '\0')
+		{
+			if (n > _size)
+			{
+				reserve(n);
+				for (size_t i = _size; i < n; ++i)
+				{
+					_str[i] = ch;
+				}
+				_str[n] = '\0';
+				_size = n;
+			}
+			else
+			{
+				_str[n] = '\0';
+				_size = n;
+			}
+		}
+		size_t find(char ch, size_t pos = 0)const
+		{
+			for (size_t i = pos; i < _size; ++i)
+			{
+				if (ch == _str[i])
+				{ 
+					return i;
+				}
+			}
+			return npos;
 		}
 		size_t find(const char* sub, size_t pos = 0)
 		{
-
+			assert(sub);
+			assert(pos < _size);
+			const char* ptr = strstr(_str + pos, sub);
+			if (ptr == nullptr)
+				return npos;
+			return ptr - _str;
 		}
-		bool operator==(const string& str)const
+		string substr(size_t pos = 0, size_t len = npos)const
 		{
-
+			assert(pos < _size);
+			size_t realLenth = len;
+			if (len == npos || len + len > _size)
+			{
+				realLenth = _size - pos;
+			}
+			string strTemp;
+			for (size_t i = 0; i < realLenth; ++i)
+			{
+				strTemp += _str[pos + i];
+			}
+			return strTemp;
 		}
-		bool operator>=(const string& str)const
-		{
-
-		}
-		bool operator<=(const string& str)const
-		{
-
-		}
-
+		
 		~string()
 		{
 			delete[] _str;
@@ -498,9 +622,8 @@ namespace bjy
 		char* _str;
 		size_t _size;
 		size_t _capacity;
-		//const static size_t npos = -1;//特例:const static可以直接当成定义初始化
-		static size_t npos;
 	};
+
 	size_t string::npos = -1;
 	ostream& operator<<(ostream& out, const string& str)
 	{
@@ -509,15 +632,28 @@ namespace bjy
 	}
 	istream& operator>>(istream& in, string& str)
 	{
-		char chTemp = in.get();
-		while (chTemp != ' ' && chTemp != '\n')
+		str.clear();
+		const size_t N = 32;
+		char buff[N];
+		size_t i = 0;
+		for(char chTemp = in.get();chTemp != ' ' && chTemp != '\n'; chTemp = in.get())
 		{
-			str += chTemp;
-			chTemp = in.get();
+			buff[i++] = chTemp;
+			if (i == N - 1)
+			{
+				buff[i] = '\0';
+				str += buff;
+				i = 0;
+			}
 		}
+		buff[i] = '\0';
+		str += buff;
 		return in;
 	}
 }
+
+
+
 using namespace bjy;
 int main()
 {
@@ -586,13 +722,21 @@ int main()
 	string str5("bjyhahaha");
 	cout << str5 << endl;
 
-	string str6;
+	string str8("hello world");
+	cout << str8[str8.find('l')] << endl;
+	str8 = str8.substr(2);
+	cout << str8 << endl;
+	str8.resize(100);
+	cout << str8.size() << endl;;
+
+	string str6("hello");
 	string str7;
 	cin >> str6>>str7;
 	cout << str6 <<str7<< endl;
+
 	return 0;
 }
-
+*/
 
 
 
