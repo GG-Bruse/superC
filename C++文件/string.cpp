@@ -262,13 +262,18 @@ to_string		Convert numerical value to string (function )
 #include<cstring>
 #include<cassert>
 using std::cout;
+using std::cin;
 using std::endl;
 using std::swap;
+using std::ostream;
+using std::istream;
 namespace bjy
 {
 	class string
 	{
 	public:
+		friend ostream& operator<<(ostream& out, const string& str);
+		friend istream& operator>>(istream& in, string& str);
 		typedef char* iterator;
 		typedef const char* const_iterator;
 		iterator begin()
@@ -355,6 +360,7 @@ namespace bjy
 		{
 			return _size;
 		}
+
 		char& operator[](size_t pos)
 		{
 			assert(pos < _size);
@@ -365,6 +371,7 @@ namespace bjy
 			assert(pos < _size);
 			return _str[pos];
 		}
+
 		void reserve(size_t num)
 		{
 			if (num > _capacity)
@@ -376,22 +383,53 @@ namespace bjy
 				_capacity = num;
 			}
 		}
-		void push_back(char ch)
+
+		string& insert(size_t pos, char ch)
 		{
+			assert(pos <= _size);
 			if (_size >= _capacity)
 				reserve(_capacity == 0 ? 3 : _capacity * 2);
-			
-			_str[_size] = ch;
+			for (size_t end = _size + 1; end > pos; --end)
+			{
+				_str[end] = _str[end - 1];
+			}
+			_str[pos] = ch;
 			++_size;
-			_str[_size] = '\0';
+			return *this;
+		}
+		string& insert(size_t pos, const char* str)
+		{
+			assert(pos <= _size);
+			size_t lenth = strlen(str);
+			if (_size + lenth >= _capacity)
+				reserve(_capacity == 0 ? 3 : _capacity + lenth);
+			for (size_t end = _size + lenth; end >= pos + lenth; --end)
+			{
+				_str[end] = _str[end - lenth];
+			}
+			strncpy(_str + pos, str, lenth);
+			_size += lenth;
+			return *this;
+		}
+		void push_back(char ch)
+		{
+			insert(_size,ch);
+		}
+		void append(size_t num, char ch)
+		{
+			reserve(_size + num);//避免多次扩容
+			for (size_t i = 0; i < num; ++i)
+			{
+				push_back(ch);
+			}
 		}
 		void append(const char* str)
 		{
-			size_t lenth = strlen(str);
-			if (_size + lenth > _capacity)
-				reserve(_capacity == 0 ? 3 : _capacity + lenth);
-			strcpy(_str + _size, str);
-			_size += lenth;
+			insert(_size, str);
+		}
+		void append(const string& str)
+		{
+			append(str._str);
 		}
 		string& operator+=(char ch)
 		{
@@ -405,8 +443,42 @@ namespace bjy
 		}
 		string& operator+=(const string& str)
 		{
-			append(str.c_str());
+			append(str._str);
 			return *this;
+		}
+		void erase(size_t pos ,size_t lenth = npos)
+		{
+			assert(pos < _size);
+			if (lenth == npos || pos + lenth >= _size)//需要删完
+			{
+				_str[pos] = '\0';
+				_size = pos;
+			}
+			else
+			{
+				strcpy(_str + pos, _str + pos + lenth);
+				_size -= lenth;
+			}
+		}
+		size_t find(char ch, size_t pos = 0)
+		{
+
+		}
+		size_t find(const char* sub, size_t pos = 0)
+		{
+
+		}
+		bool operator==(const string& str)const
+		{
+
+		}
+		bool operator>=(const string& str)const
+		{
+
+		}
+		bool operator<=(const string& str)const
+		{
+
 		}
 
 		~string()
@@ -426,7 +498,25 @@ namespace bjy
 		char* _str;
 		size_t _size;
 		size_t _capacity;
+		//const static size_t npos = -1;//特例:const static可以直接当成定义初始化
+		static size_t npos;
 	};
+	size_t string::npos = -1;
+	ostream& operator<<(ostream& out, const string& str)
+	{
+		out << str.c_str();
+		return out;
+	}
+	istream& operator>>(istream& in, string& str)
+	{
+		char chTemp = in.get();
+		while (chTemp != ' ' && chTemp != '\n')
+		{
+			str += chTemp;
+			chTemp = in.get();
+		}
+		return in;
+	}
 }
 using namespace bjy;
 int main()
@@ -484,6 +574,22 @@ int main()
 	str3 += str4;
 	cout << str3.c_str() << endl;
 
+	str3.insert(3, 'b');
+	cout << str3.c_str() << endl;
+
+	str3.insert(4, "jy");
+	cout << str3.c_str() << endl;
+
+	str3.erase(6);
+	cout << str3.c_str() << endl;
+
+	string str5("bjyhahaha");
+	cout << str5 << endl;
+
+	string str6;
+	string str7;
+	cin >> str6>>str7;
+	cout << str6 <<str7<< endl;
 	return 0;
 }
 
