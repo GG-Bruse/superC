@@ -8617,21 +8617,143 @@ s只包含小写字母
 
 
 
+/*
+给你一个 升序排列 的数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。
+
+由于在某些语言中不能改变数组的长度，所以必须将结果放在数组nums的第一部分。更规范地说，如果在删除重复项之后有 k 个元素，那么 nums 的前 k 个元素应该保存最终结果。
+
+将最终结果插入 nums 的前 k 个位置后返回 k 。
+
+不要使用额外的空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成
+*/
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int removeDuplicates(vector<int>& nums)
+//    {
+//        size_t src = 0, dst = 0;
+//        while (src < nums.size())
+//        {
+//            if (nums[src] == nums[dst])
+//                ++src;
+//            else
+//                nums[++dst] = nums[src++];
+//        }
+//        return dst + 1;
+//    }
+//};
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+////1
+//class Solution
+//{
+//public:
+//    int removeDuplicates(vector<int>& nums)
+//    {
+//        size_t src = 0, dst = 0;
+//        while (src < nums.size())
+//        {
+//            if (nums[src] == nums[dst])
+//                ++src;
+//            else
+//                nums[++dst] = nums[src++];
+//        }
+//        nums.resize(dst + 1);
+//        return nums.size();
+//    }
+//};
+////2(低效)
+//class Solution
+//{
+//public:
+//    int removeDuplicates(vector<int>& nums)
+//    {
+//        size_t src = 0, dst = 0;
+//        while (src < nums.size())
+//        {
+//            if (nums[src] == nums[dst])
+//                ++src;
+//            else
+//                nums[++dst] = nums[src++];
+//        }
+//        nums.erase(nums.begin() + dst + 1, nums.end());
+//        return nums.size();
+//    }
+//};
+//int main()
+//{
+//    vector<int>nums{ 1,1,2,2,3,4,4 };
+//    Solution s;
+//    size_t size = s.removeDuplicates(nums);
+//    for (size_t i = 0; i < size; ++i)
+//    {
+//        cout << nums[i] << " ";
+//    }
+//    cout << endl;
+//    return 0;
+//}
 
 
 
 
 
 
+/*
+给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
 
-
-
-
-
-
-
-
-
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+*/
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//    const char* numToStr[10] = { "","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz" };//缺省值声明
+//public:
+//    void Combine(string digits, size_t di, vector<string>& retV, string combineStr)
+//    {
+//        if (di == digits.size())
+//        {
+//            retV.push_back(combineStr);
+//            return;
+//        }
+//        //取数字字符映射字符串
+//        size_t num = digits[di] - '0';
+//        string str = numToStr[num];
+//
+//        for (auto ch : str)
+//        {
+//            Combine(digits, di + 1, retV, combineStr + ch);
+//        }
+//    }
+//    vector<string> letterCombinations(string digits)
+//    {
+//        vector<string> retV;
+//        if (digits.empty())return retV;
+//        string str;
+//        Combine(digits, 0, retV, str);
+//        return retV;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<string> retV = s.letterCombinations("238");
+//    for (vector<string>::iterator it = retV.begin(); it != retV.end(); ++it)
+//    {
+//        cout << *it << endl;
+//    }
+//    return 0;
+//}
 
 
 
