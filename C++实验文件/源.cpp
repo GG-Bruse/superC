@@ -8556,3 +8556,140 @@ s只包含小写字母
 //    cout << ret << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+/*
+给定一个非负整数 numRows，生成「杨辉三角」的前numRows行
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<vector<int>> generate(int numRows)
+//    {
+//        vector<vector<int>>vv;
+//        vv.resize(numRows);
+//        for (size_t i = 0; i < vv.size(); ++i)
+//        {
+//            vv[i].resize(i + 1, 0);
+//            vv[i].front() = vv[i].back() = 1;
+//        }
+//        for (size_t i = 0; i < vv.size(); ++i)
+//        {
+//            for (size_t j = 0; j < vv[i].size(); ++j)
+//            {
+//                if (vv[i][j] == 0)
+//                {
+//                    vv[i][j] = vv[i - 1][j - 1] + vv[i - 1][j];
+//                }
+//            }
+//        }
+//        return vv;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<vector<int>> vv = s.generate(5);
+//    for (size_t i = 0; i < vv.size(); ++i)
+//    {
+//        for (size_t j = 0; j < vv[i].size(); ++j)
+//        {
+//            cout << vv[i][j] << " ";
+//        }
+//        cout << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
