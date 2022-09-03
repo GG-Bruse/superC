@@ -1,6 +1,12 @@
-﻿  类和对象.cpp
+﻿  STL.cpp
+  string.cpp
+  vector.cpp
+  内存管理.cpp
+  基础语法.cpp
+  模板.cpp
+  类和对象.cpp
   正在生成代码
-  Previous IPDB not found, fall back to full compilation.
-  All 16 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Compiler switch has changed, fall back to full compilation.
+  All 3 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
   C++文件.vcxproj -> D:\vs\C++\C++文件\Release\C++文件.exe
