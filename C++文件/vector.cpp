@@ -64,7 +64,32 @@ vector会分配一些额外的空间以适应可能的增长，因为存储空间比实际需要的存储空间更大
 
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
+namespace bjy
+{
+	template<class T>
+	class vector
+	{
+	public:
+		typedef T value_type;
+		typedef T* iterator;
+		typedef const T* const_iterator;
+	public:
+		vector():_start(nullptr), _finish(nullptr), _end_of_storage(nullptr) {}
+		~vector() {
+			delete[] _start;
+			_start = _finish = _end_of_storage = nullptr;
+		}
 
+		void push_back(value_type& data){
+
+		}
+
+	private:
+		iterator _start;
+		iterator _finish;
+		iterator _end_of_storage;
+	};
+}
 
 
 
