@@ -62,8 +62,76 @@ vector会分配一些额外的空间以适应可能的增长，因为存储空间比实际需要的存储空间更大
 
 
 
+
+//vector迭代器失效问题(出现扩容、缩容、越界迭代器失效)
+/*
+迭代器的主要作用就是让算法能够不用关心底层数据结构，其底层实际就是一个指针，或者是对指针进行了封装，
+比如:vector的迭代器就是原生态指针T* 。因此迭代器失效，实际就是迭代器底层对应指针所指向的空间被销毁了，
+而使用一块已经被释放的空间，造成的后果是程序崩溃(即如果继续使用已经失效的迭代器，程序可能会崩溃)。
+*/
+/*
+1.会引起其底层空间改变的操作，都有可能是迭代器失效，比如:resize、reserve、insert、assign、push_back等
+
+2.指定位置元素的删除操作erase:
+erase删除pos位置元素后，pos位置之后的元素会往前搬移，没有导致底层空间的改变，理论上讲迭代器不应该会失效
+但是:如果pos刚好是最后一个元素，删完之后pos刚好是end的位置，而end位置是没有元素的，那么该pos就失效了，不可继续访问。
+因此删除vector中任意位置上元素时(erase的实现不同，内部有可能进行缩容)，vs就认为该位置迭代器失效
+
+3.注意:Linux下，g++编译器对迭代器失效的检测并不是非常严格，处理也没有vs下极端
+
+4. 与vector类似，string在插入+扩容操作+erase之后，迭代器也会失效
+
+解决:在使用前，对迭代器重新赋值即可
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
+#include<cassert>
 namespace bjy
 {
 	template<class T>
@@ -71,19 +139,75 @@ namespace bjy
 	{
 	public:
 		typedef T value_type;
-		typedef T* iterator;
-		typedef const T* const_iterator;
+		typedef value_type* iterator;
+		typedef const value_type* const_iterator;
+		typedef value_type& reference;
+		typedef const value_type& const_reference;
 	public:
+		iterator begin() { return _start; }
+		iterator end() { return _finish; }
+		const_iterator begin()const { return _start; }
+		const_iterator end()const { return _finish; }
+
 		vector():_start(nullptr), _finish(nullptr), _end_of_storage(nullptr) {}
 		~vector() {
 			delete[] _start;
 			_start = _finish = _end_of_storage = nullptr;
 		}
 
-		void push_back(value_type& data){
+		size_t capacity()const { return _end_of_storage - _start; }
+		size_t size()const { return _finish - _start; }
 
+		reference operator[](size_t pos) {
+			assert(pos < size());
+			return _start[pos];
+		}
+		const_reference& operator[](size_t pos)const {
+			assert(pos < size());
+			return _start[pos];
 		}
 
+		void reserve(size_t n) {
+			size_t previous_size = size();
+			if (n > capacity()) {
+				value_type* temp = new value_type[n];
+				if (_start){
+					memcpy(temp, _start,sizeof(value_type)*size());
+					delete[] _start;
+				}
+				_start = temp;
+				_finish = _start + previous_size;
+				_end_of_storage = _start + n;
+			}
+		}
+		void insert(iterator pos, const_reference data) {
+			assert((pos >= _start) && (pos <= _finish));
+			if (_finish >= _end_of_storage) {
+				size_t lenth = pos - _start;//记录,避免迭代器失效
+				reserve(capacity() == 0 ? 6 : capacity() * 2);
+				pos = _start + lenth;//更新
+			}
+			for (iterator cur = _finish - 1; cur >= pos; --cur)
+				*(cur + 1) = *cur;
+			*pos = data;
+			++_finish;
+		}
+		iterator erase(iterator pos) {
+			assert((pos >= _start) && (pos < _finish));
+			for (iterator cur = pos + 1; cur < _finish; ++cur)
+				*(cur - 1) = *cur;
+			--_finish;
+			return pos;
+		}
+		void push_back(const_reference data){
+			if (_finish >= _end_of_storage)
+				reserve(capacity() == 0 ? 6 : capacity() * 2);
+			*(_finish++) = data;
+		}
+		void pop_back() {
+			assert(_finish > _start);
+			--_finish;
+		}
 	private:
 		iterator _start;
 		iterator _finish;
@@ -91,6 +215,56 @@ namespace bjy
 	};
 }
 
+#include<algorithm>
+using namespace bjy;
+using std::cout;
+using std::endl;
+using std::find;
+int main()
+{
+	vector<int>v;
+	for (size_t i = 0; i < 10; ++i)
+	{
+		v.push_back(i + 1);
+	}
+	
+	/*vector<int>::iterator it = find(v.begin(), v.end(), 5);
+	v.insert(it, 30);
+	for (auto& e : v)
+	{
+		cout << e << " ";
+	}
+	cout << endl;
+
+	for (size_t i = 0; i < 10; ++i)
+	{
+		v.push_back(i + 1);
+	}
+
+	it = find(v.begin(), v.end(), 5);
+	v.erase(it);
+	for (auto& e : v)
+	{
+		cout << e << " ";
+	}
+	cout << endl;*/
+
+	for (vector<int>::iterator it = v.begin(); it != v.end();) {
+		if (*it % 2 == 0) 
+		{
+			it = v.erase(it);
+		}
+		else{
+			++it;
+		}
+	}
+	for (auto e : v) 
+	{
+		cout << e << " ";
+	}
+	cout << endl;
+	return 0;
+}
 
 
 
