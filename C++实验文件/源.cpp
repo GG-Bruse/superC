@@ -8761,7 +8761,25 @@ s只包含小写字母
 
 
 
-
+//#include<iostream>
+//using namespace std;
+//struct A {
+//
+//	long a1;
+//
+//	short a2;
+//
+//	int a3;
+//
+//	int* a4;
+//
+//};
+//int main()
+//{
+//	cout << sizeof(A) << endl;
+//	cout << sizeof(long long) << endl;
+//	return 0;
+//}
 
 
 
