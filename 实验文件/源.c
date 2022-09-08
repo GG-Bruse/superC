@@ -5594,6 +5594,140 @@ ABCD左旋两个字符得到CDAB
 
 
 
+/*
+给你一个字符串 s 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：
+'A'：Absent，缺勤
+'L'：Late，迟到
+'P'：Present，到场
+如果学生能够 同时 满足下面两个条件，则可以获得出勤奖励：
+
+按 总出勤 计，学生缺勤（'A'）严格 少于两天。
+学生 不会 存在 连续 3 天或 连续 3 天以上的迟到（'L'）记录。
+如果学生可以获得出勤奖励，返回 true ；否则，返回 false 。
+*/
+//bool checkRecord(char* s)
+//{
+//    int countA = 0;
+//    int size = strlen(s);
+//    for (size_t i = 0; i < size; ++i)
+//    {
+//        if (s[i] == 'A')++countA;
+//        if (i > 1 && s[i] == 'L' && s[i - 1] == 'L' && s[i - 2] == 'L')
+//            return false;
+//    }
+//    return (countA < 2);
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+给你一个字符串 s 和一个字符 c ，且 c 是 s 中出现过的字符。
+
+返回一个整数数组 answer ，其中 answer.length == s.length 且 answer[i] 是 s 中从下标 i 到离它 最近 的字符 c 的 距离 。
+
+两个下标 i 和 j 之间的 距离 为 abs(i - j) ，其中 abs 是绝对值函数
+*/
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+//int* shortestToChar(char* s, char c, int* returnSize)
+//{
+//    int min = INT_MAX;
+//    size_t lenth = strlen(s);
+//    *returnSize = lenth;
+//    int* array = (int*)malloc(sizeof(int) * lenth);
+//    for (size_t i = 0; i < lenth; ++i)
+//    {
+//        for (size_t j = 0; j < lenth; ++j)
+//        {
+//            if (s[j] == c)
+//            {
+//                if (min > abs(i - j))
+//                {
+//                    min = abs(i - j);
+//                }
+//            }
+//        }
+//        array[i] = min;
+//        min = INT_MAX;
+//    }
+//    return array;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
