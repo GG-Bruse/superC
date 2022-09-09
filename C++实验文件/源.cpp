@@ -8787,6 +8787,26 @@ s只包含小写字母
 
 
 
+/*
+给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素
+算法应该具有线性时间复杂度，不使用额外空间来实现
+*/
+//#include<iostream>
+//#include<vector>
+//using std::vector;
+//class Solution
+//{
+//public:
+//    int singleNumber(vector<int>& nums)
+//    {
+//        int ret = 0;
+//        for (size_t i = 0; i < nums.size(); ++i)
+//        {
+//            ret ^= nums[i];
+//        }
+//        return ret;
+//    }
+//};
 
 
 
@@ -8796,6 +8816,49 @@ s只包含小写字母
 
 
 
+
+
+
+
+/*
+给你一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。你可以按 任意顺序 返回答案。
+
+你必须设计并实现线性时间复杂度的算法且仅使用常量额外空间来解决此问题。
+*/
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<int> singleNumber(vector<int>& nums)
+//    {
+//        int mask = 0;
+//        for (size_t i = 0; i < nums.size(); ++i)
+//            mask ^= nums[i];
+//
+//        int type1 = 0, type2 = 0;
+//        int lsb = (mask == INT_MIN ? mask : mask & (-mask));
+//
+//        for (size_t i = 0; i < nums.size(); ++i)
+//        {
+//            if (nums[i] & lsb) type1 ^= nums[i];
+//            else type2 ^= nums[i];
+//        }
+//        return { type1, type2 };
+//    }
+//};
+//int main()
+//{
+//    vector<int>v{ 1,2,1,3,2,5 };
+//    Solution s;
+//    vector<int> ret = s.singleNumber(v);
+//    for (size_t i = 0; i < ret.size(); ++i)
+//    {
+//        cout << ret[i] << " ";
+//    }
+//    return 0;
+//}
 
 
 
