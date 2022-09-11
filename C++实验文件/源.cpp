@@ -9049,6 +9049,22 @@ s只包含小写字母
 
 
 
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    getline(cin,str);
+//    size_t count = 0;
+//    for (int i = str.size() - 1; i >= 0; --i, ++count)
+//    {
+//        if (str[i] == ' ')
+//            break;
+//    }
+//    cout << count << endl;
+//    return 0;
+//}
 
 
 
@@ -9057,3 +9073,48 @@ s只包含小写字母
 
 
 
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool isPalindrome(string s)
+//    {
+//        for (size_t i = 0; i < s.size(); ++i)
+//        {
+//            if (isalnum(s[i]))
+//            {
+//                if (isupper(s[i]))
+//                    s[i] = tolower(s[i]);
+//            }
+//            else
+//            {
+//                s.erase(i,1);
+//                --i;
+//            }
+//        }
+//        if (s.size() == 0)return true;
+//        size_t begin = 0;
+//        size_t end = s.size() - 1;
+//        while (begin < end)
+//        {
+//            if (s[begin] != s[end])
+//                return false;
+//            ++begin;
+//            --end;
+//        }
+//        return true;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    string str = "0P";
+//    bool ret = s.isPalindrome(str);
+//    cout << ret << endl;
+//    return 0;
+//}
