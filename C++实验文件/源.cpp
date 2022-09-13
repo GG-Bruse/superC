@@ -9208,6 +9208,51 @@ s只包含小写字母
 
 
 
+/*
+给定一个字符串 s ，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+*/
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    void _reverseWords(string& s, size_t begin, size_t end)
+//    {
+//        while (begin < end)
+//        {
+//            char temp = s[begin];
+//            s[begin] = s[end];
+//            s[end] = temp;
+//            ++begin;
+//            --end;
+//        }
+//    }
+//    string reverseWords(string s)
+//    {
+//        size_t begin = 0;
+//        size_t end = 0;
+//        while (end < s.size())
+//        {
+//            for (; s[end] != ' '; ++end)
+//            {
+//                if (end == s.size())break;
+//            }
+//            _reverseWords(s, begin, end - 1);
+//            ++end;
+//            begin = end;
+//        }
+//        return s;
+//    }
+//};
+//int main()
+//{
+//    string str = "Let's take LeetCode contest";
+//    Solution s;
+//    string ret = s.reverseWords(str);
+//    cout << ret << endl;
+//    return 0;
+//}
 
 
 
@@ -9221,7 +9266,79 @@ s只包含小写字母
 
 
 
+/*
+给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。
 
+注意：不能使用任何内置的 BigInteger 库或直接将输入转换为整数。
+*/
+//#include<string>
+//#include<iostream>
+//using namespace std;
+////计算过程中不可将字符串整个转换为任何形式的整型
+//class Solution
+//{
+//public:
+//    string multiply(string num1, string num2)
+//    {
+//        if (num1 == "0" || num2 == "0")
+//        {
+//            return "0";
+//        }
+//        string ret = "0";
+//        int m = num1.size(), n = num2.size();
+//        for (int i = n - 1; i >= 0; i--)
+//        {
+//            string curr;
+//            int add = 0;
+//            for (int j = n - 1; j > i; j--)
+//            {
+//                curr.push_back(0);
+//            }
+//            int y = num2.at(i) - '0';
+//            for (int j = m - 1; j >= 0; j--)
+//            {
+//                int x = num1.at(j) - '0';
+//                int product = x * y + add;
+//                curr.push_back(product % 10);
+//                add = product / 10;
+//            }
+//            while (add != 0)
+//            {
+//                curr.push_back(add % 10);
+//                add /= 10;
+//            }
+//            reverse(curr.begin(), curr.end());
+//            for (auto& c : curr)
+//            {
+//                c += '0';
+//            }
+//            ret = addStrings(ret, curr);
+//        }
+//        return ret;
+//    }
+//
+//    string addStrings(string& num1, string& num2)
+//    {
+//        int i = num1.size() - 1, j = num2.size() - 1, add = 0;
+//        string ret;
+//        while (i >= 0 || j >= 0 || add != 0)
+//        {
+//            int x = i >= 0 ? num1.at(i) - '0' : 0;
+//            int y = j >= 0 ? num2.at(j) - '0' : 0;
+//            int result = x + y + add;
+//            ret.push_back(result % 10);
+//            add = result / 10;
+//            i--;
+//            j--;
+//        }
+//        reverse(ret.begin(), ret.end());
+//        for (auto& c : ret)
+//        {
+//            c += '0';
+//        }
+//        return ret;
+//    }
+//};
 
 
 
