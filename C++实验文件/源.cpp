@@ -9348,3 +9348,65 @@ s只包含小写字母
 
 
 
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main(void)
+//{
+//	vector<int>array;
+//	array.push_back(100);
+//	array.push_back(300);
+//	array.push_back(300);
+//	array.push_back(300);
+//	array.push_back(300);
+//	array.push_back(500);
+//
+//	vector<int>::iterator itor;
+//	for (itor = array.begin(); itor != array.end(); itor++)
+//	{
+//		if (*itor == 300)
+//		{
+//			itor = array.erase(itor);
+//		}
+//	}
+//	for (itor = array.begin(); itor != array.end(); itor++)
+//	{
+//		cout << *itor << " ";
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	int ar[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int n = sizeof(ar) / sizeof(int);//10
+//	vector<int>v(ar, ar + n);
+//	cout << v.size() << ":" << v.capacity() << endl;
+//	v.reserve(100);
+//	v.resize(20);
+//	cout << v.size() << ":" << v.capacity() << endl;
+//	v.reserve(50);
+//	v.resize(5);
+//	cout << v.size() << ":" << v.capacity() << endl;
+//	return 0;
+//}
+
+
+
+
+
