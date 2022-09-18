@@ -9410,3 +9410,168 @@ s只包含小写字母
 
 
 
+//#include<iostream>
+//#include<cassert>
+//namespace bjy
+//{
+//	template<class T>
+//	class vector
+//	{
+//	public:
+//		typedef T value_type;
+//		typedef value_type* iterator;
+//		typedef const value_type* const_iterator;
+//		typedef value_type& reference;
+//		typedef const value_type& const_reference;
+//	public:
+//		iterator begin() { return _start; }
+//		iterator end() { return _finish; }
+//		const_iterator begin()const { return _start; }
+//		const_iterator end()const { return _finish; }
+//
+//		vector() :_start(nullptr), _finish(nullptr), _end_of_storage(nullptr) {}
+//		~vector() {
+//			delete[] _start;
+//			_start = _finish = _end_of_storage = nullptr;
+//		}
+//
+//		size_t capacity()const { return _end_of_storage - _start; }
+//		size_t size()const { return _finish - _start; }
+//
+//		reference operator[](size_t pos) {
+//			assert(pos < size());
+//			return _start[pos];
+//		}
+//		const_reference& operator[](size_t pos)const {
+//			assert(pos < size());
+//			return _start[pos];
+//		}
+//
+//		void reserve(size_t n) {
+//			size_t previous_size = size();
+//			if (n > capacity()) {
+//				value_type* temp = new value_type[n];
+//				if (_start) {
+//					memcpy(temp, _start, sizeof(value_type) * size());
+//					delete[] _start;
+//				}
+//				_start = temp;
+//				_finish = _start + previous_size;
+//				_end_of_storage = _start + n;
+//			}
+//		}
+//		void insert(iterator pos, const_reference data) {
+//			assert((pos >= _start) && (pos <= _finish));
+//			if (_finish >= _end_of_storage) {
+//				size_t lenth = pos - _start;//记录,避免迭代器失效
+//				reserve(capacity() == 0 ? 6 : capacity() * 2);
+//				pos = _start + lenth;//更新
+//			}
+//			for (iterator cur = _finish - 1; cur >= pos; --cur)
+//				*(cur + 1) = *cur;
+//			*pos = data;
+//			++_finish;
+//		}
+//		iterator erase(iterator pos) {
+//			assert((pos >= _start) && (pos < _finish));
+//			for (iterator cur = pos + 1; cur < _finish; ++cur)
+//				*(cur - 1) = *cur;
+//			--_finish;
+//			return pos;
+//		}
+//		void push_back(const_reference data) {
+//			if (_finish >= _end_of_storage)
+//				reserve(capacity() == 0 ? 6 : capacity() * 2);
+//			*(_finish++) = data;
+//		}
+//		void pop_back() {
+//			assert(_finish > _start);
+//			--_finish;
+//		}
+//	private:
+//		iterator _start;
+//		iterator _finish;
+//		iterator _end_of_storage;
+//	};
+//}
+//
+//#include<iostream>
+//#include<algorithm>
+//using std::cout;
+//using std::cin;
+//using std::endl;
+//using std::sort;
+//using namespace bjy;
+//void MergeData(vector<int>& v1, vector<int>& v2, vector<int>& v3)
+//{
+//	sort(v1.begin(), v1.end());
+//	sort(v2.begin(), v2.end());
+//	size_t begin1 = 0, begin2 = 0;
+//	size_t end1 = v1.size() - 1;
+//	size_t end2 = v2.size() - 1;
+//	while (begin1 <= end1 && begin2 <= end2)
+//	{
+//		if (v1[begin1] < v2[begin2]) {
+//			v3.push_back(v1[begin1]);
+//			++begin1;
+//		}
+//		else{
+//			v3.push_back(v2[begin2]);
+//			++begin2;
+//		}
+//	}
+//	for (; begin1 <= end1; ++begin1)
+//	{
+//		v3.push_back(v1[begin1]);
+//	}
+//	for (; begin2 <= end2; ++begin2)
+//	{
+//		v3.push_back(v2[begin2]);
+//	}
+//}
+//int main()
+//{
+//	//输入两个有序顺序表
+//	vector<int>v1;
+//	vector<int>v2;
+//	vector<int>ret;
+//	cout << "输入第一个有10个元素的有序顺序表" << endl;
+//	for (size_t i = 0; i < 10; ++i){
+//		int input = 0;
+//		cin >> input;
+//		v1.push_back(input);
+//	}
+//	cout << "输入第一个有10个元素的有序顺序表" << endl;
+//	for (size_t i = 0; i < 10; ++i) {
+//		int input = 0;
+//		cin >> input;
+//		v2.push_back(input);
+//	}
+//	MergeData(v1, v2, ret);
+//
+//	cout << "两个有序顺序表合并后表的元素为" << endl;
+//	for (size_t i = 0; i < ret.size(); ++i)
+//	{
+//		cout << ret[i] << " ";
+//	}
+//	cout << endl;
+//
+//	//输入item，并删除该线性表中所有值为item的数据元素
+//	cout << "输入item" << endl;
+//	int item = 0;
+//	cin >> item;
+//	for (size_t i = 0; i < ret.size(); ++i)
+//	{
+//		if (ret[i] == item)
+//		{
+//			ret.erase(ret.begin() + i);
+//			--i;
+//		}
+//	}
+//	cout << "输出删除后的结果" << endl;
+//	for (size_t i = 0; i < ret.size(); ++i)
+//	{
+//		cout << ret[i] << " ";
+//	}
+//	return 0;
+//}
