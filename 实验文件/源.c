@@ -5668,7 +5668,208 @@ ABCD左旋两个字符得到CDAB
 
 
 
-
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
+//
+//typedef int SQDataType;
+//typedef struct SeqList
+//{
+//	SQDataType* arr;
+//	int size;//有效数据的个数 
+//	int capacity;//容量  
+//}SL;
+//
+//void SeqListCheckCapacity(SL* ps)//扩容 
+//{
+//	if (ps->size >= ps->capacity)
+//	{
+//		SQDataType* temp = (SQDataType*)realloc(ps->arr, sizeof(SQDataType) * ps->capacity * 2);
+//		if (temp == NULL)
+//		{
+//			printf("realloc fail\n");
+//			return;
+//		}
+//		else
+//		{
+//			ps->arr = temp;
+//			ps->capacity *= 2;
+//		}
+//	}
+//}
+//
+//void SeqListInit(SL* ps)//初始化 
+//{
+//	ps->arr = (SQDataType*)malloc(sizeof(SQDataType) * 10);
+//	if (ps->arr == NULL)
+//	{
+//		printf("malloc fail\n");
+//		return;
+//	}
+//	ps->size = 0;
+//	ps->capacity = 10;
+//}
+//
+//void SeqListDestory(SL* ps)//销毁空间
+//{
+//	free(ps->arr);
+//	ps->arr = NULL;
+//	ps->capacity = 0;
+//	ps->size = 0;
+//}
+//
+//void SeqListInsert(SL* ps, int pos, SQDataType data)//按位置插入 
+//{
+//	if (pos > ps->size)
+//	{
+//		return;
+//	}
+//	SeqListCheckCapacity(ps);
+//	for (int i = ps->size; i > pos; --i)
+//	{
+//		ps->arr[i] = ps->arr[i - 1];
+//	}
+//	ps->arr[pos] = data;
+//	++ps->size;
+//}
+//
+//void SeqListErase(SL* ps, int pos)//按位置删除 
+//{
+//	if (pos >= ps->size)
+//	{
+//		return;
+//	}
+//	for (int i = pos; i < ps->size - 1; ++i)
+//	{
+//		ps->arr[i] = ps->arr[i + 1];
+//	}
+//	--ps->size;
+//}
+//
+//void SeqListPushFront(SL* ps, SQDataType data)//头插 
+//{
+//	SeqListInsert(ps, 0, data);
+//}
+//
+//void SeqListPushBack(SL* ps, SQDataType data)//尾插 
+//{
+//	SeqListInsert(ps, ps->size, data);
+//}
+//
+//void SeqListPopBack(SL* ps)//尾删 
+//{
+//	SeqListErase(ps, ps->size - 1);
+//}
+//
+//void SeqListModity(SL* ps, int pos, SQDataType data)//改
+//{
+//	if (pos >= ps->size)
+//	{
+//		return;
+//	}
+//	ps->arr[pos] = data;
+//}
+//
+//int SeqListFind(SL* ps, SQDataType data)//查
+//{
+//	for (int i = 0; i < ps->size; ++i)
+//	{
+//		if (ps->arr[i] == data)
+//		{
+//			return i;
+//		}
+//	}
+//	return -1;
+//}
+//
+//void for_each(SL* ps)//遍历
+//{
+//	for (int i = 0; i < ps->size; ++i)
+//	{
+//		printf("%d ", ps->arr[i]);
+//	}
+//	printf("\n");
+//}
+//void MergeData(SL* ps1, SL* ps2, SL* pret)
+//{
+//	int begin1 = 0, begin2 = 0;
+//	int end1 = ps1->size - 1;
+//	int end2 = ps2->size - 1;
+//	while (begin1 <= end1 && begin2 <= end2)
+//	{
+//		if (ps1->arr[begin1] < ps2->arr[begin2]) {
+//			SeqListPushBack(pret,ps1->arr[begin1]);
+//			++begin1;
+//		}
+//		else {
+//			SeqListPushBack(pret,ps2->arr[begin2]);
+//			++begin2;
+//		}
+//	}
+//	for (; begin1 <= end1; ++begin1)
+//	{
+//		SeqListPushBack(pret, ps1->arr[begin1]);
+//	}
+//	for (; begin2 <= end2; ++begin2)
+//	{
+//		SeqListPushBack(pret, ps2->arr[begin2]);
+//	}
+//}
+//int main()
+//{
+//	SL s1;
+//	SL s2;
+//	SL ret;
+//	SeqListInit(&s1);
+//	SeqListInit(&s2); 
+//	SeqListInit(&ret);
+//	printf("输入第一个有十个元素的顺序表\n");
+//	for (int i = 0; i < 10; ++i)
+//	{
+//		int temp = 0;
+//		scanf("%d", &temp);
+//		SeqListPushBack(&s1, temp);
+//	}
+//	printf("输入第二个有十个元素的顺序表\n");
+//	for (int i = 0; i < 10; ++i)
+//	{
+//		int temp = 0;
+//		scanf("%d", &temp);
+//		SeqListPushBack(&s2, temp);
+//	}
+//
+//	MergeData(&s1, &s2, &ret);
+//
+//	printf("输出合并后的结果\n");
+//	for (int i = 0; i < ret.size; ++i)
+//	{
+//		printf("%d ", ret.arr[i]);
+//	}
+//	printf("\n");
+//
+//	printf("输入item\n");
+//	int item = 0;
+//	scanf("%d", &item);
+//	for (int i = 0; i < ret.size; ++i)
+//	{
+//		if (ret.arr[i] == item)
+//		{
+//			SeqListErase(&ret , i);
+//			--i;
+//		}
+//	}
+//
+//	printf("输出删除后的结果\n");
+//	for (int i = 0; i < ret.size; ++i)
+//	{
+//		printf("%d ",ret.arr[i]);
+//	}
+//
+//	SeqListDestory(&s1);
+//	SeqListDestory(&s2);
+//	SeqListDestory(&ret);
+//	return 0;
+//}
 
 
 
