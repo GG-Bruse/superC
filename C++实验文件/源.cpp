@@ -9655,3 +9655,83 @@ s只包含小写字母
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。
+
+找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+
+返回容器可以储存的最大水量。
+
+说明:你不能倾斜容器。
+*/
+//暴力求解超出时间限制
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int maxArea(vector<int>& height)
+//    {
+//        size_t maxRet = 0;
+//        for (size_t i = 0; i < height.size() - 1; ++i)
+//        {
+//            size_t maxNum = 0;
+//            for (size_t j = i + 1; j < height.size(); ++j)
+//            {
+//                size_t temp = (height[i] < height[j] ? height[i] : height[j]) * (j - i);
+//                if (temp > maxNum)maxNum = temp;
+//            }
+//            if (maxNum > maxRet)maxRet = maxNum;
+//        }
+//        return (int)maxRet;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v{ 1,8,6,2,5,4,8,3,7 };
+//    Solution s;
+//    int ret = s.maxArea(v);
+//    cout << ret << endl;
+//    return 0;
+//}
+
+
+//双指针
+//每轮向内移动短板，所有消去的状态都 不会导致面积最大值丢失
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int maxArea(vector<int>& height)
+//    {
+//        size_t i = 0, j = height.size() - 1, res = 0;
+//        while (i < j)
+//            res = height[i] < height[j] ? max(res, (j - i) * height[i++]) : max(res, (j - i) * height[j--]);
+//        return (int)res;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v{ 1,8,6,2,5,4,8,3,7 };
+//    Solution s;
+//    int ret = s.maxArea(v);
+//    cout << ret << endl;
+//    return 0;
+//}
