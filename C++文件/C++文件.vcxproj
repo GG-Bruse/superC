@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="list.cpp" />
     <ClCompile Include="STL.cpp" />
     <ClCompile Include="string.cpp" />
     <ClCompile Include="vector.cpp" />
