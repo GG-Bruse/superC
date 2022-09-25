@@ -9735,3 +9735,51 @@ s只包含小写字母
 //    cout << ret << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+/*
+给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。请你反转从位置 left 到位置 right 的链表节点，返回反转后的链表
+*/
+/*
+思想:在需要反转的区间里，每遍历到一个节点，让这个新节点来到反转部分的起始位置
+*/
+///**
+// * Definition for singly-linked list.
+// * struct ListNode {
+// *     int val;
+// *     ListNode *next;
+// *     ListNode() : val(0), next(nullptr) {}
+// *     ListNode(int x) : val(x), next(nullptr) {}
+// *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// * };
+// */
+//class Solution {
+//public:
+//    ListNode* reverseBetween(ListNode* head, int left, int right) {
+//        ListNode* dummyNode = new ListNode(-1);
+//        dummyNode->next = head;
+//        ListNode* pre = dummyNode;
+//        for (int i = 0; i < left - 1; i++) {
+//            pre = pre->next;
+//        }
+//        ListNode* cur = pre->next;
+//        ListNode* next;
+//        for (int i = 0; i < right - left; i++) {
+//            next = cur->next;
+//            cur->next = next->next;
+//            next->next = pre->next;
+//            pre->next = next;
+//        }
+//        return dummyNode->next;
+//    }
+//};
+
+
+
+
