@@ -39,7 +39,7 @@
     <ClCompile Include="list.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="stack.cpp">
+    <ClCompile Include="stack_queue.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
