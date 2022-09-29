@@ -62,6 +62,59 @@ pop_back()：删除容器尾部元素
 
 
 
+/*
+容器适配器:
+
+1.什么是适配器:
+适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，
+该种模式是将一个类的接口转换成客户希望的另外一个接口。
+
+2.STL标准库中stack和queue的底层结构:
+虽然stack和queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，
+这是因为stack和队列只是对其他容器的接口进行了包装，STL中stack和queue默认使用deque
+
+*/
+
+
+
+
+
+//deque分析
+/*
+deque(双端队列):
+是一种双开口的"连续"空间的数据结构
+
+双开口的含义是:可以在头尾两端进行插入和删除操作，且时间复杂度为O(1)，与vector比较，头插效率高，不需要搬移元素;与list比较，空间利用率比较高。
+
+deque并不是真正连续的空间，而是由一段段连续的小空间拼接而成的，实际deque类似于一个动态的二维数组
+
+双端队列底层是一段假象的连续空间，实际是分段连续的，为了维护其“整体连续”以及随机访问的假象，落在了deque的迭代器身上，因此deque的迭代器设计就比较复杂
+*/
+
+/*
+deque的缺陷:
+
+1.与vector比较，deque的优势是:头部插入和删除时，不需要搬移元素，效率特别高，而且在扩容时，也不需要搬移大量的元素，因此其效率是必vector高的。
+
+2.与list比较，其底层是连续空间，空间利用率比较高，不需要存储额外字段。
+
+3.deque致命缺陷:
+1.不适合遍历，因为在遍历时，deque的迭代器要频繁的去检测其是否移动到某段小空间的边界，导致效率低下，而序列式场景中，可能需要经常遍历，
+2.中间位置的插入删除效率较低
+3.迭代器设计复杂
+因此在实际中，需要线性结构时大多数情况下优先考虑vector和list，deque的应用并不多。而目前能看到的一个应用就是，STL用其作为stack和queue的底层数据结构
+*/
+
+/*
+选择deque作为stack和queue的底层默认容器的原因:
+stack是一种后进先出的特殊线性数据结构，因此只要具有push_back()和pop_back()操作的线性结构，都可以作为stack的底层容器，比如vector和list都可以
+queue是先进先出的特殊线性数据结构，只要具有push_back和pop_front操作的线性结构，都可以作为queue的底层容器，比如list。
+
+但是STL中对stack和queue默认选择deque作为其底层容器，主要是因为:
+1. stack和queue不需要遍历(因此stack和queue没有迭代器)，只需要在固定的一端或者两端进行操作。
+2. 在stack中元素增长时，deque比vector的效率高(扩容时不需要搬移大量数据)；
+queue中的元素增长时，deque不仅效率高，而且内存使用率高。结合了deque的优点，而完美的避开了其缺陷
+*/
 
 
 
@@ -80,7 +133,160 @@ pop_back()：删除容器尾部元素
 
 
 
+//模拟实现stack
+//#include<vector>
+//#include<deque>
+//using std::vector;
+//using std::deque;
+//namespace bjy
+//{
+//	template<class T, class Sequence = deque<T>>
+//	class stack
+//	{
+//	public:
+//		void push(const T& data) { _container.push_back(data); }
+//		void pop() { _container.pop_back(); }
+//		T& top() { return _container.back(); }
+//		const T& top()const { return _container.back(); }
+//		bool empty()const { return _container.empty(); }
+//		size_t size()const { return _container.size(); }
+//	private:
+//		Sequence<T> _container;
+//	};
+//}
 
+
+
+
+
+//queue的模拟实现
+//#include<deque>
+//using std::deque;
+//namespace bjy
+//{
+//	template<class T,class Sequence = deque<T>>
+//	class queue
+//	{
+//	public:
+//		void push() { _container.push_back(); }
+//		void pop() { _container.pop_front(); }
+//		T& front() { return _container.front(); }
+//		const T& front()const { return _container.front(); }
+//		T& back() { return _container.back(); }
+//		const T& back()const { return _container.back(); }
+//		bool empty()const { return _container.empty(); }
+//		size_t size()const { return _container.size(); }
+//	private:
+//		Sequence<T> _container;
+//	};
+//}
+
+
+
+
+//priority_queue模拟实现
+//#include<algorithm>
+//#include<vector>
+//using std::vector;
+//namespace bjy
+//{
+//	template<class T = void>
+//	struct less { 
+//		bool operator() (const T& left, const T& right) { return left < right; }
+//	};
+//	template<class T = void>
+//	struct greater {
+//		bool operator() (const T& left, const T& right) { return left > right; }
+//	};
+//
+//	template<class T, class Sequence = vector<T>, class Compare = less<T>>
+//	class priority_queue
+//	{
+//	public:
+//		priority_queue() {}
+//		template <class InputIterator>
+//		priority_queue(InputIterator first, InputIterator last) {
+//			for (; first != last; ++first) {
+//				_container.push_back(*first);
+//			}
+//			for (int i = (_container.size() - 1 - 1) / 2; i >= 0 ; --i) {
+//				adjust_down(i);
+//			}
+//		}
+//		void adjust_up(size_t child){
+//			Compare com;
+//			size_t parent = (child - 1) / 2;
+//			while (child > 0) {
+//				if (com(_container[parent], _container[child])) {
+//					std::swap(_container[child], _container[parent]);
+//					child = parent;
+//					parent = (child - 1) / 2;
+//				}
+//				else{ break;}
+//			}
+//		}
+//		void adjust_down(size_t parent) {
+//			Compare com;
+//			size_t child = parent * 2 + 1;
+//			while (child < _container.size()) {
+//				//选出左右孩子中大的一个
+//				if (child + 1 < _container.size() && com(_container[child],_container[child + 1])) {
+//					++child;
+//				}
+//				if (com(_container[parent], _container[child])) {
+//					std::swap(_container[child], _container[parent]);
+//					parent = child;
+//					child = parent * 2 + 1;
+//				}
+//				else { break;}
+//			}
+//		}
+//		void push(const T& data) {
+//			_container.push_back(data);
+//			adjust_up(_container.size() - 1);
+//		}
+//		void pop() {
+//			std::swap(_container.front(), _container.back());
+//			_container.pop_back();
+//			adjust_down(0);
+//		}
+//		const T& top() { return _container[0]; }
+//		size_t size()const { _container.size(); }
+//		bool empty()const { return _container.empty(); }
+//	private:
+//		Sequence _container;
+//	};
+//}
+//
+//#include<iostream>
+//using namespace bjy;
+//using std::cout;
+//using std::endl;
+//int main()
+//{
+//	priority_queue<int> heap;
+//	heap.push(5);
+//	heap.push(3);
+//	heap.push(2);
+//	heap.push(0);
+//	heap.push(4);
+//	heap.push(1);
+//	while (!heap.empty()) {
+//		cout << heap.top() << " ";
+//		heap.pop();
+//	}
+//	cout << endl;
+//
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	priority_queue<int,vector<int>,greater<int>> heap2(arr, arr + sizeof(arr) / sizeof(arr[0]));
+//	while (!heap2.empty()) {
+//		cout << heap2.top() << " ";
+//		heap2.pop();
+//	}
+//	cout << endl;
+//
+//	return 0;
+//}
 
 
 
