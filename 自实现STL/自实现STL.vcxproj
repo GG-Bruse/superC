@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="list.hpp" />
+    <ClInclude Include="queue.hpp" />
+    <ClInclude Include="stack.hpp" />
     <ClInclude Include="string.h" />
     <ClInclude Include="vector.hpp" />
   </ItemGroup>

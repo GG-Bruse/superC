@@ -64,12 +64,17 @@ namespace bjy
 
 		size_t capacity()const { return _end_of_storage - _start; }
 		size_t size()const { return _finish - _start; }
+		bool empty()const { return (size() == 0); }
+		reference front() { return _start[0]; }
+		const_reference front()const { return _start[0]; }
+		reference back() { return _start[size() - 1]; }
+		const_reference back()const { return _start[size() - 1]; }
 
 		reference operator[](size_t pos) {
 			assert(pos < size());
 			return _start[pos];
 		}
-		const_reference& operator[](size_t pos)const {
+		const_reference operator[](size_t pos)const {
 			assert(pos < size());
 			return _start[pos];
 		}
