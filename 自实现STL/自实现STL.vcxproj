@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="list.hpp" />
     <ClInclude Include="queue.hpp" />
+    <ClInclude Include="reverse_iterator.h" />
     <ClInclude Include="stack.hpp" />
     <ClInclude Include="string.h" />
     <ClInclude Include="vector.hpp" />

@@ -2,6 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<cassert>
+#include"reverse_iterator.h"
 using std::bidirectional_iterator_tag;
 namespace bjy
 {
@@ -72,11 +73,18 @@ namespace bjy
 	public:
 		typedef __list_iterator<T, T&, T*> iterator;
 		typedef __list_iterator<T, const T&, const T*> const_iterator;
+		typedef __reverse_iterator<iterator, T&, T*> reverse_iterator;
+		typedef __reverse_iterator<const_iterator, const T&, const T*> const_reverse_iterator;
 
 		iterator begin() { return iterator(_head->_next); }
 		const_iterator begin()const { return const_iterator(_head->_next); }
 		iterator end() { return iterator(_head); }
 		const_iterator end()const { return const_iterator(_head); }
+
+		reverse_iterator rbegin() { return reverse_iterator(end()); }
+		const_reverse_iterator rbegin()const { return const_reverse_iterator(end()); }
+		reverse_iterator rend() { return reverse_iterator(begin()); }
+		const_reverse_iterator rend()const { return const_reverse_iterator(begin()); }
 
 		void empty_initialize() {
 			_head = new list_node;
@@ -148,4 +156,3 @@ namespace bjy
 	private:
 		list_node* _head;
 	};
-}

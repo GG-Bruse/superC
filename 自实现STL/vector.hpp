@@ -4,6 +4,7 @@
 #include<iostream>
 #include<algorithm>
 #include<cassert>
+#include"reverse_iterator.h"
 using std::swap;
 namespace bjy
 {
@@ -12,15 +13,22 @@ namespace bjy
 	{
 	public:
 		typedef T value_type;
-		typedef value_type* iterator;
-		typedef const value_type* const_iterator;
 		typedef value_type& reference;
 		typedef const value_type& const_reference;
+		typedef value_type* iterator;
+		typedef const value_type* const_iterator;
+		typedef __reverse_iterator<iterator, reference, T*> reverse_iterator;
+		typedef __reverse_iterator<const_iterator, const_reference, const value_type*> const_reverse_iterator;
 	public:
 		iterator begin() { return _start; }
 		iterator end() { return _finish; }
 		const_iterator begin()const { return _start; }
 		const_iterator end()const { return _finish; }
+
+		reverse_iterator rbegin() { return reverse_iterator(end()); }
+		reverse_iterator rend() { return reverse_iterator(begin()); }
+		const_reverse_iterator rbegin()const { return const_reverse_iterator(end()); }
+		const_reverse_iterator rend()const { return const_reverse_iterator(begin()); }
 
 		vector() :_start(nullptr), _finish(nullptr), _end_of_storage(nullptr) {}
 #ifdef OLD1
