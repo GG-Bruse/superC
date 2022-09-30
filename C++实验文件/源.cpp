@@ -10152,3 +10152,51 @@ int getMin() 获取堆栈中的最小元素
 //        return heap.top();
 //    }
 //};
+
+
+
+
+//#include<iostream>
+//#include<queue>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	priority_queue<int> a;//3210
+//	priority_queue<int, vector<int>, greater<int> > c;//0123
+//	priority_queue<string> b;//大堆
+//
+//	for (int i = 0; i < 5; i++)
+//	{
+//		a.push(i);
+//		c.push(i);
+//	}
+//
+//	while (!a.empty())
+//	{
+//		cout << a.top() << ' ';
+//		a.pop();
+//	}
+//	cout << endl;//43210
+//
+//	while (!c.empty())
+//	{
+//		cout << c.top() << ' ';
+//		c.pop();
+//	}
+//	cout << endl;//01234
+//
+//	b.push("abc");
+//	b.push("abcd");
+//	b.push("cbd");
+//
+//	while (!b.empty())
+//	{
+//		cout << b.top() << ' ';
+//		b.pop();
+//	}//cbd abcd abc
+//
+//	cout << endl;
+//	return 0;
+//}
+//4321001234cbdabcdabc
