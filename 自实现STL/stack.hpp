@@ -1,5 +1,7 @@
 #pragma once
+#include<vector>
 #include<deque>
+using std::vector;
 using std::deque;
 namespace bjy
 {

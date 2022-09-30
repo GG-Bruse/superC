@@ -156,3 +156,4 @@ namespace bjy
 	private:
 		list_node* _head;
 	};
+}

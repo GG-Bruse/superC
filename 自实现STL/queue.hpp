@@ -11,7 +11,7 @@ namespace bjy
 	class queue
 	{
 	public:
-		void push() { _container.push_back(); }
+		void push(const T& data) { _container.push_back(data); }
 		void pop() { _container.pop_front(); }
 		T& front() { return _container.front(); }
 		const T& front()const { return _container.front(); }

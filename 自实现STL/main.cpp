@@ -1,6 +1,7 @@
 #include<iostream>
 #include"vector.hpp"
 #include"queue.hpp"
+#include"stack.hpp"
 using namespace bjy;
 using std::cout;
 using std::endl;
@@ -18,7 +19,7 @@ int main_vector()
 	cout << endl;
 	return 0;
 }
-int main()
+int main_priority_queue()
 {
 	priority_queue<int> heap;
 	heap.push(5);
@@ -38,6 +39,26 @@ int main()
 	while (!heap2.empty()) {
 		cout << heap2.top() << " ";
 		heap2.pop();
+	}
+	cout << endl;
+
+	return 0;
+}
+int main_test()
+{
+	stack<int> sk;
+	for (size_t i = 0; i < 10; ++i) { sk.push(i + 1); }
+	while (!sk.empty()) {
+		cout << sk.top() << " ";
+		sk.pop();
+	}
+	cout << endl;
+
+	queue<int> qe;
+	for (size_t i = 0; i < 10; ++i) { qe.push(i+1); }
+	while (!qe.empty()) {
+		cout << qe.front() << " ";
+		qe.pop();
 	}
 	cout << endl;
 
