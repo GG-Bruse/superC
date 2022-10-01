@@ -13,7 +13,12 @@ list的介绍:
 list还需要一些额外的空间，以保存每个节点的相关联信息(对于存储类型较小元素的大list来说这可能是一个重要的因素)
 
 */
-
+/*
+list迭代器失效:
+迭代器失效即迭代器所指向的节点的无效，即该节点被删除了
+因为list的底层结构为带头结点的双向循环链表，因此在list中进行插入时是不会导致list的迭代器失效的，
+只有在删除时才会失效，并且失效的只是指向被删除节点的迭代器，其他迭代器不会受到影响
+*/
 
 
 
@@ -24,6 +29,7 @@ list还需要一些额外的空间，以保存每个节点的相关联信息(对于存储类型较小元素的大lis
 //#define _CRT_SECURE_NO_WARNINGS
 //#include<iostream>
 //#include<cassert>
+//#include"reverse_iterator.h"
 //using std::bidirectional_iterator_tag;
 //namespace bjy
 //{
@@ -94,11 +100,18 @@ list还需要一些额外的空间，以保存每个节点的相关联信息(对于存储类型较小元素的大lis
 //	public:
 //		typedef __list_iterator<T,T&,T*> iterator;
 //		typedef __list_iterator<T, const T&, const T*> const_iterator;
+//		typedef __reverse_iterator<iterator, T&, T*> reverse_iterator;
+//		typedef __reverse_iterator<const_iterator, const T&, const T*> const_reverse_iterator;
 //
 //		iterator begin() { return iterator(_head->_next); }
 //		const_iterator begin()const { return const_iterator(_head->_next); }
 //		iterator end() { return iterator(_head); }
 //		const_iterator end()const { return const_iterator(_head); }
+//
+//		reverse_iterator rbegin() { return reverse_iterator(end()); }
+//		const_reverse_iterator rbegin()const { return const_reverse_iterator(end()); }
+//		reverse_iterator rend() { return reverse_iterator(begin()); }
+//		const_reverse_iterator rend()const { return const_reverse_iterator(begin()); }
 //
 //		void empty_initialize() {
 //			_head = new list_node;
@@ -294,7 +307,7 @@ list还需要一些额外的空间，以保存每个节点的相关联信息(对于存储类型较小元素的大lis
 //	cout << endl;
 //	return 0;
 //}
-//int main()
+//int main4()
 //{
 //	list<int> lt1;
 //	lt1.push_back(1);
@@ -328,4 +341,29 @@ list还需要一些额外的空间，以保存每个节点的相关联信息(对于存储类型较小元素的大lis
 //
 //	return 0;
 //}
-
+//int main()
+//{
+//	list<int> lt;
+//	lt.push_back(1);
+//	lt.push_back(2);
+//	lt.push_back(3);
+//	lt.push_back(4);
+//	lt.push_back(5);
+//
+//	list<int>::iterator it = lt.begin();
+//	while (it != lt.end())
+//	{
+//		cout << *it << " ";
+//		++it;
+//	}
+//	cout << endl;
+//
+//	list<int>::reverse_iterator rit = lt.rbegin();
+//	while (rit != lt.rend())
+//	{
+//		cout << *rit << " ";
+//		++rit;
+//	}
+//	cout << endl;
+//	return 0;
+//}

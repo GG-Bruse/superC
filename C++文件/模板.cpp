@@ -261,7 +261,6 @@ class 类模板名
 
 
 
-//模板不支持分离编译，一般放在同一文件中，取名.hpp
 
 
 
@@ -292,6 +291,30 @@ class 类模板名
 
 
 
+//模板参数分为 类型形参与非类型形参
+/*
+类型形参即: 出现在模板参数列表中，跟在class或者typename之类的参数类型名称。
+非类型形参: 就是用一个常量作为类(函数)模板的一个参数，在类(函数)模板中可将该参数当成常量来使用
+*/
+
+//template<class T, size_t N = 10>
+//class array
+//{
+//public:
+//	T& operator[](size_t index) { return _array[index]; }
+//	const T& operator[](size_t index)const { return _array[index]; }
+//	size_t size()const { return _size; }
+//	bool empty()const { return 0 == _size; }
+//private:
+//	T _array[N];
+//	size_t _size;
+//};
+
+/*
+注意:
+1. 浮点数、类对象以及字符串是不允许作为非类型模板参数的
+2. 非类型的模板参数必须在编译期就能确认结果
+*/
 
 
 
@@ -299,3 +322,232 @@ class 类模板名
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+//模板的特化
+/*
+概念:
+通常情况下，使用模板可以实现一些与类型无关的代码，但对于一些特殊类型的可能会得到一些错误的结果，需要特殊处理
+此时，就需要对模板进行特化。即:在原模板类的基础上，针对特殊类型所进行特殊化的实现方式。模板特化中分为函数模板特化与类模板特化
+*/
+
+//函数模板特化
+/*
+1. 必须要先有一个基础的函数模板
+2. 关键字template后面接一对空的尖括号<>
+3. 函数名后跟一对尖括号，尖括号中指定需要特化的类型
+4. 函数形参表: 必须要和模板函数的基础参数类型完全相同
+*/
+
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//class Date
+//{
+//public:
+//	Date() :_year(0), _month(0), _day(0) {}
+//	Date(int year, int month, int day) :_year(year), _month(month), _day(day) {}
+//	bool operator<(const Date& d)const {
+//		if ((_year < d._year) || (_year == d._year && _month < d._month) || (_year == d._year && _month == d._month && _day < d._day))
+//			return true;
+//			return false;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+////该种实现简单明了，代码的可读性高，容易书写，因为对于一些参数类型复杂的函数模板，特化时特别给出，因此函数模板不建议特化
+//bool Less(Date* left, Date* right)
+//{
+//	return *left < *right;
+//}
+//template<class T>
+//bool Less(T left, T right)
+//{
+//	return left < right;
+//}
+////对Less函数模板进行特化
+//template<>
+//bool Less<Date*>(Date* left, Date* right)
+//{
+//	return *left < *right;
+//}
+//int main()
+//{
+//	cout << Less(1, 2) << endl;
+//	Date d1(2022, 7, 7);
+//	Date d2(2022, 7, 8);
+//	cout << Less(d1, d2) << endl;
+//	Date* p1 = &d1;
+//	Date* p2 = &d2;
+//	cout << Less(p1, p2) << endl;
+//	return 0;
+//}
+
+
+
+
+
+//类模板特化
+/*
+全特化:
+全特化即是将模板参数列表中所有的参数都确定化
+
+偏特化:
+任何针对模版参数进一步进行条件限制设计的特化版本
+	偏特化有以下两种表现方式:
+	(1)部分特化:将模板参数类表中的一部分参数特化
+	(2)参数更进一步的限制:偏特化并不仅仅是指特化部分参数，而是针对模板参数更进一步的条件限制所设计出来的一个特化版本
+*/
+
+
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//template<class T1, class T2>
+//class Data
+//{
+//public:
+//	Data() { cout << "Data<T1, T2>" << endl; }
+//};
+//
+//template<>//全特化
+//class Data<int, char>
+//{
+//public:
+//	Data() { cout << "Data<int, char>" << endl; }
+//};
+//
+//template <class T1>//偏特化
+//class Data<T1, int>
+//{
+//public:
+//	Data() { cout << "Data<T1, int>" << endl; }
+//};
+//template<class T1, class T2>//偏特化
+//class Data<T1*,T2*>
+//{
+//public:
+//	Data() { cout << "Data<T1*, T2*>" << endl; }
+//};
+//template<class T1, class T2>//偏特化
+//class Data<T1&, T2&>
+//{
+//public:
+//	Data() { cout << "Data<T1&, T2&>" << endl; }
+//};
+//
+//int main()
+//{
+//	Data<int, int> d1;//Data<T1, int>
+//	Data<int, char> d2;//Data<int, char>
+//	Data<double, double>d3;//Data<T1, T2>
+//
+//	Data<int*, int*> d4;//Data<T1*, T2*>
+//	Data<double*, char*>d5;//Data<T1*, T2*>
+//
+//	Data<double&, char&>d6;//Data<T1&, T2&>
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//模板的分离编译
+
+//模板不支持分离编译
+/*
+解决方法:
+1.将声明和定义放到一个文件 "xxx.hpp" 里面或者xxx.h其实也是可以的(推荐)
+2.模板定义的位置显式实例化(不推荐:将类型写死)
+*/
+/*
+原因:
+main.cpp文件:
+#include"add.h"
+int main()
+{
+	Add(1,1);
+	Add(2.1,2.2);
+	return 0;
+}
+
+add.h文件:
+template<class T>
+T Add(const T& left,const T& right);
+
+add.cpp文件
+template<class T>
+T Add(const T& left,const T& right) { return left + right; }
+
+C/C++程序要运行，得经历: 预处理 -- 编译 -- 汇编 -- 链接
+编译:
+对程序进行词法、语法、语义分析，无误后生成汇编代码。
+头文件不参与编译，编译器对各个.cpp文件分离编译
+链接:
+将多个.o文件合并，并处理没有解决的地址问题
+
+分离编译导致add.cpp文件中的模板函数并未实例化，链接合并符号表后无法找到Add函数的地址，导致链接错误
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//模板总结
+/*
+优点:
+1. 模板复用了代码，节省资源，更快的迭代开发，C++的标准模板库(STL)因此而产生
+2. 增强了代码的灵活性
+缺陷:
+1. 模板会导致代码膨胀问题，也会导致编译时间变长
+2. 出现模板编译错误时，错误信息非常凌乱，不易定位错误
+*/

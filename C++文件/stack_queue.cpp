@@ -151,7 +151,7 @@ queueÖĞµÄÔªËØÔö³¤Ê±£¬deque²»½öĞ§ÂÊ¸ß£¬¶øÇÒÄÚ´æÊ¹ÓÃÂÊ¸ß¡£½áºÏÁËdequeµÄÓÅµã£¬¶øÍêÃ
 //		bool empty()const { return _container.empty(); }
 //		size_t size()const { return _container.size(); }
 //	private:
-//		Sequence<T> _container;
+//		Sequence _container;
 //	};
 //}
 
@@ -177,7 +177,7 @@ queueÖĞµÄÔªËØÔö³¤Ê±£¬deque²»½öĞ§ÂÊ¸ß£¬¶øÇÒÄÚ´æÊ¹ÓÃÂÊ¸ß¡£½áºÏÁËdequeµÄÓÅµã£¬¶øÍêÃ
 //		bool empty()const { return _container.empty(); }
 //		size_t size()const { return _container.size(); }
 //	private:
-//		Sequence<T> _container;
+//		Sequence _container;
 //	};
 //}
 
