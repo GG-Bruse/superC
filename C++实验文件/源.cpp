@@ -10200,3 +10200,128 @@ int getMin() 获取堆栈中的最小元素
 //	return 0;
 //}
 //4321001234cbdabcdabc
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using std::vector;
+//using std::cout;
+//using std::endl;
+//
+//int main()
+//{
+//	int ar[] = { 1,2,3,4,0,5,6,7,8,9 };
+//	int n = sizeof(ar) / sizeof(int);
+//	vector<int> v(ar, ar + n);
+//	vector<int>::iterator it = v.begin();
+//	while (it != v.end())
+//	{
+//		if (*it != 0)
+//			cout << *it;
+//		else
+//			v.erase(it);
+//		it++;
+//	}
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using std::cout;
+//using std::endl;
+//using std::string;
+//int main(int argc, char* argv[])
+//{
+//	string a = "hello world";
+//	string b = a;
+//	if (a.c_str() == b.c_str())
+//	{
+//		cout << "true" << endl;
+//	}
+//	else cout << "false" << endl;
+//
+//	string c = b;
+//	c = "";
+//	if (a.c_str() == b.c_str())
+//	{
+//		cout << "true" << endl;
+//	}
+//	else cout << "false" << endl;
+//
+//	a = "";
+//	if (a.c_str() == b.c_str())
+//	{
+//		cout << "true" << endl;
+//	}
+//	else cout << "false" << endl;
+//
+//	return 0;
+//}//false false false
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using std::cout;
+//using std::endl;
+//using std::string;
+//int main()
+//{
+//	string str("Hello Bit.");
+//	str.reserve(111);
+//	str.resize(5);
+//	str.reserve(50);
+//	cout << str.size() << ":" << str.capacity() << endl;
+//	return 0;
+//}//5 111
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using std::cout;
+//using std::endl;
+//using std::string;
+//int main(int argc, char* argv[])
+//{
+//	string strText = "How are you?";
+//	string strSeparator = " ";
+//	string strResult;
+//
+//	int size_pos = 0;
+//	int size_prev_pos = 0;
+//
+//	while ((size_pos = strText.find_first_of(strSeparator, size_pos)) != string::npos)
+//	{
+//		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+//		cout << strResult << " ";
+//		size_prev_pos = ++size_pos;
+//	}
+//	if (size_prev_pos != strText.size())
+//	{
+//		strResult = strText.substr(size_prev_pos, size_pos - size_prev_pos);
+//		cout << strResult << " ";
+//	}
+//	cout << endl;
+//	return 0;
+//}//How are you?
+
