@@ -1,3 +1,2 @@
 ﻿  源.cpp
-D:\vs\C++\C++实验文件\源.cpp(10313,66): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
   C++实验文件.vcxproj -> D:\vs\C++\C++实验文件\x64\Debug\C++实验文件.exe

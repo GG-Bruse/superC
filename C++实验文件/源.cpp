@@ -10325,3 +10325,118 @@ int getMin() 获取堆栈中的最小元素
 //	return 0;
 //}//How are you?
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include<stdio.h>
+//#include<stdlib.h>
+//typedef int SLDataType;
+//typedef struct SListNode
+//{
+//	SLDataType data;
+//	struct SListNode* next;
+//}SLNode;
+//
+//SLNode* buy_list_node(SLDataType d) {//创建一个结点
+//	SLNode* newNode = (SLNode*)malloc(sizeof(SLNode));
+//	if (newNode == NULL)
+//		return NULL;
+//	newNode->data = d;
+//	newNode->next = NULL;
+//	return newNode;
+//}
+//
+//void SListPushBack(SLNode** ppheader, SLDataType d) {//尾插
+//	SLNode* newNode = buy_list_node(d);
+//	if (*ppheader == NULL)
+//		*ppheader = newNode;
+//	else{
+//		SLNode* tail = *ppheader;
+//		while (tail->next != NULL){
+//			tail = tail->next;
+//		}
+//		tail->next = newNode;
+//	}
+//}
+//
+//void seqlist_print(SLNode* pheader){
+//	for (SLNode* cur = pheader; cur != NULL; cur = cur->next)
+//		printf("%d ", cur->data);
+//	printf("\n");
+//}
+//
+//void seqlist_init(SLNode** ppheader, int size, int num) {
+//	for (int i = 0; i < size; ++i) {
+//		SListPushBack(ppheader, num);
+//	}
+//}
+//
+//int main(){
+//	int size = 0;
+//	scanf("%d", &size);
+//	SLNode* pheader = NULL;
+//	seqlist_init(&pheader, size, 0);
+//	seqlist_print(pheader);
+//	return 0;
+//}
+
+
+
+//#include<stdio.h>
+//typedef struct LNode
+//{
+//	int data;
+//	struct LNode* next;
+//}LNode, * LinkList;
+//void SListPushBack(LinkList& L, int d) {//尾插
+//	LNode* newNode = new(LNode);//new是用于开辟内存，有失败的可能
+//	newNode->data = d;
+//	newNode->next = NULL;
+//	if (newNode != NULL) {
+//		if (L == NULL)
+//			L = newNode;
+//		else {
+//			LNode* tail = L;
+//			while (tail->next != NULL) {
+//				tail = tail->next;
+//			}
+//			tail->next = newNode;
+//		}
+//	}
+//}
+//void CreateListNode(LinkList& L, int size, int num) {
+//	for (int i = 0; i < size; ++i) {
+//		SListPushBack(L, num);
+//	}
+//}
+//void SeqlistPrint(LinkList& L){
+//	for (LNode* cur = L; cur != NULL; cur = cur->next)
+//		printf("%d ", cur->data);
+//	printf("\n");
+//}
+//int main()
+//{
+//	int size = 0;
+//	scanf("%d", &size);
+//	int num = 0;
+//	scanf("%d", &num);
+//	LinkList L = NULL;
+//	CreateListNode(L, size, num);
+//	SeqlistPrint(L);
+//	return 0;
+//}
+
+
+
