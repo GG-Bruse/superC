@@ -10445,4 +10445,89 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+//#include<stdio.h>
+//#include<stdlib.h>
+//int compare(const void* a, const void* b)
+//{
+//    return (*(size_t*)b - *(size_t*)a);
+//}
+//int main()
+//{
+//    size_t n = 0;
+//    scanf("%zd", &n);
+//    size_t* arr = (size_t*)malloc(sizeof(size_t) * 3 * n);
+//    if (arr == NULL) return 0;
+//    for (int i = 0; i < 3 * n; ++i) {
+//        scanf("%zd", &arr[i]);
+//    }
+//    qsort(arr, 3 * n, sizeof(size_t), compare);
+//
+//    if (n >= 2) {
+//        size_t ret = 0;
+//        size_t count = 0;
+//        for (int i = 1; i < 3 * n; i += 2) {
+//            if (count == n)break;
+//            ret += arr[i];
+//            ++count;
+//        }
+//        printf("%zu", ret);
+//    }
+//    else{
+//        printf("%zu", arr[1]);
+//    }
+//    free(arr);
+//    arr = NULL;
+//    return 0;
+//}
 
+
+
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//int main()
+//{
+//    /*string ret_str = "They are students.";
+//    string delete_str = "aeiou";*/
+//    string ret_str;
+//    string delete_str;
+//    getline(cin,ret_str);
+//    getline(cin, delete_str);
+//   /* if (ret_str == " " || delete_str == " ") {
+//        cout << ret_str << endl;
+//        return 0;
+//    }
+//    for (string::iterator itd = delete_str.begin(); itd != delete_str.end(); ++itd) {
+//        for (string::iterator it = ret_str.begin(); it != ret_str.end();) {
+//            if (*it == *itd) {
+//                it = ret_str.erase(it);
+//            }
+//            else {
+//                ++it;
+//            }
+//        }
+//    }*/
+//    std::size_t found = ret_str.find_first_of(delete_str);
+//    while (found != std::string::npos)
+//    {
+//        ret_str.erase(found,1);
+//        found = ret_str.find_first_of(delete_str, found);
+//    }
+//    cout << ret_str << endl;
+//    return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//using std::cout;
+//using std::endl;
+//int main()
+//{
+//	const char* str = "compare";
+//	printf("%5.3s", str);
+//	return 0;
+//}
