@@ -1,8 +1,0 @@
-﻿  game.c
-D:\vs\三子棋\game.c(16,21): warning C4047: “=”:“char”与“char [2]”的间接级别不同
-  源.c
-  正在生成代码
-  Previous IPDB not found, fall back to full compilation.
-  All 12 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  已完成代码的生成
-  三子棋.vcxproj -> D:\vs\三子棋\Release\三子棋.exe

@@ -1,2 +1,0 @@
-D:\vs\三子棋\Debug\三子棋.exe
-D:\vs\C\三子棋\Debug\三子棋.exe
