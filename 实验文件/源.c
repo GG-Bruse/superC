@@ -5960,11 +5960,83 @@ ABCD左旋两个字符得到CDAB
 
 
 
+/*
+给你一个数组，将数组中的元素向右轮转 k个位置，其中k是非负数
+尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。
+使用空间复杂度为 O(1)的算法原地解决这个问题
+*/
+
+//超出时间限制，时间复杂度过高
+//void rotate_once(int* nums, int numsSize) {
+//    int temp = nums[numsSize - 1];
+//    for (int i = numsSize - 1; i > 0; --i) {
+//        nums[i] = nums[i - 1];
+//    }
+//    nums[0] = temp;
+//}
+//void rotate(int* nums, int numsSize, int k) {
+//    if (k == 0 || numsSize <= 1) return;
+//    for (int i = 0; i < (k % numsSize); ++i) {
+//        rotate_once(nums, numsSize);
+//    }
+//}
+
+
+
+//空间换时间，但空间复杂度为O(N)
+/*
+void rotate(int* nums, int numsSize, int k){
+    if(k == 0 || numsSize <= 1) return;
+    k = k % numsSize;
+    int* array_temp = (int*)malloc(sizeof(int)*numsSize);
+    int count = 0;
+    for(int i = numsSize - k; i < numsSize; ++i){
+        array_temp[count] = nums[i];
+        ++count;
+    }
+    for(int i = 0;i < numsSize - k; ++i){
+        array_temp[count] = nums[i];
+        ++count;
+    }
+    for(int i = 0;i < numsSize;++i){
+        nums[i] = array_temp[i];
+    }
+}
+*/
 
 
 
 
+//完全符合条件:分区反转(反转三次)
+/*
+void swap(int* left,int* right){
+    int temp = *left;
+    *left = *right;
+    *right = temp;
+}
+void change_array(int* nums,int left,int right){
+    while(left <= right){
+        swap(&nums[left],&nums[right]);
+        ++left;
+        --right;
+    }
+}
+void rotate(int* nums, int numsSize, int k){
+    if(k == 0 || numsSize <= 1) return;
+    k = k % numsSize;
 
+    int left = 0,right = numsSize - k - 1;
+    change_array(nums,left,right);
+
+    left = numsSize - k;
+    right = numsSize - 1;
+    change_array(nums,left,right);
+
+    left = 0;
+    right = numsSize - 1;
+    change_array(nums,left,right);
+}
+*/
 
 
 

@@ -1,2 +1,0 @@
-D:\vs\实验文件\Debug\实验文件.exe
-D:\vs\C\实验文件\Debug\实验文件.exe
