@@ -6024,17 +6024,9 @@ void change_array(int* nums,int left,int right){
 void rotate(int* nums, int numsSize, int k){
     if(k == 0 || numsSize <= 1) return;
     k = k % numsSize;
-
-    int left = 0,right = numsSize - k - 1;
-    change_array(nums,left,right);
-
-    left = numsSize - k;
-    right = numsSize - 1;
-    change_array(nums,left,right);
-
-    left = 0;
-    right = numsSize - 1;
-    change_array(nums,left,right);
+    change_array(nums,0,numsSize - k - 1);
+    change_array(nums,numsSize - k,numsSize - 1);
+    change_array(nums,0,numsSize - 1);
 }
 */
 
