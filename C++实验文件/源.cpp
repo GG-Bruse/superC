@@ -10531,3 +10531,104 @@ int getMin() 获取堆栈中的最小元素
 //	printf("%5.3s", str);
 //	return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int checkzj(int* array, int n,int left) {
+//    int flag = 0;
+//    for (int i = left; i < n - 1; ++i) {
+//        if (array[i] > array[i + 1]) {
+//            flag = 1;//非递增
+//            break;
+//        }
+//        else if (array[i] < array[i + 1]) {
+//            flag = 0;//非递减
+//            break;
+//        }
+//    }
+//    return flag;
+//}
+//int main()
+//{
+//    int n = 0;
+//    cin >> n;
+//    int* array = new(int[n]);
+//    for (int i = 0; i < n; ++i) {
+//        cin >> array[i];
+//    }
+//    if (n == 1) cout << 1 << endl;
+//    else {
+//        int ret = 1;
+//        int left = 0;
+//        int right = 1;
+//        int flag = checkzj(array,n,left);
+//        
+//        for (int i = 0; i < n - 1; ++i,++right,++left) {
+//            if (flag == 0 && array[left] > array[right]) {
+//                ++ret;
+//                left = i;
+//                right = left + 1;
+//                flag = checkzj(array, n, left + 1);
+//            }
+//            else if (flag == 1 && array[left] < array[right]) {
+//                ++ret;
+//                left = i;
+//                right = left + 1;
+//                flag = checkzj(array, n, left + 1);
+//            }
+//        }
+//        cout << ret << endl;
+//    }
+//    delete[] array;
+//    array = nullptr;
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//void change(string& str, size_t left, size_t right) {
+//	while (left < right) {
+//		char temp = str[left];
+//		str[left] = str[right];
+//		str[right] = temp;
+//		++left;
+//		--right;
+//	}
+//}
+//int main()
+//{
+//	string str = "I like beijing";
+//	//getline(cin, str);
+//	size_t left = 0, right = 0;
+//	for (size_t i = 0; i < str.size(); ++i) {
+//		if (str[i] == ' ' || str[i] == '.' || i == str.size() - 1) {
+//			if (str[i] == '.' || i == str.size() - 1)right = i;
+//			else right = i - 1;
+//			change(str, left, right);
+//			left = i + 1;
+//		}
+//	}
+//	change(str, 0, str.size() - 1);
+//	cout << str << endl;
+//	return 0;
+//}
+
+
+
