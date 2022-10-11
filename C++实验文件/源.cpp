@@ -10632,3 +10632,82 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//#include<cctype>
+//using namespace std;
+//int main()
+//{
+//    string str = "abcd12345ed125ss123456789";
+//    int count = 0, max = 0;
+//    for (size_t i = 0; i < str.size(); ++i) {
+//        if (isdigit(str[i])) {
+//            ++count;
+//        }
+//        else count = 0;
+//        if (count > max) {
+//            max = count;
+//        }
+//    }
+//    count = 0;
+//    for (size_t i = 0; i < str.size(); ++i) {
+//        if (isdigit(str[i])) {
+//            ++count;
+//        }
+//        else count = 0;
+//        if (count == max) {
+//            for (size_t j = i + 1; j < i + max; ++j) {
+//                cout << str[j - max];
+//            }
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int MoreThanHalfNum_Solution(vector<int>& numbers) {
+//        if (numbers.size() == 1) return numbers[0];
+//        int half_size = numbers.size() / 2 + 1;
+//        int left = 0;
+//        int right = 1;
+//        int count = 1;
+//        while (left < half_size) {
+//            if (numbers[left] == numbers[right]) {
+//                ++count;
+//            }
+//            if (count == half_size) return numbers[left];
+//            if (right == numbers.size() - 1) {
+//                ++left;
+//                right = left + 1;
+//                count = 1;
+//                continue;
+//            }
+//            ++right;
+//        }
+//        return -1;
+//    }
+//};
+//int main()
+//{
+//    vector<int>v{ 1,2,3,2,2,2,5,4,2};
+//    Solution s;
+//    int ret = s.MoreThanHalfNum_Solution(v);
+//    cout << ret << endl;
+//    return 0;
+//}
