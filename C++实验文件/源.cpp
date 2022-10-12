@@ -10711,3 +10711,80 @@ int getMin() 获取堆栈中的最小元素
 //    cout << ret << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//    string ret;
+//    int M = 0, N = 0;
+//    while (cin >> M >> N) {
+//        int flag = 1;
+//        if (M < 0) {
+//            flag = 0;
+//            M = abs(M);
+//        }
+//        char temp = 0;
+//        while (M / N != 0) {
+//            if (M % N < 10)
+//                ret.insert(0, 1, (M % N) + '0');
+//            else
+//                ret.insert(0, 1, (M % N) - 10 + 'A');
+//            M = M / N;
+//        }
+//        if (M % N < 10)
+//            ret.insert(0, 1, (M % N) + '0');
+//        else
+//            ret.insert(0, 1, (M % N) - 10 + 'A');
+//        if (flag == 0) ret.insert(0, 1, '-');
+//        cout << ret << endl;
+//        ret = "";
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//bool check(int data) {
+//    return ((data >= -30) && (data <= 30));
+//}
+//int main()
+//{
+//    //A_B B_C AjB BjC
+//    vector<int>v;
+//    v.resize(4);
+//    for (size_t i = 0; i < v.size(); ++i) {
+//        cin >> v[i];
+//    }
+//    int A = (v[0] + v[2]) / 2;
+//    int B = (v[1] + v[3]) / 2;
+//    int C = (v[3] - v[1]) / 2;
+//    if (A - B == v[0] && B - C == v[1] && A + B == v[2] && B + C == v[3]) {
+//        if (check(A) && check(B) && check(C)) {
+//            cout << A << " " << B << " " << C << " " << endl;
+//        }
+//        else cout << "No" << endl;
+//    }
+//    else cout << "No" << endl;
+//    return 0;
+//}
+
+
+
+
+
