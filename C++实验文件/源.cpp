@@ -10788,3 +10788,78 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//bool check(string& str) {
+//    size_t left = 0, right = str.size() - 1;
+//    while (left < right) {
+//        if (str[left] != str[right])
+//        {
+//            return false;
+//        }
+//        ++left;
+//        --right;
+//    }
+//    return true;
+//}
+//int main()
+//{
+//    string A, B;
+//    getline(cin, A);
+//    getline(cin, B);
+//    size_t count = 0;
+//    for (size_t i = 0; i < A.size(); ++i) {
+//        string temp = A;
+//        A.insert(i, B);
+//        if (check(A)) {
+//            ++count;
+//        }
+//        A = temp;
+//    }
+//    A += B;
+//    if (check(A)) {
+//        ++count;
+//    }
+//    cout << count << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main() {
+//    int n;
+//    cin >> n;
+//    vector<int>v;
+//    v.resize(n);
+//    for (int i = 0; i < n; ++i) {
+//        cin >> v[i];
+//    }
+//    int sum = v[0];
+//    int max = v[0];
+//    for (int i = 1; i < n; ++i) {
+//        if (sum >= 0) {
+//            sum += v[i];
+//        }
+//        else {
+//            sum = v[i];
+//        }
+//        if (max < sum)max = sum;
+//    }
+//    cout << max << endl;
+//    return 0;
+//}
+
+
+
+
+
+
