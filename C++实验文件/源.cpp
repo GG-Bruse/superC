@@ -10863,3 +10863,238 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+
+
+
+
+
+
+//#include<stdio.h>
+//struct ListNode {
+//    int val;
+//    struct ListNode* next;
+//    
+//};
+
+//struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+//    if (list1 == NULL) return list2;
+//    if (list2 == NULL) return list1;
+//
+//    struct ListNode* head = NULL, * tail = head;
+//    while (list1 != NULL && list2 != NULL) {
+//        if (list1->val < list2->val) {
+//            if (head == NULL) {//首个元素插入
+//                head = tail = list1;
+//                list1 = list1->next;
+//            }
+//            else {
+//                tail->next = list1;
+//                list1 = list1->next;
+//                tail = tail->next;
+//            }
+//        }
+//        else {//list1->val >= list2->val
+//            if (head == NULL) {//首个元素插入
+//                head = tail = list2;
+//                list2 = list2->next;
+//            }
+//            else {
+//                tail->next = list2;
+//                list2 = list2->next;
+//                tail = tail->next;
+//            }
+//        }
+//    }
+//    if (list1 != NULL)
+//        tail->next = list1;
+//    if (list2 != NULL)
+//        tail->next = list2;
+//    return head;
+//}
+
+//struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+//    if (list1 == NULL) return list2;
+//    if (list2 == NULL) return list1;
+//
+//    struct ListNode* head = NULL, * tail = head;
+//    if (list1->val < list2->val) {
+//        head = tail = list1;
+//        list1 = list1->next;
+//    }
+//    else {
+//        head = tail = list2;
+//        list2 = list2->next;
+//    }
+//    while (list1 != NULL && list2 != NULL) {
+//        if (list1->val < list2->val) {
+//            tail->next = list1;
+//            list1 = list1->next;
+//        }
+//        else {//list1->val >= list2->val
+//            tail->next = list2;
+//            list2 = list2->next;
+//        }
+//        tail = tail->next;
+//    }
+//    if (list1 != NULL)
+//        tail->next = list1;
+//    if (list2 != NULL)
+//        tail->next = list2;
+//    return head;
+//}
+
+//struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+//    struct ListNode* head, * tail;
+//    head = tail = (struct ListNode*)malloc(sizeof(struct ListNode));
+//    tail->next = NULL;
+//    while (list1 != NULL && list2 != NULL) {
+//        if (list1->val < list2->val) {
+//            tail->next = list1;
+//            list1 = list1->next;
+//        }
+//        else {//list1->val >= list2->val
+//            tail->next = list2;
+//            list2 = list2->next;
+//        }
+//        tail = tail->next;
+//    }
+//    if (list1 != NULL)
+//        tail->next = list1;
+//    if (list2 != NULL)
+//        tail->next = list2;
+//
+//    struct ListNode* del = head;
+//    head = head->next;
+//    free(del);
+//    return head;
+//}
+
+
+
+
+
+
+
+
+
+
+
+/*
+现有一链表的头指针 ListNode* pHead，给一定值x，编写一段代码将所有小于x的结点排在其余结点之前，且不能改变原来的数据顺序，返回重新排列后的链表的头指针。
+*/
+//#include<iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    struct ListNode *next;
+//    ListNode(int x) : val(x), next(NULL) {}
+//};
+//class Partition {
+//public:
+//    ListNode* partition(ListNode* pHead, int x) {
+//        struct ListNode* less_head, * less_tail;
+//        less_head = less_tail = (struct ListNode*)malloc(sizeof(struct ListNode));
+//        less_tail->next = NULL;
+//
+//        struct ListNode* greater_head, * greater_tail;
+//        greater_head = greater_tail = (struct ListNode*)malloc(sizeof(struct ListNode*));
+//        greater_tail->next = NULL;
+//
+//        struct ListNode* current = pHead;
+//        while (current != NULL) {
+//            if (current->val < x) {
+//                less_tail->next = current;
+//                less_tail = less_tail->next;
+//            }
+//            else {
+//                greater_tail->next = current;
+//                greater_tail = greater_tail->next;
+//            }
+//            current = current->next;
+//        }
+//
+//        less_tail->next = greater_head->next;
+//        greater_tail->next = NULL;
+//        ListNode* head = less_head->next;
+//        free(less_head);
+//        free(greater_head);
+//
+//        return head;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/*
+对于一个链表，请设计一个时间复杂度为O(n),额外空间复杂度为O(1)的算法，判断其是否为回文结构。
+给定一个链表的头指针A，请返回一个bool值，代表其是否为回文结构。保证链表长度小于等于900。
+*/
+//#include<iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    struct ListNode *next;
+//    ListNode(int x) : val(x), next(NULL) {}
+//};
+////利用快慢指针找到中间结点
+////反转后半部分链表
+//class PalindromeList {
+//public:
+//    struct ListNode* middleNode(struct ListNode* head) {
+//        struct ListNode* slow = head, * fast = head;
+//        while (fast && fast->next) {
+//            slow = slow->next;
+//            fast = fast->next->next;
+//        }
+//        return slow;
+//    }
+//    struct ListNode* reverseList(struct ListNode* head) {
+//        struct ListNode* cur = head;
+//        struct ListNode* newhead = NULL;
+//        while (cur != NULL) {
+//            struct ListNode* next = cur->next;
+//            cur->next = newhead;
+//            newhead = cur;
+//            cur = next;
+//        }
+//        return newhead;
+//    }
+//
+//    bool chkPalindrome(ListNode* A) {
+//        struct ListNode* mid = middleNode(A);
+//        struct ListNode* newhead = reverseList(mid);
+//
+//        while (A && newhead) {
+//            if (A->val != newhead->val) {
+//                return false;
+//            }
+//            A = A->next;
+//            newhead = newhead->next;
+//        }
+//        return true;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
