@@ -11092,7 +11092,51 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+/*
+给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null
+题目数据 保证 整个链式结构中不存在环
+注意:函数返回结果后，链表必须保持其原始结构
+*/
 
+//长链表先走长度之差步
+//#include<stdio.h>
+//struct ListNode {
+//    int val;
+//    struct ListNode *next;
+//};
+//struct ListNode* getIntersectionNode(struct ListNode* headA, struct ListNode* headB) {
+//    int lenth_A = 0, lenth_B = 0;
+//    struct ListNode* current_A = headA;
+//    struct ListNode* current_B = headB;
+//    while (current_A->next != NULL) {
+//        ++lenth_A;
+//        current_A = current_A->next;
+//    }
+//    while (current_B->next != NULL) {
+//        ++lenth_B;
+//        current_B = current_B->next;
+//    }
+//
+//    if (current_A != current_B) return NULL;//尾结点不同，肯定不为相交链表
+//
+//    current_A = headA;
+//    current_B = headB;
+//    if (lenth_A > lenth_B) {
+//        for (int i = 0; i < lenth_A - lenth_B; ++i) {
+//            current_A = current_A->next;
+//        }
+//    }
+//    else {//lenth_A <= lenth_B
+//        for (int i = 0; i < lenth_B - lenth_A; ++i) {
+//            current_B = current_B->next;
+//        }
+//    }
+//    while (current_A != current_B) {//此时肯定为相交链表
+//        current_A = current_A->next;
+//        current_B = current_B->next;
+//    }
+//    return current_A;
+//}
 
 
 
