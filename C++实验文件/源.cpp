@@ -11142,3 +11142,103 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<cctype>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    int StrToInt(string str) {
+//        int flag = 1;//默认为正数
+//        long long ret = 0;
+//        for (size_t i = 0; i < str.size(); ++i) {
+//            if (isdigit(str[i])) {
+//                ret += str[i] - '0';
+//                ret *= 10;
+//            }
+//            else {
+//                if (str[i] == '+') {}
+//                else if (str[i] == '-') {
+//                    flag = -1;
+//                }
+//                else {
+//                    return 0;
+//                }
+//            }
+//        }
+//        ret /= 10;
+//        ret *= flag;
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    long long ret = s.StrToInt("+2147483647");
+//    cout << ret << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//    int wigth = 0, heigth = 0, count = 0;
+//    cin >> wigth >> heigth;
+//    vector<vector<int>> v;
+//    v.resize(wigth);
+//    for (size_t i = 0; i < v.size(); ++i) {
+//        v[i].resize(heigth, 1);
+//    }
+//    for (int i = 0; i < wigth; ++i) {
+//        for (int j = 0; j < heigth; ++j) {
+//            if (v[i][j] == 1) {
+//                ++count;
+//                if (i + 2 < wigth)
+//                    v[i + 2][j] = 0;
+//                if (j + 2 < heigth)
+//                    v[i][j + 2] = 0;
+//            }
+//        }
+//    }
+//    cout << count << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
