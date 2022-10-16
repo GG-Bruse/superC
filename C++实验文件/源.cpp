@@ -11225,20 +11225,20 @@ int getMin() 获取堆栈中的最小元素
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    int N = 0;
+//    cin >> N;
+//    int temp = 0;
+//    int left = 0, right = 1;
+//    while (left < N) {
+//        temp = left;
+//        left = right;
+//        right = temp + right;
+//    }
+//    int ret = min(abs(left - N), abs(N - temp));
+//    cout << ret << endl;
+//    return 0;
+//}
