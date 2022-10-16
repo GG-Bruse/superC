@@ -146,6 +146,7 @@
     <ClCompile Include="vector.cpp" />
     <ClCompile Include="内存管理.cpp" />
     <ClCompile Include="基础语法.cpp" />
+    <ClCompile Include="多态.cpp" />
     <ClCompile Include="模板.cpp" />
     <ClCompile Include="类和对象.cpp" />
     <ClCompile Include="继承.cpp" />

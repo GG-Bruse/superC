@@ -45,6 +45,9 @@
     <ClCompile Include="继承.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="多态.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="reverse_iterator.h">
