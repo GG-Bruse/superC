@@ -11242,3 +11242,82 @@ int getMin() 获取堆栈中的最小元素
 //    cout << ret << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<cstring>
+//using namespace std;
+//bool check_dictionary(vector<string>& v) {
+//    for (size_t i = 0; i < v.size() - 1; ++i)
+//    {
+//        if ((strcmp(v[i].c_str(), v[i + 1].c_str()) > 0))
+//        {
+//            return false;
+//        }
+//    }
+//    return true;
+//}
+//bool check_lenth(vector<string>& v) {
+//    for (size_t i = 0; i < v.size() - 1; ++i)
+//    {
+//        if (v[i].size() > v[i + 1].size())
+//        {
+//            return false;
+//        }
+//    }
+//    return true;
+//}
+//int main()
+//{
+//    int n = 0;
+//    cin >> n;
+//    vector<string>v;
+//    v.resize(n);
+//    for (size_t i = 0; i < n; ++i) {
+//        cin >> v[i];
+//    }
+//
+//    if (check_dictionary(v) && !check_lenth(v)) {
+//        cout << "lexicographically" << endl;
+//    }
+//    else if (!check_dictionary(v) && check_lenth(v)) {
+//        cout << "lengths" << endl;
+//    }
+//    else if (check_dictionary(v) && check_lenth(v)) {
+//        cout << "both" << endl;
+//    }
+//    else {
+//        cout << "none" << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int  main()
+//{
+//    size_t A = 0, B = 0;
+//    cin >> A >> B;
+//    size_t min_num = min(A, B);
+//    size_t ret = 0;
+//    for (size_t i = min_num; i <= A * B; ++i) {
+//        if (i % A == 0 && i % B == 0) {
+//            ret = i;
+//            break;
+//        }
+//    }
+//    cout << ret << endl;
+//    return 0;
+//}
