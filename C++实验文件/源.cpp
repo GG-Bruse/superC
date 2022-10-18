@@ -11321,3 +11321,54 @@ int getMin() 获取堆栈中的最小元素
 //    cout << ret << endl;
 //    return 0;
 //}
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int get_num(int n, int m) {
+//    static int count = 0;
+//    if (m == 0 || n == 0)
+//    {
+//        ++count;
+//        return 0;
+//    }
+//    get_num(n - 1, m);
+//    get_num(n, m - 1);
+//    return count;
+//}
+//int main()
+//{
+//    int n = 0, m = 0;
+//    cin >> n >> m;
+//    int ret = get_num(n, m);
+//    cout << ret << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//class UnusualAdd
+//{
+//public:
+//    int addAB(int A, int B)
+//    {
+//        if (0 == A) return B;
+//        else if (0 == B) return A;
+//        else return addAB(A ^ B, (A & B) << 1);
+//    }
+//};
+//int main()
+//{
+//    UnusualAdd u;
+//    cout << u.addAB(1580198, 2537294) << endl;
+//    return 0;
+//}
