@@ -11372,3 +11372,133 @@ int getMin() 获取堆栈中的最小元素
 //    cout << u.addAB(1580198, 2537294) << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<cctype>
+//using namespace std;
+//int check_length(const string& str)
+//{
+//    size_t length = str.size();
+//    if (length <= 4) return 5;
+//    else if (length >= 5 && length <= 7) return 10;
+//    else return 25;
+//}
+//int check_letter(const string& str)
+//{
+//    int flag_only_small = 1;
+//    int flag_only_big = 1;
+//    for (size_t i = 0; i < str.size(); ++i) {
+//        if (islower(str[i])) {
+//            flag_only_big = 0;
+//        }
+//        if (isupper(str[i])) {
+//            flag_only_small = 0;
+//        }
+//        if (flag_only_small == 0 && flag_only_big == 0) return 20;
+//    }
+//    if (flag_only_small == 1 && flag_only_big == 1) return 0;
+//    else return 10;
+//}
+//int check_num(const string& str)
+//{
+//    int count = 0;
+//    for (size_t i = 0; i < str.size(); ++i) {
+//        if (isdigit(str[i])) ++count;
+//    }
+//    if (count > 1) return 20;
+//    else if (count == 1) return 10;
+//    else return 0;
+//}
+//int check_sign(const string& str)
+//{
+//    int count = 0;
+//    for (size_t i = 0; i < str.size(); ++i) {
+//        if (ispunct(str[i])) ++count;
+//    }
+//    if (count > 1) return 25;
+//    else if (count == 1) return 10;
+//    else return 0;
+//}
+//int check_award(const string& str)
+//{
+//    if (check_letter(str) == 20 && check_num(str) != 0 && check_sign(str) != 0) return 5;
+//    else if (check_letter(str) != 0 && check_num(str) != 0 && check_sign(str) != 0) return 3;
+//    else return 2;
+//}
+//void print_ret(int ret)
+//{
+//    if (ret >= 90) cout << "VERY_SECURE" << endl;
+//    else if (ret >= 80) cout << "SECURE" << endl;
+//    else if (ret >= 70) cout << "VERY_STRONG" << endl;
+//    else if (ret >= 60) cout << "STRONG" << endl;
+//    else if (ret >= 50) cout << "AVERAGE" << endl;
+//    else if (ret >= 25) cout << "WEAK" << endl;
+//    else cout << "VERY_WEAK" << endl;
+//}
+//
+//int main()
+//{
+//    string str;
+//    cin >> str;
+//    int ret = 0;
+//    ret += check_length(str);
+//    ret += check_letter(str);
+//    ret += check_num(str);
+//    ret += check_sign(str);
+//    ret += check_award(str);
+//    print_ret(ret);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//class Board {
+//public:
+//    bool checkWon(vector<vector<int> > board) {
+//        for (size_t i = 0; i < board.size(); ++i)
+//        {
+//            if (board[i][0] == board[i][1] && board[i][0] == board[i][2])
+//            {
+//                if (board[i][0] == 1) return true;
+//                else return false;
+//            }
+//        }
+//        for (size_t j = 0; j < board[0].size(); ++j)
+//        {
+//            if (board[0][j] == board[1][j] && board[2][j] == board[2][j])
+//            {
+//                if (board[0][j] == 1) return true;
+//                else return false;
+//            }
+//        }
+//        if (board[0][0] == board[1][1] && board[1][1] == board[2][2])
+//        {
+//            if (board[0][0] == 1) return true;
+//            else return false;
+//        }
+//        if (board[0][2] == board[1][1] && board[1][1] == board[2][0])
+//        {
+//            if (board[0][2] == 1) return true;
+//            else return false;
+//        }
+//        return false;
+//    }
+//};
