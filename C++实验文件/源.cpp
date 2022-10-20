@@ -11502,3 +11502,45 @@ int getMin() 获取堆栈中的最小元素
 //        return false;
 //    }
 //};
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    int num = 0;
+//    cin >> num;
+//    int count = 0;
+//    int max = 0;
+//    for (int i = 0; i < 32; ++i) {
+//        if (max < count) max = count;
+//        if ((num & 1) == 1) {
+//            ++count;
+//        }
+//        else {
+//            count = 0;
+//        }
+//        num = num >> 1;
+//    }
+//    cout << max << endl;
+//    return 0;
+//}
+
+
+
+
+
+//class LCA {
+//public:
+//    int getLCA(int a, int b) {
+//        while (a != b){
+//            if (a > b) a = a / 2;
+//            else b = b / 2;
+//        }
+//        return a;
+//    }
+//};
