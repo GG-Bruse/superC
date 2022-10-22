@@ -11544,3 +11544,57 @@ int getMin() 获取堆栈中的最小元素
 //        return a;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<cmath>
+//#include<cassert>
+//#include<cstdlib>
+//#include<climits>
+//#include<vector>
+//using namespace std;
+//bool check_prime(int num)
+//{
+//    for (int i = 2; i <= sqrt(num); ++i) {
+//        if (num % i == 0) return false;
+//    }
+//    return true;
+//}
+//int main()
+//{
+//    int ou = 0;
+//    cin >> ou;
+//    vector<int>v;
+//
+//    int count = 0;
+//    for (int i = 2; i < ou - 1; ++i) {
+//        if (check_prime(i)) v.push_back(i);
+//    }
+//    vector<vector<int>>vv;
+//    for (size_t i = 0; i < v.size(); ++i) {
+//        for (size_t j = 0; j < v.size(); ++j) {
+//            if (v[i] + v[j] == ou)
+//                vv.push_back({ v[i],v[j] });
+//        }
+//    }
+//    int min = INT_MAX;
+//    int ret_left = 0, ret_right = 0;
+//    for (size_t i = 0; i < vv.size(); ++i) {
+//        if (abs(vv[i][0] - vv[i][1]) < min) {
+//            min = abs(vv[i][0] - vv[i][1]);
+//            ret_left = vv[i][0];
+//            ret_right = vv[i][1];
+//        }
+//    }
+//    cout << ret_left << endl;
+//    cout << ret_right << endl;
+//    return 0;
+//}
+
