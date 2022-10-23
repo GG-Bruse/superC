@@ -11598,3 +11598,105 @@ int getMin() 获取堆栈中的最小元素
 //    return 0;
 //}
 
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	const int ret = 10;
+//	int* p = (int*)&ret;
+//	*p = 20;
+//	cout << "ret = " << ret << " " << "*p = " << *p << endl;//ret = 10 *p = 20
+//	return 0;
+//}
+/*
+见volatile关键字
+*/
+
+
+
+
+
+
+//#include <iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//    string get_str;
+//    getline(cin, get_str);
+//
+//    vector<string>v;
+//    int count = 0;
+//    for (size_t i = 0; i < get_str.size(); ++i) {
+//        if (get_str[i] == ' ') {
+//            ++count;
+//        }
+//        else if (get_str[i] == '"') {
+//            ++i;
+//            string temp;
+//            while (get_str[i] != '"') {
+//                temp.push_back(get_str[i]);
+//                ++i;
+//            }
+//            v.push_back(temp);
+//        }
+//        else {
+//            if (v.size() != count + 1) v.resize(v.size() + 1);
+//            v[count].push_back(get_str[i]);
+//        }
+//    }
+//    cout << count + 1 << endl;
+//    for (size_t i = 0; i < v.size(); ++i) {
+//        cout << v[i] << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <algorithm>
+//#include <vector>
+//#include <climits>
+//#include <cmath>
+//using namespace std;
+//int main()
+//{
+//    int N = 0, M = 0;
+//    cin >> N >> M;
+//    vector<int> v(M + 1, INT_MAX);
+//    v[N] = 0;
+//    for (int i = N; i <= M; i++) {
+//        if (v[i] == INT_MAX) {
+//            continue;
+//        }
+//        for (int j = 2; (j * j) <= i; j++) {
+//            if (i % j == 0) {
+//                if (i + j <= M) {
+//                    v[i + j] = min(v[i] + 1, v[i + j]);
+//                }
+//                if (i + (i / j) <= M) {
+//                    v[i + (i / j)] = min(v[i] + 1, v[i + (i / j)]);
+//                }
+//            }
+//        }
+//    }
+//    if (v[M] == INT_MAX) {
+//        v[M] = -1;
+//    }
+//    cout << v[M] << endl;
+//    return 0;
+//}
+
+
