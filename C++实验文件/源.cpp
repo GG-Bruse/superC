@@ -11742,3 +11742,34 @@ int getMin() 获取堆栈中的最小元素
 //	}
 //	return 0;
 //}
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    long long num = 0;
+//    while (cin >> num) {
+//        long long temp = 1;
+//        size_t count = 0;
+//        for (size_t i = 0; i < 64; ++i) {
+//            if ((num & temp) != 0) {
+//                ++count;
+//            }
+//            temp <<= 1;
+//        }
+//        cout << count << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
