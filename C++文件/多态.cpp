@@ -147,6 +147,29 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //单继承中的虚函数表
 //#include<iostream>
 //using namespace std;
@@ -252,9 +275,56 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 
 
 
-
-
-
+//#include<iostream>
+//using namespace std;
+//class Base1 {
+//public:
+//	virtual void func1() { cout << "Base1::func1" << endl; }
+//	virtual void func2() { cout << "Base1::func2" << endl; }
+//private:
+//	int b1;
+//};
+//class Base2 {
+//public:
+//	virtual void func1() { cout << "Base2::func1" << endl; }
+//	virtual void func2() { cout << "Base2::func2" << endl; }
+//private:int b2;
+//};
+//class Derive : public Base1, public Base2 {
+//public:
+//	virtual void func1() { cout << "Derive::func1" << endl; }
+//	virtual void func3() { cout << "Derive::func3" << endl; }
+//private:
+//	int d1;
+//};
+//typedef void(*VFPTR)();
+//void PrintVFTable(VFPTR table[]) {
+//	for (int i = 0; table[i] != nullptr; ++i) {
+//		cout << i << " " << (table + i) << " " << table[i] << " ";
+//		table[i]();
+//	}
+//	cout << endl;
+//}
+//int main()
+//{
+//	Derive d;
+//	PrintVFTable((VFPTR*)(*(int*)&d));
+//	Base2* ptr = &d;
+//	PrintVFTable((VFPTR*)(*(int*)(ptr)));
+//
+//	printf("%p\n", &Derive::func1);//语法规定，成员函数必须加&才能取到其地址
+//
+//	d.func1();
+//	Base1* ptr1 = &d;
+//	ptr1->func1();
+//	Base2* ptr2 = &d;
+//	ptr2->func1();
+//
+//	return 0;
+//}
+/*
+两个虚表中Derive::func1打印出函数的地址不一样
+*/
 
 
 
