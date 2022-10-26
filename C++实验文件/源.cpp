@@ -11773,3 +11773,43 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+
+
+//#include<iostream>
+//#include<climits>
+//#include<cmath>
+//#include<vector>
+//using namespace std;
+//vector<int> get_div_num(int num) {
+//    vector<int> temp;
+//    for (int i = 2; i <= sqrt(num); ++i) {
+//        if (num % i == 0) {
+//            temp.push_back(i);
+//            if (num / i != i) temp.push_back(num / i);
+//        }
+//    }
+//    return temp;
+//}
+//int jump(int n, int m) {
+//    vector<int>step(m + 1, INT_MAX);
+//    step[n] = 0;
+//    for (int i = n; i <= m; ++i) {
+//        if (step[i] == INT_MAX) continue;
+//        vector<int> div_num = get_div_num(i);
+//        for (int j = 0; j < div_num.size(); ++j) {
+//            if (div_num[j] + i <= m)
+//                step[i + div_num[j]] = step[i + div_num[j]] < step[i] + 1 ? step[i + div_num[j]] : step[i] + 1;
+//        }
+//    }
+//    return step[m] < INT_MAX ? step[m] : -1;
+//}
+//int main()
+//{
+//    int n = 0, m = 0, min_step = INT_MAX;
+//    while (cin >> n >> m) {
+//        min_step = jump(n, m);
+//        cout << min_step << endl;
+//    }
+//    return 0;
+//}
