@@ -11960,3 +11960,56 @@ int getMin() 获取堆栈中的最小元素
 //    cout << count << endl;
 //    return 0;
 //}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int get_rabbit_num(int n) {
+//    if (n == 1 || n == 2) return 1;
+//    return get_rabbit_num(n - 1) + get_rabbit_num(n - 2);
+//}
+//int main()
+//{
+//    int n = 0;
+//    while (cin >> n) {
+//        cout << get_rabbit_num(n) << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//#include <iostream> 
+//#include <vector>
+//#include <string>
+//#include <algorithm>
+//using namespace std;
+//bool match(int i, int j, string& a, string& b) {
+//    if (i == a.length() && j == b.length()) return true;
+//    else if (i > a.length() || j > b.length()) return false;
+//    if (a[i] == b[j]) return match(i + 1, j + 1, a, b);
+//    else if (a[i] == '?') {
+//        if (!(isdigit(b[j]) || isalpha(b[j]))) return false;
+//        return match(i + 1, j + 1, a, b);
+//    }
+//    else if (a[i] == '*') {
+//        while (a[i + 1] == '*') i++;
+//        return match(i, j + 1, a, b) || match(i + 1, j, a, b) || match(i + 1, j + 1, a, b);
+//    }
+//    return false;
+//}
+//int main() {
+//    string a, b;
+//    while (cin >> a >> b) {
+//        for (int i = 0; i < a.length(); i++) a[i] = toupper(a[i]);
+//        for (int i = 0; i < b.length(); i++) b[i] = toupper(b[i]);
+//        if (match(0, 0, a, b)) cout << "true" << endl;
+//        else cout << "false" << endl;
+//    }
+//}
+
+
