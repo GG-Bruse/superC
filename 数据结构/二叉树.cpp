@@ -72,6 +72,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 二叉树:
 n(n>=0)个结点的有限集合，由一个根结点以及两棵互不相交，分别称为左子树和右子树的二叉树组成
@@ -463,3 +477,112 @@ int main()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//搜索二叉树(二叉排序树、二叉查找树 BST)
+/*
+它或者是一棵空树，或者是具有以下性质的二叉树:
+若它的左子树不为空，则左子树上所有节点的值都小于根节点的值
+若它的右子树不为空，则右子树上所有节点的值都大于根节点的值
+它的左右子树也分别为二叉搜索树
+*/
+
+
+//二叉搜索树操作
+/*
+1. 二叉搜索树的查找
+a、从根开始比较，查找，比根大则往右边走查找，比根小则往左边走查找。
+b、最多查找高度次，走到到空，还没找到，这个值不存在
+
+2. 二叉搜索树的插入
+a. 树为空，则直接新增节点，赋值给root指针
+b. 树不空，按二叉搜索树性质查找插入位置，插入新节点
+
+
+*/
+
+#include<iostream>
+using std::cout;
+using std::endl;
+template<class K>
+struct BinarySearchTreeNode
+{
+	BinarySearchTreeNode(const K& key = K()): _left(nullptr), _right(nullptr), _key(key) {}
+	BinarySearchTreeNode<K>* _left;
+	BinarySearchTreeNode<K>* _right;
+	K _key;
+};
+template<class K>
+class BinarySearchTree
+{
+	typedef BinarySearchTreeNode<K> BSTNode;
+public:
+	bool insert(const K& key) {
+		if (_root == nullptr) {
+			_root = new BSTNode(key);
+			return true;
+		}
+		BSTNode* cur = _root,* parent = nullptr;
+		while (cur != nullptr) {
+			if (cur->_key > key) {
+				parent = cur;
+				cur = cur->_left;
+			}
+			else if (cur->_key < key) {
+				parent = cur;
+				cur = cur->_right;
+			}
+			else {//cur->_key == key
+				return false;//不允许键值冗余，插入失败
+			}
+		}
+		cur = new BSTNode(key);
+		if (parent->_key > key) parent->_left = cur;
+		else parent->_right = cur;
+		return true;
+	}
+
+
+
+
+private:
+	BSTNode* _root = nullptr;
+};
+
+int main()
+{
+	BinarySearchTree<int> bst;
+	int arr[] = { 8,3,1,10,6,7,2,4,5,9 };
+	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i) {
+		bst.insert(arr[i]);
+	}
+
+	return 0;
+}

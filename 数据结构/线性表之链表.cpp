@@ -60,6 +60,7 @@ SLNode* SListFind(SLNode* pheader,SLDataType d)
 
 void SListPushFront(SLNode** ppheader, SLDataType d)//头插 
 {
+	assert(ppheader);
 	SLNode* newNode = BuyListNode(d);
 	newNode->next = *ppheader;
 	*ppheader = newNode;
@@ -67,6 +68,7 @@ void SListPushFront(SLNode** ppheader, SLDataType d)//头插
 
 void SListPushBack(SLNode** ppheader, SLDataType d)//尾插 
 {
+	assert(ppheader);
 	SLNode* newNode = BuyListNode(d);
 
 	if (*ppheader == NULL)
@@ -119,6 +121,7 @@ void SListPopBack(SLNode** ppheader)//尾删
 
 void SListInsert(SLNode** ppheader,SLNode* pos,SLDataType d)//在pos的前面插入 
 {
+	assert(ppheader && pos);
 	if(pos == *ppheader)
 	{
 		SListPushFront(ppheader,d);
@@ -135,6 +138,7 @@ void SListInsert(SLNode** ppheader,SLNode* pos,SLDataType d)//在pos的前面插入
 
 void SListErase(SLNode** ppheader,SLNode* pos)//删除pos位置的值 
 {
+	assert(ppheader && pos);
 	if(pos == *ppheader)
 	{
 		SlistPopFront(ppheader);

@@ -250,3 +250,13 @@ long long Factorial(size_t N)
 
 
 
+
+/*
+例四:
+long long Fibonacci(size_t N)
+{
+	return N<2?N:Fibonacci(N-1):Fibonacci(N-2);
+}
+空间是不累计的，时间复杂度为O(N)
+函数栈帧的开辟是有顺序的，前面的的栈帧会销毁,后面的栈帧使用的是相同的空间
+*/
