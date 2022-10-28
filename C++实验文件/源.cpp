@@ -11907,3 +11907,56 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    cin >> n;
+//    if (n <= 2) {
+//        cout << -1 << endl;
+//    }
+//    else {
+//        if (n % 2 == 1) {
+//            cout << 2 << endl;
+//        }
+//        else {
+//            if (n % 4 == 0) cout << 3 << endl;
+//            else cout << 4 << endl;
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<cctype>
+//#include<cstring>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    getline(cin, str);
+//
+//    char target = 0;
+//    cin >> target;
+//    target = toupper(target);
+//
+//    size_t count = 0;
+//    size_t left = 0, right = str.size() - 1;
+//    while (left < right) {
+//        if (target == toupper(str[left])) ++count;
+//        if (target == toupper(str[right])) ++count;
+//        ++left;
+//        --right;
+//    }
+//    cout << count << endl;
+//    return 0;
+//}
