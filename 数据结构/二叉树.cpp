@@ -525,12 +525,15 @@ b、最多查找高度次，走到到空，还没找到，这个值不存在
 a. 树为空，则直接新增节点，赋值给root指针
 b. 树不空，按二叉搜索树性质查找插入位置，插入新节点
 
+3. 二叉搜索树的删除
 
 */
 
 #include<iostream>
+#include<algorithm>
 using std::cout;
 using std::endl;
+using std::swap;
 template<class K>
 struct BinarySearchTreeNode
 {
@@ -569,9 +572,89 @@ public:
 		return true;
 	}
 
+	bool erase(const K& key) {
+		BSTNode* cur = _root, * parent = nullptr;
+		while (cur != nullptr) {
+			if (cur->_key > key) {
+				parent = cur;
+				cur = cur->_left;
+			}
+			else if (cur->_key < key) {
+				parent = cur;
+				cur = cur->_right;
+			}
+			else {//cur->_key == key,开始删除
+				if (cur->_left == nullptr) {
+					if (cur == _root) {
+						_root = cur->_right;
+					}
+					else {
+						if (cur == parent->_left) {
+							parent->_left = cur->_right;
+						}
+						if (cur == parent->_right) {
+							parent->_right = cur->_right;
+						}
+					}
+					delete cur;
+					cur = nullptr;
+				}
+				else if (cur->_right == nullptr) {
+					if (cur == _root) {
+						_root = cur->_left;
+					}
+					else {
+						if (cur == parent->_left) {
+							parent->_right = cur->_right;
+						}
+						if (cur == parent->_right) {
+							parent->_right = cur->_right;
+						}
+					}
+					delete cur;
+					cur = nullptr;
+				}
+				else {//左右都不为nullptr,使用替换法
+					BSTNode* replace = cur->_left;
+					while (replace->_left != nullptr) {
+						replace = replace->_left;
+					}
+					swap(replace->_key, cur->_key);
+					erase(cur->_key);
+				}
+			}
+		}
+		return false;
+	}
 
+	bool find(const K& key) {
+		BSTNode* cur = _root;
+		while (cur != nullptr) {
+			if (cur->_key > key) {
+				cur = cur->_left;
+			}
+			else if (cur->_key < key) {
+				cur = cur->_right;
+			}
+			else {//cur->_key == key
+				return true;
+			}
+		}
+		return false;
+	}
 
-
+	void inorder() {
+		_inorder(_root);
+	}
+private:
+	void _inorder(BSTNode* root) {
+		if (root == nullptr) {
+			return;
+		}
+		_inorder(root->_left);
+		cout << root->_key << " ";
+		_inorder(root->_right);
+	}
 private:
 	BSTNode* _root = nullptr;
 };
@@ -579,10 +662,14 @@ private:
 int main()
 {
 	BinarySearchTree<int> bst;
-	int arr[] = { 8,3,1,10,6,7,2,4,5,9 };
+	int arr[] = { 8,3,1,10,6,7,2,4,5,9,4,3,4 };
 	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i) {
 		bst.insert(arr[i]);
 	}
+	bst.inorder();
+	cout << endl;
+	bst.erase(4);
+	bst.inorder();
 
 	return 0;
 }
