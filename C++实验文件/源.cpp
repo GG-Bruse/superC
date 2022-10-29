@@ -12013,3 +12013,32 @@ int getMin() 获取堆栈中的最小元素
 //}
 
 
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<cctype>
+//using namespace std;
+//vector<string> section(const string&  str) {
+//	vector<string> ret;
+//	string str1, str2;
+//	for (size_t i = 0; i < str.size(); ++i) {
+//		if (isdigit(str[i])) str1.push_back(str[i]);
+//		if (isalpha(str[i])) str2.push_back(str[i]);
+//	}
+//	ret.push_back(str1);
+//	ret.push_back(str2);
+//	return ret;
+//}
+//int main()
+//{
+//	string str;
+//	cin >> str;
+//	vector<string> ret = section(str);
+//	cout << ret[0] << endl;
+//	cout << ret[1] << endl;
+//	return 0;
+//}
