@@ -12042,3 +12042,81 @@ int getMin() 获取堆栈中的最小元素
 //	cout << ret[1] << endl;
 //	return 0;
 //}
+
+
+
+
+
+//#include<stdio.h>
+//#include<ctype.h>
+//#define MAX_SIZE 100
+//void section(const char* str, char* str1, char* str2) {
+//	int length1 = 0, length2 = 0;
+//	for (size_t i = 0; str[i] != '\0'; ++i) {
+//		if (isdigit(str[i])) str1[length1++] = str[i];
+//		if (isalpha(str[i])) str2[length2++] = str[i];
+//	}
+//}
+//int main()
+//{
+//	char str[MAX_SIZE] = {0};
+//	scanf("%s", str);
+//	char str1[100] = { 0 }, str2[100] = { 0 };
+//	section(str, str1, str2);
+//	printf("%s\n", str1);
+//	printf("%s\n", str2);
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    string tree2str(TreeNode* root) {
+//        if (root == nullptr) {
+//            return string();
+//        }
+//        string str;
+//
+//        str += to_string(root->val);
+//
+//        if (root->left != nullptr || root->right != nullptr) {
+//            str += '(';
+//            str += tree2str(root->left);
+//            str += ')';
+//        }
+//
+//        if (root->right != nullptr) {
+//            str += '(';
+//            str += tree2str(root->right);
+//            str += ')';
+//        }
+//        return str;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
