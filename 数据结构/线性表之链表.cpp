@@ -22,8 +22,6 @@
 
 
 
-
-
 //无头单向非循环链表的C语言实现
 /*
 #include<stdio.h>
@@ -190,143 +188,6 @@ int main()
 */
 
 
-
-
-
-//带头单向不循环链表C++实现(企业版)
-/*
-与用户协议:需要自定义数据类型，预留四个字节交予链表链接使用(不需开辟结点) 
-*/
-/*
-#include<iostream>
-using namespace std;
-class LinkNode
-{
-	friend class LinkList;
-private:
-	LinkNode* next;
-};
-class LinkList
-{
-public:
-	LinkList();
-	void insert(int pos, void* data);
-	void push_back(void* data);
-	void for_each(void(*MyPrint)(void*));
-	void remove(int pos);
-	~LinkList();
-private:
-	LinkNode pHeader;
-	int m_size;
-};
-LinkList::LinkList()
-{
-	this->pHeader.next = nullptr;
-	this->m_size = 0;
-}
-
-void LinkList::insert(int pos, void* data)
-{
-	if (data == nullptr)return;
-	if (pos<0 || pos>this->m_size)
-	{
-		pos = this->m_size;//无效位置变为尾插
-	}
-	LinkNode* NewNode = (LinkNode*)data;
-	LinkNode* pCurrent = &(this->pHeader);
-	for (int i = 0; i < pos; ++i)
-	{
-		pCurrent = pCurrent->next;//找到前驱结点
-	}
-	//变更指针指向
-	NewNode->next = pCurrent->next;
-	pCurrent->next = NewNode;
-	++this->m_size;
-}
-
-void LinkList::push_back(void* data)
-{
-	this->insert(this->m_size, data);
-}
-
-void LinkList::for_each(void(*MyPrint)(void*))
-{
-	LinkNode* node = this->pHeader.next;
-	for (int i = 0; i < this->m_size; ++i)
-	{
-		MyPrint(node);
-		node = node->next;
-	}
-	cout<<endl;
-}
-
-void LinkList::remove(int pos)
-{
-	if (pos<0 || pos>this->m_size - 1)return;
-	LinkNode* pCurrent = &(this->pHeader);
-	for (int i = 0; i < pos; ++i)
-	{
-		pCurrent = pCurrent->next;//找到前驱结点
-	}
-	LinkNode* pDel = pCurrent->next;
-	pCurrent->next = pDel->next;
-	--this->m_size;
-}
-
-LinkList::~LinkList()
-{
-	this->pHeader.next = nullptr;
-	this->m_size = 0;
-}
-
-
-struct data
-{
-	void* Link;
-	int m_data;
-};
-void MyPrint(void* d)
-{
-	cout<<(((data*)d)->m_data)<<" ";
-}
-int main()
-{
-	LinkList lt;
-	
-	data p0;
-	p0.Link = nullptr;
-	p0.m_data = 0;
-	data p1;
-	p1.Link = nullptr;
-	p1.m_data = 1;
-	data p2;
-	p2.Link = nullptr;
-	p2.m_data = 2;
-	data p3;
-	p3.Link = nullptr;
-	p3.m_data = 3;
-	data p4;
-	p4.Link = nullptr;
-	p4.m_data = 4;
-	data p5;
-	p5.Link = nullptr;
-	p5.m_data = 5;
-	
-	lt.push_back(&p1);
-	lt.push_back(&p2);
-	lt.push_back(&p3);
-	lt.push_back(&p4);
-	lt.push_back(&p5);
-	lt.insert(0,&p0);
-	lt.for_each(MyPrint);
-	
-	lt.remove(3);
-	lt.for_each(MyPrint);
-	return 0;
-}
-*/
-
-
 /*
 单链表的缺陷:
 1. 与数组相比，在链表中存储元素需要更多的内存。 因为在链表中，每个节点都包含一个指针，并且它本身需要额外的内存。
@@ -380,10 +241,6 @@ void for_each(ListNode* pheader)
 	printf("\n");
 }
 
-
-
-
-
 ListNode* ListInit()
 {
 	ListNode* pheader = BuyListNode(0);
@@ -403,10 +260,6 @@ void ListDestory(ListNode* pheader)
 	free(pheader);
 	pheader = NULL;
 }
-
-
-
-
 
 ListNode* ListFind(ListNode* pheader,LDataType d)
 {
@@ -437,10 +290,6 @@ void ListErase(ListNode* pos)//删除pos位置的值
 	free(pos);
 	pos = NULL;
 }
-
-
-
-
 
 void ListPushFront(ListNode* pheader,LDataType d)
 {
@@ -491,9 +340,6 @@ void ListPopBack(ListNode* pheader)
 	assert(pheader);
 	ListErase(pheader->prev); 
 }
-
-
-
 
 
 int main()
