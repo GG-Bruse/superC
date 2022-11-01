@@ -12120,3 +12120,83 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+//struct ListNode* detectCycle(struct ListNode* head) {
+//    struct ListNode* newhead = NULL;
+//    struct ListNode* fast = head, * slow = head;
+//    while (fast && fast->next) {
+//        slow = slow->next;
+//        fast = fast->next->next;
+//        if (slow == fast) {
+//            newhead = fast->next;
+//            fast->next = NULL;
+//        }
+//    }
+//    if (newhead == NULL) return NULL;
+//
+//    int length1 = 0, length2 = 0;
+//    struct ListNode* cur = head;
+//    while (cur->next != NULL) {
+//        ++length1;
+//        cur = cur->next;
+//    }
+//    cur = newhead;
+//    while (cur->next != NULL) {
+//        ++length2;
+//        cur = cur->next;
+//    }
+//    if (length1 > length2) {
+//        for (int i = 0; i < length1 - length2; ++i) {
+//            head = head->next;
+//        }
+//    }
+//    if (length1 < length2) {
+//        for (int i = 0; i < length2 - length1; ++i) {
+//            newhead = newhead->next;
+//        }
+//    }
+//    while (head != newhead) {
+//        head = head->next;
+//        newhead = newhead->next;
+//    }
+//    if (head == newhead) return head;
+//    return NULL;
+//}
+
+
+
+
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+//struct ListNode* detectCycle(struct ListNode* head) {
+//    struct ListNode* fast = head, * slow = head;
+//    while (fast && fast->next) {
+//        slow = slow->next;
+//        fast = fast->next->next;
+//        if (slow == fast) {
+//            struct ListNode* meet = fast;
+//            while (meet != head) {
+//                meet = meet->next;
+//                head = head->next;
+//            }
+//            return meet;
+//        }
+//    }
+//    return NULL;
+//}
