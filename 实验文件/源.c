@@ -6043,7 +6043,58 @@ void rotate(int* nums, int numsSize, int k){
 
 
 
+/**
+ * Definition for a Node.
+ * struct Node {
+ *     int val;
+ *     struct Node *next;
+ *     struct Node *random;
+ * };
+ */
 
+//struct Node* copyRandomList(struct Node* head) {
+//    struct Node* cur = head;
+//    //1.将原链表结点全部拷贝，并将拷贝结点插入原链表其对应的结点的后一个位置
+//    while (cur != NULL) {
+//        struct Node* copy = (struct Node*)malloc(sizeof(struct Node));
+//        copy->val = cur->val;
+//        copy->next = cur->next;
+//        cur->next = copy;
+//        cur = copy->next;
+//    }
+//    /*
+//    2.
+//    (1)copy结点random指针 指向 其对应结点的random指针指向的结点的后一个
+//    (2)若对应结点的random指针指向NULL,copy结点的random指针也指向NULL
+//    */
+//    cur = head;
+//    while (cur != NULL) {
+//        struct Node* copy = cur->next;
+//        if (cur->random == NULL) copy->random = NULL;
+//        else copy->random = cur->random->next;
+//        cur = copy->next;
+//    }
+//    //3.将插入原链表的所有copy结点，全部解除下来并逐个尾插为一个新的链表，将原链表还原
+//    cur = head;
+//    struct Node* newhead = NULL, * newtail = NULL;
+//    while (cur != NULL) {
+//        struct Node* copy = cur->next;
+//        struct Node* next = copy->next;
+//        if (newtail == NULL)
+//        {
+//            newhead = newtail = copy;
+//        }
+//        else
+//        {
+//            newtail->next = copy;
+//            newtail = newtail->next;
+//        }
+//        cur->next = next;
+//        cur = next;
+//    }
+//    //4.返回新链表
+//    return newhead;
+//}
 
 
 
