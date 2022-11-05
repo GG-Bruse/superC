@@ -6103,95 +6103,265 @@ void rotate(int* nums, int numsSize, int k){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//typedef int SKDataType;
+//typedef struct stack
+//{
+//    SKDataType* data;
+//    int top;//指向最后一个数据的下一个位置
+//    int capacity;
+//}Stack;
+//void StackInit(Stack* ps)
+//{
+//    assert(ps);
+//    ps->data = NULL;
+//    ps->capacity = ps->top = 0;
+//}
+//void StackDestory(Stack* ps)
+//{
+//    assert(ps);
+//    free(ps->data);
+//    ps->data = NULL;
+//    ps->capacity = ps->top = 0;
+//}
+//void StackPush(Stack* ps, SKDataType d)
+//{
+//    assert(ps);
+//    if (ps->top == ps->capacity)
+//    {
+//        int newCapacity = ps->capacity == 0 ? 4 : ps->capacity * 2;
+//        SKDataType* newSpace = (SKDataType*)realloc(ps->data, newCapacity * sizeof(SKDataType));
+//        if (newSpace == NULL)
+//        {
+//            printf("realloc fail\n");
+//            exit(-1);
+//        }
+//        ps->data = newSpace;
+//        ps->capacity = newCapacity;
+//    }
+//    ps->data[ps->top] = d;
+//    ++ps->top;
+//}
+//void StackPop(Stack* ps)
+//{
+//    assert(ps);
+//    assert(ps->top > 0);//栈不可为空 
+//    --ps->top;
+//}
+//SKDataType StackTop(Stack* ps)
+//{
+//    assert(ps);
+//    assert(ps->top > 0);
+//    return ps->data[ps->top - 1];
+//}
+//int StackSize(Stack* ps)
+//{
+//    assert(ps);
+//    return ps->top;
+//}
+//bool StackIsEmpty(Stack* ps)
+//{
+//    assert(ps);
+//    return ps->top == 0;
+//}
+//
+//
+//typedef struct {
+//    Stack sk1;
+//    Stack sk2;
+//} MyQueue;
+//
+//
+//MyQueue* myQueueCreate() {
+//    MyQueue* obj = (MyQueue*)malloc(sizeof(MyQueue));
+//    if (obj == NULL) perror("malloc fail:");
+//    StackInit(&obj->sk1);
+//    StackInit(&obj->sk2);
+//    return obj;
+//}
+//
+//void myQueuePush(MyQueue* obj, int x) {
+//    assert(obj);
+//    if (!StackIsEmpty(&obj->sk1)) {
+//        StackPush(&obj->sk1, x);
+//    }
+//    else {
+//        StackPush(&obj->sk2, x);
+//    }
+//}
+//
+//int myQueuePop(MyQueue* obj) {
+//    Stack* emptyStack = &obj->sk1;
+//    Stack* nonEmptyStack = &obj->sk2;
+//    if (!StackIsEmpty(&obj->sk1)) {
+//        emptyStack = &obj->sk2;
+//        nonEmptyStack = &obj->sk1;
+//    }
+//
+//    while (StackSize(nonEmptyStack) > 1) {
+//        StackPush(emptyStack, StackTop(nonEmptyStack));
+//        StackPop(nonEmptyStack);
+//    }
+//    int data = StackTop(nonEmptyStack);
+//    StackPop(nonEmptyStack);
+//
+//    while (!StackIsEmpty(emptyStack)) {
+//        StackPush(nonEmptyStack, StackTop(emptyStack));
+//        StackPop(emptyStack);
+//    }
+//    return data;
+//}
+//
+//int myQueuePeek(MyQueue* obj) {
+//    Stack* emptyStack = &obj->sk1;
+//    Stack* nonEmptyStack = &obj->sk2;
+//    if (!StackIsEmpty(&obj->sk1)) {
+//        emptyStack = &obj->sk2;
+//        nonEmptyStack = &obj->sk1;
+//    }
+//
+//    while (StackSize(nonEmptyStack) > 1) {
+//        StackPush(emptyStack, StackTop(nonEmptyStack));
+//        StackPop(nonEmptyStack);
+//    }
+//    int data = StackTop(nonEmptyStack);
+//
+//    while (!StackIsEmpty(emptyStack)) {
+//        StackPush(nonEmptyStack, StackTop(emptyStack));
+//        StackPop(emptyStack);
+//    }
+//    return data;
+//}
+//
+//bool myQueueEmpty(MyQueue* obj) {
+//    return StackIsEmpty(&obj->sk1) && StackIsEmpty(&obj->sk2);
+//}
+//
+//void myQueueFree(MyQueue* obj) {
+//    StackDestory(&obj->sk1);
+//    StackDestory(&obj->sk2);
+//    free(obj);
+//}
+
+
+
+
+
+
+
+
+//typedef int SKDataType;
+//typedef struct stack
+//{
+//    SKDataType* data;
+//    int top;//指向最后一个数据的下一个位置
+//    int capacity;
+//}Stack;
+//void StackInit(Stack* ps)
+//{
+//    assert(ps);
+//    ps->data = NULL;
+//    ps->capacity = ps->top = 0;
+//}
+//void StackDestory(Stack* ps)
+//{
+//    assert(ps);
+//    free(ps->data);
+//    ps->data = NULL;
+//    ps->capacity = ps->top = 0;
+//}
+//void StackPush(Stack* ps, SKDataType d)
+//{
+//    assert(ps);
+//    if (ps->top == ps->capacity)
+//    {
+//        int newCapacity = ps->capacity == 0 ? 4 : ps->capacity * 2;
+//        SKDataType* newSpace = (SKDataType*)realloc(ps->data, newCapacity * sizeof(SKDataType));
+//        if (newSpace == NULL)
+//        {
+//            printf("realloc fail\n");
+//            exit(-1);
+//        }
+//        ps->data = newSpace;
+//        ps->capacity = newCapacity;
+//    }
+//    ps->data[ps->top] = d;
+//    ++ps->top;
+//}
+//void StackPop(Stack* ps)
+//{
+//    assert(ps);
+//    assert(ps->top > 0);//栈不可为空 
+//    --ps->top;
+//}
+//SKDataType StackTop(Stack* ps)
+//{
+//    assert(ps);
+//    assert(ps->top > 0);
+//    return ps->data[ps->top - 1];
+//}
+//int StackSize(Stack* ps)
+//{
+//    assert(ps);
+//    return ps->top;
+//}
+//bool StackIsEmpty(Stack* ps)
+//{
+//    assert(ps);
+//    return ps->top == 0;
+//}
+//
+//
+//
+//typedef struct {
+//    Stack pushSk;
+//    Stack popSk;
+//} MyQueue;
+//
+//
+//MyQueue* myQueueCreate() {
+//    MyQueue* obj = (MyQueue*)malloc(sizeof(MyQueue));
+//    if (obj == NULL) perror("malloc fail:");
+//    StackInit(&obj->pushSk);
+//    StackInit(&obj->popSk);
+//    return obj;
+//}
+//
+//void myQueuePush(MyQueue* obj, int x) {
+//    assert(obj);
+//    StackPush(&obj->pushSk, x);
+//}
+//
+//int myQueuePop(MyQueue* obj) {
+//    if (StackIsEmpty(&obj->popSk)) {
+//        while (!StackIsEmpty(&obj->pushSk)) {
+//            StackPush(&obj->popSk, StackTop(&obj->pushSk));
+//            StackPop(&obj->pushSk);
+//        }
+//    }
+//    int data = StackTop(&obj->popSk);
+//    StackPop(&obj->popSk);
+//    return data;
+//}
+//
+//int myQueuePeek(MyQueue* obj) {
+//    if (StackIsEmpty(&obj->popSk)) {
+//        while (!StackIsEmpty(&obj->pushSk)) {
+//            StackPush(&obj->popSk, StackTop(&obj->pushSk));
+//            StackPop(&obj->pushSk);
+//        }
+//    }
+//    return StackTop(&obj->popSk);
+//}
+//
+//bool myQueueEmpty(MyQueue* obj) {
+//    return StackIsEmpty(&obj->pushSk) && StackIsEmpty(&obj->popSk);
+//}
+//
+//void myQueueFree(MyQueue* obj) {
+//    StackDestory(&obj->pushSk);
+//    StackDestory(&obj->popSk);
+//    free(obj);
+//}
 
 
 
