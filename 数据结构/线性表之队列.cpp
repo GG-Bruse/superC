@@ -144,3 +144,115 @@
 
 
 
+
+//循环队列
+/*
+可以使用数组实现，也可使用循环链表实现
+
+循环队列 满和空 两种情况的区别:
+1.
+head == tail 队列空
+head == tail + 1(tail->next == head) 队列满，空余一个数据位不可进行插入
+2.
+结构体中增加size数据成员用以记录队列中的数据个数
+*/
+
+//利用数组实现循环队列
+//#include<stdio.h>
+//#include<stdbool.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//typedef int QDataType;
+//typedef struct {
+//    QDataType* data;
+//    int size;
+//    int head;
+//    int tail;
+//}CircularQueue;
+//
+//CircularQueue* CircularQueueCreate(int k) {
+//    CircularQueue* obj = (CircularQueue*)malloc(sizeof(CircularQueue));
+//    if (obj == NULL) {
+//        perror("malloc fail:");
+//        return NULL;
+//    }
+//    obj->data = (QDataType*)malloc(sizeof(QDataType) * (k + 1));
+//    if (obj->data == NULL) perror("malloc fail:");
+//    obj->size = k;
+//    obj->head = obj->tail = 0;
+//    return obj;
+//}
+//
+//bool CircularQueueIsEmpty(CircularQueue* obj) {
+//    return obj->head == obj->tail;
+//}
+//
+//bool CircularQueueIsFull(CircularQueue* obj) {
+//    return obj->head == (obj->tail + 1) % (obj->size + 1);
+//}
+//
+//bool CircularQueuePush(CircularQueue* obj, int value) {
+//    assert(obj);
+//    if (CircularQueueIsFull(obj)) {
+//        return false;
+//    }
+//    else {
+//        obj->data[obj->tail] = value;
+//        obj->tail = (obj->tail + 1) % (obj->size + 1);
+//        return true;
+//    }
+//}
+//
+//bool CircularQueuePop(CircularQueue* obj) {
+//    if (CircularQueueIsEmpty(obj)) {
+//        return false;
+//    }
+//    else {
+//        obj->head = (obj->head + 1) % (obj->size + 1);
+//        return true;
+//    }
+//}
+//
+//QDataType CircularQueueFront(CircularQueue* obj) {
+//    if (CircularQueueIsEmpty(obj)) {
+//        return -1;
+//    }
+//    else {
+//        return obj->data[obj->head];
+//    }
+//}
+//
+//QDataType myCircularQueueRear(CircularQueue* obj) {
+//    if (CircularQueueIsEmpty(obj)) {
+//        return -1;
+//    }
+//    else {
+//        int pos = obj->tail - 1;
+//        if (obj->tail == 0) pos = obj->size;
+//        return obj->data[pos];
+//    }
+//}
+//
+//void CircularQueueDestory(CircularQueue* obj) {
+//    free(obj->data);
+//    free(obj);
+//    obj = NULL;
+//}
+//int main()
+//{
+//    CircularQueue* q = CircularQueueCreate(5);
+//    CircularQueuePush(q, 1);
+//    CircularQueuePush(q, 2);
+//    CircularQueuePush(q, 3);
+//    CircularQueuePush(q, 4);
+//    CircularQueuePush(q, 5);
+//    printf("队列中元素个数为%d\n", q->size);
+//
+//    while (!CircularQueueIsEmpty(q))
+//    {
+//        printf("%d ", CircularQueueFront(q));
+//        CircularQueuePop(q);
+//    }
+//    CircularQueueDestory(q);
+//    return 0;
+//}
