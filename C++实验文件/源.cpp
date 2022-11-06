@@ -12200,3 +12200,98 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return NULL;
 //}
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int get_ret(int num) {
+//    int drunk_num = 0;
+//    while (1) {
+//        while (num >= 3) {
+//            num -= 3;
+//            ++drunk_num;
+//            ++num;
+//        }
+//        if (num == 2) return drunk_num + 1;
+//        if (num < 3) return drunk_num;
+//    }
+//}
+//int main()
+//{
+//    int num = 0;
+//    while (cin >> num) {
+//        if (num == 0) break;
+//        cout << get_ret(num) << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//    string str1, str2;
+//    cin >> str1 >> str2;
+//    if (str1.size() > str2.size()) {
+//        string tmp = str1;
+//        str1 = str2;
+//        str2 = tmp;
+//    }
+//    size_t begin1 = 0, begin2 = 0;
+//    string temp = "";
+//    vector<string> v;
+//    while (begin1 < str1.size()) {
+//        while (str1[begin1] != str2[begin2] && begin2 < str2.size()) {
+//            ++begin2;
+//        }
+//        if (begin2 == str2.size()) {
+//            ++begin1;
+//            begin2 = 0;
+//        }
+//        if (str1[begin1] == str2[begin2])
+//        {
+//            int flag1 = begin1,flag2 = begin2;
+//            while (str1[begin1] == str2[begin2]) {
+//                temp += str1[begin1];
+//                ++begin1;
+//                ++begin2;
+//            }
+//            if (temp.size() >= 2) {
+//                v.push_back(temp);
+//            }
+//            temp = "";
+//            begin1 = flag1;
+//            begin2 = flag2 + 1;
+//        }
+//    }
+//    if (v.size() != 0) {
+//        int max = v[0].size();
+//        int max_pos = 0;
+//        for (size_t i = 1; i < v.size(); ++i) {
+//            if (v[i].size() > max) {
+//                max = v[i].size();
+//                max_pos = i;
+//            }
+//        }
+//        cout << v[max_pos] << endl;
+//    }
+//
+//    return 0;
+//}
