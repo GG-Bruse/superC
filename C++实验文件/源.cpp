@@ -12295,3 +12295,60 @@ int getMin() 获取堆栈中的最小元素
 //
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//    string str1, str2;
+//    cin >> str1 >> str2;
+//    size_t begin1 = 0, begin2 = 0;
+//    vector<string> v;
+//    while (begin1 < str1.size()) {
+//        while (str2[begin2] != str1[begin1] && begin1 < str1.size() && begin2 < str2.size()) {
+//            ++begin2;
+//            if (begin2 == str2.size()) {
+//                ++begin1;
+//                begin2 = 0;
+//            }
+//        }
+//
+//        if (str1[begin1] == str2[begin2]) {
+//            int flag1 = begin1, flag2 = begin2;
+//            string temp = "";
+//            while (str1[begin1] == str2[begin2] && begin1 < str1.size()) {
+//                temp += str1[begin1];
+//                ++begin1;
+//                ++begin2;
+//            }
+//            v.push_back(temp);
+//            temp = "";
+//            begin1 = flag1;
+//            if ((flag2 + 1) >= str2.size()) {
+//                begin2 = 0;
+//                begin1++;
+//            }
+//            else {
+//                begin2 = flag2 + 1;
+//            }
+//        }
+//    }
+//    size_t max = 0;
+//    for (size_t i = 0; i < v.size(); ++i) {
+//        if (v[i].size() > max) {
+//            max = v[i].size();
+//        }
+//    }
+//    cout << max << endl;
+//    return 0;
+//}
