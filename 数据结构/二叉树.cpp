@@ -96,14 +96,14 @@ n(n>=0)¸ö½áµãµÄÓĞÏŞ¼¯ºÏ£¬ÓÉÒ»¸ö¸ù½áµãÒÔ¼°Á½¿Ã»¥²»Ïà½»£¬·Ö±ğ³ÆÎª×ó×ÓÊ÷ºÍÓÒ×ÓÊ÷µÄ¶
 5.¶ÔÓÚÈÎºÎÒ»¿Ã¶ş²æÊ÷£¬Èô¶ÈÎª2µÄ½áµãÊ÷ÓĞm¸ö£¬ÔòÒ¶×ÓÊın±ØÎªm+1(¼´n = m+1)
 6.¾ßÓĞN¸ö½áµãµÄÂú¶ş²æÊ÷µÄÉî¶ÈÎª ÒÔ2Îªµ×(N+1)µÄ¶ÔÊı
 7.¶ÔÓÚ¾ßÓĞn¸ö½áµãµÄÍêÈ«¶ş²æÊ÷£¬Èç¹û°´ÕÕ´ÓÉÏÖÁÏÂ´Ó×óÖÁÓÒµÄÊı×éË³Ğò¶ÔËùÓĞ½Úµã´Ó0¿ªÊ¼±àºÅ£¬Ôò¶ÔÓÚĞòºÅÎªiµÄ½áµãÓĞ:
-	(1)Èôi > 0£¬iÎ»ÖÃ½ÚµãµÄË«Ç×ĞòºÅ: (i-1)/2; i = 0£¬iÎª¸ù½Úµã±àºÅ£¬ÎŞË«Ç×½Úµã
-	(2)Èô2i + 1 < n£¬×óº¢×ÓĞòºÅ: 2i + 1£¬2i + 1 >= n·ñÔòÎŞ×óº¢×Ó
-	(3)Èô2i + 2 < n£¬ÓÒº¢×ÓĞòºÅ: 2i + 2£¬2i + 2 >= n·ñÔòÎŞÓÒº¢×Ó
+	(1)Èôi > 0£¬iÎ»ÖÃ½áµãµÄË«Ç×ĞòºÅ: (i-1)/2		Èôi = 0£¬iÎª¸ù½Úµã±àºÅ£¬ÎŞË«Ç×½Úµã
+	(2)Èô2i + 1 < n£¬iÎ»ÖÃ½áµã×óº¢×ÓĞòºÅ: 2i + 1	Èô2i + 1 >= nÔòÎŞ×óº¢×Ó
+	(3)Èô2i + 2 < n£¬iÎ»ÖÃ½áµãÓÒº¢×ÓĞòºÅ: 2i + 2	Èô2i + 2 >= nÔòÎŞÓÒº¢×Ó
 
 
 ÌØÊâ¶ş²æÊ÷:
 1.Âú¶ş²æÊ÷:
-Ò»¿ÃÉî¶ÈÎªkÇÒÓĞ2^k - 1¸ö½áµãµÄ¶ş²æÊ÷(¼´Ã¿²ãµÄ½áµãÊı¶¼´ïµ½×î´óÖµ)
+Ò»¿ÃÉî¶ÈÎªhÇÒÓĞ2^h - 1¸ö½áµãµÄ¶ş²æÊ÷(¼´Ã¿²ãµÄ½áµãÊı¶¼´ïµ½×î´óÖµ)
 2.ÍêÈ«¶ş²æÊ÷:
 ³ı×îºóÒ»²ãÍâ£¬Ã¿²ãÉÏµÄ½áµãÊı¶¼´ïµ½×î´óÖµ£¬ÔÚ×îºóÒ»²ãÉÏÖ»È±ÉÙÓÒ±ßµÄÈô¸É½áµã
 (¶ÔÓÚÉî¶ÈÎªkµÄÇÒÓĞn¸ö½áµãµÄ¶ş²æÊ÷£¬µ±ÇÒ½öµ±ÆäÃ¿Ò»¸ö½áµãÓëÉî¶ÈÎªkµÄÂú¶ş²æÊ÷ÖĞ±àºÅ´Ó1µ½nµÄ½áµãÒ»Ò»¶ÔÓ¦Ê±£¬¸Ã¶ş²æÊ÷±»³ÆÎªÍêÈ«¶ş²æÊ÷)
@@ -114,7 +114,7 @@ n(n>=0)¸ö½áµãµÄÓĞÏŞ¼¯ºÏ£¬ÓÉÒ»¸ö¸ù½áµãÒÔ¼°Á½¿Ã»¥²»Ïà½»£¬·Ö±ğ³ÆÎª×ó×ÓÊ÷ºÍÓÒ×ÓÊ÷µÄ¶
 /*
 ¶ş²æÊ÷µÄ´æ´¢·½Ê½:
 1.Ë³Ğò´æ´¢:
-ÀûÓÃÊı×é´æ´¢£¬Ò»°ãÊı×éÖ»ÊÊºÏ±íÊ¾ÍêÈ«¶ş²æÊ÷(²»ÊÇÍêÈ«¶ş²æÊ÷»áÓĞ¿Õ¼äÉÏµÄÀË·Ñ)
+ÀûÓÃÊı×é´æ´¢£¬Ò»°ãÊı×éÖ»ÊÊºÏ±íÊ¾ÍêÈ«¶ş²æÊ÷(²»ÊÇÍêÈ«¶ş²æÊ÷»áÓĞ¿Õ¼äÉÏµÄÀË·Ñ)£¬ÏÖÊµÖĞÊ¹ÓÃÖĞÖ»ÓĞ¶Ñ²Å»áÊ¹ÓÃÊı×éÀ´´æ´¢
 ¶ş²æÊ÷Ë³Ğò´æ´¢ÔÚÎïÀíÉÏÊÇÒ»¸öÊı×é£¬ÔÚÂß¼­ÉÏÊÇÒ»¸ö¶ş²æÊ÷
 2.Á´Ê½´æ´¢:
 ¶ş²æÊ÷µÄÁ´Ê½´æ´¢½á¹¹ÊÇÖ¸ÓÃÁ´±íÀ´±íÊ¾Ò»¿Ã¶ş²æÊ÷£¬¼´ÓÃÁ´À´Ö¸Ê¾ÔªËØÖ®¼äµÄÂß¼­¹ØÏµ¡£
@@ -132,6 +132,235 @@ n(n>=0)¸ö½áµãµÄÓĞÏŞ¼¯ºÏ£¬ÓÉÒ»¸ö¸ù½áµãÒÔ¼°Á½¿Ã»¥²»Ïà½»£¬·Ö±ğ³ÆÎª×ó×ÓÊ÷ºÍÓÒ×ÓÊ÷µÄ¶
 Éè¶ş²æÊ÷µÄ¸ù½áµãËùÔÚ²ãÊıÎª1£¬²ãĞò±éÀú¾ÍÊÇ´ÓËùÔÚ¶ş²æÊ÷µÄ¸ù½áµã³ö·¢£¬
 Ê×ÏÈ·ÃÎÊµÚÒ»²ãµÄÊ÷¸ù½áµã£¬È»ºó´Ó×óµ½ÓÒ·ÃÎÊµÚ¶ş²ãÉÏµÄ½áµã£¬ÒÔ´ËÀàÍÆ£¬´ÓÉÏµ½ÏÂ£¬´Ó×óµ½ÓÒ£¬Öğ²ã·ÃÎÊÊ÷µÄ½áµã¡£
 */
+
+
+
+
+
+
+
+
+
+//¶Ñ
+/*
+¶ÑµÄÂß¼­½á¹¹ÊÇÒ»¿ÃÍêÈ«¶ş²æÊ÷
+1.½á¹¹ĞÔ:
+		ÓÃÊı×é±íÊ¾µÄ¶ş²æÊ÷(²ãĞò)
+2.ÓĞĞòĞÔ:
+		ÈÎÒ»½áµãµÄ¹Ø¼ü×ÖÊÇÆä×ÓÊ÷ËùÓĞ½áµãµÄ×î´óÖµ\×îĞ¡Öµ
+		×î´ó¶Ñ(´ó¶¥¶Ñ¡¢´ó¸ù¶Ñ):×î´óÖµ	Ë«Ç×´óÓÚµÈÓÚº¢×Ó
+		×îĞ¡¶Ñ(Ğ¡¶¥¶Ñ¡¢Ğ¡¸ù¶Ñ):×îĞ¡Öµ	Ë«Ç×Ğ¡ÓÚµÈÓÚº¢×Ó
+*/
+
+//Ğ¡¶Ñ
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//#include<stdbool.h>
+//typedef int HPDataType;
+//typedef struct Heap {
+//	HPDataType* _data;
+//	int _capacity;
+//	int _size;
+//}Heap;
+//
+//void HeapInit(Heap* hp) 
+//{
+//	assert(hp);
+//	hp->_data = NULL;
+//	hp->_capacity = hp->_size = 0;
+//}
+//void HeapDestory(Heap* hp)
+//{
+//	assert(hp);
+//	free(hp->_data);
+//	hp->_capacity = hp->_size = 0;
+//}
+//
+//void Swap(HPDataType* x, HPDataType* y)
+//{
+//	HPDataType temp = *x;
+//	*x = *y;
+//	*y = temp;
+//}
+//
+//void AdjustUp(HPDataType* array,int child)
+//{
+//	int parent = (child - 1) / 2;
+//	while (array[child] < array[parent] && child)
+//	//while (array[child] > array[parent] && child)
+//	{
+//		Swap(&array[child], &array[parent]);
+//		child = parent;
+//		parent = (child - 1) / 2;
+//	}
+//}
+//void HeapPush(Heap* hp,HPDataType x)
+//{
+//	assert(hp);
+//	if (hp->_size == hp->_capacity) {
+//		int newCapacity = hp->_capacity == 0 ? 4 : hp->_capacity * 2;
+//		HPDataType* temp = (HPDataType*)realloc(hp->_data, sizeof(HPDataType) * newCapacity);
+//		if (temp == NULL) {
+//			perror("realloc fail:");
+//			exit(-1);
+//		}
+//		hp->_data = temp;
+//	}
+//	hp->_data[hp->_size] = x;
+//	++hp->_size;
+//	AdjustUp(hp->_data, hp->_size - 1);
+//}
+//
+//void AdjustDown(HPDataType* array, int size, int parent)
+//{
+//	int child = parent * 2 + 1;
+//	while (array[child] < array[parent] && child < size)
+//	//while (array[child] > array[parent] && child < size)
+//	{
+//		if (child + 1 < size && array[child + 1] < array[child]) ++child;
+//		//if (child + 1 < size && array[child + 1] > array[child]) ++child;
+//		Swap(&array[child], &array[parent]);
+//		parent = child;
+//		child = parent * 2 + 1;
+//	}
+//}
+//void HeapPop(Heap* hp)//É¾³ı¶Ñ¶¥Êı¾İ
+//{
+//	assert(hp);
+//	Swap(&(hp->_data[0]), &(hp->_data[hp->_size - 1]));
+//	--hp->_size;
+//	AdjustDown(hp->_data, hp->_size, 0);
+//}
+//
+//HPDataType HeapTop(Heap* hp) 
+//{
+//	assert(hp);
+//	assert(hp->_size > 0);
+//	return (hp->_data[0]);
+//}
+//bool HeapIsEmpty(Heap* hp)
+//{
+//	assert(hp);
+//	return hp->_size == 0;
+//}
+//int HeapSize(Heap* hp)
+//{
+//	assert(hp);
+//	return hp->_size;
+//}
+//int main()
+//{
+//	int array[] = { 27,15,19,18,28,34,65,49,25,37 };
+//	Heap hp;
+//	HeapInit(&hp);
+//	for (int i = 0; i < sizeof(array) / sizeof(array[0]); ++i) {
+//		HeapPush(&hp, array[i]);
+//	}
+//
+//	for (int i = 0; i < hp._size; ++i) {
+//		printf("%d ", hp._data[i]);
+//	}
+//	printf("\n");
+//
+//	HeapPop(&hp);
+//
+//	for (int i = 0; i < hp._size; ++i) {
+//		printf("%d ", hp._data[i]);
+//	}
+//	printf("\n");
+//
+//	while (!HeapIsEmpty(&hp)) {
+//		printf("%d ", HeapTop(&hp));
+//		HeapPop(&hp);
+//	}
+//	return 0;
+//}
+
+//¶ÑÅÅĞò
+#include<stdio.h>
+typedef int HPDataType;
+void Swap(HPDataType* x, HPDataType* y)
+{
+	HPDataType temp = *x;
+	*x = *y;
+	*y = temp;
+}
+void AdjustUp(HPDataType* array, int child)
+{
+	int parent = (child - 1) / 2;
+	while (array[child] < array[parent] && child)
+	{
+		Swap(&array[child], &array[parent]);
+		child = parent;
+		parent = (child - 1) / 2;
+	}
+}
+void AdjustDown(HPDataType* array, int size, int parent)
+{
+	int child = parent * 2 + 1;
+	while (array[child] < array[parent] && child < size)
+	{
+		if (child + 1 < size && array[child + 1] < array[child]) ++child;
+		Swap(&array[child], &array[parent]);
+		parent = child;
+		child = parent * 2 + 1;
+	}
+}
+void HeapSort(int* array,int size) 
+{
+	//½¨¶ÑµÄ·½Ê½1 O(NlogN)
+	/*for (int i = 1; i < size; ++i) {//²åÈëµÄË¼Ïë£¬Ã¿²åÈëÒ»¸öÊıÏòÉÏµ÷ÕûÒ»´Î
+		AdjustUp(array, i);
+	}*/
+	//½¨¶ÑµÄ·½Ê½2 O(N)		//¶ÑµÄ×ÓÊ÷Ò²¶¼ÊÇ¶Ñ
+	for (int i = (size - 1 - 1) / 2; i >= 0; --i) {//Ò¶×Ó²»ĞèÒªµ÷Õû
+		AdjustDown(array, size, i);
+	}
+	for (int i = size- 1; i > 0; --i)//É¾³ıµÄË¼Ïë£¬Ã¿´ÎÉ¾³ıµÄ¶¼ÊÇ¶ÑÖĞ×îĞ¡µÄÊı
+	{
+		Swap(&array[0], &array[i]);
+		AdjustDown(array, i, 0);
+	}
+}
+int main()
+{
+	int array[] = { 27,15,19,18,28,34,65,49,25,37 };
+	HeapSort(array, sizeof(array) / sizeof(array[0]));
+	for (int i = 0; i < sizeof(array) / sizeof(array[0]); ++i) {
+		printf("%d ", array[i]);
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
