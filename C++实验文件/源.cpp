@@ -12352,3 +12352,68 @@ int getMin() 获取堆栈中的最小元素
 //    cout << max << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//void _shuffle(vector<int>& v)
+//{
+//    vector<int> first;
+//    vector<int> second;
+//    for (int i = 0; i < v.size() / 2; ++i) {
+//        first.push_back(v[i]);
+//        second.push_back(v[i + v.size() / 2]);
+//    }
+//    for (int j = v.size() - 1; j >= 0; j -= 2) {
+//        v[j] = second[j / 2];
+//        v[j - 1] = first[j / 2];
+//
+//    }
+//}
+//void shuffle(vector<int>& v, int k)
+//{
+//    for (int i = 0; i < k; ++i) {
+//        _shuffle(v);
+//    }
+//}
+//int main()
+//{
+//    int T = 0;
+//    cin >> T;
+//    for (int i = 0; i < T; ++i)
+//    {
+//        int n = 0, k = 0;
+//        cin >> n >> k;
+//        vector<int> v;
+//        v.resize(2 * n);
+//        for (int j = 0; j < 2 * n; ++j) {
+//            cin >> v[j];
+//        }
+//        shuffle(v, k);
+//        for (int count = 0; count < v.size(); ++count) {
+//            cout << v[count] << " ";
+//        }
+//        cout << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
