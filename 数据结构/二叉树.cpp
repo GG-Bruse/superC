@@ -122,16 +122,7 @@ n(n>=0)¸ö½áµãµÄÓÐÏÞ¼¯ºÏ£¬ÓÉÒ»¸ö¸ù½áµãÒÔ¼°Á½¿Ã»¥²»Ïà½»£¬·Ö±ð³ÆÎª×ó×ÓÊ÷ºÍÓÒ×ÓÊ÷µÄ¶
 Á´Ê½½á¹¹ÓÖ·ÖÎª¶þ²æÁ´(leftºÍright)ºÍÈý²æÁ´(left¡¢rightºÍparent)
 */
 
-/*
-¶þ²æÊ÷µÄ±éÀú·½Ê½:
-1.Éî¶ÈÓÅÏÈ±éÀú:
-ÏÈÐò(¸ù)±éÀú:¸ù ×ó×ÓÊ÷ ÓÒ×ÓÊ÷ NLR
-ÖÐÐò(¸ù)±éÀú:×ó×ÓÊ÷ ¸ù ÓÒ×ÓÊ÷ LNR
-ºóÐò(¸ù)±éÀú:×ó×ÓÊ÷ ÓÒ×ÓÊ÷ ¸ù LRN
-2.²ãÐò±éÀú(¹ã¶ÈÓÅÏÈ±éÀú):
-Éè¶þ²æÊ÷µÄ¸ù½áµãËùÔÚ²ãÊýÎª1£¬²ãÐò±éÀú¾ÍÊÇ´ÓËùÔÚ¶þ²æÊ÷µÄ¸ù½áµã³ö·¢£¬
-Ê×ÏÈ·ÃÎÊµÚÒ»²ãµÄÊ÷¸ù½áµã£¬È»ºó´Ó×óµ½ÓÒ·ÃÎÊµÚ¶þ²ãÉÏµÄ½áµã£¬ÒÔ´ËÀàÍÆ£¬´ÓÉÏµ½ÏÂ£¬´Ó×óµ½ÓÒ£¬Öð²ã·ÃÎÊÊ÷µÄ½áµã¡£
-*/
+
 
 
 
@@ -215,14 +206,14 @@ n(n>=0)¸ö½áµãµÄÓÐÏÞ¼¯ºÏ£¬ÓÉÒ»¸ö¸ù½áµãÒÔ¼°Á½¿Ã»¥²»Ïà½»£¬·Ö±ð³ÆÎª×ó×ÓÊ÷ºÍÓÒ×ÓÊ÷µÄ¶
 //void AdjustDown(HPDataType* array, int size, int parent)
 //{
 //	int child = parent * 2 + 1;
-//	while (array[child] < array[parent] && child < size)
-//	//while (array[child] > array[parent] && child < size)
-//	{
-//		if (child + 1 < size && array[child + 1] < array[child]) ++child;
-//		//if (child + 1 < size && array[child + 1] > array[child]) ++child;
-//		Swap(&array[child], &array[parent]);
-//		parent = child;
-//		child = parent * 2 + 1;
+//	while (child < size){
+//		if (child + 1 < size && array[child + 1] > array[child]) ++child;
+//		if (array[child] > array[parent]) {
+//			Swap(&array[child], &array[parent]);
+//			parent = child;
+//			child = parent * 2 + 1;
+//		}
+//		else break;
 //	}
 //}
 //void HeapPop(Heap* hp)//É¾³ý¶Ñ¶¥Êý¾Ý
@@ -278,95 +269,198 @@ n(n>=0)¸ö½áµãµÄÓÐÏÞ¼¯ºÏ£¬ÓÉÒ»¸ö¸ù½áµãÒÔ¼°Á½¿Ã»¥²»Ïà½»£¬·Ö±ð³ÆÎª×ó×ÓÊ÷ºÍÓÒ×ÓÊ÷µÄ¶
 //}
 
 //¶ÑÅÅÐò
-#include<stdio.h>
-typedef int HPDataType;
-void Swap(HPDataType* x, HPDataType* y)
-{
-	HPDataType temp = *x;
-	*x = *y;
-	*y = temp;
-}
-void AdjustUp(HPDataType* array, int child)
-{
-	int parent = (child - 1) / 2;
-	while (array[child] < array[parent] && child)
-	{
-		Swap(&array[child], &array[parent]);
-		child = parent;
-		parent = (child - 1) / 2;
-	}
-}
-void AdjustDown(HPDataType* array, int size, int parent)
-{
-	int child = parent * 2 + 1;
-	while (array[child] < array[parent] && child < size)
-	{
-		if (child + 1 < size && array[child + 1] < array[child]) ++child;
-		Swap(&array[child], &array[parent]);
-		parent = child;
-		child = parent * 2 + 1;
-	}
-}
-void HeapSort(int* array,int size) 
-{
-	//½¨¶ÑµÄ·½Ê½1 O(NlogN)
-	/*for (int i = 1; i < size; ++i) {//²åÈëµÄË¼Ïë£¬Ã¿²åÈëÒ»¸öÊýÏòÉÏµ÷ÕûÒ»´Î
-		AdjustUp(array, i);
-	}*/
-	//½¨¶ÑµÄ·½Ê½2 O(N)		//¶ÑµÄ×ÓÊ÷Ò²¶¼ÊÇ¶Ñ
-	for (int i = (size - 1 - 1) / 2; i >= 0; --i) {//Ò¶×Ó²»ÐèÒªµ÷Õû
-		AdjustDown(array, size, i);
-	}
-	for (int i = size- 1; i > 0; --i)//É¾³ýµÄË¼Ïë£¬Ã¿´ÎÉ¾³ýµÄ¶¼ÊÇ¶ÑÖÐ×îÐ¡µÄÊý
-	{
-		Swap(&array[0], &array[i]);
-		AdjustDown(array, i, 0);
-	}
-}
-int main()
-{
-	int array[] = { 27,15,19,18,28,34,65,49,25,37 };
-	HeapSort(array, sizeof(array) / sizeof(array[0]));
-	for (int i = 0; i < sizeof(array) / sizeof(array[0]); ++i) {
-		printf("%d ", array[i]);
-	}
-	return 0;
-}
+//#include<stdio.h>
+//typedef int HPDataType;
+//void Swap(HPDataType* x, HPDataType* y)
+//{
+//	HPDataType temp = *x;
+//	*x = *y;
+//	*y = temp;
+//}
+//void AdjustUp(HPDataType* array, int child)
+//{
+//	int parent = (child - 1) / 2;
+//	while (array[child] < array[parent] && child)
+//	{
+//		Swap(&array[child], &array[parent]);
+//		child = parent;
+//		parent = (child - 1) / 2;
+//	}
+//}
+//void AdjustDown(HPDataType* array, int size, int parent)
+//{
+//	int child = parent * 2 + 1;
+//	while (child < size) {
+//		if (child + 1 < size && array[child + 1] > array[child]) ++child;
+//		if (array[child] > array[parent]) {
+//			Swap(&array[child], &array[parent]);
+//			parent = child;
+//			child = parent * 2 + 1;
+//		}
+//		else break;
+//	}
+//}
+//void HeapSort(int* array,int size) 
+//{
+//	//½¨¶ÑµÄ·½Ê½1 O(NlogN)
+//	/*for (int i = 1; i < size; ++i) {//²åÈëµÄË¼Ïë£¬Ã¿²åÈëÒ»¸öÊýÏòÉÏµ÷ÕûÒ»´Î
+//		AdjustUp(array, i);
+//	}*/
+//	//½¨¶ÑµÄ·½Ê½2 O(N)		//¶ÑµÄ×ÓÊ÷Ò²¶¼ÊÇ¶Ñ
+//	for (int i = (size - 1 - 1) / 2; i >= 0; --i) {//Ò¶×Ó²»ÐèÒªµ÷Õû
+//		AdjustDown(array, size, i);
+//	}
+//	for (int i = size- 1; i > 0; --i)//É¾³ýµÄË¼Ïë£¬Ã¿´ÎÉ¾³ýµÄ¶¼ÊÇ¶ÑÖÐ×îÐ¡µÄÊý
+//	{
+//		Swap(&array[0], &array[i]);
+//		AdjustDown(array, i, 0);
+//	}
+//}
+//int main()
+//{
+//	int array[] = { 27,15,19,18,28,34,65,49,25,37 };
+//	HeapSort(array, sizeof(array) / sizeof(array[0]));
+//	for (int i = 0; i < sizeof(array) / sizeof(array[0]); ++i) {
+//		printf("%d ", array[i]);
+//	}
+//	return 0;
+//}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Top-KÎÊÌâ
 /*
+¼´ÇóÊý¾Ý½áºÏÖÐÇ°K¸ö×î´óµÄÔªËØ»òÕß×îÐ¡µÄÔªËØ£¬Ò»°ãÇé¿öÏÂÊý¾ÝÁ¿¶¼±È½Ï´ó
+¶ÔÓÚTop-KÎÊÌâ£¬ÄÜÏëµ½µÄ×î¼òµ¥Ö±½ÓµÄ·½Ê½¾ÍÊÇÅÅÐò£¬µ«ÊÇ£ºÈç¹ûÊý¾ÝÁ¿·Ç³£´ó£¬ÅÅÐò¾Í²»Ì«¿ÉÈ¡ÁË(¿ÉÄÜÊý¾Ý¶¼²»ÄÜÒ»ÏÂ×ÓÈ«²¿¼ÓÔØµ½ÄÚ´æÖÐ)¡£
+×î¼ÑµÄ·½Ê½¾ÍÊÇÓÃ¶ÑÀ´½â¾ö
+*/
+/*
+1. ÓÃÊý¾Ý¼¯ºÏÖÐÇ°K¸öÔªËØÀ´½¨¶Ñ
+Ç°k¸ö×î´óµÄÔªËØ£¬Ôò½¨Ð¡¶Ñ
+Ç°k¸ö×îÐ¡µÄÔªËØ£¬Ôò½¨´ó¶Ñ
+2. ÓÃÊ£ÓàµÄN-K¸öÔªËØÒÀ´ÎÓë¶Ñ¶¥ÔªËØÀ´±È½Ï£¬²»Âú×ãÔòÌæ»»¶Ñ¶¥ÔªËØ
+N-K¸öÔªËØÒÀ´ÎÓë¶Ñ¶¥ÔªËØ±ÈÍêÖ®ºó£¬¶ÑÖÐÊ£ÓàµÄK¸öÔªËØ¾ÍÊÇËùÇóµÄÇ°K¸ö×îÐ¡»òÕß×î´óµÄÔªËØ
+*/
+//#include<stdio.h>
+//#include<time.h>
+//#include<stdlib.h>
+//typedef int HPDataType;
+//void Swap(HPDataType* x, HPDataType* y)
+//{
+//	HPDataType temp = *x;
+//	*x = *y;
+//	*y = temp;
+//}
+//void AdjustDown(HPDataType* array, int size, int parent)
+//{
+//	int child = parent * 2 + 1;
+//	while (child < size) {
+//		if (child + 1 < size && array[child + 1] > array[child]) ++child;
+//		if (array[child] > array[parent]) {
+//			Swap(&array[child], &array[parent]);
+//			parent = child;
+//			child = parent * 2 + 1;
+//		}
+//		else break;
+//	}
+//}
+//void PrintTopK(int* array, int n, int k)
+//{
+//	int* MinHeap = (int*)malloc(sizeof(int) * k);
+//	if (MinHeap == NULL) {
+//		perror("malloc fail:");
+//		exit(-1);
+//	}
+//
+//	for (int i = 0; i < k; ++i) {
+//		MinHeap[i] = array[i];
+//	}
+//
+//	for (int i = (k - 1 - 1) / 2; i >= 0; --i) {
+//		AdjustDown(MinHeap, k, i);
+//	}
+//	for (int i = k; i < n; ++i) {
+//		if (array[i] > MinHeap[0]) {
+//			Swap(&array[i], &MinHeap[0]);
+//			AdjustDown(MinHeap, k, 0);
+//		}
+//	}
+//
+//	for (int i = 0; i < k; ++i) {
+//		printf("%d ", MinHeap[i]);
+//	}
+//	printf("\n");
+//}
+//int main()
+//{
+//	int n = 10000;
+//	int* array = (int*)malloc(sizeof(int) * n);
+//	if (array == NULL) {
+//		perror("malloc fail:");
+//		exit(-1);
+//	}
+//
+//	srand((unsigned)time(NULL));
+//	for (size_t i = 0; i < n; ++i)
+//	{
+//		array[i] = rand() % 1000000;
+//	}
+//
+//	array[5] = 1000000 + 1;
+//	array[1231] = 1000000 + 2;
+//	array[531] = 1000000 + 3;
+//	array[5121] = 1000000 + 4;
+//	array[115] = 1000000 + 5;
+//	array[2335] = 1000000 + 6;
+//	array[9999] = 1000000 + 7;
+//	array[76] = 1000000 + 8;
+//	array[423] = 1000000 + 9;
+//	array[3144] = 1000000 + 10;
+//
+//	PrintTopK(array, n, 10);//k == 10
+//	return 0;
+//}
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Á´Ê½¶þ²æÊ÷
+/*
+¶þ²æÊ÷µÄ±éÀú·½Ê½:
+1.Éî¶ÈÓÅÏÈ±éÀú:
+ÏÈÐò(¸ù)±éÀú:¸ù ×ó×ÓÊ÷ ÓÒ×ÓÊ÷ NLR
+ÖÐÐò(¸ù)±éÀú:×ó×ÓÊ÷ ¸ù ÓÒ×ÓÊ÷ LNR
+ºóÐò(¸ù)±éÀú:×ó×ÓÊ÷ ÓÒ×ÓÊ÷ ¸ù LRN
+2.²ãÐò±éÀú(¹ã¶ÈÓÅÏÈ±éÀú):
+Éè¶þ²æÊ÷µÄ¸ù½áµãËùÔÚ²ãÊýÎª1£¬²ãÐò±éÀú¾ÍÊÇ´ÓËùÔÚ¶þ²æÊ÷µÄ¸ù½áµã³ö·¢£¬
+Ê×ÏÈ·ÃÎÊµÚÒ»²ãµÄÊ÷¸ù½áµã£¬È»ºó´Ó×óµ½ÓÒ·ÃÎÊµÚ¶þ²ãÉÏµÄ½áµã£¬ÒÔ´ËÀàÍÆ£¬´ÓÉÏµ½ÏÂ£¬´Ó×óµ½ÓÒ£¬Öð²ã·ÃÎÊÊ÷µÄ½áµã¡£
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
+#include<assert.h>
 typedef char BTDataType;
 struct BinaryTreeNode
 {
@@ -419,22 +513,31 @@ int main()
 {
 	//×¼±¸½áµã
 	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	assert(A);
 	A->data = 'A';
 	A->left = NULL;
 	A->right = NULL;
+
 	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	assert(B);
 	B->data = 'B';
 	B->left = NULL;
 	B->right = NULL;
+
 	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	assert(C);
 	C->data = 'C';
 	C->left = NULL;
 	C->right = NULL;
+
 	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	assert(D);
 	D->data = 'D';
 	D->left = NULL;
 	D->right = NULL;
+
 	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+	assert(E);
 	E->data = 'E';
 	E->left = NULL;
 	E->right = NULL;
@@ -456,7 +559,7 @@ int main()
 	DestoryTree(A);
 	return 0;
 }
-*/
+
 //A B D NULL NULL E NULL NULL C NULL NULL
 //NULL D NULL B NULL E NULL A NULL C NULL
 //NULL NULL D NULL NULL E B NULL NULL C A
