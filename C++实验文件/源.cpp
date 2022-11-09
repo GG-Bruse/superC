@@ -12417,3 +12417,94 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    cin >> str;
+//    vector<char> v_char;
+//    vector<int> v_count;
+//    for (int i = 0; i < str.size(); ++i) {
+//        if (find(v_char.begin(), v_char.end(), str[i]) == v_char.end()) {
+//            v_char.push_back(str[i]);
+//            v_count.push_back(1);
+//        }
+//        else {//有该元素
+//            vector<char>::iterator it = find(v_char.begin(), v_char.end(), str[i]);
+//            int count = 0;
+//            for (int i = 0; i < v_char.size(); ++i) {
+//                if (it == v_char.begin() + i) {
+//                    count = i;
+//                    break;
+//                }
+//            }
+//            ++v_count[count];
+//        }
+//    }
+//    int pos = -1;
+//    for (int i = 0; i < v_count.size(); ++i) {
+//        if (v_count[i] == 1) {
+//            pos = i;
+//            break;
+//        }
+//    }
+//    if (pos != -1) {
+//        cout << v_char[pos] << endl;
+//    }
+//    else {
+//        cout << -1 << endl;
+//    }
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int CommonDivisor(int x, int y)
+//{
+//    int max = 0;
+//    for (int i = 1; i <= min(x, y); ++i) {
+//        if (x % i == 0 && y % i == 0) max = i;
+//    }
+//    return max;
+//}
+//int ability(const vector<int>& v, int a)
+//{
+//    for (size_t i = 0; i < v.size(); ++i) {
+//        if (v[i] <= a) a += v[i];
+//        if (v[i] > a) a += CommonDivisor(v[i], a);
+//    }
+//    return a;
+//}
+//int main()
+//{
+//    int n = 0, a = 0;
+//    while (cin >> n >> a)
+//    {
+//        vector<int>v;
+//        v.resize(n);
+//        for (int i = 0; i < n; ++i) {
+//            cin >> v[i];
+//        }
+//
+//        cout << ability(v, a) << endl;
+//    }
+//    return 0;
+//}
