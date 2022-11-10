@@ -12508,3 +12508,39 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//class Gift {
+//public:
+//    int getValue(vector<int> gifts, int n) {
+//        sort(gifts.begin(), gifts.end());
+//        int ret = gifts[n / 2];
+//        for (size_t i = 0; i < gifts.size();) {
+//            if (gifts[i] != ret) {
+//                gifts.erase(gifts.begin() + i);
+//            }
+//            else {
+//                ++i;
+//            }
+//        }
+//        if (gifts.size() >= n / 2) return ret;
+//        else return 0;
+//    }
+//};
+
+
+
+
+
+
+
