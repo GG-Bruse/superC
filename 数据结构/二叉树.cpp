@@ -449,117 +449,116 @@ N-K¸öÔªËØÒÀ´ÎÓë¶Ñ¶¥ÔªËØ±ÈÍêÖ®ºó£¬¶ÑÖĞÊ£ÓàµÄK¸öÔªËØ¾ÍÊÇËùÇóµÄÇ°K¸ö×îĞ¡»òÕß×î´óµÄÔ
 //Á´Ê½¶ş²æÊ÷
 /*
 ¶ş²æÊ÷µÄ±éÀú·½Ê½:
-1.Éî¶ÈÓÅÏÈ±éÀú:
-ÏÈĞò(¸ù)±éÀú:¸ù ×ó×ÓÊ÷ ÓÒ×ÓÊ÷ NLR
+1.Éî¶ÈÓÅÏÈ±éÀú:DFS
+ÏÈĞò(¸ù)±éÀú:¸ù ×ó×ÓÊ÷ ÓÒ×ÓÊ÷ NLR	×î·ûºÏÉî¶ÈÓÅÏÈ
 ÖĞĞò(¸ù)±éÀú:×ó×ÓÊ÷ ¸ù ÓÒ×ÓÊ÷ LNR
-ºóĞò(¸ù)±éÀú:×ó×ÓÊ÷ ÓÒ×ÓÊ÷ ¸ù LRN
-2.²ãĞò±éÀú(¹ã¶ÈÓÅÏÈ±éÀú):
+ºóĞò(¸ù)±éÀú:×ó×ÓÊ÷ ÓÒ×ÓÊ÷ ¸ù LRN	
+2.²ãĞò±éÀú(¹ã¶ÈÓÅÏÈ±éÀú):BFS
 Éè¶ş²æÊ÷µÄ¸ù½áµãËùÔÚ²ãÊıÎª1£¬²ãĞò±éÀú¾ÍÊÇ´ÓËùÔÚ¶ş²æÊ÷µÄ¸ù½áµã³ö·¢£¬
 Ê×ÏÈ·ÃÎÊµÚÒ»²ãµÄÊ÷¸ù½áµã£¬È»ºó´Ó×óµ½ÓÒ·ÃÎÊµÚ¶ş²ãÉÏµÄ½áµã£¬ÒÔ´ËÀàÍÆ£¬´ÓÉÏµ½ÏÂ£¬´Ó×óµ½ÓÒ£¬Öğ²ã·ÃÎÊÊ÷µÄ½áµã¡£
 */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<assert.h>
-typedef char BTDataType;
-struct BinaryTreeNode
-{
-	struct BinaryTreeNode* left;
-	struct BinaryTreeNode* right;
-	BTDataType data;
-};
-void PrevOrder(struct BinaryTreeNode* root)//Ç°Ğò
-{
-	if (root == NULL)
-	{
-		printf("NULL ");
-		return;
-	}
-	printf("%c ", root->data);
-	PrevOrder(root->left);
-	PrevOrder(root->right);
-}
-void InOrder(struct BinaryTreeNode* root)//ÖĞĞò
-{
-	if (root == NULL)
-	{
-		printf("NULL ");
-		return;
-	}  
-	InOrder(root->left);
-	printf("%c ", root->data);
-	InOrder(root->right);
-}
-void PostOrder(struct BinaryTreeNode* root)//ºóĞò
-{
-	if (root == NULL)
-	{
-		printf("NULL ");
-		return;
-	}
-	PostOrder(root->left);
-	PostOrder(root->right);
-	printf("%c ", root->data);
-}
-void DestoryTree(struct BinaryTreeNode* root)//ºóĞòÏú»Ù
-{
-	if (root == NULL)
-		return;
-	DestoryTree(root->left);
-	DestoryTree(root->right);
-	free(root);
-}
-int main()
-{
-	//×¼±¸½áµã
-	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	assert(A);
-	A->data = 'A';
-	A->left = NULL;
-	A->right = NULL;
-
-	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	assert(B);
-	B->data = 'B';
-	B->left = NULL;
-	B->right = NULL;
-
-	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	assert(C);
-	C->data = 'C';
-	C->left = NULL;
-	C->right = NULL;
-
-	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	assert(D);
-	D->data = 'D';
-	D->left = NULL;
-	D->right = NULL;
-
-	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	assert(E);
-	E->data = 'E';
-	E->left = NULL;
-	E->right = NULL;
-
-	//¹¹½¨Ê÷½á¹¹
-	A->left = B;
-	A->right = C;
-	B->left = D;
-	B->right = E;
-
-	//Ç°ÖĞºóĞò±éÀú
-	PrevOrder(A);
-	printf("\n");
-	InOrder(A); 
-	printf("\n");
-	PostOrder(A);
-	printf("\n");
-
-	DestoryTree(A);
-	return 0;
-}
-
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//typedef char BTDataType;
+//struct BinaryTreeNode
+//{
+//	struct BinaryTreeNode* left;
+//	struct BinaryTreeNode* right;
+//	BTDataType data;
+//};
+//void PrevOrder(struct BinaryTreeNode* root)//Ç°Ğò
+//{
+//	if (root == NULL)
+//	{
+//		printf("NULL ");
+//		return;
+//	}
+//	printf("%c ", root->data);
+//	PrevOrder(root->left);
+//	PrevOrder(root->right);
+//}
+//void InOrder(struct BinaryTreeNode* root)//ÖĞĞò
+//{
+//	if (root == NULL)
+//	{
+//		printf("NULL ");
+//		return;
+//	}  
+//	InOrder(root->left);
+//	printf("%c ", root->data);
+//	InOrder(root->right);
+//}
+//void PostOrder(struct BinaryTreeNode* root)//ºóĞò
+//{
+//	if (root == NULL)
+//	{
+//		printf("NULL ");
+//		return;
+//	}
+//	PostOrder(root->left);
+//	PostOrder(root->right);
+//	printf("%c ", root->data);
+//}
+//void DestoryTree(struct BinaryTreeNode* root)//ºóĞòÏú»Ù
+//{
+//	if (root == NULL)
+//		return;
+//	DestoryTree(root->left);
+//	DestoryTree(root->right);
+//	free(root);
+//}
+//int main()
+//{
+//	//×¼±¸½áµã
+//	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+//	assert(A);
+//	A->data = 'A';
+//	A->left = NULL;
+//	A->right = NULL;
+//
+//	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+//	assert(B);
+//	B->data = 'B';
+//	B->left = NULL;
+//	B->right = NULL;
+//
+//	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+//	assert(C);
+//	C->data = 'C';
+//	C->left = NULL;
+//	C->right = NULL;
+//
+//	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+//	assert(D);
+//	D->data = 'D';
+//	D->left = NULL;
+//	D->right = NULL;
+//
+//	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+//	assert(E);
+//	E->data = 'E';
+//	E->left = NULL;
+//	E->right = NULL;
+//
+//	//¹¹½¨Ê÷½á¹¹
+//	A->left = B;
+//	A->right = C;
+//	B->left = D;
+//	B->right = E;
+//
+//	//Ç°ÖĞºóĞò±éÀú
+//	PrevOrder(A);
+//	printf("\n");
+//	InOrder(A); 
+//	printf("\n");
+//	PostOrder(A);
+//	printf("\n");
+//
+//	DestoryTree(A);
+//	return 0;
+//}
 //A B D NULL NULL E NULL NULL C NULL NULL
 //NULL D NULL B NULL E NULL A NULL C NULL
 //NULL NULL D NULL NULL E B NULL NULL C A
@@ -568,75 +567,177 @@ int main()
 
 
 
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//typedef char BTDataType;
+//typedef struct BinaryTreeNode
+//{
+//	struct BinaryTreeNode* left;
+//	struct BinaryTreeNode* right;
+//	BTDataType data;
+//}BinaryTreeNode;
+//void GetBinaryTreeNodeSize_1(BinaryTreeNode* root, int* count)//»ñÈ¡½áµãÊı
+//{
+//	if (root == NULL)return;
+//	++(*count);
+//	GetBinaryTreeNodeSize_1(root->left, count);
+//	GetBinaryTreeNodeSize_1(root->right, count);
+//}
+//int GetBinaryTreeNodeSize_2(BinaryTreeNode* root)//»ñÈ¡½áµãÊı
+//{
+//	return root == NULL ? 0 : GetBinaryTreeNodeSize_2(root->left) + GetBinaryTreeNodeSize_2(root->right) + 1;
+//}
+//int GetLeaf(BinaryTreeNode* root)//»ñÈ¡Ò¶×ÓÊı
+//{
+//	if (root == NULL)return 0;
+//	return ((root->left == NULL) && (root->right == NULL)) ? 1 : GetLeaf(root->left) + GetLeaf(root->right);
+//}
+//int GetLevelKSize(BinaryTreeNode* root, int k)//ÇóµÚk²ã½Úµã¸öÊı
+//{
+//	assert(k >= 1);
+//	if (root == NULL) return 0;
+//	if (k == 1) return 1;
+//	return GetLevelKSize(root->left, k - 1) + GetLevelKSize(root->right, k - 1);
+//}
+//int GetDepth(BinaryTreeNode* root)//ÇóÊ÷µÄÉî¶È
+//{
+//	if (root == NULL) return 0;
+//	int leftDep = GetDepth(root->left);
+//	int rightDep = GetDepth(root->right);
+//	return leftDep > rightDep ? leftDep + 1 : rightDep + 1;
+//
+//}
+//BinaryTreeNode* BinaryTreeFind(BinaryTreeNode* root, BTDataType x)//²éÕÒ½áµã
+//{
+//	if (root == NULL) return NULL;
+//	if (root->data == x) return root;
+//
+//	BinaryTreeNode* left = BinaryTreeFind(root->left,x);
+//	if (left != NULL) return left;
+//	BinaryTreeNode* right = BinaryTreeFind(root->right,x);
+//	if (right != NULL) return right;
+//
+//	return NULL;
+//}
+//int main()
+//{
+//	//×¼±¸½áµã
+//	BinaryTreeNode* A = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(A);
+//	A->data = 'A';
+//	A->left = NULL;
+//	A->right = NULL;
+//
+//	BinaryTreeNode* B = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(B);
+//	B->data = 'B';
+//	B->left = NULL;
+//	B->right = NULL;
+//
+//	BinaryTreeNode* C = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(C);
+//	C->data = 'C';
+//	C->left = NULL;
+//	C->right = NULL;
+//
+//	BinaryTreeNode* D = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(D);
+//	D->data = 'D';
+//	D->left = NULL;
+//	D->right = NULL;
+//
+//	BinaryTreeNode* E = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(E);
+//	E->data = 'E';
+//	E->left = NULL;
+//	E->right = NULL;
+//
+//	//¹¹½¨Ê÷½á¹¹
+//	A->left = B;
+//	A->right = C;
+//	B->left = D;
+//	B->right = E;
+//
+//	int count = 0;
+//	GetBinaryTreeNodeSize_1(A, &count);
+//	printf("¹²ÓĞ%d¸ö½áµã\n", count);//5
+//	printf("¹²ÓĞ%d¸ö½áµã\n", GetBinaryTreeNodeSize_2(A));//5
+//
+//	printf("Ò¶×ÓÊıÎª:%d\n", GetLeaf(A));//3
+//
+//	int k = 3;
+//	printf("µÚ%d²ã¹²ÓĞ%d¸ö½áµã\n", k, GetLevelKSize(A, k));
+//
+//	printf("¸ÃÊ÷µÄÉî¶ÈÎª%d\n", GetDepth(A));
+//
+//	BinaryTreeNode* node = BinaryTreeFind(A,'E');
+//	printf("%c\n", node->data);
+//	return 0;
+//}
 
 
 
 
-/*
-#include<stdio.h>
-#include<stdlib.h>
-typedef char BTDataType;
-struct BinaryTreeNode
-{
-	struct BinaryTreeNode* left;
-	struct BinaryTreeNode* right;
-	BTDataType data;
-};
-void GetBinaryTreeNodeSize_1(struct BinaryTreeNode* root, int* count)//»ñÈ¡½áµãÊı
-{
-	if (root == NULL)return;
-	++(*count);
-	GetBinaryTreeNodeSize_1(root->left, count);
-	GetBinaryTreeNodeSize_1(root->right, count);
-}
-int GetBinaryTreeNodeSize_2(struct BinaryTreeNode* root)//»ñÈ¡½áµãÊı
-{
-	return root == NULL ? 0 : GetBinaryTreeNodeSize_2(root->left) + GetBinaryTreeNodeSize_2(root->right) + 1;
-}
-int GetLeaf(struct BinaryTreeNode* root)//»ñÈ¡Ò¶×ÓÊı
-{
-	if (root == NULL)return 0;
-	return ((root->left == NULL) && (root->right == NULL)) ? 1 : GetLeaf(root->left) + GetLeaf(root->right);
-}
-int main()
-{
-	//×¼±¸½áµã
-	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	A->data = 'A';
-	A->left = NULL;
-	A->right = NULL;
-	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	B->data = 'B';
-	B->left = NULL;
-	B->right = NULL;
-	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	C->data = 'C';
-	C->left = NULL;
-	C->right = NULL;
-	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	D->data = 'D';
-	D->left = NULL;
-	D->right = NULL;
-	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	E->data = 'E';
-	E->left = NULL;
-	E->right = NULL;
 
-	//¹¹½¨Ê÷½á¹¹
-	A->left = B;
-	A->right = C;
-	B->left = D;
-	B->right = E;
+//¹¹½¨Ïú»Ù¶ş²æÊ÷
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <assert.h>
+//typedef char BTDataType;
+//typedef struct BinaryTreeNode {
+//	struct BinaryTreeNode* left;
+//	struct BinaryTreeNode* right;
+//	BTDataType data;
+//}BinaryTreeNode;
+//
+//BinaryTreeNode* BuyNode(BTDataType x) {
+//	BinaryTreeNode* node = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(node);
+//	node->data = x;
+//	node->left = node->right = NULL;
+//	return node;
+//}
+//
+//BinaryTreeNode* CreateTree(char* str, int* pi) {
+//	if (str[*pi] == '#') {
+//		++(*pi);
+//		return NULL;
+//	}
+//	BinaryTreeNode* root = BuyNode(str[(*pi)++]);
+//	root->left = CreateTree(str, pi);
+//	root->right = CreateTree(str, pi);
+//	return root;
+//}
+//
+//void InOrder(BinaryTreeNode* root) {
+//	if (root == NULL) return;
+//	InOrder(root->left);
+//	printf("%c ", root->data);
+//	InOrder(root->right);
+//}
+//
+//void DestoryTree(BinaryTreeNode* root)//ºóĞòÏú»Ù
+//{
+//	if (root == NULL) return;
+//	DestoryTree(root->left);
+//	DestoryTree(root->right);
+//	free(root);
+//}
+//int main()
+//{
+//	char str[101] = { 0 };
+//	scanf("%s", str);
+//
+//	int i = 0;
+//	BinaryTreeNode* root = CreateTree(str, &i);
+//
+//	InOrder(root);
+//
+//	DestoryTree(root);
+//	return 0;
+//}
 
-	int count = 0;
-	GetBinaryTreeNodeSize_1(A, &count);
-	printf("¹²ÓĞ%d¸ö½áµã\n", count);//5
-	printf("¹²ÓĞ%d¸ö½áµã\n", GetBinaryTreeNodeSize_2(A));//5
-
-	printf("Ò¶×ÓÊıÎª:%d\n", GetLeaf(A));//3
-	return 0;
-}
-*/
 
 
 
