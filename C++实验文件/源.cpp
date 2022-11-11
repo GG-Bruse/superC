@@ -12636,3 +12636,28 @@ int getMin() 获取堆栈中的最小元素
 //    if (isSameTree(root, subRoot)) return true;
 //    return isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
 //}
+
+
+
+
+
+
+
+
+
+
+
+//class Bonus {
+//public:
+//    int _getMost(vector<vector<int>>& board, int row, int col) {
+//        if (row == 5 && col == 5) return board[row][col];
+//        if (row == 6 || col == 6) return 0;
+//        int ret1 = 0, ret2 = 0;
+//        ret1 = _getMost(board, row + 1, col) + board[row][col];
+//        ret2 = _getMost(board, row, col + 1) + board[row][col];
+//        return max(ret1, ret2);
+//    }
+//    int getMost(vector<vector<int>> board) {
+//        return _getMost(board, 0, 0);
+//    }
+//};
