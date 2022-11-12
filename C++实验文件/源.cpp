@@ -12834,3 +12834,149 @@ int getMin() 获取堆栈中的最小元素
 //        return vv;
 //    }
 //};
+
+
+
+
+
+//非递归后序遍历
+//class Solution {
+//public:
+//    vector<int> postorderTraversal(TreeNode* root) {
+//        stack<TreeNode*> sk;
+//        vector<int>v;
+//        TreeNode* cur = root;
+//        TreeNode* prev = nullptr;
+//        while (cur != nullptr || !sk.empty()) {
+//            //左路结点
+//            while (cur != nullptr) {
+//                sk.push(cur);
+//                cur = cur->left;
+//            }
+//            //左路结点的右子树
+//            TreeNode* top = sk.top();
+//            if (top->right == nullptr || top->right == prev) {
+//                v.push_back(top->val);
+//                prev = top;
+//                sk.pop();
+//            }
+//            else {
+//                cur = top->right;//子问题 访问右子树
+//            }
+//        }
+//        return v;
+//    }
+//};
+
+
+
+
+
+//非递归中序遍历
+//class Solution {
+//public:
+//    vector<int> inorderTraversal(TreeNode* root) {
+//        stack<TreeNode*> sk;
+//        vector<int>v;
+//        TreeNode* cur = root;
+//        while (cur != nullptr || !sk.empty()) {
+//            //左路结点入栈
+//            while (cur != nullptr) {
+//                sk.push(cur);
+//                cur = cur->left;
+//            }
+//            //左路结点的右子树
+//            TreeNode* top = sk.top();
+//            v.push_back(top->val);
+//            sk.pop();
+//            cur = top->right;//子问题 访问右子树
+//        }
+//        return v;
+//    }
+//};
+
+
+
+
+
+
+//非递归后序遍历
+//class Solution {
+//public:
+//    vector<int> preorderTraversal(TreeNode* root) {
+//        stack<TreeNode*> sk;
+//        vector<int>v;
+//        TreeNode* cur = root;
+//        while (cur != nullptr || !sk.empty()) {
+//            //左路结点
+//            while (cur != nullptr) {
+//                v.push_back(cur->val);
+//                sk.push(cur);
+//                cur = cur->left;
+//            }
+//            //左路结点的右子树
+//            TreeNode* top = sk.top();
+//            sk.pop();
+//            cur = top->right;//子问题 访问右子树
+//        }
+//        return v;
+//    }
+//};
+
+
+
+
+
+
+
+
+//前序与中序
+//class Solution {
+//public:
+//    TreeNode* _buildTree(vector<int>& preorder, vector<int>& inorder, int& previ, int inBegin, int inEnd) {
+//        if (inBegin > inEnd) return nullptr;
+//
+//        TreeNode* node = new TreeNode(preorder[previ++]);
+//        int ini = inBegin;
+//        while (ini <= inEnd) {
+//            if (inorder[ini] == node->val) break;
+//            else ++ini;
+//        }
+//        node->left = _buildTree(preorder, inorder, previ, inBegin, ini - 1);
+//        node->right = _buildTree(preorder, inorder, previ, ini + 1, inEnd);
+//        return node;
+//
+//    }
+//    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+//        int i = 0;
+//        return _buildTree(preorder, inorder, i, 0, inorder.size() - 1);
+//    }
+//};
+
+
+
+
+
+
+
+
+//后序与中序
+//class Solution {
+//public:
+//    TreeNode* _buildTree(vector<int>& inorder, vector<int>& postorder, int& posti, int inBegin, int inEnd) {
+//        if (inBegin > inEnd) return nullptr;
+//        TreeNode* node = new TreeNode(postorder[posti--]);
+//        int ini = inBegin;
+//        while (ini <= inEnd) {
+//            if (inorder[ini] == node->val) break;
+//            else ++ini;
+//        }
+//        node->right = _buildTree(inorder, postorder, posti, ini + 1, inEnd);
+//        node->left = _buildTree(inorder, postorder, posti, inBegin, ini - 1);
+//        return node;
+//    }
+//    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+//        int i = postorder.size() - 1;
+//        return _buildTree(inorder, postorder, i, 0, inorder.size() - 1);
+//    }
+//};
