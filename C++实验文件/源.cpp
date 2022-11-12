@@ -12661,3 +12661,176 @@ int getMin() 获取堆栈中的最小元素
 //        return _getMost(board, 0, 0);
 //    }
 //};
+
+
+
+
+/*
+给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+*/
+//class Solution {
+//public:
+//    bool FindPath(TreeNode* root, TreeNode* x, stack<TreeNode*>& sk) {
+//        if (root == nullptr) return false;
+//
+//        sk.push(root);
+//        if (root == x) return true;
+//
+//        if (FindPath(root->left, x, sk)) return true;
+//        if (FindPath(root->right, x, sk)) return true;
+//
+//        sk.pop();
+//        return false;
+//    }
+//    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+//        stack<TreeNode*> pPath, qPath;
+//        FindPath(root, p, pPath);
+//        FindPath(root, q, qPath);
+//
+//        while (pPath.size() != qPath.size()) {
+//            if (pPath.size() > qPath.size()) pPath.pop();
+//            else qPath.pop();
+//        }
+//        while (pPath.top() != qPath.top()) {
+//            pPath.pop();
+//            qPath.pop();
+//        }
+//        return pPath.top();
+//    }
+//};
+
+//class Solution {
+//public:
+//    bool Find(TreeNode* sub, TreeNode* x) {
+//        if (sub == nullptr) return false;
+//        return sub == x || Find(sub->left, x) || Find(sub->right, x);
+//    }
+//    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+//        if (root == nullptr) return nullptr;
+//        if (root == p || root == q) return root;
+//
+//        bool pInLeft, pInRight, qInLeft, qInRight;
+//        pInLeft = Find(root->left, p);
+//        pInRight = !pInLeft;
+//        qInLeft = Find(root->left, q);
+//        qInRight = !qInLeft;
+//
+//        if ((pInLeft && qInRight) || (pInRight && qInLeft)) {
+//            return root;
+//        }
+//        else if (pInLeft && qInLeft) {
+//            return lowestCommonAncestor(root->left, p, q);
+//        }
+//        else {//pInRight && qInRight
+//            return lowestCommonAncestor(root->right, p, q);
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/*二叉树创建字符串*/
+//class Solution {
+//public:
+//    string tree2str(TreeNode* root) {
+//        if (root == nullptr) return string();
+//
+//        string str;
+//        str += to_string(root->val);
+//
+//        if (root->left != nullptr || root->right != nullptr) {
+//            str += '(';
+//            str += tree2str(root->left);
+//            str += ')';
+//        }
+//
+//        if (root->right != nullptr) {
+//            str += '(';
+//            str += tree2str(root->right);
+//            str += ')';
+//        }
+//        return str;
+//    }
+//};
+
+
+
+
+
+
+/*
+给你二叉树的根节点 root ，返回其节点值的 层序遍历
+*/
+//class Solution {
+//public:
+//    vector<vector<int>> levelOrder(TreeNode* root) {
+//        queue<TreeNode*> q;
+//        size_t levelSize = 0;
+//        if (root != nullptr) {
+//            q.push(root);
+//            levelSize = 1;
+//        }
+//        vector<vector<int>>vv;
+//        while (!q.empty()) {
+//            vector<int>v;
+//            for (size_t i = 0; i < levelSize; ++i) {
+//                TreeNode* front = q.front();
+//                v.push_back(front->val);
+//                q.pop();
+//
+//                if (front->left != nullptr) q.push(front->left);
+//                if (front->right != nullptr) q.push(front->right);
+//            }
+//            vv.push_back(v);
+//            levelSize = q.size();
+//        }
+//        return vv;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/*
+给你二叉树的根节点 root ，返回其节点值 自底向上的层序遍历
+*/
+//class Solution {
+//public:
+//    vector<vector<int>> levelOrderBottom(TreeNode* root) {
+//        queue<TreeNode*> q;
+//        size_t levelSize = 0;
+//        if (root != nullptr) {
+//            q.push(root);
+//            levelSize = 1;
+//        }
+//        vector<vector<int>>vv;
+//        while (!q.empty()) {
+//            vector<int>v;
+//            for (size_t i = 0; i < levelSize; ++i) {
+//                TreeNode* front = q.front();
+//                v.push_back(front->val);
+//                q.pop();
+//
+//                if (front->left != nullptr) q.push(front->left);
+//                if (front->right != nullptr) q.push(front->right);
+//            }
+//            vv.push_back(v);
+//            levelSize = q.size();
+//        }
+//        reverse(vv.begin(), vv.end());
+//        return vv;
+//    }
+//};
