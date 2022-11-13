@@ -13021,4 +13021,45 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+/*
+给你一个二叉树的根节点 root ，按 任意顺序 ，返回所有从根节点到叶子节点的路径。
 
+叶子节点 是指没有子节点的节点
+*/
+//class Solution {
+//public:
+//    void construct_paths(TreeNode* root, string path, vector<string>& paths) {
+//        if (root == nullptr) return;
+//        path += to_string(root->val);
+//        if (root->left == nullptr && root->right == nullptr) {
+//            paths.push_back(path);
+//        }
+//        else {
+//            path += "->";
+//            construct_paths(root->left, path, paths);
+//            construct_paths(root->right, path, paths);
+//        }
+//    }
+//    vector<string> binaryTreePaths(TreeNode* root) {
+//        vector<string> paths;
+//        construct_paths(root, "", paths);
+//        return paths;
+//    }
+//};
+
+
+
+
+
+
+//void swap_lr(TreeNode* root) {
+//	if (root == NULL) return;
+//	if (root->lchild == NULL && root->rchild == NULL) return;
+//
+//	TreeNode* tmp = root->lchild;
+//	root->lchild = root->rchild;
+//	root->rchild = tmp;
+//
+//	swap_lr(root->lchild);
+//	swap_lr(root->rchild);
+//}
