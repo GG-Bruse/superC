@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="list.cpp" />
+    <ClCompile Include="map和set.cpp" />
     <ClCompile Include="stack_queue.cpp" />
     <ClCompile Include="STL.cpp" />
     <ClCompile Include="string.cpp" />

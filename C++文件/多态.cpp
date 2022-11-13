@@ -46,6 +46,32 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 派生类继承后也不能实例化出对象，只有重写纯虚函数，派生类才能实例化出对象
 纯虚函数规范了派生类必须重写，另外纯虚函数更体现出了接口继承
 */
+//#include<iostream>
+//using namespace std;
+//class Car
+//{
+//public:
+//	virtual void Drive() = 0 {
+//		cout << "car" << endl;
+//	}//纯虚函数也可拥有函数体
+//};
+//class Benz :public Car
+//{
+//public:
+//	virtual void Drive()
+//	{
+//		cout << "Benz-舒适" << endl;
+//	}
+//};
+//class BMW :public Car
+//{
+//public:
+//	virtual void Drive()
+//	{
+//		cout << "BMW-操控" << endl;
+//	}
+//};
+
 
 //#include<iostream>
 //class A
@@ -95,25 +121,12 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //多态的原理
 
 /*
 除了_b成员，还多一个__vfptr放在对象的前面(注意有些平台可能会放到对象的最后面，这个跟平台有关)
 对象中的这个指针我们叫做虚函数表指针(v代表virtual，f代表function)。
-一个含有虚函数的类中都至少都有一个虚函数表指针，因为虚函数的地址要被放到虚函数表中，虚函数表也简称虚表。
+一个含有虚函数的类中都至少有一个虚函数表指针，因为虚函数的地址要被放到虚函数表中，虚函数表也简称虚表。
 虚函数表本质是一个存虚函数指针的指针数组，windows环境下这个数组最后面放了一个nullptr
 */
 //#include<iostream>
@@ -130,7 +143,8 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 //};
 //int main()
 //{
-//	cout << sizeof(Base) << endl;//8
+//	Base b;
+//	cout << sizeof(b) << endl;//8
 //	return 0;
 //}
 
@@ -194,9 +208,9 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 //	{
 //		cout << "Derive::Func1()" << endl;
 //	}
-//	virtual void Func4()
+//	virtual void Func3()
 //	{
-//		cout << "Derive::Func4()" << endl;
+//		cout << "Derive::Func3()" << endl;
 //	}
 //private:
 //	int _d = 2;
@@ -209,7 +223,7 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 //	}
 //	cout << endl;
 //}
-
+//
 //int main()
 //{
 //	Base b;//同一个类型的对象共用同一个虚函数表
@@ -325,25 +339,6 @@ override:	检查派生类虚函数是否重写了基类某个虚函数，如果没有重写编译报错
 /*
 两个虚表中Derive::func1打印出函数的地址不一样
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
