@@ -12980,3 +12980,45 @@ int getMin() 获取堆栈中的最小元素
 //        return _buildTree(inorder, postorder, i, 0, inorder.size() - 1);
 //    }
 //};
+
+
+
+
+
+
+//#include <iostream>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    str.resize(10001);
+//    while (cin >> str)
+//    {
+//        int sum = 0;
+//        for (int i = 0; i < str.size(); ++i)
+//            sum += (str[i] - '0');
+//        int tmp = sum / 10;
+//        while (tmp)
+//        {
+//            int k = sum;
+//            sum = 0;
+//            while (k)
+//            {
+//                int j = k % 10;
+//                k = k / 10;
+//                sum += j;
+//            }
+//            tmp = sum / 10;
+//        }
+//        cout << sum << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
