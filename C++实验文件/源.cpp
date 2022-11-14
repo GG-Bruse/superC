@@ -13111,3 +13111,171 @@ int getMin() 获取堆栈中的最小元素
 //        return _jumpFloorII(number, &sum);
 //    }
 //};
+
+
+
+
+
+
+
+
+/*
+给定一个单词列表 words 和一个整数 k ，返回前 k 个出现次数最多的单词。
+
+返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率， 按字典顺序 排序
+*/
+//class Solution {
+//public:
+//    struct Less {
+//        bool operator()(const pair<string, int>& kv1, const pair<string, int>& kv2) const {
+//            if (kv1.second < kv2.second) return true;
+//            else if (kv1.second > kv2.second) return false;
+//            else {//kv1.first == kv2.first
+//                return kv1.first > kv2.first;
+//            }
+//        }
+//    };
+//    vector<string> topKFrequent(vector<string>& words, int k) {
+//        map<string, int> count;
+//        for (size_t i = 0; i < words.size(); ++i) {
+//            ++count[words[i]];
+//        }
+//        priority_queue<pair<string, int>, vector<pair<string, int>>, Less> maxHeap;
+//        for (map<string, int>::iterator it = count.begin(); it != count.end(); ++it) {
+//            maxHeap.push(*it);
+//        }
+//
+//        vector<string>v;
+//        while (k--) {
+//            v.push_back(maxHeap.top().first);
+//            maxHeap.pop();
+//        }
+//        return v;
+//    }
+//};
+
+
+
+//#include<vector>
+//#include<iostream>
+//#include<string>
+//#include<map>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<string> topKFrequent(vector<string>& words, int k) {
+//        map<string, int> count;
+//        for (size_t i = 0; i < words.size(); ++i) {
+//            ++count[words[i]];
+//        }
+//
+//        multimap<int, string, greater<int>> sortMap;
+//        for (auto& kv : count) {
+//            sortMap.insert(make_pair(kv.second, kv.first));
+//        }
+//
+//        vector<string> v;
+//        multimap<int, string, greater<int>>::iterator it = sortMap.begin();
+//        for (size_t i = 0; i < k; ++i) {
+//            v.push_back(it->second);
+//            ++it;
+//        }
+//        return v;
+//    }
+//};
+//int main() 
+//{
+//    vector<string >words = { "i", "love", "leetcode", "i", "love", "coding" };
+//    int k = 2;
+//    Solution s;
+//    vector<string> ret = s.topKFrequent(words, k);
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+/*
+给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序
+*/
+//#include<iostream>
+//#include<map>
+//#include<vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+//        vector<int> ret;
+//
+//        map<int, int> mp1;
+//        for (auto& v : nums1) {
+//            mp1.insert(make_pair(v, 1));
+//        }
+//
+//        map<int, int> mp2;
+//        for (auto& v : nums2) {
+//            mp2.insert(make_pair(v, 1));
+//        }
+//
+//        map<int, int> mp;
+//        for (auto& kv : mp1) {
+//            ++mp[kv.first];
+//        }
+//        for (auto& kv : mp2) {
+//            ++mp[kv.first];
+//        }
+//        for (auto& kv : mp) {
+//            if (kv.second > 1) ret.push_back(kv.first);
+//        }
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int> nums1 = {1,2,2,1};
+//    vector<int> nums2 = {2,2};
+//    vector<int> ret = s.intersection(nums1, nums2);
+//    for (size_t i = 0; i < ret.size(); ++i) {
+//        cout << ret[i] << " ";
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	vector<int> v;
+//	v.resize(10);
+//	for (int i = 0; i < 10; ++i) {
+//		cin >> v[i];
+//	}
+//	int high = 0;
+//	cin >> high;
+//	high += 30;
+//
+//	int count = 0;
+//	for (int i = 0; i < 10; ++i) {
+//		if (high >= v[i]) ++count;
+//	}
+//	cout << count << endl;
+//
+//	return 0;
+//}
