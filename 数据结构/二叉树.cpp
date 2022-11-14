@@ -743,658 +743,205 @@ N-K¸öÔªËØÒÀ´ÎÓë¶Ñ¶¥ÔªËØ±ÈÍêÖ®ºó£¬¶ÑÖĞÊ£ÓàµÄK¸öÔªËØ¾ÍÊÇËùÇóµÄÇ°K¸ö×îĞ¡»òÕß×î´óµÄÔ
 
 
 //²ãĞò±éÀú(·Çµİ¹é)¡ª¡ª¶ÓÁĞÊµÏÖ
-/*
-#include<stdio.h>
-#include<stdlib.h>
-#include<assert.h>
-#include<stdbool.h>
-typedef char BTDataType;
-struct BinaryTreeNode
-{
-	struct BinaryTreeNode* left;
-	struct BinaryTreeNode* right;
-	BTDataType data;
-};
-///*************************************************************
-typedef struct BinaryTreeNode* QDataType;
-typedef struct QueueNode
-{
-	QDataType data;
-	struct QueueNode* next;
-}QNode;
-typedef struct Queue
-{
-	QNode* head;
-	QNode* tail;
-}Queue;
-
-void QueueInit(Queue* pq)
-{
-	assert(pq);
-	pq->head = pq->tail = NULL;
-}
-void QueueDestory(Queue* pq)
-{
-	assert(pq);
-	QNode* cur = pq->head;
-	while (cur != NULL)
-	{
-		QNode* next = cur->next;
-		free(cur);
-		cur = next;
-	}
-	pq->head = pq->tail = NULL;
-}
-void QueuePush(Queue* pq, QDataType d)//¶ÓÎ²Èë 
-{
-	assert(pq);
-	QNode* newNode = (QNode*)malloc(sizeof(QNode));
-	if (newNode == NULL)
-	{
-		printf("malloc fail\n");
-		exit(-1);
-	}
-	newNode->next = NULL;
-	newNode->data = d;
-
-	if (pq->tail == NULL)
-	{
-		pq->head = pq->tail = newNode;
-	}
-	else
-	{
-		pq->tail->next = newNode;
-		pq->tail = newNode;
-	}
-}
-void QueuePop(Queue* pq)//¶ÓÍ·³ö 
-{
-	assert(pq);
-	assert(pq->head);//¶ÓÁĞ²»Îª¿Õ
-	if (pq->head->next == NULL)//Ö»ÓĞÒ»¸ö½áµãµÄÇé¿ö 
-	{
-		free(pq->head);
-		pq->head = pq->tail = NULL;
-	}
-	else
-	{
-		QNode* next = pq->head->next;
-		free(pq->head);
-		pq->head = next;
-	}
-}
-QDataType QueueFront(Queue* pq)
-{
-	assert(pq);
-	assert(pq->head);
-	return pq->head->data;
-}
-QDataType QueueBack(Queue* pq)
-{
-	assert(pq);
-	assert(pq->tail);
-	return pq->tail->data;
-}
-int QueueSize(Queue* pq)
-{
-	assert(pq);
-	int size = 0;
-	QNode* cur = pq->head;
-	while (cur != NULL)
-	{
-		++size;
-		cur = cur->next;
-	}
-	return size;
-}
-bool QueueIsEmpty(Queue* pq)
-{
-	assert(pq);
-	return pq->head == NULL;
-}
-//********************************************************
-//1¡¢Ê×ÏÈ½«¶ş²æÊ÷µÄ¸ù½Úµãpushµ½¶ÓÁĞÖĞ£¬ÅĞ¶Ï¶ÓÁĞ²»ÎªNULL£¬¾ÍÊä³ö¶ÓÍ·µÄÔªËØ£¬
-//2¡¢±éÀú¹ıµÄ½Úµã³ö¶ÓÁĞ
-//3¡¢ÅĞ¶Ï½ÚµãÈç¹ûÓĞº¢×Ó£¬¾Í½«º¢×Ópushµ½¶ÓÁĞÖĞ
-//4¡¢Ñ­»·ÒÔÉÏ²Ù×÷£¬Ö±µ½Tree == NULL¡£
-void LevelOrder(struct BinaryTreeNode* root)//²ãĞò±éÀú
-{
-	Queue q;
-	QueueInit(&q);
-	if (root != NULL)
-		QueuePush(&q, root);
-	while (!QueueIsEmpty(&q))
-	{
-		struct BinaryTreeNode* front = QueueFront(&q);
-		QueuePop(&q);
-		printf("%c ", front->data);
-		if (front->left != NULL)
-			QueuePush(&q, front->left);
-		if (front->right != NULL)
-			QueuePush(&q, front->right);
-	}
-	QueueDestory(&q);
-}
-int main()
-{
-	//×¼±¸½áµã
-	struct BinaryTreeNode* A = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	A->data = 'A';
-	A->left = NULL;
-	A->right = NULL;
-	struct BinaryTreeNode* B = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	B->data = 'B';
-	B->left = NULL;
-	B->right = NULL;
-	struct BinaryTreeNode* C = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	C->data = 'C';
-	C->left = NULL;
-	C->right = NULL;
-	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	D->data = 'D';
-	D->left = NULL;
-	D->right = NULL;
-	struct BinaryTreeNode* E = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
-	E->data = 'E';
-	E->left = NULL;
-	E->right = NULL;
-
-	//¹¹½¨Ê÷½á¹¹
-	A->left = B;
-	A->right = C;
-	B->left = D;
-	B->right = E;
-
-	LevelOrder(A);
-	return 0;
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//ËÑË÷¶ş²æÊ÷(¶ş²æÅÅĞòÊ÷¡¢¶ş²æ²éÕÒÊ÷ BST)
-/*
-Ëü»òÕßÊÇÒ»¿Ã¿ÕÊ÷£¬»òÕßÊÇ¾ßÓĞÒÔÏÂĞÔÖÊµÄ¶ş²æÊ÷:
-ÈôËüµÄ×ó×ÓÊ÷²»Îª¿Õ£¬Ôò×ó×ÓÊ÷ÉÏËùÓĞ½ÚµãµÄÖµ¶¼Ğ¡ÓÚ¸ù½ÚµãµÄÖµ
-ÈôËüµÄÓÒ×ÓÊ÷²»Îª¿Õ£¬ÔòÓÒ×ÓÊ÷ÉÏËùÓĞ½ÚµãµÄÖµ¶¼´óÓÚ¸ù½ÚµãµÄÖµ
-ËüµÄ×óÓÒ×ÓÊ÷Ò²·Ö±ğÎª¶ş²æËÑË÷Ê÷
-*/
-
-
-//¶ş²æËÑË÷Ê÷²Ù×÷
-/*
-1. ¶ş²æËÑË÷Ê÷µÄ²éÕÒ
-a¡¢´Ó¸ù¿ªÊ¼±È½Ï£¬²éÕÒ£¬±È¸ù´óÔòÍùÓÒ±ß×ß²éÕÒ£¬±È¸ùĞ¡ÔòÍù×ó±ß×ß²éÕÒ¡£
-b¡¢×î¶à²éÕÒ¸ß¶È´Î£¬×ßµ½µ½¿Õ£¬»¹Ã»ÕÒµ½£¬Õâ¸öÖµ²»´æÔÚ
-
-2. ¶ş²æËÑË÷Ê÷µÄ²åÈë
-a. Ê÷Îª¿Õ£¬ÔòÖ±½ÓĞÂÔö½Úµã£¬¸³Öµ¸ørootÖ¸Õë
-b. Ê÷²»¿Õ£¬°´¶ş²æËÑË÷Ê÷ĞÔÖÊ²éÕÒ²åÈëÎ»ÖÃ£¬²åÈëĞÂ½Úµã
-
-3. ¶ş²æËÑË÷Ê÷µÄÉ¾³ı
-
-*/
-
-
-//#define RECURSION
-//#include<iostream>
-//#include<algorithm>
-//using std::swap;
-//using std::cout;
-//using std::endl;
-//namespace KEY
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<assert.h>
+//#include<stdbool.h>
+//typedef char BTDataType;
+//typedef struct BinaryTreeNode
 //{
-//	template<class K>
-//	struct BinarySearchTreeNode
-//	{
-//		BinarySearchTreeNode(const K& key = K()) : _left(nullptr), _right(nullptr), _key(key) {}
-//		BinarySearchTreeNode<K>* _left;
-//		BinarySearchTreeNode<K>* _right;
-//		K _key;
-//	};
-//	template<class K>
-//	class BinarySearchTree
-//	{
-//		typedef BinarySearchTreeNode<K> BSTNode;
-//	public:
-//		BinarySearchTree() = default;//C++11: Ç¿ÖÆ±àÒëÆ÷Éú³ÉÄ¬ÈÏ¹¹Ôì
-//		BinarySearchTree(const BinarySearchTree<K>& obj) {
-//			_root = _copy(obj._root);
-//		}
-//		~BinarySearchTree() {
-//			_destory(_root);
-//		}
-//		BinarySearchTree<K>& operator=(BinarySearchTree<K> obj) {
-//			swap(_root, obj._root);
-//			return *this;
-//		}
+//	struct BinaryTreeNode* left;
+//	struct BinaryTreeNode* right;
+//	BTDataType data;
+//}BinaryTreeNode;
+/////*************************************************************
+//typedef struct BinaryTreeNode* QDataType;
+//typedef struct QueueNode
+//{
+//	QDataType data;
+//	struct QueueNode* next;
+//}QNode;
+//typedef struct Queue
+//{
+//	QNode* head;
+//	QNode* tail;
+//}Queue;
 //
-//		bool insert(const K& key) {
-//#ifdef RECURSION
-//			return _insert(_root, key);
-//#else
-//			if (_root == nullptr) {
-//				_root = new BSTNode(key);
-//				return true;
-//			}
-//			BSTNode* cur = _root, * parent = nullptr;
-//			while (cur != nullptr) {
-//				if (cur->_key > key) {
-//					parent = cur;
-//					cur = cur->_left;
-//				}
-//				else if (cur->_key < key) {
-//					parent = cur;
-//					cur = cur->_right;
-//				}
-//				else {//cur->_key == key
-//					return false;//²»ÔÊĞí¼üÖµÈßÓà£¬²åÈëÊ§°Ü
-//				}
-//			}
-//			cur = new BSTNode(key);
-//			if (parent->_key > key) parent->_left = cur;
-//			else parent->_right = cur;
-//			return true;
-//#endif
-//		}
+//void QueueInit(Queue* pq)
+//{
+//	assert(pq);
+//	pq->head = pq->tail = NULL;
+//}
+//void QueueDestory(Queue* pq)
+//{
+//	assert(pq);
+//	QNode* cur = pq->head;
+//	while (cur != NULL)
+//	{
+//		QNode* next = cur->next;
+//		free(cur);
+//		cur = next;
+//	}
+//	pq->head = pq->tail = NULL;
+//}
+//void QueuePush(Queue* pq, QDataType d)//¶ÓÎ²Èë 
+//{
+//	assert(pq);
+//	QNode* newNode = (QNode*)malloc(sizeof(QNode));
+//	if (newNode == NULL)
+//	{
+//		printf("malloc fail\n");
+//		exit(-1);
+//	}
+//	newNode->next = NULL;
+//	newNode->data = d;
 //
-//		bool erase(const K& key) {
-//#ifdef RECURSION
-//			return _erase(_root, key);
-//#else
-//			BSTNode* cur = _root, * parent = nullptr;
-//			while (cur != nullptr) {
-//				if (cur->_key > key) {
-//					parent = cur;
-//					cur = cur->_left;
-//				}
-//				else if (cur->_key < key) {
-//					parent = cur;
-//					cur = cur->_right;
-//				}
-//				else {//cur->_key == key,¿ªÊ¼É¾³ı
-//					if (cur->_left == nullptr) {
-//						if (cur == _root) {
-//							_root = cur->_right;
-//						}
-//						else {
-//							if (cur == parent->_left) {
-//								parent->_left = cur->_right;
-//							}
-//							if (cur == parent->_right) {
-//								parent->_right = cur->_right;
-//							}
-//						}
-//						delete cur;
-//						cur = nullptr;
-//					}
-//					else if (cur->_right == nullptr) {
-//						if (cur == _root) {
-//							_root = cur->_left;
-//						}
-//						else {
-//							if (cur == parent->_left) {
-//								parent->_left = cur->_left;
-//							}
-//							if (cur == parent->_right) {
-//								parent->_right = cur->_left;
-//							}
-//						}
-//						delete cur;
-//						cur = nullptr;
-//					}
-//					else {//×óÓÒ¶¼²»Îªnullptr,Ê¹ÓÃÌæ»»·¨
-//						BSTNode* replace = cur->_right, * min_parent = cur;
-//						while (replace->_left != nullptr) {
-//							min_parent = replace;
-//							replace = replace->_left;
-//						}
-//						swap(replace->_key, cur->_key);
-//						if (min_parent->_left == replace) {
-//							min_parent->_left = replace->_right;
-//						}
-//						else {
-//							min_parent->_right = replace->_right;
-//						}
-//						delete replace;
-//					}
-//					return true;
-//				}
-//			}
+//	if (pq->tail == NULL)
+//	{
+//		pq->head = pq->tail = newNode;
+//	}
+//	else
+//	{
+//		pq->tail->next = newNode;
+//		pq->tail = newNode;
+//	}
+//}
+//void QueuePop(Queue* pq)//¶ÓÍ·³ö 
+//{
+//	assert(pq);
+//	assert(pq->head);//¶ÓÁĞ²»Îª¿Õ
+//	if (pq->head->next == NULL)//Ö»ÓĞÒ»¸ö½áµãµÄÇé¿ö 
+//	{
+//		free(pq->head);
+//		pq->head = pq->tail = NULL;
+//	}
+//	else
+//	{
+//		QNode* next = pq->head->next;
+//		free(pq->head);
+//		pq->head = next;
+//	}
+//}
+//QDataType QueueFront(Queue* pq)
+//{
+//	assert(pq);
+//	assert(pq->head);
+//	return pq->head->data;
+//}
+//QDataType QueueBack(Queue* pq)
+//{
+//	assert(pq);
+//	assert(pq->tail);
+//	return pq->tail->data;
+//}
+//int QueueSize(Queue* pq)
+//{
+//	assert(pq);
+//	int size = 0;
+//	QNode* cur = pq->head;
+//	while (cur != NULL)
+//	{
+//		++size;
+//		cur = cur->next;
+//	}
+//	return size;
+//}
+//bool QueueIsEmpty(Queue* pq)
+//{
+//	assert(pq);
+//	return pq->head == NULL;
+//}
+////********************************************************
+////1¡¢Ê×ÏÈ½«¶ş²æÊ÷µÄ¸ù½Úµãpushµ½¶ÓÁĞÖĞ£¬ÅĞ¶Ï¶ÓÁĞ²»Îª¿Õ£¬¾ÍÊä³ö¶ÓÍ·µÄÔªËØ£¬
+////2¡¢±éÀú¹ıµÄ½Úµã³ö¶ÓÁĞ
+////3¡¢ÅĞ¶Ï½ÚµãÈç¹ûÓĞº¢×Ó£¬¾Í½«º¢×Ópushµ½¶ÓÁĞÖĞ
+////4¡¢Ñ­»·ÒÔÉÏ²Ù×÷£¬Ö±µ½Tree == NULL¡£
+//void LevelOrder(BinaryTreeNode* root)//²ãĞò±éÀú
+//{
+//	Queue q;
+//	QueueInit(&q);
+//	if (root != NULL) QueuePush(&q, root);
+//	while (!QueueIsEmpty(&q))
+//	{
+//		struct BinaryTreeNode* front = QueueFront(&q);
+//		QueuePop(&q);
+//		printf("%c ", front->data);
+//		if (front->left != NULL) QueuePush(&q, front->left);
+//		if (front->right != NULL) QueuePush(&q, front->right);
+//	}
+//	QueueDestory(&q);
+//}
+//int BinaryTreeComplete(BinaryTreeNode* root) {//ÅĞ¶ÏÊÇ·ñÎªÍêÈ«¶ş²æÊ÷
+//	Queue q;
+//	QueueInit(&q);
+//	if (root != NULL) QueuePush(&q, root);
+//	while (!QueueIsEmpty(&q))
+//	{
+//		struct BinaryTreeNode* front = QueueFront(&q);
+//		QueuePop(&q);
+//		if (front != NULL) {
+//			QueuePush(&q, front->left);
+//			QueuePush(&q, front->right);
+//		}
+//		else {
+//			break;
+//		}
+//	}
+//	while (!QueueIsEmpty(&q)) {//Èô´ËÊ±¶ÓÁĞÖĞÈ«Îª¿ÕÔòÎªÍêÈ«¶ş²æÊ÷
+//		if (QueueFront(&q) != NULL) {
+//			QueueDestory(&q);
 //			return false;
-//#endif 
 //		}
-//
-//		bool find(const K& key) {
-//#ifdef RECURSION
-//			return _find(_root, key);
-//#else
-//			BSTNode* cur = _root;
-//			while (cur != nullptr) {
-//				if (cur->_key > key) {
-//					cur = cur->_left;
-//				}
-//				else if (cur->_key < key) {
-//					cur = cur->_right;
-//				}
-//				else {//cur->_key == key
-//					return true;
-//				}
-//			}
-//			return false;
-//#endif
-//		}
-//
-//		void inorder() {
-//			_inorder(_root);
-//		}
-//
-//	private:
-//		BSTNode* _copy(BSTNode* root) {
-//			if (root == nullptr) return nullptr;
-//			BSTNode* copy_root = new BSTNode(root->_key);
-//			copy_root->_left = _copy(root->_left);
-//			copy_root->_right = _copy(root->_right);
-//			return copy_root;
-//		}
-//
-//		bool _insert(BSTNode*& root, const K& key) {//rootÎªÉÏÒ»²ã×óÖ¸Õë(ÓÒÖ¸Õë)µÄ±ğÃû£¬Ö±½Ó¸³Öµ¼´¿É
-//			if (root == nullptr) {
-//				root = new BSTNode(key);
-//				return true;
-//			}
-//			else if (root->_key > key) return _insert(root->_left, key);
-//			else if (root->_key < key) return _insert(root->_right, key);
-//			else return false;
-//		}
-//
-//		bool _erase(BSTNode*& root, const K& key) {
-//			if (root == nullptr) return false;
-//			else if (root->_key > key) return _erase(root->_left, key);
-//			else if (root->_key < key) return _erase(root->_right, key);
-//			else {
-//				BSTNode* del = root;
-//				if (root->_left == nullptr) {
-//					root = root->_right;
-//				}
-//				else if (root->_right == nullptr) {
-//					root = root->_left;
-//				}
-//				else {//×óÓÒ¶¼²»Îª¿Õ
-//					BSTNode* replace = root->_right;
-//					while (replace->_left != nullptr) {
-//						replace = replace->_left;
-//					}
-//					swap(replace->_key, root->_key);
-//					return _erase(root->_right, key);//²»¿ÉĞ´³Éerase(key),ÒòÎªÖØĞÂ²éÕÒ²»µ½(ËÑËØ¶ş²æÊ÷µÄ´æ´¢ĞÔÖÊÒÑ±»ÆÆ»µ)
-//				}
-//				delete del;
-//				return true;
-//			}
-//
-//		}
-//
-//		bool _find(BSTNode* root, const K& key) {
-//			if (root == nullptr) return false;
-//			else if (root->_key > key) return _find(root->_left, key);
-//			else if (root->_key < key) return _find(root->_right, key);
-//			else return true;//root->_key == key
-//		}
-//
-//		void _inorder(BSTNode* root) {
-//			if (root == nullptr) {
-//				return;
-//			}
-//			_inorder(root->_left);
-//			cout << root->_key << " ";
-//			_inorder(root->_right);
-//		}
-//
-//		void _destory(BSTNode*& root) {
-//			if (root == nullptr) {
-//				return;
-//			}
-//			_destory(root->_left);
-//			_destory(root->_right);
-//			delete root;
-//			root = nullptr;
-//		}
-//	private:
-//		BSTNode* _root = nullptr;
-//	};
-//}
-//
-//namespace KEY_VALUE
-//{
-//	template<class K,class V>
-//	struct BinarySearchTreeNode
-//	{
-//		BinarySearchTreeNode(const K& key = K(), const V& value = V()) : _left(nullptr), _right(nullptr), _key(key), _value(value) {}
-//		BinarySearchTreeNode<K,V>* _left;
-//		BinarySearchTreeNode<K,V>* _right;
-//		K _key;
-//		V _value;
-//	};
-//	template<class K,class V>
-//	class BinarySearchTree
-//	{
-//		typedef BinarySearchTreeNode<K, V> BSTNode;
-//	public:
-//		bool insert(const K& key,const V& value) {
-//			if (_root == nullptr) {
-//				_root = new BSTNode(key,value);
-//				return true;
-//			}
-//			BSTNode* cur = _root, * parent = nullptr;
-//			while (cur != nullptr) {
-//				if (cur->_key > key) {
-//					parent = cur;
-//					cur = cur->_left;
-//				}
-//				else if (cur->_key < key) {
-//					parent = cur;
-//					cur = cur->_right;
-//				}
-//				else {//cur->_key == key
-//					return false;//²»ÔÊĞí¼üÖµÈßÓà£¬²åÈëÊ§°Ü
-//				}
-//			}
-//			cur = new BSTNode(key,value);
-//			if (parent->_key > key) parent->_left = cur;
-//			else parent->_right = cur;
-//			return true;
-//		}
-//
-//		BSTNode* find(const K& key) {
-//			BSTNode* cur = _root;
-//			while (cur != nullptr) {
-//				if (cur->_key > key) {
-//					cur = cur->_left;
-//				}
-//				else if (cur->_key < key) {
-//					cur = cur->_right;
-//				}
-//				else {//cur->_key == key
-//					return cur;
-//				}
-//			}
-//			return nullptr;
-//		}
-//
-//		void inorder() {
-//			_inorder(_root);
-//		}
-//		private:
-//		void _inorder(BSTNode* root) {
-//			if (root == nullptr) {
-//				return;
-//			}
-//			_inorder(root->_left);
-//			cout << root->_key << ":" << root->_value << " ";
-//			_inorder(root->_right);
-//		}
-//	private:
-//		BSTNode* _root = nullptr;
-//	};
-//}
-
-
-//using namespace KEY;
-//void test_K()
-//{
-//	BinarySearchTree<int> bst;
-//	int arr[] = { 8,3,1,10,6,7,2,4,5,9,4,3,4 };
-//	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i) {
-//		bst.insert(arr[i]);
+//		QueuePop(&q);
 //	}
-//	BinarySearchTree<int> copy1 = bst;
-//	BinarySearchTree<int> copy2;
-//	copy2 = bst;
-//
-//	cout << bst.find(4) << endl;
-//	bst.inorder();
-//	cout << endl;
-//	for (int i = 0; i < 10; ++i) 
-//	{
-//		bst.erase(i + 1);
-//		bst.inorder();
-//		cout << endl;
-//	}
-//
-//	copy1.inorder();
-//	cout << endl;
-//	copy2.inorder();
+//	QueueDestory(&q);
+//	return true;
 //}
-
-
-//#include<iostream>
-//#include<string>
-//#include<vector>
-//using std::string;
-//using std::vector;
-//using std::cin;
-//using namespace KEY_VALUE;
-//void test_KV() 
-//{
-//	BinarySearchTree<string, string> dict;
-//	dict.insert("sort","ÅÅĞò");
-//	dict.insert("left" , "×ó±ß");
-//	dict.insert("right","ÓÒ±ß");
-//	dict.insert("BinarySearchTree", "¶ş²æËÑË÷Ê÷");
-//	dict.insert("insert", "²åÈë");
-//	dict.inorder();
-//	cout << endl;
-//
-//	string search_str;
-//	while (cin >> search_str) 
-//	{
-//		BinarySearchTreeNode<string,string>* temp = dict.find(search_str);
-//		if (temp == nullptr) 
-//		{
-//			cout << "²éÕÒÊ§°Ü" << endl;
-//		}
-//		else
-//		{
-//			cout << temp->_value << endl;
-//		}
-//	}
-//}
-//void test_KV2() {
-//	vector<string> v = { "Æ»¹û","Ïã½¶","²İİ®","Æ»¹û", "Æ»¹û", "Æ»¹û","Ïã½¶", "Æ»¹û", "Æ»¹û", "Æ»¹û", "Æ»¹û", "Æ»¹û" ,"¹şÃÜ¹Ï"};
-//	BinarySearchTree<string, int> fruit_tree;
-//	for (size_t i = 0; i < v.size(); ++i) {
-//		BinarySearchTreeNode<string, int>* temp = fruit_tree.find(v[i]);
-//		if (temp == nullptr) 
-//		{
-//			fruit_tree.insert(v[i], 1);
-//		}
-//		else
-//		{
-//			++temp->_value;
-//		}
-//	}
-//	fruit_tree.inorder();
-//}
-//
 //int main()
 //{
-//	//test_K();
-//	//test_KV();
-//	test_KV2();
+//	//×¼±¸½áµã
+//	BinaryTreeNode* A = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(A);
+//	A->data = 'A';
+//	A->left = NULL;
+//	A->right = NULL;
+//
+//	BinaryTreeNode* B = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(B);
+//	B->data = 'B';
+//	B->left = NULL;
+//	B->right = NULL;
+//
+//	BinaryTreeNode* C = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(C);
+//	C->data = 'C';
+//	C->left = NULL;
+//	C->right = NULL;
+//
+//	struct BinaryTreeNode* D = (struct BinaryTreeNode*)malloc(sizeof(struct BinaryTreeNode));
+//	assert(D);
+//	D->data = 'D';
+//	D->left = NULL;
+//	D->right = NULL;
+//
+//	BinaryTreeNode* E = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode));
+//	assert(E);
+//	E->data = 'E';
+//	E->left = NULL;
+//	E->right = NULL;
+//
+//	//¹¹½¨Ê÷½á¹¹
+//	A->left = B;
+//	A->right = C;
+//	B->left = D;
+//	B->right = E;
+//
+//	LevelOrder(A);
+//	if (BinaryTreeComplete(A)) printf("¸ÃÊ÷ÎªÍêÈ«¶ş²æÊ÷\n");
+//	else printf("¸ÃÊ÷²»ÎªÍêÈ«¶ş²æÊ÷\n");
+//
 //	return 0;
 //}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//¶ş²æËÑË÷Ê÷µÄÓ¦ÓÃ
-/*
-1. KÄ£ĞÍ:
-KÄ£ĞÍ¼´Ö»ÓĞkey×÷Îª¹Ø¼üÂë£¬½á¹¹ÖĞÖ»ĞèÒª´æ´¢Key¼´¿É£¬¹Ø¼üÂë¼´ÎªĞèÒªËÑË÷µ½µÄÖµ
-±ÈÈç: ¸øÒ»¸öµ¥´Êword£¬ÅĞ¶Ï¸Ãµ¥´ÊÊÇ·ñÆ´Ğ´ÕıÈ·£¬¾ßÌå·½Ê½ÈçÏÂ£ºÒÔ´Ê¿âÖĞËùÓĞµ¥´Ê¼¯ºÏÖĞµÄÃ¿¸öµ¥´Ê×÷Îªkey£¬
-¹¹½¨Ò»¿Ã¶ş²æËÑË÷Ê÷ÔÚ¶ş²æËÑË÷Ê÷ÖĞ¼ìË÷¸Ãµ¥´ÊÊÇ·ñ´æÔÚ£¬´æÔÚÔòÆ´Ğ´ÕıÈ·£¬²»´æÔÚÔòÆ´Ğ´´íÎó¡£
-
-2. KVÄ£ĞÍ:
-Ã¿Ò»¸ö¹Ø¼üÂëkey£¬¶¼ÓĞÓëÖ®¶ÔÓ¦µÄÖµValue£¬¼´<Key, Value>µÄ¼üÖµ¶Ô
-±ÈÈçÓ¢ºº´Êµä¾ÍÊÇÓ¢ÎÄÓëÖĞÎÄµÄ¶ÔÓ¦¹ØÏµ£¬Í¨¹ıÓ¢ÎÄ¿ÉÒÔ¿ìËÙÕÒµ½ÓëÆä¶ÔÓ¦µÄÖĞÎÄ£¬Ó¢ÎÄµ¥´ÊÓëÆä¶ÔÓ¦µÄÖĞÎÄ<word, chinese>¾Í¹¹³ÉÒ»ÖÖ¼üÖµ¶Ô£»
-ÔÙ±ÈÈçÍ³¼Æµ¥´Ê´ÎÊı£¬Í³¼Æ³É¹¦ºó£¬¸ø¶¨µ¥´Ê¾Í¿É¿ìËÙÕÒµ½Æä³öÏÖµÄ´ÎÊı£¬µ¥´ÊÓëÆä³öÏÖ´ÎÊı¾ÍÊÇ<word, count>¾Í¹¹³ÉÒ»ÖÖ¼üÖµ¶Ô
-*/
-
-
-
-//¶ş²æËÑË÷Ê÷µÄĞÔÄÜ·ÖÎö
-/*
-²åÈëºÍÉ¾³ı²Ù×÷¶¼±ØĞëÏÈ²éÕÒ£¬²éÕÒĞ§ÂÊ´ú±íÁË¶ş²æËÑË÷Ê÷ÖĞ¸÷¸ö²Ù×÷µÄĞÔÄÜ
-¶ÔÓĞn¸ö½áµãµÄ¶ş²æËÑË÷Ê÷£¬ÈôÃ¿¸öÔªËØ²éÕÒµÄ¸ÅÂÊÏàµÈ£¬Ôò¶ş²æËÑË÷Ê÷Æ½¾ù²éÕÒ³¤¶ÈÊÇ½áµãÔÚ¶ş²æËÑË÷Ê÷µÄÉî¶ÈµÄº¯Êı£¬¼´½áµãÔ½Éî£¬Ôò±È½Ï´ÎÊıÔ½¶à¡£
-µ«¶ÔÓÚÍ¬Ò»¸ö¹Ø¼üÂë¼¯ºÏ£¬Èç¹û¸÷¹Ø¼üÂë²åÈëµÄ´ÎĞò²»Í¬£¬¿ÉÄÜµÃµ½²»Í¬½á¹¹µÄ¶ş²æËÑË÷Ê÷
-
-×îÓÅÇé¿öÏÂ£¬¶ş²æËÑË÷Ê÷ÎªÍêÈ«¶ş²æÊ÷(»òÕß½Ó½üÍêÈ«¶ş²æÊ÷)£¬ÆäÆ½¾ù±È½Ï´ÎÊıÎª: log_2 N
-×î²îÇé¿öÏÂ£¬¶ş²æËÑË÷Ê÷ÍË»¯Îªµ¥Ö§Ê÷(»òÕßÀàËÆµ¥Ö§)
-ÎÊÌâ:
-ÈôÍË»¯³Éµ¥Ö§Ê÷£¬¶ş²æËÑË÷Ê÷µÄĞÔÄÜ¾ÍÊ§È¥ÁË¡£ÄÇÄÜ·ñ½øĞĞ¸Ä½ø£¬²»ÂÛ°´ÕÕÊ²Ã´´ÎĞò²åÈë¹Ø¼üÂë£¬¶ş²æËÑË÷Ê÷µÄĞÔÄÜ¶¼ÄÜ´ïµ½×îÓÅ£¿AVLÊ÷ºÍºìºÚÊ÷
-*/
