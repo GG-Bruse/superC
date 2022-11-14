@@ -13063,3 +13063,51 @@ int getMin() 获取堆栈中的最小元素
 //	swap_lr(root->lchild);
 //	swap_lr(root->rchild);
 //}
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<cmath>
+//using namespace std;
+//int main()
+//{
+//    string length, radius;
+//    while (cin >> length >> radius) {
+//
+//        double _length = 0, _radius = 0;
+//        for (int i = length.size() - 1;i >= 0; --i) {
+//            _length += (length[i] - (double)'0') * pow(10, length.size() - i) / 100;
+//        }
+//        for (int i = radius.size() - 1; i >= 0; --i) {
+//            _radius += (radius[i] - (double)'0') * pow(10, radius.size() - i) / 100;
+//        }
+//
+//        if (_radius < _length / 6.28) cout << "No" << endl;
+//        else cout << "Yes" << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+//class Solution {
+//public:
+//    int _jumpFloorII(int number, int* sum) {
+//        if (number == 0) return 1;
+//        for (int i = 1; i <= number; ++i) {
+//            *sum += jumpFloorII(number - i);
+//        }
+//        return *sum;
+//    }
+//    int jumpFloorII(int number) {
+//        int sum = 0;
+//        return _jumpFloorII(number, &sum);
+//    }
+//};
