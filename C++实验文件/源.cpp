@@ -13279,3 +13279,43 @@ int getMin() 获取堆栈中的最小元素
 //
 //	return 0;
 //}
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    double a = 0, b = 0, c = 0;
+//    while (cin >> a >> b >> c) {
+//        if (a + b > c && a + c > b && b + c > a) {
+//            cout << "Yes" << endl;
+//        }
+//        else cout << "No" << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+//class Solution {
+//public:
+//    int Add(int num1, int num2)
+//    {
+//        int n1 = (num1 & num2) << 1;
+//        int n2 = num1 ^ num2;
+//        while (n1 & n2){
+//            num1 = n1; num2 = n2;
+//            n1 = (num1 & num2) << 1;
+//            n2 = num1 ^ num2;
+//        }
+//        return n1 | n2;
+//    }
+//};
