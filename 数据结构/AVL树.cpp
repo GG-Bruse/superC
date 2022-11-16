@@ -19,7 +19,12 @@
 #include <utility>
 #include <cstdlib>
 #include <cassert>
+#include <iostream>
+using std::cout;
+using std::endl;
+using std::max;
 using std::pair;
+using std::make_pair;
 
 template<class K,class V>
 struct AVLTreeNode {
@@ -67,9 +72,9 @@ public:
 		cur->_parent = parent;
 
 		//控制平衡
-		//1.更新平衡因子
+		//更新平衡因子
 		while (parent != nullptr){
-			if (cur == parent->right) ++parent->_balance_factor;
+			if (cur == parent->_right) ++parent->_balance_factor;
 			else --parent->_balance_factor;
 
 			if(parent->_balance_factor == 0) break;
@@ -82,28 +87,56 @@ public:
 				if (parent->_balance_factor == 2 && cur->_balance_factor == 1) {
 					rotate_left(parent);
 				}
-				else if (parent->_balance_factor == -2 && cur->_balance_factor = -1) {
+				else if (parent->_balance_factor == -2 && cur->_balance_factor == -1) {
 					rotate_right(parent);
 				}
 				else if (parent->_balance_factor == -2 && cur->_balance_factor == 1) {
 					rotate_left_right(parent);
 				}
-				else {
-
+				else if (parent->_balance_factor == 2 && cur->_balance_factor == -1) {
+					rotate_right_left(parent);
 				}
-
+				else assert(false);
+				break;
 			}
 			else {
 				assert(false);
 			}
 		}
-
-
-
-
 		return true;
 	}
+
+	void inorder() {
+		_inorder(_root);
+	}
+	bool IsBlance() {
+		return _IsBlance(_root);
+	}
 private:
+	void _inorder(TreeNode* root) {
+		if (root == nullptr) {
+			return;
+		}
+		_inorder(root->_left);
+		cout << root->_data.first << " ";
+		_inorder(root->_right);
+	}
+
+	bool _IsBlance(TreeNode* root) {
+		if (root == nullptr) return true;
+
+		int diff = Height(root->_right) - Height(root->_left);
+		if (diff != root->_balance_factor) {
+			cout << root->_data.first << "结点的平衡因子异常" << endl;
+		}
+
+		return abs(diff) < 2 && _IsBlance(root->_left) && _IsBlance(root->_right);
+	}
+	int Height(TreeNode* root) {
+		if (root == nullptr) return 0;
+		return max(Height(root->_left),Height(root->_right)) + 1;
+	}
+
 	void rotate_left(TreeNode* parent) {
 		TreeNode* subR = parent->_right;
 		TreeNode* subRL = subR->_left;
@@ -120,7 +153,7 @@ private:
 			subR->_parent = nullptr;
 		}
 		else {
-			if (pparent->left == parent) pparent->_left = subR;
+			if (pparent->_left == parent) pparent->_left = subR;
 			else pparent->_right = subR;
 			subR->_parent = pparent;
 		}
@@ -142,7 +175,7 @@ private:
 			subL->_parent = nullptr;
 		}
 		else {
-			if (pparent->left == parent) pparent->_left = subL;
+			if (pparent->_left == parent) pparent->_left = subL;
 			else pparent->_right = subL;
 			subL->_parent = pparent;
 		}
@@ -154,7 +187,7 @@ private:
 		TreeNode* subLR = subL->_right;
 		int bf = subLR->_balance_factor;
 
-		rotate_left(parent->left);
+		rotate_left(parent->_left);
 		rotate_right(parent);
 
 		//更新平衡因子
@@ -173,10 +206,82 @@ private:
 		}
 		else assert(false);
 	}
+
+	void rotate_right_left(TreeNode* parent) {
+		TreeNode* subR = parent->_right;
+		TreeNode* subRL = subR->_left;
+		int bf = subRL->_balance_factor;
+
+		rotate_right(parent->_right);
+		rotate_left(parent);
+
+		subRL->_balance_factor = 0;
+		if (bf == 1) {
+			parent->_balance_factor = -1;
+			subR->_balance_factor = 0;
+		}
+		else if (bf == -1) {
+			parent->_balance_factor = 0;
+			subR->_balance_factor = 1;
+		}
+		else if (bf == 0) {
+			parent->_balance_factor = 0;
+			subR->_balance_factor = 0;
+		}
+		else assert(false);
+	}
 private:
-	TreeNode _root = nullptr;
+	TreeNode* _root = nullptr;
 };
 
+
+
+
+#include<iostream>
+#include<ctime>
+using namespace std;
+void TestAVL1() {
+
+	int arr[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+	AVLTree<int, int> t;
+	for (auto& e : arr) {
+		t.insert(make_pair(e, e));
+	}
+	t.inorder();
+	cout << endl;
+	cout << t.IsBlance() << endl;
+
+}
+void TestAVL2() {
+
+	int arr[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+	AVLTree<int, int> t;
+	for (auto& e : arr) {
+		t.insert(make_pair(e, e));
+	}
+	t.inorder();
+	cout << endl;
+	cout << t.IsBlance() << endl;
+}
+void TestAVL3() {
+	size_t N = 10000;
+	srand((unsigned)time(NULL));
+	AVLTree<int, int> t;
+	for (size_t i = 0; i < N; ++i) {
+		int x = rand();
+		t.insert(make_pair(x, i));
+	}
+	cout << t.IsBlance() << endl;
+}
+
+
+int main()
+{
+	//TestAVL1();
+	//TestAVL2();
+	TestAVL3();
+	return 0;
+}
 
 
 
