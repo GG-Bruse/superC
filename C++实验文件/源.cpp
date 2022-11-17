@@ -13416,3 +13416,57 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+//class Solution {
+//public:
+//    int getFirstUnFormedNum(vector<int> arr, int len) {
+//        int sum = 0, min = arr[0];
+//        for (int i = 0; i < len; ++i) {
+//            sum += arr[i];
+//            if (arr[i] < min) min = arr[i];
+//        }
+//        vector<int> dp(sum + 1, 0);
+//        for (int i = 0; i < len; ++i) {
+//            for (int j = sum; j >= arr[i]; --j) {
+//                if (dp[j - arr[i]] + arr[i] > dp[j]) {
+//                    dp[j] = dp[j - arr[i]] + arr[i];
+//                }
+//            }
+//        }
+//
+//        for (int i = min; i <= sum; ++i) {
+//            if (i != dp[i])
+//                return i;
+//        }
+//        return sum + 1;
+//    }
+//};
+
+
+
+
+
+
+
+
+//#include <iostream>
+//using namespace std;
+//int main() {
+//    int n = 0;
+//    while (cin >> n) {
+//        if (n == 0) continue;
+//        int count = 0;
+//        while (n > 1) {
+//            n = n / 3 + (n % 3 > 0);
+//            count += 1;
+//        }
+//        cout << count << endl;
+//    }
+//    return 0;
+//}
