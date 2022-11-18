@@ -13470,3 +13470,84 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//using namespace std; 
+//int main() {
+//    const string flag = "ABCDEFGHIJKLMNOPQRSTUVWSYZ";
+//    string str;
+//    while (getline(cin, str)) {
+//        for (int i = 0; i < str.size(); ++i) {
+//            if (isalpha(str[i])) {
+//                if ('A' <= str[i]) {
+//                    str[i] = 'E' < str[i] ? (str[i] - 5) : (str[i] + 21);
+//                }
+//            }
+//        }
+//        cout << str << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//using namespace std;
+//bool isPrime(int num)
+//{
+//    if (num < 2) return false;
+//    if (num == 2) return true;
+//    if (num % 2 == 0) return false;
+//    for (int i = 3; i * i <= num; i += 2) {
+//        if (num % i == 0) return false;
+//    }
+//    return true;
+//}
+//
+//int countFactors(int num, int start)
+//{
+//    int count = 0;
+//    if (isPrime(num)) {
+//        ++count;
+//        return count;
+//    }
+//    else {
+//        for (int i = start; i < num; ++i) {
+//            if (0 == num % i) {
+//                ++count;
+//                while (0 == num % i) {
+//                    num /= i;
+//                }
+//                return count + countFactors(num, i + 1);
+//            }
+//        }
+//    }
+//    return count;
+//}
+//
+//int main()
+//{
+//    int num = 0;
+//    while (cin >> num) {
+//        int count = countFactors(num, 2);
+//        cout << count << endl;
+//    }
+//    return 0;
+//}
