@@ -13551,3 +13551,391 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<map>
+//#include<string>
+//using namespace std;
+//
+//int main()
+//{
+//	string str;
+//	map<string,int> mp;
+//	int count = 0;
+//	while (cin >> str) {
+//		if (str == "0") break;
+//		if(mp.insert(make_pair(str, count)).second)
+//			++count;
+//	}
+//	map<int, string> ret;
+//	for (auto& e : mp) {
+//		ret.insert(make_pair(e.second, e.first));
+//	}
+//	for (auto& e : ret) {
+//		cout << e.second;
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//inline bool good_time(register string& str) {
+//	if (str[0] != '0') {
+//		int ch = str[0] - str[1];
+//		return str[1] - str[2] == ch && str[2] - str[3] == ch;
+//	}
+//	else {
+//		int ch = str[1] - str[2];
+//		return str[2] - str[3] == ch;
+//	}
+//}
+//int main()
+//{
+//	string str = "0000";
+//	long long minuter = 0;
+//	cin >> minuter;
+//	int count = 0;
+//	for (long long i = 0; i < minuter; ++i) {
+//		if (good_time(str)) ++count;
+//
+//		if (str[0] == '2' && str[1] == '3' && str[2] == '5' && str[3] == '9') {
+//			str[0] = str[1] = str[2] = str[3] = '0';
+//		}
+//		else if (str[1] == '9' && str[2] == '5' && str[3] == '9') {
+//			++str[0];
+//			str[1] = str[2] = str[3] = '0';
+//		}
+//		else if (str[2] == '5' && str[3] == '9') {
+//			str[1]++;
+//			str[2] = str[3] = '0';
+//		}
+//		else if (str[3] == '9') {
+//			++str[2];
+//			str[3] = '0';
+//		}
+//		else {
+//			++str[3];
+//		}
+//	}
+//	if (good_time(str)) ++count;
+//	cout << count << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//	double n = 0;
+//	cin >> n;
+//	vector<double>v;
+//	v.resize(n);
+//	for (double i = 0; i < n; ++i) {
+//		cin >> v[i];
+//	}
+//	double w = 0;
+//	cin >> w;
+//	sort(v.begin(), v.end());
+//
+//	double max = v[0];
+//	for (double i = 0; i < v.size(); ++i) {
+//		if (w > v[i]) max = v[i];
+//	}
+//
+//
+//	double count = 0;
+//	vector<double> ge;
+//	for (double i = 0; i < v.size() - 1; ++i) {
+//		max -= v[i];
+//		ge.push_back(v[i]);
+//		if (max >= 0) ++count;
+//		if (ge.size() == 0 && max == 0) break;
+//	}
+//	cout << count << endl;
+//	return 0;
+//}
+//
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//using namespace std;
+//int get_fac(int min) {
+//	int sum = 0;
+//	for (int i = 1; i <= min; ++i) {
+//		sum += i;
+//	}
+//	return sum;
+//}
+//int main()
+//{
+//	int n = 0, m = 0, x = 0, y = 0;
+//	cin >> n >> m >> x >> y;
+//	string str;
+//	cin >> str;
+//	vector<vector<int>> vv;
+//	for (int i = 0; i < n; ++i) {
+//		vector<int> temp;
+//		for (int j = 0; j < n; ++j) {
+//			temp.push_back(0);
+//		}
+//		vv.push_back(temp);
+//		temp.clear();
+//	}
+//
+//	int pos1 = vv.size() - y, pos2 = x - 1;
+//
+//	vector<vector<int>> time = vv;
+//	for (int i = 0; i < m; ++i) {
+//		for (int j = 0; j < n; ++j) {
+//			for (int k = 0; k < n; ++k) {
+//				if (j == pos1 && k == pos2) {
+//					vv[j][k] += get_fac(time[j][k]);
+//					time[j][k] = 0;
+//					continue;
+//				}
+//				time[j][k]++;
+//			}
+//		}
+//		if (str[i] == 'N') {
+//			pos1--;
+//		}
+//		else if (str[i] == 'S') {
+//			pos1++;
+//		}
+//		else if (str[i] == 'W') {
+//			pos2--;
+//		}
+//		else {
+//			pos2++;
+//		}
+//	}
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < n; ++j) {
+//			vv[i][j] += get_fac(time[i][j]);
+//		}
+//	}
+//
+//	for (int i = 0; i < n; ++i)
+//	{
+//		for (int j = 0; j < n; ++j) {
+//			cout << vv[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+//#include<queue>
+//#include<iostream>
+//#include<vector>
+//#include<map>
+//using namespace std;
+//int main()
+//{
+//	int n = 0,nmax = 0;
+//	cin >> n >> nmax;
+//	vector<pair<int, int>> q;
+//	int lastans = 0;
+//	for (int i = 0; i < n; ++i) {
+//		int op = 0, x = 0, y = 0;
+//		cin >> op >> x >> y;
+//		x ^= lastans;
+//		y ^= lastans;
+//		if (op == 1) {
+//			q.push_back(make_pair(x, y));
+//		}
+//		else if(op == 2) {
+//			if(!q.empty())
+//				q.erase(q.end() - 1);
+//		}
+//		else if (op == 3) {
+//			if (q.size() == 0) {
+//				lastans = 0;
+//				cout << lastans << endl;
+//				continue;
+//			}
+//			vector<pair<int, int>>tmp = q;
+//			multimap<int, int> mp;
+//			for (int i = 0; i < q.size(); ++i) {
+//				mp.insert(q[i]);
+//			}
+//			multimap<int, int>ret;
+//			for (auto& e : mp) {
+//				ret.insert(make_pair(e.second, e.first));
+//			}
+//			int i = 0;
+//			for (auto& e : ret) {
+//				q[i] = make_pair(e.second, e.first);
+//				++i;
+//			}
+//			int count = 0;
+//			for (int i = 0; i < q.size(); ++i) {
+//				x -= q[i].first;
+//				if(x >= 0) ++count;
+//			}
+//			int sum = 0;
+//			for (int i = 0; i < count; ++i) {
+//				sum += q[i].second;
+//			}
+//			lastans = sum;
+//			q = tmp;
+//			cout << lastans << endl;
+//		}
+//
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<map>
+//#include<vector>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    bool repeat(string::iterator first, string::iterator second)
+//    {
+//        map<char, int> mp;
+//        for (; first != second; ++first) {
+//            ++mp[*first];
+//        }
+//        ++mp[*first];
+//        for (auto& e : mp) {
+//            if (e.second != 1) return false;
+//        }
+//        return true;
+//    }
+//    int lengthOfLongestSubstring(string s) {
+//        string ret;
+//        for (int length = s.size() - 1; length >= 0; --length)
+//        {
+//            for (int i = 0; i + length < s.size(); ++i)
+//            {
+//                if (repeat(s.begin() + i, s.begin() + i + length)) {
+//                    ret = string(s.begin() + i, s.begin() + i + length + 1);
+//                }
+//            }
+//            if (ret.size() != 0) break;
+//        }
+//        return ret.size();
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    string str = "cjgtykwpawkaofxvegafbleamibtikekvkguuelwbwwpdwkhemphyvimflhnxlzsxforkaqlymcbknl";
+//    cout << s.lengthOfLongestSubstring(str) << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices) {
+//        int minprice = INT_MAX;
+//        int ret = 0;
+//        //第一天不可能作为卖出天
+//        for (size_t i = 0; i < prices.size(); ++i) {
+//            ret = max(ret, prices[i] - minprice);
+//            minprice = min(minprice, prices[i]);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//class Solution {
+//public:
+//    int hammingDistance(int x, int y) {
+//        int XOR = x ^ y;
+//        int count = 0;
+//        while (XOR) {
+//            if (XOR & 1) ++count;
+//            XOR >>= 1;
+//        }
+//        return count;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    cout << s.hammingDistance(4, 1);
+//    return 0;
+//}
+////优化
+//class Solution {
+//public:
+//    int hammingDistance(int x, int y) {
+//        int s = x ^ y, ret = 0;
+//        while (s) {
+//            s &= s - 1;
+//            ret++;
+//        }
+//        return ret;
+//    }
+//};
