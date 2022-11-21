@@ -42,5 +42,8 @@
     <ClCompile Include="AVL树.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="红黑树.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

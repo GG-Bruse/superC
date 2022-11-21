@@ -12,279 +12,289 @@
 1. 它的左右子树都是AVL树
 2. 左右子树高度之差(简称平衡因子)的绝对值不超过1(-1/0/1)	右子树高度减去左子树高度
 3. 若一棵二叉搜索树是高度平衡的，其就是AVL树。若它有n个结点，其高度可保持在O(log_2 n)，搜索时间复杂度O(log_2 n)
+4. 不允许键值冗余
+*/
+
+/*(了解)
+因为AVL树也是二叉搜索树，可按照二叉搜索树的方式将节点删除，然后再更新平衡因子，
+只不过与删除不同的时，删除节点后的平衡因子更新，最差情况下一直要调整到根节点的位置
+*/
+
+/*
+AVL树是一棵绝对平衡的二叉搜索树，其要求每个节点的左右子树高度差的绝对值都不超过1，这样可以保证查询时高效的时间复杂度O(log_2 N)。
+但是若要对AVL树做一些结构修改的操作，性能非常低下，比如: 插入时要维护其绝对平衡，旋转的次数比较多，更差的是在删除时，有可能一直要让旋转持续到根的位置。
+因此: 若需要一种查询高效且有序的数据结构，而且数据的个数为静态的(即不会改变)，可以考虑AVL树，但一个结构经常修改，就不太适合
 */
 
 
 
-#include <utility>
-#include <cstdlib>
-#include <cassert>
-#include <iostream>
-using std::cout;
-using std::endl;
-using std::max;
-using std::pair;
-using std::make_pair;
-
-template<class K,class V>
-struct AVLTreeNode {
-	AVLTreeNode(const pair<K,V>& kv) :_parent(nullptr), _left(nullptr), _right(nullptr),_data(kv),_balance_factor(0) {}
-
-	AVLTreeNode<K, V>* _parent;
-	AVLTreeNode<K, V>* _left;
-	AVLTreeNode<K, V>* _right;
-
-	pair<K, V> _data;
-	int _balance_factor;//平衡因子
-};
-
-template<class K, class V>
-class AVLTree 
-{
-	typedef AVLTreeNode<K, V> TreeNode;
-public:
-	bool insert(const pair<K, V>& kv) {
-		if (_root == nullptr) {
-			_root = new TreeNode(kv);
-			return true;
-		}
-
-		TreeNode* parent = nullptr;
-		TreeNode* cur = _root;
-		while (cur != nullptr) {
-			if (kv.first > cur->_data.first) {
-				parent = cur;
-				cur = cur->_right;
-			}
-			else if (kv.first < cur->_data.first) {
-				parent = cur;
-				cur = cur->_left;
-			}
-			else return false;
-		}
-		cur = new TreeNode(kv);
-		if (kv.first > parent->_data.first) {
-			parent->_right = cur;
-		}
-		else { //kv.first < parent->_data.first)
-			parent->_left = cur;
-		}
-		cur->_parent = parent;
-
-		//控制平衡
-		//更新平衡因子
-		while (parent != nullptr){
-			if (cur == parent->_right) ++parent->_balance_factor;
-			else --parent->_balance_factor;
-
-			if(parent->_balance_factor == 0) break;
-			else if (abs(parent->_balance_factor) == 1) {
-				cur = parent;
-				parent = parent->_parent;
-			}
-			else if (abs(parent->_balance_factor) == 2) {
-				//需要旋转
-				if (parent->_balance_factor == 2 && cur->_balance_factor == 1) {
-					rotate_left(parent);
-				}
-				else if (parent->_balance_factor == -2 && cur->_balance_factor == -1) {
-					rotate_right(parent);
-				}
-				else if (parent->_balance_factor == -2 && cur->_balance_factor == 1) {
-					rotate_left_right(parent);
-				}
-				else if (parent->_balance_factor == 2 && cur->_balance_factor == -1) {
-					rotate_right_left(parent);
-				}
-				else assert(false);
-				break;
-			}
-			else {
-				assert(false);
-			}
-		}
-		return true;
-	}
-
-	void inorder() {
-		_inorder(_root);
-	}
-	bool IsBlance() {
-		return _IsBlance(_root);
-	}
-private:
-	void _inorder(TreeNode* root) {
-		if (root == nullptr) {
-			return;
-		}
-		_inorder(root->_left);
-		cout << root->_data.first << " ";
-		_inorder(root->_right);
-	}
-
-	bool _IsBlance(TreeNode* root) {
-		if (root == nullptr) return true;
-
-		int diff = Height(root->_right) - Height(root->_left);
-		if (diff != root->_balance_factor) {
-			cout << root->_data.first << "结点的平衡因子异常" << endl;
-		}
-
-		return abs(diff) < 2 && _IsBlance(root->_left) && _IsBlance(root->_right);
-	}
-	int Height(TreeNode* root) {
-		if (root == nullptr) return 0;
-		return max(Height(root->_left),Height(root->_right)) + 1;
-	}
-
-	void rotate_left(TreeNode* parent) {
-		TreeNode* subR = parent->_right;
-		TreeNode* subRL = subR->_left;
-		TreeNode* pparent = parent->_parent;
-
-		parent->_right = subRL;
-		if (subRL != nullptr) subRL->_parent = parent;
-		subR->_left = parent;
-		parent->_parent = subR;
-
-		//解决根结点变换带来的问题
-		if (_root == parent) {
-			_root = subR;
-			subR->_parent = nullptr;
-		}
-		else {
-			if (pparent->_left == parent) pparent->_left = subR;
-			else pparent->_right = subR;
-			subR->_parent = pparent;
-		}
-		subR->_balance_factor = parent->_balance_factor = 0;
-	}
-
-	void rotate_right(TreeNode* parent) {
-		TreeNode* subL = parent->_left;
-		TreeNode* subLR = subL->_right;
-		TreeNode* pparent = parent->_parent;
-
-		parent->_left = subLR;
-		if (subLR != nullptr) subLR->_parent = parent;
-		subL->_right = parent;
-		parent->_parent = subL;
-
-		if (_root == parent) {
-			_root = subL;
-			subL->_parent = nullptr;
-		}
-		else {
-			if (pparent->_left == parent) pparent->_left = subL;
-			else pparent->_right = subL;
-			subL->_parent = pparent;
-		}
-		subL->_balance_factor = parent->_balance_factor = 0;
-	}
-
-	void rotate_left_right(TreeNode* parent) {
-		TreeNode* subL = parent->_left;
-		TreeNode* subLR = subL->_right;
-		int bf = subLR->_balance_factor;
-
-		rotate_left(parent->_left);
-		rotate_right(parent);
-
-		//更新平衡因子
-		subLR->_balance_factor = 0;
-		if (bf == 1) {
-			parent->_balance_factor = 0;
-			subL->_balance_factor = -1;
-		}
-		else if (bf == -1) {
-			parent->_balance_factor = 1;
-			subL->_balance_factor = 0;
-		}
-		else if (bf == 0) {
-			parent->_balance_factor = 0;
-			subL->_balance_factor = 0;
-		}
-		else assert(false);
-	}
-
-	void rotate_right_left(TreeNode* parent) {
-		TreeNode* subR = parent->_right;
-		TreeNode* subRL = subR->_left;
-		int bf = subRL->_balance_factor;
-
-		rotate_right(parent->_right);
-		rotate_left(parent);
-
-		subRL->_balance_factor = 0;
-		if (bf == 1) {
-			parent->_balance_factor = -1;
-			subR->_balance_factor = 0;
-		}
-		else if (bf == -1) {
-			parent->_balance_factor = 0;
-			subR->_balance_factor = 1;
-		}
-		else if (bf == 0) {
-			parent->_balance_factor = 0;
-			subR->_balance_factor = 0;
-		}
-		else assert(false);
-	}
-private:
-	TreeNode* _root = nullptr;
-};
 
 
-
-
-#include<iostream>
-#include<ctime>
-using namespace std;
-void TestAVL1() {
-
-	int arr[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
-	AVLTree<int, int> t;
-	for (auto& e : arr) {
-		t.insert(make_pair(e, e));
-	}
-	t.inorder();
-	cout << endl;
-	cout << t.IsBlance() << endl;
-
-}
-void TestAVL2() {
-
-	int arr[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
-	AVLTree<int, int> t;
-	for (auto& e : arr) {
-		t.insert(make_pair(e, e));
-	}
-	t.inorder();
-	cout << endl;
-	cout << t.IsBlance() << endl;
-}
-void TestAVL3() {
-	size_t N = 10000;
-	srand((unsigned)time(NULL));
-	AVLTree<int, int> t;
-	for (size_t i = 0; i < N; ++i) {
-		int x = rand();
-		t.insert(make_pair(x, i));
-	}
-	cout << t.IsBlance() << endl;
-}
-
-
-int main()
-{
-	//TestAVL1();
-	//TestAVL2();
-	TestAVL3();
-	return 0;
-}
-
-
-
-
-
-
+//#include <utility>
+//#include <cstdlib>
+//#include <cassert>
+//#include <iostream>
+//using std::cout;
+//using std::endl;
+//using std::max;
+//using std::swap;
+//using std::pair;
+//using std::make_pair;
+//
+//template<class K,class V>
+//struct AVLTreeNode {
+//	AVLTreeNode(const pair<K,V>& kv) :_parent(nullptr), _left(nullptr), _right(nullptr),_data(kv),_balance_factor(0) {}
+//
+//	AVLTreeNode<K, V>* _parent;
+//	AVLTreeNode<K, V>* _left;
+//	AVLTreeNode<K, V>* _right;
+//
+//	pair<K, V> _data;
+//	int _balance_factor;//平衡因子
+//};
+//
+//template<class K, class V>
+//class AVLTree 
+//{
+//	typedef AVLTreeNode<K, V> TreeNode;
+//public:
+//	bool insert(const pair<K, V>& kv) {
+//		if (_root == nullptr) {
+//			_root = new TreeNode(kv);
+//			return true;
+//		}
+//
+//		TreeNode* parent = nullptr;
+//		TreeNode* cur = _root;
+//		while (cur != nullptr) {
+//			if (kv.first > cur->_data.first) {
+//				parent = cur;
+//				cur = cur->_right;
+//			}
+//			else if (kv.first < cur->_data.first) {
+//				parent = cur;
+//				cur = cur->_left;
+//			}
+//			else return false;
+//		}
+//		cur = new TreeNode(kv);
+//		if (kv.first > parent->_data.first) {
+//			parent->_right = cur;
+//		}
+//		else { //kv.first < parent->_data.first)
+//			parent->_left = cur;
+//		}
+//		cur->_parent = parent;
+//
+//		//控制平衡
+//		//更新平衡因子
+//		while (parent != nullptr){
+//			if (cur == parent->_right) ++parent->_balance_factor;
+//			else --parent->_balance_factor;
+//
+//			if(parent->_balance_factor == 0) break;
+//			else if (abs(parent->_balance_factor) == 1) {
+//				cur = parent;
+//				parent = parent->_parent;
+//			}
+//			else if (abs(parent->_balance_factor) == 2) {
+//				//需要旋转
+//				if (parent->_balance_factor == 2 && cur->_balance_factor == 1) {
+//					rotate_left(parent);
+//				}
+//				else if (parent->_balance_factor == -2 && cur->_balance_factor == -1) {
+//					rotate_right(parent);
+//				}
+//				else if (parent->_balance_factor == -2 && cur->_balance_factor == 1) {
+//					rotate_left_right(parent);
+//				}
+//				else if (parent->_balance_factor == 2 && cur->_balance_factor == -1) {
+//					rotate_right_left(parent);
+//				}
+//				else assert(false);
+//				break;
+//			}
+//			else {
+//				assert(false);
+//			}
+//		}
+//		return true;
+//	}
+//
+//	void inorder() {
+//		_inorder(_root);
+//	}
+//	bool IsBlance() {
+//		return _IsBlance(_root);
+//	}
+//private:
+//	void _inorder(TreeNode* root) {
+//		if (root == nullptr) {
+//			return;
+//		}
+//		_inorder(root->_left);
+//		cout << root->_data.first << " ";
+//		_inorder(root->_right);
+//	}
+//
+//	bool _IsBlance(TreeNode* root) {
+//		if (root == nullptr) return true;
+//
+//		int diff = Height(root->_right) - Height(root->_left);
+//		if (diff != root->_balance_factor) {
+//			cout << root->_data.first << "结点的平衡因子异常" << endl;
+//			return false;
+//		}
+//
+//		return abs(diff) < 2 && _IsBlance(root->_left) && _IsBlance(root->_right);
+//	}
+//	int Height(TreeNode* root) {
+//		if (root == nullptr) return 0;
+//		return max(Height(root->_left),Height(root->_right)) + 1;
+//	}
+//
+//	void rotate_left(TreeNode* parent) {
+//		TreeNode* subR = parent->_right;
+//		TreeNode* subRL = subR->_left;
+//		TreeNode* pparent = parent->_parent;
+//
+//		parent->_right = subRL;
+//		if (subRL != nullptr) subRL->_parent = parent;
+//		subR->_left = parent;
+//		parent->_parent = subR;
+//
+//		//解决根结点变换带来的问题
+//		if (_root == parent) {
+//			_root = subR;
+//			subR->_parent = nullptr;
+//		}
+//		else {
+//			if (pparent->_left == parent) pparent->_left = subR;
+//			else pparent->_right = subR;
+//			subR->_parent = pparent;
+//		}
+//		subR->_balance_factor = parent->_balance_factor = 0;
+//	}
+//
+//	void rotate_right(TreeNode* parent) {
+//		TreeNode* subL = parent->_left;
+//		TreeNode* subLR = subL->_right;
+//		TreeNode* pparent = parent->_parent;
+//
+//		parent->_left = subLR;
+//		if (subLR != nullptr) subLR->_parent = parent;
+//		subL->_right = parent;
+//		parent->_parent = subL;
+//
+//		if (_root == parent) {
+//			_root = subL;
+//			subL->_parent = nullptr;
+//		}
+//		else {
+//			if (pparent->_left == parent) pparent->_left = subL;
+//			else pparent->_right = subL;
+//			subL->_parent = pparent;
+//		}
+//		subL->_balance_factor = parent->_balance_factor = 0;
+//	}
+//
+//	void rotate_left_right(TreeNode* parent) {
+//		TreeNode* subL = parent->_left;
+//		TreeNode* subLR = subL->_right;
+//		int bf = subLR->_balance_factor;
+//
+//		rotate_left(parent->_left);
+//		rotate_right(parent);
+//
+//		//更新平衡因子
+//		subLR->_balance_factor = 0;
+//		if (bf == 1) {
+//			parent->_balance_factor = 0;
+//			subL->_balance_factor = -1;
+//		}
+//		else if (bf == -1) {
+//			parent->_balance_factor = 1;
+//			subL->_balance_factor = 0;
+//		}
+//		else if (bf == 0) {
+//			parent->_balance_factor = 0;
+//			subL->_balance_factor = 0;
+//		}
+//		else assert(false);
+//	}
+//
+//	void rotate_right_left(TreeNode* parent) {
+//		TreeNode* subR = parent->_right;
+//		TreeNode* subRL = subR->_left;
+//		int bf = subRL->_balance_factor;
+//
+//		rotate_right(parent->_right);
+//		rotate_left(parent);
+//
+//		subRL->_balance_factor = 0;
+//		if (bf == 1) {
+//			parent->_balance_factor = -1;
+//			subR->_balance_factor = 0;
+//		}
+//		else if (bf == -1) {
+//			parent->_balance_factor = 0;
+//			subR->_balance_factor = 1;
+//		}
+//		else if (bf == 0) {
+//			parent->_balance_factor = 0;
+//			subR->_balance_factor = 0;
+//		}
+//		else assert(false);
+//	}
+//private:
+//	TreeNode* _root = nullptr;
+//};
+//
+//
+//
+//
+//#include<iostream>
+//#include<ctime>
+//using namespace std;
+//void TestAVL1() {
+//
+//	int arr[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+//	AVLTree<int, int> t;
+//	for (auto& e : arr) {
+//		t.insert(make_pair(e, e));
+//	}
+//	t.inorder();
+//	cout << endl;
+//	cout << t.IsBlance() << endl;
+//
+//}
+//void TestAVL2() {
+//
+//	int arr[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+//	AVLTree<int, int> t;
+//	for (auto& e : arr) {
+//		t.insert(make_pair(e, e));
+//	}
+//	t.inorder();
+//	cout << endl;
+//	cout << t.IsBlance() << endl;
+//}
+//void TestAVL3() {
+//	size_t N = 10000;
+//	srand((unsigned)time(NULL));
+//	AVLTree<int, int> t;
+//	for (size_t i = 0; i < N; ++i) {
+//		int x = rand();
+//		t.insert(make_pair(x, i));
+//	}
+//	cout << t.IsBlance() << endl;
+//}
+//
+//
+//int main()
+//{
+//	//TestAVL1();
+//	//TestAVL2();
+//	TestAVL3();
+//	return 0;
+//}

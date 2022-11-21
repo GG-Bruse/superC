@@ -144,6 +144,7 @@
     <ClCompile Include="二叉树.cpp" />
     <ClCompile Include="排序.cpp" />
     <ClCompile Include="时空间复杂度.cpp" />
+    <ClCompile Include="红黑树.cpp" />
     <ClCompile Include="线性表之栈.cpp" />
     <ClCompile Include="线性表之链表.cpp" />
     <ClCompile Include="线性表之队列.cpp" />

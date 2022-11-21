@@ -4,6 +4,7 @@
 若它的左子树不为空，则左子树上所有节点的值都小于根节点的值
 若它的右子树不为空，则右子树上所有节点的值都大于根节点的值
 它的左右子树也分别为二叉搜索树
+不允许键值冗余
 */
 
 
@@ -217,7 +218,6 @@ b. 树不空，按二叉搜索树性质查找插入位置，插入新节点
 //				delete del;
 //				return true;
 //			}
-//
 //		}
 //
 //		bool _find(BSTNode* root, const K& key) {
@@ -323,36 +323,36 @@ b. 树不空，按二叉搜索树性质查找插入位置，插入新节点
 //		BSTNode* _root = nullptr;
 //	};
 //}
-
-
-//using namespace KEY;
-//void test_K()
-//{
-//	BinarySearchTree<int> bst;
-//	int arr[] = { 8,3,1,10,6,7,2,4,5,9,4,3,4 };
-//	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i) {
-//		bst.insert(arr[i]);
-//	}
-//	BinarySearchTree<int> copy1 = bst;
-//	BinarySearchTree<int> copy2;
-//	copy2 = bst;
 //
-//	cout << bst.find(4) << endl;
-//	bst.inorder();
-//	cout << endl;
-//	for (int i = 0; i < 10; ++i) 
-//	{
-//		bst.erase(i + 1);
-//		bst.inorder();
-//		cout << endl;
-//	}
 //
-//	copy1.inorder();
-//	cout << endl;
-//	copy2.inorder();
-//}
-
-
+////using namespace KEY;
+////void test_K()
+////{
+////	BinarySearchTree<int> bst;
+////	int arr[] = { 8,3,1,10,6,7,2,4,5,9,4,3,4 };
+////	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i) {
+////		bst.insert(arr[i]);
+////	}
+////	BinarySearchTree<int> copy1 = bst;
+////	BinarySearchTree<int> copy2;
+////	copy2 = bst;
+////
+////	cout << bst.find(4) << endl;
+////	bst.inorder();
+////	cout << endl;
+////	for (int i = 0; i < 10; ++i) 
+////	{
+////		bst.erase(i + 1);
+////		bst.inorder();
+////		cout << endl;
+////	}
+////
+////	copy1.inorder();
+////	cout << endl;
+////	copy2.inorder();
+////}
+//
+//
 //#include<iostream>
 //#include<string>
 //#include<vector>
