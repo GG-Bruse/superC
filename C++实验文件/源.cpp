@@ -14274,3 +14274,363 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+//#include<iostream>
+//#include<map>
+//using namespace std;
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	map<int, int> mp;
+//	for (int i = 0; i < n; ++i) {
+//		int temp = 0;
+//		cin >> temp;
+//		++mp[temp];
+//	}
+//	for (auto& e : mp) {
+//		if (e.second > 1) cout << e.first << " ";
+//	}
+//	return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<map>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//	int m = 0;
+//	cin >> m;
+//	vector<int> max, min, total;
+//	for (int i = 0; i < m; ++i) {
+//		int tmp = 0;
+//		cin >> tmp;
+//		if (tmp >= 0) max.push_back(tmp);
+//		if (tmp < 0) min.push_back(tmp);
+//		total.push_back(tmp);
+//	}
+//	if (min.size() != 0) {
+//		if (min.size() % 2 != 0) {
+//			int min_num = min[0];
+//			for (int i = 1; i < min.size(); ++i) {
+//				if (abs(min[i]) > abs(min_num)) {
+//					min_num = min[i];
+//				}
+//			}
+//			for (int i = 0; i < total.size(); ++i) {
+//				if (total[i] == min_num) {
+//					total.erase(total.begin() + i);
+//					break;
+//				}
+//			}
+//
+//			multimap<int, int> mp;
+//			for (int i = 0; i < total.size(); ++i) {
+//				mp.insert(make_pair(abs(total[i]), total[i]));
+//			}
+//			vector<int>ret;
+//			for (auto& e : mp) {
+//				ret.push_back(e.second);
+//			}
+//			int sum = min_num;
+//			for (int i = ret.size() - 1; i > ret.size() - 5; --i) {
+//				sum *= ret[i];
+//			}
+//
+//			cout << sum << endl;
+//		}
+//		else {
+//			multimap<int, int> mp;
+//			for (int i = 0; i < total.size(); ++i) {
+//				mp.insert(make_pair(abs(total[i]), total[i]));
+//			}
+//			for()
+//		}
+//	}
+//	else {//min.size() == 0
+//		sort(total.begin(), total.end());
+//		int sum = total[0];
+//		for (int i = 1; i < 5; ++i) {
+//			sum *= total[i];
+//		}
+//		cout << sum << endl;
+//	}
+//
+//	return 0;
+//}
+
+
+
+//#include <iostream>
+//#include <algorithm>
+//#include <vector>
+//#include <cmath>
+//#include <climits>
+//using namespace std;
+//vector<vector <int>> zuhe(vector<int> in, int target) {//target 是希望选择M个作组合,in是选择的范围，长度为N
+//	vector<vector <int>> output;
+//	for (int i = 0; i < pow(2, in.size()); i++) {
+//		int temp = 0, count = 0;
+//		vector<int> weishu;
+//		for (int j = 0; j < in.size(); j++) {
+//			if ((i & (1 << j)) != 0) {
+//				weishu.push_back(j); count++;
+//			}//找出二进制为1的位数以及它们的位置
+//		}
+//		if (count == target) {//位数等于M
+//			vector<int> one_case;
+//			for (int j = 0; j < count; j++) {
+//				temp = in.size() - 1 - weishu[j];
+//				one_case.push_back(in[temp]);
+//			}
+//			output.push_back(one_case);
+//		}
+//	}
+//	return output;
+//}
+//int main()
+//{
+//	int m = 0;
+//	cin >> m;
+//	vector<int> total;
+//	for (int i = 0; i < m; ++i) {
+//		int tmp = 0;
+//		cin >> tmp;
+//		total.push_back(tmp);
+//	}
+//	vector<vector <int>> output;
+//	output = zuhe(total, 5);
+//
+//	int min = INT_MAX;
+//	for (size_t i = 0; i < output.size(); ++i) {
+//		int fac = 1;
+//		for (size_t j = 0; j < 5; ++j) {
+//			fac *= output[i][j];
+//		}
+//		if (min > fac) min = fac;
+//	}
+//	cout << min << endl;
+//	return 0;
+//}
+
+
+
+
+
+//竖式模拟
+//#include <algorithm>
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//string conversion(int m, string num, int n) {
+//    int length = num.size(), remain;
+//    string ret = "";
+//    for (int i = 0; i < length; ) {
+//        remain = 0;
+//        for (int j = i; j < length; j++) {
+//            int temp = (remain * m + num[j] - '0') % n;
+//            num[j] = (remain * m + num[j] - '0') / n + '0';
+//            remain = temp;
+//        }
+//        ret += char(remain + '0');
+//        while (num[i] == '0') i++;
+//    }
+//    reverse(ret.begin(), ret.end());
+//    return ret;
+//}
+//int main() {
+//    int sum = 0;
+//    string num;
+//    cin >> num;
+//    string ret = conversion(10, num, 2);
+//    for (int i = 0; i < ret.size(); i++) {
+//        if (ret[i] == '1') {
+//            ++sum;
+//        }
+//    }
+//    cout << sum;
+//    return 0;
+//}
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//const int N = 1010;
+//int dp[N][N][2], a[N][N];
+//int n, m, k;
+//void solve()
+//{
+//	cin >> n >> m >> k;
+//	for (int i = 1; i <= n; ++i) {
+//		for (int j = 1; j <= m; ++j) {
+//			cin >> a[i][j];
+//		}
+//	}
+//	for (int i = 1; i <= n; ++i) {
+//		for (int j = 1; j <= m; ++j) {
+//			dp[i][j][0] = max(dp[i - 1][j][0], dp[i][j - 1][1] - k) + a[i][j];
+//			dp[i][j][1] = max(dp[i - 1][j][0] - k, dp[i][j - 1][1]) + a[i][j];
+//		}
+//	}
+//	cout << max(dp[n][m][0], dp[n][m][1]) - k << endl;
+//}
+//
+//signed main()
+//{
+//	int t = 1;
+//	while (t--) {
+//		solve();
+//	}
+//	return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//using namespace std;
+//int main()
+//{
+//	string str;
+//	cin >> str;
+//	int flag = str[0] - '0';
+//	int count = 1;
+//	for (int i = 1; i < str.size(); ++i)
+//	{
+//		if (count >= 7) {
+//			cout << "Yes" << endl;
+//			return 0;
+//		}
+//		if (str[i] == '0' && flag == 0) {
+//			++count;
+//		}
+//		else if (str[i] == '1' && flag == 1)
+//		{
+//			++count;
+//		}
+//		else if (str[i] == '1' && flag == 0)
+//		{
+//			flag = 1;
+//			count = 1;
+//		}
+//		else if (str[i] == '0' && flag == 1)
+//		{
+//			flag = 0;
+//			count = 1;
+//		}
+//
+//		if (count >= 7) {
+//			cout << "Yes" << endl;
+//			return 0;
+//		}
+//	}
+//	cout << "No" << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//int main()
+//{
+//	string str;
+//	cin >> str;
+//	int count0 = 0;
+//	int count1 = 0;
+//	for (int i = 0; i < str.size() ; ++i)
+//	{
+//		if (str[i] == '0'){
+//			count0++;
+//			if (count0 == 7)
+//			{
+//				cout << "Yes";
+//				return 0;
+//			}
+//		}
+//		else{
+//			count0 = 0;
+//
+//		}
+//
+//		if (str[i] == '1'){
+//			count1++;
+//			if (count1 == 7)
+//			{
+//				cout << "Yes";
+//				return 0;
+//			}
+//		}
+//		else{
+//			count1 = 0;
+//		}
+//	}
+//	cout << "No";
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<cmath>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	int T = 0;
+//	cin >> T;
+//	for (int i = 0; i < T; ++i) {
+//		long long n = 0;
+//		cin >> n;
+//		vector<pair<long long, long long>> v;
+//		long long x = 0, y = 0;
+//		for (long long x = 0; x <= n / 2; ++x) {
+//			v.push_back(make_pair(x, n - x));
+//		}
+//		vector<int> ret;
+//		for (size_t j = 0; j < v.size(); ++j) {
+//			ret.push_back(v[j].first * v[j].second);
+//		}
+//		for (size_t j = 0; j < v.size(); ++j) {
+//			get_ret()
+//		}
+//
+//	}
+//	
+//
+//	return 0;
+//}
+
+
+
