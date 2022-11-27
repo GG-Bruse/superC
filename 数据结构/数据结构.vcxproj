@@ -142,6 +142,7 @@
     <ClCompile Include="AVL树.cpp" />
     <ClCompile Include="二叉搜索树.cpp" />
     <ClCompile Include="二叉树.cpp" />
+    <ClCompile Include="哈希.cpp" />
     <ClCompile Include="排序.cpp" />
     <ClCompile Include="时空间复杂度.cpp" />
     <ClCompile Include="红黑树.cpp" />
