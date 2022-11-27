@@ -14634,3 +14634,399 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int get_stat_count(vector<vector<int>>& v, int x1, int y1, int x2, int y2) {
+//	int count = 0;
+//	for (int i = x1 - 1; i <= x2 - 1; ++i) {
+//		for (int j = y1 - 1; j <= y2 - 1; ++j) {
+//			if (v[i][j] == 1) ++count;
+//		}
+//	}
+//	return count;
+//}
+//int main()
+//{
+//	int N = 0, M = 0;
+//	cin >> N >> M;
+//	vector<vector<int>> v;
+//	for (int i = 0; i < N; ++i) {
+//		vector<int> temp;
+//		temp.resize(M);
+//		for (int j = 0; j < M; ++j) {
+//			cin >> temp[j];
+//		}
+//		v.push_back(temp);
+//		temp.clear();
+//	}
+//	int Q = 0;
+//	cin >> Q;
+//	for (int tmp = 0; tmp < Q; ++tmp) {
+//		int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+//		cin >> x1 >> y1 >> x2 >> y2;
+//		cout << get_stat_count(v, x1, y1, x2, y2) << endl;
+//	}
+//	return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	ios_base::sync_with_stdio(false);
+//	cin.tie(nullptr);
+//	cout.tie(nullptr);
+//	int N = 0, M = 0;
+//	cin >> N >> M;
+//	vector<pair<int, int>> flag;
+//	for (int i = 0; i < N; ++i) {
+//		int temp = 0;
+//		for (int j = 0; j < M; ++j) {
+//			cin >> temp;
+//			if (temp == 1) flag.push_back(make_pair(i + 1, j + 1));
+//		}
+//	}
+//	int Q = 0;
+//	cin >> Q;
+//	for (int tmp = 0; tmp < Q; ++tmp) {
+//		int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+//		cin >> x1 >> y1 >> x2 >> y2;
+//		int count = 0;
+//		int left = 0, right = flag.size() - 1;
+//		while (left < right) {
+//			if (flag[left].first >= x1 && flag[left].first <= x2 && flag[left].second >= y1 && flag[left].second <= y2) {
+//				++count;
+//			}
+//			if (flag[right].first >= x1 && flag[right].first <= x2 && flag[right].second >= y1 && flag[right].second <= y2) {
+//				++count;
+//			}
+//			++left;
+//			--right;
+//		}
+//		if (left == right) {
+//			if (flag[left].first >= x1 && flag[left].first <= x2 && flag[left].second >= y1 && flag[left].second <= y2) {
+//				++count;
+//			}
+//		}
+//		cout << count << '\n';
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//long long sgn(long long num) {
+//	return num > 0 ? 1 : -1;
+//}
+//int main()
+//{
+//	long long a = 0, b = 0;
+//	cin >> a >> b;
+//	cout << sgn(b) * abs(a) << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//vector<string> get_ret(vector<string>& num1, vector<string>& num2) {
+//	vector<string> ret;
+//	int num1_i = num1.size() - 1, num2_i = num2.size() - 1;
+//	int jingzhi = 2;
+//	while (num1_i >=0 && num2_i >= 0) {
+//		long long sum = atoll(num1[num1_i].c_str()) + atoll(num2[num2_i].c_str());
+//		ret.push_back(to_string(sum % jingzhi));
+//		if (num1_i - 1 >= 0)
+//			num1[num1_i - 1] = to_string(atoll(num1[num1_i - 1].c_str()) + sum / jingzhi);
+//		else if(sum / jingzhi != 0)
+//		{
+//			num1.insert(num1.begin(), to_string(sum / jingzhi));
+//			++num1_i;
+//		}
+//		num1_i--;
+//		num2_i--;
+//		jingzhi++;
+//	}
+//	if (num1_i < 0) {
+//		while (num2_i >= 0) {
+//			ret.push_back(num2[num2_i]);
+//			--num2_i;
+//		}
+//	}
+//	else {//num2_i == 0
+//		while (num1_i >= 0) {
+//			ret.push_back(num1[num1_i]);
+//			--num1_i;
+//		}
+//	}
+//	reverse(ret.begin(), ret.end());
+//	return ret;
+//}
+//int main()
+//{
+//	int n = 0, m = 0;
+//	cin >> n >> m;
+//	vector<string> num1, num2;
+//	for (int i = 0; i < n; ++i) {
+//		int tmp = 0;
+//		cin >> tmp;
+//		num1.push_back(to_string(tmp));
+//	}
+//	for (int i = 0; i < m; ++i) {
+//		int tmp = 0;
+//		cin >> tmp;
+//		num2.push_back(to_string(tmp));
+//	}
+//
+//	vector<string> ret = get_ret(num1, num2);
+//	for (size_t i = 0; i < ret.size(); ++i) {
+//		cout << ret[i] << " ";
+//	}
+//	cout << endl;
+//
+//	return 0;
+//}
+//
+//
+
+
+
+
+//
+//
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//
+//int main()
+//{
+//	int q = 0;
+//	cin >> q;
+//	for (int i = 0; i < q; ++i) {
+//		long long k = 0;
+//		cin >> k;
+//
+//		long long com = 1;
+//		long long flag_i = 1;
+//		long long count = 0;//第几个周期
+//		for (long long i = 2;;i += 2) {
+//			if (com >= k) {
+//				flag_i = i - 2;
+//				break;
+//			}
+//			++count;
+//			com++;
+//			com += (i * 2);
+//		}
+//
+//		long long ret = 0;
+//		if (k == com) {
+//			cout << 0 << endl;
+//			continue;
+//		}
+//		else {//k < com
+//			if (k >= com - (long long)flag_i / 2) {//4
+//				while (k != com - (long long)flag_i / 2) {
+//					--k;
+//					++ret;
+//				}
+//				ret = count * (-1) + ret;
+//			}
+//			else if (k >= com - (long long)flag_i) {// 3
+//				while (k != com - (long long)flag_i / 2) {
+//					++k;
+//					++ret;
+//				}
+//				ret = (-1) * (count - ret);
+//			}
+//			else if(k >= com - (long long)flag_i - (long long)flag_i / 2){//2
+//				while (k != com - (long long)flag_i) {
+//					++k;
+//					++ret;
+//				}
+//			}
+//			else if (k > com - (long long)flag_i * 2) {
+//				while (k != com - (long long)flag_i - (long long)flag_i / 2) {
+//					++k;
+//					++ret;
+//				}
+//				ret = count - ret;
+//			}
+//			else {//k == com - (long long)flag_i
+//				cout << 0 << endl;
+//				continue;
+//			}
+//		}
+//		cout << ret << endl;
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+//        size_t total_size = nums1.size() + nums2.size();
+//        for (size_t i = 0; i < nums1.size(); ++i) {
+//            nums2.push_back(nums1[i]);
+//        }
+//        sort(nums2.begin(), nums2.end());
+//        if (total_size % 2 == 0) {
+//            int index1 = total_size / 2;
+//            int index2 = total_size / 2 + 1;
+//            double ret = ((double)nums2[index1 - 1] + (double)nums2[index2 - 1]) / 2;
+//            return ret;
+//        }
+//        else {
+//            int index = total_size / 2 + 1;
+//            return (double)nums2[index - 1];
+//        }
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int> v1{ 1, 2 };
+//    vector<int> v2{ 3, 4 };
+//    double ret = s.findMedianSortedArrays(v1, v2);
+//    cout << ret << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    int rob(vector<int>& nums) {
+//        if (nums.empty()) {
+//            return 0;
+//        }
+//        int size = nums.size();
+//        if (size == 1) {
+//            return nums[0];
+//        }
+//        vector<int> dp = vector<int>(size, 0);
+//        dp[0] = nums[0];
+//        dp[1] = max(nums[0], nums[1]);
+//        for (int i = 2; i < size; i++) {
+//            dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]);
+//        }
+//        return dp[size - 1];
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    vector<int> v{ 2,7,9,3,1 };
+//    int ret = s.rob(v);
+//    cout << ret << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//超过时间
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    bool IsPalindrome(string& str, int i, int j) {
+//        while (i <= j) {
+//            if (str[i] != str[j]) return false;
+//            ++i;
+//            --j;
+//        }
+//        return true;
+//    }
+//    string longestPalindrome(string s) {
+//        vector< pair<int, string>> v;
+//        for (size_t i = 0; i < s.size(); ++i) {
+//            for (size_t j = i; j < s.size(); ++j) {
+//                if (IsPalindrome(s, i, j)) {
+//                    v.push_back(make_pair(j - i + 1, string(s.begin() + i, s.begin() + j + 1)));
+//                }
+//            }
+//        }
+//        size_t max = 0;
+//        string ret;
+//        for (auto& e : v) {
+//            if (max < e.first) {
+//                ret = e.second;
+//                max = e.first;
+//            }
+//        }
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    Solution s;
+//    string ret = s.longestPalindrome(string("babad"));
+//    cout << ret << endl;
+//    return 0;
+//}
