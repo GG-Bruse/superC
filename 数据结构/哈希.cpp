@@ -35,13 +35,19 @@
 闭散列
 也叫开放定址法，当发生哈希冲突时，如果哈希表未被装满，说明在哈希表中必然还有空位置，那么可以把key存放到冲突位置中的"下一个"空位置中去
 
-1.线性探测: 从发生冲突的位置开始，依次向后探测，直到寻找到下一个空位置为止
+1. 线性探测: 从发生冲突的位置开始，依次向后探测，直到寻找到下一个空位置为止
 插入: 通过哈希函数获取待插入元素在哈希表中的位置
 	  若该位置中没有元素则直接插入新元素，若该位置中有元素发生哈希冲突，使用线性探测找到下一个空位置，插入新元素
 删除: 采用闭散列处理哈希冲突时，不能随便物理删除哈希表中已有的元素。
 	  若直接删除元素会影响其他元素的搜索。因此线性探测采用标记的伪删除法来删除一个元素
 
+2. 二次探测
+线性探测的缺陷是产生冲突的数据堆积在一块，这与其找下一个空位置有关系(逐个往后去找)。
+因此二次探测为了避免该问题，找下一个空位置的方法为: H_i = (H_0 + i^2) % m, 或者: H_i = (H_0 - i^2) % m。其中: i = 0,1,2,3……
+H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 
+研究表明: 当表的长度为质数且表装载因子a不超过0.5时，新的表项一定能够插入，而且任何一个位置都不会被探查两次。
+因此只要表中有一半的空位置，在搜索时可以不考虑表装满的情况，但在插入时必须确保表的装载因子a不超过0.5，若超出必须考虑增容
 
 
 
@@ -56,13 +62,17 @@
 
 
 
-
-
-#include<iostream>
-#include<vector>
+/*
+#define LINEAR
+#include <iostream>
+#include <vector>
+#include <string>
+using std::string;
+using std::vector;
 using std::pair;
 using std::make_pair;
-using std::vector;
+using std::cout;
+using std::endl;
 enum State{
 	EMPTY,
 	EXIST,
@@ -74,16 +84,34 @@ struct HashData {
 	State _state = EMPTY;
 };
 
-template<class K,class V>
+template<class K>//默认仿函数
+struct hash {
+	size_t operator()(const K& key) {
+		return (size_t)key;
+	}
+};
+template<>//特化
+struct hash<string> {
+	//BKDR算法
+	size_t operator()(const string& key) {
+		size_t sum = 0;
+		for (auto& e : key) {
+			sum = sum * 131 + e;
+		}
+		return sum;
+	}
+};
+
+template<class K,class V, class Hash = hash<K>>
 class HashTable
 {
 public:
 	bool insert(const pair<K, V>& kv) {
 		if (find(kv.first) != nullptr) return false;//不允许键值冗余
 
-		if (_table.size() == 0 || 10 * _size / _table.size() >= 7) {//扩容
+		if (_table.size() == 0 || 10 * _size / _table.size() >= 5) {//扩容
 			size_t newSize = _table.size() == 0 ? 10 : _table.size() * 2;
-			HashTable<K, V> new_table;
+			HashTable<K, V, Hash> new_table;
 			new_table._table.resize(newSize);
 			//旧表数据映射到新表
 			for (auto& e : _table) {
@@ -94,31 +122,71 @@ public:
 			_table.swap(new_table._table);
 		}
 
-		size_t index = kv.first % _table.size();
+#ifdef LINEAR
+		Hash hash;
+		size_t index = hash(kv.first) % _table.size();//int提升为size_t
 		while (_table[index]._state == EXIST) {//线性探测
 			++index;
 			index %= _table.size();
 		}
+#else //SECONDARY
+		Hash hash;
+		size_t start = hash(kv.first) % _table.size();//int提升为size_t
+		size_t index = start,i = 0;
+		while (_table[index]._state == EXIST) {//二次探测
+			++i;
+			index =  start + i * i;
+			index %= _table.size();
+		}
+#endif
+
 		_table[index]._kv = kv;
 		_table[index]._state = EXIST;
 		++_size;
 		return true;
 	}
 
-	void erase(const K& key) {
-		
+	bool erase(const K& key) {
+		HashData<K,V>* ret = find(key);
+		if (ret == nullptr) {
+			return false;
+		}
+		else {
+			ret->_state = DELETE;
+			--_size;
+			return true;
+		}
 	}
 
-	HashData* find(const K& key) {
+	HashData<K,V>* find(const K& key) {
 		if (_table.size() == 0) return nullptr;
-		size_t index = key % _table.size();
+#ifdef LINEAR
+		Hash hash;
+		size_t start = hash(key) % _table.size();//int提升为size_t
+		size_t index = start;
 		while (_table[index]._state != EMPTY) {
-			if (_table[index]._kv.first == key) {
+			if (_table[index]._state != DELETE && _table[index]._kv.first == key) {
 				return &_table[index];
 			}
 			++index;
 			index %= _table.size();
+			if (index == start) {//当哈希表中全为DELETE 和 EXIST时避免死循环
+				break;
+			}
 		}
+#else //SECONDARY
+		Hash hash;
+		size_t start = hash(key) % _table.size();//int提升为size_t
+		size_t index = start, i = 0;
+		while (_table[index]._state == EXIST) {//二次探测
+			if (_table[index]._state != DELETE && _table[index]._kv.first == key) {
+				return &_table[index];
+			}
+			++i;
+			index = start + i * i;
+			index %= _table.size();
+		}
+#endif
 		return nullptr;
 	}
 
@@ -127,21 +195,42 @@ private:
 	size_t _size;//有效数据
 };
 
-void  Test() {
+
+
+
+
+
+void  Test1() {
 	int array[] = { 1,11,4,15,26,7,44,9 };
 	HashTable<int, int> ht;
 	for (auto& e : array)
 	{
 		ht.insert(make_pair(e, e));
 	}
+	ht.erase(4);
+	cout << ht.find(44)->_kv.first << endl;
+}
+void Test2() {
+	string arr[] = { "苹果", "西瓜", "苹果", "西瓜", "苹果", "苹果", "西瓜", "苹果", "香蕉", "苹果", "香蕉" };
 
+	HashTable<string, int> countHT;
+	for (auto& str : arr){
+		auto ptr = countHT.find(str);
+		if (ptr){
+			ptr->_kv.second++;
+		}
+		else{
+			countHT.insert(make_pair(str, 1));
+		}
+	}
 }
 int main()
 {
-	Test();
+	//Test1();
+	Test2();
 	return 0;
 }
-
+*/
 
 
 
