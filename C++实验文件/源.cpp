@@ -15030,3 +15030,195 @@ int getMin() 获取堆栈中的最小元素
 //    cout << ret << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+//
+//
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//int get_ten_six(int num) {
+//	string ret;
+//	while (num > 0) {
+//		ret += num % 16 + '0';
+//		num /= 16;
+//	}
+//	reverse(ret.begin(), ret.end());
+//	return atoi(ret.c_str());
+//}
+//int main()
+//{
+//	for (int i = 10; i < 10000; ++i) {
+//		if (get_ten_six(i) % i == 0) {
+//			cout << i << endl;
+//		}
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//bool isPrime(int n) {
+//    for (int i = 2; i < n; i++) {//如果n被i整除，则返回false
+//        if (n % i == 0) {
+//            return false;
+//            break;
+//        }
+//    }
+//    return true;	// 反之则返回true 
+//}
+//int main()
+//{
+//    vector<int> v;
+//    vector<int> flag;
+//    vector<pair<int, int>> ret;
+//    int num = 2022;
+//    for (int i = 2; i < num / 2; ++i) {
+//        if (isPrime(i)) v.push_back(i);
+//    }
+//    for (int i = 0; i < v.size(); ++i) {
+//        flag.push_back(num - v[i]);
+//    }
+//    for (int i = 0; i < flag.size(); ++i) {
+//        if (isPrime(flag[i])) {
+//            ret.push_back(make_pair(v[i],flag[i]));
+//        }
+//    }
+//    for (auto& e : ret) {
+//        cout << e.first << " " << e.second << endl;
+//    }
+//    cout << ret.size() << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int main()
+//{
+//	double t = 0, c = 0, s = 0;
+//	cin >> t >> c >> s;
+//	double xiao = c / t;
+//	cout << long long((s - c) / xiao) << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<unordered_map>
+//using namespace std;
+//int main()
+//{
+//	int n = 0;
+//	cin >> n;
+//	unordered_map<string,int> mp;
+//	for (int i = 0; i < n; ++i) {
+//		string tmp;
+//		cin >> tmp;
+//		++mp[tmp];
+//	}
+//	for (unordered_map<string,int>::iterator it = mp.begin(); it != mp.end(); ++it) {
+//		cout << (*it).first << endl;
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//#include<iostream>
+//#include<string>
+//#include<algorithm>
+//using namespace std;
+//string handle(string ret) {
+//	string add = "";
+//	string::iterator it = ret.begin();
+//	string::iterator itend = ret.end() - 1;
+//	while (*it != *itend) {
+//		add += *(it);
+//		++it;
+//	}
+//	reverse(add.begin(), add.end());
+//	ret += add;
+//	return ret;
+//}
+//int main()
+//{
+//	string str;
+//	cin >> str;
+//	if (str.size() == 1) {
+//		cout << str << endl;
+//		return 0;
+//	}
+//	string ret = handle(str);
+//	cout << ret << endl;
+//	return 0;
+//}
+
+
+
+
+
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//using namespace std;
+//int main()
+//{
+//	long long n = 0;
+//	cin >> n;
+//	vector<long long> v(n);
+//	for (long long i = 0; i < n; ++i) {
+//		cin >> v[i];
+//	}
+//	long long sum = 0;
+//	bool flag = true;
+//	for (long long i = 0; i < n - 1; ++i) {
+//		flag = true;
+//		for (long long j = 0; j < n - i - 1; ++j) {
+//			if (v[j] > v[j + 1]) {
+//				sum += v[j];
+//				swap(v[j], v[j + 1]);
+//				flag = false;
+//			}
+//		}
+//		if (flag == true) {
+//			break;
+//		}
+//	}
+//	cout << sum << endl;
+//	return 0;
+//}
