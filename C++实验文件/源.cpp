@@ -15222,3 +15222,53 @@ int getMin() 获取堆栈中的最小元素
 //	cout << sum << endl;
 //	return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//int binary_search(const vector<int>& v, const int key) {
+//	int left = 0, right = v.size() - 1;
+//	while (left <= right) {
+//		int mid = ((left - right) >> 1) + right;
+//		if (v[mid] == key) {
+//			return mid + 1;
+//		}
+//		else if (v[mid] > key) {
+//			right = mid - 1;
+//		}
+//		else if(v[mid] < key) {
+//			left = mid + 1;
+//		}
+//		else {
+//			exit(-1);
+//		}
+//	}
+//	return - 1;
+//}
+//int main()
+//{
+//	vector<int>v;
+//	v.resize(10);
+//
+//	cout << "输入10个从小到大的元素:";
+//	for (size_t i = 0; i < v.size(); ++i) {
+//		cin >> v[i];
+//	}
+//
+//	cout << "输入要查找的元素:";
+//	int tmp = 0;
+//	cin >> tmp;
+//	int index = binary_search(v, tmp);
+//	cout << "要查找的元素的位置为:" << index << endl;
+//	return 0;
+//}
