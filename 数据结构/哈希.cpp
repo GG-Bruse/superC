@@ -61,9 +61,6 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 
 
 
-
-/*
-#define LINEAR
 #include <iostream>
 #include <vector>
 #include <string>
@@ -73,164 +70,341 @@ using std::pair;
 using std::make_pair;
 using std::cout;
 using std::endl;
-enum State{
-	EMPTY,
-	EXIST,
-	DELETE
-};
-template<class K, class V>
-struct HashData {
-	pair<K, V> _kv;
-	State _state = EMPTY;
-};
 
-template<class K>//默认仿函数
-struct hash {
-	size_t operator()(const K& key) {
-		return (size_t)key;
-	}
-};
-template<>//特化
-struct hash<string> {
-	//BKDR算法
-	size_t operator()(const string& key) {
-		size_t sum = 0;
-		for (auto& e : key) {
-			sum = sum * 131 + e;
+//namespace CloseHash {
+//#define LINEAR
+//	enum State {
+//		EMPTY,
+//		EXIST,
+//		DELETE
+//	};
+//	template<class K, class V>
+//	struct HashData {
+//		pair<K, V> _kv;
+//		State _state = EMPTY;
+//	};
+//
+//	template<class K>//默认仿函数
+//	struct hash {
+//		size_t operator()(const K& key) {
+//			return (size_t)key;
+//		}
+//	};
+//	template<>//特化
+//	struct hash<string> {
+//		//BKDR算法
+//		size_t operator()(const string& key) {
+//			size_t sum = 0;
+//			for (auto& e : key) {
+//				sum = sum * 131 + e;
+//			}
+//			return sum;
+//		}
+//	};
+//
+//	template<class K, class V, class Hash = hash<K>>
+//	class HashTable
+//	{
+//	public:
+//		bool insert(const pair<K, V>& kv) {
+//			if (find(kv.first) != nullptr) return false;//不允许键值冗余
+//
+//			if (_table.size() == 0 || 10 * _size / _table.size() >= 5) {//扩容
+//				size_t newSize = _table.size() == 0 ? 10 : _table.size() * 2;
+//				HashTable<K, V, Hash> new_table;
+//				new_table._table.resize(newSize);
+//				//旧表数据映射到新表
+//				for (auto& e : _table) {
+//					if (e._state == EXIST) {
+//						new_table.insert(e._kv);
+//					}
+//				}
+//				_table.swap(new_table._table);
+//			}
+//
+//#ifdef LINEAR
+//			Hash hash;
+//			size_t index = hash(kv.first) % _table.size();//int提升为size_t
+//			while (_table[index]._state == EXIST) {//线性探测
+//				++index;
+//				index %= _table.size();
+//			}
+//#else //SECONDARY
+//			Hash hash;
+//			size_t start = hash(kv.first) % _table.size();//int提升为size_t
+//			size_t index = start, i = 0;
+//			while (_table[index]._state == EXIST) {//二次探测
+//				++i;
+//				index = start + i * i;
+//				index %= _table.size();
+//			}
+//#endif
+//
+//			_table[index]._kv = kv;
+//			_table[index]._state = EXIST;
+//			++_size;
+//			return true;
+//		}
+//
+//		bool erase(const K& key) {
+//			HashData<K, V>* ret = find(key);
+//			if (ret == nullptr) {
+//				return false;
+//			}
+//			else {
+//				ret->_state = DELETE;
+//				--_size;
+//				return true;
+//			}
+//		}
+//
+//		HashData<K, V>* find(const K& key) {
+//			if (_table.size() == 0) return nullptr;
+//#ifdef LINEAR
+//			Hash hash;
+//			size_t start = hash(key) % _table.size();//int提升为size_t
+//			size_t index = start;
+//			while (_table[index]._state != EMPTY) {
+//				if (_table[index]._state != DELETE && _table[index]._kv.first == key) {
+//					return &_table[index];
+//				}
+//				++index;
+//				index %= _table.size();
+//				if (index == start) {//当哈希表中全为DELETE 和 EXIST时避免死循环
+//					break;
+//				}
+//			}
+//#else //SECONDARY
+//			Hash hash;
+//			size_t start = hash(key) % _table.size();//int提升为size_t
+//			size_t index = start, i = 0;
+//			while (_table[index]._state == EXIST) {//二次探测
+//				if (_table[index]._state != DELETE && _table[index]._kv.first == key) {
+//					return &_table[index];
+//				}
+//				++i;
+//				index = start + i * i;
+//				index %= _table.size();
+//			}
+//#endif
+//			return nullptr;
+//		}
+//
+//	private:
+//		vector<HashData<K, V>> _table;
+//		size_t _size = 0;//有效数据
+//	};
+//}
+//using CloseHash::HashTable;
+//void  Test1() {
+//	int array[] = { 1,11,4,15,26,7,44,9 };
+//	HashTable<int, int> ht;
+//	for (auto& e : array)
+//	{
+//		ht.insert(make_pair(e, e));
+//	}
+//	ht.erase(4);
+//	cout << ht.find(44)->_kv.first << endl;
+//}
+//void Test2() {
+//	string arr[] = { "苹果", "西瓜", "苹果", "西瓜", "苹果", "苹果", "西瓜", "苹果", "香蕉", "苹果", "香蕉" };
+//
+//	HashTable<string, int> countHT;
+//	for (auto& str : arr) {
+//		auto ptr = countHT.find(str);
+//		if (ptr) {
+//			ptr->_kv.second++;
+//		}
+//		else {
+//			countHT.insert(make_pair(str, 1));
+//		}
+//	}
+//}
+//int main()
+//{
+//	//Test1();
+//	Test2();
+//	return 0;
+//}
+
+
+
+
+
+namespace OpenHash {
+	template<class K>//默认仿函数
+	struct hash {
+		size_t operator()(const K& key) {
+			return (size_t)key;
 		}
-		return sum;
-	}
-};
-
-template<class K,class V, class Hash = hash<K>>
-class HashTable
-{
-public:
-	bool insert(const pair<K, V>& kv) {
-		if (find(kv.first) != nullptr) return false;//不允许键值冗余
-
-		if (_table.size() == 0 || 10 * _size / _table.size() >= 5) {//扩容
-			size_t newSize = _table.size() == 0 ? 10 : _table.size() * 2;
-			HashTable<K, V, Hash> new_table;
-			new_table._table.resize(newSize);
-			//旧表数据映射到新表
-			for (auto& e : _table) {
-				if (e._state == EXIST) {
-					new_table.insert(e._kv);
-				}
+	};
+	template<>//特化
+	struct hash<string> {
+		//BKDR算法
+		size_t operator()(const string& key) {
+			size_t sum = 0;
+			for (auto& e : key) {
+				sum = sum * 131 + e;
 			}
-			_table.swap(new_table._table);
+			return sum;
 		}
+	};
 
-#ifdef LINEAR
-		Hash hash;
-		size_t index = hash(kv.first) % _table.size();//int提升为size_t
-		while (_table[index]._state == EXIST) {//线性探测
-			++index;
-			index %= _table.size();
-		}
-#else //SECONDARY
-		Hash hash;
-		size_t start = hash(kv.first) % _table.size();//int提升为size_t
-		size_t index = start,i = 0;
-		while (_table[index]._state == EXIST) {//二次探测
-			++i;
-			index =  start + i * i;
-			index %= _table.size();
-		}
-#endif
+	template<class K, class V>
+	struct HashNode {
+		HashNode() = default;
+		HashNode(const pair<K,V>& kv):_kv(kv),_next(nullptr) {}
+		pair<K, V> _kv;
+		HashNode<K, V>* _next;
+	};
 
-		_table[index]._kv = kv;
-		_table[index]._state = EXIST;
-		++_size;
-		return true;
-	}
-
-	bool erase(const K& key) {
-		HashData<K,V>* ret = find(key);
-		if (ret == nullptr) {
-			return false;
+	template<class K, class V, class Hash = hash<K>>
+	class HashBucket
+	{
+		typedef HashNode<K, V> Node;
+		
+		inline size_t __stl_next_prime(unsigned long n)
+		{
+			static const size_t __stl_num_primes = 28;
+			static const size_t __stl_prime_list[__stl_num_primes] =
+			{
+			  53,         97,         193,       389,       769,
+			  1543,       3079,       6151,      12289,     24593,
+			  49157,      98317,      196613,    393241,    786433,
+			  1572869,    3145739,    6291469,   12582917,  25165843,
+			  50331653,   100663319,  201326611, 402653189, 805306457,
+			  1610612741, 3221225473, 4294967291
+			};
+			for (size_t i = 0; i < __stl_num_primes; ++i) {
+				if (__stl_prime_list[i] > n) return __stl_prime_list[i];
+			}
+			return -1;
 		}
-		else {
-			ret->_state = DELETE;
-			--_size;
+	public:
+		bool insert(const pair<K, V>& kv) {
+			Hash hash;
+			if (find(kv.first) != nullptr) return false;//不允许键值冗余
+
+			//荷载因子到达1进行扩容
+			if (_table.size() == 0 || _size == _table.size()) {
+				vector<Node*> new_table;
+				new_table.resize(__stl_next_prime(_table.size()), nullptr);
+				for (size_t i = 0; i < _table.size(); ++i) {
+					Node* cur = _table[i];
+					while (cur != nullptr) {
+						Node* next = cur->_next;
+						size_t hashi = hash(cur->_kv.first) % new_table.size();
+						//头插
+						cur->_next = new_table[hashi];
+						new_table[hashi] = cur;
+						cur = next;
+					}
+					_table[i] = nullptr;
+				}
+				_table.swap(new_table);
+			}
+			
+			size_t hashi = hash(kv.first) % _table.size();
+			//头插
+			Node* newNode = new Node(kv);
+			newNode->_next = _table[hashi];
+			_table[hashi] = newNode;
+			++_size;
 			return true;
 		}
-	}
 
-	HashData<K,V>* find(const K& key) {
-		if (_table.size() == 0) return nullptr;
-#ifdef LINEAR
-		Hash hash;
-		size_t start = hash(key) % _table.size();//int提升为size_t
-		size_t index = start;
-		while (_table[index]._state != EMPTY) {
-			if (_table[index]._state != DELETE && _table[index]._kv.first == key) {
-				return &_table[index];
+		bool erase(const K& key) {
+			Hash hash;
+
+			if (_table.size() == 0) return false;
+			size_t hashi = hash(key) % _table.size();
+			Node* cur = _table[hashi];
+			Node* prev = nullptr;
+			while (cur != nullptr) {
+				if (cur->_kv.first == key) {
+					if (prev == nullptr) {//头删
+						_table[hashi] = cur->_next;
+					}
+					else {
+						prev->_next = cur->_next;
+					}
+					delete cur;
+					--_size;
+					return true;
+				}
+				prev = cur;
+				cur = cur->_next;
 			}
-			++index;
-			index %= _table.size();
-			if (index == start) {//当哈希表中全为DELETE 和 EXIST时避免死循环
-				break;
+			return false;
+		}
+
+
+		Node* find(const K& key) {
+			Hash hash;
+			if (_table.size() == 0) return nullptr;
+			size_t hashi = hash(key) % _table.size();
+			Node* cur = _table[hashi];
+			while (cur != nullptr) {
+				if (cur->_kv.first == key) {
+					return cur;
+				}
+				cur = cur->_next;
+			}
+			return nullptr;
+		}
+
+		~HashBucket(){
+			for (size_t i = 0; i < _table.size(); ++i) {
+				Node* cur = _table[i];
+				while (cur != nullptr) {
+					Node* next = cur->_next;
+					delete cur;
+					cur = next;
+				}
+				_table[i] = nullptr;
 			}
 		}
-#else //SECONDARY
-		Hash hash;
-		size_t start = hash(key) % _table.size();//int提升为size_t
-		size_t index = start, i = 0;
-		while (_table[index]._state == EXIST) {//二次探测
-			if (_table[index]._state != DELETE && _table[index]._kv.first == key) {
-				return &_table[index];
-			}
-			++i;
-			index = start + i * i;
-			index %= _table.size();
-		}
-#endif
-		return nullptr;
-	}
+	private:
+		vector<Node*> _table;
+		size_t _size = 0;
+	};
 
-private:
-	vector<HashData<K, V>> _table;
-	size_t _size;//有效数据
-};
-
-
-
-
-
-
-void  Test1() {
-	int array[] = { 1,11,4,15,26,7,44,9 };
-	HashTable<int, int> ht;
-	for (auto& e : array)
-	{
+}
+using OpenHash::HashBucket;
+void Test1()
+{
+	int array[] = { 1,11, 4,15,26,7,44,55,99,78 };
+	HashBucket<int, int> ht;
+	for (auto& e : array) {
 		ht.insert(make_pair(e, e));
 	}
+	ht.insert(make_pair(22, 22));
+	ht.erase(44);
 	ht.erase(4);
-	cout << ht.find(44)->_kv.first << endl;
+
 }
 void Test2() {
 	string arr[] = { "苹果", "西瓜", "苹果", "西瓜", "苹果", "苹果", "西瓜", "苹果", "香蕉", "苹果", "香蕉" };
 
-	HashTable<string, int> countHT;
-	for (auto& str : arr){
+	HashBucket<string, int> countHT;
+	for (auto& str : arr) {
 		auto ptr = countHT.find(str);
-		if (ptr){
+		if (ptr) {
 			ptr->_kv.second++;
 		}
-		else{
+		else {
 			countHT.insert(make_pair(str, 1));
 		}
 	}
 }
-int main()
-{
+int main() {
 	//Test1();
 	Test2();
 	return 0;
 }
-*/
+
+
+
 
 
 
