@@ -364,6 +364,41 @@ namespace OpenHash {
 				_table[i] = nullptr;
 			}
 		}
+
+		//存储的元素个数
+		size_t size() { return _size; }
+
+		// 表的长度
+		size_t table_size()
+		{
+			return _tables.size();
+		}
+
+		// 桶的个数
+		size_t bucket_num(){
+			size_t num = 0;
+			for (size_t i = 0; i < _tables.size(); ++i) {
+				if (_tables[i]) {
+					++num;
+				}
+			}
+			return num;
+		}
+
+		size_t max_bucket_length() {
+			size_t maxLen = 0;
+			for (size_t i = 0; i < _tables.size(); ++i) {
+				size_t len = 0;
+				Node* cur = _tables[i];
+				while (cur){
+					++len;
+					cur = cur->_next;
+				}
+				if (len > maxLen) maxLen = len;
+			}
+			return maxLen;
+		}
+
 	private:
 		vector<Node*> _table;
 		size_t _size = 0;
