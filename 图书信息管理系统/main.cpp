@@ -18,10 +18,12 @@ enum Option
 	SHOW,
 	SORT1,
 	SORT2,
+	SHUFF,
 	STA,
 	FIND,
 	CLEAR,
 	LOAD,
+	TK,
 	SAVE
 };
 void menu()
@@ -42,21 +44,25 @@ void menu()
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
 	cout << "\t\t\t\t\t\t**                         5.查看所有图书信息                         **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
-	cout << "\t\t\t\t\t\t**                    6.将所有图书信息按ISBN码升序排列                **" << endl;
+	cout << "\t\t\t\t\t\t**                   6.将所有图书信息按ISBN码升序排列                 **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
 	cout << "\t\t\t\t\t\t************************************************************************" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
-	cout << "\t\t\t\t\t\t**                    7.将所有图书信息按ISBN码降序排列                **" << endl;
+	cout << "\t\t\t\t\t\t**                   7.将所有图书信息按ISBN码降序排列                 **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
-	cout << "\t\t\t\t\t\t**                      8.统计所有书籍数量与单价总和                  **" << endl;
+	cout << "\t\t\t\t\t\t**                   8.将所有图书信息按ISBN码打乱顺序                 **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
-	cout << "\t\t\t\t\t\t**                           9.关键字查找                             **" << endl;
+	cout << "\t\t\t\t\t\t**                      9.统计所有书籍数量与单价总和                  **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
-	cout << "\t\t\t\t\t\t**                         10.清空所有图书信息                        **" << endl;
+	cout << "\t\t\t\t\t\t**                           10.关键字查找                            **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
-	cout << "\t\t\t\t\t\t**                         11.载入六条图书信息                        **" << endl;
+	cout << "\t\t\t\t\t\t**                         11.清空所有图书信息                        **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
-	cout << "\t\t\t\t\t\t**                         12.保存所有图书信息                        **" << endl;
+	cout << "\t\t\t\t\t\t**                         12.载入六条图书信息                        **" << endl;
+	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
+	cout << "\t\t\t\t\t\t**                             13.Top-K                               **" << endl;
+	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
+	cout << "\t\t\t\t\t\t**                         14.保存所有图书信息                        **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
 	cout << "\t\t\t\t\t\t**                       0.退出图书信息管理系统                       **" << endl;
 	cout << "\t\t\t\t\t\t**                                                                    **" << endl;
@@ -202,7 +208,12 @@ int main()
 			cout << "排序完成!" << endl;
 			Update_interface();
 			break;
-
+		case SHUFF:
+			srand(unsigned(time(0)));
+			shuff_information(v);
+			cout << "打乱完成!" << endl;
+			Update_interface();
+			break;
 		case STA:
 			ret = statistics(v);
 			cout << "\t\t\t\t\t\t************************************************************************" << endl;
@@ -233,18 +244,25 @@ int main()
 			Update_interface();
 			break;
 
-		case SAVE:
-			save(v);
-			cout << "保存成功!!!" << endl;
-			Update_interface();
-			break;
-
 		case LOAD:
 			load_six(v);
 			cout << endl << "载入成功!!!" << endl;
 			Update_interface();
 			break;
-
+		case TK:
+			cout << "输入数字K,即可得到单价排名前K名的数据:";
+			cin >> temp;
+			if (temp > v.size()) {
+				cout << endl << "图书信息管理系统中图书数量少于" << temp << "本!!!" << endl;
+			}
+			else show(topK(v, temp));
+			Update_interface();
+			break;
+		case SAVE:
+			save(v);
+			cout << "保存成功!!!" << endl;
+			Update_interface();
+			break;
 		default:
 			cout << "选择错误,请重新输入!" << endl;
 			break;

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include "vector.hpp"
+#include "queue.hpp"
 #include <algorithm>
 using std::swap;
 using std::sort;
@@ -15,6 +16,7 @@ using std::ifstream;
 using std::ofstream;
 using std::ios;
 using std::pair;
+using std::random_shuffle;
 using namespace bjy;
 
 typedef struct book{
@@ -148,24 +150,20 @@ void QuickSort(vector<book>& arr, int left, int right)
 {
 	if (left >= right)return;
 
-	int begin = left, end = right;
-	int key = begin;
-	while (begin < end)
+	int key = left;
+	int cur = left, prev = left + 1;
+	while (prev <= right)
 	{
-		while (begin < end && arr[end] >= arr[key])
+		if (arr[prev] < arr[key] && ++cur != prev)//避免无意义交换
 		{
-			--end;
+			swap(arr[prev], arr[cur]);
 		}
-		while (begin < end && arr[begin] <= arr[key])
-		{
-			++begin;
-		}
-		swap(arr[begin], arr[end]);
+		++prev;
 	}
-	swap(arr[begin], arr[key]);
+	swap(arr[key], arr[cur]);
 
-	QuickSort(arr, left, begin - 1);
-	QuickSort(arr, begin + 1, right);
+	QuickSort(arr, left, cur - 1);
+	QuickSort(arr, cur + 1, right);
 }
 void Sort(vector<book>& v) {
 	QuickSort(v,0,v.size() - 1);
@@ -179,6 +177,10 @@ public:
 };
 void Sort_2(vector<book>& v) {
 	sort(v.begin(), v.end(),Compare());
+}
+
+void shuff_information(vector<book>& v) {
+	random_shuffle(v.begin(), v.end());
 }
 
 
@@ -257,6 +259,21 @@ void load_six(vector<book>& v) {
 	for (int i = 0; i < sizeof(tmp) / sizeof(tmp[0]); ++i) {
 		v.push_back(tmp[i]);
 	}
+}
+
+
+class Less {
+public:
+	bool operator() (const book& left, const book& right) { return left._price < right._price; }
+};
+vector<book> topK(vector<book>& v, int k) {
+	priority_queue<book,vector<book>,Less> queue(v.begin(),v.end());
+	vector<book> ret;
+	while (k--) {
+		ret.push_back(queue.top());
+		queue.pop();
+	}
+	return ret;
 }
 
 bool save(const vector<book>& v) {
