@@ -61,15 +61,15 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 
 
 
-#include <iostream>
-#include <vector>
-#include <string>
-using std::string;
-using std::vector;
-using std::pair;
-using std::make_pair;
-using std::cout;
-using std::endl;
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using std::string;
+//using std::vector;
+//using std::pair;
+//using std::make_pair;
+//using std::cout;
+//using std::endl;
 
 //namespace CloseHash {
 //#define LINEAR
@@ -231,223 +231,293 @@ using std::endl;
 
 
 
-namespace OpenHash {
-	template<class K>//默认仿函数
-	struct hash {
-		size_t operator()(const K& key) {
-			return (size_t)key;
-		}
-	};
-	template<>//特化
-	struct hash<string> {
-		//BKDR算法
-		size_t operator()(const string& key) {
-			size_t sum = 0;
-			for (auto& e : key) {
-				sum = sum * 131 + e;
-			}
-			return sum;
-		}
-	};
 
-	template<class K, class V>
-	struct HashNode {
-		HashNode() = default;
-		HashNode(const pair<K,V>& kv):_kv(kv),_next(nullptr) {}
-		pair<K, V> _kv;
-		HashNode<K, V>* _next;
-	};
 
-	template<class K, class V, class Hash = hash<K>>
-	class HashBucket
-	{
-		typedef HashNode<K, V> Node;
-		
-		inline size_t __stl_next_prime(unsigned long n)
-		{
-			static const size_t __stl_num_primes = 28;
-			static const size_t __stl_prime_list[__stl_num_primes] =
-			{
-			  53,         97,         193,       389,       769,
-			  1543,       3079,       6151,      12289,     24593,
-			  49157,      98317,      196613,    393241,    786433,
-			  1572869,    3145739,    6291469,   12582917,  25165843,
-			  50331653,   100663319,  201326611, 402653189, 805306457,
-			  1610612741, 3221225473, 4294967291
-			};
-			for (size_t i = 0; i < __stl_num_primes; ++i) {
-				if (__stl_prime_list[i] > n) return __stl_prime_list[i];
-			}
-			return -1;
-		}
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using std::string;
+//using std::vector;
+//using std::pair;
+//using std::make_pair;
+//using std::cout;
+//using std::endl;
+
+//namespace OpenHash {
+//	template<class K>//默认仿函数
+//	struct hash {
+//		size_t operator()(const K& key) {
+//			return (size_t)key;
+//		}
+//	};
+//	template<>//特化
+//	struct hash<string> {
+//		//BKDR算法
+//		size_t operator()(const string& key) {
+//			size_t sum = 0;
+//			for (auto& e : key) {
+//				sum = sum * 131 + e;
+//			}
+//			return sum;
+//		}
+//	};
+//
+//	template<class K, class V>
+//	struct HashNode {
+//		HashNode() = default;
+//		HashNode(const pair<K,V>& kv):_kv(kv),_next(nullptr) {}
+//		pair<K, V> _kv;
+//		HashNode<K, V>* _next;
+//	};
+//
+//	template<class K, class V, class Hash = hash<K>>
+//	class HashBucket
+//	{
+//		typedef HashNode<K, V> Node;
+//		
+//		inline size_t __stl_next_prime(unsigned long n)
+//		{
+//			static const size_t __stl_num_primes = 28;
+//			static const size_t __stl_prime_list[__stl_num_primes] =
+//			{
+//			  53,         97,         193,       389,       769,
+//			  1543,       3079,       6151,      12289,     24593,
+//			  49157,      98317,      196613,    393241,    786433,
+//			  1572869,    3145739,    6291469,   12582917,  25165843,
+//			  50331653,   100663319,  201326611, 402653189, 805306457,
+//			  1610612741, 3221225473, 4294967291
+//			};
+//			for (size_t i = 0; i < __stl_num_primes; ++i) {
+//				if (__stl_prime_list[i] > n) return __stl_prime_list[i];
+//			}
+//			return -1;
+//		}
+//	public:
+//		bool insert(const pair<K, V>& kv) {
+//			Hash hash;
+//			if (find(kv.first) != nullptr) return false;//不允许键值冗余
+//
+//			//荷载因子到达1进行扩容
+//			if (_table.size() == 0 || _size == _table.size()) {
+//				vector<Node*> new_table;
+//				new_table.resize(__stl_next_prime(_table.size()), nullptr);
+//				for (size_t i = 0; i < _table.size(); ++i) {
+//					Node* cur = _table[i];
+//					while (cur != nullptr) {
+//						Node* next = cur->_next;
+//						size_t hashi = hash(cur->_kv.first) % new_table.size();
+//						//头插
+//						cur->_next = new_table[hashi];
+//						new_table[hashi] = cur;
+//						cur = next;
+//					}
+//					_table[i] = nullptr;
+//				}
+//				_table.swap(new_table);
+//			}
+//			
+//			size_t hashi = hash(kv.first) % _table.size();
+//			//头插
+//			Node* newNode = new Node(kv);
+//			newNode->_next = _table[hashi];
+//			_table[hashi] = newNode;
+//			++_size;
+//			return true;
+//		}
+//
+//		bool erase(const K& key) {
+//			Hash hash;
+//
+//			if (_table.size() == 0) return false;
+//			size_t hashi = hash(key) % _table.size();
+//			Node* cur = _table[hashi];
+//			Node* prev = nullptr;
+//			while (cur != nullptr) {
+//				if (cur->_kv.first == key) {
+//					if (prev == nullptr) {//头删
+//						_table[hashi] = cur->_next;
+//					}
+//					else {
+//						prev->_next = cur->_next;
+//					}
+//					delete cur;
+//					--_size;
+//					return true;
+//				}
+//				prev = cur;
+//				cur = cur->_next;
+//			}
+//			return false;
+//		}
+//
+//
+//		Node* find(const K& key) {
+//			Hash hash;
+//			if (_table.size() == 0) return nullptr;
+//			size_t hashi = hash(key) % _table.size();
+//			Node* cur = _table[hashi];
+//			while (cur != nullptr) {
+//				if (cur->_kv.first == key) {
+//					return cur;
+//				}
+//				cur = cur->_next;
+//			}
+//			return nullptr;
+//		}
+//
+//		~HashBucket(){
+//			for (size_t i = 0; i < _table.size(); ++i) {
+//				Node* cur = _table[i];
+//				while (cur != nullptr) {
+//					Node* next = cur->_next;
+//					delete cur;
+//					cur = next;
+//				}
+//				_table[i] = nullptr;
+//			}
+//		}
+//
+//		//存储的元素个数
+//		size_t size() { return _size; }
+//
+//		// 表的长度
+//		size_t table_size()
+//		{
+//			return _tables.size();
+//		}
+//
+//		// 桶的个数
+//		size_t bucket_num(){
+//			size_t num = 0;
+//			for (size_t i = 0; i < _tables.size(); ++i) {
+//				if (_tables[i]) {
+//					++num;
+//				}
+//			}
+//			return num;
+//		}
+//
+//		size_t max_bucket_length() {
+//			size_t maxLen = 0;
+//			for (size_t i = 0; i < _tables.size(); ++i) {
+//				size_t len = 0;
+//				Node* cur = _tables[i];
+//				while (cur){
+//					++len;
+//					cur = cur->_next;
+//				}
+//				if (len > maxLen) maxLen = len;
+//			}
+//			return maxLen;
+//		}
+//
+//	private:
+//		vector<Node*> _table;
+//		size_t _size = 0;
+//	};
+//
+//}
+//using OpenHash::HashBucket;
+//void Test1()
+//{
+//	int array[] = { 1,11, 4,15,26,7,44,55,99,78 };
+//	HashBucket<int, int> ht;
+//	for (auto& e : array) {
+//		ht.insert(make_pair(e, e));
+//	}
+//	ht.insert(make_pair(22, 22));
+//	ht.erase(44);
+//	ht.erase(4);
+//
+//}
+//void Test2() {
+//	string arr[] = { "苹果", "西瓜", "苹果", "西瓜", "苹果", "苹果", "西瓜", "苹果", "香蕉", "苹果", "香蕉" };
+//
+//	HashBucket<string, int> countHT;
+//	for (auto& str : arr) {
+//		auto ptr = countHT.find(str);
+//		if (ptr) {
+//			ptr->_kv.second++;
+//		}
+//		else {
+//			countHT.insert(make_pair(str, 1));
+//		}
+//	}
+//}
+//int main() {
+//	//Test1();
+//	Test2();
+//	return 0;
+//}
+
+
+
+
+
+#include <iostream>
+#include <vector>
+using std::vector;
+using std::cout;
+using std::endl;
+
+namespace bjy {
+	template<size_t N>
+	class bit_set {
 	public:
-		bool insert(const pair<K, V>& kv) {
-			Hash hash;
-			if (find(kv.first) != nullptr) return false;//不允许键值冗余
-
-			//荷载因子到达1进行扩容
-			if (_table.size() == 0 || _size == _table.size()) {
-				vector<Node*> new_table;
-				new_table.resize(__stl_next_prime(_table.size()), nullptr);
-				for (size_t i = 0; i < _table.size(); ++i) {
-					Node* cur = _table[i];
-					while (cur != nullptr) {
-						Node* next = cur->_next;
-						size_t hashi = hash(cur->_kv.first) % new_table.size();
-						//头插
-						cur->_next = new_table[hashi];
-						new_table[hashi] = cur;
-						cur = next;
-					}
-					_table[i] = nullptr;
-				}
-				_table.swap(new_table);
-			}
-			
-			size_t hashi = hash(kv.first) % _table.size();
-			//头插
-			Node* newNode = new Node(kv);
-			newNode->_next = _table[hashi];
-			_table[hashi] = newNode;
-			++_size;
-			return true;
+		bit_set() {
+			if (N % 8 == 0) _bits.resize(N / 8, 0);
+			else _bits.resize(N / 8 + 1, 0);
+		}
+		void set(size_t which){
+			size_t i = which / 8, j = which % 8;
+			_bits[i] |= (1 << j);
 		}
 
-		bool erase(const K& key) {
-			Hash hash;
-
-			if (_table.size() == 0) return false;
-			size_t hashi = hash(key) % _table.size();
-			Node* cur = _table[hashi];
-			Node* prev = nullptr;
-			while (cur != nullptr) {
-				if (cur->_kv.first == key) {
-					if (prev == nullptr) {//头删
-						_table[hashi] = cur->_next;
-					}
-					else {
-						prev->_next = cur->_next;
-					}
-					delete cur;
-					--_size;
-					return true;
-				}
-				prev = cur;
-				cur = cur->_next;
-			}
-			return false;
+		void reset(size_t which) {
+			size_t i = which / 8, j = which % 8;
+			_bits[i] &= ~(1 << j);
 		}
 
-
-		Node* find(const K& key) {
-			Hash hash;
-			if (_table.size() == 0) return nullptr;
-			size_t hashi = hash(key) % _table.size();
-			Node* cur = _table[hashi];
-			while (cur != nullptr) {
-				if (cur->_kv.first == key) {
-					return cur;
-				}
-				cur = cur->_next;
-			}
-			return nullptr;
+		bool test(size_t which)const {
+			size_t i = which / 8, j = which % 8;
+			return _bits[i] & (1 << j);
 		}
-
-		~HashBucket(){
-			for (size_t i = 0; i < _table.size(); ++i) {
-				Node* cur = _table[i];
-				while (cur != nullptr) {
-					Node* next = cur->_next;
-					delete cur;
-					cur = next;
-				}
-				_table[i] = nullptr;
-			}
-		}
-
-		//存储的元素个数
-		size_t size() { return _size; }
-
-		// 表的长度
-		size_t table_size()
-		{
-			return _tables.size();
-		}
-
-		// 桶的个数
-		size_t bucket_num(){
-			size_t num = 0;
-			for (size_t i = 0; i < _tables.size(); ++i) {
-				if (_tables[i]) {
-					++num;
-				}
-			}
-			return num;
-		}
-
-		size_t max_bucket_length() {
-			size_t maxLen = 0;
-			for (size_t i = 0; i < _tables.size(); ++i) {
-				size_t len = 0;
-				Node* cur = _tables[i];
-				while (cur){
-					++len;
-					cur = cur->_next;
-				}
-				if (len > maxLen) maxLen = len;
-			}
-			return maxLen;
-		}
-
 	private:
-		vector<Node*> _table;
-		size_t _size = 0;
+		vector<char> _bits;
 	};
-
 }
-using OpenHash::HashBucket;
-void Test1()
+
+
+
+
+
+using namespace bjy;
+void test_bit_set1()
 {
-	int array[] = { 1,11, 4,15,26,7,44,55,99,78 };
-	HashBucket<int, int> ht;
-	for (auto& e : array) {
-		ht.insert(make_pair(e, e));
-	}
-	ht.insert(make_pair(22, 22));
-	ht.erase(44);
-	ht.erase(4);
+	bit_set<100> bs1;
+	bs1.set(8);
+	bs1.set(9);
+	bs1.set(20);
 
-}
-void Test2() {
-	string arr[] = { "苹果", "西瓜", "苹果", "西瓜", "苹果", "苹果", "西瓜", "苹果", "香蕉", "苹果", "香蕉" };
+	cout << bs1.test(8) << endl;
+	cout << bs1.test(9) << endl;
+	cout << bs1.test(20) << endl;
 
-	HashBucket<string, int> countHT;
-	for (auto& str : arr) {
-		auto ptr = countHT.find(str);
-		if (ptr) {
-			ptr->_kv.second++;
-		}
-		else {
-			countHT.insert(make_pair(str, 1));
-		}
-	}
+	bs1.reset(8);
+	bs1.reset(9);
+	bs1.reset(20);
+
+	cout << bs1.test(8) << endl;
+	cout << bs1.test(9) << endl;
+	cout << bs1.test(20) << endl;
 }
-int main() {
-	//Test1();
-	Test2();
+int main()
+{
+	test_bit_set1();
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
