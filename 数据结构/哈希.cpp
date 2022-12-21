@@ -459,65 +459,102 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 
 
 
-#include <iostream>
-#include <vector>
-using std::vector;
-using std::cout;
-using std::endl;
-
-namespace bjy {
-	template<size_t N>
-	class bit_set {
-	public:
-		bit_set() {
-			if (N % 8 == 0) _bits.resize(N / 8, 0);
-			else _bits.resize(N / 8 + 1, 0);
-		}
-		void set(size_t which){
-			size_t i = which / 8, j = which % 8;
-			_bits[i] |= (1 << j);
-		}
-
-		void reset(size_t which) {
-			size_t i = which / 8, j = which % 8;
-			_bits[i] &= ~(1 << j);
-		}
-
-		bool test(size_t which)const {
-			size_t i = which / 8, j = which % 8;
-			return _bits[i] & (1 << j);
-		}
-	private:
-		vector<char> _bits;
-	};
-}
 
 
 
 
 
-using namespace bjy;
-void test_bit_set1()
-{
-	bit_set<100> bs1;
-	bs1.set(8);
-	bs1.set(9);
-	bs1.set(20);
 
-	cout << bs1.test(8) << endl;
-	cout << bs1.test(9) << endl;
-	cout << bs1.test(20) << endl;
 
-	bs1.reset(8);
-	bs1.reset(9);
-	bs1.reset(20);
 
-	cout << bs1.test(8) << endl;
-	cout << bs1.test(9) << endl;
-	cout << bs1.test(20) << endl;
-}
-int main()
-{
-	test_bit_set1();
-	return 0;
-}
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using std::vector;
+//using std::cout;
+//using std::endl;
+//
+//namespace bjy {
+//	template<size_t N>
+//	class bitset {
+//	public:
+//		bitset() {
+//			if (N % 8 == 0) _bits.resize(N / 8, 0);
+//			else _bits.resize(N / 8 + 1, 0);
+//		}
+//		void set(size_t which){
+//			size_t i = which / 8, j = which % 8;
+//			_bits[i] |= (1 << j);
+//		}
+//
+//		void reset(size_t which) {
+//			size_t i = which / 8, j = which % 8;
+//			_bits[i] &= ~(1 << j);
+//		}
+//
+//		bool test(size_t which)const {
+//			size_t i = which / 8, j = which % 8;
+//			return _bits[i] & (1 << j);
+//		}
+//	private:
+//		vector<char> _bits;
+//	};
+//}
+//
+//
+//
+//using namespace bjy;
+//void test_bit_set()
+//{
+//	bitset<100> bs;
+//	bs.set(8);
+//	bs.set(9);
+//	bs.set(20);
+//
+//	cout << bs.test(8) << endl;
+//	cout << bs.test(9) << endl;
+//	cout << bs.test(20) << endl;
+//
+//	bs.reset(8);
+//	bs.reset(9);
+//	bs.reset(20);
+//
+//	cout << bs.test(8) << endl;
+//	cout << bs.test(9) << endl;
+//	cout << bs.test(20) << endl;
+//
+//	bitset<UINT_MAX> bss;
+//}
+//int main()
+//{
+//	test_bit_set();
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
