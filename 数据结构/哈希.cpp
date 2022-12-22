@@ -544,14 +544,102 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 
 
 
-
-
-
-
-
-
-
-
+//#include <iostream>
+//#include <bitset>
+//using namespace std;
+//
+//namespace bjy {
+//	struct HashBKDR {
+//		size_t operator()(const string& key) {
+//			size_t sum = 0;
+//			for (auto& e : key) {
+//				sum = sum * 131 + e;
+//			}
+//			return sum;
+//		}
+//	};
+//	struct HashAP {
+//		size_t operator()(const string& key) {
+//			size_t hash = 0;
+//			for (size_t i = 0; i < key.size(); i++) {
+//				if ((i & 1) == 0) {
+//					hash ^= ((hash << 7) ^ key[i] ^ (hash >> 3));
+//				}
+//				else {
+//					hash ^= (~((hash << 11) ^ key[i] ^ (hash >> 5)));
+//				}
+//			}
+//			return hash;
+//		}
+//	};
+//	struct HashDJB {
+//		size_t operator()(const string& key) {
+//			size_t hash = 5381;
+//			for (auto ch : key) {
+//				hash += (hash << 5) + ch;
+//			}
+//			return hash;
+//		}
+//	};
+//
+//	template<size_t N, class K, class Hash1 = HashBKDR, class Hash2 = HashAP, class Hash3 = HashDJB>
+//	class Bloon_filter
+//	{
+//	public:
+//		void set(const K& key) {
+//			size_t pos1 = Hash1()(key) % (_ratio * N);
+//			size_t pos2 = Hash2()(key) % (_ratio * N);
+//			size_t pos3 = Hash3()(key) % (_ratio * N);
+//			_bits.set(pos1);
+//			_bits.set(pos2);
+//			_bits.set(pos3);
+//		}
+//
+//		void reset(const K& key) {
+//
+//		}
+//
+//		bool test(const K& key) {
+//			size_t pos1 = Hash1()(key) % (_ratio * N);
+//			size_t pos2 = Hash2()(key) % (_ratio * N);
+//			size_t pos3 = Hash3()(key) % (_ratio * N);
+//			if (_bits.test(pos1) && _bits.test(pos2) && _bits.test(pos3)) return true;
+//			else return false;
+//		}
+//	private:
+//		const static size_t _ratio = 5;
+//		bitset<_ratio* N> _bits;
+//	};
+//
+//
+//	
+//
+//}
+//
+//using namespace bjy;
+//void test()
+//{
+//	Bloon_filter<10, string> bf;
+//	string arr1[] = { "苹果", "西瓜", "阿里", "美团", "苹果", "字节", "西瓜", "苹果", "香蕉", "苹果", "腾讯" };
+//
+//	for (auto& str : arr1){
+//		bf.set(str);
+//	}
+//	for (auto& str : arr1){
+//		cout << bf.test(str) << endl;
+//	}
+//
+//	string arr2[] = { "苹果111", "西瓜", "阿里22", "美团", "苹果adx", "字节", "西瓜sSX", "苹果", "香蕉nj", "苹果", "腾讯@" };
+//
+//	for (auto& str : arr2){
+//		cout << str << ":" << bf.test(str) << endl;
+//	}
+//}
+//int main()
+//{
+//	test();
+//	return 0;
+//}
 
 
 
