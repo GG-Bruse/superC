@@ -545,6 +545,8 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 
 
 //#include <iostream>
+//#include <vector>
+//#include <string>
 //#include <bitset>
 //using namespace std;
 //
@@ -582,7 +584,7 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 //		}
 //	};
 //
-//	template<size_t N, class K, class Hash1 = HashBKDR, class Hash2 = HashAP, class Hash3 = HashDJB>
+//	template<size_t N, class K = string, class Hash1 = HashBKDR, class Hash2 = HashAP, class Hash3 = HashDJB>
 //	class Bloon_filter
 //	{
 //	public:
@@ -590,34 +592,26 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 //			size_t pos1 = Hash1()(key) % (_ratio * N);
 //			size_t pos2 = Hash2()(key) % (_ratio * N);
 //			size_t pos3 = Hash3()(key) % (_ratio * N);
-//			_bits.set(pos1);
-//			_bits.set(pos2);
-//			_bits.set(pos3);
-//		}
-//
-//		void reset(const K& key) {
-//
+//			_bits->set(pos1);
+//			_bits->set(pos2);
+//			_bits->set(pos3);
 //		}
 //
 //		bool test(const K& key) {
 //			size_t pos1 = Hash1()(key) % (_ratio * N);
 //			size_t pos2 = Hash2()(key) % (_ratio * N);
 //			size_t pos3 = Hash3()(key) % (_ratio * N);
-//			if (_bits.test(pos1) && _bits.test(pos2) && _bits.test(pos3)) return true;
+//			if (_bits->test(pos1) && _bits->test(pos2) && _bits->test(pos3)) return true;
 //			else return false;
 //		}
 //	private:
 //		const static size_t _ratio = 5;
-//		bitset<_ratio* N> _bits;
+//		bitset<_ratio* N>* _bits = new bitset<_ratio* N>;//库中bitset使用静态数组，开辟在栈上，容易导致栈溢出
 //	};
-//
-//
-//	
-//
 //}
 //
 //using namespace bjy;
-//void test()
+//void Test1()
 //{
 //	Bloon_filter<10, string> bf;
 //	string arr1[] = { "苹果", "西瓜", "阿里", "美团", "苹果", "字节", "西瓜", "苹果", "香蕉", "苹果", "腾讯" };
@@ -635,9 +629,58 @@ H_0是通过散列函数Hash(x)对元素的关键码 key 进行计算得到的位置，m是表的大小。
 //		cout << str << ":" << bf.test(str) << endl;
 //	}
 //}
+//void Test2()
+//{
+//	srand(time(0));
+//	const size_t N = 10000;
+//	Bloon_filter<N> bf;
+//	cout << sizeof(bf) << endl;
+//
+//	std::vector<std::string> v1;
+//	std::string url = "https://www.cnblogs.com/-clq/archive/2012/05/31/2528153.html";
+//
+//	for (size_t i = 0; i < N; ++i){
+//		v1.push_back(url + std::to_string(1234 + i));
+//	}
+//	for (auto& str : v1){
+//		bf.set(str);
+//	}
+//
+//	// 相似
+//	vector<string> v2;
+//	for (size_t i = 0; i < N; ++i){
+//		std::string url = "http://www.cnblogs.com/-clq/archive/2021/05/31/2528153.html";
+//		url += std::to_string(rand() + i);
+//		v2.push_back(url);
+//	}
+//
+//	size_t n2 = 0;
+//	for (auto& str : v2){
+//		if (bf.test(str)){
+//			++n2;
+//		}
+//	}
+//	cout << "相似字符串误判率:" << (double)n2 / (double)N << endl;
+//
+//	std::vector<std::string> v3;
+//	for (size_t i = 0; i < N; ++i){
+//		string url = "zhihu.com";
+//		url += std::to_string(rand() + i);
+//		v3.push_back(url);
+//	}
+//
+//	size_t n3 = 0;
+//	for (auto& str : v3){
+//		if (bf.test(str)){
+//			++n3;
+//		}
+//	}
+//	cout << "不相似字符串误判率:" << (double)n3 / (double)N << endl;
+//}
 //int main()
 //{
-//	test();
+//	//Test1();
+//	Test2();
 //	return 0;
 //}
 
