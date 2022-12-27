@@ -167,5 +167,150 @@ C数组越界检查薄弱，越界读基本检查不出来，越界写抽查
 
 
 
+#define _CRT_SECURE_NO_WARNINGS
 
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <array>
+#include <assert.h>
+using namespace std;
+namespace bjy
+{
+	class string
+	{
+	public:
+		typedef char* iterator;
+		iterator begin()
+		{
+			return _str;
+		}
 
+		iterator end()
+		{
+			return _str + _size;
+		}
+
+		string(const char* str = "")
+			:_size(strlen(str))
+			, _capacity(_size)
+		{
+			_str = new char[_capacity + 1];
+			strcpy(_str, str);
+		}
+
+		void swap(string& s)
+		{
+			::swap(_str, s._str);
+			::swap(_size, s._size);
+			::swap(_capacity, s._capacity);
+		}
+
+		// 拷贝构造
+		string(const string& s)
+			:_str(nullptr)
+		{
+			cout << "string(const string& s) -- 拷贝构造(深拷贝)" << endl;
+			string tmp(s._str);
+			swap(tmp);
+		}
+		// 移动构造
+		string(string&& s)
+			:_str(nullptr)
+			, _size(0)
+			, _capacity(0)
+		{
+			cout << "string(string&& s) -- 资源转移" << endl;
+			swap(s);
+		}
+
+		// 拷贝赋值
+		string& operator=(const string& s)
+		{
+			cout << "string& operator=(string s) -- 拷贝赋值(深拷贝)" << endl;
+			string tmp(s);
+			swap(tmp);
+
+			return *this;
+		}
+
+		// 移动赋值
+		string& operator=(string&& s)
+		{
+			cout << "string& operator=(string s) -- 移动赋值(资源移动)" << endl;
+			swap(s);
+
+			return *this;
+		}
+
+		~string()
+		{
+			delete[] _str;
+			_str = nullptr;
+		}
+
+		char& operator[](size_t pos)
+		{
+			assert(pos < _size);
+			return _str[pos];
+		}
+
+		void reserve(size_t n)
+		{
+			if (n > _capacity)
+			{
+				char* tmp = new char[n + 1];
+				strcpy(tmp, _str);
+				delete[] _str;
+				_str = tmp;
+
+				_capacity = n;
+			}
+		}
+
+		void push_back(char ch)
+		{
+			if (_size >= _capacity)
+			{
+				size_t newcapacity = _capacity == 0 ? 4 : _capacity * 2;
+				reserve(newcapacity);
+			}
+
+			_str[_size] = ch;
+			++_size;
+			_str[_size] = '\0';
+		}
+
+		string& operator+=(char ch)
+		{
+			push_back(ch);
+			return *this;
+		}
+
+		const char* c_str() const
+		{
+			return _str;
+		}
+	private:
+		char* _str;
+		size_t _size;
+		size_t _capacity;
+	};
+}
+
+bjy::string to_string(int value)
+{
+	bjy::string str;
+
+	//……
+
+	return str;
+}
+int main()
+{
+	bjy::string ret = to_string(-3456);
+
+	return 0;
+}
