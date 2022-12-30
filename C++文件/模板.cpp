@@ -565,3 +565,144 @@ C/C++程序要运行，得经历: 预处理 -- 编译 -- 汇编 -- 链接
 
 
 //可变参数模板
+/*
+C++11的新特性可变参数模板能够让您创建可以接受可变参数的函数模板和类模板。
+*/
+
+// Args是一个模板参数包，args是一个函数形参参数包
+// 声明一个参数包Args... args，这个参数包中可以包含0到任意个模板参数
+//template <class ...Args>
+//void ShowList(Args... args)
+//{}
+
+/*
+上面的参数args前面有省略号，所以它就是一个可变模版参数，我们把带省略号的参数称为“参数包”，它里面包含了0到N（N>=0）个模版参数。
+我们无法直接获取参数包args中的每个参数的，只能通过展开参数包的方式来获取参数包中的每个参数。
+*/
+
+
+
+//递归函数方式展开参数包
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//template <class T>
+//void ShowList(const T& t)// 递归终止函数
+//{
+//	cout << "ShowList(" << t << ", " << 0 << "参数包)" << endl;
+//}
+//// 展开函数
+//template <class T, class ...Args>
+//void ShowList(const T& value, Args... args)
+//{
+//	cout << "ShowList("<<value<<", " << sizeof...(args) << "参数包)" << endl;
+//	ShowList(args...);
+//}
+//int main()
+//{
+//	ShowList(1);
+//	cout << endl;
+//	ShowList(1, 'A');
+//	cout << endl;
+//	ShowList(1, 'A', std::string("sort"));
+//	cout << endl;
+//	return 0;
+//}
+
+
+
+//逗号表达式展开参数包
+/*
+这种展开参数包的方式，不需要通过递归终止函数，是直接在expand函数体中展开的。
+printarg不是一个递归终止函数，只是一个处理参数包中每一个参数的函数。
+这种就地展开参数包的方式实现的关键是逗号表达式。我们知道逗号表达式会按顺序执行逗号前面的表达式。
+
+expand函数中的逗号表达式：(printarg(args), 0)，也是按照这个执行顺序，先执行printarg(args)，再得到逗号表达式的结果0。
+同时还用到了C++11的另外一个特性——初始化列表，通过初始化列表来初始化一个变长数组,
+{(printarg(args), 0)...}将会展开成((printarg(arg1),0),(printarg(arg2),0), (printarg(arg3),0), etc... )，
+最终会创建一个元素值都为0的数组int arr[sizeof...(Args)]。
+
+由于是逗号表达式，在创建数组的过程中会先执行逗号表达式前面的部分printarg(args)
+打印出参数，也就是说在构造int数组的过程中就将参数包展开了，这个数组的目的纯粹是为了在数组构造的过程展开参数包
+*/
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//template<class T>
+//int PrintArg(const T& x)//处理每个参数的函数
+//{
+//	cout << x << " ";
+//	return 0;
+//}
+//template <class ...Args>
+//void ShowList(Args... args)
+//{
+//	int a[] = { PrintArg(args)... };
+//	cout << endl;
+//}
+//int main()
+//{
+//	ShowList(1);
+//	ShowList(1, 'A');
+//	ShowList(1, 'A', std::string("sort"));
+//	return 0;
+//}
+
+
+
+//emplace_back(这里写博客时，查下资料)
+//#include <iostream>
+//#include <list>
+//using namespace std;
+//class Date
+//{
+//public:
+//	Date(int year = 1, int month = 1, int day = 1)
+//		:_year(year)
+//		, _month(month)
+//		, _day(day)
+//	{
+//		cout << "Date(int year = 1, int month = 1, int day = 1)" << endl;
+//	}
+//
+//	Date(const Date& d)
+//		:_year(d._year)
+//		, _month(d._month)
+//		, _day(d._day)
+//	{
+//		cout << "Date(const Date& d)" << endl;
+//	}
+//
+//	Date& operator=(const Date& d)
+//	{
+//		cout << "Date& operator=(const Date& d))" << endl;
+//		return *this;
+//	}
+//
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//	//对于普通内置类型没有区别
+//	list<int> lt1;
+//	lt1.push_back(1);
+//	lt1.emplace_back(2);
+//
+//	//对于自定义类型
+//	list<Date> lt2;
+//	lt2.push_back(Date(2022, 11, 16));
+//	cout << "---------------------------------" << endl;
+//	lt2.emplace_back(2022, 11, 16);//本质上是将参数包中参数逐个用于构造
+//
+//	return 0;
+//}
+/*
+Date(int year = 1, int month = 1, int day = 1)
+Date(const Date& d)
+---------------------------------
+Date(int year = 1, int month = 1, int day = 1)
+*/
