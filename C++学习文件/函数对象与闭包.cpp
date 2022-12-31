@@ -486,31 +486,61 @@ template<class T>bool logical_not<T>//逻辑非
 因此实现operator()运算符重载, 该类的对象就能作为闭包使用.默认传入的this指针提供了访问成员变量的途径
 */
 
-//#include<iostream>
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <algorithm>
 //using namespace std;
-//class MyFunc
-//{
-//public:
-//    MyFunc(int temp) :m_r(temp) {}
-//    int operator()(int num)
-//    {
-//        return num + m_r;
-//    }
+//struct Goods{
+//    Goods(const char* str, double price, int evaluate)
+//        :_name(str)
+//        , _price(price)
+//        , _evaluate(evaluate){}
 //
-//private:
-//    int m_r;
+//    string _name;
+//    double _price;
+//    int _evaluate; //评价
+//};
+//struct ComparePriceLess{
+//    bool operator()(const Goods& gl, const Goods& gr){
+//        return gl._price < gr._price;
+//    }
+//};
+//struct ComparePriceGreater{
+//    bool operator()(const Goods& gl, const Goods& gr){
+//        return gl._price > gr._price;
+//    }
 //};
 //int main()
 //{
-//    MyFunc obj(10);
-//    cout << obj(1) << endl;//调用仿函数 11
-//    return 0;
+//    vector<Goods> v = { { "苹果", 2.1, 5 }, { "香蕉", 3, 4 }, { "橙子", 2.2,3 }, { "菠萝", 1.5, 4 } };
+//    sort(v.begin(), v.end(), ComparePriceLess());
+//    for (auto& e : v) {
+//        cout << e._name << "\t" << e._price << "\t" << e._evaluate << endl;
+//    }
+//    cout << endl;
+//    sort(v.begin(), v.end(), ComparePriceGreater());
+//    for (auto& e : v) {
+//        cout << e._name << "\t" << e._price << "\t" << e._evaluate << endl;
+//    }
 //}
 
 
+#include <iostream>
+using namespace std;
+int val = 10;
+void func() {
 
-
-
+    auto f = [val]() {
+        cout << val << endl;
+    };
+    f();
+}
+int main()
+{
+    func();
+    return 0;
+}
 
 
 
