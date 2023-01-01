@@ -525,25 +525,6 @@ template<class T>bool logical_not<T>//Âß¼­·Ç
 //    }
 //}
 
-
-#include <iostream>
-using namespace std;
-int val = 10;
-void func() {
-
-    auto f = [val]() {
-        cout << val << endl;
-    };
-    f();
-}
-int main()
-{
-    func();
-    return 0;
-}
-
-
-
                                                          //lambda±í´ïÊ½
 /*
 lambda±í´ïÊ½ÊÇÒ»¸öÄäÃû¶ÔÏó£¬ÓÃÓÚ´´½¨ÄäÃûµÄº¯Êý¶ÔÏó£¬ÒÔ¼ò»¯±à³Ì¹¤×÷
@@ -604,11 +585,10 @@ lambda ±í´ïÊ½»¹¿ÉÒÔÍ¨¹ý²¶»ñÁÐ±í²¶»ñÒ»¶¨·¶Î§ÄÚµÄ±äÁ¿£º
 //{
 //    int a = 0;
 //    //auto f1 = [=] { return a++; };             // error£¬ÐÞ¸Ä°´Öµ²¶»ñµÄÍâ²¿±äÁ¿
-//    auto f2 = [=]() mutable
-//    { 
+//    auto f2 = [=]() mutable { 
 //        ++a;
-//        cout <<"a = "<< a << endl;//Öµ´«µÝ
-//    };// OK£¬mutable
+//        cout << "a = " << a << endl;//Öµ´«µÝ
+//    };
 //    f2();//1
 //    cout << "a = " << a << endl;//0
 //    return 0;
@@ -692,7 +672,7 @@ lambda ±í´ïÊ½»¹¿ÉÒÔÍ¨¹ý²¶»ñÁÐ±í²¶»ñÒ»¶¨·¶Î§ÄÚµÄ±äÁ¿£º
 */
 
 /*
-C++11ÖÐÐÂÔöÁËstd::functionÀàÄ£°å,ËüÊÇ¶ÔC++ÖÐÏÖÓÐµÄ¿Éµ÷ÓÃµÄÒ»ÖÖÀàÐÍ°²È«µÄ°ü¹ü,Í¨¹ýÖ¸¶¨ËüµÄÄ£°å²ÎÊý,
+C++11ÖÐÐÂÔöÁËstd::functionÀàÄ£°å,ËüÊÇ¶ÔC++ÖÐÏÖÓÐµÄ¿Éµ÷ÓÃµÄÒ»ÖÖÀàÐÍ°²È«µÄ°ü¹ü,Í¨¹ýÖ¸¶¨ËüµÄÄ£°å²ÎÊý
 Ëü¿ÉÒÔÓÃÍ³Ò»µÄ·½Ê½´¦Àíº¯Êý¡¢º¯Êý¶ÔÏó¡¢º¯ÊýÖ¸Õë£¬²¢ÔÊÐí±£´æºÍÑÓ³ÙÖ´ÐÐËüÃÇ
 */
 
@@ -746,7 +726,27 @@ C++11ÖÐÐÂÔöÁËstd::functionÀàÄ£°å,ËüÊÇ¶ÔC++ÖÐÏÖÓÐµÄ¿Éµ÷ÓÃµÄÒ»ÖÖÀàÐÍ°²È«µÄ°ü¹ü,Í¨¹
 
 
 
-
+//#include <iostream>
+//#include <functional>
+//using namespace std;
+//class Plus
+//{
+//public:
+//    static int plusi(int a, int b){
+//        return a + b;
+//    }
+//    double plusd(double a, double b){
+//        return a + b;
+//    }
+//};
+//int main()
+//{
+//    std::function<int(int, int)> func4 = &Plus::plusi;//¾²Ì¬³ÉÔ±º¯Êý
+//    cout << func4(1, 2) << endl;
+//    std::function<double(Plus, double, double)> func5 = &Plus::plusd;//ÆÕÍ¨³ÉÔ±º¯Êý
+//    cout << func5(Plus(), 1.1, 2.2) << endl;
+//    return 0;
+//}
 
 
 
@@ -814,19 +814,6 @@ std::bind,Æä°ó¶¨µÄ²ÎÊý¸öÊý²»ÊÜÏÞÖÆ£¬°ó¶¨µÄ¾ßÌåÄÄÐ©²ÎÊýÒ²²»ÊÜÏÞÖÆ£¬ÆäÎªÕæÕýÒâÒåÉÏ
 //
 //    return 0;
 //}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
