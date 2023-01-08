@@ -167,3 +167,69 @@
 //
 //	return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//自定义类型数据转为内置类型数据
+//#include <iostream>
+//using namespace std;
+//class Test
+//{
+//public:
+//	Test(const int data) :_data(data) { cout << "调用构造函数" << endl; }
+//	Test(const Test& tmp) {
+//		_data = tmp._data;
+//		cout << "调用拷贝构造" << endl;
+//	}
+//	operator int(){
+//		return _data;
+//	}
+//private:
+//	int _data;
+//};
+//int main()
+//{
+//	Test t = 1;
+//	int a = t;
+//	int b = t.operator int();
+//	cout << a << " " << b << endl;
+//	return 0;
+//}
+
+//#include <iostream>
+//using namespace std;
+//class Test
+//{
+//public:
+//	Test(const int data) :_data(data) { cout << "调用构造函数" << endl; }
+//	Test(const Test& tmp) {
+//		_data = tmp._data;
+//		cout << "调用拷贝构造" << endl;
+//	}
+//	explicit operator int(){//禁止隐式类型转换
+//		return _data;
+//	}
+//private:
+//	int _data;
+//};
+//int main()
+//{
+//	Test t = 1;
+//	//可以使用强制类型转换
+//	int a = (int)t;
+//	int b = static_cast<int> (t);
+//	cout << a << " " << b << endl;
+//	return 0;
+//}
