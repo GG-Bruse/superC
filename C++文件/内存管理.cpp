@@ -85,38 +85,27 @@
 //class Test
 //{
 //public:
-//	Test(int data = 0): _data(data)
-//	{
-//		cout << "Test():" << this << endl;
-//	}
-//	~Test()
-//	{
-//		cout << "~Test():" << this << endl;
-//	}
+//	Test(int data = 0): _data(data) { cout << "Test():" << this << endl; }
+//	~Test() { cout << "~Test():" << this << endl; }
 //private:
 //	int _data;
 //};
 //int main()
 //{
 //	Test* p1 = (Test*)malloc(sizeof(Test));
-//	Test* p2 = new Test(1);
 //	free(p1);
-//	delete p2;
+//	cout << endl;
 //
+//	Test* p2 = new Test(1);
+//	delete p2;
 //	cout << endl;
 //
 //	Test* p5 = (Test*)malloc(sizeof(Test) * 10);
-//	Test* p6 = new Test[10];
 //	free(p5);
-//	delete[] p6;
+//	cout << endl;
 //
-//	cout << endl;
-//	//C++11支持初始化自定义类型的数组
-//	Test* p7 = new Test[5]{ 1,2,3,4,5 };//调用构造函数
-//	delete[] p7;
-//	cout << endl;
-//	Test* p8 = new Test[5]{ Test(1),Test(2), Test(3), Test(4), Test(5) };//调用拷贝构造函数
-//	delete[] p8;
+//	Test* p6 = new Test[10];
+//	delete[] p6;
 //
 //	return 0;
 //}
@@ -206,6 +195,7 @@ operator new实际也是通过malloc来申请空间，如果malloc申请空间成功就直接返回，否则
 //class Test
 //{
 //public:
+//	Test() { cout << "Test()" << endl; }
 //	void* operator new(size_t size)
 //	{
 //		cout << "void* operator new(size_t size)->STL内存池" << endl;
@@ -224,7 +214,7 @@ operator new实际也是通过malloc来申请空间，如果malloc申请空间成功就直接返回，否则
 //allocator<Test> Test::_alloc;
 //int main()
 //{
-//	//提高效率:申请时不走Test,不去malloc,走定制的内存池
+//	//提高效率:申请时不会调用malloc,而是走定制的内存池
 //	Test* t1 = new Test;
 //	Test* t2 = new Test;
 //	Test* t3 = new Test;
@@ -343,18 +333,11 @@ place_address必须是一个指针，initializer-list是类型的初始化列表
 //class Test
 //{
 //public:
-//	Test(int a = 0): _data(a)
-//	{
-//		cout << "Test():" << this << endl;
-//	}
-//	~Test()
-//	{
-//		cout << "~Test():" << this << endl;
-//	}
+//	Test(int a = 0): _data(a) { cout << "Test():" << this << endl; }
+//	~Test() { cout << "~Test():" << this << endl; }
 //private:
 //	int _data;
 //};
-//// 定位new/replacement new
 //int main()
 //{
 //	//p1现在指向的是与Test对象相同大小的一段空间，但构造函数没有执行
@@ -492,6 +475,25 @@ C/C++程序中一般我们关心两种方面的内存泄漏:
 
 
 
+//#include <iostream>
+//using namespace std;
+//int main()
+//{
+//	//动态开辟一个int类型大小的空间
+//	int* ptr1 = new int;
+//	delete ptr1;
+//
+//	//动态开辟一个int类型大小的空间并初始化为10
+//	int* ptr2 = new int(10);
+//	cout << *ptr2 << endl;
+//	delete ptr2;
+//
+//	//动态开辟10个int类型大小的空格键
+//	int* array = new int[10];
+//	delete[] array;
+//
+//	return 0;
+//}
 
 
 
@@ -504,13 +506,65 @@ C/C++程序中一般我们关心两种方面的内存泄漏:
 
 
 
+//#include<iostream>
+//#include<cstdlib>
+//using namespace std;
+//class Test
+//{
+//public:
+//	Test(int data = 0): _data(data) { cout << "Test():" << this << endl; }
+//	~Test() { cout << "~Test():" << this << endl; }
+//private:
+//	int _data;
+//};
+//int main()
+//{
+//	Test* ptr = new Test;
+//	delete ptr;
+//	return 0;
+//}
 
 
 
 
 
 
+//void* __CRTDECL operator new(size_t size) _THROW1(_STD bad_alloc)
+//{
+//	// try to allocate size bytes
+//	void* p;
+//	while ((p = malloc(size)) == 0)
+//		if (_callnewh(size) == 0)
+//		{
+//			//report no memory
+//			//若申请内存失败了，这里会抛出bad_alloc 类型异常
+//			static const std::bad_alloc nomem;
+//			_RAISE(nomem);
+//		}
+//	return (p);
+//}
 
 
 
 
+
+
+//void operator delete(void* pUserData)
+//{
+//	_CrtMemBlockHeader* pHead;
+//	RTCCALLBACK(_RTC_Free_hook, (pUserData, 0));
+//	if (pUserData == NULL)
+//		return;
+//	_mlock(_HEAP_LOCK); /* block other threads */
+//	__TRY
+//		/* get a pointer to memory block header */
+//		pHead = pHdr(pUserData);
+//	/* verify block type */
+//	_ASSERTE(_BLOCK_TYPE_IS_VALID(pHead->nBlockUse));
+//	_free_dbg(pUserData, pHead->nBlockUse);
+//	__FINALLY
+//		_munlock(_HEAP_LOCK); /* release other threads */
+//	__END_TRY_FINALLY
+//		return;
+//}
+//#define free(p) _free_dbg(p, _NORMAL_BLOCK)
