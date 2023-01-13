@@ -706,3 +706,180 @@ Date(const Date& d)
 ---------------------------------
 Date(int year = 1, int month = 1, int day = 1)
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//using namespace std;
+//
+//void Swap(double& d1, double& d2) {
+//	double temp = d1;
+//	d1 = d2;
+//	d2 = temp;
+//}
+//void Swap(int& i1, int& i2) {
+//	int temp = i1;
+//	i1 = i2;
+//	i2 = temp;
+//}
+//void Swap(char& c1, char& c2) {
+//	char temp = c1;
+//	c1 = c2;
+//	c2 = temp;
+//}
+//template <typename T>
+//void Swap(T& t1, T& t2) {
+//	T temp = t1;
+//	t1 = t2;
+//	t2 = temp;
+//}
+//int main()
+//{
+//	double d1 = 1.0;
+//	double d2 = 2.0;
+//	Swap(d1, d2);
+//	int i1 = 1;
+//	int i2 = 2;
+//	Swap(i1, i2);
+//	char c1 = '1';
+//	char c2 = '2';
+//	Swap(c1, c2);
+//	return 0;
+//}
+
+
+
+
+
+//#include <iostream>
+//using namespace std;
+//int Add(int left, int right)
+//{
+//	return left + right;
+//}
+//template<class T1, class T2>
+//T1 Add(T1 left, T2 right)
+//{
+//	return left + right;
+//}
+//int main()
+//{
+//	Add(1, 2);//与非函数模板类型完全匹配，不需要函数模板实例化
+//	Add(1, 2.0);//模板函数可以生成更加匹配的版本，编译器根据实参生成更加匹配的Add函数
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+//#include <iostream>
+//using namespace std;
+//int Add(int left, int right)
+//{
+//	return left + right;
+//}
+//template<class T1, class T2>
+//T1 Add(T1 left, T2 right)
+//{
+//	return left + right;
+//}
+//int main()
+//{
+//	Add(1, 2);//与非模板函数匹配，编译器不需要实例化
+//	Add<int>(1, 2);//调用编译器实例化的版本
+//	return 0;
+//}
+
+
+
+
+
+
+//template<class T, size_t N = 10>
+//class array
+//{
+//public:
+//	//……
+//private:
+//	T _array[N];
+//	size_t _size;
+//};
+
+
+
+
+
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	Date() :_year(0), _month(0), _day(0) {}
+//	Date(int year, int month, int day) :_year(year), _month(month), _day(day) {}
+//	bool operator<(const Date& d)const {
+//		if ((_year < d._year) || (_year == d._year && _month < d._month) || (_year == d._year && _month == d._month && _day < d._day))
+//			return true;
+//		return false;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//template<class T>
+//bool Less(T left, T right)
+//{
+//	return left < right;
+//}
+//int main()
+//{
+//	cout << Less(1, 2) << endl; // 可以比较，结果正确
+//	Date d1(2022, 7, 7);
+//	Date d2(2022, 7, 8);
+//	cout << Less(d1, d2) << endl; // 可以比较，结果正确
+//	Date* p1 = &d1;
+//	Date* p2 = &d2;
+//	cout << Less(p1, p2) << endl; // 可以比较，结果错误
+//	//这里本意比较Date类型数据的大小，实际比较的却是指针地址的大小
+//	return 0;
+//}
