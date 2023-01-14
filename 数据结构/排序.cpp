@@ -26,7 +26,7 @@
 
 
 
-			线性时间非比较类的排序:基数排序(桶排序)、计数排序
+			线性时间非比较类的排序:计数排序、基数排序
 */
 
 
@@ -49,40 +49,37 @@
 (即当插入第i个元素时，前面的array[0]……array[i-1]已经排好序，此时用array[i]的排序码与array[0]……array[i-1]的排序码进行比较，
 找到插入位置将array[i]插入,原来位置上的元素顺序后移)
 */
-/*
-#include<stdio.h>
-void InsertSort(int* arr, int n)//升序
-{
-	for (int i = 0; i < n-1; ++i)
-	{
-		int end = i;
-		int temp = arr[end + 1];
-		while(end >= 0)
-		{
-			if (arr[end] > temp)
-			{
-				arr[end + 1] = arr[end];
-				--end;
-			}
-			else
-			{
-				break;//找到位置
-			}
-		}
-		arr[end + 1] = temp;
-	}
-}
-int main()
-{
-	int arr[10] = { 10,9,8,7,6,5,4,3,2,1 };
-	InsertSort(arr, 10);
-	for (int i = 0; i < 10; ++i)
-	{
-		printf("%d ", arr[i]);
-	}
-	return 0;
-}
-*/
+
+//#include<stdio.h>
+//void InsertSort(int* arr, int n)//升序
+//{
+//	for (int i = 0; i < n-1; ++i)//一共插入n-1趟
+//	{
+//		int end = i;
+//		int temp = arr[end + 1];
+//		while(end >= 0)
+//		{
+//			if (temp < arr[end])
+//			{
+//				arr[end + 1] = arr[end];
+//				--end;
+//			}
+//			else {
+//				break;//找到位置
+//			}
+//		}
+//		arr[end + 1] = temp;
+//	}
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,6,5,4,3,2,1 };
+//	InsertSort(arr, 10);
+//	for (int i = 0; i < 10; ++i){
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
 //时间复杂度:O(n^2)
 
 
@@ -94,44 +91,44 @@ int main()
 ————直接插入排序的优化
 先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序(即预排序)，待整个序列中的记录"基本有序"时，再对全体记录进行依次直接插入排序
 */
-/*
-#include<stdio.h>
-void ShellSort(int* arr, int n)//升序
-{
-	for (int gap = n/3; gap > 1; gap = gap/3 +1)//gap取值无官方规定(2、3……)
-	{
-		//把间隔为gap的多组数据同时排
-		for (int i = 0; i < n - gap; ++i)
-		{
-			int end = i;
-			int temp = arr[end + gap];
-			while (end >= 0)
-			{
-				if (arr[end] > temp)
-				{
-					arr[end + gap] = arr[end];
-					end -= gap;
-				}
-				else
-				{
-					break;
-				}
-			}
-			arr[end + gap] = temp;
-		}
-	}
-}
-int main()
-{
-	int arr[10] = { 10,9,8,7,6,5,4,3,2,1 };
-	ShellSort(arr, 10);
-	for (int i = 0; i < 10; ++i)
-	{
-		printf("%d ", arr[i]);
-	}
-	return 0;
-}
-*/
+
+//#include<stdio.h>
+//void ShellSort(int* arr, int n)//升序
+//{
+//	int gap = n;
+//	while (gap > 1)//gap取值无官方规定(2、3……)
+//	{
+//		gap = gap / 3 + 1;
+//		//把间隔为gap的多组数据同时排
+//		for (int i = 0; i < n - gap; ++i)
+//		{
+//			int end = i;
+//			int temp = arr[end + gap];
+//			while (end >= 0)
+//			{
+//				if (arr[end] > temp)
+//				{
+//					arr[end + gap] = arr[end];
+//					end -= gap;
+//				}
+//				else
+//				{
+//					break;
+//				}
+//			}
+//			arr[end + gap] = temp;
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,6,5,4,3,2,1 };
+//	ShellSort(arr, 10);
+//	for (int i = 0; i < 10; ++i) {
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
 //时间复杂度:O(NlogN)
 
 
