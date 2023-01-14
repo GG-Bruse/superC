@@ -537,11 +537,6 @@ C/C++程序要运行，得经历: 预处理 -- 编译 -- 汇编 -- 链接
 
 
 
-
-
-
-
-
 //模板总结
 /*
 优点:
@@ -572,8 +567,7 @@ C++11的新特性可变参数模板能够让您创建可以接受可变参数的函数模板和类模板。
 // Args是一个模板参数包，args是一个函数形参参数包
 // 声明一个参数包Args... args，这个参数包中可以包含0到任意个模板参数
 //template <class ...Args>
-//void ShowList(Args... args)
-//{}
+//void ShowList(Args... args) {}
 
 /*
 上面的参数args前面有省略号，所以它就是一个可变模版参数，我们把带省略号的参数称为“参数包”，它里面包含了0到N（N>=0）个模版参数。
@@ -586,12 +580,11 @@ C++11的新特性可变参数模板能够让您创建可以接受可变参数的函数模板和类模板。
 //#include <iostream>
 //#include <string>
 //using namespace std;
-//template <class T>
-//void ShowList(const T& t)// 递归终止函数
+////template <class T>
+//void ShowList()// 递归终止函数
 //{
-//	cout << "ShowList(" << t << ", " << 0 << "参数包)" << endl;
+//	cout << endl;
 //}
-//// 展开函数
 //template <class T, class ...Args>
 //void ShowList(const T& value, Args... args)
 //{
@@ -600,12 +593,7 @@ C++11的新特性可变参数模板能够让您创建可以接受可变参数的函数模板和类模板。
 //}
 //int main()
 //{
-//	ShowList(1);
-//	cout << endl;
-//	ShowList(1, 'A');
-//	cout << endl;
 //	ShowList(1, 'A', std::string("sort"));
-//	cout << endl;
 //	return 0;
 //}
 
@@ -694,7 +682,7 @@ expand函数中的逗号表达式：(printarg(args), 0)，也是按照这个执行顺序，先执行print
 //
 //	//对于自定义类型
 //	list<Date> lt2;
-//	lt2.push_back(Date(2022, 11, 16));
+//	lt2.push_back(Date(2022, 11, 16));//构造+拷贝构造(移动构造)
 //	cout << "---------------------------------" << endl;
 //	lt2.emplace_back(2022, 11, 16);//本质上是将参数包中参数逐个用于构造
 //
@@ -883,3 +871,7 @@ Date(int year = 1, int month = 1, int day = 1)
 //	//这里本意比较Date类型数据的大小，实际比较的却是指针地址的大小
 //	return 0;
 //}
+
+
+
+
