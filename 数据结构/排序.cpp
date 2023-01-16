@@ -751,123 +751,125 @@ int main()
 将已有序的子序列合并，得到完全有序的序列。即先使每个子序列有序，再使每个子序列间有序。
 若将两个有序表合并成一个有序表，称为二路归并
 */
-/*
-#include<stdio.h>
-#include<stdlib.h>
-void _MergeSort(int* arr, int left, int right,int* temp)
-{
-	if (left >= right)return;
-	int mid = (left + right) >> 1;
-	_MergeSort(arr, left, mid, temp);
-	_MergeSort(arr, mid + 1, right, temp);
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <assert.h>
+//#include <string.h>
+//void _MergeSort(int* arr, int left, int right,int* temp)
+//{
+//	if (left >= right) return;
+//	int mid = (left + right) >> 1;
+//	_MergeSort(arr, left, mid, temp);
+//	_MergeSort(arr, mid + 1, right, temp);
+//
+//	int begin1 = left, end1 = mid;
+//	int begin2 = mid + 1, end2 = right;
+//	int index = left;
+//	while (begin1 <= end1 && begin2 <= end2)
+//	{
+//		if (arr[begin1] < arr[begin2]) {
+//			temp[index++] = arr[begin1++];
+//		}
+//		else {
+//			temp[index++] = arr[begin2++];
+//		}
+//	}
+//	while (begin1 <= end1) {
+//		temp[index++] = arr[begin1++];
+//	}
+//	while (begin2 <= end2) {
+//		temp[index++] = arr[begin2++];
+//	}
+//
+//	//将归并数据拷贝回原数组
+//	/*for (int i = left; i <= right; ++i) {
+//		arr[i] = temp[i];
+//	}*/
+//	memcpy(arr + left, temp + left, (right - left + 1) * sizeof(int));
+//}
+//void MergeSort(int* arr, int size)
+//{
+//	int* temp = (int*)malloc(sizeof(int) * size);
+//	assert(temp);
+//	_MergeSort(arr, 0, size - 1, temp);
+//	free(temp);
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+//	MergeSort(arr,(int)(sizeof(arr) / sizeof(int)));
+//	for (int i = 0; i < 10; ++i)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
 
-	int begin1 = left, end1 = mid;
-	int begin2 = mid + 1, end2 = right;
-	int index = left;
-	while (begin1 <= end1 && begin2 <= end2)
-	{
-		if (arr[begin1] < arr[begin2])
-		{
-			temp[index++] = arr[begin1++];
-		}
-		else
-		{
-			temp[index++] = arr[begin2++];
-		}
-	}
-	while (begin1 <= end1)
-	{
-		temp[index++] = arr[begin1++];
-	}
-	while (begin2 <= end2)
-	{
-		temp[index++] = arr[begin2++];
-	}
-
-	for (int i = left; i <= right; ++i)
-	{
-		arr[i] = temp[i];
-	}
-}
-void MergeSort(int* arr, int size)
-{
-	int* temp = (int*)malloc(sizeof(int) * size);
-	_MergeSort(arr, 0, size - 1, temp);
-	free(temp);
-}
-int main()
-{
-	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
-	MergeSort(arr,(int)(sizeof(arr) / sizeof(int)));
-	for (int i = 0; i < 10; ++i)
-	{
-		printf("%d ", arr[i]);
-	}
-	return 0;
-}
-*/
 
 
 //非递归
-/*
-#include<stdio.h>
-#include<stdlib.h>
-void MergeSort(int* arr, int size)
-{
-	int* temp = (int*)malloc(sizeof(int) * size);
-	int gap = 1;//每组数据个数
-	while (gap < size)
-	{
-		for (int i = 0; i < size ; i += 2 * gap)
-		{
-			int begin1 = i, end1 = i + gap - 1;
-			int begin2 = i + gap, end2 = i + 2 * gap - 1;
-			int index = i;
+//#include<stdio.h>
+//#include<stdlib.h>
+//void MergeSort(int* arr, int size)
+//{
+//	if (arr == NULL) return;
+//	int* temp = (int*)malloc(sizeof(int) * size);
+//	if (temp == NULL) return;
+//
+//	int gap = 1;//每组数据个数
+//	while (gap < size)
+//	{
+//		for (int i = 0; i < size ; i += 2 * gap)
+//		{
+//			int begin1 = i, end1 = i + gap - 1;
+//			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+//			int index = i;
+//
+//			if (end1 >= size) {
+//				end1 = size - 1;
+//				//[begin2.end2]即为一个不存在的区间
+//				begin2 = size;
+//				end2 = size - 1;
+//			}
+//			else if (begin2 >= size) {
+//				begin2 = size;
+//				end2 = size - 1;
+//			}
+//			else if (end2 >= size) end2 = size - 1;//归并过程中右区间计算过大
+//
+//			while (begin1 <= end1 && begin2 <= end2)
+//			{
+//				if (arr[begin1] < arr[begin2]) {
+//					temp[index++] = arr[begin1++];
+//				}
+//				else {
+//					temp[index++] = arr[begin2++];
+//				}
+//			}
+//			while (begin1 <= end1) {
+//				temp[index++] = arr[begin1++];
+//			}
+//			while (begin2 <= end2) {
+//				temp[index++] = arr[begin2++];
+//			}
+//		}
+//		for (int j = 0; j < size; ++j) {
+//			arr[j] = temp[j];
+//		}
+//		gap *= 2;
+//	}
+//	free(temp);
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+//	MergeSort(arr, (int)(sizeof(arr) / sizeof(int)));
+//	for (int i = 0; i < 10; ++i) {
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
 
-			//归并过程中右半区间可能不存在
-			if (begin2 >= size) break;
-			//归并过程中右区间计算过大
-			if (end2 >= size) end2 = size - 1;
-
-			while (begin1 <= end1 && begin2 <= end2)
-			{
-				if (arr[begin1] < arr[begin2])
-				{
-					temp[index++] = arr[begin1++];
-				}
-				else
-				{
-					temp[index++] = arr[begin2++];
-				}
-			}
-			while (begin1 <= end1)
-			{
-				temp[index++] = arr[begin1++];
-			}
-			while (begin2 <= end2)
-			{
-				temp[index++] = arr[begin2++];
-			}
-		}
-		for (int j = 0; j < size; ++j)
-		{
-			arr[j] = temp[j];
-		}
-		gap *= 2;
-	}
-	free(temp);
-}
-int main()
-{
-	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
-	MergeSort(arr, (int)(sizeof(arr) / sizeof(int)));
-	for (int i = 0; i < 10; ++i)
-	{
-		printf("%d ", arr[i]);
-	}
-	return 0;
-}
-*/
 
 
 
@@ -903,27 +905,24 @@ int main()
 //void CountSort(int* arr, int size)
 //{
 //	int max = arr[0], min = arr[0];
-//	for (int i = 0; i < size; ++i)
+//	for (int i = 1; i < size; ++i)
 //	{
-//		if (arr[i] > max)max = arr[i];
-//		if (arr[i] < min)min = arr[i];
+//		if (arr[i] > max) max = arr[i];
+//		if (arr[i] < min) min = arr[i];
 //	}
 //	int range = max - min + 1;
 //
-//	int* count = (int*)malloc(sizeof(int) * range);
+//	int* count = (int*)calloc(range ,sizeof(int));
 //	assert(count);
 //
-//	memset(count, 0x000, sizeof(int) * range);
-//	for (int i = 0; i < size; ++i)
-//	{
+//	for (int i = 0; i < size; ++i) {
 //		count[arr[i] - min]++;//相对位置映射
 //	}
 //	
 //	int j = 0;
 //	for (int i = 0; i < range; ++i)
 //	{
-//		while (count[i]--)
-//		{
+//		while (count[i]--) {
 //			arr[j++] = i + min;
 //		}
 //	}
@@ -941,4 +940,4 @@ int main()
 //	}
 //	return 0;
 //}
-//时间复杂度为O(n+range),适用于范围集中的整型数据
+//时间复杂度为O(max(n,range)),适用于范围集中的整型数据
