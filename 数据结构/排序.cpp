@@ -156,43 +156,39 @@
 //每一次从待排序的数据元素中选出最大(最小)的一个元素，存放在序列的起始位置，直到全部待排序的数据元素排完
 
 //选择排序
-/*
-#include<stdio.h>
-void Swap(int* a, int* b)
-{
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
-void SelectSort(int* arr, int n)
-{
-	for (int i = 0;i < n - 1;++i)
-	{
-		int min = i;
-		for (int j = i+1; j < n; ++j)
-		{
-			if (arr[j] < arr[min])
-			{
-				min = j;
-			}
-		}
-		if (min != i)
-		{
-			Swap(&arr[i], &arr[min]);
-		}
-	}
-}
-int main()
-{
-	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
-	SelectSort(arr, (int)(sizeof(arr) / sizeof(int)));
-	for (int i = 0; i < 10; ++i)
-	{
-		printf("%d ", arr[i]);
-	}
-	return 0;
-}
-*/
+//#include<stdio.h>
+//void Swap(int* a, int* b) {
+//	int temp = *a;
+//	*a = *b;
+//	*b = temp;
+//}
+//void SelectSort(int* arr, int n)
+//{
+//	for (int i = 0;i < n - 1;++i)
+//	{
+//		int min = i;
+//		for (int j = i+1; j < n; ++j)
+//		{
+//			if (arr[j] < arr[min]) {
+//				min = j;
+//			}
+//		}
+//		if (min != i) {
+//			Swap(&arr[i], &arr[min]);
+//		}
+//	}
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+//	SelectSort(arr, (int)(sizeof(arr) / sizeof(int)));
+//	for (int i = 0; i < 10; ++i)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
 
 
 
@@ -501,7 +497,48 @@ int main()
 //	}
 //	return 0;
 //}
-
+//#include<stdio.h>
+//void Swap(int* a, int* b) {
+//	int temp = *a;
+//	*a = *b;
+//	*b = temp;
+//}
+//void QuickSort(int* arr, int left, int right)
+//{
+//	if (left >= right)return;
+//
+//	int begin = left, end = right;
+//	int pivot = begin;
+//	int key = arr[begin];
+//	while (begin < end)
+//	{
+//		//右边找小，放在左边
+//		while (begin < end && arr[end] >= key) {
+//			--end;
+//		}
+//		arr[pivot] = arr[end];
+//		pivot = end;
+//		//左边找大，放在右边
+//		while (begin < end && arr[begin] <= key) {
+//			++begin;
+//		}
+//		arr[pivot] = arr[begin];
+//		pivot = begin;
+//	}
+//	pivot = begin;
+//	arr[pivot] = key;
+//	QuickSort(arr, left, pivot - 1);
+//	QuickSort(arr, pivot + 1, right);
+//}
+//int main()
+//{
+//	int arr[10] = { 10,9,8,7,4,3,2,1,6,5 };
+//	QuickSort(arr, 0, (int)(sizeof(arr) / sizeof(int)) - 1);
+//	for (int i = 0; i < 10; ++i) {
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
 
 
 
@@ -940,4 +977,4 @@ int main()
 //	}
 //	return 0;
 //}
-//时间复杂度为O(max(n,range)),适用于范围集中的整型数据
+//时间复杂度为O(N + range),适用于范围集中的整型数据
