@@ -15272,3 +15272,24 @@ int getMin() 获取堆栈中的最小元素
 //	cout << "要查找的元素的位置为:" << index << endl;
 //	return 0;
 //}
+
+
+
+
+
+
+//#include <stdio.h>
+//int main(int argc,char* argv[])
+//{
+//	for (int i = 0; i < argc; ++i) {
+//		printf("%s", argv[i]);
+//	}
+//	return 0;
+//}
+
+
+
+
+
+
+
