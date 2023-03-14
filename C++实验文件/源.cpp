@@ -15291,5 +15291,45 @@ int getMin() 获取堆栈中的最小元素
 
 
 
-
+/*
+一个袋子里面有n个球，每个球上面都有一个号码(拥有相同号码的球是无区别的)。
+如果一个袋子是幸运的当且仅当所有球的号码的和大于所有球的号码的积。
+例如：如果袋子里面的球的号码是{1, 1, 2, 3}，这个袋子就是幸运的，因为1 + 1 + 2 + 3 > 1 * 1 * 2 * 3
+你可以适当从袋子里移除一些球(可以移除0个,但是别移除完)，要使移除后的袋子是幸运的。
+现在让你编程计算一下你可以获得的多少种不同的幸运的袋子
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//size_t GetLucklyPacketNum(vector<size_t>& v, size_t n, size_t pos, size_t sum, size_t mul)
+//{
+//    size_t count = 0;
+//    for (size_t i = pos; i < n; ++i) {
+//        sum += v[i];
+//        mul *= v[i];
+//        if (sum > mul)
+//            count += 1 + GetLucklyPacketNum(v, n, i + 1, sum, mul);
+//        else if (v[i] == 1) //当前不幸运，但由于v[i]=1,后面可能存在幸福的方案
+//            count += GetLucklyPacketNum(v, n, i + 1, sum, mul);
+//        else break;//回溯
+//        sum -= v[i];
+//        mul /= v[i];
+//
+//        while (i < n - 1 && v[i] == v[i + 1]) ++i;
+//    }
+//    return count;
+//}
+//int main() {
+//    /*size_t n = 0;
+//    cin >> n;
+//    vector<size_t> v(n);
+//    for (size_t i = 0; i < n; ++i) {
+//        cin >> v[i];
+//    }*/
+//    vector<size_t> v{ 1,1,3,5,7 };
+//    size_t n = 5;
+//    sort(v.begin(), v.end());
+//    cout << GetLucklyPacketNum(v, n, 0, 0, 1) << endl;
+//}
 
