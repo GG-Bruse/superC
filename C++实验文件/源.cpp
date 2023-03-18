@@ -15333,3 +15333,346 @@ int getMin() 获取堆栈中的最小元素
 //    cout << GetLucklyPacketNum(v, n, 0, 0, 1) << endl;
 //}
 
+
+
+
+//#include <iostream>
+//#include <thread>
+//using namespace std;
+//void func(int num)
+//{
+//	for (int i = 0; i < num; ++i) {
+//		cout << i << endl;
+//	}
+//}
+//int main()
+//{
+//	thread t;
+//	//...
+//	t = thread(func, 100);
+//	t.join();
+//	return 0;
+//}
+
+
+
+
+//#include <iostream>
+//#include <thread>
+//using namespace std;
+//void func(int num)
+//{
+//	for (int i = 0; i < num; ++i) {
+//		cout << i << endl;
+//	}
+//}
+//int main()
+//{
+//	thread t = thread(func, 10);
+//	t.join();
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include <thread>
+//using namespace std;
+//void func(int n)
+//{
+//	for (int i = 0; i < n; i++) {
+//		cout << i << endl;
+//	}
+//}
+//int main()
+//{
+//	thread t(func, 10);
+//	t.join();
+//	t = thread(func, 10);
+//	t.join();
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include <thread>
+//#include <windows.h>
+//using namespace std;
+//void func(int num)
+//{
+//	for (int i = 0; i < num; i++) {
+//		cout << i << endl;
+//	}
+//}
+//bool DoSomething(){ return false; }
+//int main()
+//{
+//	thread t(func, 10);
+//	Sleep(3);
+//	if (!DoSomething()) return -1;
+//
+//	t.join(); //不会被执行
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include <thread>
+//#include <windows.h>
+//using namespace std;
+//class Thread
+//{
+//public:
+//	Thread(thread& t):_thread(t) {}
+//	~Thread() {
+//		if (_thread.joinable()) _thread.join();
+//	}
+//private:
+//	//防拷贝
+//	Thread(const Thread&) = delete;
+//	Thread& operator=(const Thread&) = delete;
+//private:
+//	thread& _thread;
+//};
+//
+//void func(int num)
+//{
+//	for (int i = 0; i < num; i++) {
+//		cout << i << endl;
+//	}
+//}
+//bool DoSomething(){ return false; }
+//int main()
+//{
+//	thread t(func, 10);
+//	Thread T(t);
+//	Sleep(3);
+//	if (!DoSomething()) return 1;
+//	return 0;
+//}
+
+
+
+//#include <iostream>
+//#include <thread>
+//using namespace std;
+//void func()
+//{
+//	cout << this_thread::get_id() << endl;
+//}
+//int main()
+//{
+//	thread t(func);
+//	t.join();
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include <thread>
+//using namespace std;
+//void add(int& num) {
+//	num++;
+//}
+//int main()
+//{
+//	int num = 0;
+//	thread t(add, ref(num));
+//	t.join();
+//	cout << num << endl;
+//	return 0;
+//}
+
+
+
+//#include <iostream>
+//#include <thread>
+//using namespace std;
+//void add(int* num) {
+//	++(*num);
+//}
+//int main()
+//{
+//	int num = 0;
+//	thread t(add, &num);
+//	t.join();
+//	cout << num << endl;
+//	return 0;
+//}
+
+
+
+//#include <iostream>
+//#include <thread>
+//using namespace std;
+//int main()
+//{
+//	int num = 0;
+//	thread t([&num](){ ++num; });
+//	t.join();
+//	cout << num << endl;
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include <mutex>
+//using namespace std;
+//mutex mtx;
+//void func()
+//{
+//	//匿名局部域
+//	{
+//		lock_guard<mutex> lg(mtx); //调用构造函数加锁
+//		if (true) {
+//			return; //调用析构函数解锁
+//		}
+//	} //调用析构函数解锁
+//}
+//int main()
+//{
+//	func();
+//	return 0;
+//}
+
+
+
+
+//template<class Mutex>
+//class lock_guard
+//{
+//public:
+//	lock_guard(Mutex& mtx) :_mtx(mtx) {
+//		mtx.lock(); //加锁
+//	}
+//	~lock_guard() {
+//		mtx.unlock(); //解锁
+//	}	
+//private:
+//	lock_guard(const lock_guard&) = delete;
+//	lock_guard& operator=(const lock_guard&) = delete;
+//private:
+//	Mutex& _mtx;
+//};
+
+
+//#include <iostream>
+//#include <mutex>
+//using namespace std;
+//void func(int& num, int count)
+//{
+//	for (int i = 0; i < count; i++) {
+//		++num;
+//	}
+//}
+//int main()
+//{
+//	int num = 0;
+//	int count = 100000; //每个线程对num++的次数
+//	thread t1(func, ref(num), count);
+//	thread t2(func, ref(num), count);
+//	t1.join();
+//	t2.join();
+//
+//	cout << num << endl;
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include <thread>
+//#include <mutex>
+//using namespace std;
+//void func(int& num, int count, mutex& mtx)
+//{
+//	mtx.lock();
+//	for (int i = 0; i < count; i++) 
+//	{
+//		//mtx.lock();
+//		++num;
+//		//mtx.unlock();
+//	}
+//	mtx.unlock();
+//}
+//int main()
+//{
+//	int num = 0;
+//	int count = 100000; //每个线程对num++的次数
+//	mutex mtx;
+//	thread t1(func, ref(num), count, ref(mtx));
+//	thread t2(func, ref(num), count, ref(mtx));
+//	t1.join();
+//	t2.join();
+//
+//	cout << num << endl;
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <thread>
+//#include <atomic>
+//using namespace std;
+//void func(atomic_int& num, int count)
+//{
+//	for (int i = 0; i < count; i++) {
+//		++num;
+//	}
+//}
+//int main()
+//{
+//	atomic_int num = { 0 };
+//	int count = 100000; //每个线程对n++的次数
+//	thread t1(func, ref(num), count);
+//	thread t2(func, ref(num), count);
+//	t1.join();
+//	t2.join();
+//	cout << num << endl; //打印n的值
+//	return 0;
+//}
+
+
+
+
+
+//#include <iostream>
+//#include <thread>
+//#include <atomic>
+//#include <condition_variable>
+//using namespace std;
+//int main()
+//{
+//	int i = 1;
+//	int n = 100;
+//	mutex mtx;
+//	condition_variable cv;
+//	size_t flag = 1;//1 or 2 代表哪个线程可以打印
+//	//奇数
+//	thread t1([&]() {
+//		while (i < n)//最大99
+//		{
+//			unique_lock<mutex> lock(mtx);
+//			cv.wait(lock, [&flag]()->bool { return flag == 1; });
+//			cout << this_thread::get_id() << ":" << i << endl;
+//			i += 1;
+//			flag = 2;
+//			cv.notify_one();
+//		}
+//	});
+//	//偶数
+//	thread t2([&]() {
+//		while (i <= n)//最大100
+//		{
+//			unique_lock<mutex> lock(mtx);
+//			cv.wait(lock, [&flag]()->bool { return flag == 2; });
+//			cout << this_thread::get_id() << ":" << i << endl;
+//			i += 1;
+//			flag = 1;
+//			cv.notify_one();
+//		}
+//	});
+//	this_thread::sleep_for(chrono::seconds(1));
+//	cout << "t1:" << t1.get_id() << endl;
+//	cout << "t2:" << t2.get_id() << endl;
+//	t1.join();
+//	t2.join();
+//	return 0;
+//}
