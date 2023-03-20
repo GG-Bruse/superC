@@ -7,7 +7,19 @@
 */
 
 
-
+//class Test
+//{
+//public:
+//	Test() {}
+//	//...
+//private:
+//	//C++98
+//	Test(const Test&);
+//	Test& operator=(const Test&);
+//	//C++11
+//	//Test(const Test&) = delete;
+//	//Test& operator=(const Test&) = delete;
+//};
 
 
 
@@ -81,7 +93,7 @@
 //class StackOnly
 //{
 //public:
-//	static StackOnly CreateObj() {
+//	static StackOnly&& CreateObj() {
 //		return StackOnly();
 //	}
 //
@@ -115,7 +127,15 @@
 //1.C++98: 构造函数私有化，派生类中调不到基类的构造函数, 则无法继承
 //2.final修饰类，表示该类不能被继承
 
-
+//class Perent
+//{
+//public:
+//	static Perent CreatePerentObj() {
+//		return Perent();
+//	}
+//private:
+//	Perent() {};
+//};
 
 
 
@@ -130,4 +150,64 @@
 
 
 //单例模式
-//见博客
+
+
+
+//饿汉模式
+//class SingleTon
+//{
+//public:
+//	static SingleTon* GetInstance() {//全局访问点
+//		return _inst;
+//	}
+//private:
+//	SingleTon() {};//构造函数私有
+//	//防拷贝
+//	SingleTon(const SingleTon&) = delete;
+//	SingleTon& operator=(const SingleTon&) = delete;
+//	static SingleTon* _inst;//指向单例对象的static指针
+//};
+//SingleTon* SingleTon::_inst = new SingleTon;//在程序入口前完成单例对象的初始化
+
+
+
+//#include <thread>
+//#include <mutex>
+//using namespace std;
+//class SingleTon
+//{
+//public:
+//	static SingleTon* GetInstance() {//全局访问点
+//		if (nullptr == _inst)
+//		{
+//			unique_lock<mutex>(_mtx);
+//			if (nullptr == _inst) {
+//				_inst = new SingleTon;
+//			}
+//		}
+//	}
+//private:
+//	SingleTon() {};//构造函数私有
+//	//防拷贝
+//	SingleTon(const SingleTon&) = delete;
+//	SingleTon& operator=(const SingleTon&) = delete;
+//	static SingleTon* _inst;//指向单例对象的static指针
+//	static mutex _mtx;
+//};
+//SingleTon* SingleTon::_inst = nullptr;
+//mutex SingleTon::_mtx;//定义，在程序入口前完成初始化
+
+
+
+//class SignleTon
+//{
+//public:
+//	static SignleTon* GetInstance() {
+//		static SignleTon inst;
+//		return &inst;
+//	}
+//private:
+//	SignleTon() {}
+//	SignleTon(const SignleTon&) = delete;
+//	SignleTon& operator=(const SignleTon&) = delete;
+//};
