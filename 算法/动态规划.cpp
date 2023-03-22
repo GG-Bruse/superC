@@ -65,6 +65,70 @@
 
 
 
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int minimumTotal(vector<vector<int> >& triangle) {
+//        if (triangle.empty()) return 0;
+//        int row = triangle.size();
+//
+//        for (int i = 1; i < row; ++i) {
+//            for (int j = 0; j <= i; ++j) {
+//                if (j == 0) triangle[i][j] = triangle[i - 1][j] + triangle[i][j];
+//                else if (j == i) triangle[i][j] = triangle[i - 1][j - 1] + triangle[i][j];
+//                else triangle[i][j] = min(triangle[i - 1][j], triangle[i - 1][j - 1]) + triangle[i][j];
+//            }
+//        }
+//        int min_sum = triangle[row - 1][0];
+//        for (int j = 1; j < row; ++j) {
+//            min_sum = min(min_sum, triangle[row - 1][j]);
+//        }
+//        return min_sum;
+//    }
+//};
+
+
+
+
+
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int minimumTotal(vector<vector<int> >& triangle) {
+//        int row = triangle.size();
+//        for (int i = row - 2; i >= 0; --i) {
+//            for (int j = 0; j <= i; ++j) {
+//                triangle[i][j] = min(triangle[i + 1][j], triangle[i + 1][j + 1]) + triangle[i][j];
+//            }
+//        }
+//        return triangle[0][0];
+//    }
+//};
+
+
+
+
+
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int uniquePaths(int m, int n) {
+//        if (m < 1 || n < 1) return 0;
+//
+//        vector<vector<int>> v(m, vector<int>(n, 1));
+//        for (int i = 1; i < m; ++i) {
+//            for (int j = 1; j < n; ++j) {
+//                v[i][j] = v[i - 1][j] + v[i][j - 1];
+//            }
+//        }
+//        return v[m - 1][n - 1];
+//    }
+//};
+
+
 
 
 
