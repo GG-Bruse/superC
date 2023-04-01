@@ -131,6 +131,24 @@
 
 
 
+/*
+class Solution {
+public:
+    int minPathSum(vector<vector<int> >& grid) {
+        if(grid.empty()) return 0;
+        const int row = grid.size();
+        const int col = grid[0].size();
+        for(int i = 1;i < col; ++i) grid[0][i] += grid[0][i - 1];
+        for(int i = 1;i < row; ++i) grid[i][0] += grid[i - 1][0];
+        for(int i = 1; i < row; ++i) {
+            for(int j = 1; j < col; ++j) {
+                grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
+            }
+        }
+        return grid[row - 1][col - 1];
+    }
+};
+*/
 
 
 
@@ -138,6 +156,28 @@
 
 
 
+//class Solution {
+//public:
+//    int backPackII(int m, vector<int>& a, vector<int>& v) {
+//        if (a.empty() || v.empty() || m <= 0) return 0;
+//
+//        const int row = a.size() + 1;
+//        const int col = m + 1;
+//
+//        vector<vector<int>> ret(row);
+//        for (int i = 0; i < row; ++i) {
+//            ret[i].resize(col, 0);
+//        }
+//
+//        for (int i = 1; i < row; ++i) {
+//            for (int j = 1; j < col; ++j) {
+//                if (a[i - 1] > j) ret[i][j] = ret[i - 1][j];
+//                else ret[i][j] = max(ret[i - 1][j], ret[i - 1][j - a[i - 1]] + v[i - 1]);
+//            }
+//        }
+//        return ret[row - 1][col - 1];
+//    }
+//};
 
 
 
@@ -145,4 +185,96 @@
 
 
 
+//class Solution {
+//public:
+//    int backPackII(int m, vector<int>& a, vector<int>& v) {
+//        if (a.empty() || v.empty() || m <= 0) return 0;
+//
+//        vector<int> ret(m + 1);
+//        for (int i = 1; i < a.size() + 1; ++i) {
+//            for (int j = m; j >= 1; --j) {
+//                if (a[i - 1] <= j) ret[j] = max(ret[j], ret[j - a[i - 1]] + v[i - 1]);
+//            }
+//        }
+//        return ret[m];
+//    }
+//};
 
+
+
+
+
+
+
+//class Solution {
+//public:
+//    bool isPal(string& s, int begin, int end)
+//    {
+//        while (begin < end) {
+//            if (s[begin] != s[end]) return false;
+//            ++begin;
+//            --end;
+//        }
+//        return true;
+//    }
+//    int minCut(string s) {
+//        int size = s.size();
+//        if (size == 0 || isPal(s, 0, size - 1)) return 0;
+//
+//        vector<int> ret(size + 1);
+//        for (int i = 1; i <= size; ++i) {
+//            ret[i] = i - 1;
+//        }
+//
+//        for (int i = 2; i <= size; ++i)
+//        {
+//            if (isPal(s, 0, i - 1)) {
+//                ret[i] = 0;
+//                continue;
+//            }
+//            for (int j = 1; j < i; ++j) {
+//                if (isPal(s, j, i - 1)) ret[i] = min(ret[i], ret[j] + 1);
+//            }
+//        }
+//        return ret[size];
+//    }
+//};
+
+
+
+
+//class Solution {
+//public:
+//    vector<vector<bool>> GetMat(string& s) {
+//        int size = s.size();
+//        vector<vector<bool>> ret(size, vector<bool>(size, false));
+//        for (int i = size - 1; i >= 0; --i) {
+//            for (int j = i; j < size; ++j) {
+//                if (i == j) ret[i][j] = true;
+//                else if (j == i + 1) ret[i][j] = (s[i] == s[j]);
+//                else ret[i][j] = ((s[i] == s[j]) && ret[i + 1][j - 1]);
+//            }
+//        }
+//        return ret;
+//    }
+//    int minCut(string s) {
+//        vector<vector<bool>> Mat = GetMat(s);
+//
+//        int size = s.size();
+//        if (size == 0 || Mat[0][size - 1]) return 0;
+//
+//
+//        vector<int> ret(size + 1);
+//        for (int i = 0; i <= size; ++i) {
+//            ret[i] = i - 1;
+//        }
+//
+//        for (int i = 2; i <= size; ++i)
+//        {
+//            for (int j = 0; j < i; ++j) {
+//                if (Mat[j][i - 1]) ret[i] = min(ret[i], ret[j] + 1);
+//            }
+//        }
+//        return ret[size];
+//    }
+//};
