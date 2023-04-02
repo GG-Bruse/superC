@@ -15676,3 +15676,58 @@ int getMin() 获取堆栈中的最小元素
 //	t2.join();
 //	return 0;
 //}
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//const string tempPath = "./TempFile/";
+//class PathTool
+//{
+//public:
+//    //将文件名字符串构建成包含路径、源文件后缀的完整字符串
+//    static string StructureCompletePath_Source(const string& fileName) {
+//        return StructureCompletePath(fileName, ".cpp");
+//    }
+//    //将文件名字符串构建成包含路径、编译错误文件后缀的完整字符串
+//    static string StructureCompletePath_CompileErr(const string& fileName) {
+//        return StructureCompletePath(fileName, ".ComErr");
+//    }
+//    //将文件名字符串构建成包含路径、可执行文件后缀的完整字符串
+//    static string StructureCompletePath_Exe(const string& fileName) {
+//        return StructureCompletePath(fileName, ".exe");
+//    }
+//    //将文件名字符串构建成包含路径、标准输入文件后缀的完整字符串
+//    static string StructureCompletePath_Stdin(const string& fileName) {
+//        return StructureCompletePath(fileName, ".in");
+//    }
+//    //将文件名字符串构建成包含路径、标准输出文件后缀的完整字符串
+//    static string StructureCompletePath_Stdout(const string& fileName) {
+//        return StructureCompletePath(fileName, ".out");
+//    }
+//    //将文件名字符串构建成包含路径、标准错误文件后缀的完整字符串
+//    static string StructureCompletePath_Stderr(const string& fileName) {
+//        return StructureCompletePath(fileName, ".errMsg");
+//    }
+//private:
+//    static string StructureCompletePath(const string& fileName, const string& suffix) {
+//        return tempPath + fileName + suffix;
+//    }
+//};
+//int main()
+//{
+//    string fileName = "code";
+//    string ret1 = PathTool::StructureCompletePath_Source(fileName);
+//    const char* str1 = ret1.c_str();
+//    string ret2 = PathTool::StructureCompletePath_Exe(fileName).c_str();
+//    const char* str2 = ret1.c_str();
+//
+//    const char* argvs[] = { "g++", str1 , "-o", str2, "-std=c++11", NULL };
+//    for (int i = 0; i < 5; ++i) {
+//        std::cout << argvs[i] << std::endl;
+//    }
+//    return 0;
+//}
