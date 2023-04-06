@@ -131,24 +131,23 @@
 
 
 
-/*
-class Solution {
-public:
-    int minPathSum(vector<vector<int> >& grid) {
-        if(grid.empty()) return 0;
-        const int row = grid.size();
-        const int col = grid[0].size();
-        for(int i = 1;i < col; ++i) grid[0][i] += grid[0][i - 1];
-        for(int i = 1;i < row; ++i) grid[i][0] += grid[i - 1][0];
-        for(int i = 1; i < row; ++i) {
-            for(int j = 1; j < col; ++j) {
-                grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
-            }
-        }
-        return grid[row - 1][col - 1];
-    }
-};
-*/
+
+//class Solution {
+//public:
+//    int minPathSum(vector<vector<int> >& grid) {
+//        if(grid.empty()) return 0;
+//        const int row = grid.size();
+//        const int col = grid[0].size();
+//        for(int i = 1;i < col; ++i) grid[0][i] += grid[0][i - 1];
+//        for(int i = 1;i < row; ++i) grid[i][0] += grid[i - 1][0];
+//        for(int i = 1; i < row; ++i) {
+//            for(int j = 1; j < col; ++j) {
+//                grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
+//            }
+//        }
+//        return grid[row - 1][col - 1];
+//    }
+//};
 
 
 
@@ -156,6 +155,9 @@ public:
 
 
 
+//#include <iostream>
+//#include <vector>
+//using namespace std;
 //class Solution {
 //public:
 //    int backPackII(int m, vector<int>& a, vector<int>& v) {
@@ -178,6 +180,14 @@ public:
 //        return ret[row - 1][col - 1];
 //    }
 //};
+//int main()
+//{
+//    Solution s;
+//    vector<int>v1{ 2, 3, 5, 7 };
+//    vector<int>v2{ 1, 5, 2, 4 };
+//    s.backPackII(10, v1, v2);
+//    return 0;
+//}
 
 
 
@@ -276,5 +286,69 @@ public:
 //            }
 //        }
 //        return ret[size];
+//    }
+//};
+
+
+
+
+
+
+
+
+//class Solution {
+//public:
+//    int minDistance(string word1, string word2) {
+//        int row = word1.size();
+//        int col = word2.size();
+//        vector<vector<int>> ret(row + 1, vector<int>(col + 1));
+//        for (int i = 0; i <= col; ++i) ret[0][i] = i;
+//        for (int i = 0; i <= row; ++i) ret[i][0] = i;
+//
+//        for (int i = 1; i <= row; ++i)
+//        {
+//            for (int j = 1; j <= col; ++j)
+//            {
+//                if (word1[i - 1] == word2[j - 1]) {
+//                    ret[i][j] = min(ret[i - 1][j], ret[i][j - 1]) + 1;
+//                    ret[i][j] = min(ret[i][j], ret[i - 1][j - 1]);
+//                }
+//                else {
+//                    ret[i][j] = min(ret[i - 1][j], ret[i][j - 1]) + 1;
+//                    ret[i][j] = min(ret[i][j], ret[i - 1][j - 1] + 1);
+//                }
+//            }
+//        }
+//        return ret[row][col];
+//    }
+//};
+
+
+
+
+
+//class Solution {
+//public:
+//    int numDistinct(string S, string T)
+//    {
+//        int row = S.size();
+//        int col = T.size();
+//        if (row < col) return 0;
+//        if (T.empty()) return 1;
+//
+//        vector<vector<int>> ret(row + 1, vector<int>(col + 1, 0));
+//        ret[0][0] = 1;
+//        for (int i = 1; i <= row; ++i)
+//        {
+//            ret[i][0] = 1;
+//            for (int j = 1; j <= col; ++j)
+//            {
+//                if (S[i - 1] == T[j - 1])
+//                    ret[i][j] = ret[i - 1][j] + ret[i - 1][j - 1];
+//                else
+//                    ret[i][j] = ret[i - 1][j];
+//            }
+//        }
+//        return ret[row][col];
 //    }
 //};
