@@ -175,3 +175,81 @@
 //	cout << GreedStrategy(works, machines) << endl;
 //	return 0;
 //}
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Compare
+//{
+//public:
+//	bool operator()(pair<int,int> p1, pair<int,int> p2) {
+//		return p1.second < p2.second;
+//	}
+//};
+//int GreedyActivitySelector(const vector<pair<int, int>>& act)
+//{
+//	int num = 1;//记录可以举行的活动的个数
+//	int i = 0;
+//	for (int j = 1; j < act.size(); ++j) {
+//		if (act[j].first >= act[i].second) {
+//			i = j;
+//			++num;
+//		}
+//	}
+//	return num;
+//}
+//int main()
+//{
+//	int number = 0;
+//	cin >> number;
+//	vector<pair<int, int>> act(number);
+//	for (int i = 0; i < act.size(); ++i) {
+//		cin >> act[i].first >> act[i].second;
+//	}
+//
+//	//按照活动截止日期从小到大排序
+//	sort(act.begin(), act.end(), Compare());
+//	int ret = GreedyActivitySelector(act);
+//	cout << ret << endl;
+//	return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//class Solution {
+//public:
+//    static bool cmp(vector<int>& a, vector<int>& b) {
+//        return a[1] < b[1];
+//    }
+//    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+//        std::sort(intervals.begin(), intervals.end(), cmp);
+//        int num = 1;
+//        int i = 0;
+//        for (int j = 1; j < intervals.size(); ++j) {
+//            if (intervals[j][0] >= intervals[i][1]) {
+//                i = j;
+//                ++num;
+//            }
+//        }
+//        return intervals.size() - num;
+//    }
+//};
+
+
