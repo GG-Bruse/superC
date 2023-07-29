@@ -401,10 +401,93 @@ index   -1  -1  2   3   2   4   2   3   2
 
 
 
+
+
 /*********************************************************** MP3光标的位置（牛客）**********************************************************/
 /*
+MP3 Player因为屏幕较小，显示歌曲列表的时候每屏只能显示几首歌曲，用户要通过上下键才能浏览所有的歌曲。
+为了简化处理，假设每屏只能显示4首歌曲，光标初始的位置为第1首歌。现在要实现通过上下键控制光标移动来浏览歌曲列表，控制逻辑如下：
 
+1. 歌曲总数<=4的时候，不需要翻页，只是挪动光标位置。
+光标在第一首歌曲上时，按Up键光标挪到最后一首歌曲；光标在最后一首歌曲时，按Down键光标挪到第一首歌曲。
+
+2. 歌曲总数大于4的时候（以一共有10首歌为例）：
+特殊翻页：屏幕显示的是第一页（即显示第1 – 4首）时，光标在第一首歌曲上，用户按Up键后，屏幕要显示最后一页（即显示第7-10首歌），
+同时光标放到最后一首歌上。同样的，屏幕显示最后一页时，光标在最后一首歌曲上，用户按Down键，屏幕要显示第一页，光标挪到第一首歌上
+
+一般翻页：屏幕显示的不是第一页时，光标在当前屏幕显示的第一首歌曲时，用户按Up键后，
+屏幕从当前歌曲的上一首开始显示，光标也挪到上一首歌曲。光标当前屏幕的最后一首歌时的Down键处理也类似
+
+其他情况，不用翻页，只是挪动光标就行
 */
+
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//vector<int> GetResult(int num, string& op) {
+//    int current = 1;
+//
+//    int gap = 0;
+//    if (num > 4) gap = 3;
+//    else gap = num - 1;
+//
+//    int start = 1, end = start + gap;
+//
+//    for (int i = 0; i < op.size(); ++i) {
+//        if (op[i] == 'U' && current > start) {
+//            current--;
+//        }
+//        else if (op[i] == 'D' && current < end) {
+//            current++;
+//        }
+//        else if (op[i] == 'U' && current == start) {
+//            if (current == 1) {
+//                current = num;
+//                end = num;
+//                start = num - gap;
+//            }
+//            else {
+//                current--;
+//                start--;
+//                end--;
+//            }
+//        }
+//        else if (op[i] == 'D' && current == end) {
+//            if (current == num) {
+//                start = 1;
+//                end = start + gap;
+//                current = 1;
+//            }
+//            else {
+//                ++end;
+//                ++current;
+//                ++start;
+//            }
+//        }
+//    }
+//    vector<int> v;
+//    for (int i = start; i <= end; ++i) {
+//        v.push_back(i);
+//    }
+//    v.push_back(current);
+//    return v;
+//}
+//int main() {
+//    int number = 0;
+//    string op;
+//    while (cin >> number >> op) {
+//        vector<int> ret = GetResult(number, op);
+//        for (int i = 0; i < ret.size() - 1; ++i) {
+//            cout << ret[i] << " ";
+//        }
+//        cout << endl;
+//        cout << ret[ret.size() - 1];
+//    }
+//    return 0;
+//}
+
+
 
 
 
