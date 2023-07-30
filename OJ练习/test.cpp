@@ -504,8 +504,56 @@ MP3 Player因为屏幕较小，显示歌曲列表的时候每屏只能显示几首歌曲，用户要通过上下键
 
 
 
+/************************************************找出字符串中第一个只出现一次的字符（牛客）************************************************/
+/*
+找出字符串中第一个只出现一次的字符
+数据范围：输入的字符串长度满足1≤n≤1000
+*/
 
-
+//#include <iostream>
+//#include <unordered_map>
+//#include <string>
+//using namespace std;
+//int GetFirstWord_1(const string& str)//hash法
+//{
+//    unordered_map<char, int> mp;
+//    for (int i = 0; i < str.size(); ++i)
+//    {
+//        auto it = mp.find(str[i]);
+//        if (it != mp.end()) it->second++;
+//        else mp[str[i]] = 1;
+//    }
+//    int index = -1;
+//    for (int i = 0; i < str.size(); ++i)
+//    {
+//        auto it = mp.find(str[i]);
+//        if (it != mp.end() && it->second == 1) {
+//            index = i;
+//            break;
+//        }
+//    }
+//    return index;
+//}
+//int GetFirstWord_2(const string& str)//string类函数法
+//{
+//    for (int i = 0; i < str.size(); ++i)
+//    {
+//        if (str.find_first_of(str[i]) == str.find_last_of(str[i])) {
+//            return i;
+//        }
+//    }
+//    return -1;
+//}
+//int main()
+//{
+//    string str;
+//    while (cin >> str) {
+//        int index = GetFirstWord_2(str);
+//        if (index == -1) cout << "-1" << endl;
+//        else cout << str[index] << endl;
+//    }
+//    return 0;
+//}
 
 
 
