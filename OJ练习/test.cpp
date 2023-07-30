@@ -514,27 +514,23 @@ MP3 Player因为屏幕较小，显示歌曲列表的时候每屏只能显示几首歌曲，用户要通过上下键
 //#include <unordered_map>
 //#include <string>
 //using namespace std;
-//int GetFirstWord_1(const string& str)//hash法
+//int GetFirstWord_1(const string& str)
 //{
 //    unordered_map<char, int> mp;
-//    for (int i = 0; i < str.size(); ++i)
-//    {
-//        auto it = mp.find(str[i]);
-//        if (it != mp.end()) it->second++;
-//        else mp[str[i]] = 1;
+//    for (int i = 0; i < str.size(); ++i) {
+//        mp[str[i]]++;
 //    }
 //    int index = -1;
 //    for (int i = 0; i < str.size(); ++i)
 //    {
-//        auto it = mp.find(str[i]);
-//        if (it != mp.end() && it->second == 1) {
+//        if (mp[str[i]] == 1) {
 //            index = i;
 //            break;
 //        }
 //    }
 //    return index;
 //}
-//int GetFirstWord_2(const string& str)//string类函数法
+//int GetFirstWord_2(const string& str)
 //{
 //    for (int i = 0; i < str.size(); ++i)
 //    {
@@ -548,7 +544,7 @@ MP3 Player因为屏幕较小，显示歌曲列表的时候每屏只能显示几首歌曲，用户要通过上下键
 //{
 //    string str;
 //    while (cin >> str) {
-//        int index = GetFirstWord_2(str);
+//        int index = GetFirstWord_1(str);
 //        if (index == -1) cout << "-1" << endl;
 //        else cout << str[index] << endl;
 //    }
