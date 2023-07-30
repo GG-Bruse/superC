@@ -16013,3 +16013,23 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+//class Gift {
+//public:
+//    int getValue(vector<int> gifts, int n) {
+//        map<int, int> mp;
+//        for (int i = 0; i < n; ++i) {
+//            mp[gifts[i]]++;
+//        }
+//        for (auto it : mp)
+//        {
+//            if (it.second > n / 2) {
+//                return it.first;
+//            }
+//        }
+//        return 0;
+//    }
+//};
