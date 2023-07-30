@@ -15731,3 +15731,285 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include <map>
+//#include <algorithm>
+//using namespace std;
+//
+//class Solution
+//{
+//public:
+//    bool IsPalindrome(int x) {
+//        //write code
+//        return true;
+//    }
+//};
+//
+//
+//bool Test1()
+//{
+//    bool ret = Solution().IsPalindrome(121);
+//    if (ret) {
+//        return true;
+//    }
+//    else {
+//        std::cout << "未通过测试用例1 : 121" << std::endl;
+//        return false;
+//    }
+//}
+//bool Test2()
+//{
+//    bool ret = Solution().IsPalindrome(-10);
+//    if (!ret) {
+//        return true;
+//    }
+//    else {
+//        std::cout << "未通过测试用例1 : -10" << std::endl;
+//        return false;
+//    }
+//}
+//
+//int main()
+//{
+//    int ret1 = Test1();
+//    int ret2 = Test2();
+//    if (ret1 && ret2) {
+//        std::cout << "通过全部测试用例" << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <map>
+//using namespace std;
+//
+//class Solution {
+//public:
+//    bool canJump(vector<int>& nums) {
+//
+//    }
+//};
+//
+//bool Test1() {
+//    vector<int> nums{ 2,3,1,1,4 };
+//    bool tmp = Solution().canJump(nums);
+//    if (tmp == true) return true;
+//    else {
+//        std::cout << "测试用例 [2,3,1,1,4] 未通过" << std::endl;
+//        return false;
+//    }
+//}
+//
+//bool Test2() {
+//    vector<int> nums{ 3,2,1,0,4 };
+//    bool tmp = Solution().canJump(nums);
+//    if (tmp == false) return true;
+//    else {
+//        std::cout << "测试用例 [3,2,1,0,4] 未通过" << std::endl;
+//        return false;
+//    }
+//}
+//
+//int main() 
+//{
+//    bool ret1 = Test1();
+//    bool ret2 = Test2();
+//    if (ret1 && ret2) {
+//        std::cout << "通过全部测试用例" << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    int balancedStringSplit(string s) {
+//        int count = 0;
+//        int balance = 0;
+//        for (int i = 0; i < s.size(); ++i) {
+//            if (s[i] == 'L') --balance;
+//            if (s[i] == 'R') ++balance;
+//            if (balance == 0) ++count;
+//        }
+//        return count;
+//    }
+//};
+
+
+
+//bool Test1() {
+//    string str = "RLRRRLLRLL";
+//    int tmp = Solution().balancedStringSplit(str);
+//    if (tmp == 2) return true;
+//    else {
+//        std::cout << "测试用例 RLRRRLLRLL 未通过" << std::endl;
+//        return false;
+//    }
+//}
+//
+//bool Test2() {
+//    string str = "RLRRLLRLRL";
+//    int tmp = Solution().balancedStringSplit(str);
+//    if (tmp == 4) return true;
+//    else {
+//        std::cout << "测试用例 RLRRLLRLRL 未通过" << std::endl;
+//        return false;
+//    }
+//}
+//
+//bool Test3() {
+//    string str = "LLLLRRRR";
+//    int tmp = Solution().balancedStringSplit(str);
+//    if (tmp == 1) return true;
+//    else {
+//        std::cout << "测试用例 LLLLRRRR 未通过" << std::endl;
+//        return false;
+//    }
+//}
+//
+//int main()
+//{
+//    bool ret1 = Test1();
+//    bool ret2 = Test2();
+//    bool ret3 = Test3();
+//    if (ret1 && ret2 && ret3) {
+//        std::cout << "通过全部测试用例" << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	void Print()
+//	{
+//		cout << _year << "年" << _month << "月" << _day << "日" << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//	Date d1; // 编译器将调用自动生成的默认构造函数对d1进行初始化
+//	d1.Print();
+//	return 0;
+//}
+
+
+//
+//
+//#include <iostream>
+//using namespace std;
+//class Date
+//{
+//public:
+//	Date(int year = 0, int month = 1, int day = 1)// 构造函数
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//	void Print()
+//	{
+//		cout << _year << "年" << _month << "月" << _day << "日" << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//int main()
+//{
+//	Date d1(2021, 5, 30);
+//	Date d2(d1); // 用已存在的对象d1创建对象d2
+//	d1.Print();
+//	d2.Print();
+//	return 0;
+//}
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//void bublle(vector<int>& v) 
+//{
+//	for (int i = 0; i < v.size() - 1; ++i) 
+//	{
+//		for (int j = 0; j < v.size() - i - 1; ++j)
+//		{
+//			if (v[j] > v[j + 1]) 
+//			{
+//				int tmp = v[j];
+//				v[j] = v[j + 1];
+//				v[j + 1] = tmp;
+//			}
+//		}
+//	}
+//}
+//int main()
+//{
+//	vector<int> v{2,3,1,4,5};
+//	bublle(v);
+//	for (int i = 0; i < v.size(); ++i) {
+//		cout << v[i] << " ";
+//	}
+//	return 0;
+//}
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//int GreatestCommonDivisor(int num1, int num2) {
+//    if (num2 == 0) return num1;
+//    return GreatestCommonDivisor(num2, num1 % num2);
+//}
+//int main() {
+//    int n = 0, a = 0;
+//    while (cin >> n >> a) {
+//        vector<int> v(n);
+//        for (int i = 0; i < n; ++i) cin >> v[i];
+//
+//        for (auto it : v) {
+//            if (a > it) a += it;
+//            else a += GreatestCommonDivisor(it, a);
+//        }
+//        cout << a << endl;
+//    }
+//    return 0;
+//}
