@@ -16033,3 +16033,145 @@ int getMin() 获取堆栈中的最小元素
 //        return 0;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <algorithm>
+//using namespace std;
+//struct Goods
+//{
+//    string _name;  //名字
+//    double _price; //价格
+//    int _num;      //数量
+//};
+//struct ComparePriceLess {
+//	bool operator()(const Goods& g1, const Goods& g2) {
+//		return g1._price < g2._price;
+//	}
+//};
+//struct ComparePriceGreater {
+//	bool operator()(const Goods& g1, const Goods& g2) {
+//		return g1._price > g2._price;
+//	}
+//};
+//struct CompareNumLess {
+//	bool operator()(const Goods& g1, const Goods& g2) {
+//		return g1._num < g2._num;
+//	}
+//};
+//struct CompareNumGreater {
+//	bool operator()(const Goods& g1, const Goods& g2) {
+//		return g1._num > g2._num;
+//	}
+//};
+//int main()
+//{
+//	vector<Goods> v = { { "苹果", 2.1, 300 }, { "香蕉", 3.3, 100 }, { "橙子", 2.2, 1000 }, { "菠萝", 1.5, 1 } };
+//	sort(v.begin(), v.end(), ComparePriceLess());    //按价格升序排序
+//	sort(v.begin(), v.end(), ComparePriceGreater()); //按价格降序排序
+//	sort(v.begin(), v.end(), CompareNumLess());      //按数量升序排序
+//	sort(v.begin(), v.end(), CompareNumGreater());   //按数量降序排序
+//	return 0;
+//}
+
+
+
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//    int a = 0;
+//    //auto f1 = [=] { return a++; };             // error，修改按值捕获的外部变量
+//    auto f2 = [&](){
+//        ++a;
+//        cout << "a = " << a << endl;//值传递
+//    };
+//    f2();//1
+//    cout << "a = " << a << endl;//0
+//    return 0;
+//}
+
+
+
+//#include<iostream>
+//using namespace std;
+//class Base
+//{
+//public:
+//    void test(int& val)const
+//    {
+//        val = 1000;
+//    }
+//private:
+//    int _val = 10;
+//};
+//int main()
+//{
+//    Base b;
+//    int a = 100;
+//    b.test(a);
+//    return 0;
+//}
+
+
+//#include <iostream>
+//#include <functional>
+//#include <map>
+//using namespace std;
+//
+//int Plus(int a, int b) {
+//    return a + b;
+//}
+//
+//int Mul(int a, int b) {
+//    return a * b;
+//}
+//
+//class Sub
+//{
+//public:
+//    int sub(int a, int b) {
+//        return a - b;
+//    }
+//};
+//
+//int main()
+//{
+//    //无法用同种function包装器接收
+//    function<int(int, int)> funcPlus = Plus;
+//    function<int(Sub, int, int)> funcSub = &Sub::sub;
+//    function<int(int, int)> funcMul = Mul;
+//
+//
+//    //通过bind调整Sub参数个数
+//    map<string, function<int(int, int)>> opFuncMap =
+//    {
+//        { "+", Plus},
+//        { "-", bind(&Sub::sub, Sub(), placeholders::_1, placeholders::_2)},
+//        { "*", Mul}
+//    };
+//
+//    cout << opFuncMap["+"](1, 2) << endl;
+//    cout << opFuncMap["-"](1, 2) << endl;
+//    cout << opFuncMap["*"](1, 2) << endl;
+//
+//    return 0;
+//}
