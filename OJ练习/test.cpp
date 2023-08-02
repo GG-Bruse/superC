@@ -799,7 +799,6 @@ f(n) = f(n−1)+f(n−1) = 2∗f(n−1)，因此每级台阶方案数是前面�
 0101 + 0111 = 0010 + 1010 = 1000 + 0100 = 1100 + 0000
 */
 
-
 //class Solution {
 //public:
 //    int Add(int num1, int num2) {
@@ -827,3 +826,187 @@ f(n) = f(n−1)+f(n−1) = 2∗f(n−1)，因此每级台阶方案数是前面�
 
 
 
+
+/*************************************************反转部分单向链表（牛客）*************************************************/
+/*
+给定一个单链表，在链表中把第 L 个节点到第 R 个节点这一部分进行反转
+
+n 表示单链表的长度
+val 表示单链表各个节点的值
+L 表示翻转区间的左端点
+R 表示翻转区间的右端点
+
+输入：
+5
+1 2 3 4 5
+1 3
+输出：
+3 2 1 4 5
+*/
+
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <stdlib.h>
+//typedef struct ListNode {
+//    int _data;
+//    struct ListNode* _next;
+//}ListNode;
+//void CreateList(ListNode* phead)
+//{
+//    int length = 0;
+//    scanf("%d", &length);
+//    ListNode* current = phead;
+//    ListNode* node;
+//    for (int i = 0; i < length; ++i)
+//    {
+//        node = (ListNode*)malloc(sizeof (struct ListNode));
+//        scanf("%d", &node->_data);
+//        node->_next = NULL;
+//        current->_next = node;
+//        current = current->_next;
+//    }
+//}
+//void PrintList(ListNode* phead)
+//{
+//    ListNode* current = phead->_next;
+//    for (; current->_next != NULL; current = current->_next) {
+//        printf("%d ", current->_data);
+//    }
+//    printf("%d", current->_data);
+//    printf("\n");
+//}
+//
+//void ReverseList_1(ListNode* phead, int left, int right)//多指针法
+//{
+//    ListNode* current = phead;
+//
+//    ListNode* prevNode = NULL, * leftNode = NULL, * rightNode = NULL, * nextNode = NULL;
+//
+//    for (int i = 0; i <= right; ++i)
+//    {
+//        if (i == left - 1) {
+//            prevNode = current; 
+//            leftNode = prevNode->_next;
+//        }
+//        if (i == right) {
+//            rightNode = current;
+//            nextNode = rightNode->_next;
+//        }
+//        current = current->_next;
+//    }
+//
+//    ListNode* prev = prevNode;
+//    current = prev->_next;
+//    ListNode* next = current->_next;
+//    for (int i = 0; i <= right - left; ++i)
+//    {
+//        current->_next = prev;
+//        prev = current;
+//        current = next;
+//        if(next != NULL)next = next->_next;
+//    }
+//    leftNode->_next = nextNode;
+//    prevNode->_next = rightNode;
+//}
+//void ReverseList(ListNode* phead, int left, int right)//头插法
+//{
+//    ListNode* current = phead;
+//    ListNode* prevNode = phead;
+//
+//    for (int i = 0; i < left - 1; ++i) {
+//        prevNode = prevNode->_next;
+//    }
+//    current = prevNode->_next;
+//
+//    for (int i = 0; i < right - left; ++i)
+//    {
+//        ListNode* insert = current->_next;
+//        current->_next = insert->_next;
+//        insert->_next = prevNode->_next;
+//        prevNode->_next = insert;
+//    }
+//}
+//int main()
+//{
+//    ListNode head;//带头结点便于处理
+//    CreateList(&head);
+//    int left = 0, right = 0;
+//    scanf("%d%d", &left, &right);
+//    ReverseList(&head, left, right);
+//    PrintList(&head);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*****************************************************猴子分桃（牛客）*****************************************************/
+/*
+老猴子辛苦了一辈子，给那群小猴子们留下了一笔巨大的财富——一大堆桃子。老猴子决定把这些桃子分给小猴子。
+第一个猴子来了，它把桃子分成五堆，五堆一样多，但还多出一个。它把剩下的一个留给老猴子，自己拿走其中的一堆。
+第二个猴子来了，它把桃子分成五堆，五堆一样多，但又多出一个。它把多出的一个留给老猴子，自己拿走其中的一堆。
+后来的小猴子都如此照办。最后剩下的桃子全部留给老猴子。
+这里有n只小猴子，请你写个程序计算一下在开始时至少有多少个桃子，以及最后老猴子最少能得到几个桃子
+
+输入描述：
+输入包括多组测试数据
+每组测试数据包括一个整数n(1≤n≤20)
+输入以0结束，该行不做处理
+
+输出描述：
+每组测试数据对应一行输出
+包括两个整数a，b
+分别代表开始时最小需要的桃子数，和结束后老猴子最少能得到的桃子数
+*/
+
+/*
+解题思路：设最开始有X个桃子
+                得到的桃子数                     剩余的桃子数
+第一只猴子      (X - 1)/5                        (X - 1)*4/5
+第二只猴子      ((X - 1)*4/5 - 1)/5              ((X - 1)*4/5 - 1)*4/5 = (4/5X - 4/5 - 1)*4/5 = (4/5)^2 * X - (4/5)^2 - 4/5
+第三只猴子      ((4/5X - 4/5 - 1)*4/5 - 1)/5     (4/5)^3 * X - (4/5)^3 - (4/5)^2
+第n只猴子                                        (4/5)^n * X - (4/5)^n - ... - (4/5)^1
+
+   S =               (4/5)^n + (4/5)^(n - 1) + ... + (4/5)^2 + (4/5)^1
+4/5S = (4/5)^(n+1) + (4/5)^n + (4/5)^(n - 1) + ... + (4/5)^2
+
+S - 4/5S = 1/5S = 4/5 - (4/5)^(n+1) = 4/5(1 - (4/5)^n)
+S = 4(1 - (4/5)^n)
+
+所以,第n只猴子剩余的桃子数为：(4/5)^n * X + 4*(4/5)^n - 4 = (4/5)^n * (X+4) - 4 = 4^n / 5^n * (X+4) - 4
+
+当X + 4 = 5^n时最小，即X = 5^n - 4
+老猴子剩余的数量为：第n个猴子分完剩余的 + 每轮拿到一个
+即(4/5)^n * (X+4) - 4 + n，将X代入，(4/5)^n * (5^n-4+4) - 4 + n = 4^n + n - 4
+*/
+
+//#include <iostream>
+//#include <cmath>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    while (cin >> n)
+//    {
+//        if (n < 1 || n > 20) break;
+//
+//        long long sum = (long long)pow(5, n);
+//        long long lest = (long long)pow(4, n);
+//        cout << sum - 4 << " " << lest + n - 4 << endl;
+//    }
+//    return 0;
+//}
