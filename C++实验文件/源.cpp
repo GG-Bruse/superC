@@ -16175,3 +16175,50 @@ int getMin() 获取堆栈中的最小元素
 //
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <cmath>
+//using namespace std;
+//vector<int> GetFactor(int number)
+//{
+//    vector<int> ret;
+//    for (int i = 2; i <= sqrt(number); ++i)
+//    {
+//        while (number % i == 0) {
+//            number /= i;
+//            ret.push_back(i);
+//        }
+//    }
+//    if (number != 1) ret.push_back(number);
+//    return ret;
+//}
+//int main()
+//{
+//    int number = 0;
+//    while (cin >> number)
+//    {
+//        vector<int> ret = GetFactor(number);
+//
+//        cout << number << " = ";
+//        for (int i = 0; i < ret.size() - 1; ++i) {
+//            cout << ret[i] << " * ";
+//        }
+//        cout << ret[ret.size() - 1] << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
