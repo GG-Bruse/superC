@@ -1170,7 +1170,7 @@ if(背包当前承重 > 放入物品之后的承重)
 
 
 
-/*****************************************************因子个数(牛客)*********************************************************/
+/**************************************************** 因子个数(牛客)*******************************************************/
 /*
 一个正整数可以分解成一个或多个数组的积。例如36=2*2*3*3，即包含2和3两个因子。NowCoder最近在研究因子个数的分布规律，
 现在给出一系列正整数，他希望你开发一个程序输出每个正整数的因子个数
@@ -1204,3 +1204,121 @@ if(背包当前承重 > 放入物品之后的承重)
 //    }
 //}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************美国节日（牛客）*******************************************************/
+/*
+和中国的节日不同，美国的节假日通常是选择某个月的第几个星期几这种形式，因此每一年的放假日期都不相同。具体规则如下：
+* 1月1日：元旦
+* 1月的第三个星期一：马丁·路德·金纪念日
+* 2月的第三个星期一：总统节
+* 5月的最后一个星期一：阵亡将士纪念日
+* 7月4日：美国国庆
+* 9月的第一个星期一：劳动节
+* 11月的第四个星期四：感恩节
+* 12月25日：圣诞节
+现在给出一个年份，请你帮忙生成当年节日的日期
+
+输入描述：
+输入包含多组数据，每组数据包含一个正整数year（2000≤year≤9999）。
+输出描述：
+对应每一组数据，以“YYYY-MM-DD”格式输出当年所有的节日日期，每个日期占一行。
+
+每组数据之后输出一个空行作为分隔。
+*/
+
+/*
+函数 CalculateTheDayOfWeek() 实现思路：
+
+以公元前1年12月31日为基准值，当天为星期7
+
+(year,month,day) - (0000,12,31) = 一共过了多少个整年天数 + 今年过了多少天
+
+"今年过了多少天"可以通过函数GetDaysNumber()进行计算
+
+"一共过了多少个整年天数" = (year - 1) * 365 + 闰年出现的次数                  注：闰年比平年2月多1天
+                         = (year - 1) * 365 + (year - 1)/4 - (year - 1)/100 + (year - 1)/400
+                         
+"今天是星期几" = ((year,month,day) - (0000,12,31)) % 7                    注：若计算结果为0，则代表可以被7整除，即为星期天
+               = ((year - 1) * 365 + (year - 1)/4 - (year - 1)/100 + (year - 1)/400 + GetDaysNumber) % 7
+365 = 364 + 1 = 52 * 7 + 1,所以可以将上式化简：
+               = ((year - 1) + (year - 1)/4 - (year - 1)/100 + (year - 1)/400 + GetDaysNumber) % 7
+*/
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//const vector<int> days = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+//
+//inline bool IsLeapYear(int year) {
+//    return ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0));
+//}
+//
+//inline int GetDaysNumber(int year, int month, int day) //计算今年过了多少天
+//{
+//    int sumDays = 0;
+//    for (int i = 0; i < month - 1; ++i) {
+//        sumDays += days[i];
+//    }
+//    if (month > 2 && IsLeapYear(year)) ++sumDays;
+//    return sumDays + day;
+//}
+//
+//inline int CalculateTheDayOfWeek(int year, int month, int day) {//计算今天是星期几
+//    int weak = ((year - 1) + (year - 1) / 4 - (year - 1) / 100 + (year - 1) / 400 + GetDaysNumber(year, month, day)) % 7;
+//    if (weak == 0) weak = 7;
+//    return weak;
+//}
+//
+////已知当月1日是星期w,计算当月第n个星期e是几号
+//inline int GetResult(int w, int n, int e) {
+//    return 1 + (n - 1) * 7 + (7 - w + e) % 7;
+//}
+//
+////已知6月1号是星期w,计算五月的最后一个星期一是几号
+//inline int GetSpecialRet(int w) {
+//    return 32 - (w == 1 ? 7 : w - 1);
+//}
+//
+//int main()
+//{
+//    int year = 0;
+//    while (cin >> year)
+//    {
+//        printf("%d-01-01\n", year);
+//
+//        int w = CalculateTheDayOfWeek(year, 1, 1);
+//        printf("%d-01-%02d\n", year, GetResult(w, 3, 1));
+//
+//        w = CalculateTheDayOfWeek(year, 2, 1);
+//        printf("%d-02-%02d\n", year, GetResult(w, 3, 1));
+//
+//        w = CalculateTheDayOfWeek(year, 6, 1);
+//        printf("%d-05-%02d\n", year, GetSpecialRet(w));
+//
+//        printf("%d-07-04\n", year);
+//
+//        w = CalculateTheDayOfWeek(year, 9, 1);
+//        printf("%d-09-%02d\n", year, GetResult(w, 1, 1));
+//
+//        w = CalculateTheDayOfWeek(year, 11, 1);
+//        printf("%d-11-%02d\n", year, GetResult(w, 4, 4));
+//
+//        printf("%d-12-25\n\n", year);
+//    }
+//    return 0;
+//}
