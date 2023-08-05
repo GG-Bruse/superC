@@ -16222,3 +16222,56 @@ int getMin() 获取堆栈中的最小元素
 
 
 
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int main()
+//{
+//    vector<long long> dp(81);
+//    dp[0] = 0, dp[1] = 1;
+//    for (long long i = 2; i < 81; ++i) {
+//        dp[i] = dp[i - 1] + dp[i - 2];
+//    }
+//
+//    long long from = 0, to = 0;
+//    while (cin >> from >> to)
+//    {
+//        long long sum = 0;
+//        for (long long i = from; i <= to; ++i) {
+//            sum += dp[i];
+//        }
+//        cout << sum << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//
+//int GetResult(string& str1, string& str2)
+//{
+//    int count = 0;
+//    size_t index = str1.find(str2);
+//    while (index != string::npos)
+//    {
+//        str1.erase(index, str2.size());
+//        ++count;
+//        index = str1.find(str2);
+//    }
+//    return count;
+//}
+//
+//int main()
+//{
+//    string strBase, str;
+//    while (cin >> strBase >> str) {
+//        cout << GetResult(strBase, str) << endl;
+//    }
+//    return 0;
+//}
