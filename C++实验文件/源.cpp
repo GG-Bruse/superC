@@ -16275,3 +16275,59 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//int main() {
+//    int n = 0;
+//    vector<long long> dp(90);
+//    dp[0] = 1, dp[1] = 2;
+//    for (int i = 2; i < 90; ++i) {
+//        dp[i] = dp[i - 1] + dp[i - 2];
+//    }
+//
+//    while (cin >> n) {
+//        cout << dp[n - 1] << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    while (cin >> n)
+//    {
+//        getchar();
+//        vector<string> v(n);
+//        for (auto& it : v) getline(cin, it);
+//
+//        for (int i = 0; i < v.size(); ++i) {
+//            if (v[i].find(' ') != string::npos || v[i].find(',') != string::npos) {
+//                if (i == v.size() - 1)
+//                    cout << "\"" << v[i] << "\"" << endl;
+//                else
+//                    cout << "\"" << v[i] << "\", ";
+//            }
+//            else {
+//                if (i == v.size() - 1)
+//                    cout << v[i] << endl;
+//                else
+//                    cout << v[i] << ", ";
+//            }
+//        }
+//    }
+//    return 0;
+//}
