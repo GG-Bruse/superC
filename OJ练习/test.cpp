@@ -1322,3 +1322,64 @@ if(背包当前承重 > 放入物品之后的承重)
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 抄送列表（牛客）**************************************************/
+//#include <iostream>
+//#include <unordered_set>
+//#include <string>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    string name;
+//    while (getline(cin, str),getline(cin, name))
+//    {
+//        unordered_set<string> set;
+//        size_t end = 0;
+//        int i = 0;
+//        while(i < str.size())
+//        {
+//            if ('\"' == str[i]) //名字包含在双引号中
+//            {
+//                end = str.find('\"', i + 1);
+//                set.insert(str.substr(i + 1, end - i - 1));
+//                i = end + 2;
+//            }
+//            else//该名字没有在引号中
+//            {
+//                end = str.find(',', i + 1);
+//                if (end == string::npos) {
+//                    set.insert(str.substr(i, str.size()));//截取末尾
+//                    break;
+//                }
+//                set.insert(str.substr(i, end - i));
+//                i = end + 1;
+//            }
+//        }
+//
+//        if (set.find(name) == set.end()) {
+//            cout << "Important!" << endl;
+//        }
+//        else {
+//            cout << "Ignore" << endl;
+//        }
+//    }
+//    return 0;
+//}
