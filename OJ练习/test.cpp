@@ -1383,3 +1383,75 @@ if(背包当前承重 > 放入物品之后的承重)
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************** mkdir（牛客）*********************************************************/
+/*
+工作中，每当要部署一台新机器的时候，就意味着有一堆目录需要创建。
+例如要创建目录“/usr/local/bin”，就需要此次创建“/usr”、“/usr/local”以及“/usr/local/bin”。
+好在，Linux下mkdir提供了强大的“-p”选项，只要一条命令“mkdir -p /usr/local/bin”就能自动创建需要的上级目录。
+现在给你一些需要创建的文件夹目录，请你帮忙生成相应的“mkdir -p”命令
+
+输入：
+3
+/a
+/a/b
+/a/b/c
+3
+/usr/local/bin
+/usr/bin
+/usr/local/share/bin
+输出：
+mkdir -p /a/b/c
+
+mkdir -p /usr/bin
+mkdir -p /usr/local/bin
+mkdir -p /usr/local/share/bin
+*/
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <algorithm>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    while (cin >> n)
+//    {
+//        vector<string> v(n);
+//        for (auto& it : v) cin >> it;
+//        sort(v.begin(), v.end());//按字典顺序排列
+//
+//        vector<bool> flag(n, true);//伪删除法，erase会导致vector中的数据不断移动，效率较低
+//        for (int i = 0; i < n - 1; ++i)
+//        {
+//            if (v[i] == v[i + 1]) flag[i] = false;//相同目录删除
+//            //子目录删除
+//            else if (v[i].size() < v[i + 1].size() && v[i] == v[i + 1].substr(0, v[i].size()) &&
+//                v[i + 1][v[i].size()] == '/')//避免出现/a和/ab的情况
+//                flag[i] = false;
+//        }
+//
+//        for (int i = 0; i < n; ++i) {
+//            if (flag[i]) cout << "mkdir -p " << v[i] << endl;
+//        }
+//        cout << endl;
+//    }
+//    return 0;
+//}
