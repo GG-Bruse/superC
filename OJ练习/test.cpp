@@ -1532,3 +1532,56 @@ mkdir -p /usr/local/share/bin
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************最长公共子序列(一)（牛客）*************************************************/
+/*
+给定两个字符串 s1 和 s2，长度为 n 和 m  。求两个字符串最长公共子序列的长度。
+所谓子序列，指一个字符串删掉部分字符（也可以不删）形成的字符串。
+例如：字符串 "arcaea" 的子序列有 "ara" 、 "rcaa" 等。但 "car" 、 "aaae" 则不是它的子序列。
+所谓 s1 和 s2 的最长公共子序列，即一个最长的字符串，它既是 s1 的子序列，也是 s2 的子序列
+
+输入描述：
+第一行输入一个整数 n 和 m ，表示字符串 s1 和 s2 的长度
+接下来第二行和第三行分别输入一个字符串 s1 和 s2
+输出描述：
+输出两个字符串的最长公共子序列的长度
+*/
+
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include <cmath>
+//using namespace std;
+//int main()
+//{
+//    int n = 0, m = 0;
+//    string str1, str2;
+//    while (cin >> n >> m >> str1 >> str2)
+//    {
+//        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+//        for (int i = 1; i <= n; ++i) {
+//            for (int j = 1; j <= m; ++j)
+//            {
+//                if (str1[i - 1] == str2[j - 1])
+//                    dp[i][j] = dp[i - 1][j - 1] + 1;
+//                else
+//                    dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
+//            }
+//        }
+//        cout << dp[n][m] << endl;
+//    }
+//    return 0;
+//}
