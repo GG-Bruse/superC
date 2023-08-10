@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 using namespace std;
 void InsertSort(vector<int>& v)
 {
@@ -20,6 +21,13 @@ void InsertSort(vector<int>& v)
 		v[end + 1] = tmp;
 	}
 }
+
+
+
+
+
+
+
 
 
 
@@ -49,6 +57,11 @@ void ShellSort(vector<int>& v)
 		}
 	}
 }
+
+
+
+
+
 
 
 
@@ -153,16 +166,261 @@ void BubbleSort(vector<int>& v)
 
 
 
+
+
+
+
+
+
+
+/***************************************************** 快速排序（Hoare）******************************************************/
+void QuickSort_1(vector<int>& v, int left, int right)
+{
+	if (left >= right) return;
+
+	int begin = left, end = right;
+	int keyIndex = begin;
+	while (begin < end)//若选用最左边的值为key，一定要right先进行移动；若选用最右边的值为key,一定要left先动
+	{
+		while (begin < end && v[end] >= v[keyIndex]) --end;//找小
+		while (begin < end && v[begin] <= v[keyIndex]) ++begin;//找大
+		swap(v[begin], v[end]);
+	}
+	swap(v[begin], v[keyIndex]);
+	QuickSort_1(v, left, begin - 1);
+	QuickSort_1(v, begin + 1, right);
+}
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************** 快速排序（挖坑法）****************************************************/
+void QuickSort_2(vector<int>& v, int left, int right)
+{
+	if (left >= right) return;
+
+	int begin = left, end = right;
+	int keyValue = v[begin];
+	while (begin < end)
+	{
+		while (begin < end && v[end] >= keyValue) --end;
+		v[begin] = v[end];
+		while (begin < end && v[begin] <= keyValue) ++begin;
+		v[end] = v[begin];
+	}
+	v[begin] = keyValue;
+	QuickSort_2(v, left, begin - 1);
+	QuickSort_2(v, begin + 1, right);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 快速排序（前后指针法）****************************************************/
+//通过current指针找到所有比key小的值，通过prev指针一个个放在前面
+void QuickSort_3(vector<int>& v, int left, int right)
+{
+	if (left >= right) return;
+
+	int keyIndex = left;
+	int current = left + 1, prev = left;
+	while (current <= right)
+	{
+		if (v[current] < v[keyIndex] && ++prev != current) swap(v[current], v[prev]);
+		++current;
+	}
+	swap(v[prev], v[keyIndex]);
+	QuickSort_3(v, left, prev - 1);
+	QuickSort_3(v, prev + 1, right);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 快速排序（非递归）*****************************************************/
+int GetMid(vector<int>& v, int left, int right);
+
+void QuickSort_4(vector<int>& v)
+{
+	stack<int> sk;
+	sk.push(v.size() - 1);
+	sk.push(0);
+
+	while (!sk.empty())
+	{
+		int left = sk.top();
+		sk.pop();
+		int right = sk.top();
+		sk.pop();
+
+		//单趟挖坑法
+		swap(v[left], v[GetMid(v, left, right)]);
+		int begin = left, end = right;
+		int keyValue = v[begin];
+		while (begin < end)
+		{
+			while (begin < end && v[end] >= keyValue) --end;
+			v[begin] = v[end];
+			while (begin < end && v[begin] <= keyValue) ++begin;
+			v[end] = v[begin];
+		}
+		v[begin] = keyValue;
+
+		if (left < begin - 1) {//左区间加入
+			sk.push(begin - 1);
+			sk.push(left);
+		}
+		if (right > begin + 1) {//右区间加入
+			sk.push(right);
+			sk.push(begin + 1);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+/**********************************************************三数取中优化*******************************************************/
+int GetMid(vector<int>& v, int left, int right)
+{
+	int mid = (left + right) >> 1;
+	if (v[left] < v[mid])
+	{
+		if (v[mid] < v[right]) return mid;
+		else if (v[left] > v[right]) return left;
+		else return right;
+	}
+	else//v[left] > v[mid]
+	{
+		if (v[mid] > v[right]) return mid;
+		else if (v[right] > v[left]) return left;
+		else return right;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+/********************************************************** 归并排序 *********************************************************/
+void _MergeSort(vector<int>& v, int left, int right, vector<int>& tmp)
+{
+	if (left >= right) return;
+	//分解
+	int mid = (left + right) >> 1;
+	_MergeSort(v, left, mid, tmp);
+	_MergeSort(v, mid + 1, right, tmp);
+	//合并
+	int begin1 = left, end1 = mid;
+	int begin2 = mid + 1, end2 = right;
+	int index = left;
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (v[begin1] < v[begin2]) tmp[index++] = v[begin1++];
+		else tmp[index++] = v[begin2++];
+	}
+	while (begin1 <= end1) tmp[index++] = v[begin1++];
+	while (begin2 <= end2) tmp[index++] = v[begin2++];
+	//将归并好的数据拷贝回原vector
+	for (int i = left; i <= right; ++i) v[i] = tmp[i];
+}
+void MergeSort(vector<int>& v)
+{
+	vector<int> tmp(v.size());
+	_MergeSort(v, 0, v.size() - 1, tmp);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 计数排序 *********************************************************/
+void CountSort(vector<int>& v)
+{
+	int max = v[0];
+	int min = v[0];
+	for (auto it : v) {
+		if (it > max) max = it;
+		if (it < min) min = it;
+	}
+
+	int range = max - min + 1;
+	vector<int> count(range, 0);
+	for (int i = 0; i < v.size(); ++i) ++count[v[i] - min];
+
+	int current = 0;
+	for (int i = 0; i < range; ++i) {
+		while (count[i]--) v[current++] = i + min;
+	}
+}
+
+
+
+
+
+
+
+
+
+
 /***************************************************** 测试 ***************************************************************/
-//int main()
-//{
-//	vector<int> v1{ 10,9,8,7,6,5,4,3,2,1 };
-//	vector<int> v2{ 4,8,1,7,2,5,6,3,10,9 };
-//	BubbleSort(v1);
-//	BubbleSort(v2);
-//	for (auto& it : v1) cout << it << " ";
-//	cout << endl;
-//	for (auto& it : v2) cout << it << " ";
-//	cout << endl;
-//	return 0;
-//}
+int main()
+{
+	vector<int> v1{ 10,9,8,7,6,5,4,3,2,1 };
+	vector<int> v2{ 4,8,1,7,2,5,6,3,10,9 };
+	vector<int> v3{ 5,2,3,1 };
+	vector<int> v4{ -4, 0, 7, 4, 9, -5, -1, 0, -7, -1 };
+	CountSort(v1);
+	CountSort(v2);
+	CountSort(v3);
+	CountSort(v4);
+	for (auto& it : v1) cout << it << " ";
+	cout << endl;
+	for (auto& it : v2) cout << it << " ";
+	cout << endl;
+	for (auto& it : v3) cout << it << " ";
+	cout << endl;
+	for (auto& it : v4) cout << it << " ";
+	cout << endl;
+	return 0;
+}
