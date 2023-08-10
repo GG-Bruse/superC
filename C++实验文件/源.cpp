@@ -16331,3 +16331,77 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+//#include <stdio.h>
+//#include <string.h>
+//#include <math.h>
+//char id, op[100];
+//
+//int main()
+//{
+//    int n = 0;
+//    while (scanf("%d", &n) != EOF)
+//    {
+//        int _max = 0, _now = 0;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            getchar();
+//            scanf("%c %s", &id, op);
+//            if (strcmp("connect", op) == 0) ++_now;
+//            else --_now;
+//            _max = _max > _now ? _max : _now;
+//        }
+//        printf("%d\n", _max);
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//将str1、str2看作26进制的数据
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include <cmath>
+//using namespace std;
+//int main()
+//{
+//    string str1, str2;
+//    int length1, length2;
+//    while (cin >> str1 >> str2 >> length1 >> length2)
+//    {
+//        //补位
+//        str1.append(length2 - str1.size(), 'a');
+//        str2.append(length2 - str2.size(), (char)('z' + 1));
+//        //计算两个字符串之间的差值
+//        vector<int> tmp;
+//        for (int i = 0; i < length2; ++i) {
+//            tmp.push_back(str2[i] - str1[i]);
+//        }
+//        //计算两者之间的数目
+//        long long ret = 0;
+//        for (int i = length1; i <= length2; ++i) {
+//            for (int j = 0; j < i; ++j) {
+//                ret += tmp[j] * pow(26, i - 1 - j);
+//            }
+//        }
+//        //不包含s2
+//        cout << (ret - 1) % 1000007 << endl;
+//    }
+//    return 0;
+//}
