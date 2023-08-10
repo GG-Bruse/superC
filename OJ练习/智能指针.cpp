@@ -208,8 +208,8 @@ namespace bjy
 	class weak_ptr
 	{
 	public:
-		weak_ptr(const weak_ptr<T>& wp) :_ptr(ptr) {};
-		weak_ptr(const shared_ptr<T>& sp) :_ptr(ptr) {};
+		weak_ptr(const weak_ptr<T>& wp) :_ptr(wp._ptr) {};
+		weak_ptr(const shared_ptr<T>& sp) :_ptr(sp._ptr) {};
 		weak_ptr<T>& operator=(const shared_ptr<T>& sp) {
 			_ptr = sp.get();
 			return *this;

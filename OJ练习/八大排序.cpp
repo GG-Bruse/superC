@@ -154,15 +154,15 @@ void BubbleSort(vector<int>& v)
 
 
 /***************************************************** ≤‚ ‘ ***************************************************************/
-int main()
-{
-	vector<int> v1{ 10,9,8,7,6,5,4,3,2,1 };
-	vector<int> v2{ 4,8,1,7,2,5,6,3,10,9 };
-	BubbleSort(v1);
-	BubbleSort(v2);
-	for (auto& it : v1) cout << it << " ";
-	cout << endl;
-	for (auto& it : v2) cout << it << " ";
-	cout << endl;
-	return 0;
-}
+//int main()
+//{
+//	vector<int> v1{ 10,9,8,7,6,5,4,3,2,1 };
+//	vector<int> v2{ 4,8,1,7,2,5,6,3,10,9 };
+//	BubbleSort(v1);
+//	BubbleSort(v2);
+//	for (auto& it : v1) cout << it << " ";
+//	cout << endl;
+//	for (auto& it : v2) cout << it << " ";
+//	cout << endl;
+//	return 0;
+//}
