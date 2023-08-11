@@ -126,14 +126,18 @@ void AdjustDown(vector<int>& v, int size, int parent)
 }
 void HeapSort(vector<int>& v)
 {
-	for (int i = v.size()/2 - 1; i >= 0; --i) {
+	for (int i = v.size()/2 - 1; i >= 0; --i) {//从最后一个非叶子结点开始进行向下调整，建堆
 		AdjustDown(v, v.size(), i);
 	}
-	for (int i = v.size() - 1; i > 0; --i) {
+	for (int i = v.size() - 1; i > 0; --i) {//根节点与当前未排序的最后一个进行交换，交换完后的新根节点向下调整
 		swap(v[0], v[i]);
 		AdjustDown(v, i, 0);
 	}
 }
+
+
+
+
 
 
 
@@ -150,7 +154,7 @@ void BubbleSort(vector<int>& v)
 	for (int i = 0; i < v.size() - 1; ++i) //一共n - 1趟
 	{
 		bool exchange = false;
-		for (int j = 0; j < v.size() - i - 1; ++j)//最大是 小于v.size() - i
+		for (int j = 0; j < v.size() - i - 1; ++j)//j + 1, 最大是 小于v.size()
 		{
 			if (v[j] > v[j + 1]) {
 				swap(v[j], v[j + 1]);
@@ -410,10 +414,10 @@ int main()
 	vector<int> v2{ 4,8,1,7,2,5,6,3,10,9 };
 	vector<int> v3{ 5,2,3,1 };
 	vector<int> v4{ -4, 0, 7, 4, 9, -5, -1, 0, -7, -1 };
-	CountSort(v1);
-	CountSort(v2);
-	CountSort(v3);
-	CountSort(v4);
+	BubbleSort(v1);
+	BubbleSort(v2);
+	BubbleSort(v3);
+	BubbleSort(v4);
 	for (auto& it : v1) cout << it << " ";
 	cout << endl;
 	for (auto& it : v2) cout << it << " ";
