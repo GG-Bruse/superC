@@ -16405,3 +16405,159 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//bool LeftUpIsFive(vector<vector<char>>& map, int i, int j)
+//{
+//    char base = map[i][j];
+//    int count = 1;
+//    for (int num = 0; num < 4; ++num) {
+//        if ((--i) >= 0 && (--j) >= 0 && map[i][j] == base)  ++count;
+//    }
+//    return count >= 5;
+//}
+//bool RightUpIsFive(vector<vector<char>>& map, int i, int j)
+//{
+//    char base = map[i][j];
+//    int count = 1;
+//    for (int num = 0; num < 4; ++num) {
+//        if ((--i) >= 0 && (++j) < 20 && map[i][j] == base)  ++count;
+//    }
+//    return count >= 5;
+//}
+//bool UpFive(vector<vector<char>>& map, int i, int j)
+//{
+//    char base = map[i][j];
+//    int count = 1;
+//    for (int num = 0; num < 4; ++num) {
+//        if ((--i) >= 0 && map[i][j] == base)  ++count;
+//    }
+//    return count >= 5;
+//}
+//bool LeftIsFive(vector<vector<char>>& map, int i, int j)
+//{
+//    char base = map[i][j];
+//    int count = 1;
+//    for (int num = 0; num < 4; ++num) {
+//        if ((--j) >= 0 && map[i][j] == base)  ++count;
+//    }
+//    return count >= 5;
+//}
+//bool RightIsFive(vector<vector<char>>& map, int i, int j)
+//{
+//    char base = map[i][j];
+//    int count = 1;
+//    for (int num = 0; num < 4; ++num) {
+//        if ((++j) < 20 && map[i][j] == base)  ++count;
+//    }
+//    return count >= 5;
+//}
+//bool GetResult(vector<vector<char>>& map)
+//{
+//    bool result = false;
+//    for (int i = 0; i < 20; ++i)
+//    {
+//        for (int j = 0; j < 20; ++j)
+//        {
+//            if (map[i][j] != '.')
+//                result = LeftUpIsFive(map, i, j) || RightUpIsFive(map, i, j) || UpFive(map, i, j) || LeftIsFive(map, i, j) || RightIsFive(map, i, j);
+//            if (result == true) return result;
+//        }
+//    }
+//    return result;
+//}
+//int main()
+//{
+//    vector<vector<char>> map(20, vector<char>(20));
+//    while (cin >> map[0][0])
+//    {
+//        for (int i = 1; i < 20; ++i) cin >> map[0][i];
+//        for (int i = 1; i < 20; ++i) {
+//            for (int j = 0; j < 20; ++j) {
+//                cin >> map[i][j];
+//            }
+//        }
+//        if (GetResult(map)) cout << "Yes" << endl;
+//        else cout << "No" << endl;
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//#include <stack>
+//#include <vector>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    const unordered_set<string> _set{ "+","-","*","/" };
+//    int evalRPN(vector<string>& tokens)
+//    {
+//        stack<string> sk;
+//        for (auto it : tokens)
+//        {
+//            if (_set.find(it) == _set.end())//数字
+//                sk.push(it);
+//            else//运算符
+//            {
+//                string rightStr = sk.top();
+//                sk.pop();
+//                string leftStr = sk.top();
+//                sk.pop();
+//
+//                int left = atoi(leftStr.c_str());
+//                int right = atoi(rightStr.c_str());
+//                char op = it.c_str()[0];
+//                int ret = 0;
+//                switch (op)
+//                {
+//                case '+':
+//                    ret = left + right;
+//                    break;
+//                case '-':
+//                    ret = left - right;
+//                    break;
+//                case '*':
+//                    ret = left * right;
+//                    break;
+//                case '/':
+//                    ret = left / right;
+//                    break;
+//                }
+//                sk.push(to_string(ret));
+//            };
+//        }
+//        string ret = sk.top();
+//        sk.pop();
+//        return atoi(ret.c_str());
+//    }
+//};
+//int main()
+//{
+//    vector<string> v{ "20","10","+","30","*" };
+//    int ret = Solution().evalRPN(v);
+//    cout << ret << endl;
+//    return 0;
+//}
