@@ -16561,3 +16561,92 @@ int getMin() 获取堆栈中的最小元素
 //    cout << ret << endl;
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    while (getline(cin, str))
+//    {
+//        for (auto it : str) {
+//            if (isdigit(it)) cout << it;
+//        }
+//        cout << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <unordered_map>
+//#include <algorithm>
+//using namespace std;
+//const unordered_map<char, char> map = { {'A','2'},{'B','2'},{'C','2'},
+//                                        {'D','3'},{'E','3'},{'F','3'},
+//                                        {'G','4'},{'H','4'},{'I','4'},
+//                                        {'J','5'},{'K','5'},{'L','5'},
+//                                        {'M','6'},{'N','6'},{'O','6'},
+//                                        {'P','7'},{'Q','7'},{'R','7'},{'S','7'},
+//                                        {'T','8'},{'U','8'},{'V','8'},
+//                                        {'W','9'},{'X','9'},{'Y','9'},{'Z','9'} };
+//void Handle(string& str)
+//{
+//    for (int i = 0; i < str.size(); ++i)
+//    {
+//        auto iter = map.find(str[i]);
+//        if (iter != map.end()) str[i] = iter->second;
+//        if (str[i] == '-') str[i] = ' ';
+//    }
+//
+//    for (int i = 0; i < str.size(); ++i)
+//    {
+//        if (str[i] == ' ') {
+//            str.erase(str.begin() + i);
+//            --i;
+//        }
+//    }
+//    str.insert(3, "-");
+//}
+//int main()
+//{
+//    int n = 0;
+//    while (std::cin >> n)
+//    {
+//        vector<string> ret(n);
+//        string tmp;
+//        for (int i = 0; i < n; ++i)
+//        {
+//            cin >> tmp;
+//            Handle(tmp);
+//            ret[i] = tmp;
+//        }
+//        sort(ret.begin(), ret.end());
+//
+//        cout << ret[0] << endl;
+//        for (int i = 1; i < ret.size(); ++i) {
+//            if (ret[i] != ret[i - 1]) cout << ret[i] << endl;
+//        }
+//        cout << endl;
+//    }
+//    return 0;
+//}
+
