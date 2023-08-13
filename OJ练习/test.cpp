@@ -1705,3 +1705,71 @@ D(1) = 0, D(2) = 1
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************** 求和（牛客）*****************************************************/
+/*
+输入两个整数 n 和 m，从数列1，2，3.......n 中随意取几个数,使其和等于 m ,要求将其中所有的可能组合列出
+
+输入描述:
+每个测试输入包含2个整数,n和m
+输出描述:
+按每个组合的字典序排列输出,每行输出一种组合
+
+输入：
+5 5
+输出：
+1 4
+2 3
+5
+*/
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//void GetSum(vector<int>& v, int pos, int currentSum, int n, int m)
+//{
+//    if (currentSum >= m)
+//    {
+//        if (currentSum == m)//当前累加和等于基准值
+//        {
+//            for (int i = 0; i < v.size() - 1; ++i) {
+//                cout << v[i] << " ";
+//            }
+//            cout << v[v.size() - 1] << endl;
+//        }
+//        return;
+//    }
+//    //累加的起始位置pos
+//    for (int i = pos; i <= n; ++i)
+//    {
+//        //保存当前数据
+//        v.push_back(i);
+//        //保证组合内部递增
+//        GetSum(v, i + 1, currentSum + i, n, m);
+//        //尝试累加其他值，删除当前元素
+//        v.pop_back();
+//    }
+//}
+//
+//int main()
+//{
+//    int n = 0, m = 0;
+//    while (cin >> n >> m)
+//    {
+//        vector<int> v;
+//        GetSum(v, 1, 0, n, m);
+//    }
+//    return 0;
+//}
