@@ -16650,3 +16650,161 @@ int getMin() 获取堆栈中的最小元素
 //    return 0;
 //}
 
+
+
+
+
+
+
+
+
+
+
+
+//#include <cctype>
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    while (getline(cin, str))
+//    {
+//        vector<string> ret;
+//        string tmp;
+//        for (auto it : str)
+//        {
+//            if (isalpha(it)) tmp.push_back(it);
+//            else {
+//                if (tmp.size() != 0) ret.push_back(tmp);
+//                tmp.clear();
+//            }
+//        }
+//        if(tmp.size() != 0) ret.push_back(tmp);
+//        for (int i = ret.size() - 1; i >= 0; --i)
+//        {
+//            cout << ret[i] << " ";
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//#include <cctype>
+//#include <iostream>
+//#include <string>
+//#include <cstdio> 
+//using namespace std;
+//int main()
+//{
+//    string str;
+//    while (cin >> str)
+//    {
+//        for (int i = 0; i < str.size() - 1; ++i) {
+//            if (str[i] == '_') {
+//                str[i + 1] = toupper(str[i + 1]);
+//                str.erase(str.begin() + i);
+//                --i;
+//            }
+//        }
+//        cout << str << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <unordered_map>
+//#include <algorithm>
+//using namespace std;
+//bool IsBrother(string& str1, string& str2)
+//{
+//    unordered_map<char, int> mp;
+//    for (auto it : str1) ++mp[it];
+//    for (auto it : str2) --mp[it];
+//
+//    int flag = true;
+//    for (auto it : mp) {
+//        if (it.second != 0) flag = false;
+//    }
+//
+//    return flag && str1 != str2;
+//}
+//vector<string> GetRet(vector<string>& words, string str)
+//{
+//    vector<string> ret;
+//    for (auto it : words) {
+//        if (IsBrother(it, str)) ret.push_back(it);
+//    }
+//    return ret;
+//}
+//
+//int main()
+//{
+//    int n = 0, k = 0;
+//    while (cin >> n)
+//    {
+//        vector<string> words(n);
+//        for (auto& it : words) cin >> it;
+//
+//        string x;
+//        cin >> x;
+//        cin >> k;
+//
+//        vector<string> brother = GetRet(words, x);
+//        sort(brother.begin(), brother.end());
+//
+//        cout << brother.size() << endl;
+//        if ((k - 1) < brother.size()) cout << brother[k - 1] << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <unordered_map>
+//using namespace std;
+//bool GetRet(string& A, string& B)
+//{
+//    unordered_map<char, int> mp;
+//    for (auto it : B) { ++mp[it]; }
+//    for (auto it : A) { --mp[it]; }
+//    for (auto it : mp) {
+//        if (it.second > 0) return false;
+//    }
+//    return true;
+//}
+//int main()
+//{
+//    string A, B;
+//    while (cin >> A >> B)
+//    {
+//        if (GetRet(A, B)) cout << "Yes" << endl;
+//        else cout << "No" << endl;
+//    }
+//    return 0;
+//}
