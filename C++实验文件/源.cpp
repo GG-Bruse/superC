@@ -16808,3 +16808,93 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//#include <algorithm>
+//using namespace std;
+//class Solution1 {
+//public:
+//    int MoreThanHalfNum_Solution(vector<int>& numbers) {
+//        sort(numbers.begin(), numbers.end());
+//        return numbers[(0 + numbers.size() - 1) >> 1];
+//    }
+//};
+//class Solution2 {
+//public:
+//    int MoreThanHalfNum_Solution(vector<int>& numbers) {
+//        unordered_map<int, int> map;
+//        int size = numbers.size();
+//        for (int i = 0; i < size; ++i)
+//        {
+//            ++map[numbers[i]];
+//            if (map[numbers[i]] > (size >> 1)) return numbers[i];
+//        }
+//        return 0;
+//    }
+//};
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <map>
+//#include <string>
+//#include <utility>
+//#include <algorithm>
+//using namespace std;
+//bool Compare(pair<int, pair<string, string>> a, pair<int, pair<string, string>> b) {
+//    return a.first > b.first;
+//}
+//void Handle(vector<pair<int, pair<string, string>>>& v, string& str)
+//{
+//    size_t left = str.rfind('\\') + 1;
+//    size_t right = str.rfind(' ');
+//    string fileName = str.substr(left, right - left);
+//    string row = str.substr(right + 1);
+//    v.push_back(make_pair(1, make_pair(fileName, row)));
+//    for (int i = 0; i < v.size() - 1; i++)
+//    {
+//        if (v[i].second == v.back().second) {
+//            ++v[i].first;
+//            v.pop_back();
+//            break;
+//        }
+//    }
+//}
+//int main() {
+//    vector<pair<int, pair<string, string>>> v;
+//    string str;
+//    while (getline(cin, str)) {
+//        Handle(v, str);
+//    }
+//    sort(v.begin(), v.end(), Compare);
+//    int count = 0;
+//    for (auto it : v) {
+//        if (it.second.first.size() > 16) {
+//            for (int i = it.second.first.size() - 16; i < it.second.first.size(); ++i)
+//                cout << it.second.first[i];
+//        }
+//        else cout << it.second.first;
+//        cout << " " << it.second.second << " " << it.first << endl;
+//        if (++count >= 8) break;
+//    }
+//    return 0;
+//}
