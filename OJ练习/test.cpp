@@ -1773,3 +1773,143 @@ D(1) = 0, D(2) = 1
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************** 合唱团（牛客）******************************************************/
+/*
+有 n 个学生站成一排，每个学生有一个能力值，牛牛想从这 n 个学生中按照顺序选取 k 名学生，
+要求相邻两个学生的位置编号的差不超过 d，使得这 k 个学生的能力值的乘积最大，你能返回最大的乘积吗？
+
+每个输入包含 1 个测试用例。每个测试数据的第一行包含一个整数 n (1 <= n <= 50)，表示学生的个数，接下来的一行，
+包含 n 个整数，按顺序表示每个学生的能力值 ai（-50 <= ai <= 50）。接下来的一行包含两个整数，k 和 d (1 <= k <= 10, 1 <= d <= 50)
+*/
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    while (cin >> n)
+//    {
+//        vector<int> ability(n);
+//        for (auto& it : ability) cin >> it;
+//        int k = 0, d = 0;
+//        cin >> k >> d;
+//
+//        //状态F(i, j) = 当最后一个学生为i 且 共选了j个学生时,所得到的最大乘积
+//        vector<vector<long long>> maxValue(n + 1, vector<long long>(k + 1, 0));
+//        vector<vector<long long>> minValue(n + 1, vector<long long>(k + 1, 0));
+//        //初始化
+//        for (int i = 1; i <= n; ++i) {
+//            maxValue[i][1] = minValue[i][1] = ability[i - 1];
+//        }
+//
+//        long long ret = 0;
+//        for (int i = 1; i <= n; ++i)
+//        {
+//            for (int j = 1; j <= k; ++j)//i,j两层循环，遍历所有情况
+//            {
+//                //选择相邻学生的范围[i - d, i - 1]
+//                for (int m = i - 1; m >= max(i - d, 1); --m) {
+//                    maxValue[i][j] = \
+//                        max(maxValue[i][j], max(maxValue[m][j - 1] * ability[i - 1], minValue[m][j - 1] * ability[i - 1]));
+//                    minValue[i][j] = \
+//                        min(minValue[i][j], min(minValue[m][j - 1] * ability[i - 1], maxValue[m][j - 1] * ability[i - 1]));
+//                }
+//            }
+//            ret = max(ret, maxValue[i][k]);
+//        }
+//        cout << ret << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************* 马戏团（牛客）******************************************************/
+/*
+搜狐员工小王最近利用假期在外地旅游，在某个小镇碰到一个马戏团表演，精彩的表演结束后发现团长正和大伙在帐篷前激烈讨论，
+小王打听了下了解到， 马戏团正打算出一个新节目“最高罗汉塔”，即马戏团员叠罗汉表演。考虑到安全因素，要求叠罗汉过程中，
+站在某个人肩上的人应该既比自己矮又比自己瘦，或相等。 团长想要本次节目中的罗汉塔叠的最高，
+由于人数众多，正在头疼如何安排人员的问题。小王觉得这个问题很简单，于是统计了参与最高罗汉塔表演的所有团员的身高体重，
+并且很快找到叠最高罗汉塔的人员序列。 现在你手上也拿到了这样一份身高体重表，请找出可以叠出的最高罗汉塔的高度，
+这份表中马戏团员依次编号为1到N
+
+输入描述：
+首先一个正整数N，表示人员个数。 之后N行，每行三个数，分别对应马戏团员编号，体重和身高
+输出描述：
+正整数m，表示罗汉塔的高度
+*/
+
+/*
+题目设计不合理：
+体重相同时，身高必须相等
+体重不同时，需体重小，身高低或相同
+才能往上叠
+*/
+//#include <iostream>
+//#include <vector>
+//#include <utility>
+//#include <algorithm>
+//using namespace std;
+//int main()
+//{
+//    int n = 0;
+//    while (cin >> n)
+//    {
+//        int number = 0;
+//        vector<pair<int, int>> flag(n);//体重、身高
+//        for (int i = 0; i < n; ++i) {
+//            cin >> number >> flag[i].first >> flag[i].second;
+//        }
+//
+//        sort(flag.begin(), flag.end(), [](const pair<int, int>& d1, const pair<int, int>& d2) {
+//            if (d1.first < d2.first) return true;
+//            else if (d1.first == d2.first) {//体重相同时，按身高降序排序，排除体重相同、身高矮的情况
+//                if (d1.second > d2.second) return true;
+//                else return false;
+//            }
+//            else return false;
+//            });
+//
+//        //求身高的最长升序子序列
+//        vector<int> dp(n, 1);
+//        int maxHeight = 1;
+//        for (int i = 1; i < n; ++i)
+//        {
+//            for (int j = i - 1; j >= 0; --j)
+//            {
+//                if (flag[i].second >= flag[j].second) {
+//                    dp[i] = max(dp[i], dp[j] + 1);
+//                }
+//            }
+//            maxHeight = max(maxHeight, dp[i]);
+//        }
+//        cout << maxHeight << endl;
+//    }
+//    return 0;
+//}
