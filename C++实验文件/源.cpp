@@ -16898,3 +16898,105 @@ int getMin() 获取堆栈中的最小元素
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> printMatrix(vector<vector<int>> matrix)
+//    {
+//        int row = matrix.size();
+//        int col = matrix[0].size();
+//        vector<int> result;
+//
+//        if (row == 0 || col == 0) return result;
+//
+//        int top = 0, bottom = row - 1, left = 0, right = col - 1;
+//        while (top <= bottom && left <= right)
+//        {
+//            //从左往右走
+//            for (int i = left; i <= right; ++i)
+//                result.push_back(matrix[top][i]);
+//            //从上往下走
+//            for (int i = top + 1; i <= bottom; ++i)
+//                result.push_back(matrix[i][right]);
+//            //从右往左走
+//            for (int i = right - 1; i >= left && top < bottom; --i)
+//                result.push_back(matrix[bottom][i]);
+//            //从下往上走
+//            for (int i = bottom - 1; i > top && right > left; --i)
+//                result.push_back(matrix[i][left]);
+//            ++top; ++left; --right; --bottom;
+//        }
+//        return result;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class MaxGap {
+//public:
+//    int GetMax(vector<int>& A, int k, int n)
+//    {
+//        int maxLeft = INT_MIN, maxRight = INT_MIN;
+//        for (int i = 0; i <= k; ++i) {
+//            maxLeft = max(maxLeft, A[i]);
+//        }
+//        for (int i = k + 1; i <= n - 1; ++i) {
+//            maxRight = max(maxRight, A[i]);
+//        }
+//        return abs(maxLeft - maxRight);
+//    }
+//    int findMaxGap(vector<int> A, int n) {
+//        int maxNum = 0;
+//        for (int i = 0; i < n - 1; ++i) {
+//            maxNum = max(maxNum, GetMax(A, i, n));
+//        }
+//        return maxNum;
+//    }
+//};
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class MaxGap {
+//public:
+//    int findMaxGap(vector<int> A, int n) {
+//        int maxNum = A[0];
+//        for (int i = 1; i < n; ++i) {
+//            maxNum = max(maxNum, A[i]);
+//        }
+//        return maxNum - min(A[0], A[n - 1]);
+//    }
+//};
