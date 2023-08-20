@@ -382,50 +382,163 @@
 一个有名的按摩师会收到源源不断的预约请求，每个预约都可以选择接或不接。在每次预约服务之间要有休息时间，
 因此她不能接受相邻的预约。给定一个预约请求序列，替按摩师找到最优的预约集合（总预约时间最长），返回总的分钟数
 */
-#include <iostream>
-#include <vector>
-using namespace std;
- class Solution_1 {
- public:
-     int massage(vector<int>& nums)
-     {
-         //状态dp[i]: 选择到nums[i - 1]时的最大预约时长
-         int size = nums.size();
-         vector<int> dp(size + 1);
-         dp[0] = 0;
-         if (size > 0) dp[1] = nums[0];
-         if (size > 1) dp[2] = nums[1];
-         if (size == 0) return dp[0];
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int massage(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        if (size == 0) return 0;
+//
+//        //状态f(i): 选择到i位置时, 选择nums[i],此时的最大预约时长
+//        vector<int> f(size);
+//        //状态g(i): 选择到i位置时, 不选择nums[i],此时的最大预约时长
+//        vector<int> g(size);
+//
+//        //初始化
+//        f[0] = nums[0];
+//        g[0] = 0;
+//
+//        for (int i = 1; i < size; ++i)
+//        {
+//            f[i] = g[i - 1] + nums[i];//不能选择相邻的,所以i - 1位置一定没有被选择
+//            g[i] = max(f[i - 1], g[i - 1]);//i - 1的位置,可能被选择也可能没有被选择
+//        }
+//        return max(f[size - 1], g[size - 1]);
+//    }
+//};
 
-         for (int i = 3; i <= size; ++i) 
-             dp[i] = max(dp[i - 2], dp[i - 3]) + nums[i - 1];
 
-         int maxRet = 0;
-         for(auto it : dp) maxRet = max(maxRet, it);
-         return maxRet;
-     }
- };
-class Solution_2 {
-public:
-    int massage(vector<int>& nums)
-    {
-        int size = nums.size();
-        if (size == 0) return 0;
 
-        //状态f(i): 选择到i位置时, 选择nums[i],此时的最大预约时长
-        vector<int> f(size);
-        //状态g(i): 选择到i位置时, 不选择nums[i],此时的最大预约时长
-        vector<int> g(size);
 
-        //初始化
-        f[0] = nums[0];
-        g[0] = 0;
 
-        for (int i = 1; i < size; ++i)
-        {
-            f[i] = g[i - 1] + nums[i];//不能选择相邻的,所以i - 1位置一定没有被选择
-            g[i] = max(f[i - 1], g[i - 1]);//i - 1的位置,可能被选择也可能没有被选择
-        }
-        return max(f[size - 1], g[size - 1]);
-    }
-};
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 打家劫舍II（LeetCode）**************************************************/
+/*
+你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。
+这个地方所有的房屋都 围成一圈 ，这意味着第一个房屋和最后一个房屋是紧挨着的。
+同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警 。
+
+给定一个代表每个房屋存放金额的非负整数数组，计算在不触动警报装置的情况下 ，今晚能够偷窃到的最高金额
+*/
+
+/*
+由于房屋呈环状
+1. 若选择了0号房屋偷盗，则1号房屋和n - 1号房屋都不能进行偷盗，则再将2号房屋到n - 2号房屋之间进行线性打家劫舍I
+2. 若不选择0号房屋，则将1号房屋到n - 1号房屋之间进行线性打家劫舍I
+选择两种情况中，能偷窃到最高金额的情况
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int robI(vector<int>& nums, int left, int right)
+//    {
+//        int size = right - left + 1;
+//        if (size <= 0) return 0;
+//        //状态f(i) : 到达第i号房屋时,偷盗了第i号房间,此时偷窃的最高金额
+//        vector<int> f(size);
+//        //状态g(i) : 到达第i号房屋时,没偷盗第i号房间,此时偷窃的最高金额
+//        vector<int> g(size);
+//
+//        f[0] = nums[left];
+//        g[0] = 0;
+//
+//        for (int i = 1; i < size; ++i) {
+//            f[i] = g[i - 1] + nums[i + left];
+//            g[i] = max(f[i - 1], g[i - 1]);
+//        }
+//        return max(f[size - 1], g[size - 1]);
+//    }
+//    int rob(vector<int>& nums) {
+//        int n = nums.size();
+//        return max(robI(nums, 2, n - 2) + nums[0], robI(nums, 1, n - 1));
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 删除并获得点数（LeetCode） **********************************************/
+/*
+给你一个整数数组nums ，你可以对它进行一些操作。
+每次操作中，选择任意一个nums[i] ，删除它并获得nums[i]的点数。之后，你必须删除所有等于nums[i] - 1 和 nums[i] + 1的元素。
+开始你拥有 0 个点数。返回你能通过这些操作获得的最大点数
+*/
+
+/*
+题目解析:
+
+选择nums[i]后，所有等于nums[i]的元素都会被选择，所有等于nums[i] - 1和nums[i] + 1的元素都不会被选择
+所以可以将值相等的元素统计在一起，使用下标表示元素
+
+必须删除所有等于nums[i] - 1 和nums[i] + 1的元素
+表示预处理后不可选择相邻的元素
+
+如：
+nums 1  1   2   2   4   4   5   8   8   8
+
+v[i]    0   2   4   0   8   5   0   7   24
+i       0   1   2   3   4   5   6   7   8
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int robI(vector<int>& nums, int left, int right)
+//    {
+//        int size = right - left + 1;
+//        if (size <= 0) return 0;
+//        vector<int> f(size);
+//        vector<int> g(size);
+//
+//        f[0] = nums[left];
+//        g[0] = 0;
+//
+//        for (int i = 1; i < size; ++i) {
+//            f[i] = g[i - 1] + nums[i + left];
+//            g[i] = max(f[i - 1], g[i - 1]);
+//        }
+//        return max(f[size - 1], g[size - 1]);
+//    }
+//    int deleteAndEarn(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //找到数组中的最大值
+//        int maxValue = nums[0];
+//        for (auto it : nums) maxValue = max(maxValue, it);
+//
+//        //v[i] 表示i这个数 出现的次数 * i
+//        vector<int> v(maxValue + 1, 0);
+//        for (int i = 0; i < nums.size(); ++i) {
+//            v[nums[i]] += nums[i];
+//        }
+//
+//        //变形为打家劫舍问题了
+//        return robI(v, 0, v.size() - 1);
+//    }
+//};
