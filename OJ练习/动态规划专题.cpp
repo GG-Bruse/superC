@@ -653,3 +653,144 @@ i       0   1   2   3   4   5   6   7   8
 //        return max(dp[size - 1][1], dp[size - 1][2]);
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************ 买卖股票的最佳时机含手续费（LeetCode）*************************************/
+/*
+给定一个整数数组 prices，其中 prices[i]表示第 i 天的股票价格 ；整数 fee 代表了交易股票的手续费用
+你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了
+返回获得利润的最大值
+注意：这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices, int fee)
+//    {
+//        int size = prices.size();
+//        //状态dp[i][j] : 在第i天结束时,处于持有、可交易(0/1)状态,获得的最大利润
+//        vector<vector<int>> dp(size, vector<int>(2));
+//        //卖出时支付手续费
+//        dp[0][0] = -prices[0];
+//        dp[0][1] = 0;
+//        //状态转移方程
+//        for (int i = 1; i < size; ++i) {
+//            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
+//            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] + prices[i] - fee);
+//        }
+//        return dp[size - 1][1];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 买卖股票的最佳时机 III（LeetCode）****************************************/
+/*
+给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。
+
+设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。
+
+注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProfit(vector<int>& prices)
+//    {
+//        /* 状态 : 在第i天结束时,有可能处于以下五种状态之一,此时能获取的最大利润
+//        未有任何操作
+//        进行第一次买入(持有)
+//        进行第一次卖出(可交易)
+//        进行第二次买入(持有)
+//        进行第二次卖出(不可交易)
+//        */
+//        int size = prices.size();
+//        vector<vector<int>> dp(size, vector<int>(5));
+//        dp[0][1] = dp[0][3] = -prices[0];//允许在同一天买入并且卖出
+//
+//        for (int i = 1; i < size; ++i) {
+//            dp[i][0] = dp[i - 1][0];//始终为0
+//            dp[i][1] = max(dp[i - 1][0] - prices[i], dp[i - 1][1]);
+//            dp[i][2] = max(dp[i - 1][1] + prices[i], dp[i - 1][2]);
+//            dp[i][3] = max(dp[i - 1][2] - prices[i], dp[i - 1][3]);
+//            dp[i][4] = max(dp[i - 1][3] + prices[i], dp[i - 1][4]);
+//        }
+//        return dp[size - 1][4];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 买卖股票的最佳时机 IV（LeetCode）****************************************/
+/*
+给你一个整数数组 prices 和一个整数 k ，其中 prices[i] 是某支给定的股票在第 i 天的价格。
+
+设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。也就是说，你最多可以买 k 次，卖 k 次。
+
+注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProfit(int k, vector<int>& prices)
+//    {
+//        int size = prices.size();
+//        k = min(k, size / 2);
+//        int nums = 1 + 2 * k;//共有几种状态
+//        vector<vector<int>> dp(size, vector<int>(nums));
+//        for (int j = 1; j < nums; j += 2) dp[0][j] = -prices[0];
+//
+//        for (int i = 1; i < size; ++i) {
+//            dp[i][0] = dp[i - 1][0];
+//            for (int j = 1; j < nums; ++j) {
+//                if (j % 2 != 0) dp[i][j] = max(dp[i - 1][j - 1] - prices[i], dp[i - 1][j]);
+//                else dp[i][j] = max(dp[i - 1][j - 1] + prices[i], dp[i - 1][j]);
+//            }
+//        }
+//        return dp[size - 1][nums - 1];
+//    }
+//};
+
+
+
+
+
