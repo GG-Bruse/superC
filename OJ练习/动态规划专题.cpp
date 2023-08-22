@@ -794,3 +794,164 @@ i       0   1   2   3   4   5   6   7   8
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 最大子数组和（LeetCode）***********************************************/
+/*
+给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+子数组 是数组中的一个连续部分
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxSubArray(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态dp[i] : 以nums[i - 1]为结尾的连续子数组的最大和
+//        vector<int> dp(size + 1);
+//
+//        int maxRet = INT_MIN;
+//        for (int i = 1; i <= size; ++i) {
+//            dp[i] = max(dp[i - 1] + nums[i - 1], nums[i - 1]);
+//            maxRet = max(maxRet, dp[i]);
+//        }
+//        return maxRet;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 环形子数组的最大和（LeetCode）*************************************************/
+/*
+给定一个长度为n的环形整数数组nums ，返回 nums 的非空子数组的最大可能和 。
+
+环形数组 意味着数组的末端将会与开头相连呈环状。形式上， nums[i] 的下一个元素是 nums[(i + 1) % n] ，
+nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
+
+子数组最多只能包含固定缓冲区nums中的每个元素一次。形式上，对于子数组 nums[i], nums[i + 1], ..., nums[j] ，
+不存在 i <= k1, k2 <= j 其中 k1 % n == k2 % n
+*/
+/*
+题目解析:
+所求环形整数数组 的 非空子数组，有两种情况:
+1. 所求子数组没涉及到环，直接当作普通数组求解
+2. 所求子数组涉及到了环，求最小和，sum - 最小和 = 最大和，因为此时最小和肯定没涉及环
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxSubarraySumCircular(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态f(i) : 以nums[i - 1]为结尾的非空连续子数组的最大和
+//        vector<int> f(size + 1);
+//        //状态g(i) : 以nums[i - 1]为结尾的非空连续子数组的最小和
+//        vector<int> g(size + 1);
+//
+//        int maxRet = INT_MIN, minRet = INT_MAX;
+//        int sum = 0;
+//        for (int i = 1; i <= size; ++i)
+//        {
+//            f[i] = max(f[i - 1] + nums[i - 1], nums[i - 1]);
+//            g[i] = min(g[i - 1] + nums[i - 1], nums[i - 1]);
+//            maxRet = max(maxRet, f[i]);
+//            minRet = min(minRet, g[i]);
+//            sum += nums[i - 1];
+//        }
+//        return sum == minRet ? maxRet : max(maxRet, sum - minRet);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 乘积最大子数组（LeetCode）*******************************************************/
+/*
+给你一个整数数组 nums ，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积
+测试用例的答案是一个 32-位 整数
+子数组 是数组的连续子序列
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxProduct(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态f(i) : 以nums[i]为结尾的乘积最大子数组的乘积
+//        //状态g(i) : 以nums[i]为结尾的乘积最小子数组的乘积
+//        vector<int> f(size), g(size);
+//        f[0] = g[0] = nums[0];
+//
+//        int maxRet = f[0];
+//        for (int i = 1; i < size; ++i) {
+//            f[i] = max(f[i - 1] * nums[i], g[i - 1] * nums[i]);
+//            f[i] = max(f[i], nums[i]);
+//            g[i] = min(f[i - 1] * nums[i], g[i - 1] * nums[i]);
+//            g[i] = min(g[i], nums[i]);
+//            maxRet = max(maxRet, f[i]);
+//        }
+//        return maxRet;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
