@@ -953,5 +953,155 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 
 
 
+/******************************************************** 乘积为正数的最长子数组长度（LeetCode）************************************************/
+/*
+给你一个整数数组 nums ，请你求出乘积为正数的最长子数组的长度
+一个数组的子数组是由原数组中零个或者更多个连续数字组成的数组
+请你返回乘积为正数的最长子数组长度
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int getMaxLen(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态f(i) : 以nums[i - 1]为结尾的,乘积为正数的最长子数组长度
+//        vector<int> f(size + 1);
+//        //状态g(i) : 以nums[i - 1]为结尾的,乘积为负数的最长子数组长度
+//        vector<int> g(size + 1);
+//
+//        int maxLength = INT_MIN;
+//        for (int i = 1; i <= size; ++i)
+//        {
+//            if (nums[i - 1] > 0) {
+//                f[i] = f[i - 1] + 1;
+//                g[i] = (g[i - 1] > 0 ? g[i - 1] + 1 : 0);
+//            }
+//            else if (nums[i - 1] < 0) {
+//                f[i] = (g[i - 1] > 0 ? g[i - 1] + 1 : 0);
+//                g[i] = f[i - 1] + 1;
+//            }
+//            else f[i] = g[i] = 0;//nums[i - 1] == 0;
+//            maxLength = max(maxLength, f[i]);
+//        }
+//        return maxLength;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************************** 等差数列划分（LeetCode）********************************************************/
+/*
+如果一个数列 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该数列为等差数列
+
+例如，[1,3,5,7,9]、[7,7,7,7] 和 [3,-1,-5,-9] 都是等差数列
+给你一个整数数组 nums ，返回数组 nums 中所有为等差数组的子数组个数
+
+子数组 是数组中的一个连续序列
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int numberOfArithmeticSlices(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态dp[i] : 以nums[i]为结尾的所有数组中为等差数组的个数
+//        vector<int> dp(size);
+//        int totalRet = 0;
+//        for (int i = 2; i < size; ++i) {
+//            dp[i] = (nums[i - 1] - nums[i - 2] == nums[i] - nums[i - 1] ? dp[i - 1] + 1 : 0);
+//            totalRet += dp[i];
+//        }
+//        return totalRet;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 最长湍流子数组（LeetCode）*********************************************/
+/*
+给定一个整数数组 arr ，返回 arr 的 最大湍流子数组的长度
+如果比较符号在子数组中的每个相邻元素对之间翻转，则该子数组是湍流子数组
+
+输入：arr = [9,4,2,10,7,8,8,1,9]
+输出：5
+解释：arr[1] > arr[2] < arr[3] > arr[4] < arr[5]
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+// class Solution_1 {
+// public:
+//     int maxTurbulenceSize(vector<int>& arr) 
+//     {
+//         int size = arr.size();
+//         if(size == 1) return 1;
+//         //状态dp[i] : 以arr[i]为结尾的所有子数组中最大湍流子数组的长度
+//         vector<int> dp(size);
+//         dp[0] = 1;
+//         dp[1] = (arr[1] != arr[0]) + dp[0];
+//
+//         int maxLength = dp[0];
+//         for(int i = 2; i < size; ++i)
+//         {
+//             if((arr[i] > arr[i - 1] && arr[i - 1] < arr[i - 2]) || (arr[i] < arr[i - 1] && arr[i - 1] > arr[i - 2]))
+//                 dp[i] = dp[i - 1] + 1;
+//             else if(arr[i] == arr[i - 1]) dp[i] = 1;
+//             else dp[i] = 2;
+//             maxLength = max(maxLength, dp[i]);
+//         }
+//         return max(maxLength, dp[1]);
+//     }
+// };
+//class Solution_2 {
+//public:
+//    int maxTurbulenceSize(vector<int>& arr)
+//    {
+//        int size = arr.size();
+//        //状态f[i] : 以arr[i]为结尾的所有子数组中,最后呈现"上升"状态的最大湍流子数组的长度
+//        //状态g[i] : 以arr[i]为结尾的所有子数组中,最后呈现"下降"状态的最大湍流子数组的长度
+//        vector<int> f(size, 1), g(size, 1);
+//
+//        int maxLength = 1;
+//        for (int i = 1; i < size; ++i) {
+//            if (arr[i] > arr[i - 1]) f[i] = g[i - 1] + 1;
+//            else if (arr[i] < arr[i - 1]) g[i] = f[i - 1] + 1;
+//            maxLength = max(maxLength, max(f[i], g[i]));
+//        }
+//        return maxLength;
+//    }
+//};
+
+
+
+
+
+
+
 
 
