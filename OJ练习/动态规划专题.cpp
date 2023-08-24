@@ -1105,3 +1105,130 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 
 
 
+
+
+
+/******************************************************* 单词拆分（LeetCode） ****************************************************/
+/*
+给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出s 
+注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    bool wordBreak(string s, vector<string>& wordDict)
+//    {
+//        unordered_set<string> set;
+//        for (auto& it : wordDict) set.insert(it);
+//
+//        int size = s.size();
+//        //状态dp[i] : s[0...i]区间的字符串,能否被字典中的单词拼成
+//        vector<bool> dp(size + 1);
+//        dp[0] = true;
+//        s = ' ' + s;//下标统一
+//
+//        for (int i = 1; i <= size; ++i) {
+//            for (int j = i; j >= 1; --j) {//最后一个单词的起始位置
+//                if (dp[j - 1] && set.count(s.substr(j, i - j + 1))) {
+//                    dp[i] = true;
+//                    break;
+//                }
+//            }
+//        }
+//        return dp[size];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 环绕字符串中唯一的子字符串（LeetCode）*****************************************/
+/*
+定义字符串base为一个"abcdefghijklmnopqrstuvwxyz"无限环绕的字符串，所以base看起来是这样的：
+"...zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd....".
+给你一个字符串 s ，请你统计并返回s中有多少不同非空子串也在base中出现
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    int findSubstringInWraproundString(string s)
+//    {
+//        int size = s.size();
+//        //状态dp[i] : 以i位置为结尾的所有非空子字串,在base中出现的次数
+//        vector<int> dp(size, 1);
+//
+//        for (int i = 1; i < size; ++i) {
+//            if (s[i] - s[i - 1] == 1 || (s[i] == 'a' && s[i - 1] == 'z'))
+//                dp[i] = dp[i - 1] + 1;
+//        }
+//        //去重 : 相同字符结尾,保存最大的那个dp值即可
+//        vector<int> Ret(26);
+//        int sumRet = 0;
+//        for (int i = 0; i < size; ++i)
+//            Ret[s[i] - 'a'] = max(Ret[s[i] - 'a'], dp[i]);
+//
+//        for (auto& it : Ret) sumRet += it;
+//        return sumRet;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 最长递增子序列（LeetCode）***********************************************/
+/*
+给你一个整数数组 nums ，找到其中最长严格递增子序列的长度
+子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int lengthOfLIS(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态dp[i] : 以i为结尾的所有子序列中的,最长递增子序列的长度
+//        vector<int> dp(size, 1);
+//        int maxLength = 1;
+//        for (int i = 1; i < size; ++i)
+//        {
+//            for (int j = i - 1; j >= 0; --j) {
+//                if (nums[i] > nums[j]) dp[i] = max(dp[i], dp[j] + 1);
+//            }s
+//            maxLength = max(maxLength, dp[i]);
+//        }
+//        return maxLength;
+//    }
+//};
