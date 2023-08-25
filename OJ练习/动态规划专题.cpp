@@ -1232,3 +1232,100 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return maxLength;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************** 摆动序列（LeetCode）**************************************************/
+/*
+如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为 摆动序列 。第一个差（如果存在的话）可能是正数或负数。
+仅有一个元素或者含两个不等元素的序列也视作摆动序列
+例如， [1, 7, 4, 9, 2, 5] 是一个 摆动序列 ，因为差值 (6, -3, 5, -7, 3) 是正负交替出现的。
+
+相反，[1, 4, 7, 2, 5] 和 [1, 7, 4, 5, 5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零
+子序列 可以通过从原始序列中删除一些（也可以不删除）元素来获得，剩下的元素保持其原始顺序
+给你一个整数数组 nums ，返回 nums 中作为 摆动序列 的 最长子序列的长度
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int wiggleMaxLength(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态f[i] : 以i位置为结尾的所有子序列中,最后一个位置呈现"上升"状态,最长的摆动序列长度
+//        //状态g[i] : 以i位置为结尾的所有子序列中,最后一个位置呈现"下降"状态,最长的摆动序列长度
+//        vector<int> f(size, 1), g(size, 1);
+//
+//        int maxLength = 1;
+//        for (int i = 1; i < size; ++i)
+//        {
+//            for (int j = 0; j < i; ++j) {
+//                if (nums[i] - nums[j] > 0) f[i] = max(f[i], g[j] + 1);
+//                if (nums[i] - nums[j] < 0) g[i] = max(g[i], f[j] + 1);
+//            }
+//            maxLength = max(maxLength, max(f[i], g[i]));
+//        }
+//        return maxLength;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 最长递增子序列的个数（LeetCode）*********************************************/
+/*
+给定一个未排序的整数数组nums，返回最长递增子序列的个数
+注意这个数列必须是严格递增的
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findNumberOfLIS(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        //状态length[i] : 以i位置为结尾的所有子序列, 最长递增子序列的长度
+//        //状态count[i] : 以i位置为结尾的所有子序列, 最长递增子序列的个数
+//        vector<int> length(size, 1), count(size, 1);
+//
+//        int retLen = 1, retCount = 1;
+//        for (int i = 1; i < size; ++i)
+//        {
+//            for (int j = 0; j < i; ++j)
+//            {
+//                if (nums[i] > nums[j])
+//                {
+//                    if (length[j] + 1 == length[i]) count[i] += count[j];
+//                    else if (length[j] + 1 > length[i])
+//                        length[i] = length[j] + 1, count[i] = count[j];
+//                }
+//            }
+//            if (retLen == length[i]) retCount += count[i];//最长递增子序列的长度未改变
+//            else if (retLen < length[i])//最长递增子序列的长度改变,重新计数
+//                retLen = length[i], retCount = count[i];
+//        }
+//        return retCount;
+//    }
+//};
+
