@@ -1471,4 +1471,49 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 
 
 
+/***************************************************** 最长等差数列（LeetCode）**************************************************/
+/*
+给你一个整数数组 nums，返回 nums 中最长等差子序列的长度
+回想一下，nums 的子序列是一个列表 nums[i1], nums[i2], ..., nums[ik] ，且 0 <= i1 < i2 < ... < ik <= nums.length - 1
+并且如果 seq[i+1] - seq[i]( 0 <= i < seq.length - 1) 的值都相同，那么序列 seq 是等差的
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestArithSeqLength(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        unordered_map<int, int> hash;
+//        hash[nums[0]] = 0;
+//
+//        //状态dp[i][j] : 以i位置、j位置元素为结尾的所有子序列中(i < j), 最长等差数列的长度
+//        vector<vector<int>> dp(size, vector<int>(size, 2));
+//
+//        int maxLength = 2;
+//        for (int i = 1; i < size; ++i)//先固定倒数第二个数
+//        {
+//            for (int j = i + 1; j < size; ++j)
+//            {
+//                int tmp = 2 * nums[i] - nums[j];
+//                if (hash.count(tmp)) dp[i][j] = dp[hash[tmp]][i] + 1;
+//                maxLength = max(maxLength, dp[i][j]);
+//            }
+//            hash[nums[i]] = i;//一边dp,一般保存下标(因为可能存在多个相同的数,只需要最后一个即可)
+//        }
+//        return maxLength;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
 
