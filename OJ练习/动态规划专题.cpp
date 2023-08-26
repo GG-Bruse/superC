@@ -1329,3 +1329,146 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //    }
 //};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 最长数对链（LeetCode）****************************************************/
+/*
+给你一个由n个数对组成的数对数组pairs ，其中pairs[i] = [lefti, righti] 且lefti < righti
+现在，我们定义一种跟随关系，当且仅当b < c时，数对p2 = [c, d]才可以跟在p1 = [a, b]后面。我们用这种形式来构造数对链
+找出并返回能够形成的 最长数对链的长度
+你不需要用到所有的数对，你可以以任何顺序选择其中的一些数对来构造
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    int findLongestChain(vector<vector<int>>& pairs)
+//    {
+//        int size = pairs.size();
+//        sort(pairs.begin(), pairs.end());
+//        //状态dp[i] : 以i为结尾的所有子序列中,最长数对链的长度
+//        vector<int> dp(size, 1);
+//        int maxLength = 1;
+//        for (int i = 1; i < size; ++i)
+//        {
+//            for (int j = 0; j < i; ++j) {
+//                if (pairs[j][1] < pairs[i][0]) dp[i] = max(dp[i], dp[j] + 1);
+//            }
+//            maxLength = max(maxLength, dp[i]);
+//        }
+//        return maxLength;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 最长定差子序列（LeetCode）***************************************************/
+/*
+给你一个整数数组arr和一个整数difference，请你找出并返回arr中最长等差子序列的长度，该子序列中相邻元素之间的差等于difference
+子序列是指在不改变其余元素顺序的情况下，通过删除一些元素或不删除任何元素而从arr派生出来的序列
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestSubsequence(vector<int>& arr, int difference)
+//    {
+//        int size = arr.size();
+//        //状态dp[i] : 以arr[i]为结尾的所有子序列中,最长等差子序列的长度
+//        unordered_map<int, int> dp;
+//        int maxLength = 1;
+//        for (int i = 0; i < size; ++i) {
+//            dp[arr[i]] = dp[arr[i] - difference] + 1;//只需考虑最后一个dp[j]
+//            maxLength = max(maxLength, dp[arr[i]]);
+//        }
+//        return maxLength;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 最长的斐波那契子序列的长度（LeetCode）*******************************************/
+/*
+如果序列 X_1, X_2, ..., X_n 满足下列条件，就说它是斐波那契式的：n >= 3
+对于所有 i + 2 <= n，都有 X_i + X_{i+1} = X_{i+2}
+给定一个严格递增的正整数数组形成序列arr，找到arr中最长的斐波那契式的子序列的长度。如果一个不存在，返回0
+
+（回想一下，子序列是从原序列 arr 中派生出来的，它从 arr 中删掉任意数量的元素（也可以不删），而不改变其余元素的顺序。
+例如， [3, 5, 8] 是 [3, 4, 5, 6, 7, 8] 的一个子序列）
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int lenLongestFibSubseq(vector<int>& arr)
+//    {
+//        int size = arr.size();
+//        unordered_map<int, int> hash;
+//        for (int i = 0; i < size; ++i) hash[arr[i]] = i;
+//
+//        //状态dp[i][j] : 以i位置以及j位置的元素为结尾的所有子序列(i < j)中, 最长的斐波那契子序列的长度
+//        vector<vector<int>> dp(size, vector<int>(size, 2));
+//
+//        int maxLength = 2;
+//        for (int j = 2; j < size; ++j)
+//        {
+//            for (int i = 1; i < j; ++i)
+//            {
+//                int tmp = arr[j] - arr[i];
+//                if (tmp < arr[i] && hash.count(tmp)) dp[i][j] = dp[hash[tmp]][i] + 1;
+//                maxLength = max(maxLength, dp[i][j]);
+//            }
+//        }
+//        return maxLength < 3 ? 0 : maxLength;
+//    }
+//};
+
+
+
+
+
+
+
+
+
