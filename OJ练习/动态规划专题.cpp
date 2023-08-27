@@ -1612,3 +1612,137 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************** 最长回文子串（LeetCode）************************************************/
+/*
+给你一个字符串 s，找到 s 中最长的回文子串
+如果字符串的反序与原始字符串相同，则该字符串称为回文字符串
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    string longestPalindrome(string s)
+//    {
+//        int size = s.size();
+//        //状态dp[i][j] : 字符串s[i,j]是否为回文串
+//        vector<vector<bool>> dp(size, vector<bool>(size));
+//
+//        vector<int> flag(2);
+//        for (int i = size - 1; i >= 0; --i)
+//        {
+//            for (int j = i; j < size; ++j)
+//            {
+//                if (s[i] == s[j]) dp[i][j] = i + 1 < j ? dp[i + 1][j - 1] : true;
+//                if (dp[i][j] && j - i > flag[1] - flag[0]) flag[0] = i, flag[1] = j;
+//            }
+//        }
+//        return s.substr(flag[0], flag[1] - flag[0] + 1);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 分割回文串IV（LeetCode）***************************************************/
+/*
+给你一个字符串s ，如果可以将它分割成三个非空回文子字符串，那么返回true ，否则返回false
+当一个字符串正着读和反着读是一模一样的，就称其为 回文字符串
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool checkPartitioning(string s)
+//    {
+//        int size = s.size();
+//        //状态dp[i][j] : s[i,j]是否为回文串
+//        vector<vector<bool>> dp(size, vector<bool>(size));
+//
+//        for (int i = size - 1; i >= 0; --i) {
+//            for (int j = i; j < size; ++j) {
+//                if (s[i] == s[j]) dp[i][j] = i + 1 < j ? dp[i + 1][j - 1] : true;
+//            }
+//        }
+//
+//        //[0,i] [i,j] [j,size - 1]
+//        for (int i = 1; i < size - 1; ++i) { //第一刀
+//            for (int j = i + 1; j < size; ++j) {//第二刀
+//                if (dp[0][i - 1] && dp[i][j - 1] && dp[j][size - 1]) return true;
+//            }
+//        }
+//        return false;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 分割回文串II（LeetCode）***************************************************/
+/*
+给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文
+返回符合要求的 最少分割次数
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int minCut(string s)
+//    {
+//        int size = s.size();
+//        vector<vector<bool>> map(size, vector<bool>(size));//存储每个子串是否为回文串
+//        for (int i = size - 1; i >= 0; --i) {
+//            for (int j = i; j < size; ++j) {
+//                if (s[i] == s[j]) map[i][j] = i + 1 < j ? map[i + 1][j - 1] : true;
+//            }
+//        }
+//
+//        //状态dp[i] : s[0,i]字符串的最少分割次数
+//        vector<int> dp(size, INT_MAX);
+//        for (int i = 0; i < size; ++i)
+//        {
+//            if (map[0][i]) dp[i] = 0;
+//            else
+//            {
+//                for (int j = 1; j <= i; ++j)
+//                    if (map[j][i]) dp[i] = min(dp[i], dp[j - 1] + 1);
+//            }
+//        }
+//        return dp[size - 1];
+//    }
+//};
