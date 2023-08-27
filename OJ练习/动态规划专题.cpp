@@ -1517,3 +1517,98 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 
 
 
+
+
+
+
+
+
+/***************************************************** 等差数列划分 II - 子序列（LeetCode） ***************************************/
+/*
+给你一个整数数组nums，返回nums中所有等差子序列的数目
+如果一个序列中 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该序列为等差序列。
+
+例如，[1, 3, 5, 7, 9]、[7, 7, 7, 7] 和 [3, -1, -5, -9] 都是等差序列
+再例如，[1, 1, 2, 5, 7] 不是等差序列
+数组中的子序列是从数组中删除一些元素（也可能不删除）得到的一个序列
+
+例如，[2,5,10] 是 [1,2,1,2,4,1,5,10] 的一个子序列
+题目数据保证答案是一个 32-bit 整数
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int numberOfArithmeticSlices(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        unordered_map<long long, vector<int>> hash;
+//        for (int i = 0; i < size; ++i) hash[nums[i]].push_back(i);
+//
+//        //状态dp[i][j] : 以i位置、j位置元素为结尾的所有子序列(i < j)中,等差子序列的个数
+//        vector<vector<int>> dp(size, vector<int>(size));
+//
+//        int sumNums = 0;
+//        for (int j = 2; j < size; ++j)
+//        {
+//            for (int i = 1; i < j; ++i)
+//            {
+//                long long tmp = (long long)2 * nums[i] - nums[j];
+//                if (hash.count(tmp))
+//                {
+//                    for (auto it : hash[tmp])
+//                        if (it < i) dp[i][j] += (dp[it][i] + 1);
+//                }
+//                sumNums += dp[i][j];
+//            }
+//        }
+//        return sumNums;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************** 回文子串（LeetCode）***************************************************/
+/*
+给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目
+回文字符串 是正着读和倒过来读一样的字符串
+子字符串 是字符串中的由连续字符组成的一个序列
+具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int countSubstrings(string s)
+//    {
+//        int size = s.size();
+//        //状态dp[i][j] : 以i位置为开始、j位置为结尾的子串，是否为回文子串
+//        vector<vector<bool>> dp(size, vector<bool>(size));//默认false
+//
+//        int ret = 0;
+//        for (int i = size - 1; i >= 0; --i)
+//        {
+//            for (int j = i; j < size; ++j)
+//            {
+//                if (s[i] == s[j]) dp[i][j] = i + 1 < j ? dp[i + 1][j - 1] : true;
+//                if (dp[i][j]) ++ret;
+//            }
+//        }
+//        return ret;
+//    }
+//};
