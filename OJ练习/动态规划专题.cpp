@@ -1746,3 +1746,272 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp[size - 1];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 最长回文子序列（LeetCode）*************************************************/
+/*
+给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度
+子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestPalindromeSubseq(string s)
+//    {
+//        int size = s.size();
+//        //状态dp[i][j] : 在[i,j]区间内的所有子序列中,最长的回文子序列的长度
+//        vector<vector<int>> dp(size, vector<int>(size, 0));
+//
+//        for (int i = size - 1; i >= 0; --i) {
+//            dp[i][i] = 1;
+//            for (int j = i + 1; j < size; ++j) {
+//                if (s[i] == s[j]) dp[i][j] = dp[i + 1][j - 1] + 2;
+//                else dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
+//            }
+//        }
+//        return dp[0][size - 1];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************** 让字符串成为回文串的最少插入次数（LeetCode）****************************************/
+/*
+给你一个字符串 s ，每一次操作你都可以在字符串的任意位置插入任意字符
+请你返回让 s 成为回文串的 最少操作次数
+「回文串」是正读和反读都相同的字符串
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int minInsertions(string s)
+//    {
+//        int size = s.size();
+//        //状态dp[i][j] : [i,j]区间的子串,使其成为回文串的最小插入次数
+//        vector<vector<int>> dp(size, vector<int>(size));
+//
+//        for (int i = size - 1; i >= 0; --i) {
+//            for (int j = i; j < size; ++j) {
+//                if (s[i] == s[j]) dp[i][j] = i + 1 < j ? dp[i + 1][j - 1] : 0;
+//                else dp[i][j] = min(dp[i][j - 1] + 1, dp[i + 1][j] + 1);
+//            }
+//        }
+//        return dp[0][size - 1];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 最长公共子序列（LeetCode）*****************************************************/
+/*
+给定两个字符串text1和text2，返回这两个字符串的最长公共子序列的长度。如果不存在公共子序列，返回0
+一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符
+（也可以不删除任何字符）后组成的新字符串
+
+例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列
+两个字符串的 公共子序列 是这两个字符串所共同拥有的子序列
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestCommonSubsequence(string text1, string text2)
+//    {
+//        int size1 = text1.size(), size2 = text2.size();
+//        //dp[i][j] : text1[0,i]区间和text2[0,j]区间的所有子序列中,最长公共子序列
+//        vector<vector<int>> dp(size1 + 1, vector<int>(size2 + 1));
+//
+//        for (int i = 1; i <= size1; ++i) {
+//            for (int j = 1; j <= size2; ++j) {
+//                if (text1[i - 1] == text2[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
+//                else dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+//            }
+//        }
+//        return dp[size1][size2];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 不相交的线（LeetCode）****************************************************/
+/*
+在两条独立的水平线上按给定的顺序写下 nums1 和 nums2 中的整数
+
+现在，可以绘制一些连接两个数字 nums1[i] 和 nums2[j] 的直线，这些直线需要同时满足满足：
+ nums1[i] == nums2[j]
+且绘制的直线不与任何其他连线（非水平线）相交
+请注意，连线即使在端点也不能相交：每个数字只能属于一条连线
+
+以这种方法绘制线条，并返回可以绘制的最大连线数
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2)
+//    {
+//        int size1 = nums1.size(), size2 = nums2.size();
+//        //状态dp[i][j] : nums1[0,i]区间与nums2[0,j]区间之间不相交的线的最大数量
+//        vector<vector<int>> dp(size1 + 1, vector<int>(size2 + 1));
+//
+//        for (int i = 1; i <= size1; ++i) {
+//            for (int j = 1; j <= size2; ++j) {
+//                if (nums1[i - 1] == nums2[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
+//                else dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+//            }
+//        }
+//        return dp[size1][size2];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 不同的子序列（LeetCode）****************************************************/
+/*
+给你两个字符串s和t ，统计并返回在s的子序列中t出现的个数
+题目数据保证答案符合 32 位带符号整数范围
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int numDistinct(string s, string t)
+//    {
+//        int size1 = s.size(), size2 = t.size();
+//        if (size1 < size2) return 0;
+//
+//        s = " " + s, t = " " + t;
+//        //状态dp[i][j] : 在s[0,i]的所有子序列中 t[0,j]子串 出现的次数
+//        vector<vector<double>> dp(size1 + 1, vector<double>(size2 + 1));
+//        for (int i = 0; i <= size1; ++i) dp[i][0] = 1;
+//
+//        for (int i = 1; i <= size1; ++i) {
+//            for (int j = 1; j <= size2; ++j) {
+//                //根据s的子序列的最后一个位置是否为s[i],分为两类
+//                dp[i][j] += dp[i - 1][j];//否
+//                if (s[i] == t[j]) dp[i][j] += dp[i - 1][j - 1]; //是
+//            }
+//        }
+//        return dp[size1][size2];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 通配符匹配（LeetCode）*************************************************/
+/*
+给你一个输入字符串 (s) 和一个字符模式 (p) ，请你实现一个支持 '?' 和 '*' 匹配规则的通配符匹配：
+'?' 可以匹配任何单个字符。
+'*' 可以匹配任意字符序列（包括空字符序列）
+判定匹配成功的充要条件是：字符模式必须能够 完全匹配 输入字符串（而不是部分匹配）
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    bool isMatch(string s, string p)
+//    {
+//        int size1 = s.size(), size2 = p.size();
+//        s = " " + s, p = " " + p;
+//        //状态dp[i][j] : s[0,i]和p[0,j]之间是否匹配
+//        vector<vector<bool>> dp(size1 + 1, vector<bool>(size2 + 1));
+//        dp[0][0] = true;
+//        for (int j = 1; j <= size2; ++j) {
+//            if (p[j] == '*') dp[0][j] = true;
+//            else break;
+//        }
+//
+//        for (int i = 1; i <= size1; ++i) {
+//            for (int j = 1; j <= size2; ++j) {
+//                if (s[i] == p[j] || p[j] == '?') dp[i][j] = dp[i - 1][j - 1];
+//                if (p[j] == '*') dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+//            }
+//        }
+//        return dp[size1][size2];
+//    }
+//};
