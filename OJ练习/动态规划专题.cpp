@@ -2015,3 +2015,200 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp[size1][size2];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************* 交错字符串（LeetCode）***************************************************/
+/*
+给定三个字符串s1、s2、s3，请你帮忙验证s3是否是由s1和s2交错组成的
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    bool isInterleave(string s1, string s2, string s3)
+//    {
+//        int size1 = s1.size(), size2 = s2.size();
+//        if (size1 + size2 != s3.size()) return false;
+//        s1 = " " + s1, s2 = " " + s2, s3 = " " + s3;
+//        //状态dp[i][j] : s1[0,i]和s2[0,j]是否可以交错组成s3[0,i + j]
+//        vector<vector<bool>> dp(size1 + 1, vector<bool>(size2 + 1));
+//        dp[0][0] = true;
+//        for (int j = 1; j <= size2; ++j) { //初始化第一行dp[0][j]
+//            if (s2[j] == s3[j]) dp[0][j] = true;
+//            else break;
+//        }
+//        for (int i = 1; i <= size1; ++i) { //初始化第一列dp[i][0]
+//            if (s1[i] == s3[i]) dp[i][0] = true;
+//            else break;
+//        }
+//
+//        for (int i = 1; i <= size1; ++i) {
+//            for (int j = 1; j <= size2; ++j) {
+//                if (s1[i] == s3[i + j]) dp[i][j] = dp[i][j] || dp[i - 1][j];
+//                if (s2[j] == s3[i + j]) dp[i][j] = dp[i][j] || dp[i][j - 1];
+//            }
+//        }
+//        return dp[size1][size2];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 两个字符串的最小ASCII删除和（LeetCode）*****************************************/
+/*
+给定两个字符串s1和s2，返回使两个字符串相等所需删除字符的ASCII值的最小和
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    int minimumDeleteSum(string s1, string s2)
+//    {
+//        int size1 = s1.size(), size2 = s2.size();
+//        s1 = " " + s1, s2 = " " + s2;
+//        //dp[i][j] : 要使s1[0,i]和s2[0,j]相等所需删除的字符的ASCII值的最小和
+//        vector<vector<int>> dp(size1 + 1, vector<int>(size2 + 1));
+//        dp[0][0] = 0;
+//        for (int j = 1; j <= size2; ++j) dp[0][j] = dp[0][j - 1] + s2[j];//一行
+//        for (int i = 1; i <= size1; ++i) dp[i][0] = dp[i - 1][0] + s1[i];//一列
+//
+//        for (int i = 1; i <= size1; ++i)
+//        {
+//            for (int j = 1; j <= size2; ++j)
+//            {
+//                if (s1[i] == s2[j]) dp[i][j] = dp[i - 1][j - 1];
+//                if (s1[i] != s2[j]) dp[i][j] = min(dp[i - 1][j] + s1[i], dp[i][j - 1] + s2[j]);
+//            }
+//        }
+//        return dp[size1][size2];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************** 最长重复子数组（LeetCode）**************************************************/
+/*
+给两个整数数组nums1和nums2，返回两个数组中公共的 、长度最长的子数组的长度
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findLength(vector<int>& nums1, vector<int>& nums2)
+//    {
+//        int size1 = nums1.size(), size2 = nums2.size();
+//        //状态dp[i][j] : nums1中以i结尾的 和 nums2中以j结尾的,所有子数组中,最长的公共子数组的长度
+//        vector<vector<int>> dp(size1 + 1, vector<int>(size2 + 1));
+//
+//        int maxRet = 0;
+//        for (int i = 1; i <= size1; ++i) {
+//            for (int j = 1; j <= size2; ++j) {
+//                if (nums1[i - 1] == nums2[j - 1])
+//                    dp[i][j] = dp[i - 1][j - 1] + 1, maxRet = max(maxRet, dp[i][j]);
+//            }
+//        }
+//        return maxRet;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************************** 01背包（LeetCode）***********************************************/
+/*
+你有一个背包，最多能容纳的体积是V
+现在有n个物品，第i个物品的体积为vi,价值为wi​
+
+（1）求这个背包至多能装多大价值的物品？
+（2）若背包恰好装满，求至多能装多大价值的物品？
+
+第一行两个整数n和V，表示物品个数和背包体积
+接下来n行，每行两个数vi和wi，表示第i个物品的体积和价值
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//const int N = 1010;
+//vector<vector<int>> dp(N, vector<int>(N));
+//
+//int GetMaxValue(vector<vector<int>>& article, int v, int n) {
+//    //dp[i][j] : 从前i个物品中挑选,总体积不超过j,所有的选法中,能挑选出来的最⼤价值
+//    for (int i = 1; i <= n; ++i) {
+//        for (int j = 1; j <= v; ++j) {
+//            dp[i][j] = dp[i - 1][j];
+//            if (j >= article[i][0])
+//                dp[i][j] = max(dp[i][j], dp[i - 1][j - article[i][0]] + article[i][1]);
+//        }
+//    }
+//    return dp[n][v];
+//}
+//int GetMaxValueII(vector<vector<int>>& article, int v, int n) {
+//    //从前i个物品中挑选,总体积正好等于j,所有的选法中,能挑选出来的最⼤价值
+//    dp = vector<vector<int>>(N, vector<int>(N));
+//    for (int j = 1; j <= v; j++) dp[0][j] = -1;
+//
+//    for (int i = 1; i <= n; ++i) {
+//        for (int j = 1; j <= v; ++j) {
+//            dp[i][j] = dp[i - 1][j];
+//            if (j >= article[i][0] && dp[i - 1][j - article[i][0]] != -1)
+//                dp[i][j] = max(dp[i][j], dp[i - 1][j - article[i][0]] + article[i][1]);
+//        }
+//    }
+//    return dp[n][v] == -1 ? 0 : dp[n][v];
+//}
+//int main() {
+//    int n = 0, v = 0;
+//    while (cin >> n >> v) {
+//        vector<vector<int>> article(n + 1, vector<int>(2));
+//        for (int i = 1; i <= n; ++i) cin >> article[i][0] >> article[i][1];
+//
+//        cout << GetMaxValue(article, v, n) << endl;
+//        cout << GetMaxValueII(article, v, n) << endl;
+//    }
+//    return 0;
+//}
