@@ -2212,3 +2212,127 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //    }
 //    return 0;
 //}
+
+////滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//const int N = 1010;
+//vector<int> dp(N);
+//
+//int GetMaxValue(vector<vector<int>>& article, int v, int n) {
+//    for (int i = 1; i <= n; ++i)
+//        for (int j = v; j >= article[i][0]; --j)
+//            dp[j] = max(dp[j], dp[j - article[i][0]] + article[i][1]);
+//    return dp[v];
+//}
+//int GetMaxValueII(vector<vector<int>>& article, int v, int n) {
+//    dp = vector<int>(N, -1);
+//    dp[0] = 0;
+//
+//    for (int i = 1; i <= n; ++i)
+//        for (int j = v; j >= article[i][0]; --j)
+//            if (dp[j - article[i][0]] != -1)
+//                dp[j] = max(dp[j], dp[j - article[i][0]] + article[i][1]);
+//    return dp[v] == -1 ? 0 : dp[v];
+//}
+//int main() {
+//    int n = 0, v = 0;
+//    while (cin >> n >> v) {
+//        vector<vector<int>> article(n + 1, vector<int>(2));
+//        for (int i = 1; i <= n; ++i) cin >> article[i][0] >> article[i][1];
+//
+//        cout << GetMaxValue(article, v, n) << endl;
+//        cout << GetMaxValueII(article, v, n) << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*********************************************************** 分割等和子集（LeetCode）************************************************/
+/*
+给你一个只包含正整数的非空数组 nums 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    bool canPartition(vector<int>& nums)
+//    {
+//        int size = nums.size(), sum = 0;
+//        for (auto& it : nums) sum += it;
+//        if (sum % 2 != 0) return false;
+//
+//        //状态dp[i][j] : 在前i个数中选择,能否凑成总和为j
+//        int aim = sum / 2;
+//        vector<vector<bool>> dp(size + 1, vector<bool>(aim + 1));
+//        for (int i = 0; i <= size; ++i) dp[i][0] = true;
+//
+//        for (int i = 1; i <= size; ++i) {
+//            for (int j = 1; j <= aim; ++j) {
+//                dp[i][j] = dp[i - 1][j];
+//                if (nums[i - 1] <= j) dp[i][j] = dp[i][j] || dp[i - 1][j - nums[i - 1]];
+//            }
+//        }
+//        return dp[size][aim];
+//    }
+//};
+
+////滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    bool canPartition(vector<int>& nums)
+//    {
+//        int size = nums.size(), sum = 0;
+//        for (auto& it : nums) sum += it;
+//        if (sum % 2 != 0) return false;
+//
+//        int aim = sum / 2;
+//        vector<bool> dp(aim + 1);
+//        dp[0] = true;
+//
+//        for (int i = 1; i <= size; ++i)
+//            for (int j = aim; j >= nums[i - 1]; --j)
+//                dp[j] = dp[j] || dp[j - nums[i - 1]];
+//        return dp[aim];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
