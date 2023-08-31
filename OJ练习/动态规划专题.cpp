@@ -2328,6 +2328,73 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 
 
 
+/******************************************************** 目标和（LeetCode）********************************************************/
+/*
+给你一个非负整数数组nums和一个整数target
+向数组中的每个整数前添加'+'或'-'，然后串联起所有整数，可以构造一个表达式：
+
+例如，nums = [2, 1] ，可以在2之前添加'+'，在1之前添加'-'，然后串联起来得到表达式"+2-1"
+返回可以通过上述方法构造的、运算结果等于target的不同表达式的数目
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*
+//    题目变形：
+//    数组中所有数之和为sum
+//    前面加"+"的数之和为a,前面加"-"的数之和为b
+//    a + b = sum, a - b = target
+//    推导：a = (sum + target) / 2
+//    */
+//    int findTargetSumWays(vector<int>& nums, int target)
+//    {
+//        int sum = 0;
+//        for (auto& it : nums) sum += it;
+//        int size = nums.size();
+//        int aim = (sum + target) / 2;
+//        if (aim < 0 || (sum + target) % 2 != 0) return 0;
+//
+//        //状态dp[i][j] : 在前i个数中选择,总和正好等于j,共有几种选法
+//        vector<vector<int>> dp(size + 1, vector<int>(aim + 1));
+//        dp[0][0] = 1;
+//
+//        for (int i = 1; i <= size; ++i) {
+//            for (int j = 0; j <= aim; ++j) {
+//                dp[i][j] = dp[i - 1][j];
+//                if (j >= nums[i - 1]) dp[i][j] += dp[i - 1][j - nums[i - 1]];
+//            }
+//        }
+//        return dp[size][aim];
+//    }
+//};
+
+//滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findTargetSumWays(vector<int>& nums, int target)
+//    {
+//        int sum = 0;
+//        for (auto& it : nums) sum += it;
+//        int size = nums.size();
+//        int aim = (sum + target) / 2;
+//        if (aim < 0 || (sum + target) % 2 != 0) return 0;
+//
+//        vector<int> dp(aim + 1);
+//        dp[0] = 1;
+//
+//        for (int i = 1; i <= size; ++i) {
+//            for (int j = aim; j >= nums[i - 1]; --j) {
+//                dp[j] += dp[j - nums[i - 1]];
+//            }
+//        }
+//        return dp[aim];
+//    }
+//};
 
 
 
@@ -2336,3 +2403,64 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 
 
 
+
+
+/*********************************************** 最后一块石头的重量II（LeetCode）***************************************************/
+/*
+有一堆石头，用整数数组stones表示。其中stones[i]表示第i块石头的重量
+每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为x和y，且x <= y。那么粉碎的可能结果如下：
+如果x == y，那么两块石头都会被完全粉碎
+如果x != y，那么重量为x的石头将会完全粉碎，而重量为y的石头新重量为 y-x
+最后，最多只会剩下一块石头。返回此石头最小的可能重量 。如果没有石头剩下，就返回 0
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*
+//    石头的总重量为sum
+//    题意即,尽可能的将石头分为重量都接近sum / 2的两堆
+//    */
+//    int lastStoneWeightII(vector<int>& stones)
+//    {
+//        int sum = 0;
+//        for (auto& it : stones) sum += it;
+//        int size = stones.size();
+//        int aim = sum / 2;
+//        //dp[i][j] : 在前i个石头中选择,总重量不能超过j,此时的总重量
+//        vector<vector<int>> dp(size + 1, vector<int>(aim + 1));
+//        for (int i = 0; i <= size; ++i) dp[i][0] = 0;
+//
+//        for (int i = 1; i <= size; ++i) {
+//            for (int j = 1; j <= aim; ++j) {
+//                dp[i][j] = dp[i - 1][j];
+//                if (j >= stones[i - 1])
+//                    dp[i][j] = max(dp[i][j], dp[i - 1][j - stones[i - 1]] + stones[i - 1]);
+//            }
+//        }
+//        return sum - 2 * dp[size][aim];
+//    }
+//};
+
+////滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int lastStoneWeightII(vector<int>& stones)
+//    {
+//        int sum = 0;
+//        for (auto& it : stones) sum += it;
+//        int size = stones.size();
+//        int aim = sum / 2;
+//
+//        vector<int> dp(aim + 1);
+//        for (int i = 1; i <= size; ++i)
+//            for (int j = aim; j >= stones[i - 1]; --j)
+//                dp[j] = max(dp[j], dp[j - stones[i - 1]] + stones[i - 1]);
+//
+//        return sum - 2 * dp[aim];
+//    }
+//};
