@@ -2464,3 +2464,170 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return sum - 2 * dp[aim];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 完全背包（牛客）**********************************************************/
+/*
+你有一个背包，最多能容纳的体积是V
+现在有n种物品，每种物品有任意多个，第i种物品的体积为vi,价值为wi
+（1）求这个背包至多能装多大价值的物品？
+（2）若背包恰好装满，求至多能装多大价值的物品？
+
+输入描述：
+第一行两个整数n和V，表示物品个数和背包体积
+接下来n行，每行两个数vi和wi​，表示第i种物品的体积和价值
+1≤n,V≤1000
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//vector<vector<int>> dp;
+//
+//int GetRetI(int n, int V, vector<int>& v, vector<int>& w)
+//{
+//    //状态dp[i][j] : 从前i个物品中选择,总体积不超过j,此时的最大价值
+//    dp = vector<vector<int>>(n + 1, vector<int>(V + 1));
+//    for (int i = 1; i <= n; ++i) {
+//        for (int j = 1; j <= V; ++j) {
+//            dp[i][j] = dp[i - 1][j];
+//            if (j >= v[i]) dp[i][j] = max(dp[i][j], dp[i][j - v[i]] + w[i]);
+//        }
+//    }
+//    return dp[n][V];
+//}
+//int GetRetII(int n, int V, vector<int>& v, vector<int>& w)
+//{
+//    //状态dp[i][j] : 从前i个物品中选择,总体积刚好等于j,此时的最大价值
+//    dp = vector<vector<int>>(n + 1, vector<int>(V + 1));
+//    for (int j = 1; j <= V; ++j) dp[0][j] = -1;//设置不合法状态
+//
+//    for (int i = 1; i <= n; ++i) {
+//        for (int j = 1; j <= V; ++j) {
+//            dp[i][j] = dp[i - 1][j];
+//            if (j >= v[i] && dp[i][j - v[i]] != -1)
+//                dp[i][j] = max(dp[i][j], dp[i][j - v[i]] + w[i]);
+//        }
+//    }
+//    return dp[n][V] == -1 ? 0 : dp[n][V];
+//}
+//int main()
+//{
+//    int n = 0, V = 0;
+//    while (cin >> n >> V)
+//    {
+//        vector<int> v(n + 1), w(n + 1);
+//        for (int i = 1; i <= n; ++i) cin >> v[i] >> w[i];
+//        cout << GetRetI(n, V, v, w) << endl;
+//        cout << GetRetII(n, V, v, w) << endl;
+//    }
+//    return 0;
+//}
+
+//滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//vector<int> dp;
+//
+//int GetRetI(int n, int V, vector<int>& v, vector<int>& w)
+//{
+//    dp = vector<int>(V + 1);
+//    for (int i = 1; i <= n; ++i)
+//        for (int j = v[i]; j <= V; ++j)
+//            dp[j] = max(dp[j], dp[j - v[i]] + w[i]);
+//    return dp[V];
+//}
+//int GetRetII(int n, int V, vector<int>& v, vector<int>& w)
+//{
+//    dp = vector<int>(V + 1);
+//    for (int j = 1; j <= V; ++j) dp[j] = -1;//设置不合法状态
+//
+//    for (int i = 1; i <= n; ++i)
+//        for (int j = v[i]; j <= V; ++j)
+//            if (dp[j - v[i]] != -1) dp[j] = max(dp[j], dp[j - v[i]] + w[i]);
+//    return dp[V] == -1 ? 0 : dp[V];
+//}
+//int main()
+//{
+//    int n = 0, V = 0;
+//    while (cin >> n >> V)
+//    {
+//        vector<int> v(n + 1), w(n + 1);
+//        for (int i = 1; i <= n; ++i) cin >> v[i] >> w[i];
+//        cout << GetRetI(n, V, v, w) << endl;
+//        cout << GetRetII(n, V, v, w) << endl;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+/********************************************************* 零钱兑换（LeetCode）****************************************************/
+/*
+给你一个整数数组coins，表示不同面额的硬币；以及一个整数amount，表示总金额
+计算并返回可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1
+你可以认为每种硬币的数量是无限的
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*
+//    问题转化：(硬币无限,完全背包问题)
+//    在coins中选择硬币,使得总金额恰好为amount,此时的最小硬币数
+//                (物品)     (体积)                   (价值)
+//    */
+//    int coinChange(vector<int>& coins, int amount)
+//    {
+//        int size = coins.size();
+//        //状态dp[i][j] : 在前i个物品中选择,总金额刚好为j,此时的最小硬币数
+//        vector<vector<int>> dp(size + 1, vector<int>(amount + 1));
+//        for (int j = 1; j <= amount; ++j) dp[0][j] = 0x3f3f3f3f;//设置非法状态
+//
+//        for (int i = 1; i <= size; ++i) {
+//            for (int j = 1; j <= amount; ++j) {
+//                dp[i][j] = dp[i - 1][j];
+//                if (j >= coins[i - 1]) dp[i][j] = min(dp[i][j], dp[i][j - coins[i - 1]] + 1);
+//            }
+//        }
+//        return dp[size][amount] >= 0x3f3f3f3f ? -1 : dp[size][amount];
+//    }
+//};
+
+//滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int coinChange(vector<int>& coins, int amount)
+//    {
+//        int size = coins.size();
+//        vector<int> dp(amount + 1);
+//        for (int j = 1; j <= amount; ++j) dp[j] = 0x3f3f3f3f;//设置非法状态
+//
+//        for (int i = 1; i <= size; ++i)
+//            for (int j = coins[i - 1]; j <= amount; ++j)
+//                dp[j] = min(dp[j], dp[j - coins[i - 1]] + 1);
+//        return dp[amount] >= 0x3f3f3f3f ? -1 : dp[amount];
+//    }
+//};
