@@ -2631,3 +2631,115 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp[amount] >= 0x3f3f3f3f ? -1 : dp[amount];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/****************************************************** 零钱兑换 II（LeetCode）*****************************************************/
+/*
+给你一个整数数组coins表示不同面额的硬币，另给一个整数amount表示总金额
+请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回0
+假设每一种面额的硬币有无限个
+题目数据保证结果符合 32 位带符号整数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*
+//    在coins中选择硬币,总金额凑成恰好amount,共有几种选择
+//            (物品)      (体积)
+//    */
+//    int change(int amount, vector<int>& coins)
+//    {
+//        int size = coins.size();
+//        //状态dp[i][j] : 从前i个硬币选择,总金额刚好为j,共有几种选法
+//        vector<vector<int>> dp(size + 1, vector<int>(amount + 1));
+//        for (int i = 0; i <= size; ++i) dp[i][0] = 1;
+//
+//        for (int i = 1; i <= size; ++i) {
+//            for (int j = 1; j <= amount; ++j) {
+//                dp[i][j] = dp[i - 1][j];
+//                if (j >= coins[i - 1]) dp[i][j] += dp[i][j - coins[i - 1]];
+//            }
+//        }
+//        return dp[size][amount];
+//    }
+//};
+
+//滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int change(int amount, vector<int>& coins)
+//    {
+//        int size = coins.size();
+//        vector<int> dp(amount + 1);
+//        dp[0] = 1;
+//        for (int i = 1; i <= size; ++i)
+//            for (int j = coins[i - 1]; j <= amount; ++j)
+//                if (j >= coins[i - 1]) dp[j] += dp[j - coins[i - 1]];
+//        return dp[amount];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <cmath>
+//using namespace std;
+//class Solution {
+//public:
+//    int numSquares(int n)
+//    {
+//        int size = sqrt(n);
+//        //dp[i][j] : 从n的所有完全平方数中的前i个选择,其和刚好为j,此时完全平方数的最少数量 
+//        vector<vector<int>> dp(size + 1, vector<int>(n + 1));
+//        for (int j = 1; j <= n; ++j) dp[0][j] = 0x3f3f3f3f;
+//
+//        for (int i = 1; i <= size; ++i) {//枚举每个数,i * i即枚举所有完全平方数
+//            for (int j = 1; j <= n; ++j) {
+//                dp[i][j] = dp[i - 1][j];
+//                if (j >= i * i) dp[i][j] = min(dp[i][j], dp[i][j - i * i] + 1);
+//            }
+//        }
+//        return dp[size][n];
+//    }
+//};
+
+//滚动数组优化
+//#include <iostream>
+//#include <vector>
+//#include <cmath>
+//using namespace std;
+//class Solution {
+//public:
+//    int numSquares(int n)
+//    {
+//        int size = sqrt(n);
+//        vector<int> dp(n + 1, 0x3f3f3f3f);
+//        dp[0] = 0;
+//
+//        for (int i = 1; i <= size; ++i)
+//            for (int j = i * i; j <= n; ++j)
+//                dp[j] = min(dp[j], dp[j - i * i] + 1);
+//
+//        return dp[n];
+//    }
+//};
