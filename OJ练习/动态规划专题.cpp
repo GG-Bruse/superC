@@ -2743,3 +2743,185 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp[n];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************* 一和零（LeetCode）*******************************************************/
+/*
+给你一个二进制字符串数组strs和两个整数m和n
+请你找出并返回strs的最大子集的长度，该子集中最多有m个0和n个1
+如果x的所有元素也是y的元素，集合x是集合y的子集
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findMaxForm(vector<string>& strs, int m, int n)
+//    {
+//        int size = strs.size();
+//        //状态dp[i][j][K] : 在strs中前i个元素中选择,0的个数不超过i,1的个数不超过j
+//        vector<vector<vector<int>>> dp(size + 1, vector<vector<int>>(m + 1, vector<int>(n + 1)));
+//
+//        for (int i = 1; i <= size; ++i)
+//        {
+//            int a = 0, b = 0;
+//            for (auto& it : strs[i - 1]) {
+//                if (it == '0') a++;
+//                else b++;
+//            }
+//            for (int j = 0; j <= m; ++j) {
+//                for (int k = 0; k <= n; ++k) {
+//                    dp[i][j][k] = dp[i - 1][j][k];
+//                    if (j >= a && k >= b) dp[i][j][k] = max(dp[i][j][k], dp[i - 1][j - a][k - b] + 1);
+//                }
+//            }
+//        }
+//        return dp[size][m][n];
+//    }
+//};
+
+//滚动数组优化
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findMaxForm(vector<string>& strs, int m, int n)
+//    {
+//        int size = strs.size();
+//        vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+//
+//        for (int i = 1; i <= size; ++i)
+//        {
+//            int a = 0, b = 0;
+//            for (auto& it : strs[i - 1]) {
+//                if (it == '0') a++;
+//                else b++;
+//            }
+//            for (int j = m; j >= a; --j)
+//                for (int k = n; k >= b; --k)
+//                    dp[j][k] = max(dp[j][k], dp[j - a][k - b] + 1);
+//        }
+//        return dp[m][n];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 盈利计划（LeetCode）******************************************************/
+/*
+集团里有 n 名员工，他们可以完成各种各样的工作创造利润
+第i种工作会产生profit[i]的利润，它要求group[i]名成员共同参与。如果成员参与了其中一项工作，就不能参与另一项工作
+工作的任何至少产生minProfit利润的子集称为盈利计划。并且工作的成员总数最多为n
+有多少种计划可以选择？因为答案很大，所以返回结果模10^9 + 7的值
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    const int MOD = 1e9 + 7;
+//    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profit)
+//    {
+//        int size = group.size();
+//        //dp[i][j][k] : 在前i个工作中选择,总参加人数j不能大于n,总利润k不能小于minProfit,共有多少种计划
+//        vector<vector<vector<int>>> dp(size + 1, vector<vector<int>>(n + 1, vector<int>(minProfit + 1)));
+//        for (int j = 0; j <= n; ++j) dp[0][j][0] = 1;//空集方案
+//
+//        for (int i = 1; i <= size; ++i)
+//        {
+//            for (int j = 0; j <= n; ++j)
+//            {
+//                for (int k = 0; k <= minProfit; ++k)
+//                {
+//                    dp[i][j][k] = dp[i - 1][j][k];
+//                    if (j >= group[i - 1])
+//                        dp[i][j][k] += dp[i - 1][j - group[i - 1]][max(0, k - profit[i - 1])];
+//                    dp[i][j][k] %= MOD;
+//                }
+//            }
+//        }
+//        return dp[size][n][minProfit];
+//    }
+//};
+
+//滚动数组优化
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    const int MOD = 1e9 + 7;
+//    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profit)
+//    {
+//        int size = group.size();
+//        vector<vector<int>> dp(n + 1, vector<int>(minProfit + 1));
+//        for (int j = 0; j <= n; ++j) dp[j][0] = 1;
+//
+//        for (int i = 1; i <= size; ++i)
+//            for (int j = n; j >= 0; --j)
+//                for (int k = minProfit; k >= 0; --k) {
+//                    if (j >= group[i - 1]) dp[j][k] += dp[j - group[i - 1]][max(0, k - profit[i - 1])];
+//                    dp[j][k] %= MOD;
+//                }
+//        return dp[n][minProfit];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 不同的二叉搜索树（LeetCode）*****************************************************/
+/*
+给你一个整数n，求恰由n个节点组成且节点值从1到n互不相同的二叉搜索树有多少种？返回满足题意的二叉搜索树的种数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int numTrees(int n)
+//    {
+//        //状态dp[i] : 当结点的数量为i时,BST的个数
+//        vector<int> dp(n + 1);
+//        dp[0] = 1;//空数也是二叉搜索树
+//        for (int i = 1; i <= n; ++i)//枚举结点的个数
+//            for (int j = 1; j <= i; ++j)//选择一个结点为根节点
+//                dp[i] += dp[j - 1] * dp[i - j];
+//        return dp[n];
+//    }
+//};
