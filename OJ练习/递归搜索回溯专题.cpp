@@ -35,3 +35,82 @@
 //        _hanota(A, B, C, A.size());
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 合并两个有序链表（LeetCode）*************************************************/
+/*
+将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的
+*/
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode* next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode* next) : val(x), next(next) {}
+//    
+//};
+//class Solution {
+//public:
+//    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2)
+//    {
+//        if (list1 == nullptr) return list2;
+//        if (list2 == nullptr) return list1;
+//
+//        if (list1->val <= list2->val) {
+//            list1->next = mergeTwoLists(list1->next, list2);
+//            return list1;
+//        }
+//        else {
+//            list2->next = mergeTwoLists(list1, list2->next);
+//            return list2;
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 反转链表（LeetCode）*******************************************************/
+/*
+给你单链表的头节点 head ，请你反转链表，并返回反转后的链表
+*/
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode* next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode* next) : val(x), next(next) {}
+//    
+//};
+//class Solution {
+//public:
+//    ListNode* reverseList(ListNode* head)
+//    {
+//        if (head == nullptr || head->next == nullptr) return head;
+//        ListNode* newhead = reverseList(head->next);
+//        head->next->next = head;
+//        head->next = nullptr;
+//        return newhead;
+//    }
+//};
