@@ -114,3 +114,66 @@
 //        return newhead;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 两两交换链表中的节点（LeetCode）*************************************************/
+/*
+给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）
+*/
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//     int val;
+//     ListNode *next;
+//     ListNode() : val(0), next(nullptr) {}
+//     ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+// };
+//class Solution {
+//public:
+//    ListNode* swapPairs(ListNode* head)
+//    {
+//        if (head == nullptr || head->next == nullptr) return head;
+//        ListNode* next = head->next;
+//        head->next = swapPairs(next->next);
+//        next->next = head;
+//        return next;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/******************************************************** Pow(x, n)（LeetCode）*****************************************************/
+/*
+实现 pow(x, n) ，即计算 x 的整数 n 次幂函数（即，xn ）
+*/
+//#include <iostream>
+//#include <cmath>
+//using namespace std;
+//class Solution {
+//public:
+//    double myPow(double x, int n) {
+//        return n < 0 ? 1.0 / pow(x, -1.0 * n) : pow(x, n);
+//    }
+//    double Pow(double x, int n)
+//    {
+//        if (n == 0) return 1.0;
+//        double ret = myPow(x, n / 2);
+//        return n % 2 == 0 ? ret * ret : ret * ret * x;
+//    }
+//};
