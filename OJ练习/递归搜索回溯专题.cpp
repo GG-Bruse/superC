@@ -177,3 +177,95 @@
 //        return n % 2 == 0 ? ret * ret : ret * ret * x;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 计算布尔二叉树的值（LeetCode）************************************************/
+/*
+给你一棵 完整二叉树 的根，这棵树有以下特征：
+叶子节点 要么值为 0 要么值为 1 ，其中 0 表示 False ，1 表示 True
+非叶子节点 要么值为 2 要么值为 3 ，其中 2 表示逻辑或 OR ，3 表示逻辑与 AND
+
+计算 一个节点的值方式如下：
+如果节点是个叶子节点，那么节点的值为它本身，即 True 或者 False
+否则，计算两个孩子的节点值，然后将该节点的运算符对两个孩子值进行运算
+返回根节点 root 的布尔运算值
+
+完整二叉树 是每个节点有 0 个或者 2 个孩子的二叉树
+叶子节点 是没有孩子的节点
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}    
+//};
+//class Solution {
+//public:
+//    bool evaluateTree(TreeNode* root)
+//    {
+//        if (root->left == nullptr) return root->val == 0 ? false : true;//完整二叉树,没有左子树,必没有右子树
+//        int left = evaluateTree(root->left);
+//        int right = evaluateTree(root->right);
+//        return root->val == 2 ? (left | right) : left & right;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 求根节点到叶节点数字之和（LeetCode）******************************************/
+/*
+给你一个二叉树的根节点 root ，树中每个节点都存放有一个0到9之间的数字
+每条从根节点到叶节点的路径都代表一个数字：
+
+例如，从根节点到叶节点的路径 1 -> 2 -> 3 表示数字123
+计算从根节点到叶节点生成的所有数字之和
+
+叶节点 是指没有子节点的节点
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}    
+//};
+//class Solution {
+//public:
+//    int dfs(TreeNode* root, int num)
+//    {
+//        num = num * 10 + root->val;
+//        if (root->left == nullptr && root->right == nullptr) return num;
+//        int ret = 0;
+//        if (root->left != nullptr) ret += dfs(root->left, num);
+//        if (root->right != nullptr) ret += dfs(root->right, num);
+//        return ret;
+//    }
+//    int sumNumbers(TreeNode* root) {
+//        return dfs(root, 0);
+//    }
+//};
