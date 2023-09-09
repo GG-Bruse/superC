@@ -269,3 +269,135 @@
 //        return dfs(root, 0);
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 二叉树剪枝（LeetCode）******************************************************/
+/*
+给你二叉树的根结点root，此外树的每个结点的值要么是0，要么是1
+返回移除了所有不包含 1 的子树的原二叉树
+节点node的子树为node本身加上所有node的后代
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    TreeNode* pruneTree(TreeNode* root)
+//    {
+//        if (root == nullptr) return nullptr;
+//
+//        root->left = pruneTree(root->left);
+//        root->right = pruneTree(root->right);
+//        if (root->left == nullptr && root->right == nullptr && root->val == 0) {
+//            delete root;
+//            root = nullptr;
+//        }
+//        return root;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 验证二叉搜索树（LeetCode）****************************************************/
+/*
+给你一个二叉树的根节点root ，判断其是否是一个有效的二叉搜索树
+有效 二叉搜索树定义如下：
+节点的左子树只包含 小于 当前节点的数
+节点的右子树只包含 大于 当前节点的数
+所有左子树和右子树自身必须也是二叉搜索树
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    long prev = LONG_MIN;//记录前一个值,在二叉搜索树中,中序遍历的情况下,前一个数必比后一个数小
+//    bool isValidBST(TreeNode* root)
+//    {
+//        if (root == nullptr) return true;
+//
+//        bool left = isValidBST(root->left);
+//        if (!left) return false;//剪枝
+//
+//        bool current = false;
+//        if (root->val > prev) current = true;
+//        if (!current) return false;//剪枝
+//        prev = root->val;
+//
+//        bool right = isValidBST(root->right);
+//
+//        return left && right && current;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/************************************************** 二叉搜索树中第K小的元素（LeetCode）*********************************************/
+/*
+给定一个二叉搜索树的根节点root，和一个整数k，请你设计一个算法查找其中第k个最小元素（从1开始计数）
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    int count = 0;
+//    int ret = 0;
+//    int kthSmallest(TreeNode* root, int k) {
+//        count = k;
+//        dfs(root);
+//        return ret;
+//    }
+//    void dfs(TreeNode* root)
+//    {
+//        if (root == nullptr || count == 0) return;
+//        dfs(root->left);
+//        --count;
+//        if (count == 0) ret = root->val;
+//        dfs(root->right);
+//    }
+//};
