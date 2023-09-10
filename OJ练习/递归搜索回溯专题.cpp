@@ -401,3 +401,131 @@
 //        dfs(root->right);
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 二叉树的所有路径（LeetCode）***********************************************************/
+/*
+给你一个二叉树的根节点 root ，按任意顺序 ，返回所有从根节点到叶子节点的路径
+叶子节点 是指没有子节点的节点
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    vector<string> ret;
+//    void dfs(TreeNode* root, string str)//不用引用是关键
+//    {
+//        str += to_string(root->val);
+//        if (root->left == nullptr && root->right == nullptr) {
+//            ret.push_back(str);
+//            return;
+//        }
+//        str += "->";
+//        if (root->left) dfs(root->left, str);
+//        if (root->right) dfs(root->right, str);
+//    }
+//    vector<string> binaryTreePaths(TreeNode* root) {
+//        if (root == nullptr) return ret;
+//
+//        string str;
+//        dfs(root, str);
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/********************************************************** 全排列（LeetCode）*******************************************************/
+/*
+给定一个不含重复数字的数组nums ，返回其所有可能的全排列 。你可以按任意顺序 返回答案
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> ret;
+//
+//    vector<vector<int>> permute(vector<int>& nums) {
+//        vector<int> tmp;
+//        dfs(nums, tmp);
+//        return ret;
+//    }
+//    void dfs(vector<int> nums, vector<int> retNum)
+//    {
+//        int size = nums.size();
+//        if (size == 0) {
+//            ret.push_back(retNum);
+//            return;
+//        }
+//        for (int i = 0; i < size; ++i)
+//        {
+//            vector<int> tmp(nums.begin(), nums.end());
+//            retNum.push_back(nums[i]);
+//            tmp.erase(tmp.begin() + i);
+//            dfs(tmp, retNum);
+//            retNum.pop_back();
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 子集（LeetCode）************************************************************/
+/*
+给你一个整数数组nums ，数组中的元素互不相同 。返回该数组所有可能的子集（幂集）
+解集不能包含重复的子集。你可以按任意顺序返回解集
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> ret;
+//    vector<int> path;
+//
+//    vector<vector<int>> subsets(vector<int>& nums) {
+//        dfs(nums);
+//        return ret;
+//    }
+//    void dfs(vector<int> nums) {
+//        ret.push_back(path);
+//        for (int i = 0; i < nums.size(); ++i) {
+//            path.push_back(nums[i]);
+//            dfs(vector<int>(nums.begin() + i + 1, nums.end()));
+//            path.pop_back();
+//        }
+//    }
+//};
