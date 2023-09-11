@@ -529,3 +529,95 @@
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************ 找出所有子集的异或总和再求和（LeetCode）*******************************************/
+/*
+一个数组的异或总和定义为数组中所有元素按位XOR的结果；如果数组为空，则异或总和为0
+例如，数组[2,5,6]的异或总和为2 XOR 5 XOR 6 = 1
+给你一个数组nums，请你求出nums中每个子集的异或总和，计算并返回这些值相加之和
+
+注意：在本题中，元素相同的不同子集应多次计数
+数组a是数组b的一个子集的前提条件是：从b删除几个（也可能不删除）元素能够得到a
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int sum = 0;
+//    int path = 0;
+//
+//    int subsetXORSum(vector<int>& nums)
+//    {
+//        dfs(nums, 0);
+//        return sum;
+//    }
+//    void dfs(vector<int> nums, int pos)
+//    {
+//        sum += path;
+//        for (int i = pos; i < nums.size(); ++i) {
+//            path ^= nums[i];
+//            dfs(nums, i + 1);
+//            path ^= nums[i];
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************* 全排列 II（LeetCode）*******************************************************/
+/*
+给定一个可包含重复数字的序列nums，按任意顺序返回所有不重复的全排列
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> ret;
+//    vector<int> path;
+//    bool check[9];//标志nums中该下标是否使用过
+//
+//    vector<vector<int>> permuteUnique(vector<int>& nums) {
+//        sort(nums.begin(), nums.end());
+//        dfs(nums, 0);
+//        return ret;
+//    }
+//    void dfs(vector<int> nums, int pos)
+//    {
+//        if (nums.size() == pos) {
+//            ret.push_back(path);
+//            return;
+//        }
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            if (check[i] == false && (i == 0 || nums[i - 1] != nums[i] || check[i - 1] == true)) //剪枝
+//            {
+//                path.push_back(nums[i]);
+//                check[i] = true;
+//                dfs(nums, pos + 1);
+//                path.pop_back();
+//                check[i] = false;
+//            }
+//        }
+//    }
+//};
