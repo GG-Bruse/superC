@@ -582,7 +582,6 @@
 
 
 
-
 /******************************************************* 全排列 II（LeetCode）*******************************************************/
 /*
 给定一个可包含重复数字的序列nums，按任意顺序返回所有不重复的全排列
@@ -618,6 +617,142 @@
 //                path.pop_back();
 //                check[i] = false;
 //            }
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/**************************************************** 电话号码的字母组合（LeetCode）*********************************************/
+/*
+给定一个仅包含数字2-9的字符串，返回所有它能表示的字母组合。答案可以按任意顺序返回
+给出数字到字母的映射如下（与电话按键相同）。注意1不对应任何字母
+*/
+//#include <iostream>
+//#include <unordered_map>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    unordered_map<char, string> hash{ {'2', "abc"}, {'3', "def"}, {'4', "ghi"},
+//            {'5', "jkl"}, {'6', "mno"}, {'7', "pqrs"}, {'8', "tuv"}, {'9', "wxyz"} };
+//    vector<string> ret;
+//    string path;
+//    vector<string> letterCombinations(string digits)
+//    {
+//        if (digits.size() == 0) return ret;
+//        dfs(digits, 0);
+//        return ret;
+//    }
+//    void dfs(string digits, int pos)
+//    {
+//        if (digits.size() == pos) {
+//            ret.push_back(path);
+//            return;
+//        }
+//        string tmp = hash[digits[pos]];
+//        for (int i = 0; i < tmp.size(); ++i) {
+//            path.push_back(tmp[i]);
+//            dfs(digits, pos + 1);
+//            path.pop_back();
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/******************************************************** 括号生成（LeetCode）****************************************************/
+/*
+数字n代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的括号组合
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<string> ret;
+//    string path;
+//    int left = 0, right = 0, num = 0;
+//    /*
+//    左括号数量 = 右括号数量 = 括号对数
+//    从头开始的任意一个子串, 左括号的数量 >= 右括号的数量
+//    */
+//    vector<string> generateParenthesis(int n) {
+//        num = n;
+//        dfs();
+//        return ret;
+//    }
+//    void dfs()
+//    {
+//        if (num == right) {
+//            ret.push_back(path);
+//            return;
+//        }
+//        if (left < num) {
+//            path.push_back('('), ++left;
+//            dfs();
+//            path.pop_back(), --left;
+//        }
+//        if (right < left) {
+//            path.push_back(')'), ++right;
+//            dfs();
+//            path.pop_back(), --right;
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/****************************************************** 组合（LeetCode）*********************************************************/
+/*
+给定两个整数n和k，返回范围[1, n]中所有可能的k个数的组合
+你可以按 任何顺序 返回答案
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> ret;
+//    vector<int> path;
+//    int num = 0, knum = 0;
+//
+//    vector<vector<int>> combine(int n, int k) {
+//        num = n, knum = k;
+//        dfs(1);
+//        return ret;
+//    }
+//    void dfs(int start)
+//    {
+//        if (path.size() == knum) {
+//            ret.push_back(path);
+//            return;
+//        }
+//        for (int i = start; i <= num; ++i) {
+//            path.push_back(i);
+//            dfs(i + 1);
+//            path.pop_back();
 //        }
 //    }
 //};
