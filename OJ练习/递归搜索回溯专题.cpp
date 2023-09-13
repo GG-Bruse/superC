@@ -756,3 +756,168 @@
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/******************************************************** 目标和（LeetCode）*********************************************************/
+/*
+给你一个非负整数数组nums和一个整数target
+向数组中的每个整数前添加'+'或'-'，然后串联起所有整数，可以构造一个表达式：
+例如，nums = [2, 1] ，可以在2之前添加'+'，在1之前添加'-'，然后串联起来得到表达式"+2-1"
+返回可以通过上述方法构造的、运算结果等于target的不同表达式的数目
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int ret = 0;
+//    int target = 0;
+//
+//    int findTargetSumWays(vector<int>& nums, int _target) {
+//        target = _target;
+//        dfs(nums, 0, 0);
+//        return ret;
+//    }
+//    void dfs(vector<int>& nums, int pos, int sum)
+//    {
+//        if (pos == nums.size()) {
+//            if (sum == target) ++ret;
+//            return;
+//        }
+//        dfs(nums, pos + 1, sum + nums[pos]);
+//        dfs(nums, pos + 1, sum - nums[pos]);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/**************************************************** 组合总和（LeetCode）**********************************************************/
+/*
+给你一个无重复元素的整数数组candidates和一个目标整数target，找出candidates中可以使数字和为目标数target的所有不同组合，
+并以列表形式返回。你可以按任意顺序返回这些组合
+candidates中的同一个数字可以无限制重复被选取 。如果至少一个数字的被选数量不同，则两种组合是不同的
+对于给定的输入，保证和为target的不同组合数少于150个
+*/
+///*每次考虑每个位置放什么数*/
+//#include <iostream>
+//#include <vector>
+//using namespcae std;
+//class Solution
+//{
+//public:
+//    vector<vector<int>> ret;
+//    vector<int> path;
+//    int aim = 0;
+//
+//    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+//        aim = target;
+//        dfs(candidates, 0, 0);
+//        return ret;
+//    }
+//    void dfs(vector<int>& candidates, int pos, int sum)
+//    {
+//        if (sum >= aim || pos == candidates.size()) {
+//            if (sum == aim) ret.push_back(path);
+//            return;
+//        }
+//        for (int i = pos; i < candidates.size(); ++i) {
+//            path.push_back(candidates[i]);
+//            dfs(candidates, i, sum + candidates[i]);
+//            path.pop_back();
+//        }
+//    }
+//};
+///*每次考虑每个数使用了几次*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<vector<int>> ret;
+//    vector<int> path;
+//    int aim = 0;
+//
+//    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+//        aim = target;
+//        dfs(candidates, 0, 0);
+//        return ret;
+//    }
+//    void dfs(vector<int>& candidates, int pos, int sum)
+//    {
+//        if (sum >= aim || pos == candidates.size()) {
+//            if (sum == aim) ret.push_back(path);
+//            return;
+//        }
+//        for (int i = 0; i * candidates[pos] + sum <= aim; ++i) {
+//            if (i) path.push_back(candidates[pos]);
+//            dfs(candidates, pos + 1, sum + i * candidates[pos]);
+//        }
+//        for (int k = 1; k * candidates[pos] + sum <= aim; ++k) path.pop_back();
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 字母大小写全排列（LeetCode）***************************************************/
+/*
+给定一个字符串s，通过将字符串s中的每个字母转变大小写，我们可以获得一个新的字符串
+返回 所有可能得到的字符串集合 。以 任意顺序 返回输出
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<string> ret;
+//    string path;
+//
+//    vector<string> letterCasePermutation(string s)
+//    {
+//        dfs(s, 0);
+//        return ret;
+//    }
+//    void dfs(string& str, int pos)
+//    {
+//        if (pos == str.size()) {
+//            ret.push_back(path);
+//            return;
+//        }
+//        //不改变
+//        path.push_back(str[pos]);
+//        dfs(str, pos + 1);
+//        path.pop_back();
+//        //改变
+//        if (isalpha(str[pos]))
+//        {
+//            if (str[pos] <= 'Z' && str[pos] >= 'A') path.push_back(tolower(str[pos]));
+//            else path.push_back(toupper(str[pos]));
+//            dfs(str, pos + 1);
+//            path.pop_back();
+//        }
+//    }
+//};
