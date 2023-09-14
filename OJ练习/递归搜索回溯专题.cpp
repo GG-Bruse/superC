@@ -921,3 +921,111 @@ candidatesÖĞµÄÍ¬Ò»¸öÊı×Ö¿ÉÒÔÎŞÏŞÖÆÖØ¸´±»Ñ¡È¡ ¡£Èç¹ûÖÁÉÙÒ»¸öÊı×ÖµÄ±»Ñ¡ÊıÁ¿²»Í¬£¬Ô
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/********************************************************** ÓÅÃÀµÄÅÅÁĞ£¨LeetCode£©***************************************************/
+/*
+¼ÙÉèÓĞ´Ó1µ½nµÄn¸öÕûÊı¡£ÓÃÕâĞ©ÕûÊı¹¹ÔìÒ»¸öÊı×éperm£¨ÏÂ±ê´Ó1¿ªÊ¼£©£¬Ö»ÒªÂú×ãÏÂÊöÌõ¼şÖ®Ò»£¬¸ÃÊı×é¾ÍÊÇÒ»¸öÓÅÃÀµÄÅÅÁĞ£º
+perm[i]ÄÜ¹»±»iÕû³ı
+iÄÜ¹»±»perm[i]Õû³ı
+¸øÄãÒ»¸öÕûÊın£¬·µ»Ø¿ÉÒÔ¹¹ÔìµÄÓÅÃÀÅÅÁĞµÄÊıÁ¿
+*/
+//#include <iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int ret = 0;
+//    int nums = 0;
+//    bool check[16];
+//
+//    int countArrangement(int n) {
+//        nums = n;
+//        dfs(1);
+//        return ret;
+//    }
+//    void dfs(int pos)
+//    {
+//        if (pos == nums + 1) {
+//            ++ret;
+//            return;
+//        }
+//        for (int i = 1; i <= nums; ++i) {
+//            if (check[i] == false && (pos % i == 0 || i % pos == 0)) {
+//                check[i] = true;
+//                dfs(pos + 1);
+//                check[i] = false;
+//            }
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/**************************************************** N »Êºó£¨LeetCode£©************************************************/
+/*
+°´ÕÕ¹ú¼ÊÏóÆåµÄ¹æÔò£¬»Êºó¿ÉÒÔ¹¥»÷ÓëÖ®´¦ÔÚÍ¬Ò»ĞĞ»òÍ¬Ò»ÁĞ»òÍ¬Ò»Ğ±ÏßÉÏµÄÆå×Ó
+n»ÊºóÎÊÌâÑĞ¾¿µÄÊÇÈçºÎ½«n¸ö»Êºó·ÅÖÃÔÚn¡ÁnµÄÆåÅÌÉÏ£¬²¢ÇÒÊ¹»Êºó±Ë´ËÖ®¼ä²»ÄÜÏà»¥¹¥»÷
+¸øÄãÒ»¸öÕûÊın£¬·µ»ØËùÓĞ²»Í¬µÄn»ÊºóÎÊÌâµÄ½â¾ö·½°¸
+Ã¿Ò»ÖÖ½â·¨°üº¬Ò»¸ö²»Í¬µÄn»ÊºóÎÊÌâµÄÆå×Ó·ÅÖÃ·½°¸£¬¸Ã·½°¸ÖĞ'Q'ºÍ'.'·Ö±ğ´ú±íÁË»ÊºóºÍ¿ÕÎ»
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<string>> ret;
+//    vector<string> path;
+//    bool checkCol[9], checkDig1[18], checkDig2[18];
+//    int num = 0;
+//    /*
+//    checkCol¼ÇÂ¼Ã¿Ò»ÁĞÊÇ·ñÓĞÎ»ÖÃ±»Ê¹ÓÃ
+//
+//    checkDig1¼ÇÂ¼Ã¿ÌõÖ÷¶Ô½ÇÏßÊÇ·ñ±»Ê¹ÓÃ
+//    y = x + b ¼´ y - x = b, ´¦ÔÚÍ¨¹ıÖ÷¶Ô½ÇÏßµÄµãµÄºá×ø±ê - ×İ×ø±ê = ¹Ì¶¨Öµ
+//    È«²¿+n, ±ÜÃâÔ½½ç(³öÏÖ¸ºÊı)
+//
+//    checkDig2¼ÇÂ¼Ã¿Ìõ¸±¶Ô½ÇÏßÊÇ·ñ±»Ê¹ÓÃ
+//    y = -x + b ¼´ y - x = b, ´¦ÔÚÍ¨¹ı¸±¶Ô½ÇÏßµÄµãµÄºá×ø±ê + ×İ×ø±ê = ¹Ì¶¨Öµ
+//    */
+//    vector<vector<string>> solveNQueens(int n)
+//    {
+//        num = n;
+//        path = vector<string>(n, string(n, '.'));
+//        dfs(0);
+//        return ret;
+//    }
+//    void dfs(int row)
+//    {
+//        if (row == num) {
+//            ret.push_back(path);
+//            return;
+//        }
+//        for (int col = 0; col < num; ++col)
+//        {
+//            if (!checkCol[col] && !checkDig1[col - row + num] && !checkDig2[col + row])
+//            {
+//                path[row][col] = 'Q';
+//                checkCol[col] = checkDig1[col - row + num] = checkDig2[col + row] = true;
+//                dfs(row + 1);
+//                checkCol[col] = checkDig1[col - row + num] = checkDig2[col + row] = false;
+//                path[row][col] = '.';
+//            }
+//        }
+//    }
+//};
