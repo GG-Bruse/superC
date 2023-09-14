@@ -1958,3 +1958,45 @@ D(1) = 0, D(2) = 1
 //    }
 //};
 
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 有效的数独（LeetCode）*******************************************/
+/*
+请你判断一个9 x 9的数独是否有效。只需要根据以下规则 ，验证已经填入的数字是否有效即可
+数字 1-9 在每一行只能出现一次
+数字 1-9 在每一列只能出现一次
+数字 1-9 在每一个以粗实线分隔的3x3宫内只能出现一次
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    bool checkRow[9][9];//数字i - 1在j行是否出现过 
+//    bool checkCol[9][9];//数字i - 1在j列是否出现过
+//    bool checkArea[3][3][9];//i行j列的区域是否出现过数字k - 1
+//
+//    bool isValidSudoku(vector<vector<char>>& board)
+//    {
+//        for (int i = 0; i < 9; ++i)
+//        {
+//            for (int j = 0; j < 9; ++j)
+//            {
+//                if (board[i][j] != '.') {
+//                    int num = board[i][j] - '0';
+//                    if (checkRow[num - 1][i] || checkCol[num - 1][j] || checkArea[i / 3][j / 3][num - 1]) return false;
+//                    checkRow[num - 1][i] = checkCol[num - 1][j] = checkArea[i / 3][j / 3][num - 1] = true;
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//};
