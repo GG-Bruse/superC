@@ -1029,3 +1029,136 @@ n皇后问题研究的是如何将n个皇后放置在n×n的棋盘上，并且使皇后彼此之间不能相互攻击
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 解数独（LeetCode）************************************************/
+/*
+编写一个程序，通过填充空格来解决数独问题
+数独的解法需 遵循如下规则：
+数字 1-9 在每一行只能出现一次
+数字 1-9 在每一列只能出现一次
+数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）
+数独部分空格内已填入了数字，空白格用 '.' 表示
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    bool checkRow[9][9];//数字i - 1在j行是否出现过 
+//    bool checkCol[9][9];//数字i - 1在j列是否出现过
+//    bool checkArea[3][3][9];//i行j列的区域是否出现过数字k - 1
+//
+//    void solveSudoku(vector<vector<char>>& board)
+//    {
+//        for (int i = 0; i < 9; ++i) {
+//            for (int j = 0; j < 9; ++j) {
+//                if (board[i][j] != '.')
+//                {
+//                    int num = board[i][j] - '0';
+//                    checkRow[num - 1][i] = checkCol[num - 1][j] = checkArea[i / 3][j / 3][num - 1] = true;
+//                }
+//            }
+//        }
+//        dfs(board);
+//    }
+//    bool dfs(vector<vector<char>>& board)
+//    {
+//        for (int row = 0; row < 9; ++row)
+//        {
+//            for (int col = 0; col < 9; ++col)
+//            {
+//                if (board[row][col] == '.') //填数
+//                {
+//                    for (int num = 1; num <= 9; ++num)//枚举每个可能填的数
+//                    {
+//                        if (!checkRow[num - 1][row] && !checkCol[num - 1][col] && !checkArea[row / 3][col / 3][num - 1])//满足要求
+//                        {
+//                            checkRow[num - 1][row] = checkCol[num - 1][col] = checkArea[row / 3][col / 3][num - 1] = true;
+//                            board[row][col] = num + '0';
+//                            if (dfs(board))  return true;
+//                            board[row][col] = '.';
+//                            checkRow[num - 1][row] = checkCol[num - 1][col] = checkArea[row / 3][col / 3][num - 1] = false;
+//                        }
+//                    }
+//                    return false;//所有数都不满足要求,之前填的值存在问题
+//                }
+//            }
+//        }
+//        return true;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************ 单词搜索（LeetCode）***********************************************/
+/*
+给定一个mxn二维字符网格board和一个字符串单词 word
+如果word存在于网格中，返回true；否则，返回false
+单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格
+同一个单元格内的字母不允许被重复使用
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    bool pos[6][6];//i行j列的值是否被选中
+//    int row = 0, col = 0;
+//    string word;
+//
+//    bool exist(vector<vector<char>>& board, string _word)
+//    {
+//        row = board.size(), col = board[0].size();
+//        word = _word;
+//        for (int i = 0; i < row; ++i)
+//        {
+//            for (int j = 0; j < col; ++j)
+//            {
+//                if (board[i][j] == word[0])
+//                {
+//                    pos[i][j] = true;
+//                    if (dfs(board, i, j, 1)) return true;
+//                    pos[i][j] = false;
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//    int dx[4] = { 0, 0, -1, 1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//    bool dfs(vector<vector<char>>& board, int i, int j, int k)//i、j表示矩阵的位置,k表示在字符串中的位置
+//    {
+//        if (k == word.size()) return true;
+//
+//        for (int p = 0; p < 4; ++p) //遍历四个位置
+//        {
+//            int x = i + dx[p], y = j + dy[p];
+//            if (x >= 0 && y >= 0 && x < row && y < col && !pos[x][y] && board[x][y] == word[k])//合法
+//            {
+//                pos[x][y] = true;
+//                if (dfs(board, x, y, k + 1)) return true;
+//                pos[x][y] = false;
+//            }
+//        }
+//        return false;
+//    }
+//};
