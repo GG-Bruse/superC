@@ -1162,3 +1162,140 @@ n皇后问题研究的是如何将n个皇后放置在n×n的棋盘上，并且使皇后彼此之间不能相互攻击
 //        return false;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 黄金矿工（LeetCode）**********************************************/
+/*
+你要开发一座金矿，地质勘测学家已经探明了这座金矿中的资源分布，并用大小为 m * n 的网格 grid 进行了标注
+每个单元格中的整数就表示这一单元格中的黄金数量；如果该单元格是空的，那么就是 0
+
+为了使收益最大化，矿工需要按以下规则来开采黄金：
+
+每当矿工进入一个单元，就会收集该单元格中的所有黄金。
+矿工每次可以从当前位置向上下左右四个方向走。
+每个单元格只能被开采（进入）一次。
+不得开采（进入）黄金数目为 0 的单元格。
+矿工可以从网格中 任意一个 有黄金的单元格出发或者是停止
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    bool pos[15][15] = {false};//i行j列这个位置是否被开采过
+//    int row = 0, col = 0;
+//    int ret = 0, path = 0;
+//    int getMaximumGold(vector<vector<int>>& grid)
+//    {
+//        row = grid.size(), col = grid[0].size();
+//        for (int i = 0; i < row; ++i)
+//        {
+//            for (int j = 0; j < col; ++j)
+//            {
+//                if (grid[i][j] != 0)
+//                {
+//                    pos[i][j] = true;
+//                    path = grid[i][j];
+//                    dfs(grid, i, j);
+//                    path = 0;
+//                    pos[i][j] = false;
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//    void dfs(vector<vector<int>>& grid, int i, int j)
+//    {
+//        for (int k = 0; k < 4; ++k)
+//        {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && !pos[x][y] && grid[x][y] != 0)
+//            {
+//                pos[x][y] = true;
+//                path += grid[x][y];
+//                dfs(grid, x, y);
+//                path -= grid[x][y];
+//                pos[x][y] = false;
+//            }
+//        }
+//        ret = max(ret, path);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 不同路径 III（LeetCode）*****************************************/
+/*
+在二维网格 grid 上，有 4 种类型的方格：
+1 表示起始方格。且只有一个起始方格
+2 表示结束方格，且只有一个结束方格
+0 表示我们可以走过的空方格
+-1 表示我们无法跨越的障碍
+返回在四个方向（上、下、左、右）上行走时，从起始方格到结束方格的不同路径的数目
+每一个无障碍方格都要通过一次，但是一条路径中不能重复通过同一个方格
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    bool pos[20][20] = { false };//该位置是否走过
+//    int row = 0, col = 0;
+//    int ret = 0;
+//    int uniquePathsIII(vector<vector<int>>& grid)
+//    {
+//        row = grid.size(), col = grid[0].size();
+//        int x = 0, y = 0;
+//        //初始化
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j) {
+//                if (grid[i][j] == -1) pos[i][j] = true;
+//                if (grid[i][j] == 1) x = i, y = j, pos[i][j] = true;
+//            }
+//        dfs(grid, x, y);
+//        return ret;
+//    }
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//    void dfs(vector<vector<int>>& grid, int i, int j)
+//    {
+//        if (grid[i][j] == 2)
+//        {
+//            int flag = true;
+//            for (int m = 0; m < row; ++m)
+//                for (int n = 0; n < col; ++n)
+//                    if (pos[m][n] == false) flag = false;
+//            if (flag) ++ret;
+//        }
+//        for (int k = 0; k < 4; ++k)
+//        {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && !pos[x][y] && (grid[x][y] == 0 || grid[x][y] == 2))
+//            {
+//                pos[x][y] = true;
+//                dfs(grid, x, y);
+//                pos[x][y] = false;
+//            }
+//        }
+//    }
+//};
