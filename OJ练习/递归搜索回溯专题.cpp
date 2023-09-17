@@ -1299,3 +1299,96 @@ n皇后问题研究的是如何将n个皇后放置在n×n的棋盘上，并且使皇后彼此之间不能相互攻击
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 图像渲染（LeetCode）**********************************************/
+/*
+有一幅以 m x n 的二维整数数组表示的图画 image ，其中image[i][j]表示该图画的像素值大小
+你也被给予三个整数sr ,sc 和newColor。你应该从像素image[sr][sc]开始对图像进行 上色填充
+为了完成上色工作 ，从初始像素开始，记录初始坐标的上下左右四个方向上像素值与初始坐标相同的相连像素点，
+接着再记录这四个方向上符合条件的像素点与他们对应 四个方向上 像素值与初始坐标相同的相连像素点，……，
+重复该过程。将所有有记录的像素点的颜色值改为newColor
+最后返回 经过上色渲染后的图像
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    int prevColor = 0, newColor = 0;
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//
+//    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color)
+//    {
+//        row = image.size(), col = image[0].size();
+//        prevColor = image[sr][sc], newColor = color;
+//        if (prevColor == newColor) return image;
+//
+//        dfs(image, sr, sc);
+//        return image;
+//    }
+//    void dfs(vector<vector<int>>& image, int i, int j)
+//    {
+//        image[i][j] = newColor;
+//        for (int k = 0; k < 4; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && image[x][y] == prevColor) dfs(image, x, y);
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 岛屿数量（LeetCode）*************************************************/
+/*
+给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量
+岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成
+此外，你可以假设该网格的四条边均被水包围
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    int ret = 0;
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//
+//    int numIslands(vector<vector<char>>& grid)
+//    {
+//        row = grid.size(), col = grid[0].size();
+//        for (int i = 0; i < row; ++i) {
+//            for (int j = 0; j < col; ++j) {
+//                if (grid[i][j] == '1') dfs(grid, i, j), ++ret;
+//            }
+//        }
+//        return ret;
+//    }
+//    void dfs(vector<vector<char>>& grid, int i, int j)
+//    {
+//        grid[i][j] = '2';
+//        for (int k = 0; k < 4; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && grid[x][y] == '1') dfs(grid, x, y);
+//        }
+//    }
+//};
