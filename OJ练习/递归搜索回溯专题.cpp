@@ -1392,3 +1392,165 @@ n皇后问题研究的是如何将n个皇后放置在n×n的棋盘上，并且使皇后彼此之间不能相互攻击
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/********************************************* 岛屿的最大面积（LeetCode）********************************************/
+/*
+给你一个大小为m x n的二进制矩阵grid
+岛屿 是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个 1 必须在 水平或者竖直的四个方向上 相邻
+你可以假设 grid 的四个边缘都被 0（代表水）包围着
+岛屿的面积是岛上值为 1 的单元格的数目
+计算并返回grid 中最大的岛屿面积。如果没有岛屿，则返回面积为
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxArea = 0;
+//    int path = 0;
+//    int row = 0, col = 0;
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//
+//    int maxAreaOfIsland(vector<vector<int>>& grid)
+//    {
+//        row = grid.size(), col = grid[0].size();
+//        for (int i = 0; i < row; ++i) {
+//            for (int j = 0; j < col; ++j) {
+//                if (grid[i][j] == 1)
+//                {
+//                    dfs(grid, i, j);
+//                    maxArea = max(maxArea, path);
+//                    path = 0;
+//                }
+//            }
+//        }
+//        return maxArea;
+//    }
+//    void dfs(vector<vector<int>>& grid, int i, int j)
+//    {
+//        grid[i][j] = 2, ++path;
+//        for (int k = 0; k < 4; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && grid[x][y] == 1) dfs(grid, x, y);
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/********************************************** 被围绕的区域（LeetCode）*********************************************/
+/*
+给你一个 m x n 的矩阵 board ，由若干字符 'X' 和 'O' ，找到所有被 'X' 围绕的区域，
+并将这些区域里所有的 'O' 用 'X' 填充
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//
+//    void solve(vector<vector<char>>& board)
+//    {
+//        row = board.size(), col = board[0].size();
+//        //将与在边界上的O所在的连通块都修改为@
+//        for (int i = 0; i < row; ++i) {
+//            if (board[i][0] == 'O') dfs(board, i, 0);
+//            if (board[i][col - 1] == 'O') dfs(board, i, col - 1);
+//        }
+//        for (int j = 0; j < col; ++j) {
+//            if (board[0][j] == 'O') dfs(board, 0, j);
+//            if (board[row - 1][j] == 'O') dfs(board, row - 1, j);
+//        }
+//        //将所有O改为X, 所有@改为O
+//        for (int i = 0; i < row; ++i) {
+//            for (int j = 0; j < col; ++j) {
+//                if (board[i][j] == 'O') board[i][j] = 'X';
+//                if (board[i][j] == '@') board[i][j] = 'O';
+//            }
+//        }
+//    }
+//    void dfs(vector<vector<char>>& board, int i, int j)
+//    {
+//        board[i][j] = '@';
+//        for (int k = 0; k < 4; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && board[x][y] == 'O') dfs(board, x, y);
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/****************************************** 太平洋大西洋水流问题（LeetCode）*****************************************/
+/*
+有一个 m × n 的矩形岛屿，与 太平洋 和 大西洋 相邻。 “太平洋” 处于大陆的左边界和上边界，
+而 “大西洋” 处于大陆的右边界和下边界
+这个岛被分割成一个由若干方形单元格组成的网格。给定一个 m x n 的整数矩阵 heights ，
+heights[r][c] 表示坐标 (r, c) 上单元格高于海平面的高度
+岛上雨水较多，如果相邻单元格的高度 小于或等于 当前单元格的高度，雨水可以直接向北、南、东、西流向相邻单元格
+水可以从海洋附近的任何单元格流入海洋
+返回网格坐标result的2D列表 ，其中result[i]=[ri, ci]表示雨水从单元格(ri, ci)流动既可流向太平洋也可流向大西洋
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//
+//    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights)
+//    {
+//        vector<vector<int>> ret;
+//        row = heights.size(), col = heights[0].size();
+//        vector<vector<bool>> posPac(row, vector<bool>(col));
+//        vector<vector<bool>> posAtl(row, vector<bool>(col));
+//
+//        //标记所有可以流向太平洋的的位置
+//        for (int i = 0; i < row; ++i) dfs(heights, i, 0, posPac);
+//        for (int j = 0; j < col; ++j) dfs(heights, 0, j, posPac);
+//        //标记所有可以流向大西洋的的位置
+//        for (int i = 0; i < row; ++i) dfs(heights, i, col - 1, posAtl);
+//        for (int j = 0; j < col; ++j) dfs(heights, row - 1, j, posAtl);
+//
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j)
+//                if (posPac[i][j] && posAtl[i][j]) ret.push_back({ i, j });
+//        return  ret;
+//    }
+//    void dfs(vector<vector<int>>& heights, int i, int j, vector<vector<bool>>& pos)
+//    {
+//        pos[i][j] = true;
+//        for (int k = 0; k < 4; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && !pos[x][y] && heights[x][y] >= heights[i][j])
+//                dfs(heights, x, y, pos);
+//        }
+//    }
+//};
