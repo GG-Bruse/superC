@@ -1554,3 +1554,120 @@ heights[r][c] 表示坐标 (r, c) 上单元格高于海平面的高度
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 扫雷游戏（LeetCode）***********************************************/
+/*
+https://leetcode.cn/problems/minesweeper/description/
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    int dx[8] = { 1, 1, 1, 0, 0, -1, -1, -1 };
+//    int dy[8] = { 1, 0, -1, 1, -1, 1, 0, -1 };
+//
+//    vector<vector<char>> updateBoard(vector<vector<char>>& board, vector<int>& click)
+//    {
+//        row = board.size(), col = board[0].size();
+//        int x = click[0], y = click[1];
+//        if (board[x][y] == 'M') {
+//            board[x][y] = 'X';
+//            return board;
+//        }
+//        dfs(board, x, y);
+//        return board;
+//    }
+//    void dfs(vector<vector<char>>& board, int i, int j)
+//    {
+//        int count = 0;
+//        for (int k = 0; k < 8; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && board[x][y] == 'M') ++count;
+//        }
+//        if (count != 0) {
+//            board[i][j] = count + '0';
+//            return;
+//        }
+//        else {
+//            board[i][j] = 'B';
+//            for (int k = 0; k < 8; ++k) {
+//                int x = i + dx[k], y = j + dy[k];
+//                if (x >= 0 && y >= 0 && x < row && y < col && board[x][y] == 'E') dfs(board, x, y);
+//            }
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/****************************************** 机器人的运动范围（LeetCode）*********************************************/
+/*
+地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，
+它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子
+例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19
+请问该机器人能够到达多少个格子？
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int ret = 0;
+//    int row = 0, col = 0;
+//    int reference = 0;
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//
+//    int movingCount(int m, int n, int k)
+//    {
+//        row = m, col = n, reference = k;
+//        vector<vector<bool>> pos(m, vector<bool>(n));
+//        dfs(pos, 0, 0);
+//        return ret;
+//    }
+//    void dfs(vector<vector<bool>>& pos, int i, int j)
+//    {
+//        pos[i][j] = true, ++ret;
+//        for (int k = 0; k < 4; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && !pos[x][y] && Handle(x, y)) dfs(pos, x, y);
+//        }
+//    }
+//
+//private:
+//    bool Handle(int x, int y) {
+//        vector<int> ret1 = decompose(x);
+//        vector<int> ret2 = decompose(y);
+//        int sum = 0;
+//        for (auto& it : ret1) sum += it;
+//        for (auto& it : ret2) sum += it;
+//        return sum <= reference;
+//    }
+//    vector<int> decompose(int number) {
+//        vector<int> ret;
+//        while (number) {
+//            ret.push_back(number % 10);
+//            number /= 10;
+//        }
+//        return ret;
+//    }
+//};
