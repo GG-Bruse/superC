@@ -1671,3 +1671,132 @@ https://leetcode.cn/problems/minesweeper/description/
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************************************************************************************/
+/*
+斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：
+
+F(0) = 0，F(1) = 1
+F(n) = F(n - 1) + F(n - 2)，其中 n > 1
+给定 n ，请计算 F(n)
+*/
+//#include <iostream>
+//#include <cstdlib>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int memory[31];//备忘录
+//
+//    int fib(int n) {
+//        memset(memory, -1, sizeof memory);
+//        return dfs(n);
+//    }
+//    int dfs(int number)
+//    {
+//        if (memory[number] != -1) return memory[number];
+//
+//        if (number == 0 || number == 1) {
+//            memory[number] = number;
+//            return number;
+//        }
+//        memory[number] = dfs(number - 1) + dfs(number - 2);
+//        return memory[number];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************ 不同路径（LeetCode）**************************************************/
+/*
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）
+问总共有多少条不同的路径？
+*/
+//记忆化搜索
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int uniquePaths(int m, int n) {
+//        vector<vector<int>> memory(m + 1, vector<int>(n + 1, -1));
+//        return dfs(m, n, memory);
+//    }
+//    int dfs(int i, int j, vector<vector<int>>& memory)
+//    {
+//        if (memory[i][j] != -1) return memory[i][j];
+//
+//        if (i == 0 || j == 0) return 0;
+//        if (i == 1 && j == 1) {
+//            memory[i][j] = 1;
+//            return memory[i][j];
+//        }
+//
+//        memory[i][j] = dfs(i - 1, j, memory) + dfs(i, j - 1, memory);
+//        return memory[i][j];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************* 最长递增子序列（LeetCode）***********************************************/
+/*
+给你一个整数数组 nums ，找到其中最长严格递增子序列的长度
+子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序
+例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int lengthOfLIS(vector<int>& nums) {
+//        int size = nums.size();
+//        vector<int> memory(size);
+//
+//        int ret = 0;
+//        for (int i = 0; i < nums.size(); ++i)
+//            ret = max(ret, dfs(i, nums, memory));
+//        return ret;
+//    }
+//    int dfs(int index, vector<int>& nums, vector<int>& memory)
+//    {
+//        if (memory[index] != 0) return memory[index];
+//
+//        int ret = 1;
+//        for (int i = index + 1; i < nums.size(); ++i)
+//            if (nums[i] > nums[index]) ret = max(ret, dfs(i, nums, memory) + 1);
+//        memory[index] = ret;
+//        return memory[index];
+//    }
+//};
