@@ -1767,8 +1767,6 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 
 
 
-
-
 /********************************************* 最长递增子序列（LeetCode）***********************************************/
 /*
 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度
@@ -1798,5 +1796,101 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 //            if (nums[i] > nums[index]) ret = max(ret, dfs(i, nums, memory) + 1);
 //        memory[index] = ret;
 //        return memory[index];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/************************************************ 猜数字大小 II（LeetCode）*********************************************/
+/*
+我们正在玩一个猜数游戏，游戏规则如下：
+
+我从 1 到 n 之间选择一个数字
+你来猜我选了哪个数字
+如果你猜到正确的数字，就会赢得游戏
+如果你猜错了，那么我会告诉你，我选的数字比你的更大或者更小 ，并且你需要继续猜数
+每当你猜了数字x并且猜错了的时候，你需要支付金额为 x 的现金。如果你花光了钱，就会输掉游戏
+给你一个特定的数字n ，返回能够确保你获胜的最小现金数，不管我选择那个数字
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int getMoneyAmount(int n) {
+//        vector<vector<int>> memory(n + 1, vector<int>(n + 1, -1));
+//        return dfs(1, n, memory);
+//    }
+//    int dfs(int start, int end, vector<vector<int>>& memory)
+//    {
+//        if (start >= end) return 0;
+//        if (memory[start][end] != -1) return memory[start][end];
+//
+//        int ret = INT_MAX;
+//        for (int i = start; i <= end; ++i)
+//        {
+//            int left = dfs(start, i - 1, memory);
+//            int right = dfs(i + 1, end, memory);
+//            ret = min(ret, i + max(left, right));
+//        }
+//        memory[start][end] = ret;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/****************************************** 矩阵中的最长递增路径（LeetCode）********************************************/
+/*
+给定一个m x n整数矩阵matrix，找出其中最长递增路径的长度
+对于每个单元格，你可以往上，下，左，右四个方向移动。 你不能在对角线方向上移动或移动到边界外（即不允许环绕）
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*因为是寻找递增序列, 所以不可能重复走*/
+//    int row = 0, col = 0;
+//    int longestIncreasingPath(vector<vector<int>>& matrix)
+//    {
+//        row = matrix.size(), col = matrix[0].size();
+//        vector<vector<int>> memory(row, vector<int>(col, -1));
+//
+//        int ret = 1;
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j)
+//                ret = max(ret, dfs(matrix, i, j, memory));
+//        return ret;
+//    }
+//
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    int dfs(vector<vector<int>>& matrix, int i, int j, vector<vector<int>>& memory)
+//    {
+//        if (memory[i][j] != -1) return memory[i][j];
+//
+//        int ret = 1;
+//        for (int k = 0; k < 4; ++k) {
+//            int x = i + dx[k], y = j + dy[k];
+//            if (x >= 0 && y >= 0 && x < row && y < col && matrix[i][j] < matrix[x][y])
+//                ret = max(ret, 1 + dfs(matrix, x, y, memory));
+//        }
+//        memory[i][j] = ret;
+//        return ret;
 //    }
 //};
