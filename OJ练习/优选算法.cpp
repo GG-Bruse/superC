@@ -363,3 +363,109 @@ nums[a] + nums[b] + nums[c] + nums[d] == target
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 长度最小的子数组（LeetCode）****************************************/
+/*
+给定一个含有 n 个正整数的数组和一个正整数target
+找出该数组中满足其总和大于等于 target 的长度最小的 连续子数组 [numsl, numsl+1, ..., numsr-1, numsr] ，
+并返回其长度。如果不存在符合条件的子数组，返回 0
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int minSubArrayLen(int target, vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        int ret = INT_MAX, sum = 0;
+//        for (int start = 0, end = 0; end < size; ++end)
+//        {
+//            sum += nums[end];
+//            while (sum >= target) {
+//                ret = min(ret, end - start + 1);
+//                sum -= nums[start++];
+//            }
+//        }
+//        return ret == INT_MAX ? 0 : ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************* 无重复字符的最长子串（LeetCode）****************************************/
+/*
+给定一个字符串 s ，请你找出其中不含有重复字符的最长子串的长度
+*/
+//#include <iostream>
+//#include <unordered_map>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    unordered_map<char, int> hash;
+//    int lengthOfLongestSubstring(string s)
+//    {
+//        int size = s.size();
+//        int ret = 0;
+//        for (int left = 0, right = 0; right < size; ++right)
+//        {
+//            ++hash[s[right]];
+//            while (hash[s[right]] > 1) --hash[s[left++]];
+//            ret = max(ret, right - left + 1);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/********************************************* 最大连续1的个数 III（LeetCode）***************************************/
+/*
+给定一个二进制数组nums和一个整数 k，如果可以翻转最多k个0 ，则返回 数组中连续1的最大个数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*问题转化：找到最长的子数组, 子数组中0的个数不超过k个*/
+//    int longestOnes(vector<int>& nums, int k)
+//    {
+//        int size = nums.size();
+//        int ret = 0;
+//        for (int left = 0, right = 0, zero = 0; right < size; ++right)
+//        {
+//            if (nums[right] == 0) ++zero;
+//            while (zero > k)
+//                if (nums[left++] == 0) --zero;
+//            ret = max(ret, right - left + 1);
+//        }
+//        return ret;
+//    }
+//};
