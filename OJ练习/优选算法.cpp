@@ -469,3 +469,94 @@ nums[a] + nums[b] + nums[c] + nums[d] == target
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************** 将 x 减到 0 的最小操作数（LeetCode）***********************************/
+/*
+给你一个整数数组 nums 和一个整数 x 。每一次操作时，你应当移除数组 nums 最左边或最右边的元素，
+然后从 x 中减去该元素的值。请注意，需要 修改 数组以供接下来的操作使用
+如果可以将 x 恰好 减到 0 ，返回 最小操作数 ；否则，返回 -1
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*
+//    转化问题：
+//    找到一段和为sum - x的最长数组
+//    */
+//    int minOperations(vector<int>& nums, int x)
+//    {
+//        int sum = 0;
+//        for (auto& it : nums) sum += it;
+//        int target = sum - x;
+//        if (target < 0) return -1;
+//
+//        int ret = -1;
+//        int size = nums.size();
+//        for (int left = 0, right = 0, tmp = 0; right < size; ++right)
+//        {
+//            tmp += nums[right];
+//            while (tmp > target) tmp -= nums[left++];
+//            if (tmp == target) ret = max(ret, right - left + 1);
+//        }
+//        return ret == -1 ? -1 : size - ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************** 水果成篮（LeetCode）*************************************************/
+/*
+你正在探访一家农场，农场从左到右种植了一排果树。这些树用一个整数数组fruits表示，其中fruits[i]是第i棵树上的水果种类
+你想要尽可能多地收集水果。然而，农场的主人设定了一些严格的规矩，你必须按照要求采摘水果：
+你只有 两个 篮子，并且每个篮子只能装 单一类型 的水果。每个篮子能够装的水果总量没有限制
+你可以选择任意一棵树开始采摘，你必须从 每棵 树（包括开始采摘的树）上 恰好摘一个水果
+采摘的水果应当符合篮子中的水果类型。每采摘一次，你将会向右移动到下一棵树，并继续采摘
+一旦你走到某棵树前，但水果不符合篮子的水果类型，那么就必须停止采摘
+给你一个整数数组 fruits ，返回你可以收集的水果的最大数目
+*/
+//#include <iostream>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int totalFruit(vector<int>& fruits)
+//    {
+//        unordered_map<int, int> hash;//种类 : 出现次数
+//
+//        int size = fruits.size();
+//        int ret = 0;
+//        for (int left = 0, right = 0; right < size; ++right)
+//        {
+//            ++hash[fruits[right]];
+//            while (hash.size() > 2) {
+//                --hash[fruits[left]];
+//                if (hash[fruits[left]] == 0) hash.erase(fruits[left]);
+//                ++left;
+//            }
+//            ret = max(ret, right - left + 1);
+//        }
+//        return ret;
+//    }
+//};
