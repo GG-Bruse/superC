@@ -560,3 +560,47 @@ nums[a] + nums[b] + nums[c] + nums[d] == target
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/***************************************** 找到字符串中所有字母异位词（LeetCode）***************************************/
+/*
+给定两个字符串s和p，找到s中所有p的异位词的子串，返回这些子串的起始索引。不考虑答案输出的顺序
+异位词 指由相同字母重排列形成的字符串（包括相同的字符串）
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> findAnagrams(string s, string p)
+//    {
+//        vector<int> ret;
+//        int Shash[26] = { 0 };//记录窗口中每个字母出现的次数
+//        int Phash[26] = { 0 };//记录p中每个字母出现的次数
+//        for (auto& it : p) ++Phash[it - 'a'];
+//
+//        int length = p.size();
+//        for (int left = 0, right = 0, count = 0; right < s.size(); ++right)
+//        {
+//            char in = s[right];
+//            if (++Shash[in - 'a'] <= Phash[in - 'a']) ++count;//符合要求, 进窗口
+//            if (right - left + 1 > length)
+//            {
+//                char out = s[left++];
+//                if (Shash[out - 'a']-- <= Phash[out - 'a']) --count;
+//            }
+//            if (count == length) ret.push_back(left);
+//        }
+//        return ret;
+//    }
+//};
