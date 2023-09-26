@@ -604,3 +604,112 @@ nums[a] + nums[b] + nums[c] + nums[d] == target
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/******************************************* 串联所有单词的子串（LeetCode）******************************************/
+/*
+给定一个字符串s和一个字符串数组words。words中所有字符串长度相同
+s中的串联子串是指一个包含words中所有字符串以任意顺序排列连接起来的子串
+例如，如果 words = ["ab","cd","ef"]， 那么 "abcdef"， "abefcd"，"cdabef"， "cdefab"，"efabcd"， 和 "efcdab"
+都是串联子串。 "acdbef" 不是串联子串，因为他不是任何 words 排列的连接
+返回所有串联子串在s中的开始索引。你可以以任意顺序返回答案
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> findSubstring(string s, vector<string>& words)
+//    {
+//        unordered_map<string, int> hash1;//统计words中每个单词出现的次数
+//        for (string& it : words) ++hash1[it];
+//
+//        vector<int> ret;
+//        int size = words.size(), length = words[0].size();
+//
+//        for (int i = 0; i < length; ++i)
+//        {
+//            unordered_map<string, int> hash2;//统计窗口内每个单词出现的次数
+//            for (int left = i, right = i, count = 0; right + length <= s.size(); right += length)
+//            {
+//                string in = s.substr(right, length);
+//                ++hash2[in];
+//                if (hash1.count(in) && hash2[in] <= hash1[in]) ++count;//进窗口单词为有效单词
+//                if (right - left + 1 > length * size)
+//                {
+//                    string out = s.substr(left, length);
+//                    if (hash1.count(out) && hash2[out] <= hash1[out]) --count;//出窗口单词为有效单词
+//                    --hash2[out];
+//                    left += length;
+//                }
+//                if (count == size) ret.push_back(left);
+//            }
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************* 最小覆盖子串（LeetCode）**********************************************/
+/*
+给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串
+如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 ""
+*/
+//#include <iostream>
+//#include <string>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    string minWindow(string s, string t)
+//    {
+//        int kinds = 0;//记录有效字符的种类数
+//        int hash1[127] = { 0 };//统计string t中所有字符出现的个数
+//        for (char& ch : t) if (hash1[ch]++ == 0) ++kinds;
+//
+//        int hash2[128] = { 0 };//维护窗口中所有字符出现的个数
+//        int min_length = INT_MAX, begin = -1;
+//
+//        //count标记窗口中完全出现的有效字符的种类
+//        for (int left = 0, right = 0, count = 0; right < s.size(); ++right)
+//        {
+//            char in = s[right];
+//            ++hash2[in];
+//            if (hash2[in] == hash1[in]) ++count;
+//            while (count == kinds)
+//            {
+//                if (right - left + 1 < min_length)
+//                {
+//                    min_length = right - left + 1;
+//                    begin = left;
+//                }
+//                char out = s[left];
+//                if (hash2[out] == hash1[out]) --count;
+//                ++left, --hash2[out];
+//            }
+//        }
+//        if (begin == -1) return "";
+//        else return s.substr(begin, min_length);
+//    }
+//};
