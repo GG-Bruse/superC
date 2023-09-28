@@ -713,3 +713,127 @@ s中的串联子串是指一个包含words中所有字符串以任意顺序排列连接起来的子串
 //        else return s.substr(begin, min_length);
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*********************************** 在排序数组中查找元素的第一个和最后一个位置（LeetCode）***************************/
+/*
+给你一个按照非递减顺序排列的整数数组nums，和一个目标值target。请你找出给定目标值在数组中的开始位置和结束位置
+如果数组中不存在目标值target，返回[-1, -1]
+你必须设计并实现时间复杂度为 O(log n) 的算法解决此问题
+*/
+////方法一
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+////极端情况下,退化为O(n),如所有元素相同的情况
+//class Solution {
+//public:
+//    vector<int> searchRange(vector<int>& nums, int target)
+//    {
+//        int beginRet = -1, endRet = -1;
+//        int left = 0, right = nums.size() - 1;
+//        int index = -1;
+//        while (left <= right)
+//        {
+//            int mid = (left + right) >> 1;
+//            if (nums[mid] > target) right = mid - 1;
+//            else if (nums[mid] < target) left = mid + 1;
+//            else {
+//                index = mid;
+//                break;
+//            }
+//        }
+//        if (index != -1)
+//        {
+//            for (int i = index; i >= 0; --i) {
+//                if (nums[i] == target) beginRet = i;
+//                else break;
+//            }
+//            for (int i = index; i < nums.size(); ++i) {
+//                if (nums[i] == target) endRet = i;
+//                else break;
+//            }
+//        }
+//        return { beginRet, endRet };
+//    }
+//};
+////方法二
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> searchRange(vector<int>& nums, int target)
+//    {
+//        int beginRet = -1, endRet = -1;
+//        if (nums.size() == 0) return { beginRet, endRet };
+//        //找左端点
+//        int left = 0, right = nums.size() - 1;
+//        while (left < right)
+//        {
+//            int mid = left + (right - left) / 2;
+//            if (nums[mid] < target) left = mid + 1;
+//            else /*if(nums[mid] >= target)*/ right = mid;
+//        }
+//        if (nums[left] == target) beginRet = left;
+//        //找右端点
+//        left = 0, right = nums.size() - 1;
+//        while (left < right)
+//        {
+//            int mid = left + (right - left + 1) / 2;
+//            if (nums[mid] <= target) left = mid;
+//            else /*if((nums[mid] > target)*/ right = mid - 1;
+//        }
+//        if (nums[left] == target) endRet = right;
+//        return { beginRet, endRet };
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************** x的平方（LeetCode）*********************************************/
+/*
+给你一个非负整数x，计算并返回x的算术平方根
+由于返回类型是整数，结果只保留整数部分，小数部分将被舍去
+注意：不允许使用任何内置指数函数和算符，例如 pow(x, 0.5) 或者 x ** 0.5
+*/
+//#include <iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int mySqrt(int x)
+//    {
+//        int left = 0, right = x;
+//        int ret = 0;
+//        while (left <= right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            if ((long long)mid * mid <= x) {
+//                ret = mid;
+//                left = mid + 1;
+//            }
+//            else /*if(tmp > x)*/ right = mid - 1;
+//        }
+//        return ret;
+//    }
+//};
