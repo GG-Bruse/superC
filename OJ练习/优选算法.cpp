@@ -809,6 +809,38 @@ s中的串联子串是指一个包含words中所有字符串以任意顺序排列连接起来的子串
 
 
 
+/************************************************* 搜索插入位置（LeetCode）**********************************************/
+/*
+给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置
+请必须使用时间复杂度为 O(log n) 的算法
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int searchInsert(vector<int>& nums, int target)
+//    {
+//        int left = 0, right = nums.size() - 1;
+//        while (left < right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            if (nums[mid] >= target) right = mid;
+//            else /*if(nums[mid] < target)*/ left = mid + 1;
+//        }
+//        if (nums[left] < target) return right + 1;
+//        else return right;
+//    }
+//};
+
+
+
+
+
+
+
+
+
 
 
 /**************************************************** x的平方（LeetCode）*********************************************/
@@ -823,17 +855,147 @@ s中的串联子串是指一个包含words中所有字符串以任意顺序排列连接起来的子串
 //public:
 //    int mySqrt(int x)
 //    {
-//        int left = 0, right = x;
-//        int ret = 0;
-//        while (left <= right)
+//        if (x < 1) return 0;
+//        int left = 1, right = x;
+//        while (left < right)
 //        {
-//            int mid = left + ((right - left) >> 1);
-//            if ((long long)mid * mid <= x) {
-//                ret = mid;
-//                left = mid + 1;
-//            }
+//            int mid = left + ((right - left + 1) >> 1);
+//            if ((long long)mid * mid <= x) left = mid;
 //            else /*if(tmp > x)*/ right = mid - 1;
 //        }
-//        return ret;
+//        return left;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 山脉数组的峰顶索引（LeetCode）******************************************/
+/*
+符合下列属性的数组 arr 称为 山脉数组 ：
+arr.length >= 3
+存在 i（0 < i < arr.length - 1）使得：
+arr[0] < arr[1] < ... arr[i-1] < arr[i]
+arr[i] > arr[i+1] > ... > arr[arr.length - 1]
+给你由整数组成的山脉数组 arr ，返回满足 arr[0] < arr[1] < ... arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1]的下标i
+你必须设计并实现时间复杂度为 O(log(n)) 的解决方案
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int peakIndexInMountainArray(vector<int>& arr)
+//    {
+//        int left = 1, right = arr.size() - 2;//第一个和最后一个一定不是结果
+//        while (left < right)
+//        {
+//            int mid = left + ((right - left + 1) >> 1);
+//            if (arr[mid] > arr[mid - 1]) left = mid;
+//            else /*if(arr[mid] <= target)*/ right = mid - 1;
+//        }
+//        return left;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************ 寻找峰值（LeetCode）***************************************************/
+/*
+峰值元素是指其值严格大于左右相邻值的元素
+给你一个整数数组nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回任何一个峰值所在位置即可
+你可以假设 nums[-1] = nums[n] = -∞
+你必须实现时间复杂度为O(log n)的算法来解决此问题
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findPeakElement(vector<int>& nums)
+//    {
+//        int left = 0, right = nums.size() - 1;
+//        while (left < right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            if (nums[mid] > nums[mid + 1]) right = mid;
+//            else /*if(nums[mid] < target)*/ left = mid + 1;
+//        }
+//        return left;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/***************************************** 寻找旋转排序数组中的最小值（LeetCode）****************************************/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findMin(vector<int>& nums)
+//    {
+//        int left = 0, right = nums.size() - 1;
+//        int flag = nums[right];//记录翻转后数组中的最后一个数
+//        while (left < right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            if (nums[mid] > flag) left = mid + 1;
+//            else /*if(nums[mid] < flag)*/ right = mid;
+//        }
+//        return nums[right];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/************************************************* 点名（LeetCode）******************************************************/
+/*
+某班级 n 位同学的学号为 0 ~ n-1。点名结果记录于升序数组 records。假定仅有一位同学缺席，请返回他的学号
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int takeAttendance(vector<int>& records)
+//    {
+//        int left = 0, right = records.size() - 1;
+//        while (left < right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            if (records[mid] == mid) left = mid + 1;
+//            else right = mid;
+//        }
+//        return records[left] == left ? left + 1 : left;
 //    }
 //};
