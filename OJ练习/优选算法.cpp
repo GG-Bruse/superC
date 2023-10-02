@@ -1100,3 +1100,124 @@ arr[i] > arr[i+1] > ... > arr[arr.length - 1]
 //        return -1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 除自身以外数组的乘积（LeetCode）****************************************/
+/*
+给你一个整数数组nums，返回数组answer，其中answer[i]等于nums中除nums[i]之外其余各元素的乘积
+题目数据保证数组nums之中任意元素的全部前缀元素和后缀的乘积都在32位整数范围内
+请不要使用除法，且在O(n)时间复杂度内完成此题
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> productExceptSelf(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        vector<int> left(size), right(size);//left[i]: i左侧所有数字的乘积 、right[i]: i右侧所有数字的乘积
+//        vector<int> answer(size);
+//        //填充left、right
+//        left[0] = right[size - 1] = 1;
+//        for (int i = 1; i < size; ++i) left[i] = left[i - 1] * nums[i - 1];
+//        for (int i = size - 2; i >= 0; --i) right[i] = right[i + 1] * nums[i + 1];
+//        //填充answer
+//        for (int i = 0; i < size; ++i) answer[i] = left[i] * right[i];
+//        return answer;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/************************************************ 和为K的子数组（LeetCode）**********************************************/
+/*
+给你一个整数数组nums和一个整数k，请你统计并返回该数组中和为k的连续子数组的个数
+子数组是数组中元素的连续非空序列
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int subarraySum(vector<int>& nums, int k)
+//    {
+//        unordered_map<int, int> hash;//统计前缀和出现的次数
+//        hash[0] = 1;
+//
+//        int sum = 0, ret = 0;
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            sum += nums[i];//计算当前位置的前缀和
+//            if (hash.count(sum - k)) ret += hash[sum - k];//统计个数
+//            ++hash[sum];
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/********************************************** 和可被K整除的子数组（LeetCode）******************************************/
+/*
+给定一个整数数组nums和一个整数k，返回其中元素之和可被k整除的（连续、非空）子数组的数目
+子数组是数组的连续部分
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    /*
+//    同余定理:
+//    (a - b) / p = k ... 0
+//    a - b = p * k
+//    a = b + p * k
+//    a % p = (b + p * k) % p = b % p
+//    可得 a % p = b % p
+//    */
+//    /*
+//    C++中负数取模
+//    (a % p + p) % p
+//    */
+//    int subarraysDivByK(vector<int>& nums, int k)
+//    {
+//        unordered_map<int, int> hash;
+//        hash[0 % k] = 1;
+//
+//        int sum = 0, ret = 0;
+//        for (auto x : nums)
+//        {
+//            sum += x; // 算出当前位置的前缀和
+//            int r = (sum % k + k) % k; // 修正后的余数
+//            if (hash.count(r)) ret += hash[r]; // 统计结果
+//            hash[r]++;
+//        }
+//        return ret;
+//    }
+//};
