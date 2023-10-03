@@ -1221,3 +1221,83 @@ arr[i] > arr[i+1] > ... > arr[arr.length - 1]
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 连续数组（LeetCode）************************************************/
+/*
+给定一个二进制数组nums ,找到含有相同数量的0和1的最长连续子数组，并返回该子数组的长度
+*/
+//#include <iostream>
+//#include <unordered_map>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    /*
+//    将0记为-1, 1记为1, 问题就变成了找出⼀段区间，这段区间的和等于0
+//    */
+//    int findMaxLength(vector<int>& nums)
+//    {
+//        unordered_map<int, int> hash;//前缀和 : 下标
+//        hash[0] = -1;
+//
+//        int sum = 0, ret = 0;
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            sum += (nums[i] == 0 ? -1 : 1);
+//            if (hash.count(sum)) ret = max(ret, i - hash[sum]);
+//            else hash[sum] = i;//只保留前面的,因为越长越好
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 矩阵区域和（LeetCode）**************************************************/
+/*
+给你一个m x n的矩阵mat和一个整数k，请你返回一个矩阵answer，其中每个answer[i][j]是所有满足下述条件的元素 mat[r][c] 的和：
+i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k)
+//    {
+//        int row = mat.size(), col = mat[0].size();
+//        vector<vector<int>> dp(row + 1, vector<int>(col + 1));
+//        //预处理前缀和矩阵(dp[i,j] : [1,1]到[i,j]所围成的矩阵的和)
+//        for (int i = 1; i <= row; ++i)
+//            for (int j = 1; j <= col; ++j)
+//                dp[i][j] = dp[i][j - 1] + dp[i - 1][j] - dp[i - 1][j - 1] + mat[i - 1][j - 1];
+//        //使用前缀和矩阵
+//        vector<vector<int>> answer(row, vector<int>(col));
+//        for (int i = 0; i < row; ++i)
+//        {
+//            for (int j = 0; j < col; ++j)
+//            {
+//                int x1 = max(0, i - k) + 1, y1 = max(0, j - k) + 1;
+//                int x2 = min(row - 1, i + k) + 1, y2 = min(col - 1, j + k) + 1;
+//                answer[i][j] = dp[x2][y2] - dp[x1 - 1][y2] - dp[x2][y1 - 1] + dp[x1 - 1][y1 - 1];
+//            }
+//        }
+//        return answer;
+//    }
+//};
