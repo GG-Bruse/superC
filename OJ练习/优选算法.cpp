@@ -1301,3 +1301,92 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return answer;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/************************************************* 判定字符是否唯一（LeetCode）******************************************/
+/*
+实现一个算法，确定一个字符串s的所有字符是否全都不同
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    bool isUnique(string astr)
+//    {
+//        if (astr.size() > 26) return false;
+//
+//        int bitMap = 0;
+//        for (int i = 0; i < astr.size(); ++i)
+//        {
+//            int tmp = astr[i] - 'a';
+//            if (((bitMap >> tmp) & 1) == 1) return false;
+//            bitMap |= (1 << tmp);
+//        }
+//        return true;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 丢失的数字（LeetCode）*********************************************/
+/*
+给定一个包含[0, n]中n个数的数组nums，找出[0, n]这个范围内没有出现在数组中的那个数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int missingNumber(vector<int>& nums)
+//    {
+//        int ret = 0;
+//        for (int i = 0; i <= nums.size(); ++i) ret ^= i;
+//        for (int& it : nums) ret ^= it;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 两整数之和（LeetCode）**********************************************/
+/*
+给你两个整数a和b，不使用运算符+和-​​​​​​，计算并返回两整数之和
+*/
+//class Solution {
+//public:
+//    int getSum(int a, int b)
+//    {
+//        while (b != 0)
+//        {
+//            int tmp = a ^ b;//a与b无进位相加
+//            unsigned int carry = (a & b) << 1;//进位
+//            a = tmp;
+//            b = carry;
+//        }
+//        return a;
+//    }
+//};
