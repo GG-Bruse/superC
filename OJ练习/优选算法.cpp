@@ -1390,3 +1390,84 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return a;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 只出现一次的数字II（LeetCode）*******************************************/
+/*
+给你一个整数数组nums，除某个元素仅出现一次外，其余每个元素都恰出现 三次 。请你找出并返回那个只出现了一次的元素
+你必须设计并实现线性时间复杂度的算法且使用常数级空间来解决此问题
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*
+//    每一位的情况：
+//    3n个0 一个1     相加得1     %3   == 1
+//    3n个0 一个0     相加得0     %3   == 0
+//    3n个1 一个1     相加得3n+1  %3   == 1
+//    3n个1 一个0     相加得3n    %3   == 0
+//    */
+//    int singleNumber(vector<int>& nums)
+//    {
+//        int ret = 0;
+//        for (int i = 0; i < 32; ++i)//依次修改ret的每一位
+//        {
+//            int sum = 0;
+//            for (int j = 0; j < nums.size(); ++j)
+//                if (((nums[j] >> i) & 1) == 1) ++sum;
+//            sum %= 3;
+//            if (sum == 1) ret |= (1 << i);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/************************************************ 消失的两个数字（LeetCode）**********************************************/
+/*
+给定一个数组，包含从1到N所有的整数，但其中缺了两个数字。你能在O(N)时间内只用O(1)的空间找到它们吗？
+以任意顺序返回这两个数字均可
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> missingTwo(vector<int>& nums)
+//    {
+//        int mask = 0;
+//        for (int& it : nums) mask ^= it;
+//        for (int i = 1; i <= nums.size() + 2; ++i) mask ^= i;
+//
+//        int type1 = 0, type2 = 0;
+//        int lowbit = (mask == INT_MIN ? mask : mask & (-mask));
+//
+//        for (int& it : nums) {
+//            if (it & lowbit) type1 ^= it;
+//            else type2 ^= it;
+//        }
+//        for (int i = 1; i <= nums.size() + 2; ++i) {
+//            if (i & lowbit) type1 ^= i;
+//            else type2 ^= i;
+//        }
+//        return { type1, type2 };
+//    }
+//};
