@@ -1471,3 +1471,83 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return { type1, type2 };
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 替换所有的问号（LeetCode）**********************************************/
+/*
+给你一个仅包含小写英文字母和'?'字符的字符串s，请你将所有的'?'转换为若干小写字母，使最终的字符串不包含任何连续重复的字符
+注意：你 不能 修改非 '?' 字符
+题目测试用例保证 除 '?' 字符 之外，不存在连续重复的字符
+在完成所有转换（可能无需转换）后返回最终的字符串。如果有多个解决方案，请返回其中任何一个。可以证明，在给定的约束条件下，答案总是存在的
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    string modifyString(string s)
+//    {
+//        for (int i = 0; i < s.size(); ++i)
+//        {
+//            if (s[i] == '?')
+//            {
+//                for (int j = 0; j < 26; ++j)
+//                {
+//                    if (i - 1 >= 0 && s[i - 1] == ('a' + j)) continue;
+//                    if (i + 1 < s.size() && s[i + 1] == ('a' + j)) continue;
+//                    s[i] = ('a' + j);
+//                }
+//            }
+//        }
+//        return s;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 提莫攻击（LeetCode）*************************************************/
+/*
+在《英雄联盟》的世界中，有一个叫“提莫”的英雄。他的攻击可以让敌方英雄艾希（编者注：寒冰射手）进入中毒状态
+当提莫攻击艾希，艾希的中毒状态正好持续duration秒
+正式地讲，提莫在t发起攻击意味着艾希在时间区间[t, t + duration - 1]（含t和t + duration - 1）处于中毒状态
+如果提莫在中毒影响结束 前 再次攻击，中毒状态计时器将会重置，在新的攻击之后，中毒影响将会在duration秒后结束
+给你一个非递减的整数数组timeSeries，其中timeSeries[i]表示提莫在timeSeries[i]秒时对艾希发起攻击，
+以及一个表示中毒持续时间的整数duration。返回艾希处于中毒状态的总秒数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findPoisonedDuration(vector<int>& timeSeries, int duration)
+//    {
+//        int ret = 0;
+//        for (int i = 1; i < timeSeries.size(); ++i)
+//        {
+//            int tmp = timeSeries[i] - timeSeries[i - 1];
+//            if (tmp >= duration) ret += duration;
+//            else ret += tmp;
+//        }
+//        return ret + duration;
+//    }
+//};
