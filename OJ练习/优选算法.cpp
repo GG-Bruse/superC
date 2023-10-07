@@ -1551,3 +1551,84 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return ret + duration;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************** N字形变换（LeetCode）******************************************************/
+/*
+将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列
+之后，你的输出需要从左往右逐行读取，产生出一个新的字符串
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string convert(string s, int numRows)
+//    {
+//        if (numRows == 1) return s;
+//        string ret;
+//        int d = 2 * numRows - 2, size = s.size();
+//        //第一行
+//        for (int i = 0; i < size; i += d) ret += s[i];
+//        //中间行
+//        for (int k = 1; k < numRows - 1; ++k)//枚举每一行 
+//        {
+//            for (int i = k, j = d - k; i < size || j < size; i += d, j += d) {
+//                if (i < size) ret += s[i];
+//                if (j < size) ret += s[j];
+//            }
+//        }
+//        //最后一行
+//        for (int i = numRows - 1; i < size; i += d) ret += s[i];
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 外观数列（LeetCode）***************************************************/
+/*
+给定一个正整数n，输出外观数列的第n项
+「外观数列」是一个整数序列，从数字1开始，序列中的每一项都是对前一项的描述
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    string countAndSay(int n)
+//    {
+//        string ret = "1";
+//        for (int i = 0; i < n - 1; ++i)
+//        {
+//            string tmp;
+//            int length = ret.size();
+//            for (int left = 0, right = 0; right < length;)
+//            {
+//                while (right < length && ret[left] == ret[right]) ++right;
+//                tmp += (to_string(right - left) + ret[left]);
+//                left = right;
+//            }
+//            ret = tmp;
+//        }
+//        return ret;
+//    }
+//};
