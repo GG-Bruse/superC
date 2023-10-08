@@ -1632,3 +1632,88 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 数青蛙（LeetCode）**************************************************/
+/*
+给你一个字符串 croakOfFrogs，它表示不同青蛙发出的蛙鸣声（字符串 "croak" ）的组合
+由于同一时间可以有多只青蛙呱呱作响，所以croakOfFrogs中会混合多个“croak”
+请你返回模拟字符串中所有蛙鸣所需不同青蛙的最少数目
+要想发出蛙鸣"croak"，青蛙必须依序输出‘c’,’r’,’o’,’a’,’k’这5个字母
+如果没有输出全部五个字母，那么它就不会发出声音。如果字符串croakOfFrogs不是由若干有效的"croak"字符混合而成，请返回-1
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int minNumberOfFrogs(string croakOfFrogs)
+//    {
+//        string str = "croak";
+//        int size = str.size();
+//
+//        vector<int> hash(size);
+//        unordered_map<char, int> index;//char字符存在hash中的哪个下标
+//        for (int i = 0; i < size; ++i) index[str[i]] = i;
+//
+//        for (char& ch : croakOfFrogs)
+//        {
+//            if (ch == 'c') {
+//                if (hash[size - 1] != 0) --hash[size - 1];
+//                ++hash[0];
+//            }
+//            else {
+//                int i = index[ch];
+//                if (hash[i - 1] == 0) return -1;
+//                else --hash[i - 1], ++hash[i];
+//            }
+//        }
+//        for (int i = 0; i < size - 1; ++i) if (hash[i] != 0) return -1;
+//        return hash[size - 1];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 颜色分类（LeetCode）***********************************************/
+/*
+给定一个包含红色、白色和蓝色、共n个元素的数组 nums ，原地对它们进行排序，
+使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列
+我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色
+必须在不使用库内置的 sort 函数的情况下解决这个问题
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    //快排思想: 分三块  
+//    void sortColors(vector<int>& nums)
+//    {
+//        int left = -1, right = nums.size(), current = 0;
+//        while (current < right)
+//        {
+//            if (nums[current] == 0) swap(nums[++left], nums[current++]);
+//            else if (nums[current] == 1) ++current;
+//            else /*nums[current] == 2*/ swap(nums[--right], nums[current]);
+//        }
+//    }
+//};
