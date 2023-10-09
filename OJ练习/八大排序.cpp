@@ -30,9 +30,6 @@ void InsertSort(vector<int>& v)
 
 
 
-
-
-
 /*******************************************************希尔排序***********************************************************/
 
 void ShellSort(vector<int>& v)
@@ -57,8 +54,6 @@ void ShellSort(vector<int>& v)
 		}
 	}
 }
-
-
 
 
 
@@ -109,6 +104,10 @@ void SelectSortPlus(vector<int>& v)
 
 
 
+
+
+
+
 /***************************************************** 堆排序 ****************************************************************/
 void AdjustDown(vector<int>& v, int size, int parent)
 {
@@ -134,8 +133,6 @@ void HeapSort(vector<int>& v)
 		AdjustDown(v, i, 0);
 	}
 }
-
-
 
 
 
@@ -177,6 +174,7 @@ void BubbleSort(vector<int>& v)
 
 
 
+
 /***************************************************** 快速排序（Hoare）******************************************************/
 void QuickSort_1(vector<int>& v, int left, int right)
 {
@@ -194,6 +192,11 @@ void QuickSort_1(vector<int>& v, int left, int right)
 	QuickSort_1(v, left, begin - 1);
 	QuickSort_1(v, begin + 1, right);
 }
+
+
+
+
+
 
 
 
@@ -223,6 +226,10 @@ void QuickSort_2(vector<int>& v, int left, int right)
 	QuickSort_2(v, left, begin - 1);
 	QuickSort_2(v, begin + 1, right);
 }
+
+
+
+
 
 
 
@@ -312,6 +319,11 @@ void QuickSort_4(vector<int>& v)
 
 
 
+
+
+
+
+
 /**********************************************************三数取中优化*******************************************************/
 int GetMid(vector<int>& v, int left, int right)
 {
@@ -377,6 +389,53 @@ void MergeSort(vector<int>& v)
 
 
 
+/*********************************************************** 归并排序（非递归）**********************************************************/
+void MergeSort_S(vector<int>& v)
+{
+	vector<int> tmp(v.size());
+
+	int gap = 1;//每组数据个数
+	while (gap < v.size())
+	{
+		for (int i = 0; i < v.size(); i += 2 * gap)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+			int current = i;
+
+			if (end1 >= v.size()) {
+				end1 = v.size() - 1;
+				begin2 = v.size();//右区间不合法
+				end2 = v.size() - 1;
+			}
+			else if (begin2 >= v.size()) {
+				begin2 = v.size();//右区间不合法
+				end2 = v.size() - 1;
+			}
+			else if (end2 >= v.size()) end2 = v.size() - 1;
+
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (v[begin1] < v[begin2]) tmp[current++] = v[begin1++];
+				else tmp[current++] = v[begin2++];
+			}
+			while (begin1 <= end1) tmp[current++] = v[begin1++];
+			while (begin2 <= end2) tmp[current++] = v[begin2++];
+		}
+		for (int j = 0; j < v.size(); ++j) v[j] = tmp[j];
+		gap *= 2;
+	}
+}
+
+
+
+
+
+
+
+
+
+
 
 /******************************************************* 计数排序 *********************************************************/
 void CountSort(vector<int>& v)
@@ -408,23 +467,23 @@ void CountSort(vector<int>& v)
 
 
 /***************************************************** 测试 ***************************************************************/
-int main()
-{
-	vector<int> v1{ 10,9,8,7,6,5,4,3,2,1 };
-	vector<int> v2{ 4,8,1,7,2,5,6,3,10,9 };
-	vector<int> v3{ 5,2,3,1 };
-	vector<int> v4{ -4, 0, 7, 4, 9, -5, -1, 0, -7, -1 };
-	BubbleSort(v1);
-	BubbleSort(v2);
-	BubbleSort(v3);
-	BubbleSort(v4);
-	for (auto& it : v1) cout << it << " ";
-	cout << endl;
-	for (auto& it : v2) cout << it << " ";
-	cout << endl;
-	for (auto& it : v3) cout << it << " ";
-	cout << endl;
-	for (auto& it : v4) cout << it << " ";
-	cout << endl;
-	return 0;
-}
+//int main()
+//{
+//	vector<int> v1{ 10,9,8,7,6,5,4,3,2,1 };
+//	vector<int> v2{ 4,8,1,7,2,5,6,3,10,9 };
+//	vector<int> v3{ 5,2,3,1 };
+//	vector<int> v4{ -4, 0, 7, 4, 9, -5, -1, 0, -7, -1 };
+//	MerageSortx(v1);
+//	MerageSortx(v2);
+//	MerageSortx(v3);
+//	MerageSortx(v4);
+//	for (auto& it : v1) cout << it << " ";
+//	cout << endl;
+//	for (auto& it : v2) cout << it << " ";
+//	cout << endl;
+//	for (auto& it : v3) cout << it << " ";
+//	cout << endl;
+//	for (auto& it : v4) cout << it << " ";
+//	cout << endl;
+//	return 0;
+//}

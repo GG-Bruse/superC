@@ -207,33 +207,41 @@ namespace KEY_VALUE
 	};
 }
 
-using namespace KEY_VALUE;
-void RBTreeTest() 
-{
-	size_t N = 10;
-	srand((unsigned)time(NULL));
-	RedBlackTree<int, int> t;
-	for (size_t i = 0; i < N; ++i) {
-		int x = rand();
-		//cout << "insert:" << x << ":" << i << endl;
-		t.insert(make_pair(x, i));
-	}
-	t.inorder();
-	cout << t.IsBalance() << endl;
 
-}
-void RBTreeTest2()
-{
-	RedBlackTree<int, int> tree;
-	tree.insert(make_pair(32083, 0));
-	tree.insert(make_pair(17005, 1));
-	tree.insert(make_pair(13759, 2));
-	tree.insert(make_pair(2397, 3));
-	tree.insert(make_pair(25975, 4));
-	tree.insert(make_pair(27966, 5));
-}
-int main()
-{
-	RBTreeTest();
-	return 0;
-}
+
+
+
+
+
+//using namespace KEY_VALUE;
+//void RBTreeTest() 
+//{
+//	size_t N = 10;
+//	srand((unsigned)time(NULL));
+//	RedBlackTree<int, int> t;
+//	for (size_t i = 0; i < N; ++i) {
+//		int x = rand();
+//		//cout << "insert:" << x << ":" << i << endl;
+//		t.insert(make_pair(x, i));
+//	}
+//	t.inorder();
+//	cout << t.IsBalance() << endl;
+//
+//}
+//void RBTreeTest2()
+//{
+//	RedBlackTree<int, int> tree;
+//	tree.insert(make_pair(32083, 0));
+//	tree.insert(make_pair(17005, 1));
+//	tree.insert(make_pair(13759, 2));
+//	tree.insert(make_pair(2397, 3));
+//	tree.insert(make_pair(25975, 4));
+//	tree.insert(make_pair(27966, 5));
+//	tree.inorder();
+//	cout << tree.IsBalance() << endl;
+//}
+//int main()
+//{
+//	RBTreeTest();
+//	return 0;
+//}
