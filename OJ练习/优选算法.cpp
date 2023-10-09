@@ -1717,3 +1717,147 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 排序数组（LeetCode）************************************************/
+/*
+给你一个整数数组 nums，请你将该数组升序排列
+*/
+//三区间快排
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    //适用有大量重复数据的情况
+//    vector<int> sortArray(vector<int>& nums)
+//    {
+//        srand(time(NULL));
+//        QuickSort(nums, 0, nums.size() - 1);
+//        return nums;
+//    }
+//    void QuickSort(vector<int>& nums, int left, int right)
+//    {
+//        if (left >= right) return;
+//        int keyValue = GetRandom(nums, left, right);
+//        int begin = left - 1, end = right + 1, current = left;
+//        while (current < end)
+//        {
+//            if (nums[current] < keyValue) swap(nums[++begin], nums[current++]);
+//            else if (nums[current] == keyValue) ++current;
+//            else /*nums[current] > keyValue*/ swap(nums[--end], nums[current]);
+//        }
+//        QuickSort(nums, left, begin);
+//        QuickSort(nums, end, right);
+//    }
+//    int GetRandom(vector<int>& nums, int left, int right)
+//    {
+//        int randNum = rand();
+//        return nums[randNum % (right - left + 1) + left];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/********************************************** 数组中的第K个最大元素（LeetCode）**************************************/
+/*
+给定整数数组nums和整数k，请返回数组中第k个最大的元素
+请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素
+你必须设计并实现时间复杂度为 O(n) 的算法解决此问题
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findKthLargest(vector<int>& nums, int k)
+//    {
+//        srand(time(NULL));
+//        return GetResult(nums, 0, nums.size() - 1, k);
+//    }
+//    int GetResult(vector<int>& nums, int left, int right, int k)
+//    {
+//        if (left == right) return nums[left];
+//
+//        int keyValue = GetRandom(nums, left, right);
+//        int begin = left - 1, end = right + 1, current = left;
+//        while (current < end)
+//        {
+//            if (nums[current] < keyValue) swap(nums[++begin], nums[current++]);
+//            else if (nums[current] == keyValue) ++current;
+//            else /*nums[current] > keyValue*/ swap(nums[--end], nums[current]);
+//        }
+//        int b = end - begin - 1, c = right - end + 1;
+//        if (c >= k) return GetResult(nums, end, right, k);//最右区间
+//        else if (b + c >= k) return keyValue;//中间
+//        else return GetResult(nums, left, begin, k - b - c);//最左区间
+//    }
+//    int GetRandom(vector<int>& nums, int left, int right) {
+//        return nums[rand() % (right - left + 1) + left];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 库存管理III（LeetCode）*******************************************/
+/*
+仓库管理员以数组stock形式记录商品库存表，其中stock[i]表示对应商品库存余量
+请返回库存余量最少的cnt个商品余量，返回顺序不限
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> inventoryManagement(vector<int>& stock, int cnt)
+//    {
+//        srand(time(NULL));
+//        GetResult(stock, 0, stock.size() - 1, cnt);
+//        return { stock.begin(), stock.begin() + cnt };
+//    }
+//    void GetResult(vector<int>& nums, int left, int right, int k)
+//    {
+//        if (left >= right) return;
+//        int KeyValue = GetRandom(nums, left, right);
+//        int begin = left - 1, end = right + 1, current = left;
+//        while (current < end)
+//        {
+//            if (nums[current] < KeyValue) swap(nums[++begin], nums[current++]);
+//            else if (nums[current] == KeyValue) ++current;
+//            else swap(nums[--end], nums[current]);
+//        }
+//        int a = begin - left + 1, b = end - begin - 1;
+//        if (a > k) GetResult(nums, left, begin, k);
+//        else if (a + b >= k) return;
+//        else GetResult(nums, end, right, k - a - b);
+//    }
+//    int GetRandom(vector<int>& nums, int left, int right) {
+//        return nums[rand() % (right - left + 1) + left];
+//    }
+//};
