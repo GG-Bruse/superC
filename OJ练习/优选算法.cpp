@@ -1861,3 +1861,96 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return nums[rand() % (right - left + 1) + left];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 排序数组（LeetCode）************************************************/
+/*
+给你一个整数数组 nums，请你将该数组升序排列
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> sortArray(vector<int>& nums)
+//    {
+//        vector<int> tmp(nums.size());
+//        _MerageSort(nums, 0, nums.size() - 1, tmp);
+//        return nums;
+//    }
+//    void _MerageSort(vector<int>& nums, int left, int right, vector<int>& tmp)
+//    {
+//        if (left >= right) return;
+//        int mid = left + ((right - left) >> 1);
+//        _MerageSort(nums, left, mid, tmp);
+//        _MerageSort(nums, mid + 1, right, tmp);
+//
+//        int current1 = left, current2 = mid + 1, index = left;
+//        while (current1 <= mid && current2 <= right)
+//            tmp[index++] = nums[current1] < nums[current2] ? nums[current1++] : nums[current2++];
+//        while (current1 <= mid) tmp[index++] = nums[current1++];
+//        while (current2 <= right) tmp[index++] = nums[current2++];
+//
+//        for (int i = left; i <= right; ++i) nums[i] = tmp[i];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/********************************************* 交易逆序对的总数（LeetCode）********************************************/
+/*
+在股票交易中，如果前一天的股价高于后一天的股价，则可以认为存在一个「交易逆序对」
+请设计一个程序，输入一段时间内的股票交易记录 record，返回其中存在的「交易逆序对」总数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> tmp;
+//    int reversePairs(vector<int>& record)
+//    {
+//        tmp.resize(record.size());
+//        return _Merage(record, 0, record.size() - 1);
+//    }
+//    int _Merage(vector<int>& nums, int left, int right)
+//    {
+//        if (left >= right) return 0;
+//        int ret = 0;
+//        int mid = left + ((right - left) >> 1);
+//        ret += _Merage(nums, left, mid);
+//        ret += _Merage(nums, mid + 1, right);
+//
+//        int current1 = left, current2 = mid + 1, index = left;
+//        while (current1 <= mid && current2 <= right)
+//        {
+//            if (nums[current1] <= nums[current2]) {
+//                tmp[index++] = nums[current1++];
+//            }
+//            else {
+//                ret += mid - current1 + 1;
+//                tmp[index++] = nums[current2++];
+//            }
+//        }
+//        while (current1 <= mid) tmp[index++] = nums[current1++];
+//        while (current2 <= right) tmp[index++] = nums[current2++];
+//        for (int i = left; i <= right; ++i) nums[i] = tmp[i];
+//        return ret;
+//    }
+//};
