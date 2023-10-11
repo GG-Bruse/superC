@@ -1954,3 +1954,130 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/******************************************** 计算右侧小于当前元素的个数（LeetCode）***********************************/
+/*
+给你一个整数数组nums，按要求返回一个新数组counts
+数组counts有该性质：counts[i]的值是nums[i]右侧小于nums[i]的元素的数量
+*/
+//#include <iostream>
+//#include <vecctor>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> ret;
+//    vector<int> index;
+//    vector<int> tmpNums;
+//    vector<int> tmpIndex;
+//
+//    vector<int> countSmaller(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        ret.resize(size);
+//        index.resize(size);
+//        tmpNums.resize(size);
+//        tmpIndex.resize(size);
+//        for (int i = 0; i < size; ++i) index[i] = i;
+//
+//        Merage(nums, 0, size - 1);
+//        return ret;
+//    }
+//    void Merage(vector<int>& nums, int left, int right)
+//    {
+//        if (left >= right) return;
+//        int mid = (left + right) >> 1;
+//        Merage(nums, left, mid);
+//        Merage(nums, mid + 1, right);
+//
+//        int current1 = left, current2 = mid + 1, it = left;
+//        while (current1 <= mid && current2 <= right)
+//        {
+//            if (nums[current1] <= nums[current2]) {
+//                tmpNums[it] = nums[current2];
+//                tmpIndex[it++] = index[current2++];
+//            }
+//            else {
+//                ret[index[current1]] += right - current2 + 1;
+//                tmpNums[it] = nums[current1];
+//                tmpIndex[it++] = index[current1++];
+//            }
+//        }
+//        while (current1 <= mid) {
+//            tmpNums[it] = nums[current1];
+//            tmpIndex[it++] = index[current1++];
+//        }
+//        while (current2 <= right) {
+//            tmpNums[it] = nums[current2];
+//            tmpIndex[it++] = index[current2++];
+//        }
+//        for (int i = left; i <= right; ++i) {
+//            nums[i] = tmpNums[i];
+//            index[i] = tmpIndex[i];
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/************************************************* 翻转对（LeetCode）**************************************************/
+/*
+给定一个数组nums，如果i < j且nums[i] > 2 * nums[j]我们就将(i, j)称作一个重要翻转对
+你需要返回给定数组中的重要翻转对的数量
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    vector<int> tmp;
+//    int reversePairs(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        tmp.resize(size);
+//        return Merage(nums, 0, size - 1);
+//    }
+//    int Merage(vector<int>& nums, int left, int right)
+//    {
+//        int ret = 0;
+//        if (left >= right) return ret;
+//
+//        int mid = (right + left) >> 1;
+//        ret += Merage(nums, left, mid);
+//        ret += Merage(nums, mid + 1, right);
+//
+//        int current1 = left, current2 = mid + 1, it = left;
+//        while (current1 <= mid) //降序
+//        {
+//            while (current2 <= right && nums[current2] >= nums[current1] / 2.0) current2++;
+//            if (current2 > right) break;
+//            ret += right - current2 + 1;
+//            current1++;
+//        }
+//
+//        current1 = left, current2 = mid + 1;
+//        while (current1 <= mid && current2 <= right)
+//            tmp[it++] = nums[current1] <= nums[current2] ? nums[current2++] : nums[current1++];
+//        while (current1 <= mid) tmp[it++] = nums[current1++];
+//        while (current2 <= right) tmp[it++] = nums[current2++];
+//
+//        for (int i = left; i <= right; ++i) nums[i] = tmp[i];
+//        return ret;
+//    }
+//};
