@@ -2081,3 +2081,187 @@ i - k <= r <= i + k, j - k <= c <= j + k 且 (r, c) 在矩阵内
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************** 两数相加（LeetCode）************************************************/
+/*
+给你两个非空的链表，表示两个非负的整数。它们每位数字都是按照逆序的方式存储的，并且每个节点只能存储一位数字
+请你将两个数相加，并以相同形式返回一个表示和的链表
+你可以假设除了数字 0 之外，这两个数都不会以 0 开头
+*/
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode* next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode* next) : val(x), next(next) {}
+//};
+//class Solution {
+//public:
+//    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+//    {
+//        int tmp = 0;
+//        ListNode* newHead = nullptr, * newTail = nullptr;
+//        ListNode* list1 = l1, * list2 = l2;
+//        while (list1 != nullptr || list2 != nullptr || tmp != 0)
+//        {
+//            int num1 = list1 ? list1->val : 0;
+//            int num2 = list2 ? list2->val : 0;
+//            int sum = num1 + num2 + tmp;
+//            if (newHead == nullptr) {
+//                newHead = newTail = new ListNode(sum % 10);
+//            }
+//            else {
+//                newTail->next = new ListNode(sum % 10);
+//                newTail = newTail->next;
+//            }
+//            tmp = sum / 10;
+//            if (list1) list1 = list1->next;
+//            if (list2) list2 = list2->next;
+//        }
+//        return newHead;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/********************************************* 两两交换链表中的节点（LeetCode）*******************************************/
+/*
+给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点
+你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）
+*/
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//     int val;
+//     ListNode *next;
+//     ListNode() : val(0), next(nullptr) {}
+//     ListNode(int x) : val(x), next(nullptr) {}
+//     ListNode(int x, ListNode *next) : val(x), next(next) {}
+//};
+//class Solution {
+//public:
+//    ListNode* swapPairs(ListNode* head)
+//    {
+//        if (head == nullptr || head->next == nullptr) return head;
+//
+//        ListNode* newHead = new ListNode(0);
+//        newHead->next = head;
+//
+//        ListNode* prev = newHead, * current = head, * next = current->next, * nnext = next->next;
+//        while (current && next)
+//        {
+//            prev->next = next;
+//            next->next = current;
+//            current->next = nnext;
+//
+//            prev = current;
+//            current = nnext;
+//            if (current != nullptr) next = current->next;
+//            if (next != nullptr) nnext = next->next;
+//        }
+//        current = newHead->next;
+//        delete newHead;
+//        return current;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************** 重排链表（LeetCode）***********************************************/
+/*
+给定一个单链表 L 的头节点 head ，单链表 L 表示为：
+L0 → L1 → … → Ln - 1 → Ln
+请将其重新排列后变为：
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换
+*/
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode *next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode *next) : val(x), next(next) {}
+//};
+//
+//class Solution {
+//public:
+//    void reorderList(ListNode* head)
+//    {
+//        if (head == nullptr || head->next == nullptr) return;
+//        ListNode* mid = GetMid(head);
+//
+//        ListNode* list1 = head;
+//        ListNode* list2 = mid->next;
+//        mid->next = nullptr;
+//        list2 = ReverseList(list2);
+//        Merage(list1, list2);
+//    }
+//    ListNode* GetMid(ListNode* head)
+//    {
+//        ListNode* slow = head, * fast = head;
+//        while (fast != nullptr && fast->next != nullptr) {
+//            slow = slow->next;
+//            fast = fast->next->next;
+//        }
+//        return slow;
+//    }
+//    ListNode* ReverseList(ListNode* head)
+//    {
+//        ListNode* prev = nullptr;
+//        ListNode* current = head;
+//        while (current != nullptr)
+//        {
+//            ListNode* next = current->next;
+//            current->next = prev;
+//            prev = current;
+//            current = next;
+//        }
+//        return prev;
+//    }
+//    void Merage(ListNode* list1, ListNode* list2)
+//    {
+//        ListNode* tmpL1 = nullptr, * tmpL2 = nullptr;
+//        while (list1 != nullptr && list2 != nullptr)
+//        {
+//            tmpL1 = list1->next;
+//            tmpL2 = list2->next;
+//
+//            list1->next = list2;
+//            list1 = tmpL1;
+//            list2->next = list1;
+//            list2 = tmpL2;
+//        }
+//    }
+//};
