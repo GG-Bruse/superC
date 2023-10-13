@@ -2265,3 +2265,182 @@ L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/***************************************** 合并K个升序链表（LeetCode）*************************************/
+/*
+给你一个链表数组，每个链表都已经按升序排列
+请你将所有链表合并到一个升序链表中，返回合并后的链表
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode* next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode* next) : val(x), next(next) {}
+//};
+////1.堆结构
+//class Solution1 {
+//public:
+//    struct Compare {
+//        bool operator()(ListNode* node1, ListNode* node2) {
+//            return node1->val > node2->val;
+//        }
+//    };
+//    ListNode* mergeKLists(vector<ListNode*>& lists)
+//    {
+//        priority_queue<ListNode*, vector<ListNode*>, Compare> pq;
+//        for (ListNode* node : lists) if (node) pq.push(node);
+//
+//        ListNode* ret = new ListNode(0);
+//        ListNode* tail = ret;
+//        while (!pq.empty())
+//        {
+//            tail->next = pq.top();
+//            pq.pop();
+//            tail = tail->next;
+//            if (tail->next != nullptr) pq.push(tail->next);
+//        }
+//        tail = ret->next;
+//        delete ret;
+//        return tail;
+//    }
+//};
+////2.归并
+//class Solution2 {
+//public:
+//    ListNode* mergeKLists(vector<ListNode*>& lists) {
+//        return Merage(lists, 0, lists.size() - 1);
+//    }
+//    ListNode* Merage(vector<ListNode*>& lists, int left, int right)
+//    {
+//        if (left > right) return nullptr;
+//        if (left == right) return lists[left];
+//        int mid = (left + right) >> 1;
+//        ListNode* list1 = Merage(lists, left, mid);
+//        ListNode* list2 = Merage(lists, mid + 1, right);
+//        return Merage2List(list1, list2);
+//    }
+//    ListNode* Merage2List(ListNode* list1, ListNode* list2)
+//    {
+//        if (list1 == nullptr) return list2;
+//        if (list2 == nullptr) return list1;
+//        ListNode* newHead = new ListNode(0);
+//        ListNode* current1 = list1, * current2 = list2, * tail = newHead;
+//        while (current1 != nullptr && current2 != nullptr)
+//        {
+//            if (current1->val < current2->val) {
+//                tail->next = current1;
+//                current1 = current1->next;
+//            }
+//            else {
+//                tail->next = current2;
+//                current2 = current2->next;
+//            }
+//            tail = tail->next;
+//        }
+//        if (current1 != nullptr) tail->next = current1;
+//        if (current2 != nullptr) tail->next = current2;
+//        tail = newHead->next;
+//        delete newHead;
+//        return tail;
+//    }
+//};
+//int main()
+//{
+//    //[1, 4, 5] , [1, 3, 4], [2, 6]
+//    vector<ListNode*> v;
+//    ListNode* node = nullptr;
+//    v.push_back(node);
+//    /*ListNode* L1 = new ListNode(1);
+//    ListNode* L2 = new ListNode(4);
+//    ListNode* L3 = new ListNode(5);
+//    L1->next = L2;
+//    L2->next = L3;
+//    v.push_back(L1);
+//    L1 = new ListNode(1);
+//    L2 = new ListNode(3);
+//    L3 = new ListNode(4);
+//    L1->next = L2;
+//    L2->next = L3;
+//    v.push_back(L1);
+//    L1 = new ListNode(2);
+//    L2 = new ListNode(6);
+//    L1->next = L2;
+//    v.push_back(L1);*/
+//
+//    Solution2 s;
+//    ListNode* list = s.mergeKLists(v);
+//    while (list != nullptr) {
+//        cout << list->val << " ";
+//        list = list->next;
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+/***************************************** K个一组翻转链表（LeetCode）*************************************/
+/*
+给你链表的头节点 head ，每 k 个节点一组进行翻转，请你返回修改后的链表
+k是一个正整数，它的值小于或等于链表的长度。如果节点总数不是k的整数倍，那么请将最后剩余的节点保持原有顺序
+你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode *next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode *next) : val(x), next(next) {}
+//}; 
+//class Solution {
+//public:
+//    ListNode* reverseKGroup(ListNode* head, int k)
+//    {
+//        //计算出需要翻转多少次
+//        int number = 0;
+//        for (ListNode* current = head; current != nullptr; current = current->next, ++number);
+//        number /= k;
+//        //每次翻转k个为一组的链表
+//        ListNode* newHead = new ListNode(0);
+//        ListNode* tail = newHead;//每次头插到该结点的后一个位置
+//        ListNode* current = head;
+//        for (int i = 0; i < number; ++i)
+//        {
+//            ListNode* tmp = current;
+//            for (int j = 0; j < k; ++j) {
+//                ListNode* next = current->next;
+//                current->next = tail->next;
+//                tail->next = current;
+//                current = next;
+//            }
+//            tail = tmp;
+//        }
+//        //将后续不需要翻转的结点连接起来
+//        tail->next = current;
+//        current = newHead->next;
+//        delete newHead;
+//        return current;
+//    }
+//};
