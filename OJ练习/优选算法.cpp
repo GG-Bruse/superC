@@ -2444,3 +2444,128 @@ k是一个正整数，它的值小于或等于链表的长度。如果节点总�
 //        return current;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/******************************************** 两数之和（LeetCode）******************************************/
+/*
+给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值target的那两个整数，
+并返回它们的数组下标
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现
+你可以按任意顺序返回答案
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> twoSum(vector<int>& nums, int target)
+//    {
+//        unordered_map<int, int> hash;//key : index
+//        for (int i = 0; i < nums.size(); ++i) hash[nums[i]] = i;
+//        for (int i = 0; i < nums.size(); ++i) {
+//            auto it = hash.find(target - nums[i]);
+//            if (it != hash.end() && it->second != i) return { i, it->second };
+//        }
+//        return { -1, -1 };
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/**************************************** 判定是否互为字符重排（LeetCode）*********************************/
+/*
+给定两个由小写字母组成的字符串 s1 和 s2，请编写一个程序，确定其中一个字符串的字符重新排列后，
+能否变成另一个字符串
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    bool CheckPermutation(string s1, string s2)
+//    {
+//        if (s1.size() != s2.size()) return false;
+//        int hash[26] = { 0 };
+//        for (char it : s1) hash[it - 'a']++;
+//        for (char it : s2) hash[it - 'a']--;
+//        bool ret = true;
+//        for (int i = 0; i < 26; ++i) if (hash[i] != 0) ret = false;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/****************************************** 存在重复元素（LeetCode）***************************************/
+/*
+给你一个整数数组nums 。如果任一值在数组中出现至少两次，返回true；如果数组中每个元素互不相同，返回false
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    bool containsDuplicate(vector<int>& nums)
+//    {
+//        unordered_set<int> hash;
+//        for (int i = 0; i < nums.size(); ++i)
+//            if (hash.count(nums[i])) return true;
+//            else hash.insert(nums[i]);
+//        return false;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/***************************************** 存在重复元素II（LeetCode）**************************************/
+/*
+给你一个整数数组nums和一个整数k，判断数组中是否存在两个不同的索引i和j，
+满足nums[i] == nums[j]且abs(i - j) <= k。如果存在，返回true ；否则，返回false
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    bool containsNearbyDuplicate(vector<int>& nums, int k)
+//    {
+//        unordered_map<int, int> hash;//num, index
+//        int size = nums.size();
+//        for (int i = 0; i < size; ++i)
+//        {
+//            auto it = hash.find(nums[i]);
+//            if (it == hash.end()) hash[nums[i]] = i;
+//            else if (i - it->second <= k) return true;
+//            else hash[nums[i]] = i;
+//        }
+//        return false;
+//    }
+//};
