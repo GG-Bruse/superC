@@ -2569,3 +2569,203 @@ k是一个正整数，它的值小于或等于链表的长度。如果节点总�
 //        return false;
 //    }
 //};
+
+
+
+
+
+
+
+
+/******************************************* 最长公共前缀（LeetCode）***************************************/
+/*
+编写一个函数来查找字符串数组中的最长公共前缀
+如果不存在公共前缀，返回空字符串 ""
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string longestCommonPrefix(vector<string>& strs)
+//    {
+//        string ret = strs[0];
+//        for (int i = 1; i < strs.size(); ++i)
+//            ret = Compare(ret, strs[i]);
+//        return ret;
+//    }
+//    string Compare(string ret, string str)
+//    {
+//        int size = min(ret.size(), str.size());
+//        for (int i = 0; i < size; ++i) {
+//            if (ret[i] == str[i]) continue;
+//            else return string(ret.begin(), ret.begin() + i);
+//        }
+//        return string(ret.begin(), ret.begin() + size);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/******************************************** 最长回文子串（LeetCode）*************************************/
+/*
+给你一个字符串 s，找到 s 中最长的回文子串
+如果字符串的反序与原始字符串相同，则该字符串称为回文字符串
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string longestPalindrome(string s)
+//    {
+//        int size = s.size();
+//        int left = 0, right = 0;
+//        int begin = -1, maxLength = 0;
+//        for (int i = 0; i < size; ++i)//固定一个中心点
+//        {
+//            //奇数结果
+//            left = right = i;
+//            while (left >= 0 && right < size && s[left] == s[right])
+//                --left, ++right;
+//            if (right - left - 1 > maxLength) {
+//                begin = left + 1;
+//                maxLength = right - left - 1;
+//            }
+//            //偶数结果
+//            left = i, right = i + 1;
+//            while (left >= 0 && right < size && s[left] == s[right])
+//                --left, ++right;
+//            if (right - left - 1 > maxLength) {
+//                begin = left + 1;
+//                maxLength = right - left - 1;
+//            }
+//        }
+//        return s.substr(begin, maxLength);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/****************************************** 二进制求和（LeetCode）*****************************************/
+/*
+给你两个二进制字符串a和b，以二进制字符串的形式返回它们的和
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string addBinary(string a, string b)
+//    {
+//        int end1 = a.size() - 1, end2 = b.size() - 1;
+//        int tmp = 0;
+//        string ret = "";
+//        while (end1 >= 0 || end2 >= 0 || tmp > 0)
+//        {
+//            if (end1 >= 0) tmp += a[end1--] - '0';
+//            if (end2 >= 0) tmp += b[end2--] - '0';
+//            ret.insert(ret.begin(), (tmp % 2) + '0');
+//            tmp /= 2;
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+/****************************************** 字符串相乘（LeetCode）*****************************************/
+/*
+给定两个以字符串形式表示的非负整数num1和num2，返回num1和num2的乘积，它们的乘积也表示为字符串形式
+注意：不能使用任何内置的 BigInteger 库或直接将输入转换为整数
+*/
+//模拟列竖式运算
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string multiply(string num1, string num2)
+//    {
+//        if (num1 == "0" || num2 == "0") return "0";
+//        string sum = "0";
+//        for (int i = 0; i < num2.size(); ++i)
+//            sum = Add(sum, Mul(num1, num2[num2.size() - 1 - i]), i);
+//        return sum;
+//    }
+//    string Mul(string& str, char& ch)
+//    {
+//        int tmp = 0;
+//        string ret = "";
+//        for (int i = str.size() - 1; i >= 0; --i)
+//        {
+//            int num1 = str[i] - '0';
+//            tmp += num1 * (ch - '0');
+//            ret.insert(ret.begin(), (tmp % 10) + '0');
+//            tmp /= 10;
+//        }
+//        if (tmp != 0) ret.insert(ret.begin(), tmp + '0');
+//        return ret;
+//    }
+//    string Add(string str1, string str2, int count)
+//    {
+//        for (int i = 0; i < count; ++i) str2 += '0';
+//        string ret = "";
+//        int tmp = 0;
+//        int end1 = str1.size() - 1, end2 = str2.size() - 1;
+//        while (end1 >= 0 || end2 >= 0 || tmp > 0)
+//        {
+//            if (end1 >= 0) tmp += str1[end1--] - '0';
+//            if (end2 >= 0) tmp += str2[end2--] - '0';
+//            ret.insert(ret.begin(), (tmp % 10) + '0');
+//            tmp /= 10;
+//        }
+//        return ret;
+//    }
+//};
+//无进位相乘后相加，最后处理进位
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string multiply(string num1, string num2)
+//    {
+//        if (num1 == "0" || num2 == "0") return "0";
+//        int size1 = num1.size(), size2 = num2.size();
+//        vector<int> tmp(size1 + size2 - 1);
+//        //无进位相乘后相加
+//        for (int j = size2 - 1; j >= 0; --j)
+//            for (int i = size1 - 1; i >= 0; --i)
+//                tmp[i + j] += (num1[i] - '0') * (num2[j] - '0');
+//        //处理进位
+//        string ret = "";
+//        int current = size1 + size2 - 2, tmpNum = 0;
+//        while (current >= 0 || tmpNum > 0)
+//        {
+//            if (current >= 0) tmpNum += tmp[current--];
+//            ret.insert(ret.begin(), (tmpNum % 10) + '0');
+//            tmpNum /= 10;
+//        }
+//        return ret;
+//    }
+//};
