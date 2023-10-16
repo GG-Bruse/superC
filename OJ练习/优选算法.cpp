@@ -2769,3 +2769,217 @@ k是一个正整数，它的值小于或等于链表的长度。如果节点总�
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+/********************************** 删除字符串中的所有相邻重复项（LeetCode）**********************************/
+/*
+给出由小写字母组成的字符串 S，重复项删除操作会选择两个相邻且相同的字母，并删除它们
+在 S 上反复执行重复项删除操作，直到无法继续删除
+在完成所有重复项删除操作后返回最终的字符串。答案保证唯一
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string removeDuplicates(string s)
+//    {
+//        string ret = "";
+//        for (int i = 0; i < s.size(); ++i) {
+//            if (ret.size() == 0 || s[i] != ret.back()) ret.push_back(s[i]);
+//            else ret.pop_back();
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/*************************************** 比较含退格的字符串（LeetCode）***************************************/
+/*
+给定s和t两个字符串，当它们分别被输入到空白的文本编辑器后，如果两者相等，返回true 。#代表退格字符
+注意：如果对空文本输入退格字符，文本继续为空
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    bool backspaceCompare(string s, string t) {
+//        return Handle(s) == Handle(t);
+//    }
+//    string Handle(string& str)
+//    {
+//        string ret = "";
+//        for (int i = 0; i < str.size(); ++i) {
+//            if (str[i] == '#' && !ret.empty()) ret.pop_back();
+//            else if (str[i] != '#')ret.push_back(str[i]);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/******************************************** 基本计算器II（LeetCode）*****************************************/
+/*
+给你一个字符串表达式s，请你实现一个基本计算器来计算并返回它的值
+整数除法仅保留整数部分
+你可以假设给定的表达式总是有效的。所有中间结果将在 [-231, 231 - 1] 的范围内
+注意：不允许使用任何将字符串作为数学表达式计算的内置函数，比如 eval()
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    int calculate(string s)
+//    {
+//        vector<int> sk;//使用数组模拟栈
+//        int size = s.size(), current = 0;
+//        char op = '+';
+//        while (current < size)
+//        {
+//            if (s[current] == ' ') ++current;
+//            else if ('0' <= s[current] && s[current] <= '9')
+//            {
+//                //提取数字
+//                int tmp = 0;
+//                while (current < size && s[current] >= '0' && s[current] <= '9')
+//                    tmp = tmp * 10 + (s[current++] - '0');
+//                //处理操作符号
+//                if (op == '+') sk.push_back(tmp);
+//                else if (op == '-') sk.push_back(-1 * tmp);
+//                else if (op == '*') sk.back() *= tmp;
+//                else sk.back() /= tmp;
+//            }
+//            else {//s[current] == 操作符
+//                op = s[current++];
+//            }
+//        }
+//        int ret = 0;
+//        for (int& it : sk) ret += it;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************* 字符串解码（LeetCode）********************************************/
+/*
+给定一个经过编码的字符串，返回它解码后的字符串
+编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数
+你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的
+此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入
+*/
+//#include <iostream>
+//#include <string>
+//#include <stack>
+//using namespace std;
+//class Solution {
+//public:
+//    string decodeString(string s)
+//    {
+//        stack<int> nums;
+//        stack<string> sk;
+//        sk.push("");
+//
+//        int current = 0, size = s.size();
+//        while (current < size)
+//        {
+//            if (s[current] >= '0' && s[current] <= '9')
+//            {
+//                //提取数字
+//                int tmp = 0;
+//                while (current < size && s[current] >= '0' && s[current] <= '9')
+//                    tmp = tmp * 10 + (s[current++] - '0');
+//                nums.push(tmp);
+//            }
+//            else if (s[current] == '[')
+//            {
+//                //提取括号中的字符串
+//                ++current;
+//                string tmp = "";
+//                while (s[current] >= 'a' && s[current] <= 'z')
+//                    tmp += s[current++];
+//                sk.push(tmp);
+//            }
+//            else if (s[current] == ']')
+//            {
+//                string tmp = sk.top();
+//                sk.pop();
+//                int k = nums.top();
+//                nums.pop();
+//                while (k--) sk.top() += tmp;
+//                ++current;
+//            }
+//            else //提取不在括号中的字符串
+//            {
+//                string tmp = "";
+//                while (current < size && s[current] >= 'a' && s[current] <= 'z')
+//                    tmp += s[current++];
+//                sk.top() += tmp;
+//            }
+//        }
+//        return sk.top();
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************** 验证栈序列（LeetCode）*******************************************/
+/*
+给定pushed和popped两个序列，每个序列中的值都不重复，
+只有当它们可能是在最初空栈上进行的推入push和弹出pop操作序列的结果时，返回true；否则，返回false
+*/
+//#include <iostream>
+//#include <vector>
+//#include <stack>
+//using namespace std;
+//class Solution {
+//public:
+//    bool validateStackSequences(vector<int>& pushed, vector<int>& popped)
+//    {
+//        stack<int> sk;
+//        int current = 0, size = popped.size();
+//        for (int& it : pushed)
+//        {
+//            sk.push(it);
+//            while (sk.size() != 0 && sk.top() == popped[current]) sk.pop(), ++current;
+//        }
+//        return current == size;
+//    }
+//};
