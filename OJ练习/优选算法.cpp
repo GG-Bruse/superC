@@ -3216,7 +3216,7 @@ k是一个正整数，它的值小于或等于链表的长度。如果节点总�
 //                if (front->left) qe.push(front->left);
 //                if (front->right) qe.push(front->right);
 //            }
-//            if (maxNum != LONG_MIN) ret.push_back(maxNum);
+//            ret.push_back(maxNum);
 //        }
 //        return ret;
 //    }
