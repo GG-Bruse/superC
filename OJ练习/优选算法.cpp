@@ -2983,3 +2983,241 @@ k是一个正整数，它的值小于或等于链表的长度。如果节点总�
 //        return current == size;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/******************************************* N叉树的层序遍历（LeetCode）******************************************/
+/*
+给定一个 N 叉树，返回其节点值的层序遍历。（即从左到右，逐层遍历）
+树的序列化输入是用层序遍历，每组子节点都由 null 值分隔
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Node {
+//public:
+//    int val;
+//    vector<Node*> children;
+//    Node() {}
+//    Node(int _val) { val = _val; }
+//    Node(int _val, vector<Node*> _children) {
+//        val = _val;
+//        children = _children;
+//    }
+//};
+//class Solution {
+//public:
+//    vector<vector<int>> levelOrder(Node* root)
+//    {
+//        vector<vector<int>> ret;
+//        queue<Node*> qe;
+//        qe.push(root);
+//        if (root == nullptr) return {};
+//
+//        while (!qe.empty())
+//        {
+//            vector<int> layer;//存储本层的结点值
+//            int size = qe.size();
+//            for (int i = 0; i < size; ++i)
+//            {
+//                //插入结点值
+//                Node* front = qe.front();
+//                qe.pop();
+//                layer.push_back(front->val);
+//                //将子结点加入队列中
+//                for (Node* it : front->children) if (it != nullptr) qe.push(it);
+//            }
+//            ret.push_back(layer);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/**************************************** 二叉树的锯齿形层序遍历（LeetCode）**************************************/
+/*
+给你二叉树的根节点 root ，返回其节点值的 锯齿形层序遍历
+（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    vector<vector<int>> zigzagLevelOrder(TreeNode* root)
+//    {
+//        if (root == nullptr) return {};
+//
+//        bool flag = true;//正序
+//        vector<vector<int>> ret;
+//        queue<TreeNode*> qe;
+//        qe.push(root);
+//
+//        while (!qe.empty())
+//        {
+//            vector<TreeNode*> layer;
+//            while (!qe.empty()) {
+//                layer.push_back(qe.front());
+//                qe.pop();
+//            }
+//            vector<int> tmp;
+//            if (flag) {
+//                for (int i = 0; i < layer.size(); ++i) {
+//                    tmp.push_back(layer[i]->val);
+//                    TreeNode* Left = layer[i]->left, * Right = layer[i]->right;
+//                    if (Left) qe.push(Left);
+//                    if (Right) qe.push(Right);
+//                }
+//            }
+//            else {
+//                for (int i = layer.size() - 1; i >= 0; --i) {
+//                    tmp.push_back(layer[i]->val);
+//                    TreeNode* Left = layer[layer.size() - 1 - i]->left, * Right = layer[layer.size() - 1 - i]->right;
+//                    if (Left) qe.push(Left);
+//                    if (Right) qe.push(Right);
+//                }
+//            }
+//            flag == true ? flag = false : flag = true;
+//            if (tmp.size() != 0) ret.push_back(tmp);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************* 二叉树最大宽度（LeetCode）****************************************/
+/*
+给你一棵二叉树的根节点root ，返回树的 最大宽度
+树的最大宽度是所有层中最大的宽度
+每一层的 宽度 被定义为该层最左和最右的非空节点（即，两个端点）之间的长度
+将这个二叉树视作与满二叉树结构相同，两端点间会出现一些延伸到这一层的null节点，这些null节点也计入长度
+题目数据保证答案将会在32 位带符号整数范围内
+*/
+//#include <iostream>
+//#include <queue>
+//#include <utility>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode* left;
+//    TreeNode* right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    typedef unsigned long long ull;
+//    int widthOfBinaryTree(TreeNode* root)
+//    {
+//        if (root == nullptr) return {};
+//        ull maxWidth = 0;
+//        queue<pair<TreeNode*, ull>> qe;
+//        qe.push({ root, 1 });
+//
+//        while (!qe.empty())
+//        {
+//            //更新本层宽度
+//            pair<TreeNode*, ull> front = qe.front();
+//            pair<TreeNode*, ull> back = qe.back();
+//            maxWidth = max(maxWidth, back.second - front.second + 1);
+//            //记录本层队列中的元素个数
+//            int count = qe.size();
+//            //下一层进入队列 并 清空队列中本层元素
+//            for (int i = 0; i < count; ++i) {
+//                auto& [x ,y] = qe.front();//C++17新语法
+//                if (x->left) qe.push({ x->left, y * 2 });
+//                if (x->right) qe.push({ x->right, y * 2 + 1 });
+//                qe.pop();
+//            }
+//        }
+//        return (int)maxWidth;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/****************************************** 在每个树行中找最大值（LeetCode）***********************************/
+/*
+给定一棵二叉树的根节点root ，请找出该二叉树中每一层的最大值
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode *left;
+//    TreeNode *right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    vector<int> largestValues(TreeNode* root)
+//    {
+//        vector<int> ret;
+//        if (root == nullptr) return ret;
+//
+//        queue<TreeNode*> qe;
+//        qe.push(root);
+//
+//        while (!qe.empty())
+//        {
+//            int size = qe.size();
+//            long long maxNum = LONG_MIN;//记录每层的最大值
+//            for (int i = 0; i < size; ++i)
+//            {
+//                //取出队列中本层的每个元素
+//                TreeNode* front = qe.front();
+//                qe.pop();
+//                //更新本层中的最大值
+//                maxNum = max(maxNum, (long long)front->val);
+//                //加入下一层结点
+//                if (front->left) qe.push(front->left);
+//                if (front->right) qe.push(front->right);
+//            }
+//            if (maxNum != LONG_MIN) ret.push_back(maxNum);
+//        }
+//        return ret;
+//    }
+//};
