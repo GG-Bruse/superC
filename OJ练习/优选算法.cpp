@@ -3400,3 +3400,48 @@ double findMedian() 返回到目前为止所有元素的中位数。与实际答
  * obj->addNum(num);
  * double param_2 = obj->findMedian();
  */
+
+
+
+
+
+
+
+
+/******************************************** 下一个排列（LeetCode）*********************************************/
+/*
+整数数组的一个 排列  就是将其所有成员以序列或线性顺序排列
+例如，arr = [1,2,3] ，以下这些都可以视作 arr 的排列：[1,2,3]、[1,3,2]、[3,1,2]、[2,3,1]
+整数数组的 下一个排列 是指其整数的下一个字典序更大的排列
+更正式地，如果数组的所有排列根据其字典顺序从小到大排列在一个容器中，
+那么数组的 下一个排列 就是在这个有序容器中排在它后面的那个排列。如果不存在下一个更大的排列，
+那么这个数组必须重排为字典序最小的排列（即，其元素按升序排列）
+
+例如，arr = [1,2,3] 的下一个排列是 [1,3,2] 
+类似地，arr = [2,3,1] 的下一个排列是 [3,1,2] 
+而 arr = [3,2,1] 的下一个排列是 [1,2,3] ，因为 [3,2,1] 不存在一个字典序更大的排列
+给你一个整数数组 nums ，找出 nums 的下一个排列
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    void nextPermutation(vector<int>& nums)
+//    {
+//        int indexOne = nums.size() - 2;
+//        //找到符合nums[index] < nums[index + 1]的组合
+//        while (indexOne >= 0 && nums[indexOne] >= nums[indexOne + 1])
+//            --indexOne;//退出该循环时,[indexOne + 1, n)必是降序区间
+//
+//        if (indexOne >= 0)//若是indexOne < 0,说明找不到符合要求的组合,这个组合逆序,直接反转即可
+//        {
+//            int indexTwo = nums.size() - 1;
+//            //找到尽可能小的右值
+//            while (indexTwo >= 0 && nums[indexOne] >= nums[indexTwo])
+//                --indexTwo;//退出该循环时, nums[indexOne] < nums[indexTwo]
+//            swap(nums[indexOne], nums[indexTwo]);//此时[indexOne + 1, n)依然是降序区间
+//        }
+//        reverse(nums.begin() + indexOne + 1, nums.end());
+//    }
+//};
