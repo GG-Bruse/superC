@@ -3221,3 +3221,182 @@ k是一个正整数，它的值小于或等于链表的长度。如果节点总�
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+/**************************************** 最后一块石头的重量（LeetCode）***************************************/
+/*
+有一堆石头，每块石头的重量都是正整数
+每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎
+假设石头的重量分别为 x 和 y，且 x <= y。那么粉碎的可能结果如下：
+如果 x == y，那么两块石头都会被完全粉碎；
+如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x
+最后，最多只会剩下一块石头。返回此石头的重量。如果没有石头剩下，就返回0
+*/
+//#include <iostream>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int lastStoneWeight(vector<int>& stones)
+//    {
+//        priority_queue<int> qe;
+//        for (auto& it : stones) qe.push(it);
+//
+//        while (qe.size() > 1)
+//        {
+//            int x = qe.top();
+//            qe.pop();
+//            int y = qe.top();
+//            qe.pop();
+//            if (x > y) qe.push(x - y);//因为使用的是大堆,不可能出现x < y的情况;若x == y,不处理则相当于丢弃
+//        }
+//        return qe.empty() ? 0 : qe.top();
+//    }
+//};
+
+
+
+
+
+
+
+
+/************************************** 数据流中的第K大元素（LeetCode）****************************************/
+/*
+设计一个找到数据流中第k大元素的类（class）。注意是排序后的第k大元素，不是第k个不同的元素
+请实现 KthLargest 类：
+KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象
+int add(int val)将val插入数据流 nums 后，返回当前数据流中第k大的元素
+*/
+//#include <iostream>
+//#include <queue>
+//using namespace std;
+//class KthLargest {
+//public:
+//    priority_queue<int, vector<int>, greater<int>> _numbers;//小根堆
+//    int _k;
+//    KthLargest(int k, vector<int>& nums) {
+//        for (int& it : nums) {
+//            _numbers.push(it);
+//            if (_numbers.size() > k) _numbers.pop();
+//        }
+//        _k = k;
+//    }
+//    int add(int val) {
+//        _numbers.push(val);
+//        if (_numbers.size() > _k) _numbers.pop();
+//        return _numbers.top();
+//    }
+//};
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest* obj = new KthLargest(k, nums);
+ * int param_1 = obj->add(val);
+ */
+
+
+
+
+
+
+
+
+/****************************************** 前K个高频单词（LeetCode）******************************************/
+/*
+给定一个单词列表words和一个整数 k ，返回前 k 个出现次数最多的单词
+返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率， 按字典顺序 排序
+*/
+//#include <iostream>
+//#include <queue>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    struct Compare {
+//        bool operator()(const pair<string, int>& p1, const pair<string, int>& p2) {
+//            if (p1.second == p2.second) // 频次相同，字典序按照⼤根堆的⽅式排列
+//                return p1.first < p2.first;
+//            return p1.second > p2.second;
+//        }
+//    };
+//    vector<string> topKFrequent(vector<string>& words, int k)
+//    {
+//        unordered_map<string, int> hash;
+//        for (auto& it : words) hash[it]++;
+//
+//        priority_queue<pair<string, int>, vector<pair<string, int>>, Compare> qe;
+//        for (auto& it : hash) {
+//            qe.push(it);
+//            if (qe.size() > k) qe.pop();
+//        }
+//
+//        vector<string> ret(k);
+//        for (int i = k - 1; i >= 0; --i) {
+//            ret[i] = qe.top().first;
+//            qe.pop();
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+/***************************************** 数据流的中位数（LeetCode）******************************************/
+/*
+中位数是有序整数列表中的中间值。如果列表的大小是偶数，则没有中间值，中位数是两个中间值的平均值
+例如 arr = [2,3,4] 的中位数是3
+例如 arr = [2,3] 的中位数是 (2 + 3) / 2 = 2.5
+实现 MedianFinder 类:
+MedianFinder() 初始化 MedianFinder 对象
+void addNum(int num) 将数据流中的整数 num 添加到数据结构中
+double findMedian() 返回到目前为止所有元素的中位数。与实际答案相差 10-5 以内的答案将被接受
+*/
+//#include <iostream>
+//#include <queue>
+//using namespace std;
+//class MedianFinder {
+//public:
+//    priority_queue<int> _bigHeap;//大根堆 - left
+//    priority_queue<int, vector<int>, greater<int>> _smallHeap;//小根堆 - right
+//    MedianFinder() {}
+//    void addNum(int num)
+//    {
+//        if (_bigHeap.size() == _smallHeap.size()) {
+//            if (_bigHeap.empty() || num <= _bigHeap.top()) _bigHeap.push(num);
+//            else {//num > _bigHeap.top()
+//                _smallHeap.push(num);
+//                _bigHeap.push(_smallHeap.top());
+//                _smallHeap.pop();
+//            }
+//        }
+//        else {
+//            if (num <= _bigHeap.top()) {
+//                _bigHeap.push(num);
+//                _smallHeap.push(_bigHeap.top());
+//                _bigHeap.pop();
+//            }
+//            else _smallHeap.push(num);
+//        }
+//    }
+//    double findMedian() {
+//        if (_bigHeap.size() == _smallHeap.size()) return (_bigHeap.top() + _smallHeap.top()) / 2.0;
+//        else return _bigHeap.top();
+//    }
+//};
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
