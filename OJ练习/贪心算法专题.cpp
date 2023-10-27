@@ -335,3 +335,118 @@
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/*************************************** K次取反后最大化的数组和（LeetCode）***********************************/
+/*
+给你一个整数数组nums和一个整数k ，按以下方法修改该数组：
+选择某个下标i并将nums[i]替换为 -nums[i]
+重复这个过程恰好k次。可以多次选择同一个下标i 
+以这种方式修改数组后，返回数组可能的最大和
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    int largestSumAfterKNegations(vector<int>& nums, int k)
+//    {
+//        //记录所有小于0的数及其下标
+//        vector<pair<int, int>> smallZero;
+//        for (int i = 0; i < nums.size(); ++i) if (nums[i] < 0) smallZero.push_back({ nums[i], i });
+//
+//        if (smallZero.size() > k) { //将前k小负数变为正数
+//            sort(smallZero.begin(), smallZero.end(), [&](pair<int, int>& p1, pair<int, int>& p2) {
+//                return p1.first < p2.first; });
+//            for (int i = 0; i < k; ++i) nums[smallZero[i].second] *= -1;
+//        }
+//        else if (smallZero.size() == k) { //将所有负数变为正数
+//            for (int i = 0; i < k; ++i) nums[smallZero[i].second] *= -1;
+//        }
+//        else //smallZero.size() < k
+//        {
+//            //先将所有负数变为正数
+//            for (int i = 0; i < smallZero.size(); ++i) nums[smallZero[i].second] *= -1;
+//            //计算出还需取反几次
+//            int last = k - smallZero.size();
+//            //剩余取反次数若为偶数, 可相互抵消, 不做处理即可
+//            //若为奇数, 找到最小的数, 将其转为负数
+//            if (last % 2 != 0) {
+//                int minNum = INT_MAX, minIndex = -1;
+//                for (int i = 0; i < nums.size(); ++i) {
+//                    if (minNum > nums[i]) {
+//                        minNum = min(minNum, nums[i]);
+//                        minIndex = i;
+//                    }
+//                }
+//                nums[minIndex] *= -1;
+//            }
+//        }
+//        int ret = 0;
+//        for (auto& it : nums) ret += it;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/********************************************* 按身高排序（LeetCode）******************************************/
+/*
+给你一个字符串数组names，和一个由互不相同的正整数组成的数组heights。两个数组的长度均为n
+对于每个下标 i，names[i]和heights[i]表示第i个人的名字和身高
+请按身高降序顺序返回对应的名字数组names
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <utility>
+//#include <algorithm>
+////创建二元组
+//class Solution {
+//public:
+//    vector<string> sortPeople(vector<string>& names, vector<int>& heights)
+//    {
+//        int size = names.size();
+//        vector<pair<string, int>> reflect(size);
+//        for (int i = 0; i < size; ++i) reflect[i] = { names[i], heights[i] };
+//
+//        sort(reflect.begin(), reflect.end(), [](pair<string, int>& p1, pair<string, int>& p2) {
+//            return p1.second > p2.second; });
+//
+//        vector<string> ret(size);
+//        for (int i = 0; i < size; ++i) ret[i] = reflect[i].first;
+//        return ret;
+//    }
+//};
+////下标排序
+//using namespace std;
+//class Solution {
+//public:
+//    vector<string> sortPeople(vector<string>& names, vector<int>& heights)
+//    {
+//        int size = names.size();
+//        vector<int> index(size);
+//        for (int i = 0; i < size; ++i) index[i] = i;
+//
+//        sort(index.begin(), index.end(), [&](int i, int j) { //将下标进行排序
+//            return heights[i] > heights[j]; });
+//
+//        vector<string> ret(size);
+//        for (int i = 0; i < size; ++i) ret[i] = names[index[i]];
+//        return ret;
+//    }
+//};
