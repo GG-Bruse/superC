@@ -450,3 +450,116 @@
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/********************************************* 最长回文串（LeetCode）*********************************************/
+/*
+给定一个包含大写字母和小写字母的字符串s，返回 通过这些字母构造成的 最长的回文串
+在构造过程中，请注意区分大小写 。比如"Aa"不能当做一个回文字符串
+*/
+//#include <iostream>
+//#include <string>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestPalindrome(string s)
+//    {
+//        unordered_map<char, int> hash;//char : 出现次数
+//        for (char& it : s) ++hash[it];
+//
+//        int ret = 0;
+//        bool flag = false;//是否出现过奇数个的字符
+//        for (auto& it : hash) {
+//            if (it.second % 2 == 0) ret += it.second;
+//            else {
+//                flag = true;
+//                ret += (it.second - 1);
+//            }
+//        }
+//        if (flag) ret += 1;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/***************************************** 增减字符串匹配（LeetCode）*********************************************/
+/*
+由范围 [0,n] 内所有整数组成的 n + 1 个整数的排列序列可以表示为长度为 n 的字符串 s ，其中:
+如果 perm[i] < perm[i + 1] ，那么 s[i] == 'I'
+如果 perm[i] > perm[i + 1] ，那么 s[i] == 'D'
+给定一个字符串s，重构排列perm并返回它。如果有多个有效排列perm，则返回其中任何一个
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    /*
+//    遇到'I'时, 为了让下⼀个上升的数可选择的范围更多, 当前选择最⼩的那个数
+//    当遇到'D'的时候, 为了让下⼀个下降的数可选择的范围更多, 选择当前最⼤的那个数
+//    */
+//    vector<int> diStringMatch(string s)
+//    {
+//        int size = s.size();
+//        vector<int> ret(size + 1);
+//        int minNum = 0, maxNum = size;//分别标记最小值和最大值
+//        for (int i = 0; i < size; ++i) {
+//            if (s[i] == 'I') ret[i] = minNum++;
+//            else ret[i] = maxNum--;
+//        }
+//        ret.back() = minNum;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+/******************************************* 合并区间（LeetCode）**********************************************/
+/*
+以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi]
+请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> merge(vector<vector<int>>& intervals)
+//    {
+//        if (intervals.size() == 0) return {};
+//        sort(intervals.begin(), intervals.end(), [](const vector<int>& v1, const vector<int>& v2) {
+//            return v1[0] < v2[0];
+//            });
+//        vector<vector<int>> merged;
+//        merged.push_back(intervals[0]);
+//        for (int i = 1; i < intervals.size(); ++i)
+//        {
+//            if (intervals[i][0] > merged.back()[1]) merged.push_back(intervals[i]);
+//            else merged.back()[1] = max(merged.back()[1], intervals[i][1]);
+//        }
+//        return merged;
+//    }
+//};
