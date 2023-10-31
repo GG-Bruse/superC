@@ -536,6 +536,7 @@
 
 
 
+
 /******************************************* 合并区间（LeetCode）**********************************************/
 /*
 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi]
@@ -561,5 +562,120 @@
 //            else merged.back()[1] = max(merged.back()[1], intervals[i][1]);
 //        }
 //        return merged;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/******************************************** 分发饼干（LeetCode）*********************************************/
+/*
+假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干
+对每个孩子i，都有一个胃口值g[i]，这是能让孩子们满足胃口的饼干的最小尺寸
+并且每块饼干j，都有一个尺寸s[j]。如果s[j] >= g[i]，我们可以将这个饼干j分配给孩子i，这个孩子会得到满足
+你的目标是尽可能满足越多数量的孩子，并输出这个最大数值
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    int findContentChildren(vector<int>& g, vector<int>& s)
+//    {
+//        sort(g.begin(), g.end());
+//        sort(s.begin(), s.end());
+//
+//        int count = 0;
+//        int current1 = 0, current2 = 0;
+//        while (current1 < g.size() && current2 < s.size())
+//        {
+//            if (s[current2] >= g[current1]) ++current1, ++current2, ++count;
+//            else /*if(s[current2] < g[current1])*/ ++current2;
+//        }
+//        return count;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/***************************************** 最优除法（LeetCode）************************************************/
+/*
+给定一正整数数组 nums，nums 中的相邻整数将进行浮点除法。例如， [2,3,4] -> 2 / 3 / 4
+例如，nums = [2,3,4]，我们将求表达式的值 "2/3/4"
+但是，你可以在任意位置添加任意数目的括号，来改变算数的优先级
+你需要找出怎么添加括号，以便计算后的表达式的值为最大值
+以字符串格式返回具有最大值的对应表达式
+注意：你的表达式不应该包含多余的括号
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    string optimalDivision(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        string ret;
+//        ret += to_string(nums[0]);
+//        if (size == 1) return ret;
+//        if (size == 2) return ret + "/" + to_string(nums[1]);
+//
+//        ret += "/(";
+//        for (int i = 1; i < size; ++i)
+//            ret += (to_string(nums[i]) + "/");
+//        ret.pop_back();
+//        return ret + ")";
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/****************************************** 跳跃游戏II（LeetCode）*********************************************/
+/*
+给定一个长度为 n 的 0 索引整数数组 nums。初始位置为 nums[0]
+每个元素 nums[i] 表示从索引 i 向前跳转的最大长度
+换句话说，如果你在 nums[i] 处，你可以跳转到任意 nums[i + j] 处:
+0 <= j <= nums[i]
+i + j < n
+返回到达 nums[n - 1] 的最小跳跃次数。生成的测试用例可以到达 nums[n - 1]
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int jump(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        int left = 0, right = 0, maxIndex = 0;
+//        int totalStep = 0;
+//        while (left <= right)
+//        {
+//            if (maxIndex >= size - 1) return totalStep;
+//            for (int i = left; i <= right; ++i) maxIndex = max(maxIndex, nums[i] + i);
+//            left = right + 1;
+//            right = maxIndex;
+//            ++totalStep;
+//        }
+//        return -1;
 //    }
 //};
