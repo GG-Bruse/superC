@@ -79,3 +79,120 @@ nums[i] < nums[j] 且 nums[k] < nums[j]
 //        return -1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/************************************* 数组的最小相等和（LeetCode）***********************************************/
+/*
+给你两个由正整数和0组成的数组nums1和nums2 
+你必须将两个数组中的所有0替换为严格正整数，并且满足两个数组中所有元素的和相等 
+返回最小相等和，如果无法使两数组相等，则返回-1
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    long long minSum(vector<int>& nums1, vector<int>& nums2)
+//    {
+//        long long ret1 = 0;
+//        bool flag1 = false;
+//        for (auto& it : nums1) {
+//            if (it == 0) ret1 += 1, flag1 = true;
+//            else ret1 += it;
+//        }
+//        long long ret2 = 0;
+//        bool flag2 = false;
+//        for (auto& it : nums2) {
+//            if (it == 0) ret2 += 1, flag2 = true;
+//            else  ret2 += it;
+//        }
+//        if (flag1 && !flag2 && ret1 > ret2) return -1;
+//        else if (!flag1 && flag2 && ret1 < ret2) return -1;
+//        else if (!flag1 && !flag2 && ret1 != ret2) return -1;
+//        else return max(ret1, ret2);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/********************************** 使数组变美的最小增量运算数（LeetCode）****************************************/
+/*
+给你一个下标从 0 开始、长度为n的整数数组nums，和一个整数k
+你可以执行下述递增运算任意次（可以是 0 次）
+从范围 [0, n - 1] 中选择一个下标 i ，并将nums[i]的值加1
+如果数组中任何长度大于或等于3的子数组，其最大元素都大于或等于k，则认为数组是一个美丽数组
+以整数形式返回使数组变为美丽数组需要执行的最小递增运算数
+子数组是数组中的一个连续 非空 元素序列
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    long long minIncrementOperations(vector<int>& nums, int k)
+//    {
+//        int size = nums.size();
+//        //dp[i] : 将nums[0] 到 nums[i]变为美丽数组, 且满足nums[i] >= k的最小增量运算数
+//        vector<long long> dp(size);
+//        for (int i = 0; i < 3; ++i)
+//            dp[i] = max(k - nums[i], 0);
+//        for (int i = 3; i < size; ++i)
+//            dp[i] = min({ dp[i - 1], dp[i - 2], dp[i - 3] }) + max(k - nums[i], 0);
+//        return min({ dp[size - 1], dp[size - 2], dp[size - 3] });
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/***************************************** 找出数组中的K-or值（LeetCode）*****************************************/
+/*
+给你一个下标从0开始的整数数组nums和一个整数k
+nums 中的 K-or 是一个满足以下条件的非负整数：
+只有在nums中，至少存在k个元素的第i位值为1，那么K-or中的第i位的值才是1
+返回nums的K-or值
+注意：对于整数x ，如果 (2i AND x) == 2i ，则x中的第i位值为1 ，其中AND为按位与运算符
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int findKOr(vector<int>& nums, int k)
+//    {
+//        unordered_map<int, int> hash;//bitNum : Count
+//        for (int i = 0; i < nums.size(); ++i)
+//        {
+//            int tmp = nums[i];
+//            for (int j = 0; j < 32; ++j) {
+//                if ((tmp & (1 << j)) != 0)
+//                    ++hash[j];
+//            }
+//        }
+//        int ret = 0;
+//        for (auto& it : hash) {
+//            if (it.second >= k) ret += pow(2, it.first);
+//        }
+//        return ret;
+//    }
+//};
