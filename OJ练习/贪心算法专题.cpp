@@ -679,3 +679,141 @@ i + j < n
 //        return -1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/********************************************* 跳跃游戏（LeetCode）********************************************/
+/*
+给你一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度
+判断你是否能够到达最后一个下标，如果可以，返回 true ；否则，返回 false
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    bool canJump(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        int left = 0, right = 0;//标定区间左断点与右端点
+//        int maxIndex = 0;//能到达的最远位置
+//        while (left <= right)
+//        {
+//            if (maxIndex >= size - 1) return true;
+//            for (int i = left; i <= right; ++i)
+//                maxIndex = max(maxIndex, nums[i] + i);
+//            left = right + 1;
+//            right = maxIndex;
+//        }
+//        return false;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/******************************************* 单调递增的数字（LeetCode）****************************************/
+/*
+当且仅当每个相邻位数上的数字x和y满足 x <= y 时，我们称这个整数是单调递增的
+给定一个整数 n ，返回 小于或等于 n 的最大数字，且数字呈 单调递增
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    int monotoneIncreasingDigits(int n)
+//    {
+//        string str = to_string(n);
+//        int size = str.size();
+//        //找到第一个递减的位置
+//        int current = 0;
+//        while (current + 1 < size && str[current] <= str[current + 1]) ++current;
+//        if (current + 1 == size) return n;//特殊情况
+//        //回推
+//        while (current - 1 >= 0 && str[current] == str[current - 1]) --current;
+//        --str[current];
+//        for (int i = current + 1; i < size; ++i) str[i] = '9';
+//        return stoi(str);
+//    }
+//};
+
+
+
+
+
+
+
+
+/***************************************** 坏了的计算器（LeetCode）********************************************/
+/*
+在显示着数字 startValue 的坏计算器上，我们可以执行以下两种操作：
+双倍（Double）：将显示屏上的数字乘2
+递减（Decrement）：将显示屏上的数字减1
+给定两个整数startValue和target 。返回显示数字target所需的最小操作数
+*/
+//#include <iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    int brokenCalc(int startValue, int target)
+//    {
+//        int count = 0;
+//        while (target > startValue)
+//        {
+//            ++count;
+//            if (target % 2 == 1) ++target;//target为奇数
+//            else target /= 2;//为偶数
+//        }
+//        return count + startValue - target;
+//    }
+//};
+
+
+
+
+
+
+
+
+/****************************************** 无重叠区间（LeetCode）*********************************************/
+/*
+给定一个区间的集合 intervals ，其中 intervals[i] = [starti, endi]
+返回 需要移除区间的最小数量，使剩余区间互不重叠
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    int eraseOverlapIntervals(vector<vector<int>>& intervals)
+//    {
+//        int size = intervals.size();
+//        sort(intervals.begin(), intervals.end());//默认左端点排序
+//
+//        int ret = 0;
+//        int right = intervals[0][1];//记录区间的右端点
+//        for (int i = 1; i < size; ++i)
+//        {
+//            int a = intervals[i][0], b = intervals[i][1];
+//            if (a < right) {//有重叠部分
+//                ++ret;
+//                right = min(right, b);
+//            }
+//            else right = b;
+//        }
+//        return ret;
+//    }
+//};
