@@ -817,3 +817,126 @@ i + j < n
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/************************************* 用最少数量的箭引爆气球（LeetCode）**************************************/
+/*
+有一些球形气球贴在一堵用 XY 平面表示的墙面上。墙面上的气球记录在整数数组points，
+其中points[i] = [xstart, xend] 表示水平直径在 xstart 和 xend之间的气球。你不知道气球的确切 y 坐标
+
+一支弓箭可以沿着 x 轴从不同点完全垂直地射出。在坐标 x 处射出一支箭，
+若有一个气球的直径的开始和结束坐标为 xstart，xend， 且满足  xstart ≤ x ≤ xend，
+则该气球会被引爆 。可以射出的弓箭的数量 没有限制 。 弓箭一旦被射出之后，可以无限地前进
+
+给你一个数组points，返回引爆所有气球所必须射出的最小弓箭数
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+// class Solution {
+// public:
+//     int findMinArrowShots(vector<vector<int>>& points) 
+//     {
+//         int size = points.size();
+//         if(size == 0) return 0;
+//         sort(points.begin(), points.end());//默认按照左端点排序
+//
+//         vector<vector<int>> ret;//每多一个气球重叠,则可少射出一支箭
+//         int count = 0;
+//         ret.push_back(points[0]);
+//         for(int i = 1; i < size; ++i)
+//         {
+//             vector<int> left = ret.back();
+//             vector<int> right = points[i];
+//             if(right[0] <= left[1]) {
+//                 ret.back() = {right[0], min(left[1], right[1])};
+//                 ++count;
+//             }
+//             else {
+//                 ret.push_back(right);
+//             }
+//         }
+//         return size - count;
+//     }
+// };
+////写法优化
+//class Solution {
+//public:
+//    int findMinArrowShots(vector<vector<int>>& points)
+//    {
+//        int size = points.size();
+//        if (size == 0) return 0;
+//        sort(points.begin(), points.end());//默认按照左端点排序
+//
+//        int count = 1;
+//        int right = points[0][1];
+//        for (int i = 1; i < size; ++i)
+//        {
+//            if (points[i][0] <= right) {
+//                right = min(points[i][1], right);
+//            }
+//            else {
+//                right = points[i][1];
+//                ++count;
+//            }
+//        }
+//        return count;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/********************************************** 整数替换（LeetCode）*******************************************/
+/*
+给定一个正整数 n ，你可以做如下操作：
+如果 n 是偶数，则用 n/2 替换n
+如果 n 是奇数，则可以用 n+1 或 n-1 替换n
+返回 n 变为 1 所需的最小替换次数
+*/
+//#include <iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    //通过 %4 判断数据二进制最后两位是多少
+//    int integerReplacement(long long n)
+//    {
+//        int count = 0;
+//        while (n != 1)
+//        {
+//            if (n % 2 == 0) {//后两位为00或10
+//                n /= 2;
+//                ++count;
+//            }
+//            else if (n % 4 == 1) {//后两位为01
+//                count += 2;
+//                n -= 1;
+//                n /= 2;
+//            }
+//            else {//后两位为11
+//                if (n == 3) {
+//                    count += 2;
+//                    n = 1;
+//                }
+//                else {
+//                    count += 2;
+//                    n = (n + 1) / 2;
+//                }
+//            }
+//        }
+//        return count;
+//    }
+//};
