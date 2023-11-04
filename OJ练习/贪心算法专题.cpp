@@ -940,3 +940,53 @@ i + j < n
 //        return count;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/************************************** 俄罗斯套娃信封问题（LeetCode) ***************************************/
+/*
+给你一个二维整数数组 envelopes ，其中 envelopes[i] = [wi, hi] ，表示第 i 个信封的宽度和高度
+当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样
+请计算 最多能有多少个 信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）
+注意：不允许旋转信封
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm> 
+//using namespace std;
+//class Solution {
+//public:
+//    int maxEnvelopes(vector<vector<int>>& envelopes)
+//    {
+//        int size = envelopes.size();
+//        //按宽度从小到大排序, 宽度相同时按照高度从大到小排序
+//        sort(envelopes.begin(), envelopes.end(), [](const vector<int>& v1, const vector<int>& v2) {
+//            return v1[0] == v2[0] ? v1[1] > v2[1] : v1[0] < v2[0];
+//            });
+//        //贪心 + 二分
+//        vector<int> ret;
+//        ret.push_back(envelopes[0][1]);
+//        for (int i = 1; i < size; ++i)
+//        {
+//            int height = envelopes[i][1];
+//            if (height > ret.back()) ret.push_back(height);
+//            else {
+//                int left = 0, right = ret.size() - 1;
+//                while (left < right)
+//                {
+//                    int mid = (left + right) >> 1;
+//                    if (ret[mid] >= height) right = mid;
+//                    else left = mid + 1;
+//                }
+//                ret[left] = height;
+//            }
+//        }
+//        return ret.size();
+//    }
+//};
