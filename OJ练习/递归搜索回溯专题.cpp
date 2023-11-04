@@ -1894,3 +1894,38 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/********************************************** 整数替换（LeetCode）*******************************************/
+/*
+给定一个正整数 n ，你可以做如下操作：
+如果 n 是偶数，则用 n/2 替换n
+如果 n 是奇数，则可以用 n+1 或 n-1 替换n
+返回 n 变为 1 所需的最小替换次数
+*/
+//#include <iostream>
+//#include <unordered_map>
+//using namespace std;
+// class Solution {
+// public:
+//     unordered_map<int, int> memory;//number : step
+//     int integerReplacement(int n) {
+//         return dfs(n);
+//     }
+//     int dfs(long long number)
+//     {
+//         if(number == 1) return 0;
+//         if(memory.count(number)) return memory[number];
+//
+//         if(number % 2 == 0) return memory[number] = 1 + dfs(number / 2);
+//         else return memory[number] = 1 + min(dfs(number + 1), dfs(number - 1));
+//     }
+// };
