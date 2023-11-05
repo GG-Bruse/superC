@@ -196,3 +196,39 @@ nums 中的 K-or 是一个满足以下条件的非负整数：
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/***************************************** 找到冠军I（LeetCode）******************************************/
+/*
+一场比赛中共有n支队伍，按从0到 n - 1编号
+给你一个下标从 0 开始、大小为 n * n 的二维布尔矩阵grid
+对于满足0 <= i, j <= n - 1且i != j的所有 i, j：如果grid[i][j] == 1，那么i队比j队强；否则，j队比i队强 
+在这场比赛中，如果不存在某支强于 a 队的队伍，则认为 a 队将会是冠军
+返回这场比赛中将会成为冠军的队伍
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findChampion(vector<vector<int>>& grid)
+//    {
+//        int size = grid.size();
+//        //如果第 j 列的元素值都是 0, 说明没有队伍可以击败它，返回 j
+//        for (int i = 0; i < size; ++i)//枚举各列
+//        {
+//            bool flag = false;//是否出现1 
+//            for (int j = 0; j < size; ++j)//遍历该列元素
+//                if (grid[j][i] == 1) flag = true;
+//            if (flag == false) return i;
+//        }
+//        return -1;
+//    }
+//};
