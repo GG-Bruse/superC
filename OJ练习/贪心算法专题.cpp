@@ -990,3 +990,120 @@ i + j < n
 //        return ret.size();
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/**************************************** 可被三整除的最大和（LeetCode）*************************************/
+/*
+给你一个整数数组 nums，请你找出并返回能被三整除的元素最大和
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    const int INF = 0X3f3f3f3f;
+//    int maxSumDivThree(vector<int>& nums)
+//    {
+//        int sum = 0;
+//        for (int& it : nums) sum += it;
+//        if (sum % 3 == 0) return sum;
+//
+//        int x1 = INF, x2 = INF;//记录%3==1的数中的最小值与次小值
+//        int y1 = INF, y2 = INF;//记录%3==2的数中的最小值与次小值
+//        for (int i = 0; i < nums.size(); ++i) {
+//            if (nums[i] % 3 == 1) GetFirstMinSecondMin(x1, x2, nums[i]);
+//            if (nums[i] % 3 == 2) GetFirstMinSecondMin(y1, y2, nums[i]);
+//        }
+//
+//        if (sum % 3 == 1)
+//        {
+//            //删除所有%3 == 1的数中最小的 …… x
+//            //删除所有%3 == 2的数中最小的2个 …… y
+//            //删除min(x, y)
+//            sum -= min(x1, y1 + y2);
+//        }
+//        else/*sum % 3 == 2*/
+//        {
+//            //删除所有%3 == 1的数中最小的2个 …… x
+//            //删除所有%3 == 2的数中最小 …… y
+//            //删除min(x, y)
+//            sum -= min(x1 + x2, y1);
+//        }
+//        return sum;
+//    }
+//private:
+//    void GetFirstMinSecondMin(int& num1, int& num2, int newNum)
+//    {
+//        if (newNum < num1) {
+//            num2 = num1;
+//            num1 = newNum;
+//        }
+//        else if (newNum < num2) {
+//            num2 = newNum;
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/**************************************** 距离相等的条形码（LeetCode）************************************/
+/*
+在一个仓库里，有一排条形码，其中第 i 个条形码为 barcodes[i]
+请你重新排列这些条形码，使其中任意两个相邻的条形码不能相等
+你可以返回任何满足该要求的答案，此题保证存在答案
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> rearrangeBarcodes(vector<int>& barcodes)
+//    {
+//        unordered_map<int, int> hash;//number : count
+//        int maxValue = 0, maxCount = 0;//出现最多的那个数字, 出现的最多的数字出现的次数
+//        for (auto& it : barcodes) {
+//            if (maxCount < ++hash[it]) {
+//                maxCount = hash[it];
+//                maxValue = it;
+//            }
+//        }
+//
+//        int size = barcodes.size();
+//        vector<int> ret(size);
+//        int index = 0;
+//        //先处理出现次数最多的数字
+//        for (int i = 0; i < maxCount; ++i) {
+//            ret[index] = maxValue;
+//            index += 2;
+//        }
+//        hash.erase(maxValue);
+//        //处理剩余的数
+//        for (auto& [x, y] : hash)
+//        {
+//            for (int i = 0; i < y; ++i) {
+//                if (index >= size) index = 1;
+//                ret[index] = x;
+//                index += 2;
+//            }
+//        }
+//        return ret;
+//    }
+//};
