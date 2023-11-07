@@ -1107,3 +1107,60 @@ i + j < n
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/***************************************** 重构字符串（LeetCode）********************************************/
+/*
+给定一个字符串 s ，检查是否能重新排布其中的字母，使得两相邻的字符不同
+返回 s 的任意可能的重新排列。若不可行，返回空字符串""
+*/
+//#include <iostream>
+//#include <string>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    string reorganizeString(string s)
+//    {
+//        unordered_map<char, int> hash;
+//        char maxChar = 0;
+//        int maxCount = 0;
+//        for (char& it : s) {
+//            if (maxCount < ++hash[it]) {
+//                maxCount = hash[it];
+//                maxChar = it;
+//            }
+//        }
+//        int size = s.size();
+//        string ret(size, 'A');
+//        int index = 0;
+//        //先处理出现最多的字符
+//        for (int i = 0; i < maxCount; ++i) {
+//            if (index >= size) index = 1;
+//            ret[index] = maxChar;
+//            index += 2;
+//        }
+//        hash.erase(maxChar);
+//        //处理剩余字符
+//        for (auto& [x, y] : hash)
+//        {
+//            for (int i = 0; i < y; ++i)
+//            {
+//                if (index >= size) index = 1;
+//                ret[index] = x;
+//                index += 2;
+//            }
+//        }
+//        for (int i = 1; i < size; ++i)
+//            if (ret[i - 1] == ret[i])
+//                return "";
+//        return ret;
+//    }
+//};
