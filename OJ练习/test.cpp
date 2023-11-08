@@ -2000,3 +2000,102 @@ D(1) = 0, D(2) = 1
 //        return true;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/******************************************** 最长连续序列（LeetCode）**************************************************/
+/*
+给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度
+请你设计并实现时间复杂度为 O(n) 的算法解决此问题
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestConsecutive(vector<int>& nums)
+//    {
+//        unordered_set<int> hash;//去重、加快查找速度
+//        for (int& it : nums) hash.insert(it);
+//
+//        int retLength = 0;
+//        for (const int& it : hash)
+//        {
+//            if (!hash.count(it - 1))//不存在刚好比其小1的数,则将其作为头元素
+//            {
+//                int currentNum = it;
+//                int length = 1;
+//                while (hash.count(currentNum + 1)) {
+//                    ++currentNum;
+//                    ++length;
+//                }
+//                retLength = max(retLength, length);
+//            }
+//        }
+//        return retLength;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 缺失的第一个正数（LeetCode）********************************************/
+/*
+给你一个未排序的整数数组 nums ，请你找出其中没有出现的最小的正整数
+请你实现时间复杂度为 O(n) 并且只使用常数级别额外空间的解决方案
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+////原地哈希(负数标记)
+// class Solution1 {
+// public:
+//     int firstMissingPositive(vector<int>& nums) 
+//     {
+//         int size = nums.size();
+//         //将所有负数修改为size + 1
+//         for(int& it : nums) 
+//             if(it <= 0) 
+//                 it = size + 1;
+//         for(int i = 0; i < size; ++i)
+//         {
+//             int number = abs(nums[i]);
+//             if(number <= size) //若该元素没有缺失，则将其 应该放置的位置 的前面一个元素转为负数
+//                 nums[number - 1] = -abs(nums[number - 1]);
+//         }
+//         for(int i = 0; i < size; ++i) 
+//             if(nums[i] > 0) return i + 1;//若某个位置的元素为正数, 说明后一个位置 应该放置的元素 缺失
+//         return size + 1;
+//     }
+// };
+////置换
+//class Solution2 {
+//public:
+//    int firstMissingPositive(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        for (int i = 0; i < size; ++i) {
+//            //在完成交换后,新的nums[i]可能还在[1, N]的范围内,需要继续进行交换操作
+//            while (nums[i] > 0 && nums[i] <= size && nums[nums[i] - 1] != nums[i])
+//                swap(nums[nums[i] - 1], nums[i]);
+//        }
+//        for (int i = 0; i < size; ++i)
+//            if (nums[i] != i + 1)
+//                return i + 1;
+//        return size + 1;
+//    }
+//};
