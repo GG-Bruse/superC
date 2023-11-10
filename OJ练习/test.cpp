@@ -2099,3 +2099,91 @@ D(1) = 0, D(2) = 1
 //        return size + 1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 矩阵置零（LeetCode）**********************************************/
+/*
+给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用原地算法
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    void setZeroes(vector<vector<int>>& matrix)
+//    {
+//        int sizeRow = matrix.size();
+//        int sizeCol = matrix[0].size();
+//        unordered_set<int> hashRow;//row
+//        unordered_set<int> hashCol;//col
+//
+//        for (int i = 0; i < sizeRow; ++i)
+//            for (int j = 0; j < sizeCol; ++j)
+//                if (matrix[i][j] == 0) hashRow.insert(i), hashCol.insert(j);
+//
+//        for (const int& it : hashRow) {
+//            for (int j = 0; j < sizeCol; ++j)
+//                matrix[it][j] = 0;
+//        }
+//        for (const int& it : hashCol) {
+//            for (int i = 0; i < sizeRow; ++i)
+//                matrix[i][it] = 0;
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 螺旋矩阵（LeetCode）**************************************************/
+/*
+给你一个m行n列的矩阵matrix，请按照顺时针螺旋顺序，返回矩阵中的所有元素
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<bool>> visited;//辅助数组, 记录每个元素是否被访问过
+//    const int direction[4][2] = { {0,1}, {1,0}, {0,-1}, {-1,0} };
+//    vector<int> spiralOrder(vector<vector<int>>& matrix)
+//    {
+//        if (matrix.size() == 0 || matrix[0].size() == 0) return{};
+//
+//        int row = matrix.size(), col = matrix[0].size();
+//        visited = vector<vector<bool>>(row, vector<bool>(col, false));
+//
+//        int total = row * col;
+//        vector<int> ret(total);//记录走过的元素,即结果
+//        int directionIndex = 0;//移动方向数组的下标, 从此得知下次移动的移动方向
+//        int currentRow = 0, currentCol = 0;//当前处在的行和列
+//        for (int i = 0; i < total; ++i)
+//        {
+//            ret[i] = matrix[currentRow][currentCol];
+//            visited[currentRow][currentCol] = true;
+//            int nextRow = currentRow + direction[directionIndex][0];
+//            int nextCol = currentCol + direction[directionIndex][1];
+//            //超出范围或已经访问过
+//            if (nextRow < 0 || nextRow >= row || nextCol < 0 || nextCol >= col || visited[nextRow][nextCol])
+//                directionIndex = (directionIndex + 1) % 4;//修改移动方向
+//            currentRow += direction[directionIndex][0];
+//            currentCol += direction[directionIndex][1];
+//        }
+//        return ret;
+//    }
+//};
