@@ -2187,3 +2187,83 @@ D(1) = 0, D(2) = 1
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 翻转二叉树（LeetCode）***************************************************/
+/*
+给你一棵二叉树的根节点root ，翻转这棵二叉树，并返回其根节点
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode *left;
+//    TreeNode *right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//}; 
+//class Solution {
+//public:
+//    TreeNode* invertTree(TreeNode* root)
+//    {
+//        if (root == nullptr) return nullptr;
+//
+//        TreeNode* leftChild = invertTree(root->left);
+//        TreeNode* rightChild = invertTree(root->right);
+//        root->left = rightChild;
+//        root->right = leftChild;
+//
+//        return root;
+//    }
+//};
+
+
+
+
+
+
+
+
+/********************************************** 二叉树的直径（LeetCode）**************************************************/
+/*
+给你一棵二叉树的根节点，返回该树的直径
+二叉树的 直径 是指树中任意两个节点之间最长路径的 长度 。这条路径可能经过也可能不经过根节点root
+两节点之间路径的 长度 由它们之间边数表示
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode *left;
+//    TreeNode *right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    int result = 1;
+//    int diameterOfBinaryTree(TreeNode* root) {
+//        depth(root);
+//        return result - 1;
+//    }
+//private:
+//    int depth(TreeNode* root)
+//    {
+//        if (root == nullptr) return 0;
+//        int leftDepth = depth(root->left);//以左孩子为根结点的子树的深度
+//        int rightDepth = depth(root->right);//以右孩子为根结点的子树的深度
+//        result = max(result, leftDepth + rightDepth + 1);
+//        return max(leftDepth, rightDepth) + 1;
+//    }
+//};
