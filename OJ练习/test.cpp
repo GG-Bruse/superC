@@ -2267,3 +2267,153 @@ D(1) = 0, D(2) = 1
 //        return max(leftDepth, rightDepth) + 1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/************************************************* 排序链表（LeetCode）************************************************/
+/*
+给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表
+*/
+//归并排序
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode *next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode *next) : val(x), next(next) {}
+//};
+//class Solution {
+//public:
+//    ListNode* sortList(ListNode* head) {
+//        return sortList(head, nullptr);
+//    }
+//    ListNode* sortList(ListNode* head, ListNode* tail)
+//    {
+//        if (head == nullptr) return head;
+//        if (head->next == tail) {
+//            head->next = nullptr;
+//            return head;
+//        }
+//        ListNode* fast = head, * slow = head;
+//        while (fast != tail)
+//        {
+//            fast = fast->next;
+//            slow = slow->next;
+//            if (fast != tail) fast = fast->next;
+//        }
+//        ListNode* mid = slow;
+//        return merge(sortList(head, mid), sortList(mid, tail));
+//    }
+//    ListNode* merge(ListNode* head1, ListNode* head2)
+//    {
+//        ListNode* tempHead = new ListNode(-1);
+//        ListNode* tmp = tempHead, * tmp1 = head1, * tmp2 = head2;
+//        while (tmp1 != nullptr && tmp2 != nullptr)
+//        {
+//            if (tmp1->val <= tmp2->val) {
+//                tmp->next = tmp1;
+//                tmp1 = tmp1->next;
+//            }
+//            else {
+//                tmp->next = tmp2;
+//                tmp2 = tmp2->next;
+//            }
+//            tmp = tmp->next;
+//        }
+//        if (tmp1 != nullptr) tmp->next = tmp1;
+//        else if (tmp2 != nullptr) tmp->next = tmp2;
+//
+//        ListNode* ret = tempHead->next;
+//        delete tempHead;
+//        return ret;
+//    }
+//};
+//int main()
+//{
+//    //4, 2, 1, 3
+//    ListNode* node1 = new ListNode(4);
+//    ListNode* node2 = new ListNode(2);
+//    ListNode* node3 = new ListNode(1);
+//    ListNode* node4 = new ListNode(3);
+//    node1->next = node2;
+//    node2->next = node3;
+//    node3->next = node4;
+//    Solution s;
+//    ListNode* ret = s.sortList(node1);
+//    for (ListNode* current = ret; current != nullptr; current = current->next)
+//        cout << current->val << " ";
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+/******************************************* 对链表进行插入排序（LeetCode）********************************************/
+/*
+给定单个链表的头head ，使用插入排序对链表进行排序，并返回排序后链表的头
+插入排序 算法的步骤:
+插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表
+每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入
+重复直到所有输入数据插入完为止
+下面是插入排序算法的一个图形示例。部分排序的列表(黑色)最初只包含列表中的第一个元素
+每次迭代时，从输入数据中删除一个元素(红色)，并就地插入已排序的列表中
+对链表进行插入排
+*/
+//#include <iostream>
+//using namespace std;
+//struct ListNode {
+//    int val;
+//    ListNode *next;
+//    ListNode() : val(0), next(nullptr) {}
+//    ListNode(int x) : val(x), next(nullptr) {}
+//    ListNode(int x, ListNode *next) : val(x), next(next) {}
+//};
+//class Solution {
+//public:
+//    ListNode* insertionSortList(ListNode* head)
+//    {
+//        if (head == nullptr) return head;
+//
+//        ListNode* newHead = new ListNode(0);
+//        newHead->next = head;//默认直接将第一个结点插入
+//
+//        ListNode* lastSorted = head;//维护链表已排序的最后一个结点
+//        ListNode* current = head->next;//维护待插入的结点
+//        while (current != nullptr)
+//        {
+//            if (lastSorted->val <= current->val) {
+//                lastSorted = lastSorted->next;
+//            }
+//            else {
+//                ListNode* prev = newHead;//prev维护current插入位置的前一个结点
+//                从前向后遍历, 寻找current插入位置的前一个结点
+//                while (prev->next->val <= current->val) {
+//                    prev = prev->next;
+//                }
+//                lastSorted->next = current->next;//更新lastSorted
+//                插入current
+//                current->next = prev->next;
+//                prev->next = current;
+//            }
+//            current = lastSorted->next;
+//        }
+//        current = newHead->next;
+//        delete newHead;
+//        return current;
+//    }
+//};
