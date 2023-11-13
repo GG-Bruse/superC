@@ -3445,3 +3445,111 @@ double findMedian() 返回到目前为止所有元素的中位数。与实际答
 //        reverse(nums.begin() + indexOne + 1, nums.end());
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 图像渲染（LeetCode）**************************************************/
+/*
+有一幅以 m x n 的二维整数数组表示的图画 image ，其中 image[i][j] 表示该图画的像素值大小
+你也被给予三个整数 sr ,sc 和 newColor 。你应该从像素 image[sr][sc] 开始对图像进行 上色填充 
+为了完成 上色工作 ，从初始像素开始，记录初始坐标的 上下左右四个方向上 像素值与初始坐标相同的相连像素点
+接着再记录这四个方向上符合条件的像素点与他们对应 四个方向上 像素值与初始坐标相同的相连像素点，……，
+重复该过程。将所有有记录的像素点的颜色值改为 newColor
+最后返回 经过上色渲染后的图像
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color)
+//    {
+//        int flagColor = image[sr][sc];//需要修改的位置的像素值
+//        if (flagColor == color) return image;
+//
+//        int row = image.size(), col = image[0].size();
+//        queue<pair<int, int>> qe;
+//        qe.push({ sr,sc });
+//        while (!qe.empty())
+//        {
+//            auto [a, b] = qe.front();
+//            qe.pop();
+//            image[a][b] = color;
+//            for (int k = 0; k < 4; ++k) {
+//                int x = a + dx[k];
+//                int y = b + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && image[x][y] == flagColor)
+//                    qe.push({ x, y });
+//            }
+//        }
+//        return image;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/************************************************ 岛屿数量（LeetCode）*************************************************/
+/*
+给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量
+岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成
+此外，你可以假设该网格的四条边均被水包围
+*/
+//BFS
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    int retCount = 0;
+//    vector<vector<bool>> flag;
+//    int numIslands(vector<vector<char>>& grid)
+//    {
+//        row = grid.size(), col = grid[0].size();
+//        flag = vector<vector<bool>>(row, vector<bool>(col, false));
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j)
+//                if (grid[i][j] == '1' && !flag[i][j])
+//                    bfs(grid, i, j), ++retCount;
+//        return retCount;
+//    }
+//    void bfs(vector<vector<char>>& grid, int i, int j)
+//    {
+//        queue<pair<int, int>> qe;
+//        qe.push({ i, j });
+//        flag[i][j] = true;
+//        while (!qe.empty())
+//        {
+//            auto [a, b] = qe.front();
+//            qe.pop();
+//            for (int k = 0; k < 4; ++k) {
+//                int x = a + dx[k], y = b + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && grid[x][y] == '1' && !flag[x][y]) {
+//                    qe.push({ x, y });
+//                    flag[x][y] = true;
+//                }
+//            }
+//        }
+//    }
+//};
