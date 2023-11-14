@@ -3553,3 +3553,147 @@ double findMedian() 返回到目前为止所有元素的中位数。与实际答
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/********************************************** 岛屿的最大面积（LeetCode）*********************************************/
+/*
+给定一个由 0 和 1 组成的非空二维数组 grid ，用来表示海洋岛屿地图
+一个岛屿是由一些相邻的 1 (代表土地) 构成的组合，这里的「相邻」要求两个1必须在水平或者竖直方向上相邻
+你可以假设 grid 的四个边缘都被 0（代表水）包围着
+找到给定的二维数组中最大的岛屿面积。如果没有岛屿，则返回面积为 0
+*/
+//BFS
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int maxArea = 0;
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    int row = 0, col = 0;
+//    vector<vector<bool>> flag;
+//
+//    int maxAreaOfIsland(vector<vector<int>>& grid)
+//    {
+//        row = grid.size(), col = grid[0].size();
+//        flag = vector<vector<bool>>(row, vector<bool>(col, false));
+//        for (int i = 0; i < row; ++i) 
+//            for (int j = 0; j < col; ++j)
+//                if (grid[i][j] == 1 && !flag[i][j])
+//                    bfs(grid, i, j);
+//        return maxArea;
+//    }
+//    void bfs(vector<vector<int>>& grid, int i, int j)
+//    {
+//        queue<pair<int, int>> qe;
+//        qe.push({ i, j });
+//        flag[i][j] = true;
+//
+//        int area = 1;
+//        while (!qe.empty())
+//        {
+//            auto [a, b] = qe.front();
+//            qe.pop();
+//            for (int k = 0; k < 4; ++k)
+//            {
+//                int x = a + dx[k], y = b + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && grid[x][y] == 1 && !flag[x][y]) {
+//                    qe.push({ x, y });
+//                    flag[x][y] = true;
+//                    ++area;
+//                }
+//            }
+//        }
+//        maxArea = max(maxArea, area);
+//    }   
+//};
+//int main()
+//{
+//    vector<vector<int>> map = { {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+//                                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 },
+//                                {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+//                                {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0 }, 
+//                                {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0 }, 
+//                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 }, 
+//                                {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 }, 
+//                                {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
+//    Solution s;
+//    cout << s.maxAreaOfIsland(map);
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+/********************************************** 被围绕的区域（LeetCode）***********************************************/
+/*
+给你一个 m x n 的矩阵 board ，由若干字符 'X' 和 'O' ，找到所有被 'X' 围绕的区域，并将这些区域里所有的 'O' 用 'X' 填充
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { 1, -1, 0, 0 };
+//
+//    void solve(vector<vector<char>>& board)
+//    {
+//        row = board.size(), col = board[0].size();
+//        //将与在边界上的O所在的连通块都修改为@
+//        for (int i = 0; i < row; ++i) {
+//            if (board[i][0] == 'O') bfs(board, i, 0);
+//            if (board[i][col - 1] == 'O') bfs(board, i, col - 1);
+//        }
+//        for (int j = 1; j < col - 1; ++j) {
+//            if (board[0][j] == 'O') bfs(board, 0, j);
+//            if (board[row - 1][j] == 'O') bfs(board, row - 1, j);
+//        }
+//        //将所有O改为X, 所有@改为O
+//        for (int i = 0; i < row; ++i) {
+//            for (int j = 0; j < col; ++j) {
+//                if (board[i][j] == 'O') board[i][j] = 'X';
+//                if (board[i][j] == '@') board[i][j] = 'O';
+//            }
+//        }
+//    }
+//    void bfs(vector<vector<char>>& board, int i, int j)
+//    {
+//        queue<pair<int, int>> qe;
+//        qe.push({ i, j });
+//        board[i][j] = '@';
+//
+//        while (!qe.empty())
+//        {
+//            auto [a, b] = qe.front();
+//            qe.pop();
+//            for (int k = 0; k < 4; ++k)
+//            {
+//                int x = a + dx[k], y = b + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && board[x][y] == 'O') {
+//                    qe.push({ x, y });
+//                    board[x][y] = '@';
+//                }
+//            }
+//        }
+//    }
+//};
