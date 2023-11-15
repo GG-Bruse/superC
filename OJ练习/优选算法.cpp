@@ -3697,3 +3697,137 @@ double findMedian() 返回到目前为止所有元素的中位数。与实际答
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/********************************************* 迷宫中离入口最近的出口（LeetCode）*****************************************/
+/*
+给你一个 m x n 的迷宫矩阵 maze （下标从 0 开始），矩阵中有空格子（用 '.' 表示）和墙（用 '+' 表示）
+同时给你迷宫的入口 entrance ，用 entrance = [entrancerow, entrancecol] 表示你一开始所在格子的行和列
+每一步操作，你可以往 上，下，左 或者 右 移动一个格子。你不能进入墙所在的格子，你也不能离开迷宫
+你的目标是找到离 entrance 最近 的出口。出口 的含义是 maze 边界 上的 空格子。entrance 格子不算出口
+请你返回从 entrance 到最近出口的最短路径的 步数 ，如果不存在这样的路径，请你返回 -1
+*/
+//#include <iostream>
+//#include <queue>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int row = 0, col = 0;
+//    vector<vector<bool>> flag;
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    int nearestExit(vector<vector<char>>& maze, vector<int>& entrance)
+//    {
+//        row = maze.size(), col = maze[0].size();
+//        flag = vector<vector<bool>>(row, vector<bool>(col, false));
+//        return bfs(maze, entrance[0], entrance[1]);
+//    }
+//    int bfs(vector<vector<char>>& maze, int i, int j)
+//    {
+//        int retStep = 0;
+//        queue<pair<int, int>> qe;
+//        qe.push({ i, j });
+//        flag[i][j] = true;
+//
+//        while (!qe.empty())
+//        {
+//            ++retStep;
+//            int size = qe.size();
+//            for (int count = 0; count < size; ++count)
+//            {
+//                auto [a, b] = qe.front();
+//                qe.pop();
+//                for (int k = 0; k < 4; ++k)
+//                {
+//                    int x = a + dx[k], y = b + dy[k];
+//                    if (x >= 0 && x < row && y >= 0 && y < col && !flag[x][y] && maze[x][y] == '.')
+//                    {
+//                        if (x == 0 || x == row - 1 || y == 0 || y == col - 1) return retStep;
+//                        else {
+//                            qe.push({ x, y });
+//                            flag[x][y] = true;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/*********************************************** 最小基因变化（LeetCode）*************************************************/
+/*
+基因序列可以表示为一条由 8 个字符组成的字符串，其中每个字符都是 'A'、'C'、'G' 和 'T' 之一
+假设我们需要调查从基因序列 start 变为 end 所发生的基因变化。一次基因变化就意味着这个基因序列中的一个字符发生了变化
+例如，"AACCGGTT" --> "AACCGGTA" 就是一次基因变化
+另有一个基因库 bank 记录了所有有效的基因变化，只有基因库中的基因才是有效的基因序列。（变化后的基因必须位于基因库 bank 中）
+给你两个基因序列 start 和 end ，以及一个基因库 bank ，请你找出并返回能够使 start 变化为 end 所需的最少变化次数
+如果无法完成此基因变化，返回-1
+注意：起始基因序列 start 默认是有效的，但是它并不一定会出现在基因库中
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <queue>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    int minMutation(string startGene, string endGene, vector<string>& bank)
+//    {
+//        unordered_set<string> flag; //标记已经搜索过的字符串
+//        unordered_set<string> hashBank(bank.begin(), bank.end()); //记录bank中的字符串,便于查找
+//        string change = "ACGT";
+//
+//        if (startGene == endGene) return 0;
+//        if (!hashBank.count(endGene)) return -1;
+//
+//        int ret = 0;
+//        queue<string> qe;
+//        qe.push(startGene);
+//        flag.insert(startGene);
+//        while (!qe.empty())
+//        {
+//            ++ret;
+//            int size = qe.size();
+//            while (size--)
+//            {
+//                string f = qe.front();
+//                qe.pop();
+//                for (int i = 0; i < 8; ++i)
+//                {
+//                    string tmp = f;
+//                    for (int j = 0; j < 4; ++j)
+//                    {
+//                        tmp[i] = change[j];
+//                        if (hashBank.count(tmp) && !flag.count(tmp))
+//                        {
+//                            if (tmp == endGene) return ret;
+//                            qe.push(tmp);
+//                            flag.insert(tmp);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+//};
