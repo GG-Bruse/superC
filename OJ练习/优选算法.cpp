@@ -3831,3 +3831,154 @@ double findMedian() 返回到目前为止所有元素的中位数。与实际答
 //        return -1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/************************************************ 单词接龙（LeetCode）****************************************************/
+/*
+字典 wordList 中从单词 beginWord 和 endWord 的 转换序列 是一个按下述规格形成的序列 beginWord -> s1 -> s2 -> ... -> sk：
+每一对相邻的单词只差一个字母。
+对于 1 <= i <= k 时，每个 si 都在 wordList 中。注意， beginWord 不需要在 wordList 中。
+sk == endWord
+给你两个单词beginWord和endWord和一个字典wordList，返回从beginWord到endWord的最短转换序列中的单词数目
+如果不存在这样的转换序列，返回 0
+*/
+//#include <iostream>
+//#include <string>
+//#include <unordered_set>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int ladderLength(string beginWord, string endWord, vector<string>& wordList)
+//    {
+//        //记录字典中的所有单词,便于查找
+//        unordered_set<string> hashWordList(wordList.begin(), wordList.end());
+//        unordered_set<string> flag;//记录转换过的单词
+//
+//        if (!hashWordList.count(endWord)) return 0;
+//        if (beginWord == endWord) return 0;
+//
+//        int retNumber = 1;//转换路径上出现的单词数
+//        queue<string> qe;
+//        qe.push(beginWord);
+//        flag.insert(beginWord);
+//
+//        while (!qe.empty())
+//        {
+//            ++retNumber;
+//            int size = qe.size();
+//            while (size--)
+//            {
+//                string front = qe.front();
+//                qe.pop();
+//                for (int i = 0; i < front.size(); ++i)//遍历每一位
+//                {
+//                    string tmp = front;
+//                    for (char ch = 'a'; ch <= 'z'; ++ch)//遍历每种修改可能
+//                    {
+//                        tmp[i] = ch;
+//                        if (tmp == endWord) return retNumber;
+//                        if (hashWordList.count(tmp) && !flag.count(tmp)) {
+//                            qe.push(tmp);
+//                            flag.insert(tmp);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return 0;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/***************************************** 为高尔夫比赛砍树（LeetCode）***************************************************/
+/*
+你被请来给一个要举办高尔夫比赛的树林砍树。树林由一个 m x n 的矩阵表示， 在这个矩阵中：
+0 表示障碍，无法触碰
+1 表示地面，可以行走
+比 1 大的数 表示有树的单元格，可以行走，数值表示树的高度
+每一步，你都可以向上、下、左、右四个方向之一移动一个单位，如果你站的地方有一棵树，那么你可以决定是否要砍倒它
+你需要按照树的高度从低向高砍掉所有的树，每砍过一颗树，该单元格的值变为 1（即变为地面）
+你将从 (0, 0) 点开始工作，返回你砍完所有树需要走的最小步数。 如果你无法砍完所有的树，返回-1
+可以保证的是，没有两棵树的高度是相同的，并且你至少需要砍倒一棵树
+*/
+//#include <iostream>
+//#include <algorithm>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int cutOffTree(vector<vector<int>>& forest)
+//    {
+//        vector<pair<int, int>> trees;//记录砍树的顺序
+//        for (int i = 0; i < forest.size(); ++i)
+//            for (int j = 0; j < forest[i].size(); ++j)
+//                if (forest[i][j] > 1) trees.push_back({ i, j });
+//        //按照树的高度排序
+//        sort(trees.begin(), trees.end(), [&](const pair<int, int>& p1, const pair<int, int>& p2) {
+//            return forest[p1.first][p1.second] < forest[p2.first][p2.second];
+//            });
+//        //按照顺序砍树
+//        int currentX = 0, currentY = 0;
+//        int minStep = 0;
+//        for (auto& [x, y] : trees)
+//        {
+//            int step = bfs(forest, currentX, currentY, x, y);
+//            if (step == -1) return -1;
+//            minStep += step;
+//            currentX = x, currentY = y;
+//        }
+//        return minStep;
+//    }
+//
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    int row = 0, col = 0;
+//    int bfs(vector<vector<int>>& forest, int curX, int curY, int endX, int endY)
+//    {
+//        if (curX == endX && curY == endY) return 0;
+//        row = forest.size(), col = forest[0].size();
+//        vector<vector<bool>> flag(row, vector<bool>(col, false));
+//
+//        int retStep = 0;
+//        queue<pair<int, int>> qe;
+//        qe.push({ curX, curY });
+//        flag[curX][curY] = true;
+//        while (!qe.empty())
+//        {
+//            ++retStep;
+//            int size = qe.size();
+//            while (size--)
+//            {
+//                auto [a, b] = qe.front();
+//                qe.pop();
+//                for (int k = 0; k < 4; ++k)
+//                {
+//                    int x = a + dx[k], y = b + dy[k];
+//                    if (x == endX && y == endY) return retStep;
+//                    if (x >= 0 && x < row && y >= 0 && y < col && !flag[x][y] && forest[x][y] != 0) {
+//                        qe.push({ x, y });
+//                        flag[x][y] = true;
+//                    }
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+//};
