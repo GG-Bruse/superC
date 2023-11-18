@@ -3982,3 +3982,129 @@ sk == endWord
 //        return -1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/************************************************** 矩阵（LeetCode）***************************************************/
+/*
+给定一个由 0 和 1 组成的矩阵 mat ，请输出一个大小相同的矩阵，其中每一个格子是 mat 中对应位置元素到最近的 0 的距离
+两个相邻元素间的距离为 1
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<int>> ret;//若为-1,则表示该位置没有被访问过
+//    int row = 0, col = 0;
+//    vector<vector<int>> updateMatrix(vector<vector<int>>& mat)
+//    {
+//        row = mat.size(), col = mat[0].size();
+//        ret = vector<vector<int>>(row, vector<int>(col, -1));
+//        queue<pair<int, int>> qe;
+//
+//        for (int i = 0; i < row; ++i) {
+//            for (int j = 0; j < col; ++j) {
+//                if (mat[i][j] == 0) {
+//                    qe.push({ i, j });
+//                    ret[i][j] = 0;
+//                }
+//            }
+//        }
+//        bfs(mat, qe);
+//        return ret;
+//    }
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    void bfs(vector<vector<int>>& mat, queue<pair<int, int>>& qe)
+//    {
+//        while (!qe.empty())
+//        {
+//            auto [a, b] = qe.front();
+//            qe.pop();
+//            for (int k = 0; k < 4; ++k)
+//            {
+//                int x = a + dx[k], y = b + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && ret[x][y] == -1)
+//                {
+//                    ret[x][y] = ret[a][b] + 1;
+//                    qe.push({ x, y });
+//                }
+//            }
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/************************************************ 飞地的数量（LeetCode）***********************************************/
+/*
+给你一个大小为 m x n 的二进制矩阵 grid ，其中 0 表示一个海洋单元格、1 表示一个陆地单元格
+一次 移动 是指从一个陆地单元格走到另一个相邻（上、下、左、右）的陆地单元格或跨过 grid 的边界
+返回网格中 无法 在任意次数的移动中离开网格边界的陆地单元格的数量
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int row = 0, col = 0;
+//    vector<vector<bool>> ret;//每个位置是否可以离开网格边界 / 是否被遍历过
+//    int numEnclaves(vector<vector<int>>& grid)
+//    {
+//        row = grid.size(), col = grid[0].size();
+//        ret = vector<vector<bool>>(row, vector<bool>(col, false));
+//
+//        queue<pair<int, int>> qe;
+//        for (int i = 0; i < row; ++i) {
+//            if (grid[i][0] != 0) ret[i][0] = true, qe.push({ i, 0 });
+//            if (grid[i][col - 1] != 0) ret[i][col - 1] = true, qe.push({ i, col - 1 });
+//        }
+//        for (int j = 1; j < col - 1; ++j) {
+//            if (grid[0][j] != 0) ret[0][j] = true, qe.push({ 0, j });
+//            if (grid[row - 1][j] != 0) ret[row - 1][j] = true, qe.push({ row - 1, j });
+//        }
+//
+//        bfs(grid, qe);
+//
+//        int number = 0;
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j)
+//                if (ret[i][j] == false && grid[i][j] == 1) ++number;
+//        return number;
+//    }
+//    int dx[4] = { 0, 0, 1, -1 };
+//    int dy[4] = { -1, 1, 0, 0 };
+//    void bfs(vector<vector<int>>& grid, queue<pair<int, int>>& qe)
+//    {
+//        while (!qe.empty())
+//        {
+//            auto [a, b] = qe.front();
+//            qe.pop();
+//            for (int k = 0; k < 4; ++k)
+//            {
+//                int x = a + dx[k], y = b + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && grid[x][y] == 1 && !ret[x][y])
+//                {
+//                    ret[x][y] = true;
+//                    qe.push({ x, y });
+//                }
+//            }
+//        }
+//    }
+//};
