@@ -255,31 +255,17 @@ nums 中的 K-or 是一个满足以下条件的非负整数：
 //public:
 //    int findMinimumOperations(string s1, string s2, string s3)
 //    {
-//        int op = 0;
-//        int minLength = min(s1.size(), min(s2.size(), s3.size()));
-//        if (s1.size() > minLength) {
-//            op += (s1.size() - minLength);
-//            s1 = string(s1.begin(), s1.begin() + minLength);
-//        }
-//        if (s2.size() > minLength) {
-//            op += (s2.size() - minLength);
-//            s2 = string(s2.begin(), s2.begin() + minLength);
-//        }
-//        if (s3.size() > minLength) {
-//            op += (s3.size() - minLength);
-//            s3 = string(s3.begin(), s3.begin() + minLength);
-//        }
+//        int size1 = s1.size(), size2 = s2.size(), size3 = s3.size();
+//        int minLength = min(size1, min(size2, size3));
 //
 //        int same = 0;
 //        for (int i = 0; i < minLength; ++i)
 //            if (s1[i] == s2[i] && s2[i] == s3[i])
 //                ++same;
 //            else break;
+//
 //        if (same == 0) return -1;
-//        else {
-//            op += (3 * (minLength - same));
-//        }
-//        return op;
+//        else return size1 + size2 + size3 - 3 * same;
 //    }
 //};
 
@@ -300,25 +286,68 @@ nums 中的 K-or 是一个满足以下条件的非负整数：
 */
 //#include <iostream>
 //#include <string>
-//#include <vector>
 //using namespace std;
 //class Solution {
 //public:
+//    //对于每个0, 它左边有多少个1, 就移动多少次
 //    long long minimumSteps(string s)
 //    {
-//        int pos = s.size() - 1;
-//        while (pos >= 0 && s[pos] == '1') --pos;//找到最后一个为0的位置
-//
-//        long long step = 0;
-//        for (int i = s.size() - 1; i >= 0; --i)
+//        long long ret = 0;
+//        int oneOfCount = 0;
+//        for (char& ch : s)
 //        {
-//            if (s[i] == '1' && pos > i)
-//            {
-//                step += (pos - i);
-//                swap(s[pos], s[i]);
-//                while (pos >= 0 && s[pos] == '1') --pos;//找到最后一个为0的位置
-//            }
+//            if (ch == '1') ++oneOfCount;
+//            else ret += oneOfCount;
 //        }
-//        return step;
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+/********************************************** 最大异或乘积（LeetCode）***********************************************/
+/*
+给你三个整数 a ，b 和 n ，请你返回 (a XOR x) * (b XOR x) 的 最大值 且 x 需要满足 0 <= x < 2n
+由于答案可能会很大，返回它对 109 + 7 取余 后的结果
+注意，XOR 是按位异或操作
+*/
+//#include <iostream>
+//using namespace std;
+//class Solution {
+//public:
+//    //若a和b在某个比特位上都为0, x在该比特位上取1
+//    //若a和b在某个比特位上都为1, x在该比特位上取0
+//    //若一个位上a、b, 一个位等于1，另一个位等于0, 则需要讨论, 但不管选什么1的数量不变, 即 a^x + b^x等于一个定值
+//    const long long MOD = 1'000'000'007;
+//    int maximumXorProduct(long long a, long long b, int n)
+//    {
+//        if (a < b) swap(a, b); //保证 a >= b
+//
+//        long long mask = (1LL << n) - 1; //n-1到0位都为1
+//        long long ax = a & ~mask; //保留第n位及其左边, 无法被x影响
+//        long long bx = b & ~mask;
+//        a &= mask; //保留低于第n位, 都能被x影响
+//        b &= mask;
+//
+//        long long discuss = a ^ b; // 一个位是0, 另一个位是1, 需要讨论
+//        long long same = mask ^ discuss; // a和b在这个比特位全为0或者全为1
+//
+//        ax += same;
+//        bx += same;
+//
+//        // 分配后应当使 ax 和 bx 尽量接近，乘积才能尽量大
+//        if (discuss > 0 && ax == bx) //最高位给ax, 其余给bx
+//        {
+//            long long high_bit = 1LL << (63 - __builtin_clzll(discuss));
+//            ax += high_bit;
+//            discuss ^= high_bit;
+//        }
+//        bx |= discuss;
+//        return (ax % MOD) * (bx % MOD) % MOD;
 //    }
 //};
