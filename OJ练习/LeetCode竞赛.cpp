@@ -232,3 +232,93 @@ nums 中的 K-or 是一个满足以下条件的非负整数：
 //        return -1;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/****************************************** 使三个字符串相等（LeetCode）***********************************************/
+/*
+给你三个字符串 s1、s2 和 s3。 你可以根据需要对这三个字符串执行以下操作 任意次数 
+在每次操作中，你可以选择其中一个长度至少为 2 的字符串 并删除其 最右位置上 的字符
+如果存在某种方法能够使这三个字符串相等，请返回使它们相等所需的 最小 操作次数；否则，返回 -1
+*/
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    int findMinimumOperations(string s1, string s2, string s3)
+//    {
+//        int op = 0;
+//        int minLength = min(s1.size(), min(s2.size(), s3.size()));
+//        if (s1.size() > minLength) {
+//            op += (s1.size() - minLength);
+//            s1 = string(s1.begin(), s1.begin() + minLength);
+//        }
+//        if (s2.size() > minLength) {
+//            op += (s2.size() - minLength);
+//            s2 = string(s2.begin(), s2.begin() + minLength);
+//        }
+//        if (s3.size() > minLength) {
+//            op += (s3.size() - minLength);
+//            s3 = string(s3.begin(), s3.begin() + minLength);
+//        }
+//
+//        int same = 0;
+//        for (int i = 0; i < minLength; ++i)
+//            if (s1[i] == s2[i] && s2[i] == s3[i])
+//                ++same;
+//            else break;
+//        if (same == 0) return -1;
+//        else {
+//            op += (3 * (minLength - same));
+//        }
+//        return op;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/******************************************* 区分黑球与白球（LeetCode）************************************************/
+/*
+桌子上有 n 个球，每个球的颜色不是黑色，就是白色
+给你一个长度为 n 、下标从 0 开始的二进制字符串 s，其中 1 和 0 分别代表黑色和白色的球
+在每一步中，你可以选择两个相邻的球并交换它们
+返回「将所有黑色球都移到右侧，所有白色球都移到左侧所需的 最小步数」
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    long long minimumSteps(string s)
+//    {
+//        int pos = s.size() - 1;
+//        while (pos >= 0 && s[pos] == '1') --pos;//找到最后一个为0的位置
+//
+//        long long step = 0;
+//        for (int i = s.size() - 1; i >= 0; --i)
+//        {
+//            if (s[i] == '1' && pos > i)
+//            {
+//                step += (pos - i);
+//                swap(s[pos], s[i]);
+//                while (pos >= 0 && s[pos] == '1') --pos;//找到最后一个为0的位置
+//            }
+//        }
+//        return step;
+//    }
+//};
