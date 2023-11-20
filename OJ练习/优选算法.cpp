@@ -4108,3 +4108,132 @@ sk == endWord
 //        }
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/*********************************************** 地图中的最高点（LeetCode）********************************************/
+/*
+给你一个大小为 m x n 的整数矩阵 isWater ，它代表了一个由 陆地 和 水域 单元格组成的地图
+
+如果 isWater[i][j] == 0 ，格子 (i, j) 是一个 陆地 格子
+如果 isWater[i][j] == 1 ，格子 (i, j) 是一个 水域 格子
+你需要按照如下规则给每个单元格安排高度：
+
+每个格子的高度都必须是非负的
+如果一个格子是 水域 ，那么它的高度必须为 0
+任意相邻的格子高度差 至多 为 1 。当两个格子在正东、南、西、北方向上相互紧挨着，就称它们为相邻的格子
+（也就是说它们有一条公共边）
+找到一种安排高度的方案，使得矩阵中的最高高度值 最大
+
+请你返回一个大小为 m x n 的整数矩阵 height ，其中 height[i][j] 是格子 (i, j) 的高度。如果有多种解法，请返回 任意一个
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    vector<vector<int>> highestPeak(vector<vector<int>>& isWater)
+//    {
+//        int row = isWater.size(), col = isWater[0].size();
+//        vector<vector<int>> ret(row, vector<int>(col, -1));//若为-1, 表示没有处理过
+//        queue<pair<int, int>> qe;
+//
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j)
+//                if (isWater[i][j] == 1) {
+//                    qe.push({ i, j });
+//                    ret[i][j] = 0;
+//                }
+//
+//        while (!qe.empty())
+//        {
+//            auto [a, b] = qe.front();
+//            qe.pop();
+//            for (int k = 0; k < 4; ++k)
+//            {
+//                int x = a + dx[k], y = b + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && ret[x][y] == -1) {
+//                    qe.push({ x, y });
+//                    ret[x][y] = ret[a][b] + 1;
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************** 地图分析（LeetCode）***********************************************/
+/*
+你现在手里有一份大小为 n x n 的 网格 grid，上面的每个 单元格 都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地
+请你找出一个海洋单元格，这个海洋单元格到离它最近的陆地单元格的距离是最大的，
+并返回该距离。如果网格上只有陆地或者海洋，请返回 -1
+我们这里说的距离是「曼哈顿距离」（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 
+这两个单元格之间的距离是 |x0 - x1| + |y0 - y1|
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution {
+//public:
+//    int dx[4] = { 1, -1, 0, 0 };
+//    int dy[4] = { 0, 0, 1, -1 };
+//    int maxDistance(vector<vector<int>>& grid)
+//    {
+//        int row = grid.size(), col = grid[0].size();
+//        vector<vector<bool>> flag(row, vector<bool>(col, false));//记录每个位置是否处理过
+//        queue<pair<int, int>> qe;
+//
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j)
+//                if (grid[i][j] == 1) {
+//                    qe.push({ i, j });
+//                    flag[i][j] = true;
+//                }
+//
+//        int step = 0;
+//        while (!qe.empty())
+//        {
+//            int size = qe.size();
+//            bool isPush = false;//此轮是否往queue中添加了新的单元格
+//            while (size--)
+//            {
+//                auto [a, b] = qe.front();
+//                qe.pop();
+//                for (int k = 0; k < 4; ++k)
+//                {
+//                    int x = a + dx[k], y = b + dy[k];
+//                    if (x >= 0 && x < row && y >= 0 && y < col && !flag[x][y])
+//                    {
+//                        qe.push({ x, y });
+//                        flag[x][y] = true;
+//                        isPush = true;
+//                    }
+//                }
+//            }
+//            if (isPush) ++step;
+//        }
+//        return step == 0 ? -1 : step;
+//    }
+//};
