@@ -4237,3 +4237,185 @@ sk == endWord
 //        return step == 0 ? -1 : step;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/************************************************* 课程表（LeetCode）***********************************************/
+/*
+你这个学期必须选修 numCourses 门课程，记为 0 到 numCourses - 1 
+在选修某些课程之前需要一些先修课程。 先修课程按数组 prerequisites 给出
+其中 prerequisites[i] = [ai, bi] ，表示如果要学习课程 ai 则 必须 先学习课程 bi
+例如，先修课程对 [0, 1] 表示：想要学习课程 0 ，你需要先完成课程 1
+请你判断是否可能完成所有课程的学习？如果可以，返回 true ；否则，返回 false
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    bool canFinish(int numCourses, vector<vector<int>>& prerequisites)
+//    {
+//        unordered_map<int, vector<int>> edges;//邻接表
+//        vector<int> in(numCourses);//每个顶点的入度
+//        //建图
+//        for (auto& v : prerequisites) {
+//            int a = v[0], b = v[1];//b -> a
+//            edges[b].push_back(a);
+//            ++in[a];
+//        }
+//        //拓扑排序
+//        queue<int> qe;
+//        for (int i = 0; i < numCourses; ++i)
+//            if (in[i] == 0) qe.push(i);
+//        while (!qe.empty())
+//        {
+//            int front = qe.front();
+//            qe.pop();
+//            for (int tmp : edges[front]) {
+//                --in[tmp];
+//                if (in[tmp] == 0) qe.push(tmp);
+//            }
+//        }
+//        for (int i = 0; i < numCourses; ++i)
+//            if (in[i] != 0) return false;
+//        return true;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/********************************************* 课程表 II（LeetCode）************************************************/
+/*
+现在你总共有 numCourses 门课需要选，记为 0 到 numCourses - 1
+给你一个数组 prerequisites ，其中 prerequisites[i] = [ai, bi] ，表示在选修课程 ai 前 必须 先选修 bi
+例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示：[0,1]
+返回你为了学完所有课程所安排的学习顺序。可能会有多个正确的顺序，你只要返回 任意一种 就可以了
+如果不可能完成所有课程，返回 一个空数组
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites)
+//    {
+//        unordered_map<int, vector<int>> edges;
+//        vector<int> in(numCourses);
+//        for (auto& v : prerequisites) {
+//            int a = v[0], b = v[1];//b -> a
+//            edges[b].push_back(a);
+//            ++in[a];
+//        }
+//
+//        vector<int> ret;
+//        queue<int> qe;
+//        for (int i = 0; i < numCourses; ++i)
+//            if (in[i] == 0) qe.push(i);
+//        while (!qe.empty())
+//        {
+//            int front = qe.front();
+//            qe.pop();
+//            ret.push_back(front);
+//            for (int tmp : edges[front])
+//            {
+//                --in[tmp];
+//                if (in[tmp] == 0) qe.push(tmp);
+//            }
+//        }
+//        if (ret.size() == numCourses) return ret;
+//        else return {};
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/************************************************ 火星词典（LeetCode）**********************************************/
+/*
+现有一种使用英语字母的外星文语言，这门语言的字母顺序与英语顺序不同
+给定一个字符串列表 words ，作为这门语言的词典，words 中的字符串已经 按这门新语言的字母顺序进行了排序 
+请你根据该词典还原出此语言中已知的字母顺序，并 按字母递增顺序 排列。若不存在合法字母顺序，返回 ""
+若存在多种可能的合法字母顺序，返回其中 任意一种 顺序即可
+字符串 s 字典顺序小于 字符串 t 有两种情况：
+在第一个不同字母处，如果 s 中的字母在这门外星语言的字母顺序中位于 t 中字母之前，那么 s 的字典顺序小于 t
+如果前面 min(s.length, t.length) 字母都相同，那么 s.length < t.length 时，s 的字典顺序也小于 t
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <queue>
+//#include <unordered_map>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    string alienOrder(vector<string>& words)
+//    {
+//        unordered_map<char, unordered_set<char>> edges;
+//        unordered_map<char, int> in;
+//        //建图
+//        for (auto& str : words)
+//            for (auto& it : str)
+//                in[it] = 0;
+//        for (int i = 0; i < words.size() - 1; ++i)
+//        {
+//            for (int j = i + 1; j < words.size(); ++j)
+//            {
+//                string aStr = words[i];
+//                string bStr = words[j];
+//                int current = 0;
+//                while (current < aStr.size() && current < bStr.size() && aStr[current] == bStr[current]) ++current;
+//                if (current < aStr.size() && current < bStr.size())
+//                {
+//                    char a = aStr[current], b = bStr[current];//a -> b
+//                    if (!edges[a].count(b))//避免数据冗余，尤其是in
+//                    {
+//                        edges[a].insert(b);
+//                        ++in[b];
+//                    }
+//                }
+//                if (current == bStr.size() && current < aStr.size()) return "";
+//            }
+//        }
+//        //拓扑排序
+//        string ret;
+//        queue<char> qe;
+//        for (auto& it : in)
+//            if (it.second == 0) qe.push(it.first);
+//        while (!qe.empty())
+//        {
+//            char front = qe.front();
+//            qe.pop();
+//            ret.push_back(front);
+//            for (char tmp : edges[front])
+//                if (--in[tmp] == 0) qe.push(tmp);
+//        }
+//        for (auto& it : in)
+//            if (it.second != 0) return "";
+//        return ret;
+//    }
+//};
