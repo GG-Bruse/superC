@@ -2971,3 +2971,42 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/************************************************* 最大正方形（LeetCode）*********************************************/
+/*
+在一个由 '0' 和 '1' 组成的二维矩阵内，找到只包含 '1' 的最大正方形，并返回其面积
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maximalSquare(vector<vector<char>>& matrix)
+//    {
+//        int row = matrix.size(), col = matrix[0].size();
+//        if (row == 0 || col == 0) return 0;
+//        //dp[i] : 以matrix[i]为右下角元素并且为1的最大正方形的变长
+//        vector<vector<int>> dp(row, vector<int>(col, 0));
+//        int maxLength = 0;
+//        for (int j = 0; j < col; ++j) if (matrix[0][j] == '1') dp[0][j] = 1, maxLength = 1;
+//        for (int i = 0; i < row; ++i) if (matrix[i][0] == '1') dp[i][0] = 1, maxLength = 1;
+//        for (int i = 1; i < row; ++i) {
+//            for (int j = 1; j < col; ++j) {
+//                if (matrix[i][j] == '1') {
+//                    dp[i][j] = min(min(dp[i - 1][j], dp[i - 1][j - 1]), dp[i][j - 1]) + 1;
+//                    maxLength = max(maxLength, dp[i][j]);
+//                }
+//            }
+//        }
+//        return maxLength * (long long)maxLength;
+//    }
+//};
