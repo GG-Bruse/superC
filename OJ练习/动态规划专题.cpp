@@ -3010,3 +3010,106 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return maxLength * (long long)maxLength;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/********************************************* 三角形最小路径和（LeetCode）********************************************/
+/*
+给定一个三角形 triangle ，找出自顶向下的最小路径和
+每一步只能移动到下一行中相邻的结点上。相邻的结点在这里指的是下标与上一层结点下标相同或者等于上一层结点下标+1的两个结点
+也就是说，如果正位于当前行的下标 i ，那么下一步可以移动到下一行的下标 i 或 i + 1
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+// class Solution1 {
+// public:
+//     int minimumTotal(vector<vector<int>>& triangle) 
+//     {
+//         int row = triangle.size(), col = triangle.back().size();
+//         //dp[i][j] : 到达triangle[i][j]时的最小路径和
+//         vector<vector<int>> dp(row, vector<int>(col, INT_MAX));
+//         dp[0][0] = triangle[0][0];
+//         for(int i = 1; i < row; ++i)
+//         {
+//             for(int j = 0; j < triangle[i].size(); ++j)
+//             {
+//                 if(j - 1 >= 0)
+//                     dp[i][j] = min(dp[i - 1][j], dp[i - 1][j - 1]) + triangle[i][j];
+//                 else 
+//                     dp[i][j] = dp[i - 1][j] + triangle[i][j];
+//             }
+//         }
+//         int minSum = INT_MAX;
+//         for(int j = 0; j < col; ++j)
+//             minSum = min(minSum, dp[row - 1][j]);
+//         return minSum;
+//     }
+// };
+//class Solution2 {
+//public:
+//    int minimumTotal(vector<vector<int>>& triangle)
+//    {
+//        int row = triangle.size();
+//        for (int i = row - 2; i >= 0; --i)
+//            for (int j = 0; j < triangle[i].size(); ++j)
+//                triangle[i][j] += min(triangle[i + 1][j], triangle[i + 1][j + 1]);
+//        return triangle[0][0];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/************************************************* 编辑距离（LeetCode）***********************************************/
+/*
+给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数
+你可以对一个单词进行如下三种操作：
+插入一个字符
+删除一个字符
+替换一个字符
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int minDistance(string word1, string word2)
+//    {
+//        int row = word1.size(), col = word2.size();
+//        //dp[i][j] : 由word1前i个字母和word2前j字母之间的编辑距离
+//        vector<vector<int>> dp(row + 1, vector<int>(col + 1));
+//        //初始化
+//        for (int i = 0; i < row + 1; ++i) dp[i][0] = i;
+//        for (int j = 0; j < col + 1; ++j) dp[0][j] = j;
+//        //dp
+//        for (int i = 1; i < row + 1; ++i)
+//        {
+//            for (int j = 1; j < col + 1; ++j)
+//            {
+//                int dis1 = dp[i][j - 1] + 1;//i先变成j - 1, 末尾再增加一个字符可变化为j
+//                int dis2 = dp[i - 1][j] + 1;//i - 1先变成j, 此时j再变成i会多出一个字符，删去即可
+//                int dis3 = dp[i - 1][j - 1];//i - 1变成j - 1, 若最后一个字符不同, 最后一个字符进行修改即可
+//                if (word1[i - 1] != word2[j - 1]) dis3 += 1;
+//                dp[i][j] = min(dis1, min(dis2, dis3));
+//            }
+//        }
+//        return dp[row][col];
+//    }
+//};
