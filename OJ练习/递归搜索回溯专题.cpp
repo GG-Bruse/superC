@@ -1929,3 +1929,109 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 //         else return memory[number] = 1 + min(dfs(number + 1), dfs(number - 1));
 //     }
 // };
+
+
+
+
+
+
+
+
+
+
+
+/****************************************** 打家劫舍 III（LeetCode）******************************************/
+/*
+小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为root
+除了 root 之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果 两个直接相连的房子在同一天晚上被打劫 ，房屋将自动报警
+给定二叉树的 root 。返回 在不触动警报的情况下 ，小偷能够盗取的最高金额
+*/
+//#include <iostream>
+//#include <unordered_map>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode *left;
+//    TreeNode *right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//}; 
+//class Solution {
+//public:
+//    //f(o) 表示选择 o 节点的情况下, o 节点的子树上被选择的节点的最大权值和
+//    //g(o) 表示不选择 o 节点的情况下, o 节点的子树上被选择的节点的最大权值和
+//    unordered_map <TreeNode*, int> f, g;
+//    void dfs(TreeNode* node)
+//    {
+//        if (node == nullptr) return;
+//        dfs(node->left);
+//        dfs(node->right);
+//        f[node] = node->val + g[node->left] + g[node->right];
+//        g[node] = max(f[node->left], g[node->left]) + max(f[node->right], g[node->right]);
+//    }
+//    int rob(TreeNode* root)
+//    {
+//        dfs(root);
+//        return max(f[root], g[root]);
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/************************************ 不同的二叉搜索树 II（LeetCode）*****************************************/
+/*
+给你一个整数 n ，请你生成并返回所有由 n 个节点组成且节点值从1到n互不相同的不同二叉搜索树
+可以按 任意顺序 返回答案
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode *left;
+//    TreeNode *right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//}; 
+//class Solution {
+//public:
+//    vector<TreeNode*> generateTrees(int start, int end)
+//    {
+//        if (start > end) return { nullptr };
+//        vector<TreeNode*> allTrees;
+//        //枚举可行根结点
+//        for (int i = start; i <= end; ++i)
+//        {
+//            //左子树集合
+//            vector<TreeNode*> left = generateTrees(start, i - 1);
+//            //右子树集合
+//            vector<TreeNode*> right = generateTrees(i + 1, end);
+//            //所有组合
+//            for (int j = 0; j < left.size(); ++j)
+//            {
+//                for (int k = 0; k < right.size(); ++k)
+//                {
+//                    TreeNode* current = new TreeNode(i);
+//                    current->left = left[j];
+//                    current->right = right[k];
+//                    allTrees.push_back(current);
+//                }
+//            }
+//        }
+//        return allTrees;
+//    }
+//    vector<TreeNode*> generateTrees(int n)
+//    {
+//        if (n == 0) return {};
+//        return generateTrees(1, n);
+//    }
+//};
