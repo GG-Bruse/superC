@@ -3113,3 +3113,98 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp[row][col];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+
+/************************************ 统计构造好字符串的方案数（LeetCode）************************************/
+/*
+给你整数 zero ，one ，low 和 high ，我们从空字符串开始构造一个字符串，每一步执行下面操作中的一种：
+将 '0' 在字符串末尾添加 zero  次
+将 '1' 在字符串末尾添加 one 次
+以上操作可以执行任意次
+如果通过以上过程得到一个 长度 在 low 和 high 之间（包含上下边界）的字符串，那么这个字符串我们称为好字符串
+请你返回满足以上要求的 不同 好字符串数目。由于答案可能很大，请将结果对 109 + 7 取余 后返回
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    const int MOD = 1e9 + 7;
+//    int countGoodStrings(int low, int high, int zero, int one)
+//    {
+//        //dp[i] : 构造长为i的字符串的方案数
+//        vector<int> dp(high + 1);
+//        dp[0] = 1;
+//        //dp
+//        int ret = 0;
+//        for (int i = 1; i <= high; ++i)
+//        {
+//            if (i >= one) dp[i] = dp[i - one] % MOD;
+//            if (i >= zero) dp[i] = (dp[i] + dp[i - zero]) % MOD;
+//            if (i >= low) ret = (ret + dp[i]) % MOD;
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+/******************************************** 最低票价（LeetCode）*********************************************/
+/*
+在一个火车旅行很受欢迎的国度，你提前一年计划了一些火车旅行
+在接下来的一年里，你要旅行的日子将以一个名为 days 的数组给出。每一项是一个从 1 到 365 的整数
+火车票有 三种不同的销售方式 ：
+一张 为期一天 的通行证售价为 costs[0] 美元；
+一张 为期七天 的通行证售价为 costs[1] 美元；
+一张 为期三十天 的通行证售价为 costs[2] 美元。
+通行证允许数天无限制的旅行。 例如，如果我们在第 2 天获得一张 为期 7 天 的通行证
+那么我们可以连着旅行 7 天：第 2 天、第 3 天、第 4 天、第 5 天、第 6 天、第 7 天和第 8 天
+返回 你想要完成在给定的列表 days 中列出的每一天的旅行所需要的最低消费
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_set>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    int mincostTickets(vector<int>& days, vector<int>& costs)
+//    {
+//        vector<int> diffDate{ 1, 7, 30 };
+//        unordered_set<int> set;
+//        for (int& it : days) set.insert(it);
+//        //dp[i] : 第i天总共的最低花费
+//        int date = days.back();
+//        vector<int> dp(date + 1, INT_MAX);
+//        dp[0] = 0;
+//        for (int i = 1; i <= date; ++i)
+//        {
+//            if (!set.count(i)) dp[i] = dp[i - 1];
+//            else
+//            {
+//                for (int k = 0; k <= 2; ++k)
+//                {
+//                    if (i - diffDate[k] >= 0)
+//                        dp[i] = min(dp[i], dp[i - diffDate[k]] + costs[k]);
+//                    else
+//                        dp[i] = min(dp[i], dp[0] + costs[k]);
+//                }
+//            }
+//        }
+//        return dp[date];
+//    }
+//};
