@@ -3208,3 +3208,119 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp[date];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/***************************************** 解决智力问题（LeetCode）*******************************************/
+/*
+给你一个下标从 0 开始的二维整数数组 questions ，其中 questions[i] = [pointsi, brainpoweri] 
+这个数组表示一场考试里的一系列题目，你需要 按顺序 （也就是从问题 0 开始依次解决），针对每个问题选择 解决 或者 跳过 操作。解决问题 i 将让你 获得  pointsi 的分数，但是你将 无法 解决接下来的 brainpoweri 个问题（即只能跳过接下来的 brainpoweri 个问题）
+如果你跳过问题 i ，你可以对下一个问题决定使用哪种操作
+比方说，给你 questions = [[3, 2], [4, 3], [4, 4], [2, 5]] ：
+如果问题 0 被解决了， 那么你可以获得 3 分，但你不能解决问题 1 和 2
+如果你跳过问题 0 ，且解决问题 1 ，你将获得 4 分但是不能解决问题 2 和 3
+请你返回这场考试里你能获得的 最高 分数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution1 {
+//public:
+//    long long mostPoints(vector<vector<int>>& questions)
+//    {
+//        int size = questions.size();
+//        //dp[i] : 第 i 道题目及以后的题目可以获得的最高分数
+//        vector<long long> dp(size);
+//        dp[size - 1] = questions[size - 1][0];
+//        for (int i = size - 2; i >= 0; --i)
+//        {
+//            dp[i] = dp[i + 1];
+//            if (i + questions[i][1] + 1 < size)
+//                dp[i] = max(questions[i][0] + dp[i + questions[i][1] + 1], dp[i]);
+//            else
+//                dp[i] = max(dp[i], (long long)questions[i][0]);
+//        }
+//        return dp[0];
+//    }
+//};
+////仅仅是简化代码，算法并无优化
+//class Solution2 {
+//public:
+//    long long mostPoints(vector<vector<int>>& questions)
+//    {
+//        int size = questions.size();
+//        //dp[i] : 第 i 道题目及以后的题目可以获得的最高分数
+//        vector<long long> dp(size + 1);//dp[size]存储0
+//        for (int i = size - 1; i >= 0; --i)
+//            dp[i] = max(dp[i + 1], questions[i][0] + dp[min(size, i + questions[i][1] + 1)]);
+//        return dp[0];
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+
+/**************************************** 多米诺和托米诺平铺（LeetCode）**************************************/
+/*
+有两种形状的瓷砖：一种是 2 x 1 的多米诺形，另一种是形如 "L" 的托米诺形。两种形状都可以旋转
+给定整数 n ，返回可以平铺 2 x n 的面板的方法的数量。返回对 109 + 7 取模 的值
+平铺指的是每个正方形都必须有瓷砖覆盖。两个平铺不同，当且仅当面板上有四个方向上的相邻单元中的两个，
+使得恰好有一个平铺有一个瓷砖占据两个正方形
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+////找规律
+//class Solution1 {
+//public:
+//    int numTilings(int n)
+//    {
+//        const int MOD = 1e9 + 7;
+//        //dp[i] : 当n == i时, 共有多少中平铺的方法
+//        if (n <= 2) return n;
+//        vector<long long> dp(n + 1);
+//        dp[0] = dp[1] = 1, dp[2] = 2;
+//        for (int i = 3; i <= n; ++i)
+//            dp[i] = (dp[i - 1] * 2 + dp[i - 3]) % MOD;
+//        return dp[n];
+//    }
+//};
+////动态规划
+//class Solution {
+//public:
+//    int numTilings(int n)
+//    {
+//        const int MOD = 1e9 + 7;
+//        //dp[i][s] 表示平铺到第 i 列时，各个状态 s 对应的平铺方法数量
+//        /*
+//        一个正方形都没有被覆盖，记为状态 0
+//        只有上方的正方形被覆盖，记为状态 1
+//        只有下方的正方形被覆盖，记为状态 2
+//        上下两个正方形都被覆盖，记为状态 3
+//        */
+//        vector<vector<long long>> dp(n + 1, vector<long long>(4));
+//        dp[1][0] = dp[1][3] = 1;
+//        for (int i = 2; i <= n; ++i)
+//        {
+//            dp[i][0] = dp[i - 1][3];
+//            dp[i][1] = (dp[i - 1][0] + dp[i - 1][2]) % MOD;
+//            dp[i][2] = (dp[i - 1][0] + dp[i - 1][1]) % MOD;
+//            dp[i][3] = (dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][2] + dp[i - 1][3]) % MOD;
+//        }
+//        return dp[n][3];
+//    }
+//};
