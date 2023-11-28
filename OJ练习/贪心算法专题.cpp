@@ -1164,3 +1164,55 @@ i + j < n
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/**************************** 找出到每个位置为止最长的有效障碍赛跑路线（LeetCode）*****************************/
+/*
+你打算构建一些障碍赛跑路线。给你一个下标从0开始的整数数组obstacles
+数组长度为 n ，其中obstacles[i]表示第i个障碍的高度
+对于每个介于 0 和 n - 1 之间（包含 0 和 n - 1）的下标  i 
+在满足下述条件的前提下，请你找出 obstacles 能构成的最长障碍路线的长度：
+你可以选择下标介于 0 到 i 之间（包含 0 和 i）的任意个障碍
+在这条路线中，必须包含第 i 个障碍
+你必须按障碍在 obstacles 中的 出现顺序 布置这些障碍
+除第一个障碍外，路线中每个障碍的高度都必须和前一个障碍 相同或者更高
+返回长度为 n 的答案数组 ans ，其中 ans[i] 是上面所述的下标 i 对应的最长障碍赛跑路线的长度
+*/
+//#include <iostrean>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    //贪心+二分
+//    vector<int> longestObstacleCourseAtEachPosition(vector<int>& obstacles)
+//    {
+//        //ret[i] : obstacles[0]-obstacles[i]，能构成的最长障碍路线的长度
+//        //path : 仅用于记录长度, 存储的不一定是有效的障碍路线
+//        int size = obstacles.size();
+//        vector<int> ret, path;
+//        for (int i = 0; i < size; ++i)
+//        {
+//            if (path.empty() || obstacles[i] >= path.back())
+//            {
+//                path.push_back(obstacles[i]);
+//                ret.push_back(path.size());
+//            }
+//            else
+//            {
+//                //二分查找第一个大于num的数字的位置, 计算出该位置的下标
+//                int index = upper_bound(path.begin(), path.end(), obstacles[i]) - path.begin();
+//                ret.push_back(index + 1);
+//                path[index] = obstacles[i];
+//            }
+//        }
+//        return ret;
+//    }
+//};
