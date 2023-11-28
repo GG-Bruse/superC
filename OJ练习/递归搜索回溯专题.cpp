@@ -2035,3 +2035,50 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 //        return generateTrees(1, n);
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/*************************************** 二叉树中的最大路径和（LeetCode）**************************************/
+/*
+二叉树中的路径被定义为一条节点序列，序列中每对相邻节点之间都存在一条边。同一个节点在一条路径序列中至多出现一次
+该路径 至少包含一个 节点，且不一定经过根节点
+路径和 是路径中各节点值的总和
+给你一个二叉树的根节点 root ，返回其 最大路径和
+*/
+//#include <iostream>
+//using namespace std;
+//struct TreeNode {
+//    int val;
+//    TreeNode *left;
+//    TreeNode *right;
+//    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+//    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+//    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+//};
+//class Solution {
+//public:
+//    int ret = INT_MIN;
+//    int maxGain(TreeNode* node)
+//    {
+//        if (node == nullptr) return 0;
+//
+//        int leftMaxGain = max(maxGain(node->left), 0);//左子树(左路)最大贡献值
+//        int rightMaxGain = max(maxGain(node->right), 0);//右子树(右路)最大贡献值
+//        //作为结果
+//        int currentMaxGain = node->val + leftMaxGain + rightMaxGain;
+//        ret = max(currentMaxGain, ret);
+//        return node->val + max(leftMaxGain, rightMaxGain);//此时仅作为一路
+//    }
+//    int maxPathSum(TreeNode* root)
+//    {
+//        if (root == nullptr) return 0;
+//        maxGain(root);
+//        return ret;
+//    }
+//};
