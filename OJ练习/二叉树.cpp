@@ -302,6 +302,79 @@ postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树
 
 
 
+/********************************************* 二叉树的右视图（LeetCode）**************************************************/
+/*
+给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值
+*/
+//class Solution {
+//public:
+//    vector<int> rightSideView(TreeNode* root)
+//    {
+//        if (root == nullptr) return {};
+//        vector<int> ret;
+//        bfs(ret, root);
+//        return ret;
+//    }
+//    void bfs(vector<int>& ret, TreeNode* node)
+//    {
+//        queue<TreeNode*> qe;
+//        qe.push(node);
+//        while (!qe.empty())
+//        {
+//            vector<int> tmpRow;
+//            int size = qe.size();
+//            while (size--)
+//            {
+//                TreeNode* front = qe.front();
+//                qe.pop();
+//                tmpRow.push_back(front->val);
+//                if (front->left) qe.push(front->left);
+//                if (front->right) qe.push(front->right);
+//            }
+//            if (tmpRow.size()) ret.push_back(tmpRow.back());
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************** 二叉树展开为链表（LeetCode）*************************************************/
+/*
+给你二叉树的根结点 root ，请你将它展开为一个单链表：
+展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null
+展开后的单链表应该与二叉树 先序遍历 顺序相同
+*/
+//class Solution {
+//public:
+//    void flatten(TreeNode* root)
+//    {
+//        TreeNode* node = root;
+//        while (node != nullptr)
+//        {
+//            //找到左子树的最右结点
+//            TreeNode* current = node->left;
+//            while (current != nullptr && current->right != nullptr) current = current->right;
+//            //变换
+//            if (current != nullptr)
+//            {
+//                current->right = node->right;
+//                node->right = node->left;
+//                node->left = nullptr;
+//            }
+//            node = node->right;
+//        }
+//    }
+//};
+
+
+
 
 
 
@@ -333,6 +406,11 @@ public:
 
 
 
+
+
+
+
+
 /******************************************************二叉树的中序遍历（非递归）************************************************/
 class Solution2 {
 public:
@@ -360,6 +438,11 @@ public:
         return ret;
     }
 };
+
+
+
+
+
 
 
 
