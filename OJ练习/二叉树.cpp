@@ -4,6 +4,7 @@
 #include <stack>
 #include <queue>
 #include <unordered_set>
+#include <unordered_map>
 using namespace std;
 struct TreeNode {
     int val;
@@ -351,7 +352,7 @@ postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树
 展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null
 展开后的单链表应该与二叉树 先序遍历 顺序相同
 */
-//class Solution {
+//class Solution1 {
 //public:
 //    void flatten(TreeNode* root)
 //    {
@@ -372,6 +373,126 @@ postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树
 //        }
 //    }
 //};
+//class Solution2 {
+//public:
+//    void flatten(TreeNode* root)
+//    {
+//        if (root == nullptr) return;
+//        stack<TreeNode*> sk;
+//        sk.push(root);
+//        TreeNode* prev = nullptr;//记录上一个结点
+//        while (!sk.empty())
+//        {
+//            TreeNode* current = sk.top();
+//            sk.pop();
+//            if (prev != nullptr)
+//            {
+//                prev->left = nullptr;
+//                prev->right = current;
+//            }
+//            TreeNode* left = current->left, * right = current->right;
+//            if (right != nullptr) sk.push(right);
+//            if (left != nullptr) sk.push(left);
+//            prev = current;
+//        }
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************* 将有序数组转换为二叉搜索树（LeetCode）**************************************/
+/*
+给你一个整数数组nums，其中元素已经按升序排列，请你将其转换为一棵高度平衡二叉搜索树
+高度平衡二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树
+*/
+//class Solution {
+//public:
+//    TreeNode* sortedArrayToBST(vector<int>& nums)
+//    {
+//        if (nums.size() == 0) return nullptr;
+//        return dfs(nums, 0, nums.size() - 1);
+//    }
+//    TreeNode* dfs(vector<int>& nums, int left, int right)
+//    {
+//        if (left > right) return nullptr;
+//        int mid = right - ((right - left) >> 1);
+//        TreeNode* node = new TreeNode(nums[mid]);
+//        node->left = dfs(nums, left, mid - 1);
+//        node->right = dfs(nums, mid + 1, right);
+//        return node;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/*************************************************** 路径总和III （LeetCode）********************************************/
+/*
+给定一个二叉树的根节点root，和一个整数targetSum ，求该二叉树里节点值之和等于targetSum的路径的数目
+路径 不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）
+*/
+////深度优先遍历
+//class Solution1 {
+//public:
+//    int pathSum(TreeNode* root, long long targetSum)
+//    {
+//        if (root == nullptr) return 0;
+//        //递归,以每个结点为起点都进行计算
+//        int ret = rootSum(root, targetSum);
+//        ret += pathSum(root->left, targetSum);
+//        ret += pathSum(root->right, targetSum);
+//        return ret;
+//    }
+//    //node结点为起点向下,满足总和为value的路径数目
+//    int rootSum(TreeNode* node, long long value)
+//    {
+//        if (node == nullptr) return 0;
+//        int ret = 0;
+//        if (node->val == value) ++ret;
+//        ret += rootSum(node->left, value - (node->val));
+//        ret += rootSum(node->right, value - (node->val));
+//        return ret;
+//    }
+//};
+////前缀和优化
+//class Solution2 {
+//public:
+//    //前缀 : 根结点到当前结点的路径上所有节点的和 
+//    unordered_map<long long, int> prefix;//和:路径个数
+//    int dfs(TreeNode* root, long long current, int targetSum)
+//    {
+//        if (root == nullptr) return 0;
+//        int ret = 0;
+//        current += root->val;// 从根节点到当前节点的前缀和为current
+//        if (prefix.count(current - targetSum)) {//从根节点到当前结点的前缀和为current-targetSum的结点
+//            ret = prefix[current - targetSum];
+//        }
+//        //向下递归
+//        ++prefix[current];
+//        ret += dfs(root->left, current, targetSum);
+//        ret += dfs(root->right, current, targetSum);
+//        --prefix[current];
+//        return ret;
+//    }
+//    int pathSum(TreeNode* root, int targetSum) {
+//        prefix[0] = 1;
+//        return dfs(root, 0, targetSum);
+//    }
+//};
+
 
 
 
