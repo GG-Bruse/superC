@@ -123,12 +123,12 @@ string operator/(string& num1, string& num2)
     return retNum;
 }
 
-int main()
-{
-    string num1 = "29029029029058582908701160145";
-    string num2 = "29";
-    string ret = num1 / num2;
-    bool result = (num1 == (ret * num2));
-    cout << result << endl;
-	return 0;
-}
+//int main()
+//{
+//    string num1 = "29029029029058582908701160145";
+//    string num2 = "29";
+//    string ret = num1 / num2;
+//    bool result = (num1 == (ret * num2));
+//    cout << result << endl;
+//	return 0;
+//}
