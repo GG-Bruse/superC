@@ -351,3 +351,141 @@ nums 中的 K-or 是一个满足以下条件的非负整数：
 //        return (ax % MOD) * (bx % MOD) % MOD;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/********************************************** 找出峰值（LeetCode）*********************************************/
+/*
+给你一个下标从 0 开始的数组 mountain 。你的任务是找出数组 mountain 中的所有峰值
+以数组形式返回给定数组中 峰值 的下标，顺序不限
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> findPeaks(vector<int>& mountain)
+//    {
+//        int size = mountain.size();
+//        vector<int> ret;
+//        for (int i = 1; i < size - 1; ++i)
+//            if (mountain[i] > mountain[i - 1] && mountain[i] > mountain[i + 1])
+//                ret.push_back(i);
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/**************************************** 需要添加的硬币的最小数量（LeetCode）***********************************/
+/*
+给你一个下标从 0 开始的整数数组 coins，表示可用的硬币的面值，以及一个整数 target
+如果存在某个 coins 的子序列总和为 x，那么整数 x 就是一个 可取得的金额
+返回需要添加到数组中的 任意面值 硬币的 最小数量 ，使范围 [1, target] 内的每个整数都属于 可取得的金额 
+数组的 子序列 是通过删除原始数组的一些（可能不删除）元素而形成的新的 非空 数组，删除过程不会改变剩余元素的相对位置
+*/
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//    int minimumAddedCoins(vector<int>& coins, int target)
+//    {
+//        sort(coins.begin(), coins.end());
+//        int result = 0;
+//        int right = 1; //可以组成[0, right - 1]中的所有数
+//
+//        int current = 0;
+//        //当right > target, 此时[0, target]中的所有数字都可以组成了
+//        while (right <= target)
+//        {
+//            //现在可以组成[0, right + coins[current]]中的所有数字
+//            if (current < coins.size() && coins[current] <= right) {
+//                right += coins[current];
+//                ++current;
+//            }
+//            else {
+//                right += right;
+//                ++result;
+//            }
+//        }
+//        return result;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/***************************************** 统计完全子字符串（LeetCode）******************************************/
+/*
+给你一个字符串 word 和一个整数 k
+如果 word 的一个子字符串 s 满足以下条件，我们称它是 完全字符串：
+s 中每个字符 恰好 出现 k 次
+相邻字符在字母表中的顺序 至多 相差 2 。也就是说，s 中两个相邻字符 c1 和 c2
+它们在字母表中的位置相差 至多 为 2
+请你返回 word 中 完全 子字符串的数
+子字符串 指的是一个字符串中一段连续 非空 的字符序列
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    int Handle(string str, int k)
+//    {
+//        int ret = 0;
+//        //符合要求的字符串的长度肯定是k的倍数, 最长为26个字符每个出现k次
+//        for (int groupNum = 1; groupNum <= 26 && k * groupNum <= str.size(); ++groupNum)
+//        {
+//            unordered_map<char, int> hash;//字符出现次数
+//            for (int right = 0; right < str.size(); ++right)
+//            {
+//                ++hash[str[right]];
+//                int left = right + 1 - k * groupNum;
+//                if (left >= 0)
+//                {
+//                    bool flag = true;
+//                    for (auto& it : hash)
+//                        if (it.second != k) flag = false;
+//                    if (flag) ++ret;
+//                    --hash[str[left]];
+//                    if (hash[str[left]] == 0) hash.erase(hash.find(str[left]));
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//    int countCompleteSubstrings(string word, int k)
+//    {
+//        int size = word.size();
+//        int result = 0;
+//        //一个一个区域处理
+//        for (int i = 0; i < size;)
+//        {
+//            int start = i;
+//            for (i++; i < size && abs(word[i] - word[i - 1]) <= 2; i++);
+//            cout << word.substr(start, i - start) << endl;
+//            result += Handle(word.substr(start, i - start), k);
+//        }
+//        return result;
+//    }
+//};
