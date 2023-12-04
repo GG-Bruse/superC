@@ -2450,3 +2450,126 @@ D(1) = 0, D(2) = 1
 //        return false;
 //    }
 //};
+
+
+
+
+
+
+
+
+/******************************************* 搜索二维矩阵（LeetCode）***********************************************/
+/*
+给你一个满足下述两条属性的 m x n 整数矩阵：
+每行中的整数从左到右按非严格递增顺序排列
+每行的第一个整数大于前一行的最后一个整数
+给你一个整数 target ，如果 target 在矩阵中，返回true ；否则，返回false
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+////线性查找
+//class Solution1 {
+//public:
+//    bool searchMatrix(vector<vector<int>>& matrix, int target) 
+//    {
+//        int row = matrix.size(), col = matrix[0].size();
+//        int corRow = 0;
+//        for(int i = 0; i < row; ++i) 
+//        {
+//            if(matrix[i][0] > target) {
+//                corRow = i - 1;
+//                break;
+//            } 
+//            else if(matrix[i][0] == target) return true;
+//            else corRow = i;
+//        }
+//        if(corRow >= 0)
+//        {
+//            for(int j = 0; j < col; ++j)
+//                if(matrix[corRow][j] == target) 
+//                    return true;
+//            return false;
+//        }
+//        else return false;
+//    }
+//};
+////两次二分查找
+//class Solution2 {
+//public:
+//    bool searchMatrix(vector<vector<int>>& matrix, int target)
+//    {
+//        int left = 0, right = matrix.size();
+//        //找到一个大于target的数，或者等于target的数
+//        while (left < right)
+//        {
+//            int mid = left + (right - left) / 2;
+//            if (matrix[mid][0] > target) right = mid;
+//            else if (matrix[mid][0] < target) left = mid + 1;
+//            else return true;
+//        }
+//        int corRow = max(0, right - 1);
+//        left = 0, right = matrix[corRow].size();
+//        while (left < right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            if (matrix[corRow][mid] > target) right = mid;
+//            else if (matrix[corRow][mid] < target) left = mid + 1;
+//            else return true;
+//        }
+//        return matrix[corRow][max(0, right - 1)] == target;
+//    }
+//};
+
+
+
+
+
+
+
+
+/******************************************* 搜索旋转排序数组（LeetCode）*******************************************/
+/*
+整数数组 nums 按升序排列，数组中的值互不相同
+在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了旋转，
+使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）
+例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2]
+给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1
+你必须设计一个时间复杂度为 O(log n) 的算法解决此问题
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int search(vector<int>& nums, int target)
+//    {
+//        int size = nums.size();
+//        if (size == 0) return -1;
+//        if (size == 1) return nums[0] == target ? 0 : -1;
+//
+//        int left = 0, right = size - 1;
+//        while (left <= right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            if (nums[mid] == target) return mid;
+//            //nums[mid]在第一个区间[k, n - 1]
+//            if (nums[0] <= nums[mid])
+//            {
+//                if (nums[0] <= target && target < nums[mid]) right = mid - 1;
+//                else left = mid + 1;
+//            }
+//            //nums[mid]在第二个区间[0, k - 1]
+//            else
+//            {
+//                if (nums[mid] < target && target <= nums[size - 1]) {
+//                    left = mid + 1;
+//                }
+//                else {
+//                    right = mid - 1;
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+//};
