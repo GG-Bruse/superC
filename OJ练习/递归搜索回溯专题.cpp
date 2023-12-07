@@ -2082,3 +2082,60 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/******************************************* 分割回文串（LeetCode）********************************************/
+/*
+给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案
+回文串 是正着读和反着读都一样的字符串
+*/
+//回溯+动态规划预处理
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<vector<string>> ret;
+//    vector<string> path;
+//    //dp[i,j] : s[i, j]是否为回文串
+//    vector<vector<bool>> dp;
+//    int size = 0;
+//    void dfs(const string& str, int i, vector<vector<bool>>& dp)
+//    {
+//        if (i == size) {
+//            ret.push_back(path);
+//            return;
+//        }
+//        for (int j = i; j < size; ++j)
+//        {
+//            if (dp[i][j])
+//            {
+//                path.push_back(str.substr(i, j - i + 1));
+//                dfs(str, j + 1, dp);
+//                path.pop_back();
+//            }
+//        }
+//    }
+//    vector<vector<string>> partition(string s)
+//    {
+//        size = s.size();
+//        dp = vector<vector<bool>>(size, vector<bool>(size, true));
+//
+//        for (int i = size - 1; i >= 0; --i) {
+//            for (int j = i + 1; j < size; ++j) {
+//                dp[i][j] = (s[i] == s[j]) && dp[i + 1][j - 1];
+//            }
+//        }
+//
+//        dfs(s, 0, dp);
+//        return ret;
+//    }
+//};
