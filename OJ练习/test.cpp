@@ -2500,7 +2500,7 @@ D(1) = 0, D(2) = 1
 //    bool searchMatrix(vector<vector<int>>& matrix, int target)
 //    {
 //        int left = 0, right = matrix.size();
-//        //找到一个大于target的数，或者等于target的数
+//        //找到一个大于target的数
 //        while (left < right)
 //        {
 //            int mid = left + (right - left) / 2;
@@ -2571,5 +2571,77 @@ D(1) = 0, D(2) = 1
 //            }
 //        }
 //        return -1;
+//    }
+//};
+
+
+
+
+
+
+
+
+/****************************************** 寻找重复数（LeetCode）*********************************************/
+/*
+给定一个包含 n + 1 个整数的数组 nums ，其数字都在 [1, n] 范围内（包括 1 和 n），可知至少存在一个重复的整数
+假设 nums 只有 一个重复的整数 ，返回 这个重复的数
+你设计的解决方案必须 不修改 数组 nums 且只用常量级 O(1) 的额外空间
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int findDuplicate(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        int left = 0, right = size - 1, ret = -1;
+//        while (left < right)
+//        {
+//            int mid = left + ((right - left) >> 1);
+//            int count = 0;//nums中小于等于mid的元素个数
+//            for (int i = 0; i < size; ++i)
+//                if (nums[i] <= mid) ++count;
+//            if (count <= mid) left = mid + 1;
+//            else right = mid; //count > mid
+//        }
+//        return right;
+//    }
+//};
+
+
+
+
+
+
+
+
+/****************************************** 划分字母区间（LeetCode）*******************************************/
+/*
+给你一个字符串 s 。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中
+注意，划分结果需要满足：将所有划分结果按顺序连接，得到的字符串仍然是 s
+返回一个表示每个字符串片段的长度的列表
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> partitionLabels(string s)
+//    {
+//        vector<int> ret;
+//        int size = s.size();
+//        int start = 0, end = -1;
+//        while (start < size)
+//        {
+//            end = s.find_last_of(s[start]);
+//            int current = start;
+//            while (current < end)
+//                end = max(end, (int)s.find_last_of(s[current++]));
+//            ret.push_back(end - start + 1);
+//            start = end + 1;
+//        }
+//        return ret;
 //    }
 //};
