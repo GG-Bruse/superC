@@ -2645,3 +2645,95 @@ D(1) = 0, D(2) = 1
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/********************************************** 每日温度（LeetCode）*******************************************/
+/*
+给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，其中 answer[i] 是指对于第 i 天，
+下一个更高温度出现在几天后。如果气温在这之后都不会升高，请在该位置用 0 来代替
+*/
+//#include <iostream>
+//#include <vector>
+//#include <stack>
+//using namespace std;
+//class Solution {
+//public:
+//    vector<int> dailyTemperatures(vector<int>& temperatures)
+//    {
+//        int size = temperatures.size();
+//        vector<int> ret(size);
+//        stack<int> sk;//单调栈
+//        for (int i = 0; i < size; ++i)
+//        {
+//            while (!sk.empty() && temperatures[i] > temperatures[sk.top()])
+//            {
+//                int prevIndex = sk.top();
+//                sk.pop();
+//                ret[prevIndex] = i - prevIndex;
+//            }
+//            sk.push(i);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/******************************************* 前K个高频元素（LeetCode）*****************************************/
+/*
+给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    static bool Compare(const pair<int, int>& p1, const pair<int, int>& p2) {
+//        return p1.second > p2.second;
+//    }
+//    vector<int> topKFrequent(vector<int>& nums, int k)
+//    {
+//        unordered_map<int, int> hash;//num : count
+//        for (int i = 0; i < nums.size(); ++i)
+//            ++hash[nums[i]];
+//        //建小堆
+//        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(&Compare)> qe(Compare);
+//        int count = 0;
+//        for (auto& it : hash)
+//        {
+//            pair<int, int> tmp = { it.first, it.second };
+//            if (count < k) qe.push(tmp);
+//            else {
+//                qe.push(it);
+//                qe.pop();
+//            }
+//            ++count;
+//        }
+//
+//        vector<int> ret;
+//        while (!qe.empty())
+//        {
+//            pair<int, int> top = qe.top();
+//            qe.pop();
+//            ret.push_back(top.first);
+//        }
+//        return ret;
+//    }
+//};
