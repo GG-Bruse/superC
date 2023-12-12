@@ -2737,3 +2737,115 @@ D(1) = 0, D(2) = 1
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/******************************************** LRU 缓存（LeetCode）******************************************/
+/*
+请你设计并实现一个满足  LRU (最近最少使用) 缓存 约束的数据结构。
+实现 LRUCache 类：
+LRUCache(int capacity) 以 正整数 作为容量 capacity 初始化 LRU 缓存
+int get(int key) 如果关键字 key 存在于缓存中，则返回关键字的值，否则返回 -1 。
+void put(int key, int value) 如果关键字 key 已经存在，则变更其数据值 value
+如果不存在，则向缓存中插入该组 key-value 。如果插入操作导致关键字数量超过 capacity
+则应该 逐出 最久未使用的关键字
+函数 get 和 put 必须以 O(1) 的平均时间复杂度运行
+*/
+//#include <iostream>
+//#include <unordered_map>
+//using namespace std;
+//struct LinkNode
+//{
+//    int key = 0, value = 0;
+//    LinkNode* prev;
+//    LinkNode* next;
+//    LinkNode() {}
+//    LinkNode(int _key, int _value) :
+//        key(_key), value(_value), prev(nullptr), next(nullptr) {}
+//};
+//class LRUCache {
+//public:
+//    LRUCache(int _capacity) :capacity(_capacity), size(0)
+//    {
+//        //伪头结点,伪尾结点
+//        head = new LinkNode();
+//        tail = new LinkNode();
+//        head->next = tail;
+//        tail->prev = head;
+//    }
+//
+//    int get(int key)
+//    {
+//        if (!hash.count(key)) return -1;
+//        LinkNode* node = hash[key];
+//        moveToHead(node);//该结点移到链表头部
+//        return node->value;
+//    }
+//
+//    void put(int key, int value)
+//    {
+//        if (!hash.count(key))
+//        {
+//            LinkNode* node = new LinkNode(key, value);
+//            hash[key] = node;
+//            addToHead(node);//将该结点加入链表头部
+//            ++size;
+//            if (size > capacity)
+//            {
+//                LinkNode* del = delTail();
+//                hash.erase(del->key);
+//                delete del;
+//                --size;
+//            }
+//        }
+//        else
+//        {
+//            LinkNode* node = hash[key];
+//            node->value = value;
+//            moveToHead(node);//该结点移到链表头部
+//        }
+//    }
+//private:
+//    void addToHead(LinkNode* node)
+//    {
+//        node->prev = head;
+//        node->next = head->next;
+//        head->next->prev = node;
+//        head->next = node;
+//    }
+//    void removeNode(LinkNode* node)//将该结点移出链表
+//    {
+//        node->prev->next = node->next;
+//        node->next->prev = node->prev;
+//    }
+//    void moveToHead(LinkNode* node)
+//    {
+//        removeNode(node);
+//        addToHead(node);
+//    }
+//    LinkNode* delTail()
+//    {
+//        LinkNode* node = tail->prev;
+//        removeNode(node);
+//        return node;
+//    }
+//private:
+//    unordered_map<int, LinkNode*> hash;
+//    LinkNode* head;
+//    LinkNode* tail;
+//    int size;
+//    int capacity;
+//};
+///**
+// * Your LRUCache object will be instantiated and called as such:
+// * LRUCache* obj = new LRUCache(capacity);
+// * int param_1 = obj->get(key);
+// * obj->put(key,value);
+// */
