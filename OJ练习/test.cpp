@@ -2747,7 +2747,7 @@ D(1) = 0, D(2) = 1
 
 
 
-/******************************************** LRU 缓存（LeetCode）******************************************/
+/********************************************* LRU 缓存（LeetCode）********************************************/
 /*
 请你设计并实现一个满足  LRU (最近最少使用) 缓存 约束的数据结构。
 实现 LRUCache 类：
@@ -2848,4 +2848,146 @@ void put(int key, int value) 如果关键字 key 已经存在，则变更其数�
 // * LRUCache* obj = new LRUCache(capacity);
 // * int param_1 = obj->get(key);
 // * obj->put(key,value);
+// */
+
+
+
+
+
+
+
+
+
+
+/***************************************** 滑动窗口最大值（LeetCode）******************************************/
+/*
+给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧
+你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位
+返回 滑动窗口中的最大值
+*/
+//#include <iostream>
+//#include <queue>
+//#include <vector>
+//using namespace std;
+////堆
+//class Solution1 
+//{
+//public:
+//    vector<int> maxSlidingWindow(vector<int>& nums, int k)
+//    {
+//        priority_queue<pair<int, int>> qe;//nums[i] : i
+//        for (int i = 0; i < k; ++i) qe.push({ nums[i], i });
+//        vector<int> ret;
+//        ret.push_back(qe.top().first);
+//        for (int i = k; i < nums.size(); ++i)
+//        {
+//            qe.push({ nums[i], i });
+//            while (qe.top().second <= i - k) qe.pop();
+//            ret.push_back(qe.top().first);
+//        }
+//        return ret;
+//    }
+//};
+////单调队列
+///*
+//若当前的滑动窗口中有两个下标i和j，其中i在j的左侧(i<j),并且i对应的元素不大于j对应的元素(nums[i] <= nums[j])
+//由于nums[j]的存在,nums[i]一定不会是滑动窗口中的最大值了,可以将nums[i]永久地移除
+//*/
+//class Solution2
+//{
+//public:
+//    vector<int> maxSlidingWindow(vector<int>& nums, int k)
+//    {
+//        int size = nums.size();
+//        deque<int> qe;//双端队列
+//        for (int i = 0; i < k; ++i) {
+//            while (!qe.empty() && nums[i] >= nums[qe.back()]) qe.pop_back();
+//            qe.push_back(i);
+//        }
+//        vector<int> ret;
+//        ret.push_back(nums[qe.front()]);
+//        for (int i = k; i < size; ++i)
+//        {
+//            while (!qe.empty() && nums[i] >= nums[qe.back()]) qe.pop_back();
+//            qe.push_back(i);
+//            while (qe.front() <= i - k) qe.pop_front();
+//            ret.push_back(nums[qe.front()]);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/***************************************** 实现 Trie (前缀树)（LeetCode）**************************************/
+/*
+前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键
+这一数据结构有相当多的应用情景，例如自动补完和拼写检查
+
+请你实现 Trie 类：
+Trie() 初始化前缀树对象
+void insert(String word) 向前缀树中插入字符串 word
+boolean search(String word)如果字符串word在前缀树中，返回true（即在检索之前已经插入）；否则，返回false
+boolean startsWith(String prefix)如果之前已经插入的字符串word的前缀之一为 prefix ，返回true ；否则，返回false
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Trie
+//{
+//public:
+//    Trie() :_children(26), isEnd(false) {}
+//    void insert(string word)
+//    {
+//        Trie* current = this;
+//        for (int i = 0; i < word.size(); ++i)
+//        {
+//            int index = word[i] - 'a';//获得下标
+//            if (current->_children[index] == nullptr)
+//                current->_children[index] = new Trie();
+//            current = current->_children[index];
+//        }
+//        current->isEnd = true;
+//    }
+//
+//    bool search(string word)
+//    {
+//        Trie* node = searchPrefix(word);
+//        return node != nullptr && node->isEnd;
+//    }
+//
+//    bool startsWith(string prefix) {
+//        return searchPrefix(prefix) != nullptr;
+//    }
+//private:
+//    Trie* searchPrefix(string prefix)
+//    {
+//        Trie* current = this;
+//        for (int i = 0; i < prefix.size(); ++i)
+//        {
+//            int index = prefix[i] - 'a';
+//            if (current->_children[index] == nullptr)
+//                return nullptr;
+//            current = current->_children[index];
+//        }
+//        return current;
+//    }
+//private:
+//    vector<Trie*> _children;
+//    bool isEnd;//是否为字符串的结尾
+//};
+///**
+// * Your Trie object will be instantiated and called as such:
+// * Trie* obj = new Trie();
+// * obj->insert(word);
+// * bool param_2 = obj->search(word);
+// * bool param_3 = obj->startsWith(prefix);
 // */
