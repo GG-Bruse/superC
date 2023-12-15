@@ -3364,3 +3364,40 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return maxLength;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/******************************************** 接雨水（LeetCode）***********************************************/
+/*
+给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int trap(vector<int>& height)
+//    {
+//        int size = height.size();
+//
+//        vector<int> left(size); //left[i] : i位置以及左边的位置中,height的最大值
+//        left[0] = height[0];
+//        for (int i = 1; i < size; ++i) left[i] = max(left[i - 1], height[i]);
+//
+//        vector<int> right(size);//right[i] : i位置以及右边的位置中,height的最大值
+//        right[size - 1] = height[size - 1];
+//        for (int i = size - 2; i >= 0; --i) right[i] = max(right[i + 1], height[i]);
+//
+//        int ret = 0;
+//        for (int i = 0; i < size; ++i)
+//            ret += min(left[i], right[i]) - height[i];
+//        return ret;
+//    }
+//};
