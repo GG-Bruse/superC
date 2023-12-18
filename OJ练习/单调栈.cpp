@@ -70,3 +70,41 @@
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/******************************************* 最长有效括号（LeetCode）******************************************/
+/*
+给你一个只包含 '(' 和 ')' 的字符串，找出最长有效（格式正确且连续）括号子串的长度
+*/
+//#include <iostream>
+//#include <string>
+//#include <stack>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestValidParentheses(string s)
+//    {
+//        int size = s.size();
+//        stack<int> sk;//存储下标
+//        sk.push(-1);
+//        int ret = 0;
+//        for (int i = 0; i < size; ++i)
+//        {
+//            if (s[i] == '(') sk.push(i);
+//            else //s[i] == ')'
+//            {
+//                sk.pop();
+//                if (sk.empty()) sk.push(i);
+//                else ret = max(ret, i - sk.top());
+//            }
+//        }
+//        return ret;
+//    }
+//};
