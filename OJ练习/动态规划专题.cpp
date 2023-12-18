@@ -3401,3 +3401,42 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/******************************************* 最长有效括号（LeetCode）******************************************/
+/*
+给你一个只包含 '(' 和 ')' 的字符串，找出最长有效（格式正确且连续）括号子串的长度
+*/
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//using namespace std;
+//class Solution {
+//public:
+//    int longestValidParentheses(string s)
+//    {
+//        int size = s.size();
+//        int ret = 0;
+//        //dp[i] : 以下标i字符结尾的最长有效括号的长度
+//        vector<int> dp(size);
+//        for (int i = 1; i < size; ++i)
+//        {
+//            if (s[i] == ')')
+//            {
+//                if (s[i - 1] == '(')
+//                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+//                else if (i - dp[i - 1] > 0 && s[i - dp[i - 1] - 1] == '(')
+//                    dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
+//                ret = max(ret, dp[i]);
+//            }
+//        }
+//        return ret;
+//    }
+//};
