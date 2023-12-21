@@ -3033,3 +3033,36 @@ boolean startsWith(String prefix)如果之前已经插入的字符串word的前�
 //        return { -1, -1 };
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/**************************************** 有效的字母异位词（LeetCode）*****************************************/
+/*
+给定两个字符串s和t ，编写一个函数来判断t是否是s的字母异位词
+注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词
+*/
+//#include <iostream>
+//#include <string>
+//#include <unordered_map>
+//using namespace std;
+//class Solution {
+//public:
+//    bool isAnagram(string s, string t)
+//    {
+//        if (s.size() != t.size()) return false;
+//        unordered_map<char, int> hash;
+//        for (int i = 0; i < s.size(); ++i) {
+//            ++hash[s[i]];
+//            --hash[t[i]];
+//        }
+//        for (auto& it : hash)
+//            if (it.second != 0) return false;
+//        return true;
+//    }
+//};
