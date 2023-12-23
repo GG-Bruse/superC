@@ -1,11 +1,11 @@
-/************************************ ÇøÓòºÍ¼ìË÷ - Êı×é²»¿É±ä£¨LeetCode£©**************************************/
+ï»¿/************************************ åŒºåŸŸå’Œæ£€ç´¢ - æ•°ç»„ä¸å¯å˜ï¼ˆLeetCodeï¼‰**************************************/
 /*
-¸ø¶¨Ò»¸öÕûÊıÊı×é  nums£¬´¦ÀíÒÔÏÂÀàĞÍµÄ¶à¸ö²éÑ¯:
-¼ÆËãË÷Òı left ºÍ right £¨°üº¬ left ºÍ right£©Ö®¼äµÄ nums ÔªËØµÄ ºÍ £¬ÆäÖĞ left <= right
-ÊµÏÖ NumArray Àà£º
-NumArray(int[] nums) Ê¹ÓÃÊı×é nums ³õÊ¼»¯¶ÔÏó
-int sumRange(int i, int j)·µ»ØÊı×énumsÖĞË÷ÒıleftºÍrightÖ®¼äµÄÔªËØµÄ×ÜºÍ £¬
-°üº¬ left ºÍ right Á½µã£¨Ò²¾ÍÊÇ nums[left] + nums[left + 1] + ... + nums[right] )
+ç»™å®šä¸€ä¸ªæ•´æ•°æ•°ç»„  numsï¼Œå¤„ç†ä»¥ä¸‹ç±»å‹çš„å¤šä¸ªæŸ¥è¯¢:
+è®¡ç®—ç´¢å¼• left å’Œ right ï¼ˆåŒ…å« left å’Œ rightï¼‰ä¹‹é—´çš„ nums å…ƒç´ çš„ å’Œ ï¼Œå…¶ä¸­ left <= right
+å®ç° NumArray ç±»ï¼š
+NumArray(int[] nums) ä½¿ç”¨æ•°ç»„ nums åˆå§‹åŒ–å¯¹è±¡
+int sumRange(int i, int j)è¿”å›æ•°ç»„numsä¸­ç´¢å¼•leftå’Œrightä¹‹é—´çš„å…ƒç´ çš„æ€»å’Œ ï¼Œ
+åŒ…å« left å’Œ right ä¸¤ç‚¹ï¼ˆä¹Ÿå°±æ˜¯ nums[left] + nums[left + 1] + ... + nums[right] )
 */
 //#include <iostream>
 //#include <vector>
@@ -24,7 +24,7 @@ int sumRange(int i, int j)·µ»ØÊı×énumsÖĞË÷ÒıleftºÍrightÖ®¼äµÄÔªËØµÄ×ÜºÍ £¬
 //        return prevSum[right + 1] - prevSum[left];
 //    }
 //private:
-//    vector<int> prevSum;//Ç°×ººÍ : prevSum[i] : nums[0]µ½nums[i]Ö®¼äËùÓĞÔªËØÖ®ºÍ 
+//    vector<int> prevSum;//å‰ç¼€å’Œ : prevSum[i] : nums[0]åˆ°nums[i]ä¹‹é—´æ‰€æœ‰å…ƒç´ ä¹‹å’Œ 
 //};
 ///**
 // * Your NumArray object will be instantiated and called as such:
@@ -41,14 +41,14 @@ int sumRange(int i, int j)·µ»ØÊı×énumsÖĞË÷ÒıleftºÍrightÖ®¼äµÄÔªËØµÄ×ÜºÍ £¬
 
 
 
-/********************************** ¶şÎ¬ÇøÓòºÍ¼ìË÷ - ¾ØÕó²»¿É±ä£¨LeetCode£©************************************/
+/********************************** äºŒç»´åŒºåŸŸå’Œæ£€ç´¢ - çŸ©é˜µä¸å¯å˜ï¼ˆLeetCodeï¼‰************************************/
 /*
-¸ø¶¨Ò»¸ö¶şÎ¬¾ØÕó matrix£¬ÒÔÏÂÀàĞÍµÄ¶à¸öÇëÇó£º
-¼ÆËãÆä×Ó¾ØĞÎ·¶Î§ÄÚÔªËØµÄ×ÜºÍ£¬¸Ã×Ó¾ØÕóµÄ×óÉÏ½ÇÎª(row1, col1)£¬ÓÒÏÂ½ÇÎª(row2, col2)
-ÊµÏÖ NumMatrix Àà£º
-NumMatrix(int[][] matrix) ¸ø¶¨ÕûÊı¾ØÕó matrix ½øĞĞ³õÊ¼»¯
-int sumRegion(int row1, int col1, int row2, int col2) ·µ»Ø ×óÉÏ½Ç (row1, col1) ¡¢
-ÓÒÏÂ½Ç (row2, col2) ËùÃèÊöµÄ×Ó¾ØÕóµÄÔªËØ ×ÜºÍ
+ç»™å®šä¸€ä¸ªäºŒç»´çŸ©é˜µ matrixï¼Œä»¥ä¸‹ç±»å‹çš„å¤šä¸ªè¯·æ±‚ï¼š
+è®¡ç®—å…¶å­çŸ©å½¢èŒƒå›´å†…å…ƒç´ çš„æ€»å’Œï¼Œè¯¥å­çŸ©é˜µçš„å·¦ä¸Šè§’ä¸º(row1, col1)ï¼Œå³ä¸‹è§’ä¸º(row2, col2)
+å®ç° NumMatrix ç±»ï¼š
+NumMatrix(int[][] matrix) ç»™å®šæ•´æ•°çŸ©é˜µ matrix è¿›è¡Œåˆå§‹åŒ–
+int sumRegion(int row1, int col1, int row2, int col2) è¿”å› å·¦ä¸Šè§’ (row1, col1) ã€
+å³ä¸‹è§’ (row2, col2) æ‰€æè¿°çš„å­çŸ©é˜µçš„å…ƒç´  æ€»å’Œ
 */
 //#include <iostream>
 //#include <vector>
@@ -58,7 +58,7 @@ int sumRegion(int row1, int col1, int row2, int col2) ·µ»Ø ×óÉÏ½Ç (row1, col1) ¡
 //    NumMatrix(vector<vector<int>>& matrix)
 //    {
 //        row = matrix.size(), col = matrix[0].size();
-//        //prevSum[i][j] : matrix[0][0]µ½matrix[i - 1][j - 1]Ö®¼äËùÓĞÔªËØÖ®ºÍ 
+//        //prevSum[i][j] : matrix[0][0]åˆ°matrix[i - 1][j - 1]ä¹‹é—´æ‰€æœ‰å…ƒç´ ä¹‹å’Œ 
 //        prevSum = vector<vector<int>>(row + 1, vector<int>(col + 1));
 //        prevSum[1][1] = matrix[0][0];
 //        for (int i = 1; i <= row; ++i)
@@ -91,10 +91,10 @@ int sumRegion(int row1, int col1, int row2, int col2) ·µ»Ø ×óÉÏ½Ç (row1, col1) ¡
 
 
 
-/****************************** ¾ØĞÎÇøÓò²»³¬¹ı K µÄ×î´óÊıÖµºÍ£¨LeetCode£©**************************************/
+/****************************** çŸ©å½¢åŒºåŸŸä¸è¶…è¿‡ K çš„æœ€å¤§æ•°å€¼å’Œï¼ˆLeetCodeï¼‰**************************************/
 /*
-¸øÄãÒ»¸ö m x n µÄ¾ØÕó matrix ºÍÒ»¸öÕûÊı k £¬ÕÒ³ö²¢·µ»Ø¾ØÕóÄÚ²¿¾ØĞÎÇøÓòµÄ²»³¬¹ı k µÄ×î´óÊıÖµºÍ
-ÌâÄ¿Êı¾İ±£Ö¤×Ü»á´æÔÚÒ»¸öÊıÖµºÍ²»³¬¹ı k µÄ¾ØĞÎÇøÓò
+ç»™ä½ ä¸€ä¸ª m x n çš„çŸ©é˜µ matrix å’Œä¸€ä¸ªæ•´æ•° k ï¼Œæ‰¾å‡ºå¹¶è¿”å›çŸ©é˜µå†…éƒ¨çŸ©å½¢åŒºåŸŸçš„ä¸è¶…è¿‡ k çš„æœ€å¤§æ•°å€¼å’Œ
+é¢˜ç›®æ•°æ®ä¿è¯æ€»ä¼šå­˜åœ¨ä¸€ä¸ªæ•°å€¼å’Œä¸è¶…è¿‡ k çš„çŸ©å½¢åŒºåŸŸ
 */
 //#include <iostream>
 //#include <vector>
@@ -106,13 +106,13 @@ int sumRegion(int row1, int col1, int row2, int col2) ·µ»Ø ×óÉÏ½Ç (row1, col1) ¡
 //    {
 //        int ret = INT_MIN;
 //        int row = matrix.size(), col = matrix[0].size();
-//        for (int i = 0; i < row; ++i)//Ã¶¾ÙÉÏ±ß½ç
+//        for (int i = 0; i < row; ++i)//æšä¸¾ä¸Šè¾¹ç•Œ
 //        {
-//            vector<int> sum(col);//±ß½çÄÚ Ã¿ÁĞµÄÔªËØºÍ
-//            for (int j = i; j < row; ++j)//Ã¶¾ÙÏÂ±ß½ç
+//            vector<int> sum(col);//è¾¹ç•Œå†… æ¯åˆ—çš„å…ƒç´ å’Œ
+//            for (int j = i; j < row; ++j)//æšä¸¾ä¸‹è¾¹ç•Œ
 //            {
 //                for (int k = 0; k < col; ++k)
-//                    sum[k] += matrix[j][k];//¸üĞÂÃ¿ÁĞµÄÔªËØºÍ
+//                    sum[k] += matrix[j][k];//æ›´æ–°æ¯åˆ—çš„å…ƒç´ å’Œ
 //
 //                set<int> sumSet{ 0 };
 //                int sRight = 0;
@@ -127,5 +127,94 @@ int sumRegion(int row1, int col1, int row2, int col2) ·µ»Ø ×óÉÏ½Ç (row1, col1) ¡
 //            }
 //        }
 //        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/*************************************** è¿ç»­çš„å­æ•°ç»„å’Œï¼ˆLeetCodeï¼‰********************************************/
+/*
+ç»™ä½ ä¸€ä¸ªæ•´æ•°æ•°ç»„ nums å’Œä¸€ä¸ªæ•´æ•° k ï¼Œç¼–å†™ä¸€ä¸ªå‡½æ•°æ¥åˆ¤æ–­è¯¥æ•°ç»„æ˜¯å¦å«æœ‰åŒæ—¶æ»¡è¶³ä¸‹è¿°æ¡ä»¶çš„è¿ç»­å­æ•°ç»„ï¼š
+å­æ•°ç»„å¤§å° è‡³å°‘ä¸º 2 ï¼Œä¸”å­æ•°ç»„å…ƒç´ æ€»å’Œä¸º k çš„å€æ•°
+å¦‚æœå­˜åœ¨ï¼Œè¿”å› true ï¼›å¦åˆ™ï¼Œè¿”å› false
+å¦‚æœå­˜åœ¨ä¸€ä¸ªæ•´æ•° n ï¼Œä»¤æ•´æ•° x ç¬¦åˆ x = n * k ï¼Œåˆ™ç§° x æ˜¯ k çš„ä¸€ä¸ªå€æ•°ã€‚0 å§‹ç»ˆè§†ä¸º k çš„ä¸€ä¸ªå€æ•°
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+///*
+//å½“prefixSums[q] âˆ’ prefixSums[p]ä¸ºkçš„å€æ•°æ—¶, prefixSums[p] å’Œ prefixSums[q]é™¤ä»¥kçš„ä½™æ•°ç›¸åŒ
+//*/
+//class Solution {
+//public:
+//    bool checkSubarraySum(vector<int>& nums, int k)
+//    {
+//        int size = nums.size();
+//        if (size < 2) return false;
+//
+//        unordered_map<int, int> mp;//ä½™æ•°:ç¬¬ä¸€æ¬¡å‡ºç°çš„ä¸‹æ ‡
+//        mp[0] = -1;
+//        int prefixSum = 0;//å‰ç¼€å’Œçš„ä½™æ•°
+//        for (int i = 0; i < size; ++i)
+//        {
+//            prefixSum = (prefixSum + nums[i]) % k;
+//            if (mp.count(prefixSum))
+//            {
+//                int prevIndex = mp[prefixSum];
+//                if (i - prevIndex >= 2) return true;
+//            }
+//            else mp[prefixSum] = i;
+//        }
+//        return false;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+/************************************* æœ€å¤§å¹³å‡å€¼å’Œçš„åˆ†ç»„ï¼ˆLeetCodeï¼‰******************************************/
+/*
+ç»™å®šæ•°ç»„ nums å’Œä¸€ä¸ªæ•´æ•° k ã€‚æˆ‘ä»¬å°†ç»™å®šçš„æ•°ç»„ nums åˆ†æˆ æœ€å¤š k ä¸ªéç©ºå­æ•°ç»„ï¼Œä¸”æ•°ç»„å†…éƒ¨æ˜¯è¿ç»­çš„
+åˆ†æ•° ç”±æ¯ä¸ªå­æ•°ç»„å†…çš„å¹³å‡å€¼çš„æ€»å’Œæ„æˆ
+æ³¨æ„æˆ‘ä»¬å¿…é¡»ä½¿ç”¨ nums æ•°ç»„ä¸­çš„æ¯ä¸€ä¸ªæ•°è¿›è¡Œåˆ†ç»„ï¼Œå¹¶ä¸”åˆ†æ•°ä¸ä¸€å®šéœ€è¦æ˜¯æ•´æ•°
+è¿”å›æˆ‘ä»¬æ‰€èƒ½å¾—åˆ°çš„æœ€å¤§ åˆ†æ•° æ˜¯å¤šå°‘ã€‚ç­”æ¡ˆè¯¯å·®åœ¨ 10-6 å†…è¢«è§†ä¸ºæ˜¯æ­£ç¡®çš„
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    //å¹³å‡å€¼å’Œæœ€å¤§çš„åˆ†ç»„çš„å­æ•°ç»„æ•°ç›®å¿…å®šä¸ºk
+//    double largestSumOfAverages(vector<int>& nums, int k)
+//    {
+//        int size = nums.size();
+//
+//        vector<double> prefix(size + 1);
+//        for (int i = 0; i < size; ++i)
+//            prefix[i + 1] = prefix[i] + nums[i];
+//
+//        //dp[i][j] : nums[0, i - 1]è¢«åˆ‡åˆ†ä¸ºjä¸ªå­æ•°ç»„çš„æœ€å¤§å¹³å‡å€¼å’Œ
+//        vector<vector<double>> dp(size + 1, vector<double>(k + 1));
+//        //åˆå§‹åŒ–:  j=1æ—¶,dp[i][j]æ˜¯å¯¹åº”åŒºé—´[0,iâˆ’1]çš„å¹³å‡å€¼
+//        for (int i = 1; i <= size; ++i)
+//            dp[i][1] = prefix[i] / i;
+//        //dp
+//        for (int j = 2; j <= k; ++j)
+//            for (int i = j; i <= size; ++i)
+//                for (int x = j - 1; x < i; ++x)//éå†å„ç§åˆ‡å‰²æ–¹æ³•
+//                    dp[i][j] = max(dp[i][j], dp[x][j - 1] + (prefix[i] - prefix[x]) / (i - x));
+//        return dp[size][k];
 //    }
 //};

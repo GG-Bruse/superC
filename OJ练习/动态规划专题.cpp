@@ -3440,3 +3440,46 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/************************************* 最大平均值和的分组（LeetCode）******************************************/
+/*
+给定数组 nums 和一个整数 k 。我们将给定的数组 nums 分成 最多 k 个非空子数组，且数组内部是连续的
+分数 由每个子数组内的平均值的总和构成
+注意我们必须使用 nums 数组中的每一个数进行分组，并且分数不一定需要是整数
+返回我们所能得到的最大 分数 是多少。答案误差在 10-6 内被视为是正确的
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    //平均值和最大的分组的子数组数目必定为k
+//    double largestSumOfAverages(vector<int>& nums, int k)
+//    {
+//        int size = nums.size();
+//
+//        vector<double> prefix(size + 1);
+//        for (int i = 0; i < size; ++i)
+//            prefix[i + 1] = prefix[i] + nums[i];
+//
+//        //dp[i][j] : nums[0, i - 1]被切分为j个子数组的最大平均值和
+//        vector<vector<double>> dp(size + 1, vector<double>(k + 1));
+//        //初始化:  j=1时,dp[i][j]是对应区间[0,i−1]的平均值
+//        for (int i = 1; i <= size; ++i)
+//            dp[i][1] = prefix[i] / i;
+//        //dp
+//        for (int j = 2; j <= k; ++j)
+//            for (int i = j; i <= size; ++i)
+//                for (int x = j - 1; x < i; ++x)//遍历各种切割方法
+//                    dp[i][j] = max(dp[i][j], dp[x][j - 1] + (prefix[i] - prefix[x]) / (i - x));
+//        return dp[size][k];
+//    }
+//};
