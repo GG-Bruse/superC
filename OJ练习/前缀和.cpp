@@ -218,3 +218,157 @@ int sumRegion(int row1, int col1, int row2, int col2) 返回 左上角 (row1, co
 //        return dp[size][k];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/************************************* 和相同的二元子数组（LeetCode）******************************************/
+/*
+给你一个二元数组 nums ，和一个整数 goal ，请你统计并返回有多少个和为 goal 的非空子数组
+子数组 是数组的一段连续部分
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//using namespace std;
+//// class Solution {
+//// public:
+////     int numSubarraysWithSum(vector<int>& nums, int goal) 
+////     {
+////         int size = nums.size();
+////         vector<int> prefix(size + 1);
+////         for(int i = 1; i <= size; ++i)
+////             prefix[i] = prefix[i - 1] + nums[i - 1];
+//
+////         int ret = 0;
+////         unordered_map<int, int> hash;
+////         ++hash[0];
+////         for(int i = 1; i <= size; ++i)
+////         {
+////             int partRight = prefix[i];
+////             if(hash.count(partRight - goal)) ret += hash[partRight - goal];
+////             ++hash[partRight];
+////         }
+////         return ret;
+////     }
+//// };
+////优化
+//class Solution {
+//public:
+//    int numSubarraysWithSum(vector<int>& nums, int goal)
+//    {
+//        int size = nums.size();
+//        int sum = 0;//统计当前元素和,代替前缀和数组
+//
+//        int ret = 0;
+//        unordered_map<int, int> hash;
+//        for (int i = 0; i < size; ++i)
+//        {
+//            ++hash[sum];
+//            sum += nums[i];
+//            if (hash.count(sum - goal)) ret += hash[sum - goal];
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/***************************************** 构建回文串检测（LeetCode）******************************************/
+/*
+给你一个字符串 s，请你对 s 的子串进行检测
+每次检测，待检子串都可以表示为 queries[i] = [left, right, k]
+我们可以 重新排列 子串 s[left], ..., s[right]，并从中选择 最多 k 项替换成任何小写英文字母
+如果在上述检测过程中，子串可以变成回文形式的字符串，那么检测结果为 true，否则结果为 false
+返回答案数组 answer[]，其中 answer[i] 是第 i 个待检子串 queries[i] 的检测结果
+注意：在替换时，子串中的每个字母都必须作为 独立的 项进行计数，也就是说，
+如果 s[left..right] = "aaa" 且 k = 2，我们只能替换其中的两个字母
+（另外，任何检测都不会修改原始字符串 s，可以认为每次检测都是独立的）
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
+////注意:可以重新排列
+//class Solution {
+//public:
+//    vector<bool> canMakePaliQueries(string s, vector<vector<int>>& queries)
+//    {
+//        int size = s.size();
+//        //异或前缀和
+//        vector<int> count(size + 1);
+//        for (int i = 0; i < size; ++i)
+//            count[i + 1] = count[i] ^ (1 << (s[i] - 'a'));
+//
+//        vector<bool> ret;
+//        for (auto& query : queries)
+//        {
+//            int left = query[0], right = query[1], k = query[2];
+//            int bits = 0;
+//            int tmp = count[right + 1] ^ count[left];
+//            while (tmp > 0) {
+//                tmp &= tmp - 1;//统计有几个1
+//                ++bits;
+//            }
+//            ret.push_back(bits <= k * 2 + 1);
+//        }
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
+
+/**************************************** 可获得的最大点数（LeetCode）*****************************************/
+/*
+几张卡牌 排成一行，每张卡牌都有一个对应的点数。点数由整数数组 cardPoints 给出
+每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 k 张卡牌
+你的点数就是你拿到手中的所有卡牌的点数之和
+给你一个整数数组 cardPoints 和整数 k，请你返回可以获得的最大点数
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution
+//{
+//public:
+//    // 求连续的n - k张卡牌的最小值
+//    int maxScore(vector<int>& cardPoints, int k)
+//    {
+//        int size = cardPoints.size();
+//        int windowSize = size - k;
+//        //选前size - k个作为初始值
+//        int sum = 0;
+//        for (int i = 0; i < size - k; ++i) sum += cardPoints[i];
+//
+//        int minSum = sum;
+//        for (int i = windowSize; i < size; ++i)
+//        {
+//            sum += cardPoints[i] - cardPoints[i - windowSize];
+//            minSum = min(minSum, sum);
+//        }
+//
+//        int totalSum = 0;
+//        for (int i = 0; i < size; ++i) totalSum += cardPoints[i];
+//
+//        return totalSum - minSum;
+//    }
+//};
