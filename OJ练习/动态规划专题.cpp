@@ -3483,3 +3483,48 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp[size][k];
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/******************************************* 戳气球（LeetCode）*********************************************/
+/*
+有 n 个气球，编号为0 到 n - 1，每个气球上都标有一个数字，这些数字存在数组 nums 中
+现在要求你戳破所有的气球。戳破第 i 个气球，你可以获得 nums[i - 1] * nums[i] * nums[i + 1] 枚硬币
+这里的 i - 1 和 i + 1 代表和 i 相邻的两个气球的序号
+如果 i - 1或 i + 1 超出了数组的边界，那么就当它是一个数字为 1 的气球
+求所能获得硬币的最大数量
+*/
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxCoins(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        vector<int> newNums(size + 2, 1);
+//        for (int i = 1; i <= size; ++i) newNums[i] = nums[i - 1];
+//
+//        //dp[i][j] 表示填满开区间(i,j)能得到的最多硬币数
+//        vector<vector<int>> dp(size + 2, vector<int>(size + 2));
+//        for (int i = size - 1; i >= 0; --i)//left
+//        {
+//            for (int j = i + 2; j <= size + 1; ++j)//right
+//            {
+//                for (int k = i + 1; k < j; ++k)
+//                {
+//                    int tmp = newNums[i] * newNums[k] * newNums[j];
+//                    tmp += dp[i][k] + dp[k][j];
+//                    dp[i][j] = max(dp[i][j], tmp);
+//                }
+//            }
+//        }
+//        return dp[0][size + 1];
+//    }
+//};
