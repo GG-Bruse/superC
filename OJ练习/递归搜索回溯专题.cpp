@@ -2139,3 +2139,49 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/******************************************* 戳气球（LeetCode）*********************************************/
+/*
+有 n 个气球，编号为0 到 n - 1，每个气球上都标有一个数字，这些数字存在数组 nums 中
+现在要求你戳破所有的气球。戳破第 i 个气球，你可以获得 nums[i - 1] * nums[i] * nums[i + 1] 枚硬币
+这里的 i - 1 和 i + 1 代表和 i 相邻的两个气球的序号
+如果 i - 1或 i + 1 超出了数组的边界，那么就当它是一个数字为 1 的气球
+求所能获得硬币的最大数量
+*/
+//记忆化搜索
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//class Solution {
+//public:
+//    int dfs(vector<vector<int>>& memory, vector<int>& newNums, int left, int right)
+//    {
+//        if (left >= right - 1) return 0;
+//        if (memory[left][right] != -1) return memory[left][right];
+//
+//        for (int i = left + 1; i < right; ++i)
+//        {
+//            int tmp = newNums[left] * newNums[i] * newNums[right];
+//            tmp += dfs(memory, newNums, left, i) + dfs(memory, newNums, i, right);
+//            memory[left][right] = max(memory[left][right], tmp);
+//        }
+//        return memory[left][right];
+//    }
+//    int maxCoins(vector<int>& nums)
+//    {
+//        int size = nums.size();
+//        vector<int> newNums(size + 2, 1);
+//        for (int i = 1; i <= size; ++i) newNums[i] = nums[i - 1];
+//
+//        vector<vector<int>> memory(size + 2, vector<int>(size + 2, -1));
+//        return dfs(memory, newNums, 0, size + 1);
+//    }
+//};
