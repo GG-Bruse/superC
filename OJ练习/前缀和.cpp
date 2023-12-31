@@ -372,3 +372,53 @@ int sumRegion(int row1, int col1, int row2, int col2) 返回 左上角 (row1, co
 //        return totalSum - minSum;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/****************************** 和为目标值且不重叠的非空子数组的最大数目（LeetCode）***************************/
+/*
+给你一个数组 nums 和一个整数 target
+请你返回 非空不重叠 子数组的最大数目，且每个子数组中数字和都为 target
+*/
+//#include <iostream>
+//#include <vector>
+//#include <unordered_set>
+//using namespace std;
+//class Solution {
+//public:
+//    int maxNonOverlapping(vector<int>& nums, int target)
+//    {
+//        int size = nums.size();
+//        int ret = 0;
+//
+//        //如果找到了一个符合条件的子数组，则接下来遍历时需要用一个新的哈希表
+//        //而不是使用原有的哈希表，因为要确保每次找到的子数组都与此前找到的不重合
+//        int current = 0;
+//        while (current < size)
+//        {
+//            unordered_set<int> hash{ 0 };
+//            int sum = 0;
+//            while (current < size)
+//            {
+//                sum += nums[current];
+//                if (hash.find(sum - target) != hash.end()) {
+//                    ++ret;
+//                    break;
+//                }
+//                else {
+//                    hash.insert(sum);
+//                    ++current;
+//                }
+//            }
+//            ++current;
+//        }
+//        return ret;
+//    }
+//};
