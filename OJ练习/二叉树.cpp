@@ -502,6 +502,46 @@ postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树
 
 
 
+/*********************************************** 路径总和II（LeetCode）*****************************************************/
+/*
+给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径
+叶子节点 是指没有子节点的节点
+*/
+//class Solution
+//{
+//public:
+//    vector<vector<int>> ret;
+//    vector<int> path;
+//
+//    void dfs(TreeNode* root, int targetSum)
+//    {
+//        if (root == nullptr) return;
+//
+//        path.push_back(root->val);
+//        targetSum -= root->val;
+//        if (targetSum == 0 && root->left == nullptr && root->right == nullptr) {
+//            ret.push_back(path);
+//        }
+//        dfs(root->left, targetSum);
+//        dfs(root->right, targetSum);
+//        path.pop_back();
+//    }
+//    vector<vector<int>> pathSum(TreeNode* root, int targetSum)
+//    {
+//        if (root == nullptr) return ret;
+//        dfs(root, targetSum);
+//        return ret;
+//    }
+//};
+
+
+
+
+
+
+
+
+
 
 /*******************************************************二叉树的前序遍历(非递归)*************************************************/
 class Solution1{
