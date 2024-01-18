@@ -3066,3 +3066,61 @@ boolean startsWith(String prefix)如果之前已经插入的字符串word的前�
 //        return true;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+
+/******************************************** 01矩阵（LeetCode）***********************************************/
+/*
+给定一个由 0 和 1 组成的矩阵 mat ，请输出一个大小相同的矩阵
+其中每一个格子是 mat 中对应位置元素到最近的 0 的距离
+两个相邻元素间的距离为 1
+*/
+//#include <iostream>
+//#include <vector>
+//#include <queue>
+//using namespace std;
+//class Solution
+//{
+//    int dx[4] = { -1, 1, 0, 0 };
+//    int dy[4] = { 0, 0, -1, 1 };
+//public:
+//    vector<vector<int>> updateMatrix(vector<vector<int>>& mat)
+//    {
+//        int row = mat.size(), col = mat[0].size();
+//        vector<vector<bool>> flag(row, vector<bool>(col));
+//        vector<vector<int>> ret(row, vector<int>(col));
+//
+//        queue<pair<int, int>> qe;
+//        for (int i = 0; i < row; ++i)
+//            for (int j = 0; j < col; ++j)
+//                if (mat[i][j] == 0) {
+//                    qe.emplace(i, j);//所有0点加入队列中
+//                    flag[i][j] = true;
+//                }
+//
+//        //广度优先遍历,每个0点可以到达的位置中距离最短的 距离
+//        while (!qe.empty())
+//        {
+//            auto [i, j] = qe.front();
+//            qe.pop();
+//            for (int k = 0; k < 4; ++k)
+//            {
+//                int x = i + dx[k], y = j + dy[k];
+//                if (x >= 0 && x < row && y >= 0 && y < col && !flag[x][y])
+//                {
+//                    ret[x][y] = ret[i][j] + 1;
+//                    qe.emplace(x, y);
+//                    flag[x][y] = true;
+//                }
+//            }
+//        }
+//        return ret;
+//    }
+//};
