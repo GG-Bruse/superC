@@ -3124,3 +3124,82 @@ boolean startsWith(String prefix)如果之前已经插入的字符串word的前�
 //        return ret;
 //    }
 //};
+
+
+
+
+
+
+
+
+
+/**************************************** 反转字符串中的单词（LeetCode）***************************************/
+/*
+给你一个字符串 s ，请你反转字符串中 单词 的顺序。
+单词 是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的单词分隔开。
+返回 单词 顺序颠倒且 单词 之间用单个空格连接的结果字符串。
+注意：输入字符串 s中可能会存在前导空格、尾随空格或者单词间的多个空格
+返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格
+*/
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//class Solution1 {
+//public:
+//    string reverseWords(string s)
+//    {
+//        vector<string> tmpV;
+//        string tmp;
+//        for (int i = 0; i < s.size(); ++i)
+//        {
+//            if (s[i] != ' ') tmp += s[i];
+//            else {
+//                if (tmp != "")
+//                {
+//                    tmpV.push_back(tmp);
+//                    tmp = "";
+//                }
+//            }
+//        }
+//        if (tmp != "") tmpV.push_back(tmp);
+//        string ret;
+//        for (int i = tmpV.size() - 1; i >= 1; --i)
+//        {
+//            ret += tmpV[i];
+//            ret += ' ';
+//        }
+//        ret += tmpV[0];
+//        return ret;
+//    }
+//};
+//class Solution2
+//{
+//public:
+//    string reverseWords(string s)
+//    {
+//        //反转整个字符串
+//        reverse(s.begin(), s.end());
+//
+//        int size = s.size();
+//        int index = 0;
+//        for (int start = 0; start < size; ++start)
+//        {
+//            if (s[start] != ' ')
+//            {
+//                //填一个空白字符然后将index移动到下一个单词的开头位置
+//                if (index != 0) s[index++] = ' ';
+//                //循环遍历至单词的末尾
+//                int end = start;
+//                while (end < size && s[end] != ' ') s[index++] = s[end++];
+//                //反转整个单词
+//                reverse(s.begin() + index - (end - start), s.begin() + index);
+//                //更新start,处理下一个单词
+//                start = end;
+//            }
+//        }
+//        s.erase(s.begin() + index, s.end());
+//        return s;
+//    }
+//};
