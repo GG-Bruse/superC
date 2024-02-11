@@ -1,26 +1,22 @@
 #include <iostream>
-#include <cassert>
 #include <vector>
 #include <queue>
-#include <set>
 #include <unordered_map>
-#include <functional>
 #include "并查集.cpp"
 using namespace std;
 
 
 
-
-
-//邻接表
 namespace link_table
 {
+	//链表结点
 	template<class W>
 	struct Edge
 	{
-		Edge(const int dest, const W& w) :_destinationIndex(dest), _weight(w), _next(nullptr) {}
-		int _destinationIndex;//目标点的下标
-		W _weight;//权值
+		Edge(int dstI, const W& w) : _destionIndex(dstI), _weight(w), _next(nullptr) {}
+		//int _sourceIndex; //可选
+		int _destionIndex;
+		W _weight;
 		Edge<W>* _next;
 	};
 
@@ -29,73 +25,66 @@ namespace link_table
 	{
 		typedef Edge<W> Edge;
 	public:
-		Graph(const V* v, size_t size)
+		Graph() = default;
+		Graph(const V* vertexs, size_t size)
+			:_vertexs(vertexs, vertexs + size), _linkTable(size, nullptr)
 		{
-			_vertexs.reserve(size);
-			for (size_t i = 0; i < size; ++i) {
-				_vertexs.push_back(v[i]);
-				_indexMap[v[i]] = i;
-			}
-			_table.resize(size, nullptr);
+			for (int i = 0; i < size; ++i)
+				_indexMap[vertexs[i]] = i;
 		}
-		size_t GetVertexIndex(const V& v)
+
+		int GetVertexIndex(const V& vertex)
 		{
-			auto it = _indexMap.find(v);
+			auto it = _indexMap.find(vertex);
 			if (it != _indexMap.end()) return it->second;
 			else {
-				assert(false);
+				throw invalid_argument("不存在的顶点");
 				return -1;
 			}
 		}
-		void AddEdge(const V& src, const V& dest, const W& w)
-		{
-			size_t srcIndex = GetVertexIndex(src);
-			size_t destIndex = GetVertexIndex(dest);
 
-			//头插
-			Edge* edge = new Edge(destIndex, w);
-			edge->_next = _table[srcIndex];
-			_table[srcIndex] = edge;
-			//无向图添加两次
-			if (Direction == false) {
-				Edge* edge = new Edge(srcIndex, w);
-				edge->_next = _table[destIndex];
-				_table[destIndex] = edge;
+		void AddEdge(const V& src, const V& dst, const W& w)
+		{
+			int srcIndex = GetVertexIndex(src), dstIndex = GetVertexIndex(dst);
+
+			Edge* newEdge = new Edge(dstIndex, w);
+			newEdge->_next = _linkTable[srcIndex];
+			_linkTable[srcIndex] = newEdge;
+			
+			if (Direction == false)
+			{
+				Edge* newEdge = new Edge(srcIndex, w);
+				newEdge->_next = _linkTable[dstIndex];
+				_linkTable[dstIndex] = newEdge;
 			}
 		}
-		void Print()
+
+		void Print() 
 		{
-			for (size_t i = 0; i < _table.size(); ++i)
+			int size = _vertexs.size();
+			//打印顶点集合
+			for (int i = 0; i < size; i++)
+				cout << "[" << i << "]->" << _vertexs[i] << " ";
+			cout << endl << endl;
+			//打印邻接表
+			for (int i = 0; i < size; i++) 
 			{
-				cout << _vertexs[i] << "[" << i << "]->";
-				Edge* cur = _table[i];
-				while (cur != nullptr)
-				{
-					cout << _vertexs[cur->_destinationIndex]
-						<< "[" << cur->_destinationIndex << "]" << cur->_weight << "->";
+				Edge* cur = _linkTable[i];
+				cout << "[" << i << ":" << _vertexs[i] << "]->";
+				while (cur) {
+					cout << "[" << cur->_destionIndex << ":" << _vertexs[cur->_destionIndex] << ":" << cur->_weight << "]->";
 					cur = cur->_next;
 				}
 				cout << "nullptr" << endl;
 			}
 		}
+
 	private:
-		vector<V> _vertexs;//顶点集合
-		unordered_map<V, int> _indexMap;//顶点与下标的映射
-		vector<Edge*> _table;//邻接表
+		vector<V> _vertexs;				//顶点集合
+		unordered_map<V, int> _indexMap;	//映射关系
+		vector<Edge*> _linkTable;			//出边表
 	};
-
-
-
-	void TestGraph()
-	{
-		string a[] = { "张三", "李四", "王五", "赵六" };
-		Graph<string, int, true> g1(a, 4);
-		g1.AddEdge("张三", "李四", 100);
-		g1.AddEdge("张三", "王五", 200);
-		g1.AddEdge("王五", "赵六", 30);
-		g1.Print();
-	}
-};
+}
 
 
 
@@ -106,349 +95,402 @@ namespace link_table
 
 
 
-//邻接矩阵
+
+
+
 namespace matrix
 {
 	template<class V, class W, W MAX_W = INT_MAX, bool Direction = false>
 	class Graph
 	{
-		typedef Graph<V, W, MAX_W, Direction> Self;
 	public:
 		Graph() = default;
-		Graph(const V* v, size_t size)
+		Graph(const V* vertex, size_t size)
+			:_vertexs(vertex, vertex + size), _matrix(size, vector<int>(size, MAX_W)) 
 		{
-			_vertexs.reserve(size);
-			for (size_t i = 0; i < size; ++i) {
-				_vertexs.push_back(v[i]);
-				_indexMap[v[i]] = i;
-			}
-			_matrix.resize(size);
-			for (size_t i = 0; i < size; ++i) {
-				_matrix[i].resize(size, MAX_W);
-			}
+			for (int i = 0; i < size; ++i)
+				_indexMap[vertex[i]] = i;
 		}
 
-		size_t GetVertexIndex(const V& v) 
+		//获取顶点对应的下标
+		int GetVertexIndex(const V& v)
 		{
 			auto it = _indexMap.find(v);
-			if (it != _indexMap.end()) return it->second;
-			else {
-				assert(false);
+			if (it != _indexMap.end()) //顶点存在
+				return it->second;
+			else { //顶点不存在
+				throw invalid_argument("顶点不存在");
 				return -1;
 			}
 		}
 
-		void _addEdge(size_t srcIndex, size_t destIndex, const W& w)
+		//添加边
+		void _AddEdge(int& srcIndex, int& dstIndex, const W& weight)
 		{
-			_matrix[srcIndex][destIndex] = w;
-			//无向图添加两次
-			if (Direction == false) _matrix[destIndex][srcIndex] = w;
+			_matrix[srcIndex][dstIndex] = weight;
+			if (Direction == false)
+				_matrix[dstIndex][srcIndex] = weight;
 		}
-		void AddEdge(const V& src, const V& dest, const W& w)
+		void AddEdge(const V& source, const V& destion, const W& weight)
 		{
-			size_t srcIndex = GetVertexIndex(src);
-			size_t destIndex = GetVertexIndex(dest);
-			_addEdge(srcIndex, destIndex, w);
+			int sourceIndex = GetVertexIndex(source), destionIndex = GetVertexIndex(destion);
+			_AddEdge(sourceIndex, destionIndex, weight);
 		}
 
-		void BFS(const V& src)
+		struct Edge
 		{
-			size_t srcIndex = GetVertexIndex(src);
+			Edge(int srcIndex, int dstIndex, const W& weight) 
+				:_sourceIndex(srcIndex), _destionIndex(dstIndex), _weight(weight) {}
+			bool operator>(const Edge& edge)const {
+				return _weight > edge._weight;
+			}
+			int _sourceIndex;
+			int _destionIndex;
+			W _weight;
+		};
+		W Kruskal(Graph<V, W, MAX_W, Direction>& minTree)
+		{
+			int size = _vertexs.size();
+			//最小生成树初始化
+			minTree._vertexs = _vertexs;
+			minTree._indexMap = _indexMap;
+			minTree._matrix.resize(size, vector<W> (size, MAX_W));
 			
+			priority_queue<Edge, vector<Edge>, greater<Edge>> minHeap;//小堆
+			for (int i = 0; i < size; ++i)
+				for (int j = 0; j < i; ++j)//只遍历矩阵一半，避免添加重复的边
+					if (_matrix[i][j] != MAX_W)
+						minHeap.push(Edge(i, j, _matrix[i][j]));
+
+			UnionFindSet ufs(size); //size个顶点的并查集, 用于判环
+			int count = 0; //已选边的数量
+			W totalWeight = W(); //最小生成树的总权值
+			while (!minHeap.empty() && count < size - 1)
+			{
+				//获取此时最小的边
+				Edge minEdge = minHeap.top();
+				minHeap.pop();
+				int srcI = minEdge._sourceIndex, dstI = minEdge._destionIndex;
+				W weight = minEdge._weight;
+				if (!ufs.IsInSet(srcI, dstI)) //边的源顶点和目标顶点不在同一个集合, 即无环
+				{
+					minTree._AddEdge(srcI, dstI, weight);
+					ufs.Union(srcI, dstI);
+					++count;
+					totalWeight += weight;
+					cout << "选边: " << _vertexs[srcI] << "->" << _vertexs[dstI] << ":" << weight << endl;
+				}
+			}
+			if (count == size - 1) {
+				cout << "构建最小生成树成功" << endl;
+				return totalWeight;
+			}
+			else {
+				cout << "无法构成最小生成树" << endl;
+				return W();
+			}
+		}
+		W Prim(Graph<V, W, MAX_W, Direction>& minTree, const V& start)
+		{
+			int size = _vertexs.size();
+			//最小生成树初始化
+			minTree._vertexs = _vertexs;
+			minTree._indexMap = _indexMap;
+			minTree._matrix.resize(size, vector<W>(size, MAX_W));
+
+			int startIndex = GetVertexIndex(start);
+			vector<bool> forest(size, false);
+			forest[startIndex] = true;
+			priority_queue<Edge, vector<Edge>, greater<Edge>> minHeap;
+
+			//将初始顶点连接的边加入堆中
+			for (int j = 0; j < size; ++j)
+				if (_matrix[startIndex][j] != MAX_W)
+					minHeap.push(Edge(startIndex, j, _matrix[startIndex][j]));
+
+			int count = 0;
+			W totalWeight = W();
+			while (!minHeap.empty() && count < size - 1)
+			{
+				Edge minEdge = minHeap.top();
+				minHeap.pop();
+				int srcIndex = minEdge._sourceIndex, dstIndex = minEdge._destionIndex;
+				W weight = minEdge._weight;
+
+				if (forest[dstIndex] == false) // 边的目标顶点还没有被加入到forest集合中
+				{
+					//将目标顶点连接出去的边加入到优先级队列中
+					for (int j = 0; j < size; ++j)
+						if (_matrix[dstIndex][j] != MAX_W)
+							minHeap.push(Edge(dstIndex, j, _matrix[dstIndex][j]));
+					minTree._AddEdge(srcIndex, dstIndex, weight);
+					forest[dstIndex] = true;
+					++count;
+					totalWeight += weight;
+					cout << "选边: " << _vertexs[srcIndex] << "->" << _vertexs[dstIndex] << ":" << weight << endl;
+				}	
+			}
+			if (count == size - 1) {
+				cout << "构建最小生成树成功" << endl;
+				return totalWeight;
+			}
+			else {
+				cout << "无法构成最小生成树" << endl;
+				return W();
+			}
+		}
+
+		void Dijkstra(const V& source, vector<W>& dist, vector<int>& parentPath)
+		{
+			int size = _vertexs.size();
+			int srcIndex = GetVertexIndex(source);
+			dist.resize(size, MAX_W);
+			dist[srcIndex] = W();
+			parentPath.resize(size, -1);
+
+			vector<bool> S(size, false);//已确定最短路径的顶点的集合
+			for (int i = 0; i < size; ++i)//目标是将Q集合中的所有顶点都加入S集合
+			{
+				//从集合Q中选出一个估计值最小的顶点
+				W minW = MAX_W;		//记录最小估计值
+				int u = -1;			//记录拥有最小估计值的顶点
+				for(int j = 0; j < size; ++j)
+					if (S[j] == false && dist[j] < minW) {
+						minW = dist[j];
+						u = j;
+					}
+				//将选出的顶点加入S集合
+				S[u] = true;
+				//对u连接出去的顶点进行松弛更新
+				for (int v = 0; v < size; ++v)
+				{
+					if (S[v] == false && _matrix[u][v] != MAX_W && dist[u] + _matrix[u][v] < dist[v])
+					{
+						dist[v] = dist[u] + _matrix[u][v];
+						parentPath[v] = u;
+					}
+				}
+			}
+		}
+		bool BellmanFord(const V& source, vector<W>& dist, vector<int>& parentPath)
+		{
+			int size = _vertexs.size();
+			int srcIndex = GetVertexIndex(source);
+			dist.resize(size, MAX_W);
+			dist[srcIndex] = W();
+			parentPath.resize(size, -1);
+
+			for (int k = 0; k < size - 1; ++k) // 最多更新size - 1轮
+			{
+				bool update = false;//记录本轮是否更新过
+				for (int i = 0; i < size; ++i)
+				{
+					for (int j = 0; j < size; ++j)
+					{
+						if (_matrix[i][j] != MAX_W && dist[i] != MAX_W && dist[i] + _matrix[i][j] < dist[j])
+						{
+							dist[j] = dist[i] + _matrix[i][j];
+							parentPath[j] = i;
+							update = true;
+						}
+					}
+				}
+				if (update == false) break;
+			}
+			for (int i = 0; i < size; ++i) 
+				for (int j = 0; j < size; ++j)
+					if (_matrix[i][j] != MAX_W && dist[i] + _matrix[i][j] < dist[j])
+						return false; //带有负权回路的图无法求出最短路径
+			return true;
+		}
+		void FloydWarshall(vector<vector<W>>& vvDist, vector<vector<int>>& vvParentPath)
+		{
+			int size = _vertexs.size();
+			vvDist.resize(size, vector<W>(size, MAX_W));
+			vvParentPath.resize(size, vector<int>(size, -1));
+
+			//根据邻接矩阵初始化直接相连的顶点
+			for (int i = 0; i < size; ++i)
+			{
+				for (int j = 0; j < size; ++j)
+				{
+					if (_matrix[i][j] != MAX_W)//i -> j 有边
+					{
+						vvDist[i][j] = _matrix[i][j];
+						vvParentPath[i][j] = i;
+					}
+					if (i == j) vvDist[i][j] = W();
+				}
+			}
+			for (int k = 0; k < size; ++k)//依次选取各个顶点作为i->j路径的中间顶点
+				for (int i = 0; i < size; ++i)
+					for (int j = 0; j < size; ++j)
+						if (vvDist[i][k] != MAX_W && vvDist[k][j] != MAX_W &&
+							vvDist[i][k] + vvDist[k][j] < vvDist[i][j])
+						{
+							vvDist[i][j] = vvDist[i][k] + vvDist[k][j];
+							vvParentPath[i][j] = vvParentPath[k][j];
+						}
+		}
+
+		//打印最短路径及路径权值
+		void PrintShortPath(const V& src, const vector<W>& dist, const vector<int>& parentPath) 
+		{
+			int n = _vertexs.size();
+			int srci = GetVertexIndex(src); //获取源顶点的下标
+			for (int i = 0; i < n; i++) 
+			{
+				vector<int> path;
+				int cur = i;
+				while (cur != -1) { //源顶点的前驱顶点为-1
+					path.push_back(cur);
+					cur = parentPath[cur];
+				}
+				reverse(path.begin(), path.end()); //逆置
+				for (int j = 0; j < path.size(); j++) {
+					cout << _vertexs[path[j]] << "->";
+				}
+				cout << "路径权值: " << dist[i] << "" << endl;
+			}
+		}
+		//打印顶点集合和邻接矩阵
+		void Print() 
+		{
+			int size = _vertexs.size();
+			//打印顶点集合
+			for (int i = 0; i < size; i++)
+				cout << "[" << i << "]->" << _vertexs[i] << endl;
+			cout << endl;
+
+			//打印邻接矩阵
+			cout << "  ";
+			for (int i = 0; i < size; i++)
+				printf("%4d", i);
+			cout << endl;
+			for (int i = 0; i < size; i++) 
+			{
+				cout << i << " "; //竖下标
+				for (int j = 0; j < size; j++) 
+				{
+					if (_matrix[i][j] == MAX_W) printf("%4c", '*');
+					else printf("%4d", _matrix[i][j]);
+				}
+				cout << endl;
+			}
+			cout << endl;
+		}
+
+		void BFS(const V& source)
+		{
+			int sourceIndex = GetVertexIndex(source);
 			queue<int> qe;
-			qe.push(srcIndex);
 			vector<bool> visited(_vertexs.size(), false);
-			visited[srcIndex] = true;
+			qe.push(sourceIndex);
+			visited[sourceIndex] = true;
 
 			while (!qe.empty())
 			{
 				int front = qe.front();
 				qe.pop();
-				//访问
-				cout << front << ":" << _vertexs[front] << endl;
-				//入队列
-				for (int j = 0; j < _matrix[front].size(); ++j)
-					if (_matrix[front][j] != MAX_W && visited[j] == false) {
+				cout << _vertexs[front] << " ";
+				for (int j = 0; j < _vertexs.size(); ++j)
+				{
+					if (_matrix[front][j] != MAX_W && visited[j] == false)
+					{
 						qe.push(j);
 						visited[j] = true;
 					}
-			}
-		}
-
-		void _dfs(size_t srcIndex, vector<bool>& visvited)
-		{
-			cout << srcIndex << ":" << _vertexs[srcIndex] << endl;
-			visvited[srcIndex] = true;
-			for (size_t j = 0; j < _matrix[srcIndex].size(); ++j)
-				if (_matrix[srcIndex][j] != MAX_W && visvited[j] == false)
-					_dfs(j, visvited);
-		}
-		void DFS(const V& src)
-		{
-			size_t srcIndex = GetVertexIndex(src);
-			vector<bool> visvited(_vertexs.size(), false);
-			_dfs(srcIndex, visvited);
-		}
-
-		struct Edge
-		{
-			Edge(size_t srci, size_t dsti, const W& w) : _srcIndex(srci), _destIndex(dsti), _w(w) {}
-			bool operator>(const Edge& edge) const {
-				return _w > edge._w;
-			}
-			size_t _srcIndex;
-			size_t _destIndex;
-			W _w;
-		};
-		W Kruskal(Self& minTree)
-		{
-			size_t size = _vertexs.size();
-			//初始化
-			minTree._vertexs = _vertexs;
-			minTree._indexMap = _indexMap;
-			minTree._matrix.resize(size);
-			for (size_t i = 0; i < size; ++i)
-				minTree._matrix[i].resize(size, MAX_W);
-
-			priority_queue<Edge, vector<Edge>, greater<Edge>> minqe;
-			for (size_t i = 0; i < size; ++i)
-				for (size_t j = 0; j < size; ++j)
-					if (i < j && _matrix[i][j] != MAX_W)
-						minqe.push(Edge(i, j, _matrix[i][j]));
-
-			int count = 0;
-			W totalW = W();
-			UnionFindSet ufs(size);
-			while (!minqe.empty())
-			{
-				Edge min = minqe.top();
-				minqe.pop();
-				if (!ufs.IsInSet(min._srcIndex, min._destIndex))
-				{
-					cout << _vertexs[min._srcIndex] << "-" << _vertexs[min._destIndex] <<
-						":" << _matrix[min._srcIndex][min._destIndex] << endl;
-					minTree._addEdge(min._srcIndex, min._destIndex, min._w);
-					ufs.Union(min._srcIndex, min._destIndex);
-					++count;
-					totalW += min._w;
 				}
 			}
-			if (count == size - 1) return totalW;
-			else return W();
-		}
-		W Prim(Self& minTree, const W& src)
-		{
-			size_t size = _vertexs.size();
-			size_t srcIndex = GetVertexIndex(src);
-			minTree._vertexs = _vertexs;
-			minTree._indexMap = _indexMap;
-			minTree._matrix.resize(size);
-			for (size_t i = 0; i < size; ++i)
-				minTree._matrix[i].resize(size, MAX_W);
-
-			vector<bool> X(size, false), Y(size, true);
-			X[srcIndex] = true;
-			Y[srcIndex] = false;
-
-			priority_queue<Edge, vector<Edge>, greater<Edge>> minqe;
-			//先将srcIndex连接的边添加到队列中
-			for (size_t j = 0; j < size; ++j)
-				if (_matrix[srcIndex][j] != MAX_W)
-					minqe.push(Edge(srcIndex, j, _matrix[srcIndex][j]));
-
-			size_t count = 0;
-			W totalW = W();
-			while (!minqe.empty())
-			{
-				Edge min = minqe.top();
-				minqe.pop();
-
-				if (X[min._destIndex])
-				{
-					/*cout << "构成环:";
-					cout << _vertexs[min._srcIndex] << "->" << _vertexs[min._destIndex] 
-						<< ":" << min._w << endl;*/
-				}
-				else
-				{
-					minTree._addEdge(min._srcIndex, min._destIndex, min._w);
-					/*cout << _vertexs[min._srcIndex] << "->" << _vertexs[min._destIndex]
-						<< ":" << min._w << endl;*/
-					X[min._destIndex] = true;
-					Y[min._destIndex] = false;
-					++count;
-					totalW += min._w;
-					if (count == size - 1) break;
-					//将_destIndex连接的边添加到队列中
-					for (size_t j = 0; j < size; ++j)
-						if (_matrix[min._destIndex][j] != MAX_W && Y[j])
-							minqe.push(Edge(min._destIndex, j, _matrix[min._destIndex][j]));
-				}
-			}
-			if (count == size - 1) return totalW;
-			else return W();
-		}
-
-		void Dijkstra(const V& src, vector<W>& dist, vector<int>& pPath)
-		{
-			size_t size = _vertexs.size();
-			size_t srcIndex = GetVertexIndex(src);
-			dist.resize(size, MAX_W);
-			pPath.resize(size, -1);
-
-			dist[srcIndex] = 0;
-			pPath[srcIndex] = srcIndex;
-
-			//已经确定最短路径的顶点集合
-			vector<bool> S(size, false);
-
-			for(size_t count = 0; count < size; ++count)
-			{
-				//选最短路径顶点更新其他路径
-				int u = 0;
-				W min = MAX_W;
-				for (size_t i = 0; i < size; ++i)
-				{
-					if (S[i] == false && dist[i] < min) 
-					{
-						u = i;
-						min = dist[i];
-					}
-				}
-				S[u] = true;
-				//松弛更新与u连接的顶点
-				for (size_t v = 0; v < size; ++v)
-				{
-					if (_matrix[u][v] != MAX_W && dist[u] + _matrix[u][v] < dist[v])
-					{
-						dist[v] = dist[u] + _matrix[u][v];
-						pPath[v] = u;
-					}
-				}
-			}
-		}
-
-
-
-		void Print()
-		{
-			for(int i = 0; i < _vertexs.size(); ++i)
-				cout << _vertexs[i] << "-" << i << " ";
-			cout << endl << endl;
-			cout << "  ";
-			for (size_t i = 0; i < _vertexs.size(); ++i)
-				printf("%4d ", i);
 			cout << endl;
-			// 打印矩阵
-			for (size_t i = 0; i < _matrix.size(); ++i)
-			{
-				cout << i << " ";
-				for (size_t j = 0; j < _matrix[i].size(); ++j)
-				{
-					if (_matrix[i][j] != MAX_W)
-						printf("%4d ", _matrix[i][j]);
-					else
-						printf("%4c ", '#');
-				}
-				cout << endl;
-			}
-			cout << endl << endl;
-			// 打印所有的边
-			for (size_t i = 0; i < _matrix.size(); ++i)
-			{
-				for (size_t j = 0; j < _matrix[i].size(); ++j)
-				{
-					if (i < j && _matrix[i][j] != MAX_W)
-						cout << _vertexs[i] << "-" << _vertexs[j] << ":" << _matrix[i][j] << endl;
-				}
-			}
 		}
-		// 打印最短路径的逻辑算法
-		void PrinrtShotPath(const V& src, const vector<W>& dist, const vector<int>& parentPath)
+
+		void _DFS(int srcIndex, vector<bool>& visvited)
 		{
-			size_t N = _vertexs.size();
-			size_t srci = GetVertexIndex(src);
-			for (size_t i = 0; i < N; ++i)
-			{
-				if (i == srci)
-					continue;
-				vector<int> path;
-				int parenti = i;
-				while (parenti != srci)
-				{
-					path.push_back(parenti);
-					parenti = parentPath[parenti];
-				}
-				path.push_back(srci);
-				reverse(path.begin(), path.end());
-				for (auto pos : path)
-					cout << _vertexs[pos] << "->";
-				cout << dist[i] << endl;
-			}
+			cout << _vertexs[srcIndex] << " "; // 访问
+			visvited[srcIndex] = true;
+			for (int j = 0; j < _vertexs.size(); ++j)
+				if (_matrix[srcIndex][j] != MAX_W && visvited[j] == false)
+					_DFS(j, visvited);
 		}
+		void DFS(const V& source)
+		{
+			int sourceIndex = GetVertexIndex(source);
+			vector<bool> visvited(_vertexs.size(), false);
+			_DFS(sourceIndex, visvited);
+			cout << endl;
+		}
+
 	private:
-		vector<V> _vertexs;//顶点集合
-		unordered_map<V, int> _indexMap;//顶点与下标的映射
-		vector<vector<W>> _matrix;//邻接矩阵
+		vector<V> _vertexs;					//顶点集合
+		unordered_map<V, int> _indexMap;	//顶点映射下标
+		vector<vector<int>> _matrix;		//邻接矩阵
 	};
+}
 
 
 
-	void TestGraphDBFS()
-	{
-		string a[] = { "张三", "李四", "王五", "赵六", "周七" };
-		Graph<string, int> g1(a, sizeof(a) / sizeof(string));
-		g1.AddEdge("张三", "李四", 100);
-		g1.AddEdge("张三", "王五", 200);
-		g1.AddEdge("王五", "赵六", 30);
-		g1.AddEdge("王五", "周七", 30);
-		g1.Print();
-		cout << endl;
-		g1.BFS("张三");
-		cout << endl;
-		g1.DFS("张三");
-	}
-	void TestGraph()
-	{
-		Graph<char, int, INT_MAX, true> g("0123", 4);
-		g.AddEdge('0', '1', 1);
-		g.AddEdge('0', '3', 4);
-		g.AddEdge('1', '3', 2);
-		g.AddEdge('1', '2', 9);
-		g.AddEdge('2', '3', 8);
-		g.AddEdge('2', '1', 5);
-		g.AddEdge('2', '0', 3);
-		g.AddEdge('3', '2', 6);
-		g.Print();
-	}
-	void TestGraphMinTree()
-	{
-		const char* str = "abcdefghi";
-		Graph<char, int> g(str, strlen(str));
-		g.AddEdge('a', 'b', 4);
-		g.AddEdge('a', 'h', 8);
-		//g.AddEdge('a', 'h', 9);
-		g.AddEdge('b', 'c', 8);
-		g.AddEdge('b', 'h', 11);
-		g.AddEdge('c', 'i', 2);
-		g.AddEdge('c', 'f', 4);
-		g.AddEdge('c', 'd', 7);
-		g.AddEdge('d', 'f', 14);
-		g.AddEdge('d', 'e', 9);
-		g.AddEdge('e', 'f', 10);
-		g.AddEdge('f', 'g', 2);
-		g.AddEdge('g', 'h', 1);
-		g.AddEdge('g', 'i', 6);
-		g.AddEdge('h', 'i', 7);
-		Graph<char, int> kminTree;
-		cout << "Kruskal:" << g.Kruskal(kminTree) << endl;
-		kminTree.Print();
-		Graph<char, int> pminTree;
-		cout << "Prim:" << g.Prim(pminTree, 'a') << endl;
-		pminTree.Print();
-	}
-	void TestGraphDijkstra()
-	{
+
+
+
+using namespace matrix;
+void TestGraph()
+{
+	Graph<char, int, true> g("0123", 4);
+	g.AddEdge('0', '1', 1);
+	g.AddEdge('0', '3', 4);
+	g.AddEdge('1', '3', 2);
+	g.AddEdge('1', '2', 9);
+	g.AddEdge('2', '3', 8);
+	g.AddEdge('2', '1', 5);
+	g.AddEdge('2', '0', 3);
+	g.AddEdge('3', '2', 6);
+	g.Print();
+}
+void TestBDFS()
+{
+	string a[] = { "张三", "李四", "王五", "赵六", "周七" };
+	Graph<string, int> g1(a, sizeof(a) / sizeof(string));
+	g1.AddEdge("张三", "李四", 100);
+	g1.AddEdge("张三", "王五", 200);
+	g1.AddEdge("王五", "赵六", 30);
+	g1.AddEdge("王五", "周七", 30);
+	g1.Print();
+	g1.BFS("张三");
+	g1.DFS("张三");
+}
+void TestGraphMinTree()
+{
+	const char str[] = "abcdefghi";
+	Graph<char, int> g(str, strlen(str));
+	g.AddEdge('a', 'b', 4);
+	g.AddEdge('a', 'h', 8);
+	//g.AddEdge('a', 'h', 9);
+	g.AddEdge('b', 'c', 8);
+	g.AddEdge('b', 'h', 11);
+	g.AddEdge('c', 'i', 2);
+	g.AddEdge('c', 'f', 4);
+	g.AddEdge('c', 'd', 7);
+	g.AddEdge('d', 'f', 14);
+	g.AddEdge('d', 'e', 9);
+	g.AddEdge('e', 'f', 10);
+	g.AddEdge('f', 'g', 2);
+	g.AddEdge('g', 'h', 1);
+	g.AddEdge('g', 'i', 6);
+	g.AddEdge('h', 'i', 7);
+
+	Graph<char, int> kminTree;
+	cout << "Kruskal:" << g.Kruskal(kminTree) << endl;
+	kminTree.Print();
+	cout << endl << endl;
+
+	Graph<char, int> pminTree;
+	cout << "Prim:" << g.Prim(pminTree, 'a') << endl;
+	pminTree.Print();
+	cout << endl;
+}
+void TestGraphDijkstra()
+{
 		const char* str = "syztx";
 		Graph<char, int, INT_MAX, true> g(str, strlen(str));
 		g.AddEdge('s', 't', 10);
@@ -460,11 +502,13 @@ namespace matrix
 		g.AddEdge('z', 'x', 6);
 		g.AddEdge('t', 'y', 2);
 		g.AddEdge('t', 'x', 1);
-		g.AddEdge('x', 'z', 4); 
+		g.AddEdge('x', 'z', 4);
+
 		vector<int> dist;
 		vector<int> parentPath;
 		g.Dijkstra('s', dist, parentPath);
-		g.PrinrtShotPath('s', dist, parentPath);
+		g.PrintShortPath('s', dist, parentPath);
+
 		// 图中带有负权路径时，贪心策略则失效了。
 		// 测试结果可以看到s->t->y之间的最短路径没更新出来
 		/*const char* str = "sytx";
@@ -476,23 +520,91 @@ namespace matrix
 		vector<int> dist;
 		vector<int> parentPath;
 		g.Dijkstra('s', dist, parentPath);
-		g.PrinrtShotPath('s', dist, parentPath);*/
+		g.PrintShortPath('s', dist, parentPath);*/
+
+		//const char* str = "syztx";
+		//Graph<char, int, INT_MAX, true> g(str, strlen(str));
+		//g.AddEdge('s', 't', 6);
+		//g.AddEdge('s', 'y', 7);
+		//g.AddEdge('y', 'z', 9);
+		//g.AddEdge('y', 'x', -3);
+		//g.AddEdge('z', 's', 2);
+		//g.AddEdge('z', 'x', 7);
+		//g.AddEdge('t', 'x', 5);
+		//g.AddEdge('t', 'y', 8);
+		//g.AddEdge('t', 'z', -4);
+		//g.AddEdge('x', 't', -2);
+		//vector<int> dist;
+		//vector<int> parentPath;
+		//g.Dijkstra('s', dist, parentPath);
+		//g.PrintShortPath('s', dist, parentPath);
+}
+void TestGraphBellmanFord()
+{
+	const char* str = "syztx";
+	Graph<char, int, INT_MAX, true> g(str, strlen(str));
+	/*g.AddEdge('s', 't', 10);
+	g.AddEdge('s', 'y', 5);
+	g.AddEdge('y', 't', 3);
+	g.AddEdge('y', 'x', 9);
+	g.AddEdge('y', 'z', 2);
+	g.AddEdge('z', 's', 7);
+	g.AddEdge('z', 'x', 6);
+	g.AddEdge('t', 'y', 2);
+	g.AddEdge('t', 'x', 1);
+	g.AddEdge('x', 'z', 4);*/
+
+	g.AddEdge('s', 't', 6);
+	g.AddEdge('s', 'y', 7);
+	g.AddEdge('y', 'z', 9);
+	g.AddEdge('y', 'x', -3);
+	//g.AddEdge('y', 's', 1); // 新增
+	g.AddEdge('z', 's', 2);
+	g.AddEdge('z', 'x', 7);
+	g.AddEdge('t', 'x', 5);
+	//g.AddEdge('t', 'y', -8); //更改
+	g.AddEdge('t', 'y', 8);
+
+	g.AddEdge('t', 'z', -4);
+	g.AddEdge('x', 't', -2);
+	vector<int> dist;
+	vector<int> parentPath;
+	if (g.BellmanFord('s', dist, parentPath))
+		g.PrintShortPath('s', dist, parentPath);
+	else
+		cout << "带负权回路" << endl;
+}
+void TestFloydWarShall()
+{
+	const char* str = "12345";
+	Graph<char, int, INT_MAX, true> g(str, strlen(str));
+	g.AddEdge('1', '2', 3);
+	g.AddEdge('1', '3', 8);
+	g.AddEdge('1', '5', -4);
+	g.AddEdge('2', '4', 1);
+	g.AddEdge('2', '5', 7);
+	g.AddEdge('3', '2', 4);
+	g.AddEdge('4', '1', 2);
+	g.AddEdge('4', '3', -5);
+	g.AddEdge('5', '4', 6);
+	vector<vector<int>> vvDist;
+	vector<vector<int>> vvParentPath;
+	g.FloydWarshall(vvDist, vvParentPath);
+
+	// 打印任意两点之间的最短路径
+	for (size_t i = 0; i < strlen(str); ++i)
+	{
+		g.PrintShortPath(str[i], vvDist[i], vvParentPath[i]);
+		cout << endl;
 	}
-};
-
-
-
-
-
-
-
-
-
+}
 int main()
 {
-	//link_table::TestGraph();
-	//matrix::TestGraphDBFS();
-	//matrix::TestGraphMinTree();
-	matrix::TestGraphDijkstra();
+	//TestGraph();
+	//TestBDFS();
+	//TestGraphMinTree();
+	//TestGraphDijkstra();
+	//TestGraphBellmanFord();
+	TestFloydWarShall();
 	return 0;
 }
