@@ -26,7 +26,7 @@ namespace b_tree
 	{
 		typedef BTreeNode<K, M> Node;
 	public:
-		//Node*指向找到的节点，int为该元素在该节点中的位置
+		//Node*指向找到的结点，int为该元素在该结点中的位置
 		pair<Node*, int> Find(const K& key)
 		{
 			Node* parent = nullptr;
@@ -143,6 +143,8 @@ namespace b_tree
 			}
 			current->_keys[end + 1] = key;
 			current->_childs[end + 2] = child;
+			if (child)
+				child->_parent = current;
 			++current->_number;
 		}
 
