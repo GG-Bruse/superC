@@ -3642,3 +3642,70 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //        return dp;
 //    }
 //};
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int N = 0;
+//    cin >> N;
+//
+//    vector<vector<int>> weight(N + 1, vector<int>(N + 1));
+//    vector<vector<int>> dp(N + 1, vector<int>(N + 1, 0x7ffffff));
+//
+//    for (int i = 1; i <= N; ++i)
+//        for (int j = 1; j <= N; ++j)
+//            cin >> weight[i][j];
+//
+//    for (int i = 1; i <= N; ++i) {
+//        for (int j = 1; j <= N; ++j) {
+//            if (i == 1 && j == 1) dp[i][j] = weight[i][j];
+//            else dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + weight[i][j];
+//        }
+//    }
+//
+//    cout << dp[N][N] << endl;
+//
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int T = 0;
+//    cin >> T;
+//    while (T--)
+//    {
+//        int row = 0, col = 0;
+//        cin >> row >> col;
+//
+//        vector<vector<int>> peanutField(row + 1, vector<int>(col + 1));
+//        vector<vector<int>> dp(row + 1, vector<int>(col + 1));
+//
+//        for (int i = 1; i <= row; ++i)
+//            for (int j = 1; j <= col; ++j)
+//                cin >> peanutField[i][j];
+//
+//        for (int i = 1; i <= row; ++i)
+//            for (int j = 1; j <= col; ++j)
+//                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + peanutField[i][j];
+//
+//        cout << dp[row][col] << endl;
+//    }
+//    return 0;
+//}
