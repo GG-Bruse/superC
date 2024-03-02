@@ -3716,41 +3716,91 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 
 
 
-#include <iostream>
-#include <vector>
-using namespace std;
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int M = 0, N = 0;
+//    cin >> M >> N;
+//
+//    // vector<vector<int>> weight(M + 1, vector<int>(N + 1));
+//    // vector<vector<vector<int>>> dp(N + M + 2, vector<vector<int>>(M + 1, vector<int>(N + 1)));
+//    int weight[M + 1][N + 1] = { 0 };
+//    int dp[N + M + 2][M + 1][N + 1] = { 0 };
+//
+//    for (int i = 1; i <= M; ++i)
+//        for (int j = 1; j <= N; ++j)
+//            cin >> weight[i][j];
+//
+//    for (int k = 2; k <= M + N; ++k)
+//    {
+//        for (int i1 = max(1, k - N); i1 <= min(k - 1, M); ++i1)
+//        {
+//            for (int i2 = max(1, k - N); i2 <= min(k - 1, M); ++i2)
+//            {
+//                int value = weight[i1][k - i1];
+//                if (i1 != i2) value += weight[i2][k - i2];
+//
+//                int& tmp = dp[k][i1][i2];
+//                tmp = max(tmp, dp[k - 1][i1 - 1][i2 - 1] + value);
+//                tmp = max(tmp, dp[k - 1][i1][i2 - 1] + value);
+//                tmp = max(tmp, dp[k - 1][i1 - 1][i2] + value);
+//                tmp = max(tmp, dp[k - 1][i1][i2] + value);
+//            }
+//        }
+//    }
+//    cout << dp[M + N][M][M] << endl;
+//    return 0;
+//}
 
-int main()
-{
-    int M = 0, N = 0;
-    cin >> M >> N;
 
-    // vector<vector<int>> weight(M + 1, vector<int>(N + 1));
-    // vector<vector<vector<int>>> dp(N + M + 2, vector<vector<int>>(M + 1, vector<int>(N + 1)));
-    int weight[M + 1][N + 1] = { 0 };
-    int dp[N + M + 2][M + 1][N + 1] = { 0 };
 
-    for (int i = 1; i <= M; ++i)
-        for (int j = 1; j <= N; ++j)
-            cin >> weight[i][j];
 
-    for (int k = 2; k <= M + N; ++k)
-    {
-        for (int i1 = max(1, k - N); i1 <= min(k - 1, M); ++i1)
-        {
-            for (int i2 = max(1, k - N); i2 <= min(k - 1, M); ++i2)
-            {
-                int value = weight[i1][k - i1];
-                if (i1 != i2) value += weight[i2][k - i2];
 
-                int& tmp = dp[k][i1][i2];
-                tmp = max(tmp, dp[k - 1][i1 - 1][i2 - 1] + value);
-                tmp = max(tmp, dp[k - 1][i1][i2 - 1] + value);
-                tmp = max(tmp, dp[k - 1][i1 - 1][i2] + value);
-                tmp = max(tmp, dp[k - 1][i1][i2] + value);
-            }
-        }
-    }
-    cout << dp[M + N][M][M] << endl;
-    return 0;
-}
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int K = 0;
+//    cin >> K;
+//
+//    while (K--)
+//    {
+//        int N = 0;
+//        cin >> N;
+//
+//        vector<int> height(N);
+//        for (int i = 0; i < N; ++i)
+//            cin >> height[i];
+//
+//        int maxRet = 1;
+//
+//        vector<int> dp(N, 1);//所有以height[i]为结尾的,最长上升子序列的长度
+//        for (int i = 1; i < N; ++i)
+//            for (int j = 0; j < i; ++j)
+//                if (height[i] > height[j])
+//                {
+//                    dp[i] = max(dp[i], dp[j] + 1);
+//                    maxRet = max(maxRet, dp[i]);
+//                }
+//
+//        dp = vector<int>(N, 1);//所有以height[i]为开始的,最长下降子序列的长度
+//        for (int i = N - 2; i >= 0; --i)
+//            for (int j = N - 1; j >= i; --j)
+//                if (height[i] > height[j])
+//                {
+//                    dp[i] = max(dp[i], dp[j] + 1);
+//                    maxRet = max(maxRet, dp[i]);
+//                }
+//
+//        cout << maxRet << endl;
+//    }
+//    return 0;
+//}
