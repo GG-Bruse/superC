@@ -3804,3 +3804,114 @@ nums[i] 的前一个元素是 nums[(i - 1 + n) % n] 。
 //    }
 //    return 0;
 //}
+
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int N = 0;
+//    cin >> N;
+//
+//    vector<int> height(N);
+//    for (int i = 0; i < N; ++i)  cin >> height[i];
+//
+//    vector<int> up(N, 1);//以height[i]为结尾的最长上升子序列的长度
+//    for (int i = 1; i < N; ++i)
+//        for (int j = 0; j < i; ++j)
+//            if (height[i] > height[j])
+//                up[i] = max(up[i], up[j] + 1);
+//
+//    vector<int> down(N, 1);//以height[i]为起始的最长下降子序列的长度
+//    for (int i = N - 2; i >= 0; --i)
+//        for (int j = N - 1; j >= i; --j)
+//            if (height[i] > height[j])
+//                down[i] = max(down[i], down[j] + 1);
+//
+//    int maxRet = 1;
+//    for (int i = 0; i < N; ++i)
+//        maxRet = max(maxRet, up[i] + down[i] - 1);
+//
+//    cout << maxRet << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//#include <algorithm>
+//using namespace std;
+//
+//int main()
+//{
+//    int N = 0;
+//    cin >> N;
+//
+//    vector<pair<int, int>> position(N);
+//    for (int i = 0; i < N; ++i)
+//        cin >> position[i].first >> position[i].second;
+//
+//    sort(position.begin(), position.end(), [](const pair<int, int>& p1, const pair<int, int>& p2) {
+//        return p1.first < p2.first;
+//        });
+//
+//    int maxRet = 1;
+//    vector<int> dp(N, 1);//以[position[i].first, position[i].second]为结尾的,最长上升子序列的长度
+//    for (int i = 1; i < N; ++i)
+//    {
+//        for (int j = 0; j < i; ++j)
+//            if (position[i].first > position[j].first && position[i].second > position[j].second)
+//                dp[i] = max(dp[i], dp[j] + 1);
+//        maxRet = max(maxRet, dp[i]);
+//    }
+//
+//    cout << maxRet << endl;
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//
+//int main()
+//{
+//    int N = 0;
+//    cin >> N;
+//
+//    vector<int> value(N);
+//    for (int i = 0; i < N; ++i) cin >> value[i];
+//
+//    int maxRet = value[0];
+//    vector<int> dp(value);//以value[i]为结尾的所有子序列各自之和的最大值
+//    dp[0] = value[0];
+//    for (int i = 1; i < N; ++i)
+//    {
+//        for (int j = 0; j < i; ++j)
+//            if (value[i] > value[j])
+//                dp[i] = max(dp[i], value[i] + dp[j]);
+//        maxRet = max(maxRet, dp[i]);
+//    }
+//    cout << maxRet << endl;
+//    return 0;
+//}
