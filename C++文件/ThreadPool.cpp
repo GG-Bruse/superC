@@ -113,19 +113,19 @@ mutex ThreadPool<T>::_init_mutex;
 
 
 
-int main()
-{
-	ThreadPool<Task>* threadPool = ThreadPool<Task>::getThreadPool(4);
-	threadPool->start();
-	while (true)
-	{
-		//生产任务
-		int x = rand() % 100 + 1;
-		Sleep(1000);
-		int y = rand() % 30 + 1;
-		Task task(x, y, [](int x, int y)->int { return x + y; });
-		//推送至线程池
-		threadPool->pushTask(task);
-	}
-	return 0;
-}
+//int main()
+//{
+//	ThreadPool<Task>* threadPool = ThreadPool<Task>::getThreadPool(4);
+//	threadPool->start();
+//	while (true)
+//	{
+//		//生产任务
+//		int x = rand() % 100 + 1;
+//		Sleep(1000);
+//		int y = rand() % 30 + 1;
+//		Task task(x, y, [](int x, int y)->int { return x + y; });
+//		//推送至线程池
+//		threadPool->pushTask(task);
+//	}
+//	return 0;
+//}
